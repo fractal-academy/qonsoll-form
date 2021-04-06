@@ -10,7 +10,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.14.1",
-    "antd-styled": "1.1.71",
+    "antd-styled": "^1.1.71",
     "babel-plugin-import": "^1.13.3",
     "craco-alias": "^2.2.0",
     "craco-antd": "^1.19.0",

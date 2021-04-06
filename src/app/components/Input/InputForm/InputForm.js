@@ -57,7 +57,7 @@ function InputForm(props) {
           <Col>
             <Form.Item
               style={{ marginBottom: 0 }}
-              name="clinicName"
+              name="input"
               rules={[{ required: isRequired }]}>
               <Input {...inputProps} />
             </Form.Item>
