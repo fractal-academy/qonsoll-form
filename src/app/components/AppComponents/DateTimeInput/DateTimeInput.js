@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { DatePicker } from 'antd'
+import PropTypes from 'prop-types'
 
-// import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 /*
@@ -46,6 +46,8 @@ const DateTimeInput = (props) => {
   return <DatePicker onChange={onChange} {...props} />
 }
 
-DateTimeInput.propTypes = {}
+DateTimeInput.propTypes = {
+  onChange: PropTypes.func
+}
 
 export default DateTimeInput

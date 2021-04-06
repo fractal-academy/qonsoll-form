@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
 import Input from 'components/GlobalComponents/Input'
+// import { withTheme } from 'styled-components'
+import PropTypes from 'prop-types'
 
 const { Text, Title } = Typography
-// import { withTheme } from 'styled-components'
-// import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
@@ -77,6 +77,10 @@ function InputForm(props) {
   )
 }
 
-InputForm.propTypes = {}
+InputForm.propTypes = {
+  isRequired: PropTypes.bool,
+  btnProps: PropTypes.object,
+  inputProps: PropTypes.object
+}
 
 export default InputForm
