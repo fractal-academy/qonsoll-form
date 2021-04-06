@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
-import Input from '../Input'
+import Input from 'components/GlobalComponents/Input'
 
 const { Text, Title } = Typography
 // import { withTheme } from 'styled-components'
