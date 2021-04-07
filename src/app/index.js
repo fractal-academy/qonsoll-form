@@ -1,6 +1,5 @@
 import { Button } from 'antd'
 import { firestore } from 'app/services'
-import TextEditable from './components/GlobalComponents/TextEditable'
 
 const App = () => {
   // const onClick = () => {
@@ -10,7 +9,7 @@ const App = () => {
   //     .then((res) => res.docs.forEach((item) => console.log(item.data())))
   // }
 
-  return <TextEditable textSecondary />
+  return <> </>
 }
 
 export default App
