@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { TextEditable } from 'components/GlobalComponents'
+import { TextEditable } from 'components/TextEditable/TextEditable'
 
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'

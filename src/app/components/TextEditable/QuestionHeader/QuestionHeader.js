@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { TextEditable } from 'components/GlobalComponents'
-// import PropTypes from 'prop-types'
+import { QuestionTitle } from 'components/TextEditable/QuestionTitle'
+import { QuestionSubtitle } from 'components/TextEditable/QuestionSubtitle'
+import { Row, Col } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionHeader(props) {
@@ -37,7 +39,20 @@ function QuestionHeader(props) {
     }
   }, [])
 
-  return <TextEditable onChange={onChange} />
+  return (
+    <>
+      <Row>
+        <Col>
+          <QuestionTitle onChange={onChange} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <QuestionSubtitle onChange={onChange} />
+        </Col>
+      </Row>
+    </>
+  )
 }
 
 QuestionHeader.propTypes = {}
