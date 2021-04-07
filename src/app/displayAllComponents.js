@@ -26,7 +26,7 @@ const DisplayAllComponents = (props) => {
   return (
     <Container>
       <Col>
-        <Row mb={2} style={{ backgroundColor: '#ece8e8' }}>
+        <Row mb={4}>
           <TextAreaForm
             longText
             noBorder
@@ -34,7 +34,7 @@ const DisplayAllComponents = (props) => {
             // textAreaProps={textAreaProps}
           />
         </Row>
-        <Row mb={2} style={{ backgroundColor: '#ece8e8' }}>
+        <Row mb={4}>
           <Popover
             trigger="click"
             placement="bottomRight"
