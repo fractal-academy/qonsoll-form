@@ -1,3 +1,3 @@
-export { default as Input } from './GlobalComponents/Input'
-export { default as DateTimeInput } from './AppComponents/DateTimeInput'
-export { default as InputForm } from './AppComponents/InputForm'
+export { default as DateTimeInput } from './Input/DateTimeInput'
+export { default as InputForm } from './Input/InputForm'
+export { default as Input } from './Input/Input'
