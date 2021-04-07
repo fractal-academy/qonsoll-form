@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
-import Input from 'components/GlobalComponents/Input'
+import { Input } from 'components'
 // import { withTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 
@@ -78,6 +78,7 @@ function InputForm(props) {
 }
 
 InputForm.propTypes = {
+  onSubmit: PropTypes.func,
   isRequired: PropTypes.bool,
   btnProps: PropTypes.object,
   inputProps: PropTypes.object

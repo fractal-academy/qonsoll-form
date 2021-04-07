@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 */
 
 const DateTimeInput = (props) => {
-  const { onChange } = props
+  // const { PROPERTIES_DESTRUCTURING_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -24,6 +24,7 @@ const DateTimeInput = (props) => {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
+  const onChange = (date) => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -46,6 +47,7 @@ const DateTimeInput = (props) => {
   return <DatePicker onChange={onChange} {...props} />
 }
 
+//Also all props from Ant Design DataPicker
 DateTimeInput.propTypes = {
   onChange: PropTypes.func
 }
