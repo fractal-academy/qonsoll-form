@@ -1,3 +1,3 @@
-import Dropdown from './Dropdown'
+import { CustomDropDown as Dropdown } from './Dropdown'
 
 export default Dropdown
