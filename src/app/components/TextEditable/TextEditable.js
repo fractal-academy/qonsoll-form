@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Typography } from 'antd'
 import PropTypes from 'prop-types'
+
+const { TextArea } = Input
 // import { useTranslation } from 'react-i18next'
 
 function TextEditable(props) {
-  const { onChange, textSecondary } = props
+  const { onChange, textSecondary, placeholder } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -37,21 +39,23 @@ function TextEditable(props) {
   }, [])
   //TODO: Replace inline colors to theme vars
   return (
-    <Input
+    <TextArea
       style={{
-        border: 0,
-        boxShadow: 'none',
         color: textSecondary ? 'gray' : 'black'
       }}
+      bordered={false}
       onChange={setTextValue}
-      placeholder="change default text"
+      placeholder={placeholder}
+      autoSize
+      {...props}
     />
   )
 }
 
 TextEditable.propTypes = {
-  onChange: PropTypes.func,
-  textSecondary: PropTypes.bool
+  onChange: PropTypes.func.isRequired,
+  textSecondary: PropTypes.bool,
+  placeholder: PropTypes.string.isRequired
 }
 
 export default TextEditable

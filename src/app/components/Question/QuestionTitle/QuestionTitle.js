@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { TextEditable } from 'components/TextEditable'
+import { TextEditable } from 'components'
+import PropTypes from 'prop-types'
 
-// import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionTitle(props) {
-  // const { WRITE_PROPS_HERE } = props
+  const { placeholder, onChange } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -18,7 +18,6 @@ function QuestionTitle(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const onChange = (data) => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -38,9 +37,14 @@ function QuestionTitle(props) {
     }
   }, [])
 
-  return <TextEditable onChange={onChange} />
+  return (
+    <TextEditable onChange={onChange} placeholder={placeholder} {...props} />
+  )
 }
 
-QuestionTitle.propTypes = {}
+QuestionTitle.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired
+}
 
 export default QuestionTitle

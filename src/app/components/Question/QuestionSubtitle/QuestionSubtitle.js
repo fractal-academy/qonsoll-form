@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { TextEditable } from 'components/TextEditable'
+import { TextEditable } from 'components'
+import PropTypes from 'prop-types'
 
-// import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionSubtitle(props) {
-  // const { WRITE_PROPS_HERE } = props
+  const { placeholder } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -38,9 +38,13 @@ function QuestionSubtitle(props) {
     }
   }, [])
   // TODO: add secondary text style
-  return <TextEditable onChange={onChange} textSecondary />
+  return (
+    <TextEditable onChange={onChange} placeholder={placeholder} textSecondary />
+  )
 }
 
-QuestionSubtitle.propTypes = {}
+QuestionSubtitle.propTypes = {
+  placeholder: PropTypes.string.isRequired
+}
 
 export default QuestionSubtitle

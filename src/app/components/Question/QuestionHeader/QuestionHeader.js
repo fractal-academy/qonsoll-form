@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { QuestionTitle } from 'components/Question/QuestionTitle'
-import { QuestionSubtitle } from 'components/Question/QuestionSubtitle'
+import { QuestionTitle, QuestionSubtitle } from 'components'
 import { Row, Col } from '@qonsoll/react-design'
-import PropTypes from 'prop-types'
+
+//import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionHeader(props) {
-  // const { WRITE_PROPS_HERE } = props
+  const { titlePlaceholder, subtitlePlaceholder } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -19,7 +19,8 @@ function QuestionHeader(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const onChange = (data) => {}
+  const onChangeTitle = (data) => {}
+  const onChangeSubtitle = (data) => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -43,12 +44,18 @@ function QuestionHeader(props) {
     <>
       <Row>
         <Col>
-          <QuestionTitle onChange={onChange} />
+          <QuestionTitle
+            onChange={onChangeTitle}
+            placeholder={titlePlaceholder}
+          />
         </Col>
       </Row>
       <Row>
         <Col>
-          <QuestionSubtitle onChange={onChange} />
+          <QuestionSubtitle
+            onChange={onChangeSubtitle}
+            placeholder={subtitlePlaceholder}
+          />
         </Col>
       </Row>
     </>
