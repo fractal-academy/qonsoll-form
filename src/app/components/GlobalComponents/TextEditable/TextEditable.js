@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Typography } from 'antd'
+import { Input, Typography } from 'antd'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -19,18 +19,9 @@ function TextEditable(props) {
 
   // [COMPONENT STATE HOOKS]
   const [textValue, setTextValue] = useState()
-  const [isEditing, setIsEditing] = useState(false)
 
   // [COMPUTED PROPERTIES]
-  const editingProps = {
-    onChange: setTextValue,
-    icon: <></>,
-    editing: isEditing,
-    onEnd: () => {
-      //onChange(textValue)
-      setIsEditing(!isEditing)
-    }
-  }
+
   // [CLEAN FUNCTIONS]
 
   // [USE_EFFECTS]
@@ -52,13 +43,11 @@ function TextEditable(props) {
   }, [])
 
   return (
-    <Typography.Text
-      onClick={() => {
-        setIsEditing(!isEditing)
-      }}
-      editable={editingProps}>
-      {textValue || 'click to change text'}
-    </Typography.Text>
+    <Input
+      style={{ border: 0 }}
+      onChange={setTextValue}
+      placeholder="change default text"
+    />
   )
 }
 
