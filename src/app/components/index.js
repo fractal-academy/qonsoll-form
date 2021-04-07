@@ -1,4 +1,4 @@
-export { default as TextEditable } from './TextEditable/TextEditable'
-export { default as QuestionHeader } from './TextEditable/QuestionHeader'
-export { default as QuestionTitle } from './TextEditable/QuestionTitle'
-export { default as QuestionSubtitle } from './TextEditable/QuestionSubtitle'
+export { default as QuestionHeader } from './Question/QuestionHeader'
+export { default as QuestionTitle } from './Question/QuestionTitle'
+export { default as QuestionSubtitle } from './Question/QuestionSubtitle'
+export { default as TextEditable } from './TextEditable'

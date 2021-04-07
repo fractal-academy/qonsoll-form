@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { TextEditable } from 'components/TextEditable/TextEditable'
-
-// import PropTypes from 'prop-types'
+import { QuestionTitle } from 'components/Question/QuestionTitle'
+import { QuestionSubtitle } from 'components/Question/QuestionSubtitle'
+import { Row, Col } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
-function QuestionTitle(props) {
+function QuestionHeader(props) {
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -38,9 +39,22 @@ function QuestionTitle(props) {
     }
   }, [])
 
-  return <TextEditable onChange={onChange} />
+  return (
+    <>
+      <Row>
+        <Col>
+          <QuestionTitle onChange={onChange} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <QuestionSubtitle onChange={onChange} />
+        </Col>
+      </Row>
+    </>
+  )
 }
 
-QuestionTitle.propTypes = {}
+QuestionHeader.propTypes = {}
 
-export default QuestionTitle
+export default QuestionHeader

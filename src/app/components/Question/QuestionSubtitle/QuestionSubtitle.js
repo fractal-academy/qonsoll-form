@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { QuestionTitle } from 'components/TextEditable/QuestionTitle'
-import { QuestionSubtitle } from 'components/TextEditable/QuestionSubtitle'
-import { Row, Col } from '@qonsoll/react-design'
-import PropTypes from 'prop-types'
+import { TextEditable } from 'components/TextEditable'
+
+// import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
-function QuestionHeader(props) {
+function QuestionSubtitle(props) {
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -38,23 +37,10 @@ function QuestionHeader(props) {
       isComponentMounted = false
     }
   }, [])
-
-  return (
-    <>
-      <Row>
-        <Col>
-          <QuestionTitle onChange={onChange} />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <QuestionSubtitle onChange={onChange} />
-        </Col>
-      </Row>
-    </>
-  )
+  // TODO: add secondary text style
+  return <TextEditable onChange={onChange} textSecondary />
 }
 
-QuestionHeader.propTypes = {}
+QuestionSubtitle.propTypes = {}
 
-export default QuestionHeader
+export default QuestionSubtitle
