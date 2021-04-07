@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Typography } from 'antd'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function TextEditable(props) {
-  const { onChange } = props
+  const { onChange, textSecondary } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -35,16 +35,23 @@ function TextEditable(props) {
       isComponentMounted = false
     }
   }, [])
-
+  //TODO: Replace inline colors to theme vars
   return (
     <Input
-      style={{ border: 0 }}
+      style={{
+        border: 0,
+        boxShadow: 'none',
+        color: textSecondary ? 'gray' : 'black'
+      }}
       onChange={setTextValue}
       placeholder="change default text"
     />
   )
 }
 
-TextEditable.propTypes = {}
+TextEditable.propTypes = {
+  onChange: PropTypes.func,
+  textSecondary: PropTypes.bool
+}
 
 export default TextEditable

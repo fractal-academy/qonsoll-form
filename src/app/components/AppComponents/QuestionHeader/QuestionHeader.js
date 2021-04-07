@@ -17,6 +17,7 @@ function QuestionHeader(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
+  const onChange = (data) => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -36,7 +37,7 @@ function QuestionHeader(props) {
     }
   }, [])
 
-  return <TextEditable />
+  return <TextEditable onChange={onChange} />
 }
 
 QuestionHeader.propTypes = {}

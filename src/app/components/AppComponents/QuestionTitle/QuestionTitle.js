@@ -18,6 +18,7 @@ function QuestionTitle(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
+  const onChange = (data) => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -37,7 +38,7 @@ function QuestionTitle(props) {
     }
   }, [])
 
-  return <TextEditable />
+  return <TextEditable onChange={onChange} />
 }
 
 QuestionTitle.propTypes = {}

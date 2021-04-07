@@ -18,6 +18,7 @@ function QuestionSubtitle(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
+  const onChange = (data) => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -37,7 +38,7 @@ function QuestionSubtitle(props) {
     }
   }, [])
   // TODO: add secondary text style
-  return <TextEditable />
+  return <TextEditable onChange={onChange} textSecondary />
 }
 
 QuestionSubtitle.propTypes = {}
