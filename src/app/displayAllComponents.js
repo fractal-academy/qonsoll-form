@@ -1,14 +1,15 @@
 import React from 'react'
 import { Menu } from 'antd'
 import { Col, Container, Row } from '@qonsoll/react-design'
-import { Popover, TextAreaForm } from 'components'
-import { PlusOutlined } from '@ant-design/icons'
+import { Popover, Rate, TextAreaForm } from 'components'
+import { CaretUpOutlined, PlusOutlined } from '@ant-design/icons'
+import Title from 'antd/lib/typography/Title'
 
 const DisplayAllComponents = (props) => {
   //
   // const textAreaProps = {}
   const btnProps = {
-    icon: <PlusOutlined />,
+    icon: <CaretUpOutlined />,
     children: 'This is TextAreaForm',
     type: 'primary',
     size: 'large'
@@ -20,6 +21,7 @@ const DisplayAllComponents = (props) => {
       <Menu.Item>Item 3</Menu.Item>
     </Menu>
   )
+  const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful']
 
   return (
     <Container>
@@ -32,15 +34,19 @@ const DisplayAllComponents = (props) => {
             // textAreaProps={textAreaProps}
           />
         </Row>
-        <Row>
+        <Row mb={2} style={{ backgroundColor: '#ece8e8' }}>
           <Popover
             trigger="click"
             placement="bottomRight"
-            btnText="This is Popover"
+            btnText="This is Popover - click"
             btnType="primary"
             content={content}
             btnIcon=<PlusOutlined />
           />
+        </Row>
+        <Row mb={2}>
+          <Rate count="4" tooltips={desc} />
+          <Title> ^ This is Rating - Rate Component</Title>
         </Row>
       </Col>
     </Container>

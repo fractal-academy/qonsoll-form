@@ -12,7 +12,14 @@ const { TextArea } = Input
 */
 
 const CustomTextArea = (props) => {
-  const { onSubmit, textAreaProps, btnProps, noBorder, shortText } = props
+  const {
+    onSubmit,
+    textAreaProps,
+    btnProps,
+    noBorder,
+    shortText,
+    btnIcon
+  } = props
 
   useEffect(() => {
     let isComponentMounted = true
@@ -32,6 +39,7 @@ const CustomTextArea = (props) => {
       placeholder="Type your answer here..."
       autoSize={{ minRows: 1, maxRows: 10 }}
       bordered={!noBorder}
+      btnIcon={btnIcon}
       {...textAreaProps}
       {...btnProps}
     />
