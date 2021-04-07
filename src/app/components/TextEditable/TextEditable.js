@@ -6,7 +6,7 @@ const { TextArea } = Input
 // import { useTranslation } from 'react-i18next'
 
 function TextEditable(props) {
-  const { onChange, textSecondary, placeholder } = props
+  const { onChange, textSecondary, placeholder, isTitle } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -41,7 +41,9 @@ function TextEditable(props) {
   return (
     <TextArea
       style={{
-        color: textSecondary ? 'gray' : 'black'
+        color: textSecondary ? 'gray' : 'black',
+        fontSize: isTitle ? '20px' : '16px',
+        fontWeight: isTitle ? 'bold' : 'normal'
       }}
       bordered={false}
       onChange={setTextValue}

@@ -38,7 +38,12 @@ function QuestionTitle(props) {
   }, [])
 
   return (
-    <TextEditable onChange={onChange} placeholder={placeholder} {...props} />
+    <TextEditable
+      onChange={onChange}
+      placeholder={placeholder}
+      isTitle
+      {...props}
+    />
   )
 }
 
