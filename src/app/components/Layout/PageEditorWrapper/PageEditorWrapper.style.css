@@ -1,9 +1,6 @@
 .custom-scroll::-webkit-scrollbar {
   width: 7px;
 }
-.custom-scroll::-webkit-scrollbar {
-  width: 7px;
-}
 
 /* Track */
 .custom-scroll::-webkit-scrollbar-track {
