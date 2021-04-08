@@ -64,8 +64,8 @@ function TextAreaForm(props) {
                 ]}>
                 <TextArea noBorder={noBorder} {...textAreaProps} />
               </Form.Item>
-               <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
-                <Button
+              <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
+              <Button
                 key="submit"
                 onClick={() => form.submit()}
                 {...btnProps}
