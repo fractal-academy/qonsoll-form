@@ -2,8 +2,14 @@ import React from 'react'
 import { Menu } from 'antd'
 import { Col, Container, Row } from '@qonsoll/react-design'
 import { Popover, Rate, TextAreaForm } from 'components'
-import { CaretUpOutlined, PlusOutlined } from '@ant-design/icons'
+import {
+  CaretUpOutlined,
+  PlusOutlined,
+  SettingOutlined
+} from '@ant-design/icons'
 import Title from 'antd/lib/typography/Title'
+import { QuestionTypeView } from 'domains/QuestionType/components'
+import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 
 const DisplayAllComponents = (props) => {
   //
@@ -27,26 +33,22 @@ const DisplayAllComponents = (props) => {
     <Container>
       <Col>
         <Row mb={4}>
-          <TextAreaForm
-            longText
-            noBorder
-            btnProps={btnProps}
-            // textAreaProps={textAreaProps}
-          />
+          <TextAreaForm longText noBorder btnProps={btnProps} />
         </Row>
-        <Row mb={4}>
-          <Popover
-            trigger="click"
-            placement="bottomRight"
-            btnText="This is Popover - click"
-            btnType="primary"
-            content={content}
-            btnIcon={<PlusOutlined />}
-          />
-        </Row>
+        <Row mb={4}></Row>
         <Row mb={2}>
           <Rate count="4" tooltips={desc} />
           <Title> ^ This is Rating - Rate Component</Title>
+        </Row>
+        <Row>
+          <Popover
+            content={<QuestionTypeSelect />}
+            btnText={<SettingOutlined style={{ fontSize: '20px' }} />}
+            btnType="primary"
+            trigger="click"
+            placement="bottomRight"
+            style={{ padding: '0' }}
+          />
         </Row>
       </Col>
     </Container>

@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { QUESTION_TYPE, QUESTION_TYPE_VALUE } from 'app/constants/quetstionType'
+import { Col, Row } from '@qonsoll/react-design'
+import { Option } from 'antd/es/mentions'
+import { Menu, Select } from 'antd'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -9,6 +13,9 @@ import React, { useEffect, useState } from 'react'
 */
 
 function QuestionTypesList(props) {
+  const { Option } = Select
+  const { onChange } = props
+
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -41,7 +48,15 @@ function QuestionTypesList(props) {
     }
   }, [])
 
-  return <>QuestionTypesList</>
+  return (
+    <Menu onChange={onChange} style={{ height: '300px', overflow: 'auto' }}>
+      {QUESTION_TYPE_VALUE.map((item, index) => (
+        <Menu.Item key={index} value={item}>
+          {item}
+        </Menu.Item>
+      ))}
+    </Menu>
+  )
 }
 
 QuestionTypesList.propTypes = {}

@@ -3,7 +3,7 @@ import { TextArea } from 'components'
 import { Button, Form, Typography } from 'antd'
 import { Col, Container, Row } from '@qonsoll/react-design'
 import Text from 'antd/lib/typography/Text'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function TextAreaForm(props) {
@@ -79,6 +79,11 @@ function TextAreaForm(props) {
   )
 }
 
-TextAreaForm.propTypes = {}
+TextAreaForm.propTypes = {
+  textAreaProps: PropTypes.object,
+  btnProps: PropTypes.object,
+  noBorder: PropTypes.bool,
+  longText: PropTypes.bool
+}
 
 export default TextAreaForm

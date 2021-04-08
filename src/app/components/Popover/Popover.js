@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Popover } from 'antd'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function CustomPopover(props) {
@@ -60,6 +60,14 @@ function CustomPopover(props) {
   )
 }
 
-CustomPopover.propTypes = {}
+CustomPopover.propTypes = {
+  content: PropTypes.object.isRequired,
+  title: PropTypes.string,
+  btnType: PropTypes.string.isRequired,
+  btnText: PropTypes.string,
+  btnIcon: PropTypes.object,
+  placement: PropTypes.string,
+  trigger: PropTypes.string
+}
 
 export { CustomPopover }

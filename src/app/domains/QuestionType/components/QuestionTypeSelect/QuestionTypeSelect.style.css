@@ -1,0 +1,4 @@
+.hideScroll::-webkit-scrollbar{
+    display: none;
+border-right: none;
+}
