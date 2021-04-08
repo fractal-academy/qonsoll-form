@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Menu } from 'antd'
+import { Menu, Typography } from 'antd'
 import {
   PicCenterOutlined,
   PicRightOutlined,
@@ -7,8 +7,11 @@ import {
   AlignLeftOutlined,
   ProfileFilled
 } from '@ant-design/icons'
-import { Row, Col } from '@qonsoll/react-design'
-// import PropTypes from 'prop-types'
+import { Box, Row, Col } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
+import { Content } from 'antd-styled'
+import './PageEditorWrapper.style.css'
+const { Text } = Typography
 // import { useTranslation } from 'react-i18next'
 
 const menuMap = [
@@ -20,7 +23,7 @@ const menuMap = [
 ]
 
 function PageEditorWrapper(props) {
-  // const { WRITE_PROPS_HERE } = props
+  const { children } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -52,7 +55,7 @@ function PageEditorWrapper(props) {
   }, [])
 
   return (
-    <Row>
+    <Row m={15}>
       <Col cw="auto">
         <Menu
           style={{
@@ -81,10 +84,28 @@ function PageEditorWrapper(props) {
           ))}
         </Menu>
       </Col>
+      <Col ml={3}>
+        <Content
+          backgroundColor="lightblue"
+          style={{
+            height: '550px',
+            width: '650px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'auto',
+            borderRadius: '10px'
+          }}
+          className="custom-scroll">
+          {children}
+        </Content>
+      </Col>
     </Row>
   )
 }
 
-PageEditorWrapper.propTypes = {}
+PageEditorWrapper.propTypes = {
+  children: PropTypes.node
+}
 
 export default PageEditorWrapper
