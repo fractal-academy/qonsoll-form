@@ -1,8 +1,5 @@
-import { Button, Menu } from 'antd'
-import { firestore } from 'app/services'
-import { Popover, TextAreaForm } from 'components'
 import { Col, Container, Row } from '@qonsoll/react-design'
-import { PlusOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
 import 'antd/dist/antd.css'
 
 const App = (props) => {
