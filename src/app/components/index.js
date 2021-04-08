@@ -1,3 +1,7 @@
+export { default as QuestionHeader } from './Question/QuestionHeader'
+export { default as QuestionTitle } from './Question/QuestionTitle'
+export { default as QuestionSubtitle } from './Question/QuestionSubtitle'
+export { default as TextEditable } from './TextEditable'
 export { default as PageHeader } from './Layout/PageHeader'
 export { default as TextArea } from './TextArea/TextArea'
 export { default as TextAreaForm } from './TextArea/TextAreaForm'
