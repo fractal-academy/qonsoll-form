@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 import { firestore } from 'app/services'
+import { PageHeader } from 'components'
 
 const App = () => {
   // const onClick = () => {
@@ -9,7 +10,7 @@ const App = () => {
   //     .then((res) => res.docs.forEach((item) => console.log(item.data())))
   // }
 
-  return <Button type="primary">Hello</Button>
+  return <PageHeader title="Form" />
 }
 
 export default App
