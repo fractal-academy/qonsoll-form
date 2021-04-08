@@ -89,7 +89,6 @@ function PageEditorWrapper(props) {
           backgroundColor="lightblue"
           style={{
             height: '550px',
-
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
