@@ -41,7 +41,7 @@ const DisplayAllComponents = (props) => {
             btnText="This is Popover - click"
             btnType="primary"
             content={content}
-            btnIcon=<PlusOutlined />
+            btnIcon={<PlusOutlined />}
           />
         </Row>
         <Row mb={2}>

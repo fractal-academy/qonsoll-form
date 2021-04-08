@@ -1,9 +1,10 @@
 import { Col, Container, Row } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import 'antd/dist/antd.css'
+import { PageEditorWrapper } from 'components'
 
 const App = (props) => {
-  return <Button>App</Button>
+  return <PageEditorWrapper />
 }
 
 export default App
