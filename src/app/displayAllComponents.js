@@ -33,23 +33,9 @@ const DisplayAllComponents = (props) => {
     <Container>
       <Col>
         <Row mb={4}>
-          <TextAreaForm
-            longText
-            noBorder
-            btnProps={btnProps}
-            // textAreaProps={textAreaProps}
-          />
+          <TextAreaForm longText noBorder btnProps={btnProps} />
         </Row>
-        <Row mb={4}>
-          {/*<Popover*/}
-          {/*  trigger="click"*/}
-          {/*  placement="bottomRight"*/}
-          {/*  btnText="This is Popover - click"*/}
-          {/*  btnType="primary"*/}
-          {/*  content={content}*/}
-          {/*  btnIcon=<PlusOutlined />*/}
-          {/*/>*/}
-        </Row>
+        <Row mb={4}></Row>
         <Row mb={2}>
           <Rate count="4" tooltips={desc} />
           <Title> ^ This is Rating - Rate Component</Title>
@@ -61,6 +47,7 @@ const DisplayAllComponents = (props) => {
             btnType="primary"
             trigger="click"
             placement="bottomRight"
+            style={{ padding: '0' }}
           />
         </Row>
       </Col>
