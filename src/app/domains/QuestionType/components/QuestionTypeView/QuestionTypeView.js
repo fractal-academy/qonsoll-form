@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { QUESTION_TYPE, QUESTION_TYPE_VALUE } from 'app/constants/quetstionType'
+import {
+  GlobalOutlined,
+  HomeOutlined,
+  RadiusBottomrightOutlined
+} from '@ant-design/icons'
+import { Box, Col, Container, Row } from '@qonsoll/react-design'
+import { Card } from 'antd'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -7,6 +15,32 @@ import React, { useEffect, useState } from 'react'
   Please remove this section, if you are going to make changes
   in this file.
 */
+const questionTypeMap = {
+  [QUESTION_TYPE.WELCOME_SCREEN]: {
+    value: QUESTION_TYPE_VALUE,
+    icon: <RadiusBottomrightOutlined />
+  },
+  [QUESTION_TYPE.SHORT_TEXT]: {
+    type: QUESTION_TYPE.SHORT_TEXT,
+    icon: <HomeOutlined />
+  },
+  [QUESTION_TYPE.WELCOME_SCREEN]: {
+    type: QUESTION_TYPE.WELCOME_SCREEN,
+    icon: <GlobalOutlined />
+  },
+  [QUESTION_TYPE.WELCOME_SCREEN]: {
+    type: QUESTION_TYPE.WELCOME_SCREEN,
+    icon: <RadiusBottomrightOutlined />
+  },
+  [QUESTION_TYPE.WELCOME_SCREEN]: {
+    type: QUESTION_TYPE.WELCOME_SCREEN,
+    icon: <RadiusBottomrightOutlined />
+  },
+  [QUESTION_TYPE.WELCOME_SCREEN]: {
+    type: QUESTION_TYPE.WELCOME_SCREEN,
+    icon: <RadiusBottomrightOutlined />
+  }
+}
 
 function QuestionTypeView(props) {
   // const { WRITE_PROPS_HERE } = props
@@ -41,7 +75,16 @@ function QuestionTypeView(props) {
     }
   }, [])
 
-  return <>QuestionTypeView</>
+  return (
+    <Box>
+      <Row>
+        <Col cw={'auto'}>
+          <RadiusBottomrightOutlined />
+        </Col>
+        <Col>{QUESTION_TYPE.WELCOME_SCREEN}</Col>
+      </Row>
+    </Box>
+  )
 }
 
 QuestionTypeView.propTypes = {}
