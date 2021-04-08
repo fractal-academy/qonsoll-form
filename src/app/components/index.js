@@ -1,3 +1,7 @@
+export { default as ImageUploader } from './Uploader/ImageUploader'
+export { default as FileUploader } from './Uploader/FileUploader'
+export { default as IconLabel } from './Uploader/IconLabel'
+export { default as ImageLabel } from './Uploader/ImageLabel'
 export { default as DateTimeInput } from './Input/DateTimeInput'
 export { default as InputForm } from './Input/InputForm'
 export { default as Input } from './Input/Input'
