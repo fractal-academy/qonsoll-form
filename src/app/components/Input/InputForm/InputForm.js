@@ -59,7 +59,7 @@ function InputForm(props) {
               style={{ marginBottom: 0 }}
               name="input"
               rules={[{ required: isRequired }]}>
-              <Input {...inputProps} />
+              <Input {...inputProps} style={{ borderRadius: '5px' }} />
             </Form.Item>
           </Col>
         </Row>
