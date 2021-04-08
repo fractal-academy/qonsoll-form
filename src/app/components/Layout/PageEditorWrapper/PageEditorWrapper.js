@@ -55,7 +55,7 @@ function PageEditorWrapper(props) {
   }, [])
 
   return (
-    <Row m={15}>
+    <Row my={15} mx={50}>
       <Col cw="auto">
         <Menu
           style={{
@@ -89,7 +89,7 @@ function PageEditorWrapper(props) {
           backgroundColor="lightblue"
           style={{
             height: '550px',
-            width: '650px',
+
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
