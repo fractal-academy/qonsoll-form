@@ -1,13 +1,9 @@
-import { Row, Col, Box } from '@qonsoll/react-design'
-import { Button, Form, Typography } from 'antd'
-import { ChoiseInput, DateTimeInput, InputForm, Input } from 'components'
+import { Col, Container, Row } from '@qonsoll/react-design'
+import { Button } from 'antd'
+import 'antd/dist/antd.css'
 
-const App = () => {
-  return (
-    <>
-      <Input phone />
-    </>
-  )
+const App = (props) => {
+  return <Button>App</Button>
 }
 
 export default App
