@@ -43,20 +43,20 @@ function PageHeader(props) {
 
   return (
     <Container>
-      <Row mt={4} mx={5} noGutters>
+      <Row pt={4} px={45} noGutters>
         <Col cw="auto" p={0} v="center">
           <Button
-            size="large"
+            size="small"
             type="text"
-            icon={<ArrowLeftOutlined />}
+            style={{
+              padding: 0
+            }}
+            icon={<ArrowLeftOutlined style={{ fontSize: '18px' }} />}
             onClick={() => history.goBack()}
           />
         </Col>
         <Col cw="auto" p={0} v="center">
-          <Divider
-            type="vertical"
-            style={{ height: '24px', marginLeft: '4px' }}
-          />
+          <Divider type="vertical" style={{ height: '24px' }} />
         </Col>
         <Col p={0} v="center">
           <Title style={{ marginBottom: 0 }} level={3}>
