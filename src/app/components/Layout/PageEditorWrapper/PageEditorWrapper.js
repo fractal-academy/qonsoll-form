@@ -11,14 +11,13 @@ import { Box, Row, Col } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import { Content } from 'antd-styled'
 import './PageEditorWrapper.style.css'
-const { Text } = Typography
 // import { useTranslation } from 'react-i18next'
 
 const menuMap = [
+  { icon: <AlignLeftOutlined /> },
   { icon: <PicCenterOutlined /> },
   { icon: <PicLeftOutlined /> },
   { icon: <PicRightOutlined /> },
-  { icon: <AlignLeftOutlined /> },
   { icon: <ProfileFilled /> }
 ]
 
@@ -55,51 +54,53 @@ function PageEditorWrapper(props) {
   }, [])
 
   return (
-    <Row m={[50, 40]}>
-      <Col cw="auto">
-        <Menu
-          style={{
-            background: 'transparent',
-            backgroundColor: 'lightgrey',
-            borderRadius: '8px'
-          }}
-          // selectedKeys={}
-        >
-          {menuMap.map((item, index) => (
-            <Menu.Item
-              key={index}
-              icon={item.icon}
-              onClick={(data) => {
-                console.log(data)
-              }}
-              style={{
-                borderRadius: '8px',
-                padding: '8px',
-                margin: '2px',
-                display: 'flex',
-                alignContent: 'center',
-                alignItems: 'center'
-              }}
-            />
-          ))}
-        </Menu>
-      </Col>
-      <Col ml={3}>
-        <Content
-          backgroundColor="lightblue"
-          style={{
-            height: '550px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'auto',
-            borderRadius: '10px'
-          }}
-          className="custom-scroll">
-          {children}
-        </Content>
-      </Col>
-    </Row>
+    <Box display="flex" height="100%" px={45} py={4}>
+      <Row>
+        <Col cw="auto" pr={2}>
+          <Menu
+            style={{
+              background: 'transparent',
+              backgroundColor: '#e2e6ec',
+              borderRadius: '8px'
+            }}
+            defaultSelectedKeys={['1']}
+            // selectedKeys={}
+          >
+            {menuMap.map((item, index) => (
+              <Menu.Item
+                key={index + 1}
+                icon={item.icon}
+                onClick={(data) => {
+                  console.log(data)
+                }}
+                style={{
+                  borderRadius: '8px',
+                  padding: '8px',
+                  margin: '2px',
+                  display: 'flex',
+                  alignContent: 'center',
+                  alignItems: 'center'
+                }}
+              />
+            ))}
+          </Menu>
+        </Col>
+      </Row>
+      <Content
+        backgroundColor="white"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          flex: '1',
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflow: 'auto',
+          borderRadius: '10px'
+        }}
+        className="custom-scroll">
+        {children}
+      </Content>
+    </Box>
   )
 }
 
