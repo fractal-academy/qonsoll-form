@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Container } from '@qonsoll/react-design'
-import { Button, Divider, Typography } from 'antd'
-import { ArrowLeftOutlined, SettingOutlined } from '@ant-design/icons'
+import { Button, Divider, Tooltip, Typography } from 'antd'
+import {
+  ArrowLeftOutlined,
+  EyeOutlined,
+  SettingOutlined
+} from '@ant-design/icons'
 import { useHistory } from 'react-router'
 import PropTypes from 'prop-types'
 
@@ -64,7 +68,9 @@ function PageHeader(props) {
           </Title>
         </Col>
         <Col cw="auto" v="center">
-          <SettingOutlined style={{ fontSize: '20px' }} />
+          <Tooltip placement="left" title={'Preview'}>
+            <EyeOutlined style={{ fontSize: '20px' }} />
+          </Tooltip>
         </Col>
       </Row>
     </Container>

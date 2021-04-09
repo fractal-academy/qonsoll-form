@@ -1,7 +1,12 @@
 import React, { Children, useEffect, useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Menu, Typography, Divider } from 'antd'
-import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
+import {
+  LeftOutlined,
+  PlusOutlined,
+  RightOutlined,
+  SettingOutlined
+} from '@ant-design/icons'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -17,7 +22,7 @@ function EditorSidebar(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [open, setOpen] = useState(true)
 
   // [COMPUTED PROPERTIES]
 
@@ -47,7 +52,22 @@ function EditorSidebar(props) {
       width="220px"
       display="flex"
       flex={1}
-      flexDirection="column">
+      flexDirection="column"
+      position="relative">
+      <Box
+        position="absolute"
+        bg="white"
+        borderRadius="5px 0px 0 5px"
+        style={{ left: '-15px', cursor: 'pointer' }}
+        onClick={() => {
+          setOpen(!open)
+        }}>
+        {open ? (
+          <RightOutlined style={{ padding: '5px 5px 0 0' }} />
+        ) : (
+          <LeftOutlined style={{ padding: '5px 5px 0 0' }} />
+        )}
+      </Box>
       <Box p={3}>
         <Row display="flex" flex={1}>
           <Col v="center">
