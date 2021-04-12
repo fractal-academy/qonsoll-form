@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { EditorSidebar, PageEditorWrapper, PageHeader } from 'components'
 import { Col, Container, Row, Box } from '@qonsoll/react-design'
-
 import PropTypes from 'prop-types'
+import FormContentArea from '../FormContentArea'
+import { QuestionLayoutSwitcher } from '../../'
+import MiddleContainer from '../MiddleContainer'
 // import { useTranslation } from 'react-i18next'
 
 function PageLayout(props) {
-  const { title = 'New Form' } = props
+  const { title = 'New Form', children } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -39,16 +41,9 @@ function PageLayout(props) {
   }, [])
 
   return (
-    <Box bg="#f6f9fe" display="flex" height="inherit" flex={1}>
-      <Box display="flex" flex={1} flexDirection="column" max-height="100%">
-        <Box>
-          <PageHeader title={title} />
-        </Box>
-        <PageEditorWrapper>Content</PageEditorWrapper>
-      </Box>
-      <Box display="flex">
-        <EditorSidebar />
-      </Box>
+    <Box display="flex" flex={1} flexDirection="column">
+      <PageHeader title={title} />
+      {children}
     </Box>
   )
 }
