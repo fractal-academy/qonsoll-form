@@ -5,7 +5,7 @@ import { Box } from '@qonsoll/react-design'
 // import { useTranslation } from 'react-i18next'
 
 function Card(props) {
-  const { number = '2', children } = props
+  const { number, children } = props
 
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
