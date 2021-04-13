@@ -4,6 +4,7 @@ import Text from 'antd/lib/typography/Text'
 import React from 'react'
 
 const { Option, OptGroup } = Select
+
 const mockQuestionListRedirect = [
   'Go to next question',
   'question1',
@@ -11,10 +12,8 @@ const mockQuestionListRedirect = [
   'question3'
 ]
 
-function ChoiceTemplate(props) {
+function YesNoChoiceTemplate(props) {
   const { answers, onChange } = props
-  let startLetter = 65
-
   return (
     <>
       {answers.map((item, index) => (
@@ -29,7 +28,7 @@ function ChoiceTemplate(props) {
             border="1px solid #ededed"
             borderRadius="4px">
             <Button type="outline" style={{ marginRight: '10px' }}>
-              <Text strong>{String.fromCharCode(startLetter++)}</Text>
+              <Text strong>{item[0].toUpperCase()}</Text>
             </Button>
             {item}
           </Box>
@@ -62,4 +61,4 @@ function ChoiceTemplate(props) {
   )
 }
 
-export default ChoiceTemplate
+export default YesNoChoiceTemplate

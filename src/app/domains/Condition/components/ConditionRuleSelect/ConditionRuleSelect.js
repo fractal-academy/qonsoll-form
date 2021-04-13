@@ -2,7 +2,7 @@ import { Popover } from 'components'
 import { Button, Menu, Select } from 'antd'
 import { Col, Row } from '@qonsoll/react-design'
 import React from 'react'
-import { TEXT_CONDITION_RULES_VALUE } from 'app/constants/textConditionRules'
+import { TEXT_CONDITION_RULES_VALUE } from 'app/constants/planeTextStringConditionRules'
 import { DATE_CONDITION_RULES_VALUE } from 'app/constants/dateConditionRules'
 
 const Option = Select
