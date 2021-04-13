@@ -19,3 +19,5 @@ export { default as PageHeader } from './Layout/PageHeader'
 export { default as FormContentArea } from './Layout/FormContentArea'
 export { default as PageEditorWrapper } from './Layout/PageEditorWrapper'
 export { default as EditorSidebar } from './Layout/EditorSidebar'
+
+export { default as QuestionLayoutSwitcher } from './Layout/QuestionLayoutSwitcher'
