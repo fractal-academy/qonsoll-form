@@ -52,10 +52,10 @@ function QuestionLayoutSwitcher(props) {
   }, [])
 
   return (
-    <Menu style={styles.menuStyle} defaultSelectedKeys={['1']}>
+    <Menu style={styles.menuStyle} defaultSelectedKeys={['0']}>
       {menuMap.map((item, index) => (
         <Menu.Item
-          key={index + 1}
+          key={index}
           icon={item.icon}
           onClick={(data) => {
             console.log(data)
