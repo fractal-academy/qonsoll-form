@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Content } from 'antd-styled'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import './FormContentArea.style.css'
+import { Box } from '@qonsoll/react-design'
+import './FormContentArea.styles.css'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
