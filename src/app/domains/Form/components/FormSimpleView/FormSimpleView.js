@@ -42,25 +42,17 @@ function FormSimpleView(props) {
       style={{
         width: 160,
         backgroundColor: '#eceff5',
-        borderRadius: '8px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
+        borderRadius: '8px'
       }}
       bodyStyle={{
-        padding: '0 0 12px 12px',
-        display: 'flex',
-        flex: 1,
-        alignSelf: 'normal'
+        padding: '0 12px 12px 12px'
       }}
       cover={
         <Image
           style={{
             height: '110px',
-            width: '158px',
             padding: '3px',
-            borderRadius: '12px'
+            borderRadius: '8px'
           }}
           alt="Form view"
           src={imageURL}
