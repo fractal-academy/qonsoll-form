@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Container } from '@qonsoll/react-design'
 import { Button, Divider, Tooltip, Typography } from 'antd'
-import {
-  ArrowLeftOutlined,
-  EyeOutlined,
-  SettingOutlined
-} from '@ant-design/icons'
+import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { styles } from './PageHeader.style'
