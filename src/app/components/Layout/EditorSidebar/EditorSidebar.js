@@ -7,7 +7,7 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
-import { styles } from './EditorSidebar.style'
+import { styles } from './EditorSidebar.styles'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
