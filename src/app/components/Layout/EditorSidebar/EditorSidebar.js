@@ -60,7 +60,7 @@ function EditorSidebar(props) {
         position="absolute"
         bg="white"
         borderRadius="5px 0px 0 5px"
-        style={styles.siderOpenStateSwitcherStyle}
+        style={styles.siderStateSwitcherStyle}
         onClick={() => {
           setOpen(!open)
         }}>

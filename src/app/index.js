@@ -10,48 +10,46 @@ import {
 
 const App = (props) => {
   return (
-    <Box bg="#f6f9fe" display="flex" flex={1} height="inherit">
+    <Box bg="#f6f9fe" display="flex" height="inherit">
       <PageLayout>
         <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
-          <Box padding={3} height="100%">
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-            <Box>Content </Box>
-          </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
+          <Box>Content </Box>
         </FormContentArea>
       </PageLayout>
       <Box display="flex">
