@@ -52,9 +52,8 @@ const App = (props) => {
           <Box>Content </Box>
         </FormContentArea>
       </PageLayout>
-      <Box display="flex">
-        <EditorSidebar />
-      </Box>
+
+      <EditorSidebar />
     </Box>
   )
 }

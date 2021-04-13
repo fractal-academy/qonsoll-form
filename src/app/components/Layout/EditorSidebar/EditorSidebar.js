@@ -53,7 +53,6 @@ function EditorSidebar(props) {
       bg="white"
       width="220px"
       display="flex"
-      flex={1}
       flexDirection="column"
       position="relative">
       <Box
