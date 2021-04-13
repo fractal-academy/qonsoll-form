@@ -1,0 +1,33 @@
+.hiddenBox {
+  position: absolute;
+  z-index: 200;
+  top: 20px;
+  width: 24px;
+  height: 32px;
+  border-radius: 5px;
+  background-color: #424851;
+}
+
+.contentBox {
+  position: absolute;
+  z-index: 500;
+  left: 4px;
+  padding: 16px;
+  min-height: 72px;
+  border-radius: 16px;
+  background-color: #eceff5;
+}
+
+.numberBox {
+  position: absolute;
+  z-index: 800;
+  top: 25px;
+  width: 24px;
+  height: 22px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #424851;
+
+  color: #eceff5;
+  text-align: center;
+}
