@@ -1,5 +1,12 @@
-import { Button } from 'antd'
 import { firestore } from 'app/services'
+import {
+  SubmitButton,
+  ChoiceButton,
+  YesnoButton,
+  RangeButton,
+  Badge
+} from 'app/components'
+import { Container } from '@qonsoll/react-design'
 
 const App = () => {
   // const onClick = () => {
@@ -9,7 +16,15 @@ const App = () => {
   //     .then((res) => res.docs.forEach((item) => console.log(item.data())))
   // }
 
-  return <Button type="primary">Hello</Button>
+  return (
+    <Container>
+      <Badge />
+      <SubmitButton />
+      <ChoiceButton />
+      <YesnoButton />
+      <RangeButton from={5} to={50} />
+    </Container>
+  )
 }
 
 export default App

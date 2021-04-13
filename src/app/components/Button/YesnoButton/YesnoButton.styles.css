@@ -1,0 +1,15 @@
+.buttonStyle {
+}
+
+.buttonBox {
+  text-align: center;
+  padding: 2px 5px;
+  width: 28px;
+  border-style: solid;
+  border-color: #40a9ff;
+  border-width: 1px;
+}
+.buttonBox:hover {
+  width: 50px;
+  text-align: right;
+}
