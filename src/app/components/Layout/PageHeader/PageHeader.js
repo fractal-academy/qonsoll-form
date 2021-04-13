@@ -4,7 +4,7 @@ import { Button, Divider, Tooltip, Typography } from 'antd'
 import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router'
 import PropTypes from 'prop-types'
-import { styles } from './PageHeader.style'
+import { styles } from './PageHeader.styles'
 import { globalStyles } from 'app/styles'
 
 // import { useTranslation } from 'react-i18next'
