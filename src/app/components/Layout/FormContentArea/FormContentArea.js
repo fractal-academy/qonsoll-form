@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Content } from 'antd-styled'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import './FormContentArea.style.css'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function FormContentArea(props) {
@@ -48,6 +48,9 @@ function FormContentArea(props) {
   )
 }
 
-FormContentArea.propTypes = {}
+FormContentArea.propTypes = {
+  leftSideMenu: PropTypes.element,
+  children: PropTypes.node
+}
 
 export default FormContentArea
