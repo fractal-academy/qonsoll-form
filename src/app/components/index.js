@@ -17,3 +17,5 @@ export { default as Popover } from './Popover'
 export { default as Rate } from './Rating'
 export { default as PageEditorWrapper } from './Layout/PageEditorWrapper'
 export { default as EditorSidebar } from './Layout/EditorSidebar'
+
+export { default as QuestionLayoutSwitcher } from './Layout/QuestionLayoutSwitcher'
