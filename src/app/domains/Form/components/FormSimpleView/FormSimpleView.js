@@ -1,7 +1,7 @@
 import { Card, Image, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { style } from './FormSimpleView.style'
+import { styles } from './FormSimpleView.style'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
 
@@ -40,11 +40,11 @@ function FormSimpleView(props) {
 
   return (
     <Card
-      style={style.cardStyles}
-      bodyStyle={style.cardBodyPadding}
+      style={styles.cardStyles}
+      bodyStyle={styles.cardBodyPadding}
       cover={
         <Image
-          style={style.cardImageStyles}
+          style={styles.cardImageStyles}
           alt="Form view"
           src={imageURL}
           preview={false}
