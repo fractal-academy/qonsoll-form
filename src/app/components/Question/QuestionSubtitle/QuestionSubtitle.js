@@ -37,7 +37,6 @@ function QuestionSubtitle(props) {
       isComponentMounted = false
     }
   }, [])
-  // TODO: add secondary text style
   return (
     <TextEditable onChange={onChange} placeholder={placeholder} textSecondary />
   )
