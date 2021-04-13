@@ -1,4 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import { Card, Tag } from 'antd'
+import {
+  InputForm,
+  Popover,
+  QuestionHeader,
+  Rate,
+  TextAreaForm
+} from 'components'
+import { SettingOutlined } from '@ant-design/icons'
+import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
+import { Col, Row } from '@qonsoll/react-design'
+import ConditionRuleSelect from 'domains/Condition/components/ConditionRuleSelect'
+import ConditionView from 'domains/Condition/components/ConditionView'
+import { ConditionForm } from 'domains/Condition/components'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -9,6 +23,7 @@ import React, { useEffect, useState } from 'react'
 */
 
 function QuestionForm(props) {
+  const { questionType, questionNumber, question, description } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -41,7 +56,136 @@ function QuestionForm(props) {
     }
   }, [])
 
-  return <>QuestionForm</>
+  return (
+    <>
+      <ConditionForm />
+      {/*<Row noGutters mb={2}>*/}
+      {/*  <Col>*/}
+      {/*    <Card*/}
+      {/*      style={{*/}
+      {/*        width: '600px',*/}
+      {/*        borderRadius: '8px',*/}
+      {/*        borderColor: '#1890ff',*/}
+      {/*        padding: 0*/}
+      {/*      }}>*/}
+      {/*      <Row noGutters h="between">*/}
+      {/*        <Col cw="auto">*/}
+      {/*          <Tag color="blue">Question 1</Tag>*/}
+      {/*        </Col>*/}
+      {/*        <Col cw="auto">*/}
+      {/*          <Popover*/}
+      {/*            trigger={'click'}*/}
+      {/*            placement={'bottomRight'}*/}
+      {/*            btnType="primary"*/}
+      {/*            btnIcon={<SettingOutlined />}*/}
+      {/*            content={<QuestionTypeSelect />}*/}
+      {/*          />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*      <Row noGutters h="between">*/}
+      {/*        <Col cw="auto">*/}
+      {/*          <QuestionHeader*/}
+      {/*            titlePlaceholder={'Question one'}*/}
+      {/*            subtitlePlaceholder={'Question with input answer'}*/}
+      {/*          />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*      <Row noGutters>*/}
+      {/*        <Col>*/}
+      {/*          <InputForm btnProps={{ children: 'submit', type: 'primary' }} />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*    </Card>*/}
+      {/*  </Col>*/}
+      {/*</Row>*/}
+
+      {/*<Row noGutters mb={2}>*/}
+      {/*  <Col>*/}
+      {/*    <Card*/}
+      {/*      style={{*/}
+      {/*        width: '600px',*/}
+      {/*        borderRadius: '8px',*/}
+      {/*        borderColor: '#1890ff'*/}
+      {/*      }}>*/}
+      {/*      <Row noGutters h="between">*/}
+      {/*        <Col cw="auto">*/}
+      {/*          <Tag color="blue">Question 2</Tag>*/}
+      {/*        </Col>*/}
+      {/*        <Col cw="auto">*/}
+      {/*          <Popover*/}
+      {/*            trigger={'click'}*/}
+      {/*            placement={'bottomRight'}*/}
+      {/*            btnType="primary"*/}
+      {/*            btnIcon={<SettingOutlined />}*/}
+      {/*            content={<QuestionTypeSelect />}*/}
+      {/*          />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*      <Row noGutters>*/}
+      {/*        <Col>*/}
+      {/*          <QuestionHeader*/}
+      {/*            titlePlaceholder={'Question two'}*/}
+      {/*            subtitlePlaceholder={'Question with TextArea'}*/}
+      {/*          />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*      <Row noGutters>*/}
+      {/*        <Col>*/}
+      {/*          /!*<InputForm btnProps={{ children: 'submit', type: 'primary' }} />*!/*/}
+      {/*          <TextAreaForm*/}
+      {/*            noBorder*/}
+      {/*            btnProps={{ children: 'Submit', type: 'primary' }}*/}
+      {/*          />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*    </Card>*/}
+      {/*  </Col>*/}
+      {/*</Row>*/}
+
+      {/*<Row noGutters mb={2}>*/}
+      {/*  <Col>*/}
+      {/*    <Card*/}
+      {/*      style={{*/}
+      {/*        width: '600px',*/}
+      {/*        borderRadius: '8px',*/}
+      {/*        borderColor: '#1890ff'*/}
+      {/*      }}>*/}
+      {/*      <Row noGutters h="between">*/}
+      {/*        <Col cw="auto">*/}
+      {/*          <Tag color="blue">Question 3</Tag>*/}
+      {/*        </Col>*/}
+
+      {/*        <Col cw="auto">*/}
+      {/*          <Popover*/}
+      {/*            trigger={'click'}*/}
+      {/*            placement={'bottomRight'}*/}
+      {/*            btnType="primary"*/}
+      {/*            btnIcon={<SettingOutlined />}*/}
+      {/*            content={<QuestionTypeSelect />}*/}
+      {/*          />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*      <Row noGutters>*/}
+      {/*        <Col>*/}
+      {/*          <QuestionHeader*/}
+      {/*            titlePlaceholder={'Question three'}*/}
+      {/*            subtitlePlaceholder={'Question with Rating'}*/}
+      {/*          />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*      <Row noGutters>*/}
+      {/*        <Col>*/}
+      {/*          /!*<InputForm btnProps={{ children: 'submit', type: 'primary' }} />*!/*/}
+      {/*          <Rate />*/}
+      {/*        </Col>*/}
+      {/*      </Row>*/}
+      {/*    </Card>*/}
+      {/*  </Col>*/}
+      {/*</Row>*/}
+
+      {/*<ConditionRuleSelect />*/}
+    </>
+  )
 }
 
 QuestionForm.propTypes = {}

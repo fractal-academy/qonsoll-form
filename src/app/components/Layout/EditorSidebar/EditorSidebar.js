@@ -3,6 +3,8 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Menu, Typography, Divider } from 'antd'
 import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
+import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
+import { Popover } from 'components'
 // import { useTranslation } from 'react-i18next'
 
 const { SubMenu } = Menu
@@ -55,8 +57,22 @@ function EditorSidebar(props) {
               Questions
             </Title>
           </Col>
-          <Col cw="auto" px={10} py={1} mr={2} borderRadius="5px" bg="#e8f0fb">
-            <PlusOutlined style={{ color: '#1d6fdc' }} />
+          <Col
+            cw="auto"
+            px={10}
+            py={1}
+            mr={2}
+            borderRadius="5px" /*bg="#e8f0fb"*/
+          >
+            <Popover
+              trigger={'click'}
+              placement={'bottomRight'}
+              btnType="ghost"
+              btnIcon={<PlusOutlined />}
+              content={<QuestionTypeSelect />}
+            />
+
+            {/*<PlusOutlined style={{ color: '#1d6fdc' }} />*/}
           </Col>
           <Col cw="auto" px={1} borderRadius="5px" v="center">
             <SettingOutlined />
