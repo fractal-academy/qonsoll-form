@@ -1,10 +1,10 @@
 import { firestore } from 'app/services'
 import {
-  SubmitButton,
-  ChoiceButton,
-  YesnoButton,
+  Badge,
   RangeButton,
-  Badge
+  YesnoButton,
+  ChoiceButton,
+  SubmitButton
 } from 'app/components'
 import { Container } from '@qonsoll/react-design'
 
@@ -16,11 +16,13 @@ const App = () => {
   //     .then((res) => res.docs.forEach((item) => console.log(item.data())))
   // }
 
+  const choices = ['choice1', 'choice2', 'choice3', 'choice4']
+
   return (
     <Container>
       <Badge />
       <SubmitButton />
-      <ChoiceButton />
+      <ChoiceButton choices={choices} />
       <YesnoButton />
       <RangeButton from={5} to={50} />
     </Container>

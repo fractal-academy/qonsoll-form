@@ -1,9 +1,11 @@
 import './YesnoButton.styles.css'
-import { Button } from 'app/components'
 import { Typography } from 'antd'
+import { Button } from 'app/components'
 import { Row, Col, Box } from '@qonsoll/react-design'
 
 const YesnoButton = (props) => {
+  const { conditions } = props
+
   const onButtonClick = () => {}
 
   const yeslayout = (

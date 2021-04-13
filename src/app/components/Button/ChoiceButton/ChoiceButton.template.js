@@ -1,12 +1,37 @@
-// import './Button.styles.css'
+import { Typography } from 'antd'
 import PropTypes from 'prop-types'
 import { Button } from 'app/components'
-import { Box } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 
 const ChoiceButton = (props) => {
-  const { conditions, buttonText = 'Button' } = props
+  const { conditions, choices } = props
 
-  return <Box></Box>
+  const onButtonClick = () => {}
+
+  const layout = (letter, item) => (
+    <Row display="flex" v="center">
+      <Col className="buttonBox" mr={2}>
+        {letter}
+      </Col>
+      <Typography.Text>{item}</Typography.Text>
+    </Row>
+  )
+
+  let startLetter = 65
+
+  return (
+    <Box display="block">
+      {choices.map((item) => (
+        <Box key={item} mb={2}>
+          <Button
+            buttonType="secondary"
+            layout={layout(String.fromCharCode(startLetter++), item)}
+            onClick={onButtonClick}
+          />
+        </Box>
+      ))}
+    </Box>
+  )
 }
 
 ChoiceButton.propTypes = {
