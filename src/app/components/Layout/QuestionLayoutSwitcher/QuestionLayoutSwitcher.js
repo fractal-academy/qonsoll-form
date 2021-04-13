@@ -7,7 +7,7 @@ import {
   ProfileFilled
 } from '@ant-design/icons'
 import { Menu } from 'antd'
-import { styles } from './QuestionLayoutSwitcher.style'
+import { styles } from './QuestionLayoutSwitcher.styles'
 // import { useTranslation } from 'react-i18next'
 
 const menuMap = [
