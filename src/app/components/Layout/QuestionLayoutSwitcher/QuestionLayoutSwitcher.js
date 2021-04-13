@@ -8,6 +8,8 @@ import {
 } from '@ant-design/icons'
 import { Menu } from 'antd'
 import PropTypes from 'prop-types'
+import { styles } from './QuestionLayoutSwitcher.style'
+import { globalStyles } from 'app/styles'
 // import { useTranslation } from 'react-i18next'
 
 const menuMap = [
@@ -53,11 +55,7 @@ function QuestionLayoutSwitcher(props) {
 
   return (
     <Menu
-      style={{
-        background: 'transparent',
-        backgroundColor: '#e2e6ec',
-        borderRadius: '8px'
-      }}
+      style={styles.menuStyle}
       defaultSelectedKeys={['1']}
       // selectedKeys={}
     >
@@ -68,14 +66,7 @@ function QuestionLayoutSwitcher(props) {
           onClick={(data) => {
             console.log(data)
           }}
-          style={{
-            borderRadius: '8px',
-            padding: '8px',
-            margin: '2px',
-            display: 'flex',
-            alignContent: 'center',
-            alignItems: 'center'
-          }}
+          style={styles.menuItemStyle}
         />
       ))}
     </Menu>

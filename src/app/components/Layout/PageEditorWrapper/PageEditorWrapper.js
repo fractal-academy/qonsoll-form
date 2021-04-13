@@ -36,11 +36,7 @@ function PageEditorWrapper(props) {
     }
   }, [])
 
-  return (
-    <Box display="flex" height="100%" px={45} py={4}>
-      {children}
-    </Box>
-  )
+  return <Box>{children}</Box>
 }
 
 PageEditorWrapper.propTypes = {

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Content } from 'antd-styled'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import './FormContentArea.style.css'
-import MiddleContainer from '../MiddleContainer'
-
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -43,18 +41,7 @@ function FormContentArea(props) {
   return (
     <Box display="flex" px={45} py={4} overflow="auto">
       <Box pr={2}>{leftSideMenu}</Box>
-      <Content
-        backgroundColor="white"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          flex: '1',
-          justifyContent: 'center',
-          alignItems: 'center',
-          overflow: 'auto',
-          borderRadius: '10px'
-        }}
-        className="custom-scroll">
+      <Content backgroundColor="white" className="content-style custom-scroll ">
         {children}
       </Content>
     </Box>

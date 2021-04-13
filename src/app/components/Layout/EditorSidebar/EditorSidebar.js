@@ -7,7 +7,9 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
+import { styles } from './EditorSidebar.style'
 import PropTypes from 'prop-types'
+import { globalStyles } from 'app/styles'
 // import { useTranslation } from 'react-i18next'
 
 const { SubMenu } = Menu
@@ -58,27 +60,27 @@ function EditorSidebar(props) {
         position="absolute"
         bg="white"
         borderRadius="5px 0px 0 5px"
-        style={{ left: '-15px', cursor: 'pointer' }}
+        style={styles.siderOpenStateSwitcherStyle}
         onClick={() => {
           setOpen(!open)
         }}>
         {open ? (
-          <RightOutlined style={{ padding: '5px 5px 0 0' }} />
+          <RightOutlined style={styles.siderStateSwithcerIcon} />
         ) : (
-          <LeftOutlined style={{ padding: '5px 5px 0 0' }} />
+          <LeftOutlined style={styles.siderStateSwithcerIcon} />
         )}
       </Box>
       <Box p={3}>
         <Row display="flex" flex={1}>
           <Col v="center">
-            <Title level={5} id="logo1" style={{ margin: 0 }}>
+            <Title level={5} style={globalStyles.resetMargin}>
               Questions
             </Title>
           </Col>
-          <Col cw="auto" px={10} py={1} mr={2} borderRadius="5px" bg="#e8f0fb">
-            <PlusOutlined style={{ color: '#1d6fdc' }} />
+          <Col cw="auto" px={10} py={1} mr={2} borderRadius="4px" bg="#e8f0fb">
+            <PlusOutlined style={styles.plusIconColor} />
           </Col>
-          <Col cw="auto" px={1} borderRadius="5px" v="center">
+          <Col cw="auto" px={1} borderRadius="4px" v="center">
             <SettingOutlined />
           </Col>
         </Row>
@@ -86,25 +88,25 @@ function EditorSidebar(props) {
       <Box overflow="auto" p={3}>
         {questionsList}
       </Box>
-      <Box mt="auto" style={{ marginTop: 'auto' }}>
+      <Box mt="auto" style={styles.endingsPosition}>
         <Row>
           <Col>
-            <Divider type="horizontal" style={{ margin: 0 }} />
+            <Divider type="horizontal" style={globalStyles.resetMargin} />
           </Col>
         </Row>
-        <Row h="center" mt={1} style={{ cursor: 'grab' }}>
+        <Row h="center" mt={1} style={globalStyles.cursorGrab}>
           <Col cw="auto">
             <Box height="3px" bg="#282c34" width="50px" borderRadius="8px" />
           </Col>
         </Row>
         <Row p={3}>
           <Col v="center">
-            <Title level={5} id="logo1" style={{ margin: 0 }}>
+            <Title level={5} style={globalStyles.resetMargin}>
               Endings
             </Title>
           </Col>
-          <Col cw="auto" px={10} py={1} borderRadius="5px" bg="#e8f0fb">
-            <PlusOutlined style={{ color: '#1d6fdc' }} />
+          <Col cw="auto" px={10} py={1} borderRadius="4px" bg="#e8f0fb">
+            <PlusOutlined style={styles.plusIconColor} />
           </Col>
         </Row>
         <Row pb={3} px={3}>
