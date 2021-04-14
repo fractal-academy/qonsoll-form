@@ -9,7 +9,7 @@ const { Meta } = Card
 const { Text } = Typography
 
 function FormSimpleView(props) {
-  const { imageURL, title, subtitle } = props
+  const { imageURL, title, subtitle, size } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -47,7 +47,12 @@ function FormSimpleView(props) {
       bodyStyle={styles.cardBodyPadding}
       cover={
         <Image
-          style={styles.cardImageStyles}
+          style={{
+            height: size === 'large' ? '140px' : '90px',
+            width: size === 'large' ? '200px' : '140px',
+            padding: '3px',
+            borderRadius: '8px'
+          }}
           alt="Form view"
           src={imageURL}
           preview={false}
@@ -58,14 +63,12 @@ function FormSimpleView(props) {
           <>
             <Row>
               <Col>
-                <Text style={styles.titleStyle}>Image title</Text>
+                <Text style={styles.titleStyle}>{title}</Text>
               </Col>
             </Row>
             <Row>
               <Col>
-                <Text style={styles.descriptionTextSize}>
-                  Image description
-                </Text>
+                <Text style={styles.descriptionTextSize}>{subtitle}</Text>
               </Col>
             </Row>
           </>
@@ -77,13 +80,14 @@ function FormSimpleView(props) {
 FormSimpleView.defaultProps = {
   imageURL:
     'https://image.freepik.com/free-photo/growing-small-tree-in-nature-and-sunlight_34152-1460.jpg',
-  title: 'form title',
-  subtitle: 'form subtitle'
+  title: 'Image title',
+  subtitle: 'Image description'
 }
 FormSimpleView.propTypes = {
   imageURL: PropTypes.string,
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired
+  subtitle: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['large'])
 }
 
 export default FormSimpleView
