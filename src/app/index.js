@@ -8,6 +8,8 @@ import {
   Popover
 } from 'components'
 import { SettingOutlined } from '@ant-design/icons'
+import { ConditionForm } from 'domains/Condition/components'
+import React from 'react'
 
 const App = (props) => {
   return (
@@ -17,6 +19,7 @@ const App = (props) => {
           <PageHeader title="Main page" />
         </Box>
         <PageEditorWrapper>
+          <ConditionForm />
           <QuestionForm />
         </PageEditorWrapper>
       </Box>
