@@ -5,6 +5,8 @@ import FileUploader from 'react-firebase-file-uploader'
 import { ImageLabel } from 'components'
 import PropTypes from 'prop-types'
 import { Col, Row, Box } from '@qonsoll/react-design'
+import { globalStyles } from '~/app/styles'
+import { styles } from './ImageUploader.styles'
 
 const { Text } = Typography
 
@@ -13,23 +15,23 @@ const ImageUploader = (props) => {
 
   //[COMPONENT STATE HOOKS]
   const [isUploading, setIsUploading] = useState(false)
-  const [avatarURL, setAvatarURL] = useState(imageUrl)
+  const [backgroundImageURL, setBackgroundImageURL] = useState(imageUrl)
 
   //[USE_EFFECTS]
   useEffect(() => {
     if (isResetImage) {
-      setAvatarURL('')
+      setBackgroundImageURL('')
     }
   }, [isResetImage])
 
   const handleUploadStart = () => {
     setIsUploading(true)
-    setAvatarURL('')
+    setBackgroundImageURL('')
   }
   //
   const handleUploadError = () => {
     setIsUploading(false)
-    setAvatarURL(imageUrl)
+    setBackgroundImageURL(imageUrl)
   }
   //add functional upload file
   const handleUploadSuccess = (filename) => {}
@@ -39,32 +41,31 @@ const ImageUploader = (props) => {
       <Col cw="auto">
         <Box justifyContent="center" display="flex" width="100%">
           <Box>
-            <Spin spinning={isUploading} style={{ width: '100%' }}>
+            <Spin spinning={isUploading} style={globalStyles.fullWidth}>
               <Avatar
-                style={{
-                  width: '150px',
-                  height: '100px',
-                  borderRadius: '5px',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}
-                className={avatarURL && 'animate__animated animate__zoomIn'}
+                style={styles.backgroundStyle}
+                className={
+                  backgroundImageURL && 'animate__animated animate__zoomIn'
+                }
                 shape="square"
-                src={avatarURL}>
+                src={backgroundImageURL}>
                 <ImageLabel>
                   {!isUploading &&
-                    (avatarURL ? (
+                    (backgroundImageURL ? (
                       <>
-                        <EditOutlined className="animate__animated  animate__zoomIn" />
-                        <Text style={{ color: 'white' }}>Change</Text>
+                        <EditOutlined
+                          style={styles.iconPadding}
+                          className="animate__animated  animate__zoomIn"
+                        />
+                        <Text style={styles.textColor}>Change</Text>
                       </>
                     ) : (
                       <>
                         <PlusOutlined
-                          style={{ paddingRight: '5px' }}
+                          style={styles.iconPadding}
                           className="animate__animated  animate__zoomIn"
                         />
-                        <Text style={{ color: 'white' }}>Add</Text>
+                        <Text style={styles.textColor}>Add</Text>
                       </>
                     ))}
                   {/*Need to add storageRef  for example storageRef={storage.ref('images')}*/}
