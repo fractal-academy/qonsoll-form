@@ -14,11 +14,10 @@ export { default as TextArea } from './TextArea/TextArea'
 export { default as TextAreaForm } from './TextArea/TextAreaForm'
 export { default as Popover } from './Popover'
 export { default as Rate } from './Rating'
-
 export { default as PageHeader } from './Layout/PageHeader'
 export { default as FormContentArea } from './Layout/FormContentArea'
 export { default as PageEditorWrapper } from './Layout/PageEditorWrapper'
 export { default as EditorSidebar } from './Layout/EditorSidebar'
-
+export { default as Card } from './Card'
 export { default as QuestionLayoutSwitcher } from './Layout/QuestionLayoutSwitcher'
 export { default as PageLayout } from './Layout/PageLayout'
