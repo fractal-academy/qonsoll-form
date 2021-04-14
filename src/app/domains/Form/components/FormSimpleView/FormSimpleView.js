@@ -2,8 +2,11 @@ import { Card, Image, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from './FormSimpleView.style'
+import { Row, Col, Box } from '@qonsoll/react-design'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
+
+const { Text } = Typography
 
 function FormSimpleView(props) {
   const { imageURL, title, subtitle } = props
@@ -50,13 +53,30 @@ function FormSimpleView(props) {
           preview={false}
         />
       }>
-      <Meta title={title} description={subtitle} />
+      <Meta
+        description={
+          <>
+            <Row>
+              <Col>
+                <Text style={styles.titleStyle}>Image title</Text>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Text style={styles.descriptionTextSize}>
+                  Image description
+                </Text>
+              </Col>
+            </Row>
+          </>
+        }
+      />
     </Card>
   )
 }
 FormSimpleView.defaultProps = {
   imageURL:
-    'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
+    'https://image.freepik.com/free-photo/growing-small-tree-in-nature-and-sunlight_34152-1460.jpg',
   title: 'form title',
   subtitle: 'form subtitle'
 }
