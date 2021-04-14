@@ -114,8 +114,8 @@ function QuestionTypeSelect(props) {
       <Row h="center" v={'center'} noGutters>
         <Col>
           <Menu
-            mode="horizontal"
-            className={'hideScroll'}
+            // mode="horizontal"
+            className="hideScroll"
             onChange={onChange}
             style={{ height: '300px', overflow: 'auto' }}>
             {questionTypeMap.map((item, index) => (

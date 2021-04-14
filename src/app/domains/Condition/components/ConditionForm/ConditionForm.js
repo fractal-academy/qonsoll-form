@@ -38,13 +38,13 @@ export const mockQuestion = {
       answerType: ANSWER_TYPE.CHOICE,
       answers: ['1', '2', '3']
     },
-    {
-      name: 'Rating question example',
-      orderNumber: '4. ',
-      questionType: QUESTION_TYPE.RATING,
-      answerType: ANSWER_TYPE.CHOICE,
-      answers: ['1', '2', '3']
-    },
+    // {
+    //   name: 'Rating question example',
+    //   orderNumber: '4. ',
+    //   questionType: QUESTION_TYPE.RATING,
+    //   answerType: ANSWER_TYPE.CHOICE,
+    //   answers: ['1', '2', '3']
+    // },
     {
       name: 'Short text question example',
       orderNumber: '5. ',
@@ -79,9 +79,9 @@ const questionTypesMap = {
   [QUESTION_TYPE.OPINION_SCALE]: {
     component: <YesNoChoiceTemplate />
   },
-  [QUESTION_TYPE.RATING]: {
-    component: <YesNoChoiceTemplate />
-  },
+  // [QUESTION_TYPE.RATING]: {
+  //   component: <YesNoChoiceTemplate />
+  // },
   [QUESTION_TYPE.SHORT_TEXT]: {
     component: <PlaneTextStringTemplate />
   },
