@@ -6,7 +6,6 @@ import { Box } from '@qonsoll/react-design'
 
 function RangeButton(props) {
   const { from = 0, to = 0 } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -16,13 +15,12 @@ function RangeButton(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-  const onButtonClick = () => {}
-
   const range = Array(to - from + 1)
     .fill(0)
     .map((el, index) => from + index)
 
   // [CLEAN FUNCTIONS]
+  const onButtonClick = () => {}
 
   // [USE_EFFECTS]
   useEffect(() => {

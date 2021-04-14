@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Badge } from 'antd'
+import { styles } from './CustomBadge.styles'
 import { CheckOutlined } from '@ant-design/icons'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
@@ -37,19 +38,7 @@ function CustomBadge(props) {
     }
   }, [])
 
-  return (
-    <Badge
-      count={
-        <CheckOutlined
-          style={{
-            color: '#FFF',
-            backgroundColor: '#1890FF',
-            borderRadius: '50px',
-            padding: '5px'
-          }}
-        />
-      }></Badge>
-  )
+  return <Badge count={<CheckOutlined style={styles.customBadge} />} />
 }
 
 CustomBadge.propTypes = {}

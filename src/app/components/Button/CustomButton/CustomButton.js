@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function CustomButton(props) {
-  const { buttonType, buttonText, layout = <></>, children } = props
+  const { buttonType, children } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -16,7 +16,6 @@ function CustomButton(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-
   const style = (buttonType === 'secondary' && 'secondaryButton') || ''
 
   // [CLEAN FUNCTIONS]
@@ -41,7 +40,6 @@ function CustomButton(props) {
 
   return (
     <Button className={style} type={buttonType}>
-      {layout}
       {children}
     </Button>
   )

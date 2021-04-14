@@ -7,7 +7,6 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 
 function ChoiceButton(props) {
   const { conditions, choices } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -17,20 +16,10 @@ function ChoiceButton(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-  const onButtonClick = () => {}
-
-  const layout = (letter, item) => (
-    <Row display="flex" v="center">
-      <Col className="buttonBox" mr={2}>
-        {letter}
-      </Col>
-      <Typography.Text>{item}</Typography.Text>
-    </Row>
-  )
-
   let startLetter = 65
 
   // [CLEAN FUNCTIONS]
+  const onButtonClick = () => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -54,11 +43,14 @@ function ChoiceButton(props) {
     <Box display="block">
       {choices.map((item) => (
         <Box key={item} mb={2}>
-          <Button
-            buttonType="secondary"
-            layout={layout(String.fromCharCode(startLetter++), item)}
-            onClick={onButtonClick}
-          />
+          <Button buttonType="secondary" onClick={onButtonClick}>
+            <Row display="flex" v="center">
+              <Col className="buttonBox" mr={2}>
+                {String.fromCharCode(startLetter++)}
+              </Col>
+              <Typography.Text>{item}</Typography.Text>
+            </Row>
+          </Button>
         </Box>
       ))}
     </Box>
@@ -67,7 +59,7 @@ function ChoiceButton(props) {
 
 ChoiceButton.propTypes = {
   conditions: PropTypes.array,
-  buttonText: PropTypes.string
+  choices: PropTypes.array
 }
 
 export default ChoiceButton

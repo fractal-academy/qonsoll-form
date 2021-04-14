@@ -9,9 +9,6 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 function YesnoButton(props) {
   const { conditions } = props
 
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -20,26 +17,9 @@ function YesnoButton(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-  const onButtonClick = () => {}
-
-  const yeslayout = (
-    <Row display="flex" v="center">
-      <Col className="buttonBox" mr={2}>
-        Y
-      </Col>
-      <Typography.Text>Yes</Typography.Text>
-    </Row>
-  )
-  const nolayout = (
-    <Row display="flex" v="center">
-      <Col className="buttonBox" mr={2}>
-        N
-      </Col>
-      <Typography.Text>No</Typography.Text>
-    </Row>
-  )
 
   // [CLEAN FUNCTIONS]
+  const onButtonClick = () => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -62,17 +42,23 @@ function YesnoButton(props) {
   return (
     <Box display="block">
       <Box mb={2}>
-        <Button
-          buttonType="secondary"
-          layout={yeslayout}
-          onClick={onButtonClick}
-        />
+        <Button buttonType="secondary" onClick={onButtonClick}>
+          <Row display="flex" v="center">
+            <Col className="buttonBox" mr={2}>
+              Y
+            </Col>
+            <Typography.Text>Yes</Typography.Text>
+          </Row>
+        </Button>
       </Box>
-      <Button
-        buttonType="secondary"
-        layout={nolayout}
-        onClick={onButtonClick}
-      />
+      <Button buttonType="secondary" onClick={onButtonClick}>
+        <Row display="flex" v="center">
+          <Col className="buttonBox" mr={2}>
+            N
+          </Col>
+          <Typography.Text>No</Typography.Text>
+        </Row>
+      </Button>
     </Box>
   )
 }
