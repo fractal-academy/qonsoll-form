@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { PageHeader } from 'components'
-import { Box } from '@qonsoll/react-design'
+import './Card.styles.css'
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { Box } from '@qonsoll/react-design'
 // import { useTranslation } from 'react-i18next'
 
-function PageLayout(props) {
-  const { title = 'New Form', children } = props
+function Card(props) {
+  const { number, children } = props
+
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -38,16 +39,17 @@ function PageLayout(props) {
   }, [])
 
   return (
-    <Box display="flex" flex={1} flexDirection="column">
-      <PageHeader title={title} />
-      {children}
+    <Box position="relative">
+      <Box className="hiddenBox"></Box>
+      <Box className="contentBox">{children}</Box>
+      <Box className="numberBox">{number}</Box>
     </Box>
   )
 }
 
-PageLayout.propTypes = {
-  title: PropTypes.string,
+Card.propTypes = {
+  number: PropTypes.number,
   children: PropTypes.node
 }
 
-export default PageLayout
+export default Card
