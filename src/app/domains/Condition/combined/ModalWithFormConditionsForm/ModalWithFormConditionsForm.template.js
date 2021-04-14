@@ -22,6 +22,13 @@ function ModalWithFormConditionsForm(props) {
 
   // [CLEAN FUNCTIONS]
   const resetLogic = () => {}
+  const onSave = () => {
+    setIsModalVisible(!isModalVisible)
+  }
+  const onCancel = () => {
+    setIsModalVisible(!isModalVisible)
+  }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -52,6 +59,8 @@ function ModalWithFormConditionsForm(props) {
         visible={isModalVisible}
         okText="Save"
         cancelButtonProps={{ type: 'text' }}
+        onOk={onSave}
+        onCancel={onCancel}
         closable={false}
         width="750px"
         title={
