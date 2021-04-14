@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Content } from 'antd-styled'
-import { Box } from '@qonsoll/react-design'
+import { Box, Row, Col } from '@qonsoll/react-design'
+import { Button } from 'antd'
 import './FormContentArea.styles.css'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
@@ -19,7 +19,8 @@ function FormContentArea(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
+  const onCancel = () => {}
+  const onCreateForm = () => {}
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -39,12 +40,26 @@ function FormContentArea(props) {
   }, [])
 
   return (
-    <Box display="flex" px={45} my={3} py={3} overflow="auto" height="100%">
-      <Box pr={2}>{leftSideMenu}</Box>
-      <Content backgroundColor="white" className="content-style custom-scroll ">
-        {children}
-      </Content>
-    </Box>
+    <>
+      <Box display="flex" px={45} my={3} py={3} overflow="auto" height="100%">
+        <Box pr={2}>{leftSideMenu}</Box>
+        <Box backgroundColor="white" className="content-style custom-scroll ">
+          {children}
+        </Box>
+      </Box>
+      <Row h="right" pb={4} pr={45}>
+        <Col cw="auto">
+          <Button type="text" onClick={onCancel}>
+            Cancel
+          </Button>
+        </Col>
+        <Col cw="auto">
+          <Button type="primary" onClick={onCreateForm}>
+            Create form
+          </Button>
+        </Col>
+      </Row>
+    </>
   )
 }
 
