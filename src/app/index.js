@@ -1,31 +1,26 @@
-import { Box, Col, Container, Row } from '@qonsoll/react-design'
+import { Col, Container, Row, Box } from '@qonsoll/react-design'
 import 'antd/dist/antd.css'
-import { QuestionForm } from 'domains/Question/components'
 import {
+  PageLayout,
   EditorSidebar,
-  PageEditorWrapper,
-  PageHeader,
-  Popover
+  QuestionLayoutSwitcher,
+  FormContentArea
 } from 'components'
-import { SettingOutlined } from '@ant-design/icons'
+import { QuestionForm } from 'domains/Question/components'
 import { ConditionForm } from 'domains/Condition/components'
-import React from 'react'
 
 const App = (props) => {
   return (
-    <Box display="flex" height="inherit" flex={1}>
-      <Box display="flex" flexDirection="column" flex={1} maxHeight="100%">
-        <Box>
-          <PageHeader title="Main page" />
-        </Box>
-        <PageEditorWrapper>
-          <ConditionForm />
+    <Box bg="#f6f9fe" display="flex" height="inherit">
+      <PageLayout>
+        <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
+          {/* Here should be QuestionForm  */}
+          {/*<ConditionForm />*/}
           <QuestionForm />
-        </PageEditorWrapper>
-      </Box>
-      <Box display="flex">
-        <EditorSidebar />
-      </Box>
+        </FormContentArea>
+      </PageLayout>
+
+      <EditorSidebar />
     </Box>
   )
 }

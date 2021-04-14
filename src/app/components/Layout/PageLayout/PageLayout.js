@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Input as AntInput } from 'antd'
-import { PhoneInput } from 'antd-styled'
-import { Row } from '@qonsoll/react-design'
-
-// import PropTypes from 'prop-types'
+import { PageHeader } from 'components'
+import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
-const Input = (props) => {
-  const { phone } = props
+function PageLayout(props) {
+  const { title = 'New Form', children } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -38,11 +36,18 @@ const Input = (props) => {
       isComponentMounted = false
     }
   }, [])
-  //[TEMPLATE]
-  return <Row>{phone ? <PhoneInput /> : <AntInput {...props} />}</Row>
+
+  return (
+    <Box display="flex" flex={1} flexDirection="column">
+      <PageHeader title={title} />
+      {children}
+    </Box>
+  )
 }
 
-//Accepts all parameters that the Ant Design same component have
-Input.propTypes = {}
+PageLayout.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node
+}
 
-export default Input
+export default PageLayout

@@ -31,13 +31,13 @@ export const mockQuestion = {
       answerType: ANSWER_TYPE.CHOICE,
       answers: ['Picture 1', 'Picture 2', 'Picture 3', 'Picture 4']
     },
-    {
-      name: 'Opinion scale question example',
-      orderNumber: '3. ',
-      questionType: QUESTION_TYPE.PICTURE_CHOICE,
-      answerType: ANSWER_TYPE.CHOICE,
-      answers: ['1', '2', '3']
-    },
+    // {
+    //   name: 'Opinion scale question example',
+    //   orderNumber: '3. ',
+    //   questionType: QUESTION_TYPE.OPINION_SCALE,
+    //   answerType: ANSWER_TYPE.CHOICE,
+    //   answers: ['1', '2', '3']
+    // },
     // {
     //   name: 'Rating question example',
     //   orderNumber: '4. ',
@@ -52,13 +52,13 @@ export const mockQuestion = {
       answerType: ANSWER_TYPE.PLAIN_TEXT_STRING,
       answers: ['Short text']
     },
-    {
-      name: 'Long text question example',
-      orderNumber: '6. ',
-      questionType: QUESTION_TYPE.LONG_TEXT,
-      answerType: ANSWER_TYPE.PLAIN_TEXT_STRING,
-      answers: ['Long text']
-    },
+    // {
+    //   name: 'Long text question example',
+    //   orderNumber: '6. ',
+    //   questionType: QUESTION_TYPE.LONG_TEXT,
+    //   answerType: ANSWER_TYPE.PLAIN_TEXT_STRING,
+    //   answers: ['Long text']
+    // },
     {
       name: 'Date question example',
       orderNumber: '7. ',
@@ -76,18 +76,18 @@ const questionTypesMap = {
   [QUESTION_TYPE.PICTURE_CHOICE]: {
     component: <ChoiceTemplate />
   },
-  [QUESTION_TYPE.OPINION_SCALE]: {
-    component: <YesNoChoiceTemplate />
-  },
+  // [QUESTION_TYPE.OPINION_SCALE]: {
+  //   component: <YesNoChoiceTemplate />
+  // },
   // [QUESTION_TYPE.RATING]: {
   //   component: <YesNoChoiceTemplate />
   // },
   [QUESTION_TYPE.SHORT_TEXT]: {
     component: <PlaneTextStringTemplate />
   },
-  [QUESTION_TYPE.LONG_TEXT]: {
-    component: <PlaneTextStringTemplate />
-  },
+  // [QUESTION_TYPE.LONG_TEXT]: {
+  //   component: <PlaneTextStringTemplate />
+  // },
   [QUESTION_TYPE.DATE]: {
     component: <PlaneTextDateTemplate />
   }

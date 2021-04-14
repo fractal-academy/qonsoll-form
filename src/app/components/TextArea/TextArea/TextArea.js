@@ -32,12 +32,13 @@ const CustomTextArea = (props) => {
   return (
     <TextArea
       style={{
+        paddingLeft: 0,
         borderBottom: '2px solid lightgrey',
         // lineHeight: '40px',
-        fontSize: '30px'
+        fontSize: '25px'
       }}
       placeholder="Type your answer here..."
-      autoSize={{ minRows: 1, maxRows: 10 }}
+      autoSize={{ minRows: 1, maxRows: 6 }}
       bordered={!noBorder}
       btnIcon={btnIcon}
       {...textAreaProps}

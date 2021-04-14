@@ -41,6 +41,7 @@ function TextEditable(props) {
   return (
     <TextArea
       style={{
+        paddingLeft: 0,
         color: textSecondary ? 'gray' : 'black',
         fontSize: isTitle ? '20px' : '16px',
         fontWeight: isTitle ? 'bold' : 'normal'

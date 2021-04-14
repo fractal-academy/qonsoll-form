@@ -91,7 +91,7 @@ function QuestionForm(props) {
             </Row>
             <Row noGutters>
               <Col>
-                <InputForm btnProps={{ children: 'submit', type: 'primary' }} />
+                <InputForm btnProps={{ children: 'OK', type: 'primary' }} />
               </Col>
             </Row>
           </Card>

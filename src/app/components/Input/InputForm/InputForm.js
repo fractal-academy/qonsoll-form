@@ -53,7 +53,7 @@ function InputForm(props) {
   return (
     <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
       <Container>
-        <Row>
+        <Row noGutters>
           <Col>
             <Form.Item
               style={{ marginBottom: 0 }}
@@ -66,7 +66,12 @@ function InputForm(props) {
         {/* //TODO:REPLACE ON CUSTOM SUBMIT BUTTON */}
         <Row mt={24}>
           <Col cw="auto">
-            <Button onClick={() => form.submit()} {...btnProps} />
+            <Button
+              size={'large'}
+              style={{ borderRadius: '4px', marginRight: '4px' }}
+              onClick={() => form.submit()}
+              {...btnProps}
+            />
           </Col>
           <Col cw="auto" v="center" ml={10}>
             <Text>Press enter ↵</Text>

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Input as AntInput } from 'antd'
-import { PhoneInput } from 'antd-styled'
-import { Row } from '@qonsoll/react-design'
-
-// import PropTypes from 'prop-types'
+import { Content } from 'antd-styled'
+import { Box } from '@qonsoll/react-design'
+import './FormContentArea.styles.css'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
-const Input = (props) => {
-  const { phone } = props
+function FormContentArea(props) {
+  const { children, leftSideMenu } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -38,11 +37,20 @@ const Input = (props) => {
       isComponentMounted = false
     }
   }, [])
-  //[TEMPLATE]
-  return <Row>{phone ? <PhoneInput /> : <AntInput {...props} />}</Row>
+
+  return (
+    <Box display="flex" px={45} py={20} my={20} overflow="auto">
+      <Box pr={2}>{leftSideMenu}</Box>
+      <Content backgroundColor="white" className="content-style custom-scroll ">
+        {children}
+      </Content>
+    </Box>
+  )
 }
 
-//Accepts all parameters that the Ant Design same component have
-Input.propTypes = {}
+FormContentArea.propTypes = {
+  leftSideMenu: PropTypes.element,
+  children: PropTypes.node
+}
 
-export default Input
+export default FormContentArea
