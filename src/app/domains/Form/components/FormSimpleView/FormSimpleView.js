@@ -58,19 +58,14 @@ function FormSimpleView(props) {
           <>
             <Row>
               <Col>
-                <Text
-                  style={{
-                    color: 'black',
-                    fontSize: '12px',
-                    fontWeight: 'bold'
-                  }}>
-                  Image title
-                </Text>
+                <Text style={styles.titleStyle}>Image title</Text>
               </Col>
             </Row>
             <Row>
               <Col>
-                <Text style={{ fontSize: '12px' }}>Image description</Text>
+                <Text style={styles.descriptionTextSize}>
+                  Image description
+                </Text>
               </Col>
             </Row>
           </>
