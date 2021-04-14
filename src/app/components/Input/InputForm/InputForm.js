@@ -59,7 +59,17 @@ function InputForm(props) {
               style={{ marginBottom: 0 }}
               name="input"
               rules={[{ required: isRequired }]}>
-              <Input {...inputProps} style={{ borderRadius: '5px' }} />
+              <Input
+                {...inputProps}
+                placeholder="Type your answer here..."
+                style={{
+                  borderRadius: '8px',
+                  border: '1px solid lightgrey',
+                  fontSize: '22px',
+                  backgroundColor: '#f5f5f6',
+                  height: '44px'
+                }}
+              />
             </Form.Item>
           </Col>
         </Row>
@@ -68,7 +78,11 @@ function InputForm(props) {
           <Col cw="auto">
             <Button
               size={'large'}
-              style={{ borderRadius: '4px', marginRight: '4px' }}
+              style={{
+                borderRadius: '4px',
+                marginRight: '4px',
+                fontWeight: 'bold'
+              }}
               onClick={() => form.submit()}
               {...btnProps}
             />

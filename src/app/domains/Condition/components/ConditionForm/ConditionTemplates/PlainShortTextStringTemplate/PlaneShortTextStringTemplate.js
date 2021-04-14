@@ -6,24 +6,26 @@ import {
   TEXT_CONDITION_RULES,
   TEXT_CONDITION_RULES_VALUE
 } from 'app/constants/planeTextStringConditionRules'
+import { mockQuestion } from 'domains/Condition/components/ConditionForm/ConditionForm'
 
 const { Option, OptGroup } = Select
 
 const mockQuestionListRedirect = [
-  'Go to next question',
-  'question1',
-  'question2',
-  'question3'
+  'Go to the next question',
+  'Yes/no question example',
+  'Picture choice question example',
+  'Short text question example',
+  'Date question example'
 ]
 
-function PlaneTextStringTemplate(props) {
+function PlaneShortTextStringTemplate(props) {
   const { answers } = props
   // [CLEAN FUNCTIONS]
   const onClick = () => {}
   return (
     <>
       {answers.map((item, index) => (
-        <Row noGutters style={{ height: '50px' }} mb={2}>
+        <Row noGutters style={{ height: '50px' }} mb={2} key={index}>
           <Box
             display="flex"
             alignItems="center"
@@ -36,7 +38,7 @@ function PlaneTextStringTemplate(props) {
               bordered={false}
               // onChange={onChange}
               defaultValue={TEXT_CONDITION_RULES_VALUE[0]}
-              style={{ width: '200px' }}>
+              style={{ width: '300px' }}>
               {TEXT_CONDITION_RULES_VALUE.map((item, index) => (
                 <Option key={index} value={item} onClick={() => {}}>
                   {item}
@@ -52,7 +54,7 @@ function PlaneTextStringTemplate(props) {
             style={{}}
             p={2}
             mr={2}
-            border="1px solid #ededed"
+            border="1px solid #bbbbbb"
             borderRadius="4px">
             <Input style={{ width: '300px' }} bordered={false} />
           </Box>
@@ -68,6 +70,9 @@ function PlaneTextStringTemplate(props) {
               // onChange={onChange}
               defaultValue={mockQuestionListRedirect[0]}
               style={{ width: '300px' }}>
+              <Button>
+                <Text strong>Submit form</Text>
+              </Button>
               <OptGroup label="JUMP TO...">
                 {Object.values(
                   mockQuestionListRedirect.map((item, index) => (
@@ -81,11 +86,16 @@ function PlaneTextStringTemplate(props) {
           </Box>
         </Row>
       ))}
-      <Button onClick={onClick}>
-        <Text>+ Add condition</Text>
+      <Button
+        size="large"
+        style={{ backgroundColor: '#d6e1f2' }}
+        onClick={onClick}>
+        <Text strong style={{ color: '#1d6fdc' }}>
+          + Add condition
+        </Text>
       </Button>
     </>
   )
 }
 
-export default PlaneTextStringTemplate
+export default PlaneShortTextStringTemplate

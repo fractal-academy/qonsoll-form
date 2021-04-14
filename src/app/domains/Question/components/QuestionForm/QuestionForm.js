@@ -62,9 +62,10 @@ function QuestionForm(props) {
         <Col>
           <Card
             style={{
+              position: 'relative',
               width: '600px',
               borderRadius: '8px',
-              borderColor: '#1890ff',
+              borderColor: '#1d6fdc',
               padding: 0
             }}>
             <Row noGutters h="between">
@@ -73,6 +74,11 @@ function QuestionForm(props) {
               </Col>
               <Col cw="auto">
                 <Popover
+                  style={{
+                    position: 'absolute',
+                    top: '40px',
+                    left: '40px'
+                  }}
                   trigger={'click'}
                   placement={'bottomRight'}
                   btnType="primary"
@@ -104,7 +110,7 @@ function QuestionForm(props) {
             style={{
               width: '600px',
               borderRadius: '8px',
-              borderColor: '#1890ff'
+              borderColor: '#1d6fdc'
             }}>
             <Row noGutters h="between">
               <Col cw="auto">
@@ -147,7 +153,7 @@ function QuestionForm(props) {
             style={{
               width: '600px',
               borderRadius: '8px',
-              borderColor: '#1890ff'
+              borderColor: '#1d6fdc'
             }}>
             <Row noGutters h="between">
               <Col cw="auto">

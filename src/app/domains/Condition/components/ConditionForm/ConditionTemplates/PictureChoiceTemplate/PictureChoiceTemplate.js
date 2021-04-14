@@ -4,7 +4,6 @@ import Text from 'antd/lib/typography/Text'
 import React from 'react'
 
 const { Option, OptGroup } = Select
-
 const mockQuestionListRedirect = [
   'Go to the next question',
   'Yes/no question example',
@@ -13,24 +12,26 @@ const mockQuestionListRedirect = [
   'Date question example'
 ]
 
-function YesNoChoiceTemplate(props) {
+function PictureChoiceTemplate(props) {
   const { answers, onChange } = props
+  let startLetter = 65
+
   return (
     <>
       {answers.map((item, index) => (
-        <Row mb={2} key={index}>
+        <Row noGutters mb={2} key={index}>
           <Col>
             <Box
               display="flex"
               alignItems="center"
-              // width="500px"
+              // width="300px"
               key={index}
               p={2}
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">
               <Button type="outline" style={{ marginRight: '10px' }}>
-                <Text strong>{item[0].toUpperCase()}</Text>
+                <Text strong>{String.fromCharCode(startLetter++)}</Text>
               </Button>
               {item}
             </Box>
@@ -44,15 +45,14 @@ function YesNoChoiceTemplate(props) {
                 onChange={onChange}
                 defaultValue={mockQuestionListRedirect[0]}
                 style={{
-                  width: '100%',
-                  height: '48px',
                   display: 'flex',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  width: '100%',
+                  height: '48px'
                 }}>
                 <Button>
                   <Text strong>Submit form</Text>
                 </Button>
-
                 <OptGroup label="JUMP TO...">
                   {Object.values(
                     mockQuestionListRedirect.map((item, index) => (
@@ -71,4 +71,4 @@ function YesNoChoiceTemplate(props) {
   )
 }
 
-export default YesNoChoiceTemplate
+export default PictureChoiceTemplate

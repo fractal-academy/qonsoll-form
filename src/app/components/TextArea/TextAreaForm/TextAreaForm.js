@@ -63,19 +63,23 @@ function TextAreaForm(props) {
                     required: true
                   }
                 ]}>
-                <TextArea noBorder={noBorder} {...textAreaProps} />
+                <TextArea {...textAreaProps} />
               </Form.Item>
               <Form.Item>
                 <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
               </Form.Item>
               <Button
                 size={'large'}
-                style={{ borderRadius: '4px', marginRight: '4px' }}
+                style={{
+                  borderRadius: '4px',
+                  marginRight: '4px',
+                  fontWeight: 'bold'
+                }}
                 key="submit"
                 onClick={() => form.submit()}
                 {...btnProps}
               />
-              <Text>press Enter ↵</Text>
+              <Text>Press enter ↵</Text>
             </Form>
           </Col>
         </Row>
