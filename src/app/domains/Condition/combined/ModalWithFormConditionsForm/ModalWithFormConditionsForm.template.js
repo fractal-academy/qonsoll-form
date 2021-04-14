@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Modal, Button, Typography, Divider } from 'antd'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Modal, Button, Typography } from 'antd'
+import { Row, Col } from '@qonsoll/react-design'
 import {} from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
-// import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
@@ -22,7 +21,7 @@ function ModalWithFormConditionsForm(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
+  const resetLogic = () => {}
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -64,7 +63,9 @@ function ModalWithFormConditionsForm(props) {
                 </Title>
               </Col>
               <Col cw="auto" v="center">
-                <Button type="text">Reset logic</Button>
+                <Button type="text" onClick={resetLogic}>
+                  Reset logic
+                </Button>
               </Col>
             </Row>
             <Row pb={25}>
@@ -83,6 +84,7 @@ ModalWithFormConditionsForm.defaultProps = {
   btnProps: { children: 'Pass btn text as child' }
 }
 ModalWithFormConditionsForm.propTypes = {
+  data: PropTypes.array,
   btnProps: PropTypes.object.isRequired,
   children: PropTypes.node
 }
