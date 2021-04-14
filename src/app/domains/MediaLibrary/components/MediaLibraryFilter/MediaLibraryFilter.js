@@ -39,10 +39,16 @@ function MediaLibraryFilter(props) {
     setPhaseFilterValues([])
   }
   const onAudienceCheckboxChange = (data) => {
-    setAudienceFilterValues([...audienceFilterValues, data])
+    setAudienceFilterValues(data)
   }
   const onPhaseCheckboxChange = (data) => {
-    setPhaseFilterValues([...phaseFilterValues, data])
+    setPhaseFilterValues(data)
+  }
+  const resetPhaseFilter = () => {
+    setPhaseFilterValues([])
+  }
+  const resetAudienceFilter = () => {
+    setAudienceFilterValues([])
   }
   // [USE_EFFECTS]
   useEffect(() => {
@@ -88,9 +94,7 @@ function MediaLibraryFilter(props) {
             size="small"
             shape="circle"
             icon={<ReloadOutlined />}
-            onClick={() => {
-              setPhaseFilterValues([])
-            }}
+            onClick={resetPhaseFilter}
           />
         </Col>
       </Row>
@@ -122,9 +126,7 @@ function MediaLibraryFilter(props) {
             size="small"
             shape="circle"
             icon={<ReloadOutlined />}
-            onClick={() => {
-              setAudienceFilterValues([])
-            }}
+            onClick={resetAudienceFilter}
           />
         </Col>
       </Row>
