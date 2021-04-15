@@ -3,13 +3,14 @@ import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
-function PageEditorWrapper(props) {
+function MiddleContainer(props) {
   const { children } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
+
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
 
@@ -35,11 +36,21 @@ function PageEditorWrapper(props) {
     }
   }, [])
 
-  return <Box>{children}</Box>
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      flex={1}
+      alignItems="center"
+      justifyContent="center"
+      width="100%">
+      {children}
+    </Box>
+  )
 }
 
-PageEditorWrapper.propTypes = {
+MiddleContainer.propTypes = {
   children: PropTypes.node
 }
 
-export default PageEditorWrapper
+export default MiddleContainer

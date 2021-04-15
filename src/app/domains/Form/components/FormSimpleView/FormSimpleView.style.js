@@ -1,5 +1,20 @@
 export const styles = {
-  cardStyles: { width: 160, backgroundColor: '#eceff5', borderRadius: '8px' },
-  cardBodyPadding: { padding: '0 12px 12px 12px' },
-  cardImageStyles: { height: '110px', padding: '3px', borderRadius: '8px' }
+  cardStyles: {
+    backgroundColor: '#eceff5',
+    borderRadius: '8px',
+    display: 'inline-block'
+  },
+  cardBodyPadding: { padding: '0 8px 8px 8px' },
+  imageStyle: {
+    height: '90px',
+    width: '140px',
+    padding: '3px',
+    borderRadius: '8px'
+  },
+  titleStyle: {
+    color: 'black',
+    fontSize: '12px',
+    fontWeight: 'bold'
+  },
+  descriptionTextSize: { fontSize: '12px' }
 }
