@@ -4,6 +4,8 @@ import { Row, Col, Container } from '@qonsoll/react-design'
 import { Input } from 'components'
 // import { withTheme } from 'styled-components'
 import PropTypes from 'prop-types'
+import { styles } from './InputForm.styles'
+import { globalStyles } from 'app/styles'
 
 const { Text, Title } = Typography
 // import { useTranslation } from 'react-i18next'
@@ -56,19 +58,13 @@ function InputForm(props) {
         <Row noGutters>
           <Col>
             <Form.Item
-              style={{ marginBottom: 0 }}
+              style={globalStyles.resetMarginB}
               name="input"
               rules={[{ required: isRequired }]}>
               <Input
                 {...inputProps}
                 placeholder="Type your answer here..."
-                style={{
-                  borderRadius: '8px',
-                  border: '1px solid lightgrey',
-                  fontSize: '22px',
-                  backgroundColor: '#f5f5f6',
-                  height: '44px'
-                }}
+                style={styles.inputStyle}
               />
             </Form.Item>
           </Col>
@@ -78,11 +74,7 @@ function InputForm(props) {
           <Col cw="auto">
             <Button
               size={'large'}
-              style={{
-                borderRadius: '4px',
-                marginRight: '4px',
-                fontWeight: 'bold'
-              }}
+              style={styles.buttonStyles}
               onClick={() => form.submit()}
               {...btnProps}
             />

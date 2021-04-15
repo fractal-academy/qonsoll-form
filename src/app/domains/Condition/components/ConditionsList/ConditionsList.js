@@ -34,7 +34,7 @@ function ConditionsList(props) {
     }
   }, [])
 
-  return <div>ConditionsList</div>
+  return <>ConditionsList</>
 }
 
 ConditionsList.propTypes = {}

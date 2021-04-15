@@ -35,12 +35,7 @@ function PlaneShortTextStringTemplate(props) {
                 allowClear
                 bordered={false}
                 defaultValue={TEXT_CONDITION_RULES_VALUE[0]}
-                style={{
-                  width: '100%',
-                  height: '48px',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}>
+                style={styles.selectStyle}>
                 {TEXT_CONDITION_RULES_VALUE.map((item, index) => (
                   <Option key={index} value={item} onClick={() => {}}>
                     {item}

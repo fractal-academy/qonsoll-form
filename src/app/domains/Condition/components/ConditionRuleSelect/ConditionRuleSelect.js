@@ -6,22 +6,6 @@ import { TEXT_CONDITION_RULES_VALUE } from 'app/constants/planeTextStringConditi
 import { DATE_CONDITION_RULES_VALUE } from 'app/constants/dateConditionRules'
 
 const Option = Select
-const textMenu = {
-  isEqualTo: 'is equal to',
-  isNotEqualTo: 'is not equal to',
-  beginsWith: 'begins with',
-  endsWith: 'ends with',
-  contains: 'contains',
-  doesNotContain: 'does not contain'
-}
-const dateMenu = {
-  isOn: 'is on',
-  isNotOn: 'is not on',
-  isBefore: 'is before',
-  isAfter: 'is after',
-  isBeforeOrOn: 'is before or on',
-  isAfterOrOn: 'is after or on'
-}
 
 const ConditionRuleSelect = (props) => {
   const { onChange, conditionType } = props

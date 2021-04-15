@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Typography } from 'antd'
+import { styles } from './TextEditable.styles'
+import { styles1 } from './TextEditable.styles'
 import PropTypes from 'prop-types'
 
 const { TextArea } = Input
@@ -40,6 +42,8 @@ function TextEditable(props) {
   //TODO: Replace inline colors to theme vars
   return (
     <TextArea
+      // style={textSecondary ? styles.grayColor : styles.blackColor}
+      // style={isTitle ? styles.title : styles.default}
       style={{
         paddingLeft: 0,
         color: textSecondary ? 'gray' : 'black',
@@ -58,6 +62,7 @@ function TextEditable(props) {
 TextEditable.propTypes = {
   onChange: PropTypes.func.isRequired,
   textSecondary: PropTypes.bool,
+  isTitle: PropTypes.bool,
   placeholder: PropTypes.string.isRequired
 }
 

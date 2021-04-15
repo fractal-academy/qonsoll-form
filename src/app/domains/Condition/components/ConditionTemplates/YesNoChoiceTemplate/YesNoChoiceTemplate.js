@@ -9,9 +9,6 @@ import PropTypes from 'prop-types'
 function YesNoChoiceTemplate(props) {
   const { answers, questionList, addRedirectQuestion } = props
 
-  // const onChange = (question, index) => {
-  //   addRedirectQuestion(question, index)
-  // }
   return (
     <>
       {answers.map((item, index) => (

@@ -3,6 +3,7 @@ import { Button, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
+import { styles } from './QuestionSelect.styles'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -51,12 +52,7 @@ function QuestionSelect(props) {
         bordered={false}
         onChange={(name) => onChange(name, index)}
         defaultValue="Go to the next question"
-        style={{
-          width: '100%',
-          height: '48px',
-          display: 'flex',
-          alignItems: 'center'
-        }}>
+        style={styles.selectStyle}>
         <Option value={'Submit form'}>
           <Text strong>Submit form</Text>
         </Option>

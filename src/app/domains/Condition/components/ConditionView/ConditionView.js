@@ -44,7 +44,7 @@ function ConditionView(props) {
     }
   }, [])
 
-  return <div>ConditionView</div>
+  return <>ConditionView</>
 }
 
 ConditionView.propTypes = {}
