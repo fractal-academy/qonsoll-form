@@ -1,4 +1,4 @@
-import { Col, Container, Row, Box } from '@qonsoll/react-design'
+import { Col, Row, Box } from '@qonsoll/react-design'
 import 'antd/dist/antd.css'
 import {
   PageLayout,
