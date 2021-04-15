@@ -42,7 +42,14 @@ function FormContentArea(props) {
     <Box display="flex" px={45} py={3} my={3} overflow="auto">
       <Box pr={2}>{leftSideMenu}</Box>
       <Content backgroundColor="white" className="content-style custom-scroll ">
-        {children}
+        <Box
+          display={'flex'}
+          justifycontent={'center'}
+          flexDirection={'column'}
+          width={'100%'}
+          px={3}>
+          {children}
+        </Box>
       </Content>
     </Box>
   )

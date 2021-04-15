@@ -2,29 +2,17 @@ import { Box, Col, Row } from '@qonsoll/react-design'
 import { Button, DatePicker, Input, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
-import {
-  TEXT_CONDITION_RULES,
-  TEXT_CONDITION_RULES_VALUE
-} from 'app/constants/planeTextStringConditionRules'
 import { DATE_CONDITION_RULES_VALUE } from 'app/constants/dateConditionRules'
-import { mockQuestion } from 'domains/Condition/components/ConditionForm/ConditionForm'
-// import mockData
 const { Option, OptGroup } = Select
 
-const mockQuestionListRedirect = [
-  'Go to the next question',
-  'Yes/no question example',
-  'Picture choice question example',
-  'Short text question example',
-  'Date question example'
-]
-
 function PlaneTextDateTemplate(props) {
-  const { answers, id, addCondition, questionList } = props
-  // const [conditionArray, setConditionArray] = useState([''])
+  const { answers, id, addCondition, questionList, addRedirectQuestion } = props
   // [CLEAN FUNCTIONS]
   const onClick = () => {
     addCondition('')
+  }
+  const onChange = (question, index) => {
+    addRedirectQuestion(question, index)
   }
   return (
     <>
@@ -40,10 +28,9 @@ function PlaneTextDateTemplate(props) {
                 showSearch
                 allowClear
                 bordered={false}
-                // onChange={onChange}
                 defaultValue={DATE_CONDITION_RULES_VALUE[0]}
                 style={{
-                  width: '300px',
+                  width: '100%',
                   height: '48px',
                   display: 'flex',
                   alignItems: 'center'
@@ -67,21 +54,20 @@ function PlaneTextDateTemplate(props) {
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">
-              <DatePicker style={{ width: '300px' }} bordered={false} />
+              <DatePicker style={{ width: '100%' }} bordered={false} />
             </Box>
           </Col>
           <Col>
-            <Box
-              display="flex"
-              // alignItems="center"
-              border="1px solid #bbbbbb"
-              borderRadius="4px">
+            <Box display="flex" border="1px solid #bbbbbb" borderRadius="4px">
               <Select
+                value={
+                  answers[index].redirectQuestion || 'Go to the next question'
+                }
                 showSearch
                 allowClear
                 bordered={false}
-                // onChange={onChange}
-                defaultValue={mockQuestionListRedirect[0]}
+                onChange={(name) => onChange(name, index)}
+                defaultValue="Go to the next question"
                 style={{
                   width: '100%',
                   height: '48px',
