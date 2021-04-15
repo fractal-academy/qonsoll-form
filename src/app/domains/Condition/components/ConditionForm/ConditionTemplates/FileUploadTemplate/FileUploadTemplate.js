@@ -13,7 +13,7 @@ const mockQuestionListRedirect = [
 ]
 
 function FileUploadTemplate(props) {
-  const { answers, onChange, isUploaded } = props
+  const { answers, onChange, isUploaded, questionList } = props
 
   return (
     <>
@@ -52,13 +52,11 @@ function FileUploadTemplate(props) {
                   <Text strong>Submit form</Text>
                 </Button>
                 <OptGroup label="JUMP TO...">
-                  {Object.values(
-                    mockQuestionListRedirect.map((item, index) => (
-                      <Option key={index} value={item} onClick={() => {}}>
-                        {item}
-                      </Option>
-                    ))
-                  )}
+                  {questionList.map((item, index) => (
+                    <Option key={index} value={item.name} onClick={() => {}}>
+                      {item.name}
+                    </Option>
+                  ))}
                 </OptGroup>
               </Select>
             </Box>

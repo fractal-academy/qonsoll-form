@@ -12,15 +12,15 @@ import { ConditionForm } from 'domains/Condition/components'
 const App = (props) => {
   return (
     <Box bg="#f6f9fe" display="flex" height="inherit">
-      {/*<PageLayout>*/}
-      {/*  <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>*/}
-      {/* Here should be QuestionForm  */}
-      <ConditionForm />
-      {/*<QuestionForm />*/}
-      {/*</FormContentArea>*/}
-      {/*</PageLayout>*/}
+      <PageLayout>
+        <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
+          Here should be QuestionForm
+          <ConditionForm />
+          {/*<QuestionForm />*/}
+        </FormContentArea>
+      </PageLayout>
 
-      {/*<EditorSidebar />*/}
+      <EditorSidebar />
     </Box>
   )
 }

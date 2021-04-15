@@ -20,9 +20,12 @@ const mockQuestionListRedirect = [
 ]
 
 function PlaneTextDateTemplate(props) {
-  const { answers, onChange } = props
+  const { answers, id, addCondition, questionList } = props
+  // const [conditionArray, setConditionArray] = useState([''])
   // [CLEAN FUNCTIONS]
-  const onClick = () => {}
+  const onClick = () => {
+    addCondition('')
+  }
   return (
     <>
       {answers.map((item, index) => (
@@ -37,7 +40,7 @@ function PlaneTextDateTemplate(props) {
                 showSearch
                 allowClear
                 bordered={false}
-                onChange={onChange}
+                // onChange={onChange}
                 defaultValue={DATE_CONDITION_RULES_VALUE[0]}
                 style={{
                   width: '300px',
@@ -89,13 +92,11 @@ function PlaneTextDateTemplate(props) {
                   <Text strong>Submit form</Text>
                 </Button>
                 <OptGroup label="JUMP TO...">
-                  {Object.values(
-                    mockQuestionListRedirect.map((item, index) => (
-                      <Option key={index} value={item} onClick={() => {}}>
-                        {item}
-                      </Option>
-                    ))
-                  )}
+                  {questionList.map((item, index) => (
+                    <Option key={index} value={item.name} onClick={() => {}}>
+                      {item.name}
+                    </Option>
+                  ))}
                 </OptGroup>
               </Select>
             </Box>

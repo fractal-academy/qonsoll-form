@@ -2,6 +2,7 @@ import { Box, Col, Row } from '@qonsoll/react-design'
 import { Button, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
+import Search from 'antd/es/input/Search'
 
 const { Option, OptGroup } = Select
 const mockQuestionListRedirect = [
@@ -13,7 +14,7 @@ const mockQuestionListRedirect = [
 ]
 
 function OpinionScaleTemplate(props) {
-  const { answers, onChange } = props
+  const { answers, onChange, questionList } = props
   let startLetter = 65
 
   return (
@@ -36,7 +37,7 @@ function OpinionScaleTemplate(props) {
               {item}
             </Box>
           </Col>
-          <Col>
+          <Col mr>
             <Box display="flex" border="1px solid #bbbbbb" borderRadius="4px">
               <Select
                 showSearch
@@ -54,14 +55,13 @@ function OpinionScaleTemplate(props) {
                   <Text strong>Submit form</Text>
                 </Button>
                 <OptGroup label="JUMP TO...">
-                  {Object.values(
-                    mockQuestionListRedirect.map((item, index) => (
-                      <Option key={index} value={item} onClick={() => {}}>
-                        {item}
-                      </Option>
-                    ))
-                  )}
+                  {questionList.map((item, index) => (
+                    <Option key={index} value={item.name} onClick={() => {}}>
+                      {item.name}
+                    </Option>
+                  ))}
                 </OptGroup>
+                {/*<Search />*/}
               </Select>
             </Box>
           </Col>

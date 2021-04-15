@@ -19,9 +19,12 @@ const mockQuestionListRedirect = [
 ]
 
 function PlaneLongTextStringTemplate(props) {
-  const { answers } = props
+  const { answers, id, addCondition, questionList } = props
+  // const [conditionArray, setConditionArray] = useState([''])
   // [CLEAN FUNCTIONS]
-  const onClick = () => {}
+  const onClick = () => {
+    addCondition('')
+  }
   return (
     <>
       {answers.map((item, index) => (
@@ -75,9 +78,9 @@ function PlaneLongTextStringTemplate(props) {
               </Button>
               <OptGroup label="JUMP TO...">
                 {Object.values(
-                  mockQuestionListRedirect.map((item, index) => (
-                    <Option key={index} value={item} onClick={() => {}}>
-                      {item}
+                  questionList.map((item, index) => (
+                    <Option key={index} value={item.name} onClick={() => {}}>
+                      {item.name}
                     </Option>
                   ))
                 )}

@@ -1,7 +1,7 @@
 import { Box, Row } from '@qonsoll/react-design'
 import { Button, Input, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   TEXT_CONDITION_RULES,
   TEXT_CONDITION_RULES_VALUE
@@ -19,9 +19,12 @@ const mockQuestionListRedirect = [
 ]
 
 function PlaneShortTextStringTemplate(props) {
-  const { answers } = props
+  const { answers, id, addCondition, questionList } = props
+  // const [conditionArray, setConditionArray] = useState([''])
   // [CLEAN FUNCTIONS]
-  const onClick = () => {}
+  const onClick = () => {
+    addCondition('')
+  }
   return (
     <>
       {answers.map((item, index) => (
@@ -74,13 +77,11 @@ function PlaneShortTextStringTemplate(props) {
                 <Text strong>Submit form</Text>
               </Button>
               <OptGroup label="JUMP TO...">
-                {Object.values(
-                  mockQuestionListRedirect.map((item, index) => (
-                    <Option key={index} value={item} onClick={() => {}}>
-                      {item}
-                    </Option>
-                  ))
-                )}
+                {questionList.map((item, index) => (
+                  <Option key={index} value={item.name} onClick={() => {}}>
+                    {item.name}
+                  </Option>
+                ))}
               </OptGroup>
             </Select>
           </Box>

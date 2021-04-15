@@ -14,7 +14,7 @@ const mockQuestionListRedirect = [
 ]
 
 function YesNoChoiceTemplate(props) {
-  const { answers, onChange } = props
+  const { answers, onChange, questionList } = props
   return (
     <>
       {answers.map((item, index) => (
@@ -54,13 +54,11 @@ function YesNoChoiceTemplate(props) {
                 </Button>
 
                 <OptGroup label="JUMP TO...">
-                  {Object.values(
-                    mockQuestionListRedirect.map((item, index) => (
-                      <Option key={index} value={item} onClick={() => {}}>
-                        {item}
-                      </Option>
-                    ))
-                  )}
+                  {questionList.map((item, index) => (
+                    <Option key={index} value={item.name} onClick={() => {}}>
+                      {item.name}
+                    </Option>
+                  ))}
                 </OptGroup>
               </Select>
             </Box>
