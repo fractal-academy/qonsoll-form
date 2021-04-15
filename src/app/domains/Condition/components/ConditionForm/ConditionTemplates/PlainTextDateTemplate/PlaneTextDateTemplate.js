@@ -3,16 +3,16 @@ import { Button, DatePicker, Input, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
 import { DATE_CONDITION_RULES_VALUE } from 'app/constants/dateConditionRules'
-const { Option, OptGroup } = Select
+import { QuestionSelect } from 'domains/Question/components'
+import PropTypes from 'prop-types'
+import PlaneShortTextStringTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PlainShortTextStringTemplate'
+const { Option } = Select
 
 function PlaneTextDateTemplate(props) {
   const { answers, id, addCondition, questionList, addRedirectQuestion } = props
   // [CLEAN FUNCTIONS]
   const onClick = () => {
     addCondition('')
-  }
-  const onChange = (question, index) => {
-    addRedirectQuestion(question, index)
   }
   return (
     <>
@@ -58,34 +58,12 @@ function PlaneTextDateTemplate(props) {
             </Box>
           </Col>
           <Col>
-            <Box display="flex" border="1px solid #bbbbbb" borderRadius="4px">
-              <Select
-                value={
-                  answers[index].redirectQuestion || 'Go to the next question'
-                }
-                showSearch
-                allowClear
-                bordered={false}
-                onChange={(name) => onChange(name, index)}
-                defaultValue="Go to the next question"
-                style={{
-                  width: '100%',
-                  height: '48px',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}>
-                <Button>
-                  <Text strong>Submit form</Text>
-                </Button>
-                <OptGroup label="JUMP TO...">
-                  {questionList.map((item, index) => (
-                    <Option key={index} value={item.name} onClick={() => {}}>
-                      {item.name}
-                    </Option>
-                  ))}
-                </OptGroup>
-              </Select>
-            </Box>
+            <QuestionSelect
+              addRedirectQuestion={addRedirectQuestion}
+              answers={answers}
+              index={index}
+              questionList={questionList}
+            />
           </Col>
         </Row>
       ))}
@@ -100,5 +78,9 @@ function PlaneTextDateTemplate(props) {
     </>
   )
 }
-
+PlaneTextDateTemplate.propTypes = {
+  answers: PropTypes.array,
+  questionList: PropTypes.array,
+  addRedirectQuestion: PropTypes.func
+}
 export default PlaneTextDateTemplate

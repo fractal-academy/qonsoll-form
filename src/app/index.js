@@ -8,6 +8,7 @@ import {
 } from 'components'
 import { QuestionForm } from 'domains/Question/components'
 import { ConditionForm } from 'domains/Condition/components'
+import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
 
 const App = (props) => {
   return (
@@ -15,7 +16,7 @@ const App = (props) => {
       <PageLayout>
         <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
           Here should be QuestionForm
-          <ConditionForm />
+          <FormConditionsForm />
           {/*<QuestionForm />*/}
         </FormContentArea>
       </PageLayout>

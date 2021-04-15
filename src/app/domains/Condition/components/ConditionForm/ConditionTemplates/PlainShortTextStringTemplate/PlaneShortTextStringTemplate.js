@@ -3,6 +3,9 @@ import { Button, Input, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React, { useState } from 'react'
 import { TEXT_CONDITION_RULES_VALUE } from 'app/constants/planeTextStringConditionRules'
+import { QuestionSelect } from 'domains/Question/components'
+import PropTypes from 'prop-types'
+import PictureChoiceTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PictureChoiceTemplate'
 
 const { Option, OptGroup } = Select
 
@@ -11,12 +14,8 @@ function PlaneShortTextStringTemplate(props) {
   // const [conditionArray, setConditionArray] = useState([''])
   // [CLEAN FUNCTIONS]
 
-  console.log(questionList)
   const onClick = () => {
     addCondition('')
-  }
-  const onChange = (question, index) => {
-    addRedirectQuestion(question, index)
   }
 
   return (
@@ -64,38 +63,12 @@ function PlaneShortTextStringTemplate(props) {
             </Box>
           </Col>
           <Col>
-            <Box
-              display="flex"
-              alignItems="center"
-              border="1px solid #bbbbbb"
-              borderRadius="4px">
-              <Select
-                value={
-                  answers[index].redirectQuestion || 'Go to the next question'
-                }
-                showSearch
-                allowClear
-                bordered={false}
-                onChange={(name) => onChange(name, index)}
-                defaultValue="Go to the next question"
-                style={{
-                  width: '100%',
-                  height: '48px',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}>
-                <Button>
-                  <Text strong>Submit form</Text>
-                </Button>
-                <OptGroup label="JUMP TO...">
-                  {questionList.map((item, index) => (
-                    <Option key={index} value={item.name} onClick={() => {}}>
-                      {item.name}
-                    </Option>
-                  ))}
-                </OptGroup>
-              </Select>
-            </Box>
+            <QuestionSelect
+              addRedirectQuestion={addRedirectQuestion}
+              answers={answers}
+              index={index}
+              questionList={questionList}
+            />
           </Col>
         </Row>
       ))}
@@ -110,5 +83,9 @@ function PlaneShortTextStringTemplate(props) {
     </>
   )
 }
-
+PlaneShortTextStringTemplate.propTypes = {
+  answers: PropTypes.array,
+  questionList: PropTypes.array,
+  addRedirectQuestion: PropTypes.func
+}
 export default PlaneShortTextStringTemplate

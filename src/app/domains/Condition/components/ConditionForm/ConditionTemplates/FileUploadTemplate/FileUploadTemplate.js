@@ -1,16 +1,11 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
-
-const { Option, OptGroup } = Select
+import { QuestionSelect } from 'domains/Question/components'
+import PropTypes from 'prop-types'
 
 function FileUploadTemplate(props) {
   const { answers, isUploaded, questionList, addRedirectQuestion } = props
-
-  const onChange = (question, index) => {
-    addRedirectQuestion(question, index)
-  }
 
   return (
     <>
@@ -34,39 +29,22 @@ function FileUploadTemplate(props) {
             </Box>
           </Col>
           <Col>
-            <Box display="flex" border="1px solid #bbbbbb" borderRadius="4px">
-              <Select
-                value={
-                  answers[index].redirectQuestion || 'Go to the next question'
-                }
-                showSearch
-                allowClear
-                bordered={false}
-                onChange={(name) => onChange(name, index)}
-                defaultValue="Go to the next question"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  width: '100%',
-                  height: '48px'
-                }}>
-                <Button>
-                  <Text strong>Submit form</Text>
-                </Button>
-                <OptGroup label="JUMP TO...">
-                  {questionList.map((item, index) => (
-                    <Option key={index} value={item.name} onClick={() => {}}>
-                      {item.name}
-                    </Option>
-                  ))}
-                </OptGroup>
-              </Select>
-            </Box>
+            <QuestionSelect
+              addRedirectQuestion={addRedirectQuestion}
+              answers={answers}
+              index={index}
+              questionList={questionList}
+            />
           </Col>
         </Row>
       ))}
     </>
   )
 }
-
+FileUploadTemplate.propTypes = {
+  answers: PropTypes.array,
+  isUploaded: PropTypes.bool.isRequired,
+  questionList: PropTypes.array,
+  addRedirectQuestion: PropTypes.func
+}
 export default FileUploadTemplate

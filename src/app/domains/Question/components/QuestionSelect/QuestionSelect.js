@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Button, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -56,10 +57,9 @@ function QuestionSelect(props) {
           display: 'flex',
           alignItems: 'center'
         }}>
-        <Button>
+        <Option value={'Submit form'}>
           <Text strong>Submit form</Text>
-        </Button>
-
+        </Option>
         <OptGroup label="JUMP TO...">
           {questionList.map((item, index) => (
             <Option key={index} value={item.name} onClick={() => {}}>
@@ -72,6 +72,11 @@ function QuestionSelect(props) {
   )
 }
 
-QuestionSelect.propTypes = {}
+QuestionSelect.propTypes = {
+  questionList: PropTypes.array.isRequired,
+  answers: PropTypes.array.isRequired,
+  index: PropTypes.number.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired
+}
 
 export default QuestionSelect
