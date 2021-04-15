@@ -107,7 +107,7 @@ function EditorSidebar(props) {
           </Col>
         </Row>
         <Row pb={3} px={3}>
-          <Col>{questionsEndingsList}</Col>
+          <Col overflow="auto">{questionsEndingsList}</Col>
         </Row>
       </Box>
     </Box>
