@@ -2,7 +2,7 @@ import { Card, Image, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from './FormSimpleView.style'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
 

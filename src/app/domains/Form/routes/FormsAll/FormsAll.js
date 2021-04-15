@@ -21,7 +21,7 @@ import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { FormSimpleView } from '../../components'
+import { FormSimpleView } from 'domains/Form/components'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
@@ -30,30 +30,9 @@ const mockRoutes = [
   { path: '/images', page: 'Images' },
   { path: '/videos', page: 'Videos' }
 ]
-const mockList = [
-  0,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  13,
-  14,
-  15,
-  16,
-  17,
-  18,
-  19
-]
+const mockList = [0, 1, 2, 8, 9, 10, 11, 6, 7, 8, 9, 10, 6, 7, 8, 9, 10]
 function FormsAll(props) {
-  const { title } = props
+  //const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -96,9 +75,9 @@ function FormsAll(props) {
   )
 
   return (
-    <Box bg="#f6f9fe" flex={1} flexDirection="column" height="100%">
+    <Box bg="#f6f9fe" flexDirection="column" px={45} py={4} minHeight="100%">
       {/* Page Header */}
-      <Row pt={4} px={45} noGutters display="flex">
+      <Row noGutters display="flex">
         <Col cw="auto" p={0} v="center">
           <Button
             size="small"
@@ -124,7 +103,7 @@ function FormsAll(props) {
         </Col>
       </Row>
       {/* SecondaryTitle */}
-      <Row mb={1} v="center" px={45} pt={3}>
+      <Row mb={1} v="center" pt={3}>
         <Col>
           <Title level={2} style={(styles.boldFont, globalStyles.resetMargin)}>
             Forms
@@ -136,14 +115,14 @@ function FormsAll(props) {
           </Tooltip>
         </Col>
       </Row>
-      <Row pb={25} px={45}>
+      <Row pb={25}>
         <Col>
           <Text style={styles.textSecondary}>
             You have {amountFiles} folders/files.
           </Text>
         </Col>
       </Row>
-      <Row px={45} pb={3}>
+      <Row pb={3}>
         <Col>
           <Input
             prefix={<SearchOutlined />}
@@ -165,13 +144,11 @@ function FormsAll(props) {
         </Col>
       </Row>
       <Box
-        overflow="auto"
         display="flex"
         flexWrap="wrap"
         flexDirection="row"
         bg="#f6f9fe"
-        className="custom-scroll"
-        px={45}>
+        className="custom-scroll">
         {/* Here should be list of data Images/Video */}
         {mockList.map((item) => (
           <Box pr={3} pb={3}>

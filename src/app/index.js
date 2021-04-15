@@ -6,18 +6,20 @@ import {
   QuestionLayoutSwitcher,
   FormContentArea
 } from 'components'
+import FormsAll from './domains/Form/routes/FormsAll'
 
 const App = (props) => {
   return (
-    <Box bg="#f6f9fe" display="flex" height="inherit">
-      <PageLayout>
-        <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
-          {/* Here should be QuestionForm  */}
-        </FormContentArea>
-      </PageLayout>
+    // <Box bg="#f6f9fe" display="flex" height="inherit">
+    //   <PageLayout>
+    //     <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
+    //       {/* Here should be QuestionForm  */}
+    //     </FormContentArea>
+    //   </PageLayout>
 
-      <EditorSidebar />
-    </Box>
+    //   <EditorSidebar />
+    // </Box>
+    <FormsAll />
   )
 }
 

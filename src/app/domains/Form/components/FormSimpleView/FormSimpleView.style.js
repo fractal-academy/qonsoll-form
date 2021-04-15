@@ -1,5 +1,9 @@
 export const styles = {
-  cardStyles: { backgroundColor: '#eceff5', borderRadius: '8px' },
+  cardStyles: {
+    backgroundColor: '#eceff5',
+    borderRadius: '8px',
+    display: 'inline-block'
+  },
   cardBodyPadding: { padding: '0 8px 8px 8px' },
   titleStyle: {
     color: 'black',
