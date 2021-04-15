@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import {
+  PageLayout,
+  EditorSidebar,
+  QuestionLayoutSwitcher,
+  FormContentArea
+} from 'components'
+import { Col, Container, Row, Box } from '@qonsoll/react-design'
+
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -41,7 +49,17 @@ function FormEdit(props) {
     }
   }, [])
 
-  return <>FormEdit</>
+  return (
+    <Box bg="#f6f9fe" display="flex" height="inherit">
+      <PageLayout>
+        <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
+          {/* Here should be QuestionForm  */}
+        </FormContentArea>
+      </PageLayout>
+
+      <EditorSidebar />
+    </Box>
+  )
 }
 
 FormEdit.propTypes = {}
