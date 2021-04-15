@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
-import {} from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
