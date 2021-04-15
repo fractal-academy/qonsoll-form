@@ -1,14 +1,9 @@
-import React, { cloneElement, useEffect, useMemo, useState } from 'react'
+import React, { cloneElement, useState } from 'react'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Input, Select } from 'antd'
-import Text from 'antd/lib/typography/Text'
-import Search from 'antd/es/input/Search'
-import { SearchOutlined } from '@ant-design/icons'
-import { QUESTION_TYPE, QUESTION_TYPE_VALUE } from 'app/constants/quetstionType'
+import { QUESTION_TYPE } from 'app/constants/quetstionType'
 import { ANSWER_TYPE } from 'app/constants/answerType'
 import YesNoChoiceTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/YesNoChoiceTemplate'
 import PlaneTextDateTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PlainTextDateTemplate'
-import { ChoiceTemplate } from 'domains/Condition/components/ConditionForm/ConditionTemplates'
 import Title from 'antd/lib/typography/Title'
 import { Card } from 'components'
 import PictureChoiceTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PictureChoiceTemplate'
@@ -17,7 +12,6 @@ import RatingTemplate from 'domains/Condition/components/ConditionForm/Condition
 import PlaneShortTextStringTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PlainShortTextStringTemplate'
 import PlaneLongTextStringTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PlainLongTextStringTemplate'
 import FileUploadTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/FileUploadTemplate'
-// import { ConditionRuleSelect } from 'domains/Condition/components'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -122,8 +116,7 @@ const questionTypesMap = {
   }
 }
 
-function ConditionForm(props) {
-  const { onChange, conditionType } = props
+function ConditionForm() {
   let number = 2
 
   const [questionsData, setQuestionsData] = useState(mockQuestion)
