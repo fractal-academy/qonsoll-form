@@ -1,17 +1,16 @@
 import React, { cloneElement, useState } from 'react'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Box } from '@qonsoll/react-design'
 import { QUESTION_TYPE } from 'app/constants/quetstionType'
-import { ANSWER_TYPE } from 'app/constants/answerType'
-import YesNoChoiceTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/YesNoChoiceTemplate'
-import PlaneTextDateTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PlainTextDateTemplate'
+import { YesNoChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { PlaneTextDateTemplate } from 'domains/Condition/components/ConditionTemplates'
 import Title from 'antd/lib/typography/Title'
 import { Card } from 'components'
-import PictureChoiceTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PictureChoiceTemplate'
-import OpinionScaleTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/OpinionScaleTemplate'
-import RatingTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/RatingTemplate'
-import PlaneShortTextStringTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PlainShortTextStringTemplate'
-import PlaneLongTextStringTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PlainLongTextStringTemplate'
-import FileUploadTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/FileUploadTemplate'
+import { PictureChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { OpinionScaleTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { RatingTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { PlaneShortTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { PlaneLongTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { FileUploadTemplate } from 'domains/Condition/components/ConditionTemplates'
 import PropTypes from 'prop-types'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
@@ -52,7 +51,7 @@ function ConditionForm(props) {
     getQuestionListRedirect
   } = props
   return (
-    <Card number={mockQuestionIndex + 3} key={mockQuestionIndex}>
+    <Card number={mockQuestionIndex + 2} key={mockQuestionIndex}>
       <Box ml={3}>
         <Title level={5} strong>
           {item.name}

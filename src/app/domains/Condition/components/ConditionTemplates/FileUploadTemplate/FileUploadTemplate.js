@@ -1,24 +1,11 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
 import { QuestionSelect } from 'domains/Question/components'
 import PropTypes from 'prop-types'
-import OpinionScaleTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/OpinionScaleTemplate'
 
-const { Option, OptGroup } = Select
-const mockQuestionListRedirect = [
-  'Go to the next question',
-  'Yes/no question example',
-  'Picture choice question example',
-  'Short text question example',
-  'Date question example'
-]
-
-function RatingTemplate(props) {
-  const { answers, questionList, addRedirectQuestion } = props
-
-  let startLetter = 65
+function FileUploadTemplate(props) {
+  const { answers, isUploaded, questionList, addRedirectQuestion } = props
 
   return (
     <>
@@ -31,12 +18,14 @@ function RatingTemplate(props) {
               key={index}
               p={2}
               mr={2}
+              height="48px"
               border="1px solid #bbbbbb"
               borderRadius="4px">
-              <Button type="outline" style={{ marginRight: '10px' }}>
-                <Text strong>{String.fromCharCode(startLetter++)}</Text>
-              </Button>
-              {item.name}
+              {isUploaded ? (
+                <Text>is uploaded</Text>
+              ) : (
+                <Text>not uploaded</Text>
+              )}
             </Box>
           </Col>
           <Col>
@@ -52,9 +41,10 @@ function RatingTemplate(props) {
     </>
   )
 }
-RatingTemplate.propTypes = {
+FileUploadTemplate.propTypes = {
   answers: PropTypes.array,
+  isUploaded: PropTypes.bool.isRequired,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }
-export default RatingTemplate
+export default FileUploadTemplate

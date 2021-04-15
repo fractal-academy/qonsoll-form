@@ -1,23 +1,21 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { Button, Input, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
-import React, { useState } from 'react'
+import React from 'react'
 import { TEXT_CONDITION_RULES_VALUE } from 'app/constants/planeTextStringConditionRules'
 import { QuestionSelect } from 'domains/Question/components'
 import PropTypes from 'prop-types'
-import PictureChoiceTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/PictureChoiceTemplate'
+import { styles } from './PlainLongTextStringTemplate.style'
+import { globalStyles } from 'app/styles'
 
 const { Option, OptGroup } = Select
 
-function PlaneShortTextStringTemplate(props) {
-  const { answers, id, addCondition, questionList, addRedirectQuestion } = props
-  // const [conditionArray, setConditionArray] = useState([''])
+function PlaneLongTextStringTemplate(props) {
+  const { answers, addCondition, questionList, addRedirectQuestion } = props
   // [CLEAN FUNCTIONS]
-
   const onClick = () => {
     addCondition('')
   }
-
   return (
     <>
       {answers.map((item, index) => (
@@ -28,18 +26,14 @@ function PlaneShortTextStringTemplate(props) {
               alignItems="center"
               border="1px solid #bbbbbb"
               borderRadius="4px"
+              height="48px"
               mr={2}>
               <Select
                 showSearch
                 allowClear
                 bordered={false}
                 defaultValue={TEXT_CONDITION_RULES_VALUE[0]}
-                style={{
-                  width: '100%',
-                  height: '48px',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}>
+                style={globalStyles.fullWidth}>
                 {TEXT_CONDITION_RULES_VALUE.map((item, index) => (
                   <Option key={index} value={item} onClick={() => {}}>
                     {item}
@@ -53,13 +47,11 @@ function PlaneShortTextStringTemplate(props) {
               display="flex"
               alignItems="center"
               key={index}
-              style={{}}
               p={2}
               mr={2}
-              height="50px"
               border="1px solid #bbbbbb"
               borderRadius="4px">
-              <Input style={{ width: '100%' }} bordered={false} />
+              <Input style={globalStyles.fullWidth} bordered={false} />
             </Box>
           </Col>
           <Col>
@@ -72,20 +64,20 @@ function PlaneShortTextStringTemplate(props) {
           </Col>
         </Row>
       ))}
-      <Button
-        size="large"
-        style={{ backgroundColor: '#d6e1f2' }}
-        onClick={onClick}>
-        <Text strong style={{ color: '#1d6fdc' }}>
-          + Add condition
-        </Text>
-      </Button>
+      <Row>
+        <Button size="large" style={styles.bgc} onClick={onClick}>
+          <Text strong style={styles.fontColor}>
+            + Add condition
+          </Text>
+        </Button>
+      </Row>
     </>
   )
 }
-PlaneShortTextStringTemplate.propTypes = {
+PlaneLongTextStringTemplate.propTypes = {
   answers: PropTypes.array,
+  addCondition: PropTypes.func,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }
-export default PlaneShortTextStringTemplate
+export default PlaneLongTextStringTemplate

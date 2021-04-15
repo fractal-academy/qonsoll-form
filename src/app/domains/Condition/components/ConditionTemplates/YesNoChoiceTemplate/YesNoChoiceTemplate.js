@@ -3,20 +3,19 @@ import { Button, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
 import { QuestionSelect } from 'domains/Question/components'
+import { styles } from './YesNoChoiceTemplate.styles'
 import PropTypes from 'prop-types'
-import ConditionForm from '../../ConditionForm'
 
-const { Option, OptGroup } = Select
-
-function OpinionScaleTemplate(props) {
+function YesNoChoiceTemplate(props) {
   const { answers, questionList, addRedirectQuestion } = props
 
-  let startLetter = 65
-
+  // const onChange = (question, index) => {
+  //   addRedirectQuestion(question, index)
+  // }
   return (
     <>
       {answers.map((item, index) => (
-        <Row noGutters mb={2} key={index}>
+        <Row mb={2} key={index}>
           <Col>
             <Box
               display="flex"
@@ -25,8 +24,8 @@ function OpinionScaleTemplate(props) {
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">
-              <Button type="outline" style={{ marginRight: '10px' }}>
-                <Text strong>{String.fromCharCode(startLetter++)}</Text>
+              <Button type="outline" style={styles.buttonM}>
+                <Text strong>{item.name[0].toUpperCase()}</Text>
               </Button>
               {item.name}
             </Box>
@@ -44,9 +43,9 @@ function OpinionScaleTemplate(props) {
     </>
   )
 }
-OpinionScaleTemplate.propTypes = {
+YesNoChoiceTemplate.propTypes = {
   answers: PropTypes.array,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }
-export default OpinionScaleTemplate
+export default YesNoChoiceTemplate

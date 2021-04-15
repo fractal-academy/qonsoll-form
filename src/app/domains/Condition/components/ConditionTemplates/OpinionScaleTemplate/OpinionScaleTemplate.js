@@ -1,11 +1,17 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
+import { Button, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
 import { QuestionSelect } from 'domains/Question/components'
 import PropTypes from 'prop-types'
+import { styles } from './OpinionScaleTemplate.styles'
 
-function FileUploadTemplate(props) {
-  const { answers, isUploaded, questionList, addRedirectQuestion } = props
+const { Option, OptGroup } = Select
+
+function OpinionScaleTemplate(props) {
+  const { answers, questionList, addRedirectQuestion } = props
+
+  let startLetter = 65
 
   return (
     <>
@@ -15,17 +21,14 @@ function FileUploadTemplate(props) {
             <Box
               display="flex"
               alignItems="center"
-              height="48px"
-              key={index}
               p={2}
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">
-              {isUploaded ? (
-                <Text>is uploaded</Text>
-              ) : (
-                <Text>not uploaded</Text>
-              )}
+              <Button type="outline" style={styles.buttonM}>
+                <Text strong>{String.fromCharCode(startLetter++)}</Text>
+              </Button>
+              {item.name}
             </Box>
           </Col>
           <Col>
@@ -41,10 +44,9 @@ function FileUploadTemplate(props) {
     </>
   )
 }
-FileUploadTemplate.propTypes = {
+OpinionScaleTemplate.propTypes = {
   answers: PropTypes.array,
-  isUploaded: PropTypes.bool.isRequired,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }
-export default FileUploadTemplate
+export default OpinionScaleTemplate

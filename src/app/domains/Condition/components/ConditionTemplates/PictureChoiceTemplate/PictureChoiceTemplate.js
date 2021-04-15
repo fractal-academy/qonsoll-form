@@ -1,21 +1,21 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { Button, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
-import React, { useState } from 'react'
+import React from 'react'
 import { QuestionSelect } from 'domains/Question/components'
+import PropTypes from 'prop-types'
+import { styles } from './PictureChoiceTemplate.styles'
 
 const { Option, OptGroup } = Select
 
-function YesNoChoiceTemplate(props) {
+function PictureChoiceTemplate(props) {
   const { answers, questionList, addRedirectQuestion } = props
+  let startLetter = 65
 
-  // const onChange = (question, index) => {
-  //   addRedirectQuestion(question, index)
-  // }
   return (
     <>
       {answers.map((item, index) => (
-        <Row mb={2} key={index}>
+        <Row noGutters mb={2} key={index}>
           <Col>
             <Box
               display="flex"
@@ -24,8 +24,8 @@ function YesNoChoiceTemplate(props) {
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">
-              <Button type="outline" style={{ marginRight: '10px' }}>
-                <Text strong>{item.name[0].toUpperCase()}</Text>
+              <Button type="outline" style={styles.buttonM}>
+                <Text strong>{String.fromCharCode(startLetter++)}</Text>
               </Button>
               {item.name}
             </Box>
@@ -43,5 +43,9 @@ function YesNoChoiceTemplate(props) {
     </>
   )
 }
-
-export default YesNoChoiceTemplate
+PictureChoiceTemplate.propTypes = {
+  answers: PropTypes.array,
+  questionList: PropTypes.array,
+  addRedirectQuestion: PropTypes.func
+}
+export default PictureChoiceTemplate

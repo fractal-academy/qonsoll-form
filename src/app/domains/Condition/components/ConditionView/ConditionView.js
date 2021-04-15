@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Card, Input } from 'antd'
 import { Col, Row } from '@qonsoll/react-design'
 import Text from 'antd/lib/typography/Text'
-import ConditionRuleSelect from 'domains/Condition/components/ConditionRuleSelect'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 

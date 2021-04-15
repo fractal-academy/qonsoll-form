@@ -1,17 +1,16 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Input, Select } from 'antd'
+import { Button, DatePicker, Input, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
-import { TEXT_CONDITION_RULES_VALUE } from 'app/constants/planeTextStringConditionRules'
+import { DATE_CONDITION_RULES_VALUE } from 'app/constants/dateConditionRules'
 import { QuestionSelect } from 'domains/Question/components'
 import PropTypes from 'prop-types'
-import RatingTemplate from 'domains/Condition/components/ConditionForm/ConditionTemplates/RatingTemplate'
+import { globalStyles } from 'app/styles'
+import { styles } from 'domains/Condition/components/ConditionTemplates/PlainShortTextStringTemplate/PlainShortTextStringTemplate.style'
+const { Option } = Select
 
-const { Option, OptGroup } = Select
-
-function PlaneLongTextStringTemplate(props) {
+function PlaneTextDateTemplate(props) {
   const { answers, id, addCondition, questionList, addRedirectQuestion } = props
-  // const [conditionArray, setConditionArray] = useState([''])
   // [CLEAN FUNCTIONS]
   const onClick = () => {
     addCondition('')
@@ -23,19 +22,21 @@ function PlaneLongTextStringTemplate(props) {
           <Col>
             <Box
               display="flex"
-              alignItems="center"
               border="1px solid #bbbbbb"
               borderRadius="4px"
-              height="48px"
               mr={2}>
               <Select
                 showSearch
                 allowClear
                 bordered={false}
-                // onChange={onChange}
-                defaultValue={TEXT_CONDITION_RULES_VALUE[0]}
-                style={{ width: '100%' }}>
-                {TEXT_CONDITION_RULES_VALUE.map((item, index) => (
+                defaultValue={DATE_CONDITION_RULES_VALUE[0]}
+                style={{
+                  width: '100%',
+                  height: '48px',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                {DATE_CONDITION_RULES_VALUE.map((item, index) => (
                   <Option key={index} value={item} onClick={() => {}}>
                     {item}
                   </Option>
@@ -47,14 +48,13 @@ function PlaneLongTextStringTemplate(props) {
             <Box
               display="flex"
               alignItems="center"
-              // width="300px"
               key={index}
               style={{}}
               p={2}
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">
-              <Input style={{ width: '100%' }} bordered={false} />
+              <DatePicker style={globalStyles.fullWidth} bordered={false} />
             </Box>
           </Col>
           <Col>
@@ -67,22 +67,18 @@ function PlaneLongTextStringTemplate(props) {
           </Col>
         </Row>
       ))}
-      <Row>
-        <Button
-          size="large"
-          style={{ backgroundColor: '#d6e1f2' }}
-          onClick={onClick}>
-          <Text strong style={{ color: '#1d6fdc' }}>
-            + Add condition
-          </Text>
-        </Button>
-      </Row>
+      <Button size="large" style={styles.bgc} onClick={onClick}>
+        <Text strong style={styles.fontColor}>
+          + Add condition
+        </Text>
+      </Button>
     </>
   )
 }
-PlaneLongTextStringTemplate.propTypes = {
+PlaneTextDateTemplate.propTypes = {
   answers: PropTypes.array,
+  addCondition: PropTypes.func,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }
-export default PlaneLongTextStringTemplate
+export default PlaneTextDateTemplate
