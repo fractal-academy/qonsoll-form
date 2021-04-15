@@ -1,4 +1,3 @@
-import { Col, Container, Row, Box } from '@qonsoll/react-design'
 import 'antd/dist/antd.css'
 import {
   PageLayout,
@@ -6,6 +5,7 @@ import {
   QuestionLayoutSwitcher,
   FormContentArea
 } from 'components'
+import { Box } from '@qonsoll/react-design'
 import QuestionsList from 'app/domains/Question/components/QuestionsList'
 
 const App = (props) => {

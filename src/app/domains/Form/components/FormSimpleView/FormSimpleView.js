@@ -2,7 +2,7 @@ import { Card, Image, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from './FormSimpleView.style'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
 
@@ -47,7 +47,7 @@ function FormSimpleView(props) {
       bodyStyle={styles.cardBodyPadding}
       cover={
         <Image
-          style={styles.cardImageStyles}
+          style={styles.imageStyle}
           alt="Form view"
           src={imageURL}
           preview={false}
@@ -58,14 +58,12 @@ function FormSimpleView(props) {
           <>
             <Row>
               <Col>
-                <Text style={styles.titleStyle}>Image title</Text>
+                <Text style={styles.titleStyle}>{title}</Text>
               </Col>
             </Row>
             <Row>
               <Col>
-                <Text style={styles.descriptionTextSize}>
-                  Image description
-                </Text>
+                <Text style={styles.descriptionTextSize}>{subtitle}</Text>
               </Col>
             </Row>
           </>
@@ -77,8 +75,8 @@ function FormSimpleView(props) {
 FormSimpleView.defaultProps = {
   imageURL:
     'https://image.freepik.com/free-photo/growing-small-tree-in-nature-and-sunlight_34152-1460.jpg',
-  title: 'form title',
-  subtitle: 'form subtitle'
+  title: 'Image title',
+  subtitle: 'Image description'
 }
 FormSimpleView.propTypes = {
   imageURL: PropTypes.string,
