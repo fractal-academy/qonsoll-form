@@ -9,7 +9,7 @@ const { Meta } = Card
 const { Text } = Typography
 
 function FormSimpleView(props) {
-  const { imageURL, title, subtitle, size } = props
+  const { imageURL, title, subtitle } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -47,12 +47,7 @@ function FormSimpleView(props) {
       bodyStyle={styles.cardBodyPadding}
       cover={
         <Image
-          style={{
-            height: size === 'large' ? '140px' : '90px',
-            width: size === 'large' ? '200px' : '140px',
-            padding: '3px',
-            borderRadius: '8px'
-          }}
+          style={styles.imageStyle}
           alt="Form view"
           src={imageURL}
           preview={false}
@@ -86,8 +81,7 @@ FormSimpleView.defaultProps = {
 FormSimpleView.propTypes = {
   imageURL: PropTypes.string,
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['large'])
+  subtitle: PropTypes.string.isRequired
 }
 
 export default FormSimpleView
