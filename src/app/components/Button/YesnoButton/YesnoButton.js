@@ -1,25 +1,48 @@
-import { useEffect } from 'react'
-import './YesnoButton.styles.css'
-import { Typography } from 'antd'
 import PropTypes from 'prop-types'
-import { Button } from 'app/components'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { KeyBox } from 'app/components'
+import { useKeyPress } from '@umijs/hooks'
+import { useEffect, useState } from 'react'
+import { Box } from '@qonsoll/react-design'
 // import { useTranslation } from 'react-i18next'
 
 function YesnoButton(props) {
-  const { conditions } = props
-
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [buttonKey, setButtonKey] = useState()
 
   // [COMPUTED PROPERTIES]
+  const mappedChoises = [
+    { letter: 'Y', name: 'Yes' },
+    { letter: 'N', name: 'No' }
+  ]
+
+  const letters = []
+  mappedChoises.map((item) => letters.push(item.letter))
 
   // [CLEAN FUNCTIONS]
-  const onButtonClick = () => {}
+  const onButtonClick = (letter) => {
+    if (letters.includes(letter)) {
+      setButtonKey(letter)
+
+      console.log(`${letter} was pressed`)
+    }
+  }
+
+  useKeyPress(
+    (event) => ![].includes(event.key),
+    (event) => {
+      if (event.type === 'keyup') {
+        const key = `${event.key}`.toUpperCase()
+        onButtonClick(key)
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -41,24 +64,16 @@ function YesnoButton(props) {
 
   return (
     <Box display="block">
-      <Box mb={2}>
-        <Button buttonType="secondary" onClick={onButtonClick}>
-          <Row display="flex" v="center">
-            <Col className="buttonBox" mr={2}>
-              Y
-            </Col>
-            <Typography.Text>Yes</Typography.Text>
-          </Row>
-        </Button>
-      </Box>
-      <Button buttonType="secondary" onClick={onButtonClick}>
-        <Row display="flex" v="center">
-          <Col className="buttonBox" mr={2}>
-            N
-          </Col>
-          <Typography.Text>No</Typography.Text>
-        </Row>
-      </Button>
+      {mappedChoises.map((item, index) => (
+        <Box key={index} mb={2}>
+          <KeyBox
+            isActive={buttonKey === item.letter}
+            onButtonClick={onButtonClick}
+            item={item}
+            buttonKey={buttonKey}
+          />
+        </Box>
+      ))}
     </Box>
   )
 }

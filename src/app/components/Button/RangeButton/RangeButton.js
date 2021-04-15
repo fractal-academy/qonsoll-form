@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import './RangeButton.styles.css'
 import { Button } from 'app/components'
 import { Box } from '@qonsoll/react-design'
 // import { useTranslation } from 'react-i18next'
+
+const ButtonGroup = Button.Group
 
 function RangeButton(props) {
   const { from = 0, to = 0 } = props
@@ -43,8 +46,12 @@ function RangeButton(props) {
   return (
     <Box display="flex">
       {range.map((item) => (
-        <Button key={item} buttonType="secondary" onClick={onButtonClick}>
-          {item}
+        <Button
+          key={item}
+          buttonType="secondary"
+          className="range"
+          onClick={onButtonClick}>
+          <b>{item}</b>
         </Button>
       ))}
     </Box>

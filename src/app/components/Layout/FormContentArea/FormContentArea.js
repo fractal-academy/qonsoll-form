@@ -39,7 +39,7 @@ function FormContentArea(props) {
   }, [])
 
   return (
-    <Box display="flex" px={45} py={20} my={20} overflow="auto">
+    <Box display="flex" px={45} my={3} py={3} overflow="auto" height="100%">
       <Box pr={2}>{leftSideMenu}</Box>
       <Content backgroundColor="white" className="content-style custom-scroll ">
         {children}

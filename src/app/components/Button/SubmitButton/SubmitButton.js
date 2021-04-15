@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import './SubmitButton.styles.css'
 import PropTypes from 'prop-types'
 import { Typography } from 'antd'
 import { Button } from 'app/components'
@@ -42,7 +43,7 @@ function SubmitButton(props) {
   return (
     <Row display="flex" v="center">
       <Col cw="auto" mr={2}>
-        <Button buttonType="primary" onClick={onButtonClick}>
+        <Button buttonType="primary" className="submit" onClick={onButtonClick}>
           <Row display="flex">
             <Col mr={2}>OK</Col>
             <Col>
@@ -53,7 +54,7 @@ function SubmitButton(props) {
       </Col>
       <Col>
         <Text>
-          press <b>Enter ↵</b>
+          Press <b>Enter ↵</b>
         </Text>
       </Col>
     </Row>

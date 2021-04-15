@@ -1,56 +1,64 @@
-import { useEffect } from 'react'
-import { Typography } from 'antd'
 import PropTypes from 'prop-types'
-import { Button } from 'app/components'
-import { Row, Col, Box } from '@qonsoll/react-design'
-// import { useTranslation } from 'react-i18next'
+import { KeyBox } from 'app/components'
+import { useMemo, useState } from 'react'
+import { useKeyPress } from '@umijs/hooks'
+import { Box } from '@qonsoll/react-design'
+
+let startLetter = 65
 
 function ChoiceButton(props) {
-  const { conditions, choices } = props
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
+  const { choices } = props
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [buttonKey, setButtonKey] = useState()
 
-  // [COMPUTED PROPERTIES]
-  let startLetter = 65
+  // [ADDITIONAL HOOKS]
+  const mappedChoises = useMemo(
+    () =>
+      choices.map((el, index) => ({
+        letter: String.fromCharCode(startLetter + index),
+        name: el
+      })),
+    [choices]
+  )
+
+  const letters = useMemo(
+    () => (mappedChoises ? mappedChoises.map(({ letter }) => letter) : []),
+    [mappedChoises]
+  )
 
   // [CLEAN FUNCTIONS]
-  const onButtonClick = () => {}
+  const onButtonClick = (letter) => {
+    if (letters.includes(letter)) {
+      setButtonKey(letter)
 
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
+      console.log(`Choice ${letter} was pressed`)
     }
-  }, [])
+  }
+
+  useKeyPress(
+    (event) => ![].includes(event.key),
+    (event) => {
+      if (event.type === 'keyup') {
+        const key = `${event.key}`.toUpperCase()
+        onButtonClick(key)
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   return (
     <Box display="block">
-      {choices.map((item) => (
-        <Box key={item} mb={2}>
-          <Button buttonType="secondary" onClick={onButtonClick}>
-            <Row display="flex" v="center">
-              <Col className="buttonBox" mr={2}>
-                {String.fromCharCode(startLetter++)}
-              </Col>
-              <Typography.Text>{item}</Typography.Text>
-            </Row>
-          </Button>
+      {mappedChoises.map((item, index) => (
+        <Box key={index} mb={2}>
+          <KeyBox
+            isActive={buttonKey === item.letter}
+            onButtonClick={onButtonClick}
+            item={item}
+            buttonKey={buttonKey}
+          />
         </Box>
       ))}
     </Box>
