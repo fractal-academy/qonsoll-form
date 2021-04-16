@@ -1,6 +1,6 @@
 import React, { cloneElement, useState } from 'react'
 import { Box } from '@qonsoll/react-design'
-import { QUESTION_TYPE } from 'app/constants/quetstionType'
+import { QUESTION_TYPES } from 'app/constants'
 import { YesNoChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
 import { PlaneTextDateTemplate } from 'domains/Condition/components/ConditionTemplates'
 import Title from 'antd/lib/typography/Title'
@@ -16,28 +16,28 @@ import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 const questionTypesMap = {
-  [QUESTION_TYPE.YES_NO]: {
+  [QUESTION_TYPES.YES_NO]: {
     component: <YesNoChoiceTemplate />
   },
-  [QUESTION_TYPE.PICTURE_CHOICE]: {
+  [QUESTION_TYPES.PICTURE_CHOICE]: {
     component: <PictureChoiceTemplate />
   },
-  [QUESTION_TYPE.OPINION_SCALE]: {
+  [QUESTION_TYPES.OPINION_SCALE]: {
     component: <OpinionScaleTemplate />
   },
-  [QUESTION_TYPE.RATING]: {
+  [QUESTION_TYPES.RATING]: {
     component: <RatingTemplate />
   },
-  [QUESTION_TYPE.SHORT_TEXT]: {
+  [QUESTION_TYPES.SHORT_TEXT]: {
     component: <PlaneShortTextStringTemplate />
   },
-  [QUESTION_TYPE.LONG_TEXT]: {
+  [QUESTION_TYPES.LONG_TEXT]: {
     component: <PlaneLongTextStringTemplate />
   },
-  [QUESTION_TYPE.DATE]: {
+  [QUESTION_TYPES.DATE]: {
     component: <PlaneTextDateTemplate />
   },
-  [QUESTION_TYPE.FILE_UPLOAD]: {
+  [QUESTION_TYPES.FILE_UPLOAD]: {
     component: <FileUploadTemplate isUploaded />
   }
 }

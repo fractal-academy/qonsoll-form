@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { QUESTION_TYPE, QUESTION_TYPE_VALUE } from 'app/constants/quetstionType'
+import QUESTION_TYPES, {
+  QUESTION_TYPE_VALUES
+} from 'app/constants/quetstionType'
 import { Col, Row } from '@qonsoll/react-design'
 import { Option } from 'antd/es/mentions'
 import { Menu, Select } from 'antd'
@@ -50,7 +52,7 @@ function QuestionTypesList(props) {
 
   return (
     <Menu onChange={onChange} style={{ height: '300px', overflow: 'auto' }}>
-      {QUESTION_TYPE_VALUE.map((item, index) => (
+      {QUESTION_TYPE_VALUES.map((item, index) => (
         <Menu.Item key={index} value={item}>
           {item}
         </Menu.Item>
