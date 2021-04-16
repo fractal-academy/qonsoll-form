@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "@umijs/hooks": "^1.9.3",
     "antd": "^4.14.1",
     "antd-styled": "^1.1.71",
     "babel-plugin-import": "^1.13.3",

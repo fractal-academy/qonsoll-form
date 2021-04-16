@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { ConditionForm, ConditionsList } from 'domains/Condition/components'
-import { QUESTION_TYPE } from 'app/constants/quetstionType'
-import { ANSWER_TYPE } from 'app/constants/answerType'
+import { QUESTION_TYPES, ANSWER_TYPES } from 'app/constants'
 import PropTypes from 'prop-types'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 const mockQuestion = [
   {
     id: 1,
-    name: 'Yes/No question example',
-    questionType: QUESTION_TYPE.YES_NO,
-    answerType: ANSWER_TYPE.CHOICE,
+    name: 'Yes/no question example',
+    questionType: QUESTION_TYPES.YES_NO,
+    answerType: ANSWER_TYPES.CHOICE,
     answers: [
       { name: 'Yes', redirectQuestion: null },
       { name: 'No', redirectQuestion: null }
@@ -19,8 +18,8 @@ const mockQuestion = [
   {
     id: 2,
     name: 'Picture choice question example',
-    questionType: QUESTION_TYPE.PICTURE_CHOICE,
-    answerType: ANSWER_TYPE.CHOICE,
+    questionType: QUESTION_TYPES.PICTURE_CHOICE,
+    answerType: ANSWER_TYPES.CHOICE,
     answers: [
       { name: 'Picture 1', redirectQuestion: null },
       { name: 'Picture 2', redirectQuestion: null },
@@ -30,8 +29,8 @@ const mockQuestion = [
   {
     id: 3,
     name: 'Opinion scale question example',
-    questionType: QUESTION_TYPE.OPINION_SCALE,
-    answerType: ANSWER_TYPE.CHOICE,
+    questionType: QUESTION_TYPES.OPINION_SCALE,
+    answerType: ANSWER_TYPES.CHOICE,
     answers: [
       { name: '1', redirectQuestion: null },
       { name: '2', redirectQuestion: null },
@@ -41,8 +40,8 @@ const mockQuestion = [
   {
     id: 4,
     name: 'Rating question example',
-    questionType: QUESTION_TYPE.RATING,
-    answerType: ANSWER_TYPE.CHOICE,
+    questionType: QUESTION_TYPES.RATING,
+    answerType: ANSWER_TYPES.CHOICE,
     answers: [
       { name: '1', redirectQuestion: null },
       { name: '2', redirectQuestion: null },
@@ -52,29 +51,29 @@ const mockQuestion = [
   {
     id: 5,
     name: 'Short text question example',
-    questionType: QUESTION_TYPE.SHORT_TEXT,
-    answerType: ANSWER_TYPE.PLAIN_TEXT_STRING,
+    questionType: QUESTION_TYPES.SHORT_TEXT,
+    answerType: ANSWER_TYPES.PLAIN_TEXT_STRING,
     answers: [{ name: '', redirectQuestion: null }]
   },
   {
     id: 6,
     name: 'Long text question example',
-    questionType: QUESTION_TYPE.LONG_TEXT,
-    answerType: ANSWER_TYPE.PLAIN_TEXT_STRING,
+    questionType: QUESTION_TYPES.LONG_TEXT,
+    answerType: ANSWER_TYPES.PLAIN_TEXT_STRING,
     answers: [{ name: '', redirectQuestion: null }]
   },
   {
     id: 7,
     name: 'Date question example',
-    questionType: QUESTION_TYPE.DATE,
-    answerType: ANSWER_TYPE.PLAIN_TEXT_DATE,
+    questionType: QUESTION_TYPES.DATE,
+    answerType: ANSWER_TYPES.PLAIN_TEXT_DATE,
     answers: [{ name: '', redirectQuestion: null }]
   },
   {
     id: 8,
     name: 'File upload question example',
-    questionType: QUESTION_TYPE.FILE_UPLOAD,
-    answerType: ANSWER_TYPE.FILE,
+    questionType: QUESTION_TYPES.FILE_UPLOAD,
+    answerType: ANSWER_TYPES.FILE,
     answers: [{ name: '111', redirectQuestion: null }]
   }
 ]

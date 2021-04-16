@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Modal, Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import { globalStyles } from 'app/styles'
-import PropTypes from 'prop-types'
 import { styles } from './ModalWithFormConditionsForm.styles'
+import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
@@ -63,10 +63,7 @@ function ModalWithFormConditionsForm(props) {
         onCancel={onCancel}
         closable={false}
         width="950px"
-        bodyStyle={{
-          height: '580px',
-          overflow: 'auto'
-        }}
+        bodyStyle={styles.modalBodyStyle}
         title={
           <>
             <Row mb={1} v="center">
