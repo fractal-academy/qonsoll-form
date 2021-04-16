@@ -13,7 +13,7 @@ async function getData(collection, document) {
     try {
       result = await getCollectionRef(collection).doc(document).get()
       if (!result.exists) {
-        return Promise.reject(new Error('document not exist.'))
+        return Promise.reject(new Error('Document is not exists.'))
       }
       result = await result.data()
       return result
