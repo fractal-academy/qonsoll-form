@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { QUESTION_TYPE, QUESTION_TYPE_VALUE } from 'app/constants/quetstionType'
+import QUESTION_TYPE, { QUESTION_TYPE_VALUE } from 'app/constants/quetstionType'
 import { Col, Row } from '@qonsoll/react-design'
 import { Option } from 'antd/es/mentions'
 import { Menu, Select } from 'antd'

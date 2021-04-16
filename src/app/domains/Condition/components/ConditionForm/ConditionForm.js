@@ -1,6 +1,6 @@
 import React, { cloneElement, useState } from 'react'
 import { Box } from '@qonsoll/react-design'
-import { QUESTION_TYPE } from 'app/constants/quetstionType'
+import { QUESTION_TYPE } from 'app/constants'
 import { YesNoChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
 import { PlaneTextDateTemplate } from 'domains/Condition/components/ConditionTemplates'
 import Title from 'antd/lib/typography/Title'

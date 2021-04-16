@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Col, Row } from '@qonsoll/react-design'
 import { Menu } from 'antd'
-import { QUESTION_TYPE } from 'app/constants/quetstionType'
+import { QUESTION_TYPE } from 'app/constants'
 import {
   CarOutlined,
   GlobalOutlined,
