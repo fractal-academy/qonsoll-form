@@ -3,11 +3,11 @@ import { Box } from '@qonsoll/react-design'
 import { Carousel } from 'app/components'
 
 const contentStyle = {
-  height: '160px',
+  height: '150px',
   color: '#fff',
   lineHeight: '160px',
   textAlign: 'center',
-  background: '#364d79'
+  background: '#0445af'
 }
 
 const InnerComponent1 = () => {
