@@ -8,5 +8,6 @@ export const styles = {
     position: 'absolute',
     top: '40px',
     left: '40px'
-  }
+  },
+  columnStyle: { justifyContent: 'center', alignItems: 'center' }
 }
