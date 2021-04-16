@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ConditionForm, ConditionsList } from 'domains/Condition/components'
-import { QUESTION_TYPE } from 'app/constants/quetstionType'
-import { ANSWER_TYPE } from 'app/constants/answerType'
+import { QUESTION_TYPE, ANSWER_TYPE } from 'app/constants'
 import PropTypes from 'prop-types'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
