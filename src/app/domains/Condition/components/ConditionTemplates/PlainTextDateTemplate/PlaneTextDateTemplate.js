@@ -19,12 +19,13 @@ function PlaneTextDateTemplate(props) {
     <>
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
-          <Col>
+          <Col cw="auto">
             <Box
               display="flex"
               border="1px solid #bbbbbb"
               borderRadius="4px"
-              mr={2}>
+              mr={2}
+              width={210}>
               <Select
                 showSearch
                 allowClear
@@ -39,12 +40,12 @@ function PlaneTextDateTemplate(props) {
               </Select>
             </Box>
           </Col>
-          <Col>
+          <Col cw="auto">
             <Box
               display="flex"
               alignItems="center"
               key={index}
-              style={{}}
+              width="200px"
               p={2}
               mr={2}
               border="1px solid #bbbbbb"

@@ -4,13 +4,18 @@ import {
   PageLayout,
   EditorSidebar,
   QuestionLayoutSwitcher,
-  FormContentArea
+  FormContentArea,
+  TextAreaForm
 } from 'components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
-import { QuestionForm } from 'domains/Question/components'
+import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
 
 const App = (props) => {
-  return <FormConditionsForm />
+  return (
+    <ModalWithFormConditionsForm>
+      <FormConditionsForm />
+    </ModalWithFormConditionsForm>
+  )
 }
 
 export default App

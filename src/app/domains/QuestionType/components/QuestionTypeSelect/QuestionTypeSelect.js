@@ -12,7 +12,6 @@ import {
 import Text from 'antd/lib/typography/Text'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
-import './QuestionTypeSelect.style.css'
 import { styles } from './QuestionTypeSelect.styles'
 
 const questionTypeMap = [
@@ -106,10 +105,7 @@ function QuestionTypeSelect(props) {
     <>
       <Row h="center" v={'center'} noGutters>
         <Col>
-          <Menu
-            className="hideScroll"
-            onChange={onChange}
-            style={styles.menuStyle}>
+          <Menu onChange={onChange} style={styles.menuStyle}>
             {questionTypeMap.map((item, index) => (
               <Menu.Item
                 style={styles.menuItemStyle}

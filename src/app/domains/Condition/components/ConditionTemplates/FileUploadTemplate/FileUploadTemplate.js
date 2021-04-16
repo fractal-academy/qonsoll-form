@@ -18,7 +18,7 @@ function FileUploadTemplate(props) {
               key={index}
               p={2}
               mr={2}
-              height="48px"
+              height="50px"
               border="1px solid #bbbbbb"
               borderRadius="4px">
               {isUploaded ? (

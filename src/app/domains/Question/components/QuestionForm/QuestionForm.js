@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Tag } from 'antd'
 import {
+  DateTimeInput,
   InputForm,
   Popover,
   QuestionHeader,
@@ -151,6 +152,7 @@ function QuestionForm(props) {
             <Row noGutters>
               <Col>
                 <Rate />
+                <DateTimeInput />
               </Col>
             </Row>
           </Card>

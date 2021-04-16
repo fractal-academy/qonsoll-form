@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 const mockQuestion = [
   {
     id: 1,
-    name: 'Yes/no question example',
+    name: 'Yes/No question example',
     questionType: QUESTION_TYPE.YES_NO,
     answerType: ANSWER_TYPE.CHOICE,
     answers: [
