@@ -1,4 +1,4 @@
-const QUESTION_TYPE = {
+const QUESTION_TYPES = {
   WELCOME_SCREEN: 'Welcome screen',
   SHORT_TEXT: 'Short text',
   LONG_TEXT: 'Long text',
@@ -11,8 +11,8 @@ const QUESTION_TYPE = {
   FILE_UPLOAD: 'File upload'
 }
 
-const QUESTION_TYPE_KEYS = Object.keys(QUESTION_TYPE)
-const QUESTION_TYPE_VALUE = Object.values(QUESTION_TYPE)
+const QUESTION_TYPE_KEYS = Object.keys(QUESTION_TYPES)
+const QUESTION_TYPE_VALUES = Object.values(QUESTION_TYPES)
 
-export default QUESTION_TYPE
-export { QUESTION_TYPE_KEYS, QUESTION_TYPE_VALUE }
+export default QUESTION_TYPES
+export { QUESTION_TYPE_KEYS, QUESTION_TYPE_VALUES }

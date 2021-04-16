@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Col, Row } from '@qonsoll/react-design'
 import { Menu } from 'antd'
-import { QUESTION_TYPE } from 'app/constants'
+import { QUESTION_TYPES } from 'app/constants'
 import {
   CarOutlined,
   GlobalOutlined,
@@ -17,53 +17,53 @@ import { styles } from './QuestionTypeSelect.styles'
 
 const questionTypeMap = [
   {
-    type: QUESTION_TYPE.WELCOME_SCREEN,
+    type: QUESTION_TYPES.WELCOME_SCREEN,
     description: 'Invite your audience in',
     icon: <HomeOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.SHORT_TEXT,
+    type: QUESTION_TYPES.SHORT_TEXT,
     description: 'For short answers, like names',
     icon: <GlobalOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.DATE,
+    type: QUESTION_TYPES.DATE,
     description: 'Collect answers in date format',
 
     icon: <SwapOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.FILE_UPLOAD,
+    type: QUESTION_TYPES.FILE_UPLOAD,
     description: 'Upload a file up to 10MB',
     icon: <HeartOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.LONG_TEXT,
+    type: QUESTION_TYPES.LONG_TEXT,
     description: 'Mote space to spill the beans',
     icon: <CarOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.OPINION_SCALE,
+    type: QUESTION_TYPES.OPINION_SCALE,
     description: 'A customizable, numbered scale',
     icon: <HomeOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.PICTURE_CHOICE,
+    type: QUESTION_TYPES.PICTURE_CHOICE,
     description: 'Multiple choice but prettier',
     icon: <HomeOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.RATING,
+    type: QUESTION_TYPES.RATING,
     description: 'Choose from shapes like ⭐ or 🐶',
     icon: <HomeOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.STATEMENT,
+    type: QUESTION_TYPES.STATEMENT,
     description: 'Take the mic for a moment',
     icon: <HomeOutlined style={{ fontSize: '24px' }} />
   },
   {
-    type: QUESTION_TYPE.YES_NO,
+    type: QUESTION_TYPES.YES_NO,
     description: 'Just 2 options: Yes or No',
     icon: <HomeOutlined style={{ fontSize: '24px' }} />
   }

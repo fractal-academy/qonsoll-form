@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import QUESTION_TYPE, { QUESTION_TYPE_VALUE } from 'app/constants/quetstionType'
+import QUESTION_TYPES, {
+  QUESTION_TYPE_VALUES
+} from 'app/constants/quetstionType'
 import {
   GlobalOutlined,
   HomeOutlined,
@@ -16,28 +18,28 @@ import { Card } from 'antd'
   in this file.
 */
 const questionTypeMap = {
-  [QUESTION_TYPE.WELCOME_SCREEN]: {
-    value: QUESTION_TYPE_VALUE,
+  [QUESTION_TYPES.WELCOME_SCREEN]: {
+    value: QUESTION_TYPE_VALUES,
     icon: <RadiusBottomrightOutlined />
   },
-  [QUESTION_TYPE.SHORT_TEXT]: {
-    type: QUESTION_TYPE.SHORT_TEXT,
+  [QUESTION_TYPES.SHORT_TEXT]: {
+    type: QUESTION_TYPES.SHORT_TEXT,
     icon: <HomeOutlined />
   },
-  [QUESTION_TYPE.WELCOME_SCREEN]: {
-    type: QUESTION_TYPE.WELCOME_SCREEN,
+  [QUESTION_TYPES.WELCOME_SCREEN]: {
+    type: QUESTION_TYPES.WELCOME_SCREEN,
     icon: <GlobalOutlined />
   },
-  [QUESTION_TYPE.WELCOME_SCREEN]: {
-    type: QUESTION_TYPE.WELCOME_SCREEN,
+  [QUESTION_TYPES.WELCOME_SCREEN]: {
+    type: QUESTION_TYPES.WELCOME_SCREEN,
     icon: <RadiusBottomrightOutlined />
   },
-  [QUESTION_TYPE.WELCOME_SCREEN]: {
-    type: QUESTION_TYPE.WELCOME_SCREEN,
+  [QUESTION_TYPES.WELCOME_SCREEN]: {
+    type: QUESTION_TYPES.WELCOME_SCREEN,
     icon: <RadiusBottomrightOutlined />
   },
-  [QUESTION_TYPE.WELCOME_SCREEN]: {
-    type: QUESTION_TYPE.WELCOME_SCREEN,
+  [QUESTION_TYPES.WELCOME_SCREEN]: {
+    type: QUESTION_TYPES.WELCOME_SCREEN,
     icon: <RadiusBottomrightOutlined />
   }
 }
@@ -81,7 +83,7 @@ function QuestionTypeView(props) {
         <Col cw={'auto'}>
           <RadiusBottomrightOutlined />
         </Col>
-        <Col>{QUESTION_TYPE.WELCOME_SCREEN}</Col>
+        <Col>{QUESTION_TYPES.WELCOME_SCREEN}</Col>
       </Row>
     </Box>
   )

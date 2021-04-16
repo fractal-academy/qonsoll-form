@@ -13,52 +13,51 @@ import { SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles.js'
-import { QUESTION_TYPE, LAYOUT_TYPE } from 'app/constants'
+import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import PropTypes from 'prop-types'
 
 // import { useTranslation } from 'react-i18next'
 
 const questionTypesMap = {
-  [QUESTION_TYPE.YES_NO]: {
+  [QUESTION_TYPES.YES_NO]: {
     component: <>YES/NO btns</>
   },
-  [QUESTION_TYPE.PICTURE_CHOICE]: {
+  [QUESTION_TYPES.PICTURE_CHOICE]: {
     component: <>List of ImageUploaders</>
   },
-  [QUESTION_TYPE.OPINION_SCALE]: {
+  [QUESTION_TYPES.OPINION_SCALE]: {
     component: <>Option Scale</>
   },
-  [QUESTION_TYPE.RATING]: {
+  [QUESTION_TYPES.RATING]: {
     component: <Rate />
   },
-  [QUESTION_TYPE.SHORT_TEXT]: {
+  [QUESTION_TYPES.SHORT_TEXT]: {
     component: <InputForm />
   },
-  [QUESTION_TYPE.LONG_TEXT]: {
+  [QUESTION_TYPES.LONG_TEXT]: {
     component: <TextAreaForm />
   },
-  [QUESTION_TYPE.DATE]: {
+  [QUESTION_TYPES.DATE]: {
     component: <DateTimeInput />
   },
-  [QUESTION_TYPE.FILE_UPLOAD]: {
+  [QUESTION_TYPES.FILE_UPLOAD]: {
     component: <FileUploader />
   },
-  [QUESTION_TYPE.STATEMENT]: {
+  [QUESTION_TYPES.STATEMENT]: {
     component: <>Continue Btn</>
   }
 }
 
 const layoutSides = [
-  LAYOUT_TYPE.LEFT_SIDE_BIG,
-  LAYOUT_TYPE.LEFT_SIDE_SMALL,
-  LAYOUT_TYPE.RIGHT_SIDE_BIG,
-  LAYOUT_TYPE.RIGHT_SIDE_SMALL
+  LAYOUT_TYPES.LEFT_SIDE_BIG,
+  LAYOUT_TYPES.LEFT_SIDE_SMALL,
+  LAYOUT_TYPES.RIGHT_SIDE_BIG,
+  LAYOUT_TYPES.RIGHT_SIDE_SMALL
 ]
-const rightSide = [LAYOUT_TYPE.RIGHT_SIDE_BIG, LAYOUT_TYPE.RIGHT_SIDE_SMALL]
+const rightSide = [LAYOUT_TYPES.RIGHT_SIDE_BIG, LAYOUT_TYPES.RIGHT_SIDE_SMALL]
 
 function QuestionForm(props) {
   const { question } = props
-  // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -68,7 +67,15 @@ function QuestionForm(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-
+  const cardStyles = {
+    ...styles.cardStyle,
+    ...(question.layoutType === LAYOUT_TYPES.FULL_SCREEN
+      ? {
+          backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
+        }
+      : {})
+  }
+  const imageOrder = rightSide.includes(question.layoutType) ? 3 : 1
   // [CLEAN FUNCTIONS]
 
   // [USE_EFFECTS]
@@ -93,15 +100,7 @@ function QuestionForm(props) {
     <>
       <Row noGutters mb={2} height="inherit">
         <Col v="center" order={2}>
-          <Card
-            style={{
-              ...styles.cardStyle,
-              ...(question.layoutType === LAYOUT_TYPE.FULL_SCREEN
-                ? {
-                    backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
-                  }
-                : {})
-            }}>
+          <Card style={cardStyles}>
             <Row noGutters h="between">
               <Col cw="auto">
                 <Tag color="blue">Question 1</Tag>
@@ -125,7 +124,7 @@ function QuestionForm(props) {
                 />
               </Col>
             </Row>
-            {question.layoutType === LAYOUT_TYPE.BETWEEN && (
+            {question.layoutType === LAYOUT_TYPES.BETWEEN && (
               <Row>
                 <Col cw="auto">
                   <Box
@@ -139,9 +138,7 @@ function QuestionForm(props) {
               <Col>
                 {cloneElement(
                   questionTypesMap[question.questionType].component,
-                  {
-                    ...question
-                  }
+                  question
                 )}
               </Col>
             </Row>
@@ -153,7 +150,7 @@ function QuestionForm(props) {
             display="flex"
             style={styles.columnStyle}
             height="100%"
-            order={rightSide.includes(question.layoutType) ? 3 : 1}>
+            order={imageOrder}>
             <Box
               {...question.layoutType}
               backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
