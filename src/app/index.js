@@ -1,5 +1,5 @@
+import { Col, Container, Row, Box } from '@qonsoll/react-design'
 import 'antd/dist/antd.css'
-import { Box } from '@qonsoll/react-design'
 import FormAdvancedView from 'app/domains/Form/components/FormAdvancedView'
 
 const contentStyle = {

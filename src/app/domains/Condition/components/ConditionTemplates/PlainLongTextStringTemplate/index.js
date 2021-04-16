@@ -1,0 +1,2 @@
+import PlaneLongTextStringTemplate from './PlaneLongTextStringTemplate'
+export default PlaneLongTextStringTemplate

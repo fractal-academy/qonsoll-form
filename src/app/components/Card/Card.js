@@ -39,7 +39,7 @@ function Card(props) {
   }, [])
 
   return (
-    <Box position="relative">
+    <Box position="relative" mb={3}>
       <Box className="hiddenBox"></Box>
       <Box className="contentBox">{children}</Box>
       <Box className="numberBox">{number}</Box>
