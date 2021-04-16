@@ -1,6 +1,6 @@
 import 'antd/dist/antd.css'
 import { Box } from '@qonsoll/react-design'
-import { Carousel } from 'app/components'
+import FormAdvancedView from 'app/domains/Form/components/FormAdvancedView'
 
 const contentStyle = {
   height: '150px',
@@ -25,12 +25,12 @@ const InnerComponent4 = () => {
 
 const App = (props) => {
   return (
-    <Carousel>
+    <FormAdvancedView>
       <InnerComponent1 />
       <InnerComponent2 />
       <InnerComponent3 />
       <InnerComponent4 />
-    </Carousel>
+    </FormAdvancedView>
   )
 }
 

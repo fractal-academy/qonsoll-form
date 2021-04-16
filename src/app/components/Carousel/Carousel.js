@@ -13,7 +13,6 @@ function Carousel(props) {
 
   // [ADDITIONAL HOOKS]
   const [scroll, ref] = useScroll(document)
-  console.log(scroll.top)
 
   const carouselRef = useRef()
   const next = () => {
@@ -31,6 +30,9 @@ function Carousel(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
+  const handleScroll = (e) => {
+    e.deltaY > 0 ? next() : previous()
+  }
 
   // [USE_EFFECTS]
 
@@ -52,7 +54,10 @@ function Carousel(props) {
   }, [])
 
   return (
-    <Box ref={ref}>
+    <Box
+      onWheel={(e) => {
+        handleScroll(e)
+      }}>
       <AntdCarousel dots={false} ref={carouselRef} dotPosition="right">
         {children}
       </AntdCarousel>
