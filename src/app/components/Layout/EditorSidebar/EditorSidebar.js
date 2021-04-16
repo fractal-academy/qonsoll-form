@@ -10,6 +10,8 @@ import {
 import { styles } from './EditorSidebar.styles'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
+import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
+import { Popover } from 'components'
 // import { useTranslation } from 'react-i18next'
 const { Title } = Typography
 
@@ -75,7 +77,13 @@ function EditorSidebar(props) {
             </Title>
           </Col>
           <Col cw="auto" px={10} py={1} mr={2} borderRadius="4px" bg="#e8f0fb">
-            <PlusOutlined style={styles.plusIconColor} />
+            <Popover
+              trigger={'click'}
+              placement={'bottomRight'}
+              btnType="ghost"
+              btnIcon={<PlusOutlined />}
+              content={<QuestionTypeSelect />}
+            />
           </Col>
           <Col cw="auto" px={1} borderRadius="4px" v="center">
             <SettingOutlined />

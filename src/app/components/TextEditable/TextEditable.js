@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Input, Typography } from 'antd'
+import { styles } from './TextEditable.styles'
+import { styles1 } from './TextEditable.styles'
 import PropTypes from 'prop-types'
 
 const { TextArea } = Input
@@ -41,9 +43,8 @@ function TextEditable(props) {
   return (
     <TextArea
       style={{
-        color: textSecondary ? 'gray' : 'black',
-        fontSize: isTitle ? '20px' : '16px',
-        fontWeight: isTitle ? 'bold' : 'normal'
+        ...(isTitle ? styles.title : styles.default),
+        ...(textSecondary ? styles.grayColor : styles.blackColor)
       }}
       bordered={false}
       onChange={setTextValue}
@@ -57,6 +58,7 @@ function TextEditable(props) {
 TextEditable.propTypes = {
   onChange: PropTypes.func.isRequired,
   textSecondary: PropTypes.bool,
+  isTitle: PropTypes.bool,
   placeholder: PropTypes.string.isRequired
 }
 
