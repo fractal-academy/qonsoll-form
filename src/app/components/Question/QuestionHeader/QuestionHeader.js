@@ -42,7 +42,7 @@ function QuestionHeader(props) {
 
   return (
     <>
-      <Row>
+      <Row noGutters>
         <Col>
           <QuestionTitle
             onChange={onChangeTitle}
@@ -50,7 +50,7 @@ function QuestionHeader(props) {
           />
         </Col>
       </Row>
-      <Row>
+      <Row noGutters>
         <Col>
           <QuestionSubtitle
             onChange={onChangeSubtitle}

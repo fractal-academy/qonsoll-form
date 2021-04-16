@@ -49,28 +49,37 @@ function TextAreaForm(props) {
   return (
     <>
       <Container>
-        <Row>
+        <Row noGutters>
           <Col>
             <Form
               form={form}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}>
               <Form.Item
+                style={{ marginBottom: '0px' }}
                 name="answer"
                 rules={[
                   {
                     required: true
                   }
                 ]}>
-                <TextArea noBorder={noBorder} {...textAreaProps} />
+                <TextArea {...textAreaProps} />
               </Form.Item>
-              <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
+              <Form.Item>
+                <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
+              </Form.Item>
               <Button
+                size={'large'}
+                style={{
+                  borderRadius: '4px',
+                  marginRight: '4px',
+                  fontWeight: 'bold'
+                }}
                 key="submit"
                 onClick={() => form.submit()}
                 {...btnProps}
               />
-              <Text>press Enter ↵</Text>
+              <Text>Press enter ↵</Text>
             </Form>
           </Col>
         </Row>

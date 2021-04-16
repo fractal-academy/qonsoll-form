@@ -1,0 +1,2 @@
+import PlaneShortTextStringTemplate from './PlaneShortTextStringTemplate'
+export default PlaneShortTextStringTemplate

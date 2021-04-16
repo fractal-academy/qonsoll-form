@@ -39,7 +39,7 @@ const Input = (props) => {
     }
   }, [])
   //[TEMPLATE]
-  return <Row ml={20}>{phone ? <PhoneInput /> : <AntInput {...props} />}</Row>
+  return <Row>{phone ? <PhoneInput /> : <AntInput {...props} />}</Row>
 }
 
 //Accepts all parameters that the Ant Design same component have
