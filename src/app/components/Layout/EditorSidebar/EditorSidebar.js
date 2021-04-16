@@ -12,6 +12,8 @@ import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Popover } from 'components'
+import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
+import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
 // import { useTranslation } from 'react-i18next'
 const { Title } = Typography
 
@@ -86,7 +88,10 @@ function EditorSidebar(props) {
             />
           </Col>
           <Col cw="auto" px={1} borderRadius="4px" v="center">
-            <SettingOutlined />
+            <ModalWithFormConditionsForm
+              btnProps={{ icon: <SettingOutlined /> }}>
+              <FormConditionsForm />
+            </ModalWithFormConditionsForm>
           </Col>
         </Row>
       </Box>

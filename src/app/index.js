@@ -9,13 +9,10 @@ import {
 } from 'components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
 import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
+import { FormEdit } from 'domains/Form/routes'
 
 const App = (props) => {
-  return (
-    <ModalWithFormConditionsForm>
-      <FormConditionsForm />
-    </ModalWithFormConditionsForm>
-  )
+  return <FormEdit />
 }
 
 export default App

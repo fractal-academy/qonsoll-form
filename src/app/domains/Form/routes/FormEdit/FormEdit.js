@@ -6,6 +6,7 @@ import {
   FormContentArea
 } from 'components'
 import { Col, Container, Row, Box } from '@qonsoll/react-design'
+import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
@@ -54,6 +55,7 @@ function FormEdit(props) {
       <PageLayout>
         <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
           {/* Here should be QuestionForm  */}
+          <MediaLibraryModal btnProps={{ children: 'Press' }} />
         </FormContentArea>
       </PageLayout>
 
