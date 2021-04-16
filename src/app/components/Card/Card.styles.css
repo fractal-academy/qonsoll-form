@@ -9,7 +9,7 @@
 }
 
 .contentBox {
-  position: absolute;
+  position: inherit;
   z-index: 500;
   left: 4px;
   padding: 16px;

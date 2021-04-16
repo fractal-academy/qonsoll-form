@@ -4,6 +4,8 @@ import { Row, Col, Container } from '@qonsoll/react-design'
 import { Input } from 'components'
 // import { withTheme } from 'styled-components'
 import PropTypes from 'prop-types'
+import { styles } from './InputForm.styles'
+import { globalStyles } from 'app/styles'
 
 const { Text, Title } = Typography
 // import { useTranslation } from 'react-i18next'
@@ -53,20 +55,29 @@ function InputForm(props) {
   return (
     <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
       <Container>
-        <Row>
+        <Row noGutters>
           <Col>
             <Form.Item
-              style={{ marginBottom: 0 }}
+              style={globalStyles.resetMarginB}
               name="input"
               rules={[{ required: isRequired }]}>
-              <Input {...inputProps} style={{ borderRadius: '5px' }} />
+              <Input
+                {...inputProps}
+                placeholder="Type your answer here..."
+                style={styles.inputStyle}
+              />
             </Form.Item>
           </Col>
         </Row>
         {/* //TODO:REPLACE ON CUSTOM SUBMIT BUTTON */}
         <Row mt={24}>
           <Col cw="auto">
-            <Button onClick={() => form.submit()} {...btnProps} />
+            <Button
+              size={'large'}
+              style={styles.buttonStyles}
+              onClick={() => form.submit()}
+              {...btnProps}
+            />
           </Col>
           <Col cw="auto" v="center" ml={10}>
             <Text>Press enter ↵</Text>
