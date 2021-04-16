@@ -10,7 +10,7 @@ import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
 import { QuestionForm } from 'domains/Question/components'
 
 const App = (props) => {
-  return <QuestionForm />
+  return <FormConditionsForm />
 }
 
 export default App

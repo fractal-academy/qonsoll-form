@@ -13,7 +13,7 @@ function PlaneTextDateTemplate(props) {
   const { answers, id, addCondition, questionList, addRedirectQuestion } = props
   // [CLEAN FUNCTIONS]
   const onClick = () => {
-    addCondition('')
+    addCondition({ name: '', redirectQuestion: null })
   }
   return (
     <>

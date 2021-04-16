@@ -18,22 +18,20 @@ const ConditionRuleSelect = (props) => {
   }
 
   return (
-    <>
-      <Row h="center" noGutters>
-        <Col>
-          <Select
-            style={{ width: '200px' }}
-            onChange={onChange}
-            defaultValue={Object.values(menu)}>
-            {Object.values(menu).map((item, index) => (
-              <Option key={index} value={item} onClick={() => {}}>
-                {item}
-              </Option>
-            ))}
-          </Select>
-        </Col>
-      </Row>
-    </>
+    <Row h="center" noGutters>
+      <Col>
+        <Select
+          style={{ width: '200px' }}
+          onChange={onChange}
+          defaultValue={Object.values(menu)}>
+          {Object.values(menu).map((item, index) => (
+            <Option key={index} value={item} onClick={() => {}}>
+              {item}
+            </Option>
+          ))}
+        </Select>
+      </Col>
+    </Row>
   )
 }
 

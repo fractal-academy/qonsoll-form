@@ -42,13 +42,9 @@ function TextEditable(props) {
   //TODO: Replace inline colors to theme vars
   return (
     <TextArea
-      // style={textSecondary ? styles.grayColor : styles.blackColor}
-      // style={isTitle ? styles.title : styles.default}
       style={{
-        paddingLeft: 0,
-        color: textSecondary ? 'gray' : 'black',
-        fontSize: isTitle ? '20px' : '16px',
-        fontWeight: isTitle ? 'bold' : 'normal'
+        ...(isTitle ? styles.title : styles.default),
+        ...(textSecondary ? styles.grayColor : styles.blackColor)
       }}
       bordered={false}
       onChange={setTextValue}

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Col, Row } from '@qonsoll/react-design'
-import { Menu, Select } from 'antd'
+import { Menu } from 'antd'
 import { QUESTION_TYPE } from 'app/constants/quetstionType'
 import {
   CarOutlined,
