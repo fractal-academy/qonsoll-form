@@ -23,3 +23,5 @@ export { default as Card } from './Card'
 export { default as PageLayout } from './Layout/PageLayout'
 
 export { default as MiddleContainer } from './Layout/MiddleContainer'
+
+export { default as Carousel } from './/Carousel'
