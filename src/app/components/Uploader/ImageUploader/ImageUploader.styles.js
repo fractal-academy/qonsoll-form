@@ -4,8 +4,8 @@ export const styles = {
     height: '100px',
     borderRadius: '5px',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#0445AF1A'
   },
-  textColor: { color: 'white' },
   iconPadding: { paddingRight: '5px' }
 }

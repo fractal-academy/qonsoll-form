@@ -15,11 +15,10 @@ const ImageLabel = (props) => {
     align-items: center;
     color: white;
     //change on prime color in theme
-    background-color: #282c34;
+    background-color: #1b44d8;
     //change on prime color in theme
     &:hover {
-      color: gray;
-      background-color: #282c34;
+      background-color: #1b44d899;
     }
   `
   return <LabelWrapper>{children}</LabelWrapper>
