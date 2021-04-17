@@ -14,13 +14,13 @@ function YesnoButton(props) {
   const [buttonKey, setButtonKey] = useState()
 
   // [COMPUTED PROPERTIES]
-  const mappedChoises = [
+  const mappedChoices = [
     { letter: 'Y', name: 'Yes' },
     { letter: 'N', name: 'No' }
   ]
 
   const letters = []
-  mappedChoises.map((item) => letters.push(item.letter))
+  mappedChoices.map((item) => letters.push(item.letter))
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (letter) => {
@@ -64,7 +64,7 @@ function YesnoButton(props) {
 
   return (
     <Box display="block">
-      {mappedChoises.map((item, index) => (
+      {mappedChoices.map((item, index) => (
         <Box key={index} mb={2}>
           <KeyBox
             isActive={buttonKey === item.letter}

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Input as AntInput } from 'antd'
 import { PhoneInput } from 'antd-styled'
-import { Row } from '@qonsoll/react-design'
-
+import { Row, Col } from '@qonsoll/react-design'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -39,7 +38,15 @@ const Input = (props) => {
     }
   }, [])
   //[TEMPLATE]
-  return <Row>{phone ? <PhoneInput /> : <AntInput {...props} />}</Row>
+  return (
+    <>
+      {phone ? (
+        <PhoneInput country={'no'} {...props} />
+      ) : (
+        <AntInput {...props} />
+      )}
+    </>
+  )
 }
 
 //Accepts all parameters that the Ant Design same component have
