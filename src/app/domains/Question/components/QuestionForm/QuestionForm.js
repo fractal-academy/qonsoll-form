@@ -7,7 +7,11 @@ import {
   Popover,
   QuestionHeader,
   Rate,
-  TextAreaForm
+  TextAreaForm,
+  YesnoButton,
+  RangeButton,
+  ChoiceForm,
+  Button
 } from 'components'
 import { SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
@@ -20,13 +24,13 @@ import PropTypes from 'prop-types'
 
 const questionTypesMap = {
   [QUESTION_TYPES.YES_NO]: {
-    component: <>YES/NO btns</>
+    component: <YesnoButton />
   },
   [QUESTION_TYPES.PICTURE_CHOICE]: {
-    component: <>List of ImageUploaders</>
+    component: <ChoiceForm />
   },
   [QUESTION_TYPES.OPINION_SCALE]: {
-    component: <>Option Scale</>
+    component: <RangeButton />
   },
   [QUESTION_TYPES.RATING]: {
     component: <Rate />
@@ -44,7 +48,7 @@ const questionTypesMap = {
     component: <FileUploader />
   },
   [QUESTION_TYPES.STATEMENT]: {
-    component: <>Continue Btn</>
+    component: <Button />
   }
 }
 
