@@ -10,7 +10,7 @@ import {
   RangeButton,
   Button,
   ChoiceButton
-} from 'components'
+} from 'app/components'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { styles } from './QuestionAdvancedView.styles'
@@ -20,35 +20,11 @@ import PropTypes from 'prop-types'
 
 const { Title, Text } = Typography
 
-const questionTypesMap = {
-  [QUESTION_TYPES.YES_NO]: {
-    component: <YesnoButton />
-  },
-  [QUESTION_TYPES.PICTURE_CHOICE]: {
-    component: <ChoiceButton />
-  },
-  [QUESTION_TYPES.OPINION_SCALE]: {
-    component: <RangeButton />
-  },
-  [QUESTION_TYPES.RATING]: {
-    component: <Rate />
-  },
-  [QUESTION_TYPES.SHORT_TEXT]: {
-    component: <InputForm />
-  },
-  [QUESTION_TYPES.LONG_TEXT]: {
-    component: <TextAreaForm />
-  },
-  [QUESTION_TYPES.DATE]: {
-    component: <DateTimeInput />
-  },
-  [QUESTION_TYPES.FILE_UPLOAD]: {
-    component: <FileUploader />
-  },
-  [QUESTION_TYPES.STATEMENT]: {
-    component: <Button />
-  }
-}
+const choices = [
+  { name: 'choice 1', image: '' },
+  { name: 'choice 1', image: '' },
+  { name: 'choice 1', image: '' }
+]
 
 const layoutSides = [
   LAYOUT_TYPES.LEFT_SIDE_BIG,
@@ -70,6 +46,35 @@ function QuestionAdvancedView(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
+  const questionTypesMap = {
+    [QUESTION_TYPES.YES_NO]: {
+      component: <YesnoButton />
+    },
+    [QUESTION_TYPES.PICTURE_CHOICE]: {
+      component: <ChoiceButton choices={choices} />
+    },
+    [QUESTION_TYPES.OPINION_SCALE]: {
+      component: <RangeButton from={1} to={5} />
+    },
+    [QUESTION_TYPES.RATING]: {
+      component: <Rate />
+    },
+    [QUESTION_TYPES.SHORT_TEXT]: {
+      component: <InputForm />
+    },
+    [QUESTION_TYPES.LONG_TEXT]: {
+      component: <TextAreaForm />
+    },
+    [QUESTION_TYPES.DATE]: {
+      component: <DateTimeInput />
+    },
+    [QUESTION_TYPES.FILE_UPLOAD]: {
+      component: <FileUploader />
+    },
+    [QUESTION_TYPES.STATEMENT]: {
+      component: <Button buttonType="primary" />
+    }
+  }
   const bgImage = {
     ...(question?.layoutType === LAYOUT_TYPES.FULL_SCREEN
       ? {

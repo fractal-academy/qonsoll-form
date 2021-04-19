@@ -88,8 +88,6 @@ function YesnoButton(props) {
   )
 }
 
-YesnoButton.propTypes = {
-  conditions: PropTypes.array
-}
+YesnoButton.propTypes = {}
 
 export default YesnoButton
