@@ -5,10 +5,10 @@ import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
-import { MiddleContainer } from '~/app/components'
 import { FormAdvancedView } from 'domains/Form/components'
 import { QuestionAdvancedView } from 'domains/Question/components'
 import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
+import { styles } from './FormShow.style'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
@@ -59,7 +59,7 @@ function FormShow(props) {
           />
         </Col>
 
-        <Col style={{ textAlign: 'center' }}>
+        <Col style={styles.textAlign}>
           <Title level={5} style={globalStyles.resetMargin}>
             Live Preview
           </Title>
