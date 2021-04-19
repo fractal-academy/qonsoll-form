@@ -5,7 +5,6 @@ import { Button } from 'app/components'
 import React, { useEffect } from 'react'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
-// import { useTranslation } from 'react-i18next'
 
 function KeyBox(props) {
   const { onButtonClick, item, isActive } = props
@@ -13,8 +12,6 @@ function KeyBox(props) {
 
   // [ADDITIONAL HOOKS]
   const [isHovering, hoverRef] = useHover()
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
 
   // [COMPUTED PROPERTIES]
   const classes = isActive
@@ -46,13 +43,23 @@ function KeyBox(props) {
   return (
     <Box ref={hoverRef}>
       <Button buttonType="secondary" onClick={() => onButtonClick(letter)}>
+        {item?.choice?.image && (
+          <Row>
+            <Col>
+              <img
+                alt=""
+                className="imageContainer"
+                src={item?.choice?.image || './public/default.png'}></img>
+            </Col>
+          </Row>
+        )}
         <Row display="flex" v="center" noGutters>
           <Col className={classes} mr={2}>
             {isHovering ? `Key ${letter}` : letter}
           </Col>
           <Col>
             <Box className="text" display="flex" justifyContent="space-between">
-              {item?.name}
+              {item?.choice?.name}
               {isActive && <CheckOutlined className="icon" />}
             </Box>
           </Col>

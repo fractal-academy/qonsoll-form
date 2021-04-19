@@ -17,7 +17,7 @@ function ChoiceButton(props) {
     () =>
       choices.map((el, index) => ({
         letter: String.fromCharCode(startLetter + index),
-        name: el
+        choice: el
       })),
     [choices]
   )

@@ -1,0 +1,13 @@
+.buttonGroup {
+  margin-left: -2px;
+  border-color: #1d6fdc !important;
+  background-color: #1d6fdc !important;
+}
+.buttonGroup:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.buttonGroup:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
