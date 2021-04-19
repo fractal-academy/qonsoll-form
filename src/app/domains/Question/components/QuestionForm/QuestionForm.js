@@ -182,9 +182,19 @@ function QuestionForm(props) {
             order={imageOrder}>
             <Box
               {...question?.layoutType}
-              backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}>
+              backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
+              position="relative"
+              zIndex="1">
               <MediaLibraryModal
-                btnProps={{ type: 'primary', icon: <SettingOutlined /> }}
+                btnProps={{
+                  type: 'primary',
+                  icon: <SettingOutlined />,
+                  style: {
+                    position: 'absolute',
+                    top: '12px',
+                    right: '15px'
+                  }
+                }}
               />
             </Box>
           </Col>
