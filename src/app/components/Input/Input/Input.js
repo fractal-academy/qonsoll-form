@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Input as AntInput } from 'antd'
 import { PhoneInput } from 'antd-styled'
 import { Row, Col } from '@qonsoll/react-design'
+import 'react-phone-input-2/lib/style.css'
+
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
