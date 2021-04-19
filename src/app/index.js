@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css'
-import { ChoiceButton } from 'app/components'
+import { ChoiceButton, YesnoButton } from 'app/components'
 import { Box } from '@qonsoll/react-design'
 import FormAdvancedView from 'app/domains/Form/components/FormAdvancedView'
 
@@ -25,18 +25,32 @@ const InnerComponent4 = () => {
 }
 
 const App = (props) => {
-  const choices1 = ['choice1', 'choice1', 'choice1', 'choice1']
+  const choices = [
+    {
+      name: 'choice1'
+    },
+    {
+      name: 'choice2'
+    },
+    {
+      name: 'choice3'
+    },
+    {
+      name: 'choice4'
+    }
+  ]
 
   return (
-    <>
-      <ChoiceButton choices={choices1} />
+    <Box m={4}>
+      <YesnoButton />
+      <ChoiceButton choices={choices} />
       <FormAdvancedView>
         <InnerComponent1 />
         <InnerComponent2 />
         <InnerComponent3 />
         <InnerComponent4 />
       </FormAdvancedView>
-    </>
+    </Box>
   )
 }
 

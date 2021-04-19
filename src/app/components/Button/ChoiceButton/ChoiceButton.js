@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { KeyBox } from 'app/components'
 import { useMemo, useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Box } from '@qonsoll/react-design'
 
 let startLetter = 65
 
@@ -17,12 +17,10 @@ function ChoiceButton(props) {
     () =>
       choices.map((el, index) => ({
         letter: String.fromCharCode(startLetter + index),
-        name: el
+        choice: el
       })),
     [choices]
   )
-
-  console.log(mappedChoises)
 
   const letters = useMemo(
     () => (mappedChoises ? mappedChoises.map(({ letter }) => letter) : []),

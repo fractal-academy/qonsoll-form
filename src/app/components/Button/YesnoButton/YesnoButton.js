@@ -15,8 +15,18 @@ function YesnoButton(props) {
 
   // [COMPUTED PROPERTIES]
   const mappedChoises = [
-    { letter: 'Y', name: 'Yes' },
-    { letter: 'N', name: 'No' }
+    {
+      letter: 'Y',
+      choice: {
+        name: 'Yes'
+      }
+    },
+    {
+      letter: 'N',
+      choice: {
+        name: 'No'
+      }
+    }
   ]
 
   const letters = []

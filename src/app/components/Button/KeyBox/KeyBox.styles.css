@@ -49,3 +49,8 @@
 .icon {
   font-size: 18px;
 }
+
+.imageContainer {
+  height: 120px !important;
+  width: 150px !important;
+}
