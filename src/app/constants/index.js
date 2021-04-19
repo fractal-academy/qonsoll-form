@@ -4,6 +4,8 @@ import QUESTION_TYPES from './quetstionType'
 import ANSWER_TYPES from './answerType'
 import DATE_CONDITION_RULES from './dateConditionRules'
 import TEXT_CONDITION_RULES from './planeTextStringConditionRules'
+import ROUTES, { ROUTES_KEYS, ROUTES_VALUES } from './routes'
+import ROUTES_PATHS from './routesPaths'
 
 export {
   FIREBASE_CONFIG,
@@ -11,5 +13,9 @@ export {
   QUESTION_TYPES,
   ANSWER_TYPES,
   DATE_CONDITION_RULES,
-  TEXT_CONDITION_RULES
+  TEXT_CONDITION_RULES,
+  ROUTES,
+  ROUTES_KEYS,
+  ROUTES_VALUES,
+  ROUTES_PATHS
 }

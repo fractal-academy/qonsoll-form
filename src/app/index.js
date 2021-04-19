@@ -1,20 +1,15 @@
-import { Col, Container, Row, Box } from '@qonsoll/react-design'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import { ROUTES_PATHS, ROUTES_VALUES } from 'app/constants'
 import 'antd/dist/antd.css'
-import {
-  PageLayout,
-  EditorSidebar,
-  QuestionLayoutSwitcher,
-  FormContentArea,
-  TextAreaForm
-} from 'components'
-import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
-import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
 
 const App = (props) => {
   return (
-    <ModalWithFormConditionsForm>
-      <FormConditionsForm />
-    </ModalWithFormConditionsForm>
+    <Switch>
+      {ROUTES_VALUES.map((route) => (
+        <Route exact key={route.path} {...route} />
+      ))}
+      <Route render={() => <Redirect to={ROUTES_PATHS.FORMS_ALL} />} />
+    </Switch>
   )
 }
 
