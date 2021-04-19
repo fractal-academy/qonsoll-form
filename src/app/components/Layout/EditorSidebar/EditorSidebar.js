@@ -14,6 +14,7 @@ import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSele
 import { Popover } from 'components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
 import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
+import QuestionsList from 'domains/Question/components/QuestionsList'
 // import { useTranslation } from 'react-i18next'
 const { Title } = Typography
 
@@ -69,7 +70,7 @@ function EditorSidebar(props) {
       {open && (
         <Box
           bg="white"
-          width="220px"
+          width="300px"
           display="flex"
           flexDirection="column"
           position="relative">
@@ -97,8 +98,9 @@ function EditorSidebar(props) {
               </Col>
             </Row>
           </Box>
+          {/* Question List*/}
           <Box overflow="auto" p={3}>
-            {questionsList}
+            <QuestionsList />
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
             <Row>
@@ -126,9 +128,9 @@ function EditorSidebar(props) {
                 <PlusOutlined style={styles.plusIconColor} />
               </Col>
             </Row>
-            <Row pb={3} px={3}>
-              <Col overflow="auto">{questionsEndingsList}</Col>
-            </Row>
+            <Box pb={3} px={3} maxHeight="350px" overflow="auto">
+              <QuestionsList />
+            </Box>
           </Box>
         </Box>
       )}

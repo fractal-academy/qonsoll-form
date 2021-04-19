@@ -7,6 +7,5 @@ export const styles = {
     padding: '5px 5px 0 0'
   },
   endingsPosition: { marginTop: 'auto' },
-  plusIconColor: { color: '#1d6fdc' },
-  hoverBg: {}
+  plusIconColor: { color: '#1d6fdc' }
 }

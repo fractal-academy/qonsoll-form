@@ -7,6 +7,8 @@ import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
 import { MiddleContainer } from '~/app/components'
 import { FormAdvancedView } from 'domains/Form/components'
+import { QuestionAdvancedView } from '~/app/domains/Question/components'
+import { QUESTION_TYPES } from '~/app/constants'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
@@ -87,7 +89,11 @@ function FormShow(props) {
         borderRadius="8px"
         bg="white"
         overflow="auto">
-        <FormAdvancedView />
+        <FormAdvancedView>
+          <QuestionAdvancedView
+            question={{ questionType: QUESTION_TYPES.RATING }}
+          />
+        </FormAdvancedView>
       </Box>
     </Box>
   )
