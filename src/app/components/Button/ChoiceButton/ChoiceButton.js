@@ -13,7 +13,7 @@ function ChoiceButton(props) {
   const [buttonKey, setButtonKey] = useState()
 
   // [ADDITIONAL HOOKS]
-  const mappedChoises = useMemo(
+  const mappedChoices = useMemo(
     () =>
       choices.map((el, index) => ({
         letter: String.fromCharCode(startLetter + index),
@@ -23,8 +23,8 @@ function ChoiceButton(props) {
   )
 
   const letters = useMemo(
-    () => (mappedChoises ? mappedChoises.map(({ letter }) => letter) : []),
-    [mappedChoises]
+    () => (mappedChoices ? mappedChoices.map(({ letter }) => letter) : []),
+    [mappedChoices]
   )
 
   // [CLEAN FUNCTIONS]
@@ -51,7 +51,7 @@ function ChoiceButton(props) {
 
   return (
     <Box display="block">
-      {mappedChoises.map((item, index) => (
+      {mappedChoices.map((item, index) => (
         <Box key={index} mb={2}>
           <KeyBox
             isActive={buttonKey === item.letter}

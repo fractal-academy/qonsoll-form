@@ -78,7 +78,7 @@ function ModalWithFormConditionsForm(props) {
                 </Button>
               </Col>
             </Row>
-            <Row pb={25}>
+            <Row>
               <Col>
                 <Text>Here should be description</Text>
               </Col>

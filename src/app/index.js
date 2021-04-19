@@ -1,3 +1,5 @@
+import { Redirect, Route, Switch } from 'react-router-dom'
+import { ROUTES_PATHS, ROUTES_VALUES } from 'app/constants'
 import 'antd/dist/antd.css'
 import { ChoiceButton, YesnoButton } from 'app/components'
 import { Box } from '@qonsoll/react-design'
@@ -25,32 +27,13 @@ const InnerComponent4 = () => {
 }
 
 const App = (props) => {
-  const choices = [
-    {
-      name: 'choice1'
-    },
-    {
-      name: 'choice2'
-    },
-    {
-      name: 'choice3'
-    },
-    {
-      name: 'choice4'
-    }
-  ]
-
   return (
-    <Box m={4}>
-      <YesnoButton />
-      <ChoiceButton choices={choices} />
-      <FormAdvancedView>
-        <InnerComponent1 />
-        <InnerComponent2 />
-        <InnerComponent3 />
-        <InnerComponent4 />
-      </FormAdvancedView>
-    </Box>
+    <Switch>
+      {ROUTES_VALUES.map((route) => (
+        <Route exact key={route.path} {...route} />
+      ))}
+      <Route render={() => <Redirect to={ROUTES_PATHS.FORMS_ALL} />} />
+    </Switch>
   )
 }
 
