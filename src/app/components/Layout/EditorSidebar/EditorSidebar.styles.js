@@ -4,8 +4,7 @@ export const styles = {
     cursor: 'pointer'
   },
   siderStateSwithcerIcon: {
-    padding: '5px 5px 0 0',
-    fontSize: '20px'
+    padding: '5px 5px 0 0'
   },
   endingsPosition: { marginTop: 'auto' },
   plusIconColor: { color: '#1d6fdc' }
