@@ -6,6 +6,7 @@ import { useHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { styles } from './PageHeader.styles'
 import { globalStyles } from 'app/styles'
+import { ROUTES_PATHS } from '~/app/constants'
 
 // import { useTranslation } from 'react-i18next'
 const { Title } = Typography
@@ -24,7 +25,9 @@ function PageHeader(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
+  const onFormShow = () => {
+    history.push(ROUTES_PATHS.FORM_SHOW)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -64,9 +67,12 @@ function PageHeader(props) {
           </Title>
         </Col>
         <Col cw="auto" v="center">
-          <Tooltip placement="left" title={'Preview'}>
-            <EyeOutlined style={globalStyles.iconSize} />
-          </Tooltip>
+          <Button
+            type="text"
+            shape="circle"
+            icon={<EyeOutlined style={globalStyles.iconSize} />}
+            onClick={onFormShow}
+          />
         </Col>
       </Row>
     </Container>

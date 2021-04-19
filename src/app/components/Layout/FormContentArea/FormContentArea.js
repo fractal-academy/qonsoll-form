@@ -4,6 +4,8 @@ import { Button } from 'antd'
 import './FormContentArea.styles.css'
 import PropTypes from 'prop-types'
 import MiddleContainer from '../MiddleContainer'
+import { ROUTES_PATHS } from '~/app/constants'
+import { useHistory } from 'react-router'
 // import { useTranslation } from 'react-i18next'
 
 function FormContentArea(props) {
@@ -13,15 +15,19 @@ function FormContentArea(props) {
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-
+  const history = useHistory()
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const onCancel = () => {}
-  const onCreateForm = () => {}
+  const onCancel = () => {
+    history.push(ROUTES_PATHS.FORMS_ALL)
+  }
+  const onCreateForm = () => {
+    history.push(ROUTES_PATHS.FORMS_ALL)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true

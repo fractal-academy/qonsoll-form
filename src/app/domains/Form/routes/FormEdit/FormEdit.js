@@ -6,6 +6,8 @@ import {
   FormContentArea
 } from 'components'
 import { Col, Container, Row, Box } from '@qonsoll/react-design'
+import { QuestionForm } from '~/app/domains/Question/components'
+import { QUESTION_TYPES } from '~/app/constants'
 
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
@@ -53,7 +55,7 @@ function FormEdit(props) {
     <Box bg="#f6f9fe" display="flex" height="inherit">
       <PageLayout>
         <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
-          {/* Here should be QuestionForm  */}
+          <QuestionForm question={{ questionType: QUESTION_TYPES.RATING }} />
         </FormContentArea>
       </PageLayout>
 

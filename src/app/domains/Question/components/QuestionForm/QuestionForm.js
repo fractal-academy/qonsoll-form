@@ -73,13 +73,13 @@ function QuestionForm(props) {
   // [COMPUTED PROPERTIES]
   const cardStyles = {
     ...styles.cardStyle,
-    ...(question.layoutType === LAYOUT_TYPES.FULL_SCREEN
+    ...(question?.layoutType === LAYOUT_TYPES.FULL_SCREEN
       ? {
           backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
         }
       : {})
   }
-  const imageOrder = rightSide.includes(question.layoutType) ? 3 : 1
+  const imageOrder = rightSide.includes(question?.layoutType) ? 3 : 1
   // [CLEAN FUNCTIONS]
 
   // [USE_EFFECTS]
@@ -128,11 +128,11 @@ function QuestionForm(props) {
                 />
               </Col>
             </Row>
-            {question.layoutType === LAYOUT_TYPES.BETWEEN && (
+            {question?.layoutType === LAYOUT_TYPES.BETWEEN && (
               <Row>
                 <Col cw="auto">
                   <Box
-                    {...question.layoutType}
+                    {...question?.layoutType}
                     backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
                   />
                 </Col>
@@ -141,14 +141,14 @@ function QuestionForm(props) {
             <Row noGutters>
               <Col>
                 {cloneElement(
-                  questionTypesMap[question.questionType].component,
+                  questionTypesMap[question?.questionType].component,
                   question
                 )}
               </Col>
             </Row>
           </Card>
         </Col>
-        {layoutSides.includes(question.layoutType) && (
+        {layoutSides.includes(question?.layoutType) && (
           <Col
             v="center"
             display="flex"
@@ -156,7 +156,7 @@ function QuestionForm(props) {
             height="100%"
             order={imageOrder}>
             <Box
-              {...question.layoutType}
+              {...question?.layoutType}
               backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
             />
           </Col>

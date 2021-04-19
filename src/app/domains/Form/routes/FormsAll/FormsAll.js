@@ -156,6 +156,7 @@ function FormsAll(props) {
               key={item}
               title="form title"
               subtitle="form subtitle"
+              form
             />
           </Box>
         ))}
