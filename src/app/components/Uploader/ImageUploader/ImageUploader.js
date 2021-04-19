@@ -57,7 +57,7 @@ const ImageUploader = (props) => {
                           style={styles.iconPadding}
                           className="animate__animated  animate__zoomIn"
                         />
-                        <Text style={styles.textColor}>Change</Text>
+                        Change
                       </>
                     ) : (
                       <>
@@ -65,7 +65,7 @@ const ImageUploader = (props) => {
                           style={styles.iconPadding}
                           className="animate__animated  animate__zoomIn"
                         />
-                        <Text style={styles.textColor}>Add</Text>
+                        Add
                       </>
                     ))}
                   {/*Need to add storageRef  for example storageRef={storage.ref('images')}*/}
