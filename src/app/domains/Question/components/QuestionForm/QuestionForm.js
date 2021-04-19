@@ -22,36 +22,6 @@ import PropTypes from 'prop-types'
 
 // import { useTranslation } from 'react-i18next'
 
-const questionTypesMap = {
-  [QUESTION_TYPES.YES_NO]: {
-    component: <YesnoButton />
-  },
-  [QUESTION_TYPES.PICTURE_CHOICE]: {
-    component: <ChoiceForm />
-  },
-  [QUESTION_TYPES.OPINION_SCALE]: {
-    component: <RangeButton />
-  },
-  [QUESTION_TYPES.RATING]: {
-    component: <Rate />
-  },
-  [QUESTION_TYPES.SHORT_TEXT]: {
-    component: <InputForm />
-  },
-  [QUESTION_TYPES.LONG_TEXT]: {
-    component: <TextAreaForm />
-  },
-  [QUESTION_TYPES.DATE]: {
-    component: <DateTimeInput />
-  },
-  [QUESTION_TYPES.FILE_UPLOAD]: {
-    component: <FileUploader />
-  },
-  [QUESTION_TYPES.STATEMENT]: {
-    component: <Button />
-  }
-}
-
 const layoutSides = [
   LAYOUT_TYPES.LEFT_SIDE_BIG,
   LAYOUT_TYPES.LEFT_SIDE_SMALL,
@@ -71,6 +41,36 @@ function QuestionForm(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
+  const questionTypesMap = {
+    [QUESTION_TYPES.YES_NO]: {
+      component: <YesnoButton />
+    },
+    [QUESTION_TYPES.PICTURE_CHOICE]: {
+      component: <ChoiceForm />
+    },
+    [QUESTION_TYPES.OPINION_SCALE]: {
+      component: <RangeButton />
+    },
+    [QUESTION_TYPES.RATING]: {
+      component: <Rate />
+    },
+    [QUESTION_TYPES.SHORT_TEXT]: {
+      component: <InputForm />
+    },
+    [QUESTION_TYPES.LONG_TEXT]: {
+      component: <TextAreaForm />
+    },
+    [QUESTION_TYPES.DATE]: {
+      component: <DateTimeInput />
+    },
+    [QUESTION_TYPES.FILE_UPLOAD]: {
+      component: <FileUploader />
+    },
+    [QUESTION_TYPES.STATEMENT]: {
+      component: <Button />
+    }
+  }
+
   const cardStyles = {
     ...styles.cardStyle,
     ...(question.layoutType === LAYOUT_TYPES.FULL_SCREEN

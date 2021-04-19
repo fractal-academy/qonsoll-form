@@ -7,6 +7,8 @@ import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
 import { MiddleContainer } from '~/app/components'
 import { FormAdvancedView } from 'domains/Form/components'
+import { QuestionAdvancedView } from 'domains/Question/components'
+import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
@@ -85,9 +87,63 @@ function FormShow(props) {
         p={4}
         m={4}
         borderRadius="8px"
-        bg="white"
-        overflow="auto">
-        <FormAdvancedView />
+        bg="white">
+        <FormAdvancedView>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.LONG_TEXT,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.LONG_TEXT,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_SMALL,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.LONG_TEXT,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.DATE,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.RATING,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG
+                // btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.FILE_UPLOAD,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+        </FormAdvancedView>
       </Box>
     </Box>
   )

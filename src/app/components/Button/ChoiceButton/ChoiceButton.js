@@ -66,7 +66,6 @@ function ChoiceButton(props) {
 }
 
 ChoiceButton.propTypes = {
-  conditions: PropTypes.array,
   choices: PropTypes.array
 }
 
