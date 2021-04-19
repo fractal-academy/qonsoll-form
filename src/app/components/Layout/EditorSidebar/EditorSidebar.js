@@ -80,24 +80,18 @@ function EditorSidebar(props) {
                   Questions
                 </Title>
               </Col>
-              <Col
-                cw="auto"
-                px={10}
-                py={1}
-                mr={2}
-                borderRadius="4px"
-                bg="#e8f0fb">
+              <Col cw="auto" px={10} py={1} mr={2} borderRadius="4px">
                 <Popover
                   trigger={'click'}
                   placement={'bottomRight'}
-                  btnType="ghost"
-                  btnIcon={<PlusOutlined />}
+                  btnType="text"
+                  btnIcon={<PlusOutlined style={styles.hover} />}
                   content={<QuestionTypeSelect />}
                 />
               </Col>
               <Col cw="auto" px={1} borderRadius="4px" v="center">
                 <ModalWithFormConditionsForm
-                  btnProps={{ icon: <SettingOutlined /> }}>
+                  btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
                   <FormConditionsForm />
                 </ModalWithFormConditionsForm>
               </Col>
