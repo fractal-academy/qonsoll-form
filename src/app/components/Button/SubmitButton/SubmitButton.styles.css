@@ -1,0 +1,11 @@
+.submit {
+  width: 93px !important;
+  height: 56px !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  border-radius: 8px !important;
+  background-color: #1d6fdc !important;
+}
+.submit:hover {
+  background-color: #3682e6 !important;
+}

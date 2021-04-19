@@ -2,8 +2,8 @@ import { Popover } from 'components'
 import { Button, Menu, Select } from 'antd'
 import { Col, Row } from '@qonsoll/react-design'
 import React from 'react'
-import { TEXT_CONDITION_RULES_VALUE } from 'app/constants/planeTextStringConditionRules'
-import { DATE_CONDITION_RULES_VALUE } from 'app/constants/dateConditionRules'
+import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
+import { DATE_CONDITION_RULES_VALUES } from 'app/constants/dateConditionRules'
 
 const Option = Select
 
@@ -13,8 +13,8 @@ const ConditionRuleSelect = (props) => {
   {
     // conditionType expect for conditionType="date"  if need to display conditionType date //
     conditionType == 'date'
-      ? (menu = DATE_CONDITION_RULES_VALUE)
-      : (menu = TEXT_CONDITION_RULES_VALUE)
+      ? (menu = DATE_CONDITION_RULES_VALUES)
+      : (menu = TEXT_CONDITION_RULES_VALUES)
   }
 
   return (

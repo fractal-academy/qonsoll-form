@@ -2,7 +2,7 @@ import { Box, Col, Row } from '@qonsoll/react-design'
 import { Button, DatePicker, Input, Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import React from 'react'
-import { DATE_CONDITION_RULES_VALUE } from 'app/constants/dateConditionRules'
+import { DATE_CONDITION_RULES_VALUES } from 'app/constants/dateConditionRules'
 import { QuestionSelect } from 'domains/Question/components'
 import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
@@ -29,9 +29,9 @@ function PlaneTextDateTemplate(props) {
                 showSearch
                 allowClear
                 bordered={false}
-                defaultValue={DATE_CONDITION_RULES_VALUE[0]}
+                defaultValue={DATE_CONDITION_RULES_VALUES[0]}
                 style={styles.selectStyle}>
-                {DATE_CONDITION_RULES_VALUE.map((item, index) => (
+                {DATE_CONDITION_RULES_VALUES.map((item, index) => (
                   <Option key={index} value={item} onClick={() => {}}>
                     {item}
                   </Option>

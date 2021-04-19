@@ -1,5 +1,6 @@
-import { Col, Container, Row, Box } from '@qonsoll/react-design'
 import 'antd/dist/antd.css'
+import { ChoiceButton } from 'app/components'
+import { Box } from '@qonsoll/react-design'
 import FormAdvancedView from 'app/domains/Form/components/FormAdvancedView'
 
 const contentStyle = {
@@ -24,13 +25,18 @@ const InnerComponent4 = () => {
 }
 
 const App = (props) => {
+  const choices1 = ['choice1', 'choice1', 'choice1', 'choice1']
+
   return (
-    <FormAdvancedView>
-      <InnerComponent1 />
-      <InnerComponent2 />
-      <InnerComponent3 />
-      <InnerComponent4 />
-    </FormAdvancedView>
+    <>
+      <ChoiceButton choices={choices1} />
+      <FormAdvancedView>
+        <InnerComponent1 />
+        <InnerComponent2 />
+        <InnerComponent3 />
+        <InnerComponent4 />
+      </FormAdvancedView>
+    </>
   )
 }
 

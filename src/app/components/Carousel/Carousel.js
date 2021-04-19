@@ -1,41 +1,29 @@
+import './Carousel.styles.css'
 import PropTypes from 'prop-types'
-import { useScroll } from '@umijs/hooks'
+import { Button } from 'app/components'
+import { Carousel as AntdCarousel } from 'antd'
 import React, { useEffect, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Carousel as AntdCarousel, Button } from 'antd'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-// import { useTranslation } from 'react-i18next'
 
 function Carousel(props) {
   const { children } = props
 
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
   // [ADDITIONAL HOOKS]
-  const [scroll, ref] = useScroll(document)
-
   const carouselRef = useRef()
+
+  // [CLEAN FUNCTIONS]
+  const handleScroll = (e) => {
+    e.deltaY > 0 ? next() : previous()
+  }
   const next = () => {
     carouselRef.current?.next()
   }
   const previous = () => {
     carouselRef.current?.prev()
   }
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
-  // [COMPUTED PROPERTIES]
-
-  // [CLEAN FUNCTIONS]
-  const handleScroll = (e) => {
-    e.deltaY > 0 ? next() : previous()
-  }
 
   // [USE_EFFECTS]
-
   useEffect(() => {
     let isComponentMounted = true
 
@@ -54,27 +42,25 @@ function Carousel(props) {
   }, [])
 
   return (
-    <Box
-      onWheel={(e) => {
-        handleScroll(e)
-      }}>
+    <Box onWheel={handleScroll}>
       <AntdCarousel dots={false} ref={carouselRef} dotPosition="right">
         {children}
       </AntdCarousel>
 
       <Row h="right">
         <Col cw="auto">
-          <Button.Group>
-            <Button type="primary">
-              Powered by<b> Typeform</b>
-            </Button>
-            <Button type="primary" onClick={previous}>
-              <UpOutlined />
-            </Button>
-            <Button type="primary" onClick={next}>
-              <DownOutlined />
-            </Button>
-          </Button.Group>
+          <Button buttonType="primary" className="buttonGroup">
+            Powered by<b> Typeform</b>
+          </Button>
+          <Button
+            buttonType="primary"
+            className="buttonGroup"
+            onClick={previous}>
+            <UpOutlined />
+          </Button>
+          <Button buttonType="primary" className="buttonGroup" onClick={next}>
+            <DownOutlined />
+          </Button>
         </Col>
       </Row>
     </Box>

@@ -1,0 +1,51 @@
+.buttonBox {
+  text-align: center;
+  padding: 2px 5px;
+  width: 28px;
+  border-style: solid;
+  border-color: #307bde;
+  border-width: 1px;
+  background-color: #fff;
+  font-weight: 700;
+}
+.hovered {
+  text-align: center;
+  padding: 2px 5px;
+  width: 50px;
+  border-style: solid;
+  border-color: #307bde;
+  border-width: 1px;
+  background-color: #fff;
+  font-weight: 700;
+  margin-left: -20px;
+}
+.selected {
+  text-align: center;
+  padding: 2px 5px;
+  width: 28px;
+  border-style: solid;
+  border-color: #307bde;
+  border-width: 1px;
+  color: #fff;
+  background-color: #3682e6;
+  font-weight: 700;
+}
+.selectedHovered {
+  text-align: center;
+  padding: 2px 5px;
+  width: 50px;
+  border-style: solid;
+  border-color: #307bde;
+  border-width: 1px;
+  color: #fff;
+  background-color: #3682e6;
+  font-weight: 700;
+  margin-left: -20px;
+}
+
+.text {
+  font-weight: 700;
+}
+.icon {
+  font-size: 18px;
+}

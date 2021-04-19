@@ -1,0 +1,22 @@
+.secondaryButton {
+  height: 40px !important;
+  width: 160px;
+  border-radius: 8px !important;
+  background-color: #d6e1f2 !important;
+  color: #307bde !important;
+  font-weight: 700;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+.secondaryButton:hover {
+  background-color: #b3c7e7 !important;
+}
+
+.primaryButton {
+  background-color: #1d6fdc !important;
+  border-color: #1d6fdc !important;
+}
+.primaryButton:hover {
+  background-color: #3682e6 !important;
+  border-color: #3682e6 !important;
+}
