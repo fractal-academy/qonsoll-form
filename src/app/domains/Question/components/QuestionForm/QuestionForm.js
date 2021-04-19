@@ -13,11 +13,12 @@ import {
   ChoiceForm,
   Button
 } from 'components'
-import { SettingOutlined } from '@ant-design/icons'
+import { EyeFilled, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles.js'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import PropTypes from 'prop-types'
 
 // import { useTranslation } from 'react-i18next'
@@ -102,11 +103,11 @@ function QuestionForm(props) {
 
   return (
     <>
-      <Row noGutters mb={2} height="inherit">
+      <Row noGutters mb={2} height="inherit" style={{ position: 'relative' }}>
         <Col v="center" order={2}>
           <Card style={cardStyles}>
-            <Row noGutters h="between">
-              <Col cw="auto">
+            <Row noGutters>
+              <Col>
                 <Tag color="blue">Question 1</Tag>
               </Col>
               <Col cw="auto">
@@ -117,6 +118,15 @@ function QuestionForm(props) {
                   btnType="primary"
                   btnIcon={<SettingOutlined />}
                   content={<QuestionTypeSelect />}
+                />
+              </Col>
+              <Col cw="auto" ml={2}>
+                <MediaLibraryModal
+                  btnProps={{
+                    type: 'primary',
+                    icon: <EyeFilled />,
+                    children: 'Layout'
+                  }}
                 />
               </Col>
             </Row>
@@ -133,8 +143,11 @@ function QuestionForm(props) {
                 <Col cw="auto">
                   <Box
                     {...question?.layoutType}
-                    backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
-                  />
+                    backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}>
+                    <MediaLibraryModal
+                      btnProps={{ type: 'primary', icon: <SettingOutlined /> }}
+                    />
+                  </Box>
                 </Col>
               </Row>
             )}
@@ -157,8 +170,11 @@ function QuestionForm(props) {
             order={imageOrder}>
             <Box
               {...question?.layoutType}
-              backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
-            />
+              backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}>
+              <MediaLibraryModal
+                btnProps={{ type: 'primary', icon: <SettingOutlined /> }}
+              />
+            </Box>
           </Col>
         )}
       </Row>
