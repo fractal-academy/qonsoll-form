@@ -103,7 +103,7 @@ function QuestionForm(props) {
 
   return (
     <>
-      <Row noGutters mb={2} height="inherit" style={{ position: 'relative' }}>
+      <Row noGutters mb={2} height="inherit">
         <Col v="center" order={2}>
           <Card style={cardStyles}>
             <Row noGutters>
@@ -120,15 +120,17 @@ function QuestionForm(props) {
                   content={<QuestionTypeSelect />}
                 />
               </Col>
-              <Col cw="auto" ml={2}>
-                <MediaLibraryModal
-                  btnProps={{
-                    type: 'primary',
-                    icon: <EyeFilled />,
-                    children: 'Layout'
-                  }}
-                />
-              </Col>
+              {question?.layoutType === LAYOUT_TYPES.FULL_SCREEN && (
+                <Col cw="auto" ml={2}>
+                  <MediaLibraryModal
+                    btnProps={{
+                      type: 'primary',
+                      icon: <EyeFilled />,
+                      children: 'Layout'
+                    }}
+                  />
+                </Col>
+              )}
             </Row>
             <Row noGutters h="between">
               <Col cw="auto">
@@ -143,9 +145,19 @@ function QuestionForm(props) {
                 <Col cw="auto">
                   <Box
                     {...question?.layoutType}
-                    backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}>
+                    backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
+                    position="relative"
+                    zIndex="1">
                     <MediaLibraryModal
-                      btnProps={{ type: 'primary', icon: <SettingOutlined /> }}
+                      btnProps={{
+                        type: 'primary',
+                        icon: <SettingOutlined />,
+                        style: {
+                          position: 'absolute',
+                          top: '12px',
+                          right: '15px'
+                        }
+                      }}
                     />
                   </Box>
                 </Col>

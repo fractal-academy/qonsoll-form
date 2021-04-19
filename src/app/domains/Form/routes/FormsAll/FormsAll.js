@@ -19,7 +19,6 @@ import {
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { FormSimpleView } from 'domains/Form/components'
 // import { useTranslation } from 'react-i18next'
@@ -156,7 +155,7 @@ function FormsAll(props) {
               key={item}
               title="form title"
               subtitle="form subtitle"
-              form
+              redirect
             />
           </Box>
         ))}
