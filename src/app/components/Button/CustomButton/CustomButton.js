@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './CustomButton.styles.css'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
@@ -6,19 +6,13 @@ import PropTypes from 'prop-types'
 
 function CustomButton(props) {
   const { buttonType, children, ...args } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-  const style = (buttonType === 'secondary' && 'secondaryButton') || ''
-
-  // [CLEAN FUNCTIONS]
+  const styleMap = {
+    primary: { style: 'primaryButton' },
+    secondary: { style: 'secondaryButton' }
+  }
+  const style = styleMap[buttonType].style
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -46,8 +40,7 @@ function CustomButton(props) {
 }
 
 CustomButton.propTypes = {
-  buttonType: PropTypes.string.isRequired,
-  buttonText: PropTypes.string
+  buttonType: PropTypes.string.isRequired
 }
 
 export default CustomButton
