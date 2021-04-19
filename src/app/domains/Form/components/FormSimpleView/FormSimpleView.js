@@ -72,12 +72,7 @@ function FormSimpleView(props) {
     </Card>
   )
 }
-FormSimpleView.defaultProps = {
-  imageURL:
-    'https://image.freepik.com/free-photo/growing-small-tree-in-nature-and-sunlight_34152-1460.jpg',
-  title: 'Image title',
-  subtitle: 'Image description'
-}
+FormSimpleView.defaultProps = {}
 FormSimpleView.propTypes = {
   imageURL: PropTypes.string,
   title: PropTypes.string.isRequired,

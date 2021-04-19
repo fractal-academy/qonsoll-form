@@ -16,13 +16,14 @@ import {
   SearchOutlined,
   FilterOutlined
 } from '@ant-design/icons'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { FormSimpleView } from 'domains/Form/components'
-// import { useTranslation } from 'react-i18next'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const { Title, Text } = Typography
 const mockRoutes = [
@@ -36,16 +37,15 @@ function FormsAll(props) {
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const history = useHistory()
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [data] = useCollectionData(firestore.collection('forms'))
 
   // [COMPUTED PROPERTIES]
-  let amountFiles = 0
+  let amountFiles = data?.length
+
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -63,6 +63,7 @@ function FormsAll(props) {
       isComponentMounted = false
     }
   }, [])
+
   const menu = (
     <Menu>
       {mockRoutes.map((item, index) => (
@@ -150,12 +151,13 @@ function FormsAll(props) {
         bg="#f6f9fe"
         className="custom-scroll">
         {/* Here should be list of data Images/Video */}
-        {mockList.map((item) => (
+        {data?.map((item) => (
           <Box pr={3} pb={3}>
             <FormSimpleView
-              key={item}
-              title="form title"
-              subtitle="form subtitle"
+              key={item?.id}
+              imageURL={item?.image}
+              title={item?.title}
+              subtitle={item?.subtitle}
             />
           </Box>
         ))}
