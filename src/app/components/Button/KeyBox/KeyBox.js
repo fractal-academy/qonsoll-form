@@ -43,16 +43,6 @@ function KeyBox(props) {
   return (
     <Box ref={hoverRef}>
       <Button buttonType="secondary" onClick={() => onButtonClick(letter)}>
-        {item?.choice?.image && (
-          <Row>
-            <Col>
-              <img
-                alt=""
-                className="imageContainer"
-                src={item?.choice?.image || './public/default.png'}></img>
-            </Col>
-          </Row>
-        )}
         <Row display="flex" v="center" noGutters>
           <Col className={classes} mr={2}>
             {isHovering ? `Key ${letter}` : letter}
