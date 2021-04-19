@@ -73,6 +73,7 @@ function QuestionAdvancedView(props) {
   const bgImage = {
     ...(question?.layoutType === LAYOUT_TYPES.FULL_SCREEN
       ? {
+          //mock data will be replaced
           backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
         }
       : {})
@@ -119,6 +120,7 @@ function QuestionAdvancedView(props) {
               <Col cw="auto">
                 <Box
                   {...question?.layoutType.imgSize}
+                  //mock data will be replaced
                   backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
                 />
               </Col>
