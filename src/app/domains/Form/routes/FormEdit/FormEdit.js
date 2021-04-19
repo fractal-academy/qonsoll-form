@@ -5,10 +5,9 @@ import {
   QuestionLayoutSwitcher,
   FormContentArea
 } from 'components'
-import { Col, Container, Row, Box } from '@qonsoll/react-design'
-import { QuestionForm } from '~/app/domains/Question/components'
-import { QUESTION_TYPES } from '~/app/constants'
-
+import { Box } from '@qonsoll/react-design'
+import { QuestionForm } from 'app/domains/Question/components'
+import { QUESTION_TYPES } from 'app/constants'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 

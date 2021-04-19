@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Container } from '@qonsoll/react-design'
-import { Button, Divider, Tooltip, Typography } from 'antd'
+import { Button, Divider, Typography } from 'antd'
 import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { styles } from './PageHeader.styles'
 import { globalStyles } from 'app/styles'
-import { ROUTES_PATHS } from '~/app/constants'
+import { ROUTES_PATHS } from 'app/constants'
 
 // import { useTranslation } from 'react-i18next'
 const { Title } = Typography
