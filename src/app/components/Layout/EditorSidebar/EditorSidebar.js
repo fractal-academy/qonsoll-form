@@ -51,16 +51,11 @@ function EditorSidebar(props) {
   }, [])
 
   return (
-    <Box
-      bg="white"
-      width="220px"
-      display="flex"
-      flexDirection="column"
-      position="relative">
+    <Box position="relative" display="flex">
       <Box
         position="absolute"
         bg="white"
-        borderRadius="5px 0px 0 5px"
+        borderRadius="0px 0px 0 8px"
         style={styles.siderStateSwitcherStyle}
         onClick={() => {
           setOpen(!open)
@@ -71,58 +66,78 @@ function EditorSidebar(props) {
           <LeftOutlined style={styles.siderStateSwithcerIcon} />
         )}
       </Box>
-      <Box p={3}>
-        <Row display="flex" flex={1}>
-          <Col v="center">
-            <Title level={5} style={globalStyles.resetMargin}>
-              Questions
-            </Title>
-          </Col>
-          <Col cw="auto" px={10} py={1} mr={2} borderRadius="4px" bg="#e8f0fb">
-            <Popover
-              trigger={'click'}
-              placement={'bottomRight'}
-              btnType="ghost"
-              btnIcon={<PlusOutlined />}
-              content={<QuestionTypeSelect />}
-            />
-          </Col>
-          <Col cw="auto" px={1} borderRadius="4px" v="center">
-            <ModalWithFormConditionsForm
-              btnProps={{ icon: <SettingOutlined /> }}>
-              <FormConditionsForm />
-            </ModalWithFormConditionsForm>
-          </Col>
-        </Row>
-      </Box>
-      <Box overflow="auto" p={3}>
-        {questionsList}
-      </Box>
-      <Box mt="auto" style={styles.endingsPosition}>
-        <Row>
-          <Col>
-            <Divider type="horizontal" style={globalStyles.resetMargin} />
-          </Col>
-        </Row>
-        <Row h="center" mt={1} style={globalStyles.cursorGrab}>
-          <Col cw="auto">
-            <Box height="3px" bg="#282c34" width="50px" borderRadius="8px" />
-          </Col>
-        </Row>
-        <Row p={3}>
-          <Col v="center">
-            <Title level={5} style={globalStyles.resetMargin}>
-              Endings
-            </Title>
-          </Col>
-          <Col cw="auto" px={10} py={1} borderRadius="4px" bg="#e8f0fb">
-            <PlusOutlined style={styles.plusIconColor} />
-          </Col>
-        </Row>
-        <Row pb={3} px={3}>
-          <Col overflow="auto">{questionsEndingsList}</Col>
-        </Row>
-      </Box>
+      {open && (
+        <Box
+          bg="white"
+          width="220px"
+          display="flex"
+          flexDirection="column"
+          position="relative">
+          <Box p={3}>
+            <Row display="flex" flex={1}>
+              <Col v="center">
+                <Title level={5} style={globalStyles.resetMargin}>
+                  Questions
+                </Title>
+              </Col>
+              <Col
+                cw="auto"
+                px={10}
+                py={1}
+                mr={2}
+                borderRadius="4px"
+                bg="#e8f0fb">
+                <Popover
+                  trigger={'click'}
+                  placement={'bottomRight'}
+                  btnType="ghost"
+                  btnIcon={<PlusOutlined />}
+                  content={<QuestionTypeSelect />}
+                />
+              </Col>
+              <Col cw="auto" px={1} borderRadius="4px" v="center">
+                <ModalWithFormConditionsForm
+                  btnProps={{ icon: <SettingOutlined /> }}>
+                  <FormConditionsForm />
+                </ModalWithFormConditionsForm>
+              </Col>
+            </Row>
+          </Box>
+          <Box overflow="auto" p={3}>
+            {questionsList}
+          </Box>
+          <Box mt="auto" style={styles.endingsPosition}>
+            <Row>
+              <Col>
+                <Divider type="horizontal" style={globalStyles.resetMargin} />
+              </Col>
+            </Row>
+            <Row h="center" mt={1} style={globalStyles.cursorGrab}>
+              <Col cw="auto">
+                <Box
+                  height="3px"
+                  bg="#282c34"
+                  width="50px"
+                  borderRadius="8px"
+                />
+              </Col>
+            </Row>
+            <Row p={3}>
+              <Col v="center">
+                <Title level={5} style={globalStyles.resetMargin}>
+                  Endings
+                </Title>
+              </Col>
+              <Col cw="auto" px={10} py={1} borderRadius="4px" bg="#e8f0fb">
+                <PlusOutlined style={styles.plusIconColor} />
+              </Col>
+            </Row>
+            <Row pb={3} px={3}>
+              <Col overflow="auto">{questionsEndingsList}</Col>
+            </Row>
+          </Box>
+        </Box>
+      )}
     </Box>
   )
 }
