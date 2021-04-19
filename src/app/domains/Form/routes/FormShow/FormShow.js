@@ -101,16 +101,7 @@ function FormShow(props) {
           <Box height="600px">
             <QuestionAdvancedView
               question={{
-                questionType: QUESTION_TYPES.LONG_TEXT,
-                layoutType: LAYOUT_TYPES.RIGHT_SIDE_SMALL,
-                btnProps: { type: 'primary', children: 'Submit' }
-              }}
-            />
-          </Box>
-          <Box height="600px">
-            <QuestionAdvancedView
-              question={{
-                questionType: QUESTION_TYPES.LONG_TEXT,
+                questionType: QUESTION_TYPES.SHORT_TEXT,
                 layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
                 btnProps: { type: 'primary', children: 'Submit' }
               }}
@@ -139,6 +130,33 @@ function FormShow(props) {
               question={{
                 questionType: QUESTION_TYPES.FILE_UPLOAD,
                 layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.OPINION_SCALE,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.YES_NO,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="600px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.PICTURE_CHOICE,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
                 btnProps: { type: 'primary', children: 'Submit' }
               }}
             />
