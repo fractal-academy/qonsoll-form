@@ -3,6 +3,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Divider, Typography } from 'antd'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router'
+import { useKeyPress } from '@umijs/hooks'
 import { globalStyles } from 'app/styles'
 import { FormAdvancedView } from 'domains/Form/components'
 import { QuestionAdvancedView } from 'domains/Question/components'
@@ -10,23 +11,28 @@ import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
 import { styles } from './FormShow.style'
 // import { useTranslation } from 'react-i18next'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 function FormShow(props) {
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const history = useHistory()
+  useKeyPress('enter', (event) => {
+    onClick()
+  })
+
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [isAnswered, setIsAnswered] = useState(false)
 
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const onRestart = () => {}
+  const onClick = () => {
+    setIsAnswered(true)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -87,36 +93,52 @@ function FormShow(props) {
         m={4}
         borderRadius="8px"
         bg="white">
-        <FormAdvancedView>
+        <FormAdvancedView isAnswered={isAnswered} setIsAnswered={setIsAnswered}>
           <Box height="500px">
             <QuestionAdvancedView
+              questionNumber={1}
               question={{
                 questionType: QUESTION_TYPES.LONG_TEXT,
                 layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
-                btnProps: { type: 'primary', children: 'Submit' }
+                btnProps: {
+                  type: 'primary',
+                  children: 'Submit',
+                  onClick: onClick
+                }
               }}
             />
           </Box>
           <Box height="500px">
             <QuestionAdvancedView
+              questionNumber={2}
               question={{
                 questionType: QUESTION_TYPES.SHORT_TEXT,
                 layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
-                btnProps: { type: 'primary', children: 'Submit' }
+                btnProps: {
+                  type: 'primary',
+                  children: 'Submit',
+                  onClick: onClick
+                }
               }}
             />
           </Box>
           <Box height="500px">
             <QuestionAdvancedView
+              questionNumber={3}
               question={{
                 questionType: QUESTION_TYPES.DATE,
                 layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
-                btnProps: { type: 'primary', children: 'Submit' }
+                btnProps: {
+                  type: 'primary',
+                  children: 'Submit',
+                  onClick: onClick
+                }
               }}
             />
           </Box>
           <Box height="500px">
             <QuestionAdvancedView
+              questionNumber={4}
               question={{
                 questionType: QUESTION_TYPES.RATING,
                 layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG
@@ -125,37 +147,57 @@ function FormShow(props) {
           </Box>
           <Box height="500px">
             <QuestionAdvancedView
-              question={{
-                questionType: QUESTION_TYPES.FILE_UPLOAD,
-                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
-                btnProps: { type: 'primary', children: 'Submit' }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              question={{
-                questionType: QUESTION_TYPES.OPINION_SCALE,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
-                btnProps: { type: 'primary', children: 'Submit' }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              question={{
-                questionType: QUESTION_TYPES.YES_NO,
-                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
-                btnProps: { type: 'primary', children: 'Submit' }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
+              questionNumber={5}
               question={{
                 questionType: QUESTION_TYPES.PICTURE_CHOICE,
                 layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
-                btnProps: { type: 'primary', children: 'Submit' }
+                btnProps: {
+                  type: 'primary',
+                  children: 'Submit',
+                  onClick: onClick
+                }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              questionNumber={6}
+              question={{
+                questionType: QUESTION_TYPES.OPINION_SCALE,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: {
+                  type: 'primary',
+                  children: 'Submit',
+                  onClick: onClick
+                }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              questionNumber={7}
+              question={{
+                questionType: QUESTION_TYPES.YES_NO,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: {
+                  type: 'primary',
+                  children: 'Submit',
+                  onClick: onClick
+                }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              questionNumber={8}
+              question={{
+                questionType: QUESTION_TYPES.FILE_UPLOAD,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: {
+                  type: 'primary',
+                  children: 'Submit',
+                  onClick: onClick
+                }
               }}
             />
           </Box>

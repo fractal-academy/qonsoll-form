@@ -1,21 +1,28 @@
-import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import './RangeButton.styles.css'
+import { useState } from 'react'
 import { Button } from 'app/components'
+import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
-// import { useTranslation } from 'react-i18next'
-
-const ButtonGroup = Button.Group
 
 function RangeButton(props) {
-  const { from = 0, to = 0 } = props
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
+  const { from = 0, to = 0, onClick } = props
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [buttonKey, setButtonKey] = useState()
+
+  // [ADDITIONAL HOOKS]
+  useKeyPress(
+    (event) => ![].includes(event.key),
+    (event) => {
+      if (event.type === 'keyup') {
+        onButtonClick(event.key)
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   // [COMPUTED PROPERTIES]
   const range = Array(to - from + 1)
@@ -23,34 +30,23 @@ function RangeButton(props) {
     .map((el, index) => from + index)
 
   // [CLEAN FUNCTIONS]
-  const onButtonClick = () => {}
+  const onButtonClick = (number) => {
+    if (range.includes(Number(number))) {
+      setButtonKey(number)
 
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
+      console.log(`Choice ${number} was pressed`)
+      onClick()
     }
-  }, [])
+  }
 
   return (
     <Box display="flex">
       {range.map((item) => (
         <Button
           key={item}
+          onClick={() => onButtonClick(item)}
           buttonType="secondary"
-          className="range"
-          onClick={onButtonClick}>
+          className={(Number(buttonKey) === item && 'active') || 'range'}>
           <b>{item}</b>
         </Button>
       ))}

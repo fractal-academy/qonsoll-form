@@ -1,11 +1,24 @@
 .range {
   margin-left: 5px;
-  height: 65px !important;
   width: 65px !important;
-  background-color: #d6e1f2 !important;
-  border-color: #307bde !important;
+  height: 65px !important;
   color: #307bde !important;
+  border-color: #307bde !important;
+  background-color: #d6e1f2 !important;
 }
 .range:hover {
   background-color: #b3c7e7 !important;
+}
+
+.active {
+  margin-left: 5px;
+  width: 65px !important;
+  height: 65px !important;
+  color: #fff !important;
+  border-color: #307bde !important;
+  background-color: #3682e6 !important;
+}
+.active:hover {
+  border-color: #5a9aee !important;
+  background-color: #5a9aee !important;
 }
