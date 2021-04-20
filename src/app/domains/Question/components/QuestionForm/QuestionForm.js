@@ -11,10 +11,9 @@ import {
   YesnoButton,
   RangeButton,
   ChoiceForm,
-  Button,
   SubmitButton
 } from 'components'
-import { EyeFilled, PicRightOutlined, SettingOutlined } from '@ant-design/icons'
+import { EyeFilled, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
@@ -25,12 +24,15 @@ import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 const layoutSides = [
-  LAYOUT_TYPES.LEFT_SIDE_BIG,
-  LAYOUT_TYPES.LEFT_SIDE_SMALL,
-  LAYOUT_TYPES.RIGHT_SIDE_BIG,
-  LAYOUT_TYPES.RIGHT_SIDE_SMALL
+  LAYOUT_TYPES.LEFT_SIDE_BIG.type,
+  LAYOUT_TYPES.LEFT_SIDE_SMALL.type,
+  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
+  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
 ]
-const rightSide = [LAYOUT_TYPES.RIGHT_SIDE_BIG, LAYOUT_TYPES.RIGHT_SIDE_SMALL]
+const rightSide = [
+  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
+  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
+]
 
 function QuestionForm(props) {
   const { question, onQuestionTypeChange, setshowPopover, showPopover } = props
@@ -80,15 +82,11 @@ function QuestionForm(props) {
     }
   }
 
-  const cardStyles = {
-    ...styles.cardStyle,
-    ...(question?.layoutType === LAYOUT_TYPES.FULL_SCREEN
-      ? {
-          backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
-        }
-      : {})
-  }
-  const imageOrder = rightSide.includes(question?.layoutType) ? 3 : 1
+  const bgImage =
+    question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type &&
+    `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
+
+  const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
@@ -113,9 +111,17 @@ function QuestionForm(props) {
 
   return (
     <>
-      <Row noGutters mb={2} height="inherit">
-        <Col v="center" order={2}>
-          <Card style={cardStyles}>
+      <Row
+        noGutters
+        mb={2}
+        height="100%"
+        width="100%"
+        display="flex"
+        flex={1}
+        style={styles.rowStyle}
+        backgroundImage={bgImage && bgImage}>
+        <Col v="center" order={2} cw="auto">
+          <Card style={styles.cardStyle} bordered={false}>
             <Row noGutters>
               <Col>
                 <Tag color="blue">Question 1</Tag>
@@ -136,13 +142,13 @@ function QuestionForm(props) {
                   }
                 />
               </Col>
-              {question?.layoutType === LAYOUT_TYPES.FULL_SCREEN && (
+              {question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                 <Col cw="auto" ml={2}>
                   <MediaLibraryModal
                     btnProps={{
                       type: 'primary',
                       icon: <EyeFilled />,
-                      children: 'Layout'
+                      style: styles.borderForFullScreen
                     }}
                   />
                 </Col>
@@ -156,23 +162,20 @@ function QuestionForm(props) {
                 />
               </Col>
             </Row>
-            {question?.layoutType === LAYOUT_TYPES.BETWEEN && (
+            {question?.layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
               <Row>
                 <Col cw="auto">
                   <Box
-                    {...question?.layoutType}
-                    backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
+                    {...question?.layoutType.imgSize}
+                    backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
                     position="relative"
-                    zIndex="1">
+                    zIndex="1"
+                    mb={3}>
                     <MediaLibraryModal
                       btnProps={{
                         type: 'primary',
-                        icon: <SettingOutlined />,
-                        style: {
-                          position: 'absolute',
-                          top: '12px',
-                          right: '15px'
-                        }
+                        icon: <EyeFilled />,
+                        style: styles.modalButtonStyle
                       }}
                     />
                   </Box>
@@ -189,27 +192,25 @@ function QuestionForm(props) {
             </Row>
           </Card>
         </Col>
-        {layoutSides.includes(question?.layoutType) && (
+        {layoutSides.includes(question?.layoutType.type) && (
           <Col
             v="center"
             display="flex"
             style={styles.columnStyle}
             height="100%"
+            width="800px"
             order={imageOrder}>
             <Box
-              {...question?.layoutType}
-              backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
+              {...question?.layoutType.imgSize}
+              backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
               position="relative"
-              zIndex="1">
+              zIndex="1"
+              m={2}>
               <MediaLibraryModal
                 btnProps={{
                   type: 'primary',
-                  icon: <SettingOutlined />,
-                  style: {
-                    position: 'absolute',
-                    top: '12px',
-                    right: '15px'
-                  }
+                  icon: <EyeFilled />,
+                  style: styles.modalButtonStyle
                 }}
               />
             </Box>

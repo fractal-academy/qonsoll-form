@@ -27,12 +27,15 @@ const choices = [
 ]
 
 const layoutSides = [
-  LAYOUT_TYPES.LEFT_SIDE_BIG,
-  LAYOUT_TYPES.LEFT_SIDE_SMALL,
-  LAYOUT_TYPES.RIGHT_SIDE_BIG,
-  LAYOUT_TYPES.RIGHT_SIDE_SMALL
+  LAYOUT_TYPES.LEFT_SIDE_BIG.type,
+  LAYOUT_TYPES.LEFT_SIDE_SMALL.type,
+  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
+  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
 ]
-const rightSide = [LAYOUT_TYPES.RIGHT_SIDE_BIG, LAYOUT_TYPES.RIGHT_SIDE_SMALL]
+const rightSide = [
+  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
+  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
+]
 
 function QuestionAdvancedView(props) {
   const { question, questionNumber = 0 } = props
@@ -92,14 +95,15 @@ function QuestionAdvancedView(props) {
     }
   }
   const bgImage = {
-    ...(question?.layoutType === LAYOUT_TYPES.FULL_SCREEN
+    ...(question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
       ? {
           //mock data will be replaced
-          backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
+          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
         }
       : {})
   }
-  const imageOrder = rightSide.includes(question?.layoutType) ? 3 : 1
+  const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
   // [CLEAN FUNCTIONS]
 
   // [USE_EFFECTS]
@@ -121,7 +125,11 @@ function QuestionAdvancedView(props) {
   }, [])
 
   return (
-    <Row noGutters height="inherit" backgroundImage={bgImage}>
+    <Row
+      noGutters
+      height="inherit"
+      backgroundImage={bgImage}
+      backgroundRepeat="no-repeat">
       <Col v="center" order={2}>
         <Card bordered={false}>
           <Row noGutters>
@@ -136,13 +144,14 @@ function QuestionAdvancedView(props) {
               <Text>Question optional description</Text>
             </Col>
           </Row>
-          {question?.layoutType === LAYOUT_TYPES.BETWEEN && (
+          {question?.layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
             <Row pt={25}>
               <Col cw="auto">
                 <Box
                   {...question?.layoutType.imgSize}
                   //mock data will be replaced
-                  backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
+                  backgroundRepeat="no-repeat"
+                  backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
                 />
               </Col>
             </Row>
@@ -157,7 +166,7 @@ function QuestionAdvancedView(props) {
           </Row>
         </Card>
       </Col>
-      {layoutSides.includes(question?.layoutType) && (
+      {layoutSides.includes(question?.layoutType.type) && (
         <Col
           v="center"
           display="flex"
@@ -166,7 +175,8 @@ function QuestionAdvancedView(props) {
           order={imageOrder}>
           <Box
             {...question?.layoutType.imgSize}
-            backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
+            backgroundRepeat="no-repeat"
+            backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
           />
         </Col>
       )}

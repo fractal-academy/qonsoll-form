@@ -8,7 +8,7 @@ import {
 import { Box } from '@qonsoll/react-design'
 import { QuestionForm } from 'app/domains/Question/components'
 import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
-import { QUESTION_TYPE_KEYS } from 'app/constants/quetstionType'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -21,11 +21,15 @@ function FormEdit(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
+  const [activeKey, setActiveKey] = useState(LAYOUT_TYPE_KEYS[0])
   const [questionType, setQuestionType] = useState(QUESTION_TYPES.YES_NO)
   const [showPopover, setshowPopover] = useState(false)
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
+  const onChangeMenuItem = ({ key }) => {
+    setActiveKey(LAYOUT_TYPES[key])
+  }
   const onQuestionTypeChange = ({ key }) => {
     setQuestionType(key)
     setshowPopover(false)
@@ -51,10 +55,17 @@ function FormEdit(props) {
   return (
     <Box bg="#f6f9fe" display="flex" height="inherit" overflowX="hidden">
       <PageLayout>
-        <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
+        <FormContentArea
+          leftSideMenu={
+            <QuestionLayoutSwitcher
+              onChange={onChangeMenuItem}
+              defaultActive={activeKey}
+            />
+          }>
           <QuestionForm
             question={{
-              questionType: questionType
+              questionType: questionType,
+              layoutType: activeKey
             }}
             onQuestionTypeChange={onQuestionTypeChange}
             showPopover={showPopover}

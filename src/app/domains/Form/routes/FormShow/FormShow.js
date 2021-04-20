@@ -86,7 +86,6 @@ function FormShow(props) {
       </Row>
       <Box
         display="flex"
-        flex={1}
         justifyContent="center"
         alignItems="center"
         p={4}
@@ -141,7 +140,7 @@ function FormShow(props) {
               questionNumber={4}
               question={{
                 questionType: QUESTION_TYPES.RATING,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_SMALL
               }}
             />
           </Box>
@@ -150,7 +149,7 @@ function FormShow(props) {
               questionNumber={5}
               question={{
                 questionType: QUESTION_TYPES.PICTURE_CHOICE,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                layoutType: LAYOUT_TYPES.BETWEEN,
                 btnProps: {
                   type: 'primary',
                   children: 'Submit',
@@ -164,7 +163,7 @@ function FormShow(props) {
               questionNumber={6}
               question={{
                 questionType: QUESTION_TYPES.OPINION_SCALE,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                layoutType: LAYOUT_TYPES.FULL_SCREEN,
                 btnProps: {
                   type: 'primary',
                   children: 'Submit',
