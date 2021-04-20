@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Button, Typography, Input, Divider } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { FilterOutlined, SearchOutlined } from '@ant-design/icons'
+import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { FormSimpleView } from 'domains/Form/components'
 import { globalStyles } from 'app/styles'
 import { styles } from './MediaLibraryModal.styles'
@@ -24,6 +24,12 @@ function MediaLibraryModal(props) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [switchState, setSwitchState] = useState(true)
   const [sidebarState, setSidebarState] = useState(true)
+  const [formsList, setFormsList] = useState([
+    { title: 'New title', subtitle: 'subtitle' },
+    { title: 'New title', subtitle: 'subtitle' },
+    { title: 'New title', subtitle: 'subtitle' },
+    { title: 'New title', subtitle: 'subtitle' }
+  ])
 
   // [COMPUTED PROPERTIES]
   let amountFiles = 0
@@ -48,6 +54,15 @@ function MediaLibraryModal(props) {
   }
   const modalStateChange = () => {
     setIsModalVisible(!isModalVisible)
+  }
+  const onAddForm = () => {
+    setFormsList((prev) => [
+      ...prev,
+      {
+        title: 'new Title ',
+        subtitle: 'subtitle'
+      }
+    ])
   }
   // [USE_EFFECTS]
   useEffect(() => {
@@ -150,6 +165,7 @@ function MediaLibraryModal(props) {
             </Row>
             <Box
               height="330px"
+              pl={3}
               overflow="auto"
               display="flex"
               flexWrap="wrap"
@@ -157,6 +173,29 @@ function MediaLibraryModal(props) {
               bg="#f6f9fe"
               className="custom-scroll">
               {/* Here should be list of data Images/Video */}
+              {formsList.map((item) => (
+                <Box mr={3} mb={3}>
+                  <FormSimpleView
+                    key={item}
+                    title={item.title}
+                    subtitle={item.subtitle}
+                  />
+                </Box>
+              ))}
+              <Box
+                bg="#eceff5"
+                mr={3}
+                mb={3}
+                borderRadius="8px"
+                width="150px"
+                height="150px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                style={globalStyles.cursorPointer}
+                onClick={onAddForm}>
+                <PlusOutlined />
+              </Box>
             </Box>
             <Row>
               <Col>
