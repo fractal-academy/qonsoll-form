@@ -80,7 +80,7 @@ function QuestionAdvancedView(props) {
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
-        <Button buttonType="primary" buttonText="213" size="large">
+        <Button buttonType="primary" buttonText="Submit" size="large">
           Start questionary
         </Button>
       )
@@ -121,8 +121,6 @@ function QuestionAdvancedView(props) {
         <Card bordered={false}>
           <Row noGutters>
             <Col cw="auto">
-              {question?.layoutType ===
-              <LAYOUT_TYPES className="BETWEEN"></LAYOUT_TYPES>}
               <Title level={4} style={globalStyles.resetMargin}>
                 {questionNumber}.Question title
               </Title>
