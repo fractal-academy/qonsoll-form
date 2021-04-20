@@ -7,7 +7,7 @@ import { Box } from '@qonsoll/react-design'
 let startLetter = 65
 
 function ChoiceButton(props) {
-  const { choices } = props
+  const { choices, onClick } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -21,21 +21,10 @@ function ChoiceButton(props) {
       })),
     [choices]
   )
-
   const letters = useMemo(
     () => (mappedChoices ? mappedChoices.map(({ letter }) => letter) : []),
     [mappedChoices]
   )
-
-  // [CLEAN FUNCTIONS]
-  const onButtonClick = (letter) => {
-    if (letters.includes(letter)) {
-      setButtonKey(letter)
-
-      console.log(`Choice ${letter} was pressed`)
-    }
-  }
-
   useKeyPress(
     (event) => ![].includes(event.key),
     (event) => {
@@ -48,6 +37,16 @@ function ChoiceButton(props) {
       events: ['keydown', 'keyup']
     }
   )
+
+  // [CLEAN FUNCTIONS]
+  const onButtonClick = (letter) => {
+    if (letters.includes(letter)) {
+      setButtonKey(letter)
+      onClick()
+
+      console.log(`Choice ${letter} was pressed`)
+    }
+  }
 
   return (
     <Box display="block">

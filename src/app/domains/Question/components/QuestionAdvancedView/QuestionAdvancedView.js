@@ -36,6 +36,7 @@ const rightSide = [LAYOUT_TYPES.RIGHT_SIDE_BIG, LAYOUT_TYPES.RIGHT_SIDE_SMALL]
 
 function QuestionAdvancedView(props) {
   const { question, questionNumber = 0 } = props
+
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -48,13 +49,17 @@ function QuestionAdvancedView(props) {
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.YES_NO]: {
-      component: <YesnoButton />
+      component: <YesnoButton onClick={question?.btnProps?.onClick} />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceButton choices={choices} />
+      component: (
+        <ChoiceButton choices={choices} onClick={question?.btnProps?.onClick} />
+      )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton from={1} to={5} />
+      component: (
+        <RangeButton from={1} to={5} onClick={question?.btnProps?.onClick} />
+      )
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
@@ -111,13 +116,13 @@ function QuestionAdvancedView(props) {
           <Row noGutters>
             <Col cw="auto">
               <Title level={4} style={globalStyles.resetMargin}>
-                {questionNumber}.Question title
+                {questionNumber}. Question title
               </Title>
             </Col>
           </Row>
           <Row noGutters>
             <Col>
-              <Text>Question description</Text>
+              <Text>Question optional description</Text>
             </Col>
           </Row>
           {question?.layoutType === LAYOUT_TYPES.BETWEEN && (

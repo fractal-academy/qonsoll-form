@@ -62,7 +62,7 @@ function KeyBox(props) {
 KeyBox.propTypes = {
   onButtonClick: PropTypes.func,
   startLetter: PropTypes.string,
-  item: PropTypes.array
+  item: PropTypes.object
 }
 
 export default KeyBox
