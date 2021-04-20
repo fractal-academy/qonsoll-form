@@ -39,6 +39,7 @@ const rightSide = [
 
 function QuestionAdvancedView(props) {
   const { question, questionNumber = 0 } = props
+
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -51,13 +52,17 @@ function QuestionAdvancedView(props) {
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.YES_NO]: {
-      component: <YesnoButton />
+      component: <YesnoButton onClick={question?.btnProps?.onClick} />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceButton choices={choices} />
+      component: (
+        <ChoiceButton choices={choices} onClick={question?.btnProps?.onClick} />
+      )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton from={1} to={5} />
+      component: (
+        <RangeButton from={1} to={5} onClick={question?.btnProps?.onClick} />
+      )
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
@@ -75,13 +80,25 @@ function QuestionAdvancedView(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <Button buttonType="primary" />
+      component: (
+        <Button buttonType="primary" buttonText="213" size="large">
+          Continue
+        </Button>
+      )
+    },
+    [QUESTION_TYPES.WELCOME_SCREEN]: {
+      component: (
+        <Button buttonType="primary" buttonText="Submit" size="large">
+          Start questionary
+        </Button>
+      )
     }
   }
   const bgImage = {
     ...(question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
       ? {
           //mock data will be replaced
+          backgroundRepeat: 'no-repeat',
           backgroundImage: `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
         }
       : {})
@@ -108,19 +125,23 @@ function QuestionAdvancedView(props) {
   }, [])
 
   return (
-    <Row noGutters height="inherit" backgroundImage={bgImage}>
+    <Row
+      noGutters
+      height="inherit"
+      backgroundImage={bgImage}
+      backgroundRepeat="no-repeat">
       <Col v="center" order={2}>
         <Card bordered={false}>
           <Row noGutters>
             <Col cw="auto">
               <Title level={4} style={globalStyles.resetMargin}>
-                Question title
+                {questionNumber}. Question title
               </Title>
             </Col>
           </Row>
           <Row noGutters>
             <Col>
-              <Text>Question description</Text>
+              <Text>Question optional description</Text>
             </Col>
           </Row>
           {question?.layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
@@ -129,6 +150,7 @@ function QuestionAdvancedView(props) {
                 <Box
                   {...question?.layoutType.imgSize}
                   //mock data will be replaced
+                  backgroundRepeat="no-repeat"
                   backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
                 />
               </Col>
@@ -153,6 +175,7 @@ function QuestionAdvancedView(props) {
           order={imageOrder}>
           <Box
             {...question?.layoutType.imgSize}
+            backgroundRepeat="no-repeat"
             backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
           />
         </Col>

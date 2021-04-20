@@ -22,12 +22,17 @@ function FormEdit(props) {
 
   // [COMPONENT STATE HOOKS]
   const [activeKey, setActiveKey] = useState(LAYOUT_TYPE_KEYS[0])
-
+  const [questionType, setQuestionType] = useState(QUESTION_TYPES.YES_NO)
+  const [showPopover, setshowPopover] = useState(false)
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = ({ key }) => {
     setActiveKey(LAYOUT_TYPES[key])
+  }
+  const onQuestionTypeChange = ({ key }) => {
+    setQuestionType(key)
+    setshowPopover(false)
   }
   // [USE_EFFECTS]
   useEffect(() => {
@@ -59,9 +64,12 @@ function FormEdit(props) {
           }>
           <QuestionForm
             question={{
-              questionType: QUESTION_TYPES.RATING,
+              questionType: questionType,
               layoutType: activeKey
             }}
+            onQuestionTypeChange={onQuestionTypeChange}
+            showPopover={showPopover}
+            setshowPopover={setshowPopover}
           />
         </FormContentArea>
       </PageLayout>

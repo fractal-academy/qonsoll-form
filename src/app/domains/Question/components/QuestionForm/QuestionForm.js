@@ -11,12 +11,12 @@ import {
   YesnoButton,
   RangeButton,
   ChoiceForm,
-  Button
+  SubmitButton
 } from 'components'
 import { EyeFilled, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { styles } from './QuestionForm.styles.js'
+import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import PropTypes from 'prop-types'
@@ -35,7 +35,7 @@ const rightSide = [
 ]
 
 function QuestionForm(props) {
-  const { question } = props
+  const { question, onQuestionTypeChange, setshowPopover, showPopover } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -46,23 +46,30 @@ function QuestionForm(props) {
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
+    [QUESTION_TYPES.WELCOME_SCREEN]: {
+      component: <SubmitButton>START</SubmitButton>
+    },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceForm />
+      component: <ChoiceForm withImage />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton />
+      component: <RangeButton from={1} to={5} />
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <InputForm />
+      component: (
+        <InputForm btnProps={{ type: 'primary', children: 'Submit' }} />
+      )
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <TextAreaForm />
+      component: (
+        <TextAreaForm btnProps={{ type: 'primary', children: 'Submit' }} />
+      )
     },
     [QUESTION_TYPES.DATE]: {
       component: <DateTimeInput />
@@ -71,7 +78,7 @@ function QuestionForm(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <Button />
+      component: <SubmitButton>Next</SubmitButton>
     }
   }
 
@@ -81,7 +88,9 @@ function QuestionForm(props) {
 
   const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
   // [CLEAN FUNCTIONS]
-
+  const popoverShowChange = () => {
+    setshowPopover(!showPopover)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -108,8 +117,8 @@ function QuestionForm(props) {
         height="100%"
         width="100%"
         display="flex"
-        style={styles.rowStyle}
         flex={1}
+        style={styles.rowStyle}
         backgroundImage={bgImage && bgImage}>
         <Col v="center" order={2} cw="auto">
           <Card style={styles.cardStyle} bordered={false}>
@@ -119,12 +128,18 @@ function QuestionForm(props) {
               </Col>
               <Col cw="auto">
                 <Popover
-                  style={styles.popoverStyle}
-                  trigger="click"
-                  placement="bottomRight"
+                  onClick={popoverShowChange}
+                  visible={showPopover}
+                  onVisibleChange={() => {
+                    setshowPopover(!showPopover)
+                  }}
+                  trigger={'click'}
+                  placement={'bottomRight'}
                   btnType="primary"
                   btnIcon={<SettingOutlined />}
-                  content={<QuestionTypeSelect />}
+                  content={
+                    <QuestionTypeSelect onClick={onQuestionTypeChange} />
+                  }
                 />
               </Col>
               {question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type && (
@@ -139,10 +154,10 @@ function QuestionForm(props) {
                 </Col>
               )}
             </Row>
-            <Row noGutters h="between">
+            <Row noGutters h="between" mb={4}>
               <Col cw="auto">
                 <QuestionHeader
-                  titlePlaceholder={'change on Question type'}
+                  titlePlaceholder={'Editable question title'}
                   subtitlePlaceholder={'Description(optional)'}
                 />
               </Col>
@@ -154,7 +169,8 @@ function QuestionForm(props) {
                     {...question?.layoutType.imgSize}
                     backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
                     position="relative"
-                    zIndex="1">
+                    zIndex="1"
+                    mb={3}>
                     <MediaLibraryModal
                       btnProps={{
                         type: 'primary',

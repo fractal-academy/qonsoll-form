@@ -19,5 +19,10 @@ export const styles = {
     position: 'absolute',
     top: '12px',
     right: '15px'
+  },
+  welcomeBtn: {
+    borderRadius: '4px',
+    marginRight: '4px',
+    fontWeight: 'bold'
   }
 }

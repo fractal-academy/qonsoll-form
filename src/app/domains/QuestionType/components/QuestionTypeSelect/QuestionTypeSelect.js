@@ -3,11 +3,15 @@ import { Col, Row } from '@qonsoll/react-design'
 import { Menu } from 'antd'
 import { QUESTION_TYPES } from 'app/constants'
 import {
-  CarOutlined,
-  GlobalOutlined,
-  HeartOutlined,
+  CalendarOutlined,
+  CopyrightOutlined,
+  FileTextOutlined,
   HomeOutlined,
-  SwapOutlined
+  PictureOutlined,
+  ShareAltOutlined,
+  SmallDashOutlined,
+  StarOutlined,
+  UploadOutlined
 } from '@ant-design/icons'
 import Text from 'antd/lib/typography/Text'
 // import PropTypes from 'prop-types'
@@ -18,57 +22,57 @@ const questionTypeMap = [
   {
     type: QUESTION_TYPES.WELCOME_SCREEN,
     description: 'Invite your audience in',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
-  },
-  {
-    type: QUESTION_TYPES.SHORT_TEXT,
-    description: 'For short answers, like names',
-    icon: <GlobalOutlined style={{ fontSize: '24px' }} />
-  },
-  {
-    type: QUESTION_TYPES.DATE,
-    description: 'Collect answers in date format',
-
-    icon: <SwapOutlined style={{ fontSize: '24px' }} />
-  },
-  {
-    type: QUESTION_TYPES.FILE_UPLOAD,
-    description: 'Upload a file up to 10MB',
-    icon: <HeartOutlined style={{ fontSize: '24px' }} />
+    icon: <HomeOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.LONG_TEXT,
     description: 'Mote space to spill the beans',
-    icon: <CarOutlined style={{ fontSize: '24px' }} />
+    icon: <FileTextOutlined style={styles.iconFontSize} />
   },
+  {
+    type: QUESTION_TYPES.SHORT_TEXT,
+    description: 'For short answers, like names',
+    icon: <SmallDashOutlined style={styles.iconFontSize} />
+  },
+  {
+    type: QUESTION_TYPES.DATE,
+    description: 'Collect answers in date format',
+    icon: <CalendarOutlined style={styles.iconFontSize} />
+  },
+  {
+    type: QUESTION_TYPES.FILE_UPLOAD,
+    description: 'Upload a file up to 10MB',
+    icon: <UploadOutlined style={styles.iconFontSize} />
+  },
+
   {
     type: QUESTION_TYPES.OPINION_SCALE,
     description: 'A customizable, numbered scale',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <HomeOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.PICTURE_CHOICE,
     description: 'Multiple choice but prettier',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <PictureOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.RATING,
     description: 'Choose from shapes like ⭐ or 🐶',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <StarOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.STATEMENT,
     description: 'Take the mic for a moment',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <CopyrightOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.YES_NO,
     description: 'Just 2 options: Yes or No',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <ShareAltOutlined style={styles.iconFontSize} />
   }
 ]
 function QuestionTypeSelect(props) {
-  const { onChange } = props
+  const { onChange, onClick } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -109,8 +113,8 @@ function QuestionTypeSelect(props) {
             {questionTypeMap.map((item, index) => (
               <Menu.Item
                 style={styles.menuItemStyle}
-                key={index}
-                onClick={() => {}}>
+                key={item.type}
+                onClick={onClick}>
                 <Row noGutters v="center">
                   <Col v="center" cw="auto">
                     {item.icon}

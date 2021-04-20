@@ -7,7 +7,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
 
 function Carousel(props) {
-  const { children } = props
+  const { children, isAnswered, setIsAnswered } = props
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
@@ -18,10 +18,14 @@ function Carousel(props) {
   }
   const next = () => {
     carouselRef.current?.next()
+    setIsAnswered(false)
   }
   const previous = () => {
     carouselRef.current?.prev()
   }
+
+  //COMPUTED PROPERTIES
+  isAnswered && next()
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -48,9 +52,9 @@ function Carousel(props) {
       </AntdCarousel>
 
       <Row h="right">
-        <Col cw="auto">
+        <Col cw="auto" mt={4}>
           <Button buttonType="primary" className="buttonGroup">
-            Powered by<b> Typeform</b>
+            Powered by<b> Qonsoll</b>
           </Button>
           <Button
             buttonType="primary"
