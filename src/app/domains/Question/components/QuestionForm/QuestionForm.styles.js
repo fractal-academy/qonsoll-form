@@ -18,10 +18,6 @@ export const styles = {
   modalButtonStyle: {
     position: 'absolute',
     top: '12px',
-    right: '15px',
-    borderRadius: '8px'
-  },
-  borderForFullScreen: {
-    borderRadius: '8px'
+    right: '15px'
   }
 }

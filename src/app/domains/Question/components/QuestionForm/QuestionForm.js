@@ -154,8 +154,7 @@ function QuestionForm(props) {
                     {...question?.layoutType.imgSize}
                     backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
                     position="relative"
-                    zIndex="1"
-                    borderRadius="8px">
+                    zIndex="1">
                     <MediaLibraryModal
                       btnProps={{
                         type: 'primary',
@@ -190,7 +189,6 @@ function QuestionForm(props) {
               backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
               position="relative"
               zIndex="1"
-              borderRadius="8px"
               m={2}>
               <MediaLibraryModal
                 btnProps={{
