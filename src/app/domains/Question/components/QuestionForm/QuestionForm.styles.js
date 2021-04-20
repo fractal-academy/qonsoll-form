@@ -9,5 +9,10 @@ export const styles = {
     top: '40px',
     left: '40px'
   },
-  columnStyle: { justifyContent: 'center', alignItems: 'center' }
+  columnStyle: { justifyContent: 'center', alignItems: 'center' },
+  welcomeBtn: {
+    borderRadius: '4px',
+    marginRight: '4px',
+    fontWeight: 'bold'
+  }
 }

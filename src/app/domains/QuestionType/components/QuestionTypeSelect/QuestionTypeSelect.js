@@ -3,10 +3,15 @@ import { Col, Row } from '@qonsoll/react-design'
 import { Menu } from 'antd'
 import { QUESTION_TYPES } from 'app/constants'
 import {
+  CalendarOutlined,
   CarOutlined,
+  FileTextOutlined,
   GlobalOutlined,
   HeartOutlined,
   HomeOutlined,
+  PictureOutlined,
+  SmallDashOutlined,
+  StarOutlined,
   SwapOutlined
 } from '@ant-design/icons'
 import Text from 'antd/lib/typography/Text'
@@ -21,26 +26,26 @@ const questionTypeMap = [
     icon: <HomeOutlined style={{ fontSize: '24px' }} />
   },
   {
+    type: QUESTION_TYPES.LONG_TEXT,
+    description: 'Mote space to spill the beans',
+    icon: <FileTextOutlined style={{ fontSize: '24px' }} />
+  },
+  {
     type: QUESTION_TYPES.SHORT_TEXT,
     description: 'For short answers, like names',
-    icon: <GlobalOutlined style={{ fontSize: '24px' }} />
+    icon: <SmallDashOutlined style={{ fontSize: '24px' }} />
   },
   {
     type: QUESTION_TYPES.DATE,
     description: 'Collect answers in date format',
-
-    icon: <SwapOutlined style={{ fontSize: '24px' }} />
+    icon: <CalendarOutlined style={{ fontSize: '24px' }} />
   },
   {
     type: QUESTION_TYPES.FILE_UPLOAD,
     description: 'Upload a file up to 10MB',
     icon: <HeartOutlined style={{ fontSize: '24px' }} />
   },
-  {
-    type: QUESTION_TYPES.LONG_TEXT,
-    description: 'Mote space to spill the beans',
-    icon: <CarOutlined style={{ fontSize: '24px' }} />
-  },
+
   {
     type: QUESTION_TYPES.OPINION_SCALE,
     description: 'A customizable, numbered scale',
@@ -49,12 +54,12 @@ const questionTypeMap = [
   {
     type: QUESTION_TYPES.PICTURE_CHOICE,
     description: 'Multiple choice but prettier',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <PictureOutlined style={{ fontSize: '24px' }} />
   },
   {
     type: QUESTION_TYPES.RATING,
     description: 'Choose from shapes like ⭐ or 🐶',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <StarOutlined style={{ fontSize: '24px' }} />
   },
   {
     type: QUESTION_TYPES.STATEMENT,
@@ -109,7 +114,7 @@ function QuestionTypeSelect(props) {
             {questionTypeMap.map((item, index) => (
               <Menu.Item
                 style={styles.menuItemStyle}
-                key={index}
+                key={item.type}
                 onClick={onClick}>
                 <Row noGutters v="center">
                   <Col v="center" cw="auto">

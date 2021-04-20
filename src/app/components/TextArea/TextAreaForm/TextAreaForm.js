@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { TextArea } from 'components'
-import { Button, Form, Typography } from 'antd'
+import { TextArea, Button, SubmitButton } from 'components'
+import { Form, Typography } from 'antd'
 import { Col, Container, Row } from '@qonsoll/react-design'
 import Text from 'antd/lib/typography/Text'
 import PropTypes from 'prop-types'
@@ -68,17 +68,7 @@ function TextAreaForm(props) {
               <Form.Item>
                 <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
               </Form.Item>
-              <Button
-                size={'large'}
-                style={{
-                  borderRadius: '4px',
-                  marginRight: '4px',
-                  fontWeight: 'bold'
-                }}
-                key="submit"
-                onClick={() => form.submit()}
-                {...btnProps}
-              />
+              <SubmitButton />
               <Text>Press enter ↵</Text>
             </Form>
           </Col>

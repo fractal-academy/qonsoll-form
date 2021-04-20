@@ -11,12 +11,13 @@ import {
   YesnoButton,
   RangeButton,
   ChoiceForm,
-  Button
+  Button,
+  SubmitButton
 } from 'components'
 import { EyeFilled, PicRightOutlined, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { styles } from './QuestionForm.styles.js'
+import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import PropTypes from 'prop-types'
@@ -32,7 +33,7 @@ const layoutSides = [
 const rightSide = [LAYOUT_TYPES.RIGHT_SIDE_BIG, LAYOUT_TYPES.RIGHT_SIDE_SMALL]
 
 function QuestionForm(props) {
-  const { question } = props
+  const { question, onQuestionTypeChange, setshowPopover, showPopover } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -40,27 +41,33 @@ function QuestionForm(props) {
 
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
-  const [showPopover, setshowPopover] = useState(false)
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
+    [QUESTION_TYPES.WELCOME_SCREEN]: {
+      component: <SubmitButton>START</SubmitButton>
+    },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceForm />
+      component: <ChoiceForm withImage />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton />
+      component: <RangeButton from={1} to={5} />
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <InputForm />
+      component: (
+        <InputForm btnProps={{ type: 'primary', children: 'Submit' }} />
+      )
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <TextAreaForm />
+      component: (
+        <TextAreaForm btnProps={{ type: 'primary', children: 'Submit' }} />
+      )
     },
     [QUESTION_TYPES.DATE]: {
       component: <DateTimeInput />
@@ -69,7 +76,7 @@ function QuestionForm(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <Button />
+      component: <SubmitButton>Next</SubmitButton>
     }
   }
 
@@ -84,16 +91,6 @@ function QuestionForm(props) {
   const imageOrder = rightSide.includes(question?.layoutType) ? 3 : 1
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
-    setshowPopover(!showPopover)
-  }
-  const changeQuestionType = () => {
-    // setQuestionList((questionList) => [
-    //   ...questionList,
-    //   {
-    //     icon: <PicRightOutlined />,
-    //     description: 'New Question.'
-    //   }
-    // ])
     setshowPopover(!showPopover)
   }
   // [USE_EFFECTS]
@@ -134,7 +131,9 @@ function QuestionForm(props) {
                   placement={'bottomRight'}
                   btnType="primary"
                   btnIcon={<SettingOutlined />}
-                  content={<QuestionTypeSelect onClick={changeQuestionType} />}
+                  content={
+                    <QuestionTypeSelect onClick={onQuestionTypeChange} />
+                  }
                 />
               </Col>
               {question?.layoutType === LAYOUT_TYPES.FULL_SCREEN && (
@@ -149,10 +148,10 @@ function QuestionForm(props) {
                 </Col>
               )}
             </Row>
-            <Row noGutters h="between">
+            <Row noGutters h="between" mb={4}>
               <Col cw="auto">
                 <QuestionHeader
-                  titlePlaceholder={'change on Question type'}
+                  titlePlaceholder={'Editable question title'}
                   subtitlePlaceholder={'Description(optional)'}
                 />
               </Col>
