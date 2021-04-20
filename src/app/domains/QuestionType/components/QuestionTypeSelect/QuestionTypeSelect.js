@@ -12,7 +12,8 @@ import {
   PictureOutlined,
   SmallDashOutlined,
   StarOutlined,
-  SwapOutlined
+  SwapOutlined,
+  UploadOutlined
 } from '@ant-design/icons'
 import Text from 'antd/lib/typography/Text'
 // import PropTypes from 'prop-types'
@@ -43,7 +44,7 @@ const questionTypeMap = [
   {
     type: QUESTION_TYPES.FILE_UPLOAD,
     description: 'Upload a file up to 10MB',
-    icon: <HeartOutlined style={{ fontSize: '24px' }} />
+    icon: <UploadOutlined style={{ fontSize: '24px' }} />
   },
 
   {
