@@ -24,7 +24,7 @@ function FormShow(props) {
   })
 
   // [COMPONENT STATE HOOKS]
-  let [isAnswered, setIsAnswered] = useState(false)
+  const [isAnswered, setIsAnswered] = useState(false)
 
   // [COMPUTED PROPERTIES]
 

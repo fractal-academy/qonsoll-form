@@ -33,9 +33,9 @@ function RangeButton(props) {
   const onButtonClick = (number) => {
     if (range.includes(Number(number))) {
       setButtonKey(number)
-      onClick()
 
       console.log(`Choice ${number} was pressed`)
+      onClick()
     }
   }
 
@@ -44,9 +44,9 @@ function RangeButton(props) {
       {range.map((item) => (
         <Button
           key={item}
+          onClick={() => onButtonClick(item)}
           buttonType="secondary"
-          className={(Number(buttonKey) === item && 'active') || 'range'}
-          onClick={onButtonClick}>
+          className={(Number(buttonKey) === item && 'active') || 'range'}>
           <b>{item}</b>
         </Button>
       ))}
