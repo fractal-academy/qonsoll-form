@@ -80,7 +80,6 @@ function FormShow(props) {
       </Row>
       <Box
         display="flex"
-        flex={1}
         justifyContent="center"
         alignItems="center"
         p={4}
