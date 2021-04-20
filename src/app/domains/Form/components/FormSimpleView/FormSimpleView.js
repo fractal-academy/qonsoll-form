@@ -1,28 +1,33 @@
 import { Card, Image, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { generatePath, useHistory } from 'react-router-dom'
 import { styles } from './FormSimpleView.style'
 import { Row, Col } from '@qonsoll/react-design'
+import { ROUTES_PATHS } from 'app/constants'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
 
 const { Text } = Typography
 
 function FormSimpleView(props) {
-  const { imageURL, title, subtitle } = props
+  const { imageURL, title, subtitle, data, withRedirect } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-
+  const history = useHistory()
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
+  const onFormItemClick = () => {
+    history.push(ROUTES_PATHS.FORM_EDIT)
+  }
+  const onItemSelect = () => {}
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -52,7 +57,8 @@ function FormSimpleView(props) {
           src={imageURL}
           preview={false}
         />
-      }>
+      }
+      onClick={withRedirect ? onFormItemClick : onItemSelect}>
       <Meta
         description={
           <>

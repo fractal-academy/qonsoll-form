@@ -2,7 +2,8 @@ export const styles = {
   cardStyles: {
     backgroundColor: '#eceff5',
     borderRadius: '8px',
-    display: 'inline-block'
+    display: 'inline-block',
+    cursor: 'pointer'
   },
   cardBodyPadding: { padding: '0 8px 8px 8px' },
   imageStyle: {

@@ -13,11 +13,12 @@ import {
   ChoiceForm,
   Button
 } from 'components'
-import { SettingOutlined } from '@ant-design/icons'
+import { EyeFilled, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles.js'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import PropTypes from 'prop-types'
 
 // import { useTranslation } from 'react-i18next'
@@ -73,13 +74,13 @@ function QuestionForm(props) {
 
   const cardStyles = {
     ...styles.cardStyle,
-    ...(question.layoutType === LAYOUT_TYPES.FULL_SCREEN
+    ...(question?.layoutType === LAYOUT_TYPES.FULL_SCREEN
       ? {
           backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
         }
       : {})
   }
-  const imageOrder = rightSide.includes(question.layoutType) ? 3 : 1
+  const imageOrder = rightSide.includes(question?.layoutType) ? 3 : 1
   // [CLEAN FUNCTIONS]
 
   // [USE_EFFECTS]
@@ -105,8 +106,8 @@ function QuestionForm(props) {
       <Row noGutters mb={2} height="inherit">
         <Col v="center" order={2}>
           <Card style={cardStyles}>
-            <Row noGutters h="between">
-              <Col cw="auto">
+            <Row noGutters>
+              <Col>
                 <Tag color="blue">Question 1</Tag>
               </Col>
               <Col cw="auto">
@@ -119,6 +120,17 @@ function QuestionForm(props) {
                   content={<QuestionTypeSelect />}
                 />
               </Col>
+              {question?.layoutType === LAYOUT_TYPES.FULL_SCREEN && (
+                <Col cw="auto" ml={2}>
+                  <MediaLibraryModal
+                    btnProps={{
+                      type: 'primary',
+                      icon: <EyeFilled />,
+                      children: 'Layout'
+                    }}
+                  />
+                </Col>
+              )}
             </Row>
             <Row noGutters h="between">
               <Col cw="auto">
@@ -128,27 +140,40 @@ function QuestionForm(props) {
                 />
               </Col>
             </Row>
-            {question.layoutType === LAYOUT_TYPES.BETWEEN && (
+            {question?.layoutType === LAYOUT_TYPES.BETWEEN && (
               <Row>
                 <Col cw="auto">
                   <Box
-                    {...question.layoutType}
+                    {...question?.layoutType}
                     backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
-                  />
+                    position="relative"
+                    zIndex="1">
+                    <MediaLibraryModal
+                      btnProps={{
+                        type: 'primary',
+                        icon: <SettingOutlined />,
+                        style: {
+                          position: 'absolute',
+                          top: '12px',
+                          right: '15px'
+                        }
+                      }}
+                    />
+                  </Box>
                 </Col>
               </Row>
             )}
             <Row noGutters>
               <Col>
                 {cloneElement(
-                  questionTypesMap[question.questionType].component,
+                  questionTypesMap[question?.questionType].component,
                   question
                 )}
               </Col>
             </Row>
           </Card>
         </Col>
-        {layoutSides.includes(question.layoutType) && (
+        {layoutSides.includes(question?.layoutType) && (
           <Col
             v="center"
             display="flex"
@@ -156,9 +181,22 @@ function QuestionForm(props) {
             height="100%"
             order={imageOrder}>
             <Box
-              {...question.layoutType}
+              {...question?.layoutType}
               backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
-            />
+              position="relative"
+              zIndex="1">
+              <MediaLibraryModal
+                btnProps={{
+                  type: 'primary',
+                  icon: <SettingOutlined />,
+                  style: {
+                    position: 'absolute',
+                    top: '12px',
+                    right: '15px'
+                  }
+                }}
+              />
+            </Box>
           </Col>
         )}
       </Row>

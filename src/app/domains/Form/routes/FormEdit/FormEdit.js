@@ -5,9 +5,9 @@ import {
   QuestionLayoutSwitcher,
   FormContentArea
 } from 'components'
-import { Col, Container, Row, Box } from '@qonsoll/react-design'
-import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
-
+import { Box } from '@qonsoll/react-design'
+import { QuestionForm } from 'app/domains/Question/components'
+import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -48,8 +48,11 @@ function FormEdit(props) {
     <Box bg="#f6f9fe" display="flex" height="inherit" overflowX="hidden">
       <PageLayout>
         <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
-          {/* Here should be QuestionForm  */}
-          <MediaLibraryModal btnProps={{ children: 'Press' }} />
+          <QuestionForm
+            question={{
+              questionType: QUESTION_TYPES.RATING
+            }}
+          />
         </FormContentArea>
       </PageLayout>
 

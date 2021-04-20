@@ -69,12 +69,7 @@ function MediaLibraryModal(props) {
 
   return (
     <>
-      <Button
-        {...btnProps}
-        onClick={() => {
-          setIsModalVisible(!isModalVisible)
-        }}
-      />
+      <Button {...btnProps} onClick={modalStateChange} />
       <Modal
         visible={isModalVisible}
         footer={null}
