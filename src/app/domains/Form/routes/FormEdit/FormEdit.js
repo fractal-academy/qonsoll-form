@@ -8,6 +8,7 @@ import {
 import { Box } from '@qonsoll/react-design'
 import { QuestionForm } from 'app/domains/Question/components'
 import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -20,12 +21,14 @@ function FormEdit(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [activeKey, setActiveKey] = useState(LAYOUT_TYPE_KEYS[0])
 
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
+  const onChangeMenuItem = ({ key }) => {
+    setActiveKey(LAYOUT_TYPES[key])
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -47,10 +50,17 @@ function FormEdit(props) {
   return (
     <Box bg="#f6f9fe" display="flex" height="inherit" overflowX="hidden">
       <PageLayout>
-        <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
+        <FormContentArea
+          leftSideMenu={
+            <QuestionLayoutSwitcher
+              onChange={onChangeMenuItem}
+              defaultActive={activeKey}
+            />
+          }>
           <QuestionForm
             question={{
-              questionType: QUESTION_TYPES.RATING
+              questionType: QUESTION_TYPES.RATING,
+              layoutType: activeKey
             }}
           />
         </FormContentArea>

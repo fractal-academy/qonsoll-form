@@ -149,7 +149,7 @@ function FormsAll(props) {
               key={item}
               title={item.title}
               subtitle={item.subtitle}
-              redirect
+              withRedirect
             />
           </Box>
         ))}

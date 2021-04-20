@@ -4,22 +4,29 @@ import {
   PicRightOutlined,
   PicLeftOutlined,
   AlignLeftOutlined,
-  ProfileFilled
+  ProfileFilled,
+  MenuUnfoldOutlined
 } from '@ant-design/icons'
 import { Menu } from 'antd'
 import { styles } from './QuestionLayoutSwitcher.styles'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 // import { useTranslation } from 'react-i18next'
 
 const menuMap = [
-  { icon: <AlignLeftOutlined /> },
-  { icon: <PicCenterOutlined /> },
-  { icon: <PicLeftOutlined /> },
-  { icon: <PicRightOutlined /> },
-  { icon: <ProfileFilled /> }
+  { icon: <AlignLeftOutlined />, layoutType: LAYOUT_TYPE_KEYS[0] },
+  { icon: <PicCenterOutlined />, layoutType: LAYOUT_TYPE_KEYS[1] },
+  { icon: <MenuUnfoldOutlined />, layoutType: LAYOUT_TYPE_KEYS[2] },
+  { icon: <PicLeftOutlined />, layoutType: LAYOUT_TYPE_KEYS[3] },
+  {
+    icon: <MenuUnfoldOutlined style={{ transform: 'scaleX(-1)' }} />,
+    layoutType: LAYOUT_TYPE_KEYS[4]
+  },
+  { icon: <PicRightOutlined />, layoutType: LAYOUT_TYPE_KEYS[5] },
+  { icon: <ProfileFilled />, layoutType: LAYOUT_TYPE_KEYS[6] }
 ]
 
 function QuestionLayoutSwitcher(props) {
-  // const { WRITE_PROPS_HERE } = props
+  const { onChange, defaultActive } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -27,7 +34,6 @@ function QuestionLayoutSwitcher(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
 
@@ -52,14 +58,12 @@ function QuestionLayoutSwitcher(props) {
   }, [])
 
   return (
-    <Menu style={styles.menuStyle} defaultSelectedKeys={['0']}>
-      {menuMap.map((item, index) => (
+    <Menu style={styles.menuStyle} defaultSelectedKeys={defaultActive}>
+      {menuMap.map((item) => (
         <Menu.Item
-          key={index}
+          key={item.layoutType}
           icon={item.icon}
-          onClick={(data) => {
-            console.log(data)
-          }}
+          onClick={onChange}
           style={styles.menuItemStyle}
         />
       ))}
