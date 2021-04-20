@@ -155,7 +155,7 @@ function FormsAll(props) {
               key={item}
               title="form title"
               subtitle="form subtitle"
-              redirect
+              withRedirect
             />
           </Box>
         ))}

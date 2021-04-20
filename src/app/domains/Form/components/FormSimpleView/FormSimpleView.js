@@ -11,7 +11,7 @@ const { Meta } = Card
 const { Text } = Typography
 
 function FormSimpleView(props) {
-  const { imageURL, title, subtitle, data, redirect } = props
+  const { imageURL, title, subtitle, data, withRedirect } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -58,7 +58,7 @@ function FormSimpleView(props) {
           preview={false}
         />
       }
-      onClick={redirect ? onFormItemClick : onItemSelect}>
+      onClick={withRedirect ? onFormItemClick : onItemSelect}>
       <Meta
         description={
           <>
