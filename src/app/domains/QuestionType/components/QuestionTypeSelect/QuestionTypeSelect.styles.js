@@ -17,5 +17,8 @@ export const styles = {
   menuStyle: {
     height: '300px',
     overflow: 'auto'
+  },
+  iconFontSize: {
+    fontSize: '24px'
   }
 }

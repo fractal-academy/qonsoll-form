@@ -8,6 +8,7 @@ import {
 import { Box } from '@qonsoll/react-design'
 import { QuestionForm } from 'app/domains/Question/components'
 import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
+import { QUESTION_TYPE_KEYS } from 'app/constants/quetstionType'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -20,12 +21,15 @@ function FormEdit(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
+  const [questionType, setQuestionType] = useState(QUESTION_TYPES.YES_NO)
+  const [showPopover, setshowPopover] = useState(false)
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
+  const onQuestionTypeChange = ({ key }) => {
+    setQuestionType(key)
+    setshowPopover(false)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -50,8 +54,11 @@ function FormEdit(props) {
         <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
           <QuestionForm
             question={{
-              questionType: QUESTION_TYPES.RATING
+              questionType: questionType
             }}
+            onQuestionTypeChange={onQuestionTypeChange}
+            showPopover={showPopover}
+            setshowPopover={setshowPopover}
           />
         </FormContentArea>
       </PageLayout>

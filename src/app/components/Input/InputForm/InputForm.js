@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, Typography } from 'antd'
+import { Form, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
-import { Input } from 'components'
+import { Input, Button, SubmitButton } from 'components'
 // import { withTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 import { styles } from './InputForm.styles'
@@ -72,12 +72,7 @@ function InputForm(props) {
         {/* //TODO:REPLACE ON CUSTOM SUBMIT BUTTON */}
         <Row mt={24}>
           <Col cw="auto">
-            <Button
-              size={'large'}
-              style={styles.buttonStyles}
-              onClick={() => form.submit()}
-              {...btnProps}
-            />
+            <SubmitButton />
           </Col>
           <Col cw="auto" v="center" ml={10}>
             <Text>Press enter ↵</Text>
