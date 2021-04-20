@@ -72,7 +72,18 @@ function QuestionAdvancedView(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <Button buttonType="primary" />
+      component: (
+        <Button buttonType="primary" buttonText="213" size="large">
+          Continue
+        </Button>
+      )
+    },
+    [QUESTION_TYPES.WELCOME_SCREEN]: {
+      component: (
+        <Button buttonType="primary" buttonText="213" size="large">
+          Start questionary
+        </Button>
+      )
     }
   }
   const bgImage = {
@@ -110,6 +121,8 @@ function QuestionAdvancedView(props) {
         <Card bordered={false}>
           <Row noGutters>
             <Col cw="auto">
+              {question?.layoutType ===
+              <LAYOUT_TYPES className="BETWEEN"></LAYOUT_TYPES>}
               <Title level={4} style={globalStyles.resetMargin}>
                 {questionNumber}.Question title
               </Title>
