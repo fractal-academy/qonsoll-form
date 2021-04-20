@@ -13,7 +13,7 @@ import {
   ChoiceForm,
   Button
 } from 'components'
-import { EyeFilled, SettingOutlined } from '@ant-design/icons'
+import { EyeFilled, PicRightOutlined, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles.js'
@@ -40,6 +40,7 @@ function QuestionForm(props) {
 
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
+  const [showPopover, setshowPopover] = useState(false)
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -82,7 +83,19 @@ function QuestionForm(props) {
   }
   const imageOrder = rightSide.includes(question?.layoutType) ? 3 : 1
   // [CLEAN FUNCTIONS]
-
+  const popoverShowChange = () => {
+    setshowPopover(!showPopover)
+  }
+  const changeQuestionType = () => {
+    // setQuestionList((questionList) => [
+    //   ...questionList,
+    //   {
+    //     icon: <PicRightOutlined />,
+    //     description: 'New Question.'
+    //   }
+    // ])
+    setshowPopover(!showPopover)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -112,12 +125,16 @@ function QuestionForm(props) {
               </Col>
               <Col cw="auto">
                 <Popover
-                  style={styles.popoverStyle}
-                  trigger="click"
-                  placement="bottomRight"
+                  onClick={popoverShowChange}
+                  visible={showPopover}
+                  onVisibleChange={() => {
+                    setshowPopover(!showPopover)
+                  }}
+                  trigger={'click'}
+                  placement={'bottomRight'}
                   btnType="primary"
                   btnIcon={<SettingOutlined />}
-                  content={<QuestionTypeSelect />}
+                  content={<QuestionTypeSelect onClick={changeQuestionType} />}
                 />
               </Col>
               {question?.layoutType === LAYOUT_TYPES.FULL_SCREEN && (

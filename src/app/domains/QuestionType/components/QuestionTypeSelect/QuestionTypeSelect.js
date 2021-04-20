@@ -68,7 +68,7 @@ const questionTypeMap = [
   }
 ]
 function QuestionTypeSelect(props) {
-  const { onChange } = props
+  const { onChange, onClick } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -110,7 +110,7 @@ function QuestionTypeSelect(props) {
               <Menu.Item
                 style={styles.menuItemStyle}
                 key={index}
-                onClick={() => {}}>
+                onClick={onClick}>
                 <Row noGutters v="center">
                   <Col v="center" cw="auto">
                     {item.icon}

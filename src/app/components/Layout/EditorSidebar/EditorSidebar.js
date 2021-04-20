@@ -27,6 +27,7 @@ const mockedData = [
     description: 'Some optional ending.'
   }
 ]
+
 function EditorSidebar(props) {
   const { questionsList, questionsEndingsList } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
@@ -37,9 +38,11 @@ function EditorSidebar(props) {
 
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
+  const [showPopover, setshowPopover] = useState(false)
 
   // [COMPUTED PROPERTIES]
   const [endingList, setEndingList] = useState(mockedData)
+  const [questionList, setQuestionList] = useState(mockedData)
   // [CLEAN FUNCTIONS]
   const onUpdate = () => {}
   const addEnding = () => {
@@ -51,7 +54,19 @@ function EditorSidebar(props) {
       }
     ])
   }
-
+  const addQuestion = () => {
+    setQuestionList((questionList) => [
+      ...questionList,
+      {
+        icon: <PicRightOutlined />,
+        description: 'New Question.'
+      }
+    ])
+    setshowPopover(!showPopover)
+  }
+  const popoverShowChange = () => {
+    setshowPopover(!showPopover)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -102,11 +117,16 @@ function EditorSidebar(props) {
               </Col>
               <Col cw="auto" px={10} py={1} mr={2} borderRadius="4px">
                 <Popover
+                  onClick={popoverShowChange}
+                  visible={showPopover}
+                  onVisibleChange={() => {
+                    setshowPopover(!showPopover)
+                  }}
                   trigger={'click'}
                   placement={'bottomRight'}
                   btnType="text"
                   btnIcon={<PlusOutlined style={styles.hover} />}
-                  content={<QuestionTypeSelect />}
+                  content={<QuestionTypeSelect onClick={addQuestion} />}
                 />
               </Col>
               <Col cw="auto" px={1} borderRadius="4px" v="center">
@@ -119,7 +139,7 @@ function EditorSidebar(props) {
           </Box>
           {/* Question List*/}
           <Box overflow="auto" p={3}>
-            <QuestionsList />
+            <QuestionsList data={questionList} />
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
             <Row>

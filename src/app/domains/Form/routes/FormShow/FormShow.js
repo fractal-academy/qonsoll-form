@@ -110,7 +110,7 @@ function FormShow(props) {
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.DATE,
-                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_SMALL,
                 btnProps: { type: 'primary', children: 'Submit' }
               }}
             />
