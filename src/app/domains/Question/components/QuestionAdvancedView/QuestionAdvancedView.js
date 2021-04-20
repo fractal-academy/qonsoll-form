@@ -77,7 +77,18 @@ function QuestionAdvancedView(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <Button buttonType="primary" />
+      component: (
+        <Button buttonType="primary" buttonText="213" size="large">
+          Continue
+        </Button>
+      )
+    },
+    [QUESTION_TYPES.WELCOME_SCREEN]: {
+      component: (
+        <Button buttonType="primary" buttonText="Submit" size="large">
+          Start questionary
+        </Button>
+      )
     }
   }
   const bgImage = {
