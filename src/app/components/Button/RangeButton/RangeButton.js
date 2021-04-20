@@ -35,7 +35,7 @@ function RangeButton(props) {
       setButtonKey(number)
 
       console.log(`Choice ${number} was pressed`)
-      onClick()
+      onClick && onClick()
     }
   }
 

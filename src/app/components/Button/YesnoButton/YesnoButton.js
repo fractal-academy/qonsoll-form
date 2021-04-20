@@ -38,7 +38,7 @@ function YesnoButton(props) {
   const onButtonClick = (letter) => {
     if (letters.includes(letter)) {
       setButtonKey(letter)
-      onClick()
+      onClick && onClick()
 
       console.log(`${letter} was pressed`)
     }

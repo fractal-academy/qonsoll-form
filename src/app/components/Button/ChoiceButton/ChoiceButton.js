@@ -42,7 +42,7 @@ function ChoiceButton(props) {
   const onButtonClick = (letter) => {
     if (letters.includes(letter)) {
       setButtonKey(letter)
-      onClick()
+      onClick && onClick()
 
       console.log(`Choice ${letter} was pressed`)
     }

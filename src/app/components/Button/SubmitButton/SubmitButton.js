@@ -12,7 +12,6 @@ const { Text } = Typography
 function SubmitButton(props) {
   const { children } = props
 
-  console.log(children)
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
