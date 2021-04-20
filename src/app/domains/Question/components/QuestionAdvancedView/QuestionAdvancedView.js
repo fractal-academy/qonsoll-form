@@ -129,9 +129,15 @@ function QuestionAdvancedView(props) {
       noGutters
       height="inherit"
       backgroundImage={bgImage}
-      backgroundRepeat="no-repeat">
-      <Col v="center" order={2}>
-        <Card bordered={false}>
+      backgroundRepeat="no-repeat"
+      backgroundSize="cover">
+      <Col
+        v="center"
+        order={2}
+        mx={4}
+        display="flex"
+        style={styles.columnStyle}>
+        <Card bordered={false} style={styles.cardStyle}>
           <Row noGutters>
             <Col cw="auto">
               <Title level={4} style={globalStyles.resetMargin}>

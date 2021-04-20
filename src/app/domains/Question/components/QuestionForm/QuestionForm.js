@@ -119,8 +119,15 @@ function QuestionForm(props) {
         display="flex"
         flex={1}
         style={styles.rowStyle}
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
         backgroundImage={bgImage && bgImage}>
-        <Col v="center" order={2} cw="auto">
+        <Col
+          v="center"
+          order={2}
+          mx={4}
+          display="flex"
+          style={styles.columnStyle}>
           <Card style={styles.cardStyle} bordered={false}>
             <Row noGutters>
               <Col>
@@ -167,6 +174,7 @@ function QuestionForm(props) {
                 <Col cw="auto">
                   <Box
                     {...question?.layoutType.imgSize}
+                    backgroundRepeat="no-repeat"
                     backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
                     position="relative"
                     zIndex="1"
@@ -202,6 +210,7 @@ function QuestionForm(props) {
             order={imageOrder}>
             <Box
               {...question?.layoutType.imgSize}
+              backgroundRepeat="no-repeat"
               backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
               position="relative"
               zIndex="1"

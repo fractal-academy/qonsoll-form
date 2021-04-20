@@ -1,6 +1,6 @@
 export const styles = {
   rowStyle: {
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
   cardStyle: {
