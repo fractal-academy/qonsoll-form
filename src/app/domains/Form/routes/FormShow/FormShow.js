@@ -88,7 +88,7 @@ function FormShow(props) {
         borderRadius="8px"
         bg="white">
         <FormAdvancedView>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.LONG_TEXT,
@@ -97,7 +97,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.SHORT_TEXT,
@@ -106,7 +106,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.DATE,
@@ -115,16 +115,15 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.RATING,
                 layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG
-                // btnProps: { type: 'primary', children: 'Submit' }
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.FILE_UPLOAD,
@@ -133,7 +132,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.OPINION_SCALE,
@@ -142,7 +141,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.YES_NO,
@@ -151,10 +150,37 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.PICTURE_CHOICE,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.STATEMENT,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.WELCOME_SCREEN,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.YES_NO,
                 layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
                 btnProps: { type: 'primary', children: 'Submit' }
               }}
