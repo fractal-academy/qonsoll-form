@@ -6,6 +6,8 @@ import { Box } from '@qonsoll/react-design'
 // import { useTranslation } from 'react-i18next'
 
 function YesnoButton(props) {
+  const { onClick } = props
+
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -36,6 +38,7 @@ function YesnoButton(props) {
   const onButtonClick = (letter) => {
     if (letters.includes(letter)) {
       setButtonKey(letter)
+      onClick()
 
       console.log(`${letter} was pressed`)
     }
