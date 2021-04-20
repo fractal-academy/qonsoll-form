@@ -88,41 +88,41 @@ function FormShow(props) {
         borderRadius="8px"
         bg="white">
         <FormAdvancedView>
-          {/*<Box height="500px">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.LONG_TEXT,*/}
-          {/*      layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,*/}
-          {/*      btnProps: { type: 'primary', children: 'Submit' }*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
-          {/*<Box height="500px">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.SHORT_TEXT,*/}
-          {/*      layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,*/}
-          {/*      btnProps: { type: 'primary', children: 'Submit' }*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
-          {/*<Box height="500px">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.DATE,*/}
-          {/*      layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,*/}
-          {/*      btnProps: { type: 'primary', children: 'Submit' }*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
-          {/*<Box height="500px" border="1px solid red">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.RATING,*/}
-          {/*      layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.LONG_TEXT,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.SHORT_TEXT,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.DATE,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.RATING,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG
+              }}
+            />
+          </Box>
           <Box height="500px">
             <QuestionAdvancedView
               question={{
