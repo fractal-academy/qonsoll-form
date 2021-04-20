@@ -50,7 +50,7 @@ function Carousel(props) {
       <Row h="right">
         <Col cw="auto">
           <Button buttonType="primary" className="buttonGroup">
-            Powered by<b> Typeform</b>
+            Powered by<b> Senseteq</b>
           </Button>
           <Button
             buttonType="primary"

@@ -89,7 +89,7 @@ function FormShow(props) {
         borderRadius="8px"
         bg="white">
         <FormAdvancedView>
-          {/*<Box height="600px">*/}
+          {/*<Box height="500px">*/}
           {/*  <QuestionAdvancedView*/}
           {/*    question={{*/}
           {/*      questionType: QUESTION_TYPES.LONG_TEXT,*/}
@@ -98,7 +98,7 @@ function FormShow(props) {
           {/*    }}*/}
           {/*  />*/}
           {/*</Box>*/}
-          {/*<Box height="600px">*/}
+          {/*<Box height="500px">*/}
           {/*  <QuestionAdvancedView*/}
           {/*    question={{*/}
           {/*      questionType: QUESTION_TYPES.SHORT_TEXT,*/}
@@ -107,7 +107,7 @@ function FormShow(props) {
           {/*    }}*/}
           {/*  />*/}
           {/*</Box>*/}
-          {/*<Box height="600px">*/}
+          {/*<Box height="500px">*/}
           {/*  <QuestionAdvancedView*/}
           {/*    question={{*/}
           {/*      questionType: QUESTION_TYPES.DATE,*/}
@@ -116,7 +116,7 @@ function FormShow(props) {
           {/*    }}*/}
           {/*  />*/}
           {/*</Box>*/}
-          {/*<Box height="600px" border="1px solid red">*/}
+          {/*<Box height="500px" border="1px solid red">*/}
           {/*  <QuestionAdvancedView*/}
           {/*    question={{*/}
           {/*      questionType: QUESTION_TYPES.RATING,*/}
@@ -124,51 +124,51 @@ function FormShow(props) {
           {/*    }}*/}
           {/*  />*/}
           {/*</Box>*/}
-          {/*<Box height="600px">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.FILE_UPLOAD,*/}
-          {/*      layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,*/}
-          {/*      btnProps: { type: 'primary', children: 'Submit' }*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
-          {/*<Box height="600px">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.OPINION_SCALE,*/}
-          {/*      layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,*/}
-          {/*      btnProps: { type: 'primary', children: 'Submit' }*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
-          {/*<Box height="600px">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.YES_NO,*/}
-          {/*      layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,*/}
-          {/*      btnProps: { type: 'primary', children: 'Submit' }*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
-          {/*<Box height="600px">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.PICTURE_CHOICE,*/}
-          {/*      layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,*/}
-          {/*      btnProps: { type: 'primary', children: 'Submit' }*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
-          {/*<Box height="600px">*/}
-          {/*  <QuestionAdvancedView*/}
-          {/*    question={{*/}
-          {/*      questionType: QUESTION_TYPES.STATEMENT,*/}
-          {/*      layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,*/}
-          {/*      btnProps: { type: 'primary', children: 'Submit' }*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Box>*/}
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.FILE_UPLOAD,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.OPINION_SCALE,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.YES_NO,
+                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.PICTURE_CHOICE,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.STATEMENT,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
           <Box height="500px">
             <QuestionAdvancedView
               question={{
