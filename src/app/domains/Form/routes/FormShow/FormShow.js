@@ -5,7 +5,9 @@ import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
+import { firestore } from 'app/services'
 import { FormAdvancedView } from 'domains/Form/components'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from 'domains/Question/components'
 import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
 import { styles } from './FormShow.style'
@@ -18,23 +20,27 @@ function FormShow(props) {
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const history = useHistory()
+  const [data] = useCollectionData(firestore.collection('questions'))
+
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
+  const layoutTypeMap = {
+    fullscreen: QUESTION_TYPES.FULL_SCREEN,
+    between: QUESTION_TYPES.BETWEEN,
+    leftsidesmall: QUESTION_TYPES.LEFT_SIDE_SMALL,
+    leftsidebig: QUESTION_TYPES.LEFT_SIDE_BIG,
+    rightsidesmall: QUESTION_TYPES.RIGHT_SIDE_SMALL,
+    rightsidebig: QUESTION_TYPES.RIGHT_SIDE_BIG
+  }
 
   // [CLEAN FUNCTIONS]
   const onRestart = () => {}
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
 
     // [CLEAN UP FUNCTION]
     return () => {
@@ -89,23 +95,33 @@ function FormShow(props) {
         borderRadius="8px"
         bg="white">
         <FormAdvancedView>
-          <Box height="600px">
-            <QuestionAdvancedView
-              question={{
-                questionType: QUESTION_TYPES.LONG_TEXT,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
-                btnProps: { type: 'primary', children: 'Submit' }
-              }}
-            />
-          </Box>
-          <Box height="600px">
+          {data?.map((item, index) => (
+            <Box height="600px">
+              <QuestionAdvancedView
+                questionNumber={index + 1}
+                title={item?.title}
+                subtitle={item?.subtitle}
+                image={item?.image}
+                question={{
+                  questionType: item?.questionType,
+                  btnProps: {
+                    type: item?.btnProps?.type,
+                    children: item?.btnProps?.children
+                  },
+                  layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG
+                }}
+              />
+            </Box>
+          ))}
+          {/* <Box height="600px">
             <QuestionAdvancedView
               question={{
                 questionType: QUESTION_TYPES.SHORT_TEXT,
                 layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
                 btnProps: { type: 'primary', children: 'Submit' }
               }}
-            />
+            /> */}
+          {/* 
           </Box>
           <Box height="600px">
             <QuestionAdvancedView
@@ -160,7 +176,7 @@ function FormShow(props) {
                 btnProps: { type: 'primary', children: 'Submit' }
               }}
             />
-          </Box>
+          </Box> */}
         </FormAdvancedView>
       </Box>
     </Box>

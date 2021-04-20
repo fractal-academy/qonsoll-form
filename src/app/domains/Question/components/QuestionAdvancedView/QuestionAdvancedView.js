@@ -35,7 +35,7 @@ const layoutSides = [
 const rightSide = [LAYOUT_TYPES.RIGHT_SIDE_BIG, LAYOUT_TYPES.RIGHT_SIDE_SMALL]
 
 function QuestionAdvancedView(props) {
-  const { question, questionNumber = 0 } = props
+  const { question, image, title, subtitle, questionNumber = 0 } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -79,11 +79,12 @@ function QuestionAdvancedView(props) {
     ...(question?.layoutType === LAYOUT_TYPES.FULL_SCREEN
       ? {
           //mock data will be replaced
-          backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
+          backgroundImage: `url${image && image}`
         }
       : {})
   }
   const imageOrder = rightSide.includes(question?.layoutType) ? 3 : 1
+
   // [CLEAN FUNCTIONS]
 
   // [USE_EFFECTS]
@@ -111,13 +112,13 @@ function QuestionAdvancedView(props) {
           <Row noGutters>
             <Col cw="auto">
               <Title level={4} style={globalStyles.resetMargin}>
-                {questionNumber}.Question title
+                {questionNumber}. {title}
               </Title>
             </Col>
           </Row>
           <Row noGutters>
             <Col>
-              <Text>Question description</Text>
+              <Text>{subtitle}</Text>
             </Col>
           </Row>
           {question?.layoutType === LAYOUT_TYPES.BETWEEN && (
