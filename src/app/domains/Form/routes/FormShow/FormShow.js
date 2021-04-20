@@ -94,7 +94,7 @@ function FormShow(props) {
         borderRadius="8px"
         bg="white">
         <FormAdvancedView isAnswered={isAnswered} setIsAnswered={setIsAnswered}>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               questionNumber={1}
               question={{
@@ -108,7 +108,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               questionNumber={2}
               question={{
@@ -122,7 +122,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               questionNumber={3}
               question={{
@@ -136,17 +136,16 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               questionNumber={4}
               question={{
                 questionType: QUESTION_TYPES.RATING,
                 layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG
-                // btnProps: { type: 'primary', children: 'Submit' }
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               questionNumber={5}
               question={{
@@ -160,7 +159,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               questionNumber={6}
               question={{
@@ -174,7 +173,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               questionNumber={7}
               question={{
@@ -188,7 +187,7 @@ function FormShow(props) {
               }}
             />
           </Box>
-          <Box height="600px">
+          <Box height="500px">
             <QuestionAdvancedView
               questionNumber={8}
               question={{
@@ -199,6 +198,33 @@ function FormShow(props) {
                   children: 'Submit',
                   onClick: onClick
                 }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.STATEMENT,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.WELCOME_SCREEN,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
+              }}
+            />
+          </Box>
+          <Box height="500px">
+            <QuestionAdvancedView
+              question={{
+                questionType: QUESTION_TYPES.YES_NO,
+                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
+                btnProps: { type: 'primary', children: 'Submit' }
               }}
             />
           </Box>

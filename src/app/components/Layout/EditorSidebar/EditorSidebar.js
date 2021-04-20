@@ -3,21 +3,30 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Divider } from 'antd'
 import {
   LeftOutlined,
+  PicCenterOutlined,
+  PicRightOutlined,
   PlusOutlined,
   RightOutlined,
-  SettingOutlined
+  SettingOutlined,
+  UnorderedListOutlined
 } from '@ant-design/icons'
 import { styles } from './EditorSidebar.styles'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
-import { Popover } from 'components'
+import { DragableList, Popover } from 'components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
 import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
 import QuestionsList from 'domains/Question/components/QuestionsList'
+import QuestionSimpleView from 'domains/Question/components/QuestionSimpleView'
 // import { useTranslation } from 'react-i18next'
 const { Title } = Typography
-
+const mockedData = [
+  {
+    icon: <UnorderedListOutlined />,
+    description: 'Some optional ending.'
+  }
+]
 function EditorSidebar(props) {
   const { questionsList, questionsEndingsList } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
@@ -30,8 +39,18 @@ function EditorSidebar(props) {
   const [open, setOpen] = useState(true)
 
   // [COMPUTED PROPERTIES]
-
+  const [endingList, setEndingList] = useState(mockedData)
   // [CLEAN FUNCTIONS]
+  const onUpdate = () => {}
+  const addEnding = () => {
+    setEndingList((endingList) => [
+      ...endingList,
+      {
+        icon: <PicRightOutlined />,
+        description: 'Some optional ending.'
+      }
+    ])
+  }
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -125,11 +144,22 @@ function EditorSidebar(props) {
                 </Title>
               </Col>
               <Col cw="auto" px={10} py={1} borderRadius="4px" bg="#e8f0fb">
-                <PlusOutlined style={styles.plusIconColor} />
+                <PlusOutlined
+                  style={styles.plusIconColor}
+                  onClick={addEnding}
+                />
               </Col>
             </Row>
             <Box pb={3} px={3} maxHeight="350px" overflow="auto">
-              <QuestionsList />
+              {/*<QuestionsList />*/}
+              <DragableList
+                itemLayout="horizontal"
+                dataSource={endingList}
+                onUpdate={onUpdate}
+                renderItem={(item, index) => (
+                  <QuestionSimpleView {...item} number={index + 1} />
+                )}
+              />
             </Box>
           </Box>
         </Box>
