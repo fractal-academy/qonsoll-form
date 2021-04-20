@@ -4,15 +4,13 @@ import { Menu } from 'antd'
 import { QUESTION_TYPES } from 'app/constants'
 import {
   CalendarOutlined,
-  CarOutlined,
+  CopyrightOutlined,
   FileTextOutlined,
-  GlobalOutlined,
-  HeartOutlined,
   HomeOutlined,
   PictureOutlined,
+  ShareAltOutlined,
   SmallDashOutlined,
   StarOutlined,
-  SwapOutlined,
   UploadOutlined
 } from '@ant-design/icons'
 import Text from 'antd/lib/typography/Text'
@@ -24,53 +22,53 @@ const questionTypeMap = [
   {
     type: QUESTION_TYPES.WELCOME_SCREEN,
     description: 'Invite your audience in',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <HomeOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.LONG_TEXT,
     description: 'Mote space to spill the beans',
-    icon: <FileTextOutlined style={{ fontSize: '24px' }} />
+    icon: <FileTextOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.SHORT_TEXT,
     description: 'For short answers, like names',
-    icon: <SmallDashOutlined style={{ fontSize: '24px' }} />
+    icon: <SmallDashOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.DATE,
     description: 'Collect answers in date format',
-    icon: <CalendarOutlined style={{ fontSize: '24px' }} />
+    icon: <CalendarOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.FILE_UPLOAD,
     description: 'Upload a file up to 10MB',
-    icon: <UploadOutlined style={{ fontSize: '24px' }} />
+    icon: <UploadOutlined style={styles.iconFontSize} />
   },
 
   {
     type: QUESTION_TYPES.OPINION_SCALE,
     description: 'A customizable, numbered scale',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <HomeOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.PICTURE_CHOICE,
     description: 'Multiple choice but prettier',
-    icon: <PictureOutlined style={{ fontSize: '24px' }} />
+    icon: <PictureOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.RATING,
     description: 'Choose from shapes like ⭐ or 🐶',
-    icon: <StarOutlined style={{ fontSize: '24px' }} />
+    icon: <StarOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.STATEMENT,
     description: 'Take the mic for a moment',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <CopyrightOutlined style={styles.iconFontSize} />
   },
   {
     type: QUESTION_TYPES.YES_NO,
     description: 'Just 2 options: Yes or No',
-    icon: <HomeOutlined style={{ fontSize: '24px' }} />
+    icon: <ShareAltOutlined style={styles.iconFontSize} />
   }
 ]
 function QuestionTypeSelect(props) {
