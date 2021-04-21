@@ -7,13 +7,15 @@ import {
   SearchOutlined,
   PlusOutlined
 } from '@ant-design/icons'
+import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
 import { FormSimpleView } from 'domains/Form/components'
 import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
-import DISPATCH_EVENTS from '~/app/context/FormContext/DispatchEventsTypes'
+import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
 // import { useTranslation } from 'react-i18next'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const { Title, Text } = Typography
 
@@ -28,28 +30,17 @@ function FormsAll(props) {
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const history = useHistory()
+  const [data] = useCollectionData(firestore.collection('forms'))
+
   // [COMPONENT STATE HOOKS]
-  const [formsList, setFormsList] = useState([])
-  // [CUSTOM_HOOKS]
-  const dispatch = useFormContextDispatch()
-  const formContext = useFormContext()
 
   // [COMPUTED PROPERTIES]
-  let amountFiles = 0
+  let amountFiles = data?.length
+
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
-  const onAddForm = () => {
-    dispatch({
-      type: DISPATCH_EVENTS.ADD,
-      payload: {
-        title: 'new Title ',
-        subtitle: 'subtitle'
-      }
-    })
-  }
+  const onAddForm = () => {}
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -67,6 +58,7 @@ function FormsAll(props) {
       isComponentMounted = false
     }
   }, [])
+
   const menu = (
     <Menu>
       {mockRoutes.map((item, index) => (
@@ -137,13 +129,14 @@ function FormsAll(props) {
         bg="#f6f9fe"
         className="custom-scroll">
         {/* Here should be list of data Images/Video */}
-        {formContext.map((item) => (
-          <Box mr={3} mb={3}>
+        {data?.map((item) => (
+          <Box pr={3} pb={3}>
             <FormSimpleView
-              key={item}
-              title={item.title}
-              subtitle={item.subtitle}
               withRedirect
+              key={item?.id}
+              title={item?.title}
+              imageURL={item?.image}
+              subtitle={item?.subtitle}
             />
           </Box>
         ))}
