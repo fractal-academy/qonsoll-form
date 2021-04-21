@@ -34,7 +34,7 @@ function FormSimpleView(props) {
     setVisible(true)
   }
 
-  const handleOk = async () => {
+  const handleDelete = async () => {
     setConfirmLoading(true)
     try {
       await deleteData(COLLECTIONS.FORMS, id)
@@ -55,7 +55,7 @@ function FormSimpleView(props) {
         <Popconfirm
           title="Delete this form?"
           visible={visible}
-          onConfirm={handleOk}
+          onConfirm={handleDelete}
           okButtonProps={{ loading: confirmLoading }}
           onCancel={handleCancel}>
           <Text onClick={showPopconfirm}>Delete</Text>
