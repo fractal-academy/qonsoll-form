@@ -6,8 +6,11 @@ import {
   Divider,
   Tooltip,
   Typography,
+  Form,
   Menu,
-  Input
+  Input,
+  Modal,
+  message
 } from 'antd'
 import {
   ArrowLeftOutlined,
@@ -21,7 +24,10 @@ import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
 import { Link } from 'react-router-dom'
-import { FormSimpleView } from 'domains/Form/components'
+import { FormSimpleForm, FormSimpleView } from 'domains/Form/components'
+import { addData, setData } from 'app/services/Firestore'
+import COLLECTIONS from 'app/constants/collection'
+import { firebase, firestore } from 'app/services'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
@@ -42,9 +48,14 @@ function FormsAll(props) {
   const history = useHistory()
   // [COMPONENT STATE HOOKS]
   const [formsList, setFormsList] = useState([])
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [form] = Form.useForm()
 
   // [COMPUTED PROPERTIES]
   let amountFiles = 0
+  const formId = firestore.collection('forms').doc().id
+  console.log(formId)
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
   const onAddForm = () => {
@@ -73,6 +84,23 @@ function FormsAll(props) {
       isComponentMounted = false
     }
   }, [])
+  const onFormCreate = async (data) => {
+    setLoading(true)
+    try {
+      await setData(COLLECTIONS.FORMS, formId, {
+        id: formId,
+        title: data?.name,
+        subtitle: data?.description || '',
+        image: ''
+      })
+    } catch (e) {
+      console.error(e.message)
+    }
+    setLoading(false)
+    setIsModalVisible(false)
+    form.resetFields()
+  }
+
   const menu = (
     <Menu>
       {mockRoutes.map((item, index) => (
@@ -83,7 +111,13 @@ function FormsAll(props) {
       ))}
     </Menu>
   )
-
+  const handleCancel = () => {
+    setIsModalVisible(false)
+    form.resetFields()
+  }
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
   return (
     <Box bg="#f6f9fe" flexDirection="column" px={45} py={4} minHeight="100%">
       {/* Page Header */}
@@ -164,9 +198,30 @@ function FormsAll(props) {
           alignItems="center"
           justifyContent="center"
           style={globalStyles.cursorPointer}
-          onClick={onAddForm}>
+          onClick={showModal}>
           <PlusOutlined />
         </Box>
+        <Modal
+          title={<Title level={4}>Create new typeform</Title>}
+          visible={isModalVisible}
+          onCancel={handleCancel}
+          destroyOnClose
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button
+              key="submit"
+              loading={loading}
+              onClick={() => {
+                form.submit()
+              }}
+              type="primary">
+              Create
+            </Button>
+          ]}>
+          <FormSimpleForm form={form} onFinish={onFormCreate} />
+        </Modal>
       </Box>
     </Box>
   )
