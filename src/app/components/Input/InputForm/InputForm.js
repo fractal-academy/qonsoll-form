@@ -13,7 +13,7 @@ const { Text, Title } = Typography
 // import { useTranslation } from 'react-i18next'
 
 function InputForm(props) {
-  const { onSubmit, inputProps, isRequired, btnProps } = props
+  const { onSubmit, inputProps, isRequired, onClick, btnProps } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -72,7 +72,7 @@ function InputForm(props) {
         {/* //TODO:REPLACE ON CUSTOM SUBMIT BUTTON */}
         <Row mt={24}>
           <Col cw="auto">
-            <SubmitButton />
+            <SubmitButton onClick={onClick} />
           </Col>
           <Col cw="auto" v="center" ml={10}>
             <Text>Press enter ↵</Text>

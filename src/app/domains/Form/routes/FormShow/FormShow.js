@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import { Button, Divider, Typography } from 'antd'
-import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
-import { useHistory } from 'react-router'
-import { useKeyPress } from '@umijs/hooks'
-import { globalStyles } from 'app/styles'
+import { useState } from 'react'
 import { firestore } from 'app/services'
+import { useHistory } from 'react-router'
+import { styles } from './FormShow.style'
+import { globalStyles } from 'app/styles'
+import { useKeyPress } from '@umijs/hooks'
+import { Button, Divider, Typography } from 'antd'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import { FormAdvancedView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from 'domains/Question/components'
-import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
-import { styles } from './FormShow.style'
-// import { useTranslation } from 'react-i18next'
+import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 
 const { Title } = Typography
 
 function FormShow(props) {
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const [data] = useCollectionData(firestore.collection('questions'))
@@ -29,48 +24,24 @@ function FormShow(props) {
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
 
-  // [COMPUTED PROPERTIES]
-  const layoutTypeMap = {
-    fullscreen: QUESTION_TYPES.FULL_SCREEN,
-    between: QUESTION_TYPES.BETWEEN,
-    leftsidesmall: QUESTION_TYPES.LEFT_SIDE_SMALL,
-    leftsidebig: QUESTION_TYPES.LEFT_SIDE_BIG,
-    rightsidesmall: QUESTION_TYPES.RIGHT_SIDE_SMALL,
-    rightsidebig: QUESTION_TYPES.RIGHT_SIDE_BIG
-  }
-
   // [CLEAN FUNCTIONS]
   const onRestart = () => {}
   const onClick = () => {
     setIsAnswered(true)
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Box bg="#f6f9fe" display="flex" flexDirection="column" height="100%">
-      <Row py={3} px={4} noGutters bg="white">
-        <Col cw="auto" p={0} v="center">
+      <Row noGutters bg="white" py={3} px={4}>
+        <Col cw="auto" v="center" p={0}>
           <Button
-            size="small"
             type="text"
+            size="small"
+            onClick={() => history.goBack()}
             style={globalStyles.resetPadding}
             icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
-            onClick={() => history.goBack()}
           />
         </Col>
-
         <Col style={styles.textAlign}>
           <Title level={5} style={globalStyles.resetMargin}>
             Live Preview
@@ -86,183 +57,36 @@ function FormShow(props) {
           </Button>
         </Col>
       </Row>
+
       <Row>
         <Col>
           <Divider style={globalStyles.resetMargin} />
         </Col>
       </Row>
+
       <Box
-        display="flex"
         flex={1}
-        justifyContent="center"
+        display="flex"
         alignItems="center"
+        justifyContent="center"
         p={4}
         m={4}
         borderRadius="8px"
         bg="white">
-        <FormAdvancedView>
+        <FormAdvancedView isAnswered={isAnswered} setIsAnswered={setIsAnswered}>
           {data?.map((item, index) => (
-            <Box height="600px">
+            <Box key={index} height="600px">
               <QuestionAdvancedView
+                data={item}
                 questionNumber={index + 1}
-                title={item?.title}
-                subtitle={item?.subtitle}
-                image={item?.image}
-                question={{
-                  questionType: item?.questionType,
-                  btnProps: {
-                    type: item?.btnProps?.type,
-                    children: item?.btnProps?.children
-                  },
-                  layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG
-                }}
+                onClick={onClick}
               />
             </Box>
           ))}
-          {/* <Box height="600px">
-           <FormAdvancedView isAnswered={isAnswered} setIsAnswered={setIsAnswered}>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={1}
-              question={{
-                questionType: QUESTION_TYPES.WELCOME_SCREEN,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={2}
-              question={{
-                questionType: QUESTION_TYPES.LONG_TEXT,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={3}
-              question={{
-                questionType: QUESTION_TYPES.SHORT_TEXT,
-                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            /> */}
-          {/* 
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={4}
-              question={{
-                questionType: QUESTION_TYPES.DATE,
-                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={5}
-              question={{
-                questionType: QUESTION_TYPES.RATING,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_SMALL
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={6}
-              question={{
-                questionType: QUESTION_TYPES.PICTURE_CHOICE,
-                layoutType: LAYOUT_TYPES.BETWEEN,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={7}
-              question={{
-                questionType: QUESTION_TYPES.OPINION_SCALE,
-                layoutType: LAYOUT_TYPES.FULL_SCREEN,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={8}
-              question={{
-                questionType: QUESTION_TYPES.YES_NO,
-                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={9}
-              question={{
-                questionType: QUESTION_TYPES.FILE_UPLOAD,
-                layoutType: LAYOUT_TYPES.RIGHT_SIDE_BIG,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            />
-          </Box>
-          <Box height="500px">
-            <QuestionAdvancedView
-              questionNumber={10}
-              question={{
-                questionType: QUESTION_TYPES.STATEMENT,
-                layoutType: LAYOUT_TYPES.LEFT_SIDE_BIG,
-                btnProps: {
-                  type: 'primary',
-                  children: 'Submit',
-                  onClick: onClick
-                }
-              }}
-            />
-          </Box> */}
         </FormAdvancedView>
       </Box>
     </Box>
   )
 }
-
-FormShow.propTypes = {}
 
 export default FormShow
