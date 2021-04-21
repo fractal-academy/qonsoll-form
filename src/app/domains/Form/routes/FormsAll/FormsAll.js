@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import {
-  Breadcrumb,
-  Button,
-  Divider,
-  Tooltip,
-  Typography,
-  Menu,
-  Input
-} from 'antd'
+import { Breadcrumb, Button, Divider, Typography, Menu, Input } from 'antd'
 import {
   ArrowLeftOutlined,
   FolderOutlined,
-  SettingOutlined,
   SearchOutlined,
-  FilterOutlined,
   PlusOutlined
 } from '@ant-design/icons'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
-import { Link } from 'react-router-dom'
 import { FormSimpleView } from 'domains/Form/components'
+import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
+import DISPATCH_EVENTS from '~/app/context/FormContext/DispatchEventsTypes'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
@@ -42,19 +33,22 @@ function FormsAll(props) {
   const history = useHistory()
   // [COMPONENT STATE HOOKS]
   const [formsList, setFormsList] = useState([])
+  // [CUSTOM_HOOKS]
+  const dispatch = useFormContextDispatch()
+  const formContext = useFormContext()
 
   // [COMPUTED PROPERTIES]
   let amountFiles = 0
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
   const onAddForm = () => {
-    setFormsList((prev) => [
-      ...prev,
-      {
+    dispatch({
+      type: DISPATCH_EVENTS.ADD,
+      payload: {
         title: 'new Title ',
         subtitle: 'subtitle'
       }
-    ])
+    })
   }
   // [USE_EFFECTS]
   useEffect(() => {
@@ -143,7 +137,7 @@ function FormsAll(props) {
         bg="#f6f9fe"
         className="custom-scroll">
         {/* Here should be list of data Images/Video */}
-        {formsList.map((item) => (
+        {formContext.map((item) => (
           <Box mr={3} mb={3}>
             <FormSimpleView
               key={item}

@@ -1,3 +1,8 @@
-const dispatchEventsType = {}
+const DISPATCH_EVENTS = {
+  ADD: 'ADD',
+  DELETE: 'DELETE',
+  UPDATE: 'UPDATE',
+  GET: 'GET'
+}
 
-export default dispatchEventsType
+export default DISPATCH_EVENTS
