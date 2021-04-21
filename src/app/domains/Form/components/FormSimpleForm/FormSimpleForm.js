@@ -11,7 +11,7 @@ import { Col, Row } from '@qonsoll/react-design'
 */
 
 function FormSimpleForm(props) {
-  const { onFinish, form } = props
+  const { onFinish, form, formData } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -23,9 +23,11 @@ function FormSimpleForm(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-
+  const initialValues = {
+    name: formData?.title,
+    description: formData?.subtitle
+  }
   // [CLEAN FUNCTIONS]
-
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -45,7 +47,7 @@ function FormSimpleForm(props) {
   }, [])
 
   return (
-    <Form onFinish={onFinish} form={form}>
+    <Form onFinish={onFinish} form={form} initialValues={initialValues}>
       <Row h="center" mb={2}>
         <Col>
           <Row mb={2}>

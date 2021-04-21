@@ -30,6 +30,7 @@ import { FormSimpleForm, FormSimpleView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
+import { Spinner } from 'components'
 
 const { Title, Text } = Typography
 const mockRoutes = [
@@ -55,19 +56,9 @@ function FormsAll(props) {
   let amountFiles = data?.length
 
   const formId = firestore.collection('forms').doc().id
-  console.log(formId)
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
 
-  const onAddForm = () => {
-    setFormsList((prev) => [
-      ...prev,
-      {
-        title: 'new Title ',
-        subtitle: 'subtitle'
-      }
-    ])
-  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -93,7 +84,8 @@ function FormsAll(props) {
         id: formId,
         title: data?.name,
         subtitle: data?.description || '',
-        image: ''
+        image:
+          'https://image.freepik.com/free-photo/growing-small-tree-in-nature-and-sunlight_34152-1460.jpg'
       })
     } catch (e) {
       console.error(e.message)
@@ -120,6 +112,10 @@ function FormsAll(props) {
   const showModal = () => {
     setIsModalVisible(true)
   }
+  if (!data || loading) {
+    return <Spinner />
+  }
+
   return (
     <Box bg="#f6f9fe" flexDirection="column" px={45} py={4} minHeight="100%">
       {/* Page Header */}
@@ -196,10 +192,11 @@ function FormsAll(props) {
         bg="#f6f9fe"
         className="custom-scroll">
         {/* Here should be list of data Images/Video */}
-        {data?.map((item) => (
-          <Box pr={3} pb={3}>
+        {data?.map((item, index) => (
+          <Box pr={3} pb={3} key={index}>
             <FormSimpleView
               withRedirect
+              id={item?.id}
               key={item?.id}
               imageURL={item?.image}
               title={item?.title}
@@ -212,8 +209,8 @@ function FormsAll(props) {
           mr={3}
           mb={3}
           borderRadius="8px"
-          width="150px"
-          height="150px"
+          width="242px"
+          height="214px"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -221,6 +218,7 @@ function FormsAll(props) {
           onClick={showModal}>
           <PlusOutlined />
         </Box>
+        {/*Modal window form creation*/}
         <Modal
           title={<Title level={4}>Create new typeform</Title>}
           visible={isModalVisible}
