@@ -12,8 +12,6 @@ import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
 import { FormSimpleView } from 'domains/Form/components'
-import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
-import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
 // import { useTranslation } from 'react-i18next'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 

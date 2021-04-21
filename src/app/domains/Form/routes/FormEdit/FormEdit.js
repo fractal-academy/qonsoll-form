@@ -9,6 +9,9 @@ import { Box } from '@qonsoll/react-design'
 import { QuestionForm } from 'app/domains/Question/components'
 import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
+import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
+import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
+
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -24,11 +27,20 @@ function FormEdit(props) {
   const [activeKey, setActiveKey] = useState(LAYOUT_TYPE_KEYS[0])
   const [questionType, setQuestionType] = useState(QUESTION_TYPES.YES_NO)
   const [showPopover, setshowPopover] = useState(false)
+
+  // [CUSTOM_HOOKS]
+  const dispatch = useFormContextDispatch()
+  const formContext = useFormContext()
+
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = ({ key }) => {
     setActiveKey(LAYOUT_TYPES[key])
+    dispatch({
+      type: DISPATCH_EVENTS.CHANGE_QUESTION_LAYOUT,
+      payload: LAYOUT_TYPES[key]
+    })
   }
   const onQuestionTypeChange = ({ key }) => {
     setQuestionType(key)
