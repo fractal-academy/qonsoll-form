@@ -15,7 +15,7 @@ const { Meta } = Card
 const { Text } = Typography
 
 function FormSimpleView(props) {
-  const { imageURL, title, subtitle, data, withRedirect, id } = props
+  const { title, subtitle, id } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -101,7 +101,7 @@ function FormSimpleView(props) {
           justifyContent="center"
           alignItems="center"
           onClick={onFormItemClick}>
-          <FileOutlined style={{ fontSize: '40px', opacity: '.5' }} />
+          <FileOutlined style={styles.iconStyles} />
         </Box>
       }>
       <Meta

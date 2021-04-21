@@ -19,5 +19,6 @@ export const styles = {
     fontWeight: 'bold',
     maxWidth: '190px'
   },
-  descriptionTextSize: { fontSize: '14px', maxWidth: '190px', opacity: '.5' }
+  descriptionTextSize: { fontSize: '14px', maxWidth: '190px', opacity: '.5' },
+  iconStyles: { fontSize: '40px', opacity: '.5' }
 }

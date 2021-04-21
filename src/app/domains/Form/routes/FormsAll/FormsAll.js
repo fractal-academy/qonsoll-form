@@ -26,7 +26,7 @@ import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
 import { FormSimpleForm, FormSimpleView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { setData } from 'app/services/Firestore'
+import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import { Spinner } from 'components'
 
@@ -43,9 +43,10 @@ function FormsAll(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const [data] = useCollectionData(firestore.collection('forms'))
+  const [data] = useCollectionData(
+    getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
+  )
   // [COMPONENT STATE HOOKS]
-  const [formsList, setFormsList] = useState([])
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [form] = Form.useForm()
@@ -81,7 +82,8 @@ function FormsAll(props) {
       await setData(COLLECTIONS.FORMS, formId, {
         id: formId,
         title: data?.name,
-        subtitle: data?.description || ''
+        subtitle: data?.description || '',
+        creationDate: getTimestamp().now()
       })
     } catch (e) {
       console.error(e.message)
