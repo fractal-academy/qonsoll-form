@@ -56,13 +56,10 @@ const FormSimpleViewEdit = (props) => {
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={[
-          <Button onClick={handleCancel} key={'cancel'}>
-            Cancel
-          </Button>,
+          <Button onClick={handleCancel}>Cancel</Button>,
           <Button
             onClick={() => form.submit()}
             type="primary"
-            key={'create'}
             loading={loading}>
             Save changes
           </Button>

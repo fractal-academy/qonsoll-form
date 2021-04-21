@@ -20,8 +20,6 @@ import {
   FilterOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
@@ -55,7 +53,7 @@ function FormsAll(props) {
   // [COMPUTED PROPERTIES]
   let amountFiles = data?.length
 
-  const formId = firestore.collection('forms').doc().id
+  const formId = firestore.collection(COLLECTIONS.FORMS).doc().id
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
 
@@ -83,9 +81,7 @@ function FormsAll(props) {
       await setData(COLLECTIONS.FORMS, formId, {
         id: formId,
         title: data?.name,
-        subtitle: data?.description || '',
-        image:
-          'https://image.freepik.com/free-photo/growing-small-tree-in-nature-and-sunlight_34152-1460.jpg'
+        subtitle: data?.description || ''
       })
     } catch (e) {
       console.error(e.message)
