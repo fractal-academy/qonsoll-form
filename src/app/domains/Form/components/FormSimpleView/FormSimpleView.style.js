@@ -2,12 +2,13 @@ export const styles = {
   cardStyles: {
     backgroundColor: '#eceff5',
     borderRadius: '8px',
-    display: 'inline-block'
+    display: 'inline-block',
+    width: '150px',
+    height: '150px',
+    cursor: 'pointer'
   },
   cardBodyPadding: { padding: '0 8px 8px 8px' },
   imageStyle: {
-    height: '90px',
-    width: '140px',
     padding: '3px',
     borderRadius: '8px'
   },

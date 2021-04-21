@@ -10,6 +10,8 @@ import { CheckOutlined } from '@ant-design/icons'
 const { Text } = Typography
 
 function SubmitButton(props) {
+  const { children } = props
+
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -44,12 +46,16 @@ function SubmitButton(props) {
     <Row display="flex" v="center">
       <Col cw="auto" mr={2}>
         <Button buttonType="primary" className="submit" onClick={onButtonClick}>
-          <Row display="flex">
-            <Col mr={2}>OK</Col>
-            <Col>
-              <CheckOutlined />
-            </Col>
-          </Row>
+          {children ? (
+            children
+          ) : (
+            <Row display="flex">
+              <Col mr={2}>OK</Col>
+              <Col>
+                <CheckOutlined />
+              </Col>
+            </Row>
+          )}
         </Button>
       </Col>
       <Col>

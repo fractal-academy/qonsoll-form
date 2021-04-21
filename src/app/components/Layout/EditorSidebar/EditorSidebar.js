@@ -3,19 +3,30 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Divider } from 'antd'
 import {
   LeftOutlined,
+  PicCenterOutlined,
+  PicRightOutlined,
   PlusOutlined,
   RightOutlined,
-  SettingOutlined
+  SettingOutlined,
+  UnorderedListOutlined
 } from '@ant-design/icons'
 import { styles } from './EditorSidebar.styles'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
-import { Popover } from 'components'
+import { DragableList, Popover } from 'components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
 import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
+import QuestionsList from 'domains/Question/components/QuestionsList'
+import QuestionSimpleView from 'domains/Question/components/QuestionSimpleView'
 // import { useTranslation } from 'react-i18next'
 const { Title } = Typography
+const mockedData = [
+  {
+    icon: <UnorderedListOutlined />,
+    description: 'Some optional ending.'
+  }
+]
 
 function EditorSidebar(props) {
   const { questionsList, questionsEndingsList } = props
@@ -27,11 +38,35 @@ function EditorSidebar(props) {
 
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
+  const [showPopover, setshowPopover] = useState(false)
 
   // [COMPUTED PROPERTIES]
-
+  const [endingList, setEndingList] = useState(mockedData)
+  const [questionList, setQuestionList] = useState(mockedData)
   // [CLEAN FUNCTIONS]
-
+  const onUpdate = () => {}
+  const addEnding = () => {
+    setEndingList((endingList) => [
+      ...endingList,
+      {
+        icon: <PicRightOutlined />,
+        description: 'Some optional ending.'
+      }
+    ])
+  }
+  const addQuestion = () => {
+    setQuestionList((questionList) => [
+      ...questionList,
+      {
+        icon: <PicRightOutlined />,
+        description: 'New Question.'
+      }
+    ])
+    setshowPopover(!showPopover)
+  }
+  const popoverShowChange = () => {
+    setshowPopover(!showPopover)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -55,7 +90,7 @@ function EditorSidebar(props) {
       <Box
         position="absolute"
         bg="white"
-        borderRadius="0px 0px 0 8px"
+        borderRadius="0 0 0 8px"
         style={styles.siderStateSwitcherStyle}
         onClick={() => {
           setOpen(!open)
@@ -69,7 +104,7 @@ function EditorSidebar(props) {
       {open && (
         <Box
           bg="white"
-          width="220px"
+          width="300px"
           display="flex"
           flexDirection="column"
           position="relative">
@@ -82,11 +117,16 @@ function EditorSidebar(props) {
               </Col>
               <Col cw="auto" px={10} py={1} mr={2} borderRadius="4px">
                 <Popover
+                  onClick={popoverShowChange}
+                  visible={showPopover}
+                  onVisibleChange={() => {
+                    setshowPopover(!showPopover)
+                  }}
                   trigger={'click'}
                   placement={'bottomRight'}
                   btnType="text"
                   btnIcon={<PlusOutlined style={styles.hover} />}
-                  content={<QuestionTypeSelect />}
+                  content={<QuestionTypeSelect onClick={addQuestion} />}
                 />
               </Col>
               <Col cw="auto" px={1} borderRadius="4px" v="center">
@@ -97,8 +137,9 @@ function EditorSidebar(props) {
               </Col>
             </Row>
           </Box>
+          {/* Question List*/}
           <Box overflow="auto" p={3}>
-            {questionsList}
+            <QuestionsList data={questionList} />
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
             <Row>
@@ -123,12 +164,23 @@ function EditorSidebar(props) {
                 </Title>
               </Col>
               <Col cw="auto" px={10} py={1} borderRadius="4px" bg="#e8f0fb">
-                <PlusOutlined style={styles.plusIconColor} />
+                <PlusOutlined
+                  style={styles.plusIconColor}
+                  onClick={addEnding}
+                />
               </Col>
             </Row>
-            <Row pb={3} px={3}>
-              <Col overflow="auto">{questionsEndingsList}</Col>
-            </Row>
+            <Box pb={3} px={3} maxHeight="350px" overflow="auto">
+              {/*<QuestionsList />*/}
+              <DragableList
+                itemLayout="horizontal"
+                dataSource={endingList}
+                onUpdate={onUpdate}
+                renderItem={(item, index) => (
+                  <QuestionSimpleView {...item} number={index + 1} />
+                )}
+              />
+            </Box>
           </Box>
         </Box>
       )}

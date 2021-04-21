@@ -14,7 +14,8 @@ import {
   FolderOutlined,
   SettingOutlined,
   SearchOutlined,
-  FilterOutlined
+  FilterOutlined,
+  PlusOutlined
 } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -26,12 +27,13 @@ import { FormSimpleView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const { Title, Text } = Typography
+
 const mockRoutes = [
   { path: '/forms', page: 'Forms' },
   { path: '/images', page: 'Images' },
   { path: '/videos', page: 'Videos' }
 ]
-const mockList = [0, 1, 2, 8, 9, 10, 11, 6, 7, 8, 9, 10, 6, 7, 8, 9, 10]
+
 function FormsAll(props) {
   //const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
@@ -40,12 +42,23 @@ function FormsAll(props) {
   const history = useHistory()
   const [data] = useCollectionData(firestore.collection('forms'))
 
+  // [COMPONENT STATE HOOKS]
+  const [formsList, setFormsList] = useState([])
+
   // [COMPUTED PROPERTIES]
   let amountFiles = data?.length
 
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
-
+  const onAddForm = () => {
+    setFormsList((prev) => [
+      ...prev,
+      {
+        title: 'new Title ',
+        subtitle: 'subtitle'
+      }
+    ])
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -110,11 +123,6 @@ function FormsAll(props) {
             Forms
           </Title>
         </Col>
-        <Col cw="auto" v="center">
-          <Tooltip placement="left" title={'Settings'}>
-            <SettingOutlined style={globalStyles.iconSize} />
-          </Tooltip>
-        </Col>
       </Row>
       <Row pb={25}>
         <Col>
@@ -131,18 +139,6 @@ function FormsAll(props) {
             placeholder="Search folder/file by name..."
           />
         </Col>
-        <Col cw="auto">
-          <Divider type="vertical" style={globalStyles.fullHeight} />
-        </Col>
-        <Col cw="auto" v="center">
-          <Button
-            icon={<FilterOutlined />}
-            type="secondary"
-            style={styles.borderRadius}
-            onClick={onFilterButtonClick}>
-            Filter
-          </Button>
-        </Col>
       </Row>
       <Box
         display="flex"
@@ -154,13 +150,28 @@ function FormsAll(props) {
         {data?.map((item) => (
           <Box pr={3} pb={3}>
             <FormSimpleView
+              withRedirect
               key={item?.id}
-              imageURL={item?.image}
               title={item?.title}
+              imageURL={item?.image}
               subtitle={item?.subtitle}
             />
           </Box>
         ))}
+        <Box
+          bg="#eceff5"
+          mr={3}
+          mb={3}
+          borderRadius="8px"
+          width="150px"
+          height="150px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          style={globalStyles.cursorPointer}
+          onClick={onAddForm}>
+          <PlusOutlined />
+        </Box>
       </Box>
     </Box>
   )

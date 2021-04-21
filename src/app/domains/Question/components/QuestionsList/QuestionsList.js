@@ -61,7 +61,7 @@ function QuestionsList(props) {
   return (
     <DragableList
       itemLayout="horizontal"
-      dataSource={mockedData}
+      dataSource={data}
       onUpdate={onUpdate}
       renderItem={(item, index) => (
         <QuestionSimpleView {...item} number={index + 1} />

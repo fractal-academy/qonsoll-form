@@ -4,7 +4,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { ChoiceInput, ImageUploader } from 'components'
 import { PlusOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
-import { globalStyles } from '~/app/styles'
+import { globalStyles } from 'app/styles'
 // import { useTranslation } from 'react-i18next'
 
 const { Text } = Typography

@@ -5,13 +5,16 @@ import PropTypes from 'prop-types'
 
 function CustomPopover(props) {
   const {
+    onClick,
     content,
     title,
     btnType,
     btnText,
     btnIcon,
     placement,
-    trigger
+    trigger,
+    visible,
+    onVisibleChange
   } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
@@ -51,8 +54,10 @@ function CustomPopover(props) {
         content={content}
         title={title}
         placement={placement}
-        trigger={trigger}>
-        <Button type={btnType} icon={btnIcon}>
+        trigger={trigger}
+        visible={visible}
+        onVisibleChange={onVisibleChange}>
+        <Button type={btnType} icon={btnIcon} onClick={onClick}>
           {btnText}
         </Button>
       </Popover>

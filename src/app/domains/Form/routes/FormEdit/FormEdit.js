@@ -5,9 +5,10 @@ import {
   QuestionLayoutSwitcher,
   FormContentArea
 } from 'components'
-import { Col, Container, Row, Box } from '@qonsoll/react-design'
-import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
-
+import { Box } from '@qonsoll/react-design'
+import { QuestionForm } from 'app/domains/Question/components'
+import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -20,12 +21,19 @@ function FormEdit(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
+  const [activeKey, setActiveKey] = useState(LAYOUT_TYPE_KEYS[0])
+  const [questionType, setQuestionType] = useState(QUESTION_TYPES.YES_NO)
+  const [showPopover, setshowPopover] = useState(false)
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
+  const onChangeMenuItem = ({ key }) => {
+    setActiveKey(LAYOUT_TYPES[key])
+  }
+  const onQuestionTypeChange = ({ key }) => {
+    setQuestionType(key)
+    setshowPopover(false)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -47,9 +55,22 @@ function FormEdit(props) {
   return (
     <Box bg="#f6f9fe" display="flex" height="inherit" overflowX="hidden">
       <PageLayout>
-        <FormContentArea leftSideMenu={<QuestionLayoutSwitcher />}>
-          {/* Here should be QuestionForm  */}
-          <MediaLibraryModal btnProps={{ children: 'Press' }} />
+        <FormContentArea
+          leftSideMenu={
+            <QuestionLayoutSwitcher
+              onChange={onChangeMenuItem}
+              defaultActive={activeKey}
+            />
+          }>
+          <QuestionForm
+            question={{
+              questionType: questionType,
+              layoutType: activeKey
+            }}
+            onQuestionTypeChange={onQuestionTypeChange}
+            showPopover={showPopover}
+            setshowPopover={setshowPopover}
+          />
         </FormContentArea>
       </PageLayout>
 

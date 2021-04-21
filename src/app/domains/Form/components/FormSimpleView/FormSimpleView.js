@@ -1,28 +1,39 @@
-import { Card, Image, Typography } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Card, Image, Typography, Dropdown, Menu } from 'antd'
+import React, { useEffect, useState, cloneElement } from 'react'
 import PropTypes from 'prop-types'
+import { generatePath, useHistory } from 'react-router-dom'
+import { MoreOutlined } from '@ant-design/icons'
 import { styles } from './FormSimpleView.style'
 import { Row, Col } from '@qonsoll/react-design'
+import { ROUTES_PATHS } from 'app/constants'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
 
 const { Text } = Typography
 
 function FormSimpleView(props) {
-  const { imageURL, title, subtitle } = props
+  const { imageURL, title, subtitle, data, withRedirect } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-
+  const history = useHistory()
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-
+  const menu = (
+    <Menu>
+      <Menu.Item>Rename</Menu.Item>
+      <Menu.Item>Delete</Menu.Item>
+    </Menu>
+  )
   // [CLEAN FUNCTIONS]
-
+  const onFormItemClick = () => {
+    history.push(ROUTES_PATHS.FORM_EDIT)
+  }
+  const onItemSelect = () => {}
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -52,18 +63,34 @@ function FormSimpleView(props) {
           src={imageURL}
           preview={false}
         />
-      }>
+      }
+      onClick={withRedirect ? onFormItemClick : onItemSelect}>
       <Meta
         description={
           <>
             <Row>
               <Col>
-                <Text style={styles.titleStyle}>{title}</Text>
+                <Row>
+                  <Col>
+                    <Text style={styles.titleStyle} ellipsis>
+                      {title}
+                    </Text>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Text style={styles.descriptionTextSize} ellipsis>
+                      {subtitle}
+                    </Text>
+                  </Col>
+                </Row>
               </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Text style={styles.descriptionTextSize}>{subtitle}</Text>
+              <Col cw="auto" v="center">
+                <Dropdown overlay={menu} placement="bottomRight">
+                  {cloneElement(<MoreOutlined />, {
+                    className: 'dropdownIcon'
+                  })}
+                </Dropdown>
               </Col>
             </Row>
           </>

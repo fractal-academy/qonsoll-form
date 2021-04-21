@@ -5,7 +5,7 @@ import FileUploader from 'react-firebase-file-uploader'
 import { ImageLabel } from 'components'
 import PropTypes from 'prop-types'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { globalStyles } from '~/app/styles'
+import { globalStyles } from 'app/styles'
 import { styles } from './ImageUploader.styles'
 
 const { Text } = Typography

@@ -11,27 +11,31 @@ import {
   YesnoButton,
   RangeButton,
   ChoiceForm,
-  Button
+  SubmitButton
 } from 'components'
-import { SettingOutlined } from '@ant-design/icons'
+import { EyeFilled, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { styles } from './QuestionForm.styles.js'
+import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import PropTypes from 'prop-types'
 
 // import { useTranslation } from 'react-i18next'
 
 const layoutSides = [
-  LAYOUT_TYPES.LEFT_SIDE_BIG,
-  LAYOUT_TYPES.LEFT_SIDE_SMALL,
-  LAYOUT_TYPES.RIGHT_SIDE_BIG,
-  LAYOUT_TYPES.RIGHT_SIDE_SMALL
+  LAYOUT_TYPES.LEFT_SIDE_BIG.type,
+  LAYOUT_TYPES.LEFT_SIDE_SMALL.type,
+  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
+  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
 ]
-const rightSide = [LAYOUT_TYPES.RIGHT_SIDE_BIG, LAYOUT_TYPES.RIGHT_SIDE_SMALL]
+const rightSide = [
+  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
+  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
+]
 
 function QuestionForm(props) {
-  const { question } = props
+  const { question, onQuestionTypeChange, setshowPopover, showPopover } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -42,23 +46,30 @@ function QuestionForm(props) {
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
+    [QUESTION_TYPES.WELCOME_SCREEN]: {
+      component: <SubmitButton>START</SubmitButton>
+    },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceForm />
+      component: <ChoiceForm withImage />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton />
+      component: <RangeButton from={1} to={5} />
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <InputForm />
+      component: (
+        <InputForm btnProps={{ type: 'primary', children: 'Submit' }} />
+      )
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <TextAreaForm />
+      component: (
+        <TextAreaForm btnProps={{ type: 'primary', children: 'Submit' }} />
+      )
     },
     [QUESTION_TYPES.DATE]: {
       component: <DateTimeInput />
@@ -67,21 +78,19 @@ function QuestionForm(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <Button />
+      component: <SubmitButton>Next</SubmitButton>
     }
   }
 
-  const cardStyles = {
-    ...styles.cardStyle,
-    ...(question.layoutType === LAYOUT_TYPES.FULL_SCREEN
-      ? {
-          backgroundImage: `url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`
-        }
-      : {})
-  }
-  const imageOrder = rightSide.includes(question.layoutType) ? 3 : 1
-  // [CLEAN FUNCTIONS]
+  const bgImage =
+    question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type &&
+    `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
 
+  const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
+  // [CLEAN FUNCTIONS]
+  const popoverShowChange = () => {
+    setshowPopover(!showPopover)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -102,63 +111,118 @@ function QuestionForm(props) {
 
   return (
     <>
-      <Row noGutters mb={2} height="inherit">
-        <Col v="center" order={2}>
-          <Card style={cardStyles}>
-            <Row noGutters h="between">
-              <Col cw="auto">
+      <Row
+        noGutters
+        mb={2}
+        height="100%"
+        width="100%"
+        display="flex"
+        flex={1}
+        style={styles.rowStyle}
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+        backgroundImage={bgImage && bgImage}>
+        <Col
+          v="center"
+          order={2}
+          mx={4}
+          display="flex"
+          style={styles.columnStyle}>
+          <Card style={styles.cardStyle} bordered={false}>
+            <Row noGutters>
+              <Col>
                 <Tag color="blue">Question 1</Tag>
               </Col>
               <Col cw="auto">
                 <Popover
-                  style={styles.popoverStyle}
-                  trigger="click"
-                  placement="bottomRight"
+                  onClick={popoverShowChange}
+                  visible={showPopover}
+                  onVisibleChange={() => {
+                    setshowPopover(!showPopover)
+                  }}
+                  trigger={'click'}
+                  placement={'bottomRight'}
                   btnType="primary"
                   btnIcon={<SettingOutlined />}
-                  content={<QuestionTypeSelect />}
+                  content={
+                    <QuestionTypeSelect onClick={onQuestionTypeChange} />
+                  }
                 />
               </Col>
+              {question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type && (
+                <Col cw="auto" ml={2}>
+                  <MediaLibraryModal
+                    btnProps={{
+                      type: 'primary',
+                      icon: <EyeFilled />,
+                      style: styles.borderForFullScreen
+                    }}
+                  />
+                </Col>
+              )}
             </Row>
-            <Row noGutters h="between">
+            <Row noGutters h="between" mb={4}>
               <Col cw="auto">
                 <QuestionHeader
-                  titlePlaceholder={'change on Question type'}
+                  titlePlaceholder={'Editable question title'}
                   subtitlePlaceholder={'Description(optional)'}
                 />
               </Col>
             </Row>
-            {question.layoutType === LAYOUT_TYPES.BETWEEN && (
+            {question?.layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
               <Row>
                 <Col cw="auto">
                   <Box
-                    {...question.layoutType}
-                    backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
-                  />
+                    {...question?.layoutType.imgSize}
+                    backgroundRepeat="no-repeat"
+                    backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
+                    position="relative"
+                    zIndex="1"
+                    mb={3}>
+                    <MediaLibraryModal
+                      btnProps={{
+                        type: 'primary',
+                        icon: <EyeFilled />,
+                        style: styles.modalButtonStyle
+                      }}
+                    />
+                  </Box>
                 </Col>
               </Row>
             )}
             <Row noGutters>
               <Col>
                 {cloneElement(
-                  questionTypesMap[question.questionType].component,
+                  questionTypesMap[question?.questionType].component,
                   question
                 )}
               </Col>
             </Row>
           </Card>
         </Col>
-        {layoutSides.includes(question.layoutType) && (
+        {layoutSides.includes(question?.layoutType.type) && (
           <Col
             v="center"
             display="flex"
             style={styles.columnStyle}
             height="100%"
+            width="800px"
             order={imageOrder}>
             <Box
-              {...question.layoutType}
-              backgroundImage={`url(https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg)`}
-            />
+              {...question?.layoutType.imgSize}
+              backgroundRepeat="no-repeat"
+              backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
+              position="relative"
+              zIndex="1"
+              m={2}>
+              <MediaLibraryModal
+                btnProps={{
+                  type: 'primary',
+                  icon: <EyeFilled />,
+                  style: styles.modalButtonStyle
+                }}
+              />
+            </Box>
           </Col>
         )}
       </Row>
