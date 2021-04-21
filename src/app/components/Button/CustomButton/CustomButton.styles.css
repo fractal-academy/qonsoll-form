@@ -15,6 +15,10 @@
 .primaryButton {
   background-color: #1d6fdc !important;
   border-color: #1d6fdc !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  height: 56px !important;
+  border-radius: 8px !important;
 }
 .primaryButton:hover {
   background-color: #3682e6 !important;
