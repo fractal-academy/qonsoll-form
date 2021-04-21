@@ -20,32 +20,31 @@ import {
   FilterOutlined,
   PlusOutlined
 } from '@ant-design/icons'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
-import { Link } from 'react-router-dom'
 import { FormSimpleForm, FormSimpleView } from 'domains/Form/components'
-import { addData, setData } from 'app/services/Firestore'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
-import { firebase, firestore } from 'app/services'
-// import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
-
 const mockRoutes = [
   { path: '/forms', page: 'Forms' },
   { path: '/images', page: 'Images' },
   { path: '/videos', page: 'Videos' }
 ]
-
+const mockList = [0, 1, 2, 8, 9, 10, 11, 6, 7, 8, 9, 10, 6, 7, 8, 9, 10]
 function FormsAll(props) {
   //const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const history = useHistory()
+  const [data] = useCollectionData(firestore.collection('forms'))
   // [COMPONENT STATE HOOKS]
   const [formsList, setFormsList] = useState([])
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -53,11 +52,13 @@ function FormsAll(props) {
   const [form] = Form.useForm()
 
   // [COMPUTED PROPERTIES]
-  let amountFiles = 0
+  let amountFiles = data?.length
+
   const formId = firestore.collection('forms').doc().id
   console.log(formId)
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
+
   const onAddForm = () => {
     setFormsList((prev) => [
       ...prev,
@@ -84,6 +85,7 @@ function FormsAll(props) {
       isComponentMounted = false
     }
   }, [])
+
   const onFormCreate = async (data) => {
     setLoading(true)
     try {
@@ -153,6 +155,11 @@ function FormsAll(props) {
             Forms
           </Title>
         </Col>
+        <Col cw="auto" v="center">
+          <Tooltip placement="left" title={'Settings'}>
+            <SettingOutlined style={globalStyles.iconSize} />
+          </Tooltip>
+        </Col>
       </Row>
       <Row pb={25}>
         <Col>
@@ -169,6 +176,18 @@ function FormsAll(props) {
             placeholder="Search folder/file by name..."
           />
         </Col>
+        <Col cw="auto">
+          <Divider type="vertical" style={globalStyles.fullHeight} />
+        </Col>
+        <Col cw="auto" v="center">
+          <Button
+            icon={<FilterOutlined />}
+            type="secondary"
+            style={styles.borderRadius}
+            onClick={onFilterButtonClick}>
+            Filter
+          </Button>
+        </Col>
       </Row>
       <Box
         display="flex"
@@ -177,13 +196,14 @@ function FormsAll(props) {
         bg="#f6f9fe"
         className="custom-scroll">
         {/* Here should be list of data Images/Video */}
-        {formsList.map((item) => (
-          <Box mr={3} mb={3}>
+        {data?.map((item) => (
+          <Box pr={3} pb={3}>
             <FormSimpleView
-              key={item}
-              title={item.title}
-              subtitle={item.subtitle}
               withRedirect
+              key={item?.id}
+              imageURL={item?.image}
+              title={item?.title}
+              subtitle={item?.subtitle}
             />
           </Box>
         ))}
