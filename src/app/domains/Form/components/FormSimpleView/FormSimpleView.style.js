@@ -3,9 +3,10 @@ export const styles = {
     backgroundColor: '#eceff5',
     borderRadius: '8px',
     display: 'inline-block',
-    width: '150px',
-    height: '150px',
-    cursor: 'pointer'
+    width: '242px',
+    height: '214px',
+    cursor: 'pointer',
+    padding: '4px'
   },
   cardBodyPadding: { padding: '0 8px 8px 8px' },
   imageStyle: {
@@ -14,8 +15,10 @@ export const styles = {
   },
   titleStyle: {
     color: 'black',
-    fontSize: '12px',
-    fontWeight: 'bold'
+    fontSize: '14px',
+    fontWeight: 'bold',
+    maxWidth: '190px'
   },
-  descriptionTextSize: { fontSize: '12px' }
+  descriptionTextSize: { fontSize: '14px', maxWidth: '190px', opacity: '.5' },
+  iconStyles: { fontSize: '40px', opacity: '.5' }
 }
