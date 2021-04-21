@@ -1,34 +1,69 @@
-import { Card, Image, Typography, Dropdown, Menu } from 'antd'
+import { Card, Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 import React, { useEffect, useState, cloneElement } from 'react'
 import PropTypes from 'prop-types'
 import { generatePath, useHistory } from 'react-router-dom'
-import { MoreOutlined } from '@ant-design/icons'
+import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { styles } from './FormSimpleView.style'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import { ROUTES_PATHS } from 'app/constants'
+import { FormSimpleViewEdit } from 'domains/Form/components'
+import { deleteData } from 'app/services/Firestore'
+import COLLECTIONS from 'app/constants/collection'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
 
 const { Text } = Typography
 
 function FormSimpleView(props) {
-  const { imageURL, title, subtitle, data, withRedirect } = props
+  const { title, subtitle, id } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
   const history = useHistory()
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [visible, setVisible] = useState(false)
+  const [confirmLoading, setConfirmLoading] = useState(false)
 
   // [COMPUTED PROPERTIES]
+  const handleCancel = () => {
+    setVisible(false)
+  }
+
+  const showPopconfirm = () => {
+    setVisible(true)
+  }
+
+  const handleDelete = async () => {
+    setConfirmLoading(true)
+    try {
+      await deleteData(COLLECTIONS.FORMS, id)
+    } catch (e) {
+      message.error("Can't delete form")
+    }
+
+    setVisible(false)
+    setConfirmLoading(false)
+  }
+
   const menu = (
     <Menu>
-      <Menu.Item>Rename</Menu.Item>
-      <Menu.Item>Delete</Menu.Item>
+      <Menu.Item>
+        <FormSimpleViewEdit formData={props} />
+      </Menu.Item>
+      <Menu.Item>
+        <Popconfirm
+          title="Delete this form?"
+          visible={visible}
+          onConfirm={handleDelete}
+          okButtonProps={{ loading: confirmLoading }}
+          onCancel={handleCancel}>
+          <Text onClick={showPopconfirm}>Delete</Text>
+        </Popconfirm>
+      </Menu.Item>
     </Menu>
   )
+
   // [CLEAN FUNCTIONS]
   const onFormItemClick = () => {
     history.push(ROUTES_PATHS.FORM_EDIT)
@@ -57,18 +92,22 @@ function FormSimpleView(props) {
       style={styles.cardStyles}
       bodyStyle={styles.cardBodyPadding}
       cover={
-        <Image
-          style={styles.imageStyle}
-          alt="Form view"
-          src={imageURL}
-          preview={false}
-        />
-      }
-      onClick={withRedirect ? onFormItemClick : onItemSelect}>
+        <Box
+          height="136px"
+          weight="226px"
+          display="flex"
+          bg="white"
+          borderRadius="8px"
+          justifyContent="center"
+          alignItems="center"
+          onClick={onFormItemClick}>
+          <FileOutlined style={styles.iconStyles} />
+        </Box>
+      }>
       <Meta
         description={
           <>
-            <Row>
+            <Row h="between" mt={3}>
               <Col>
                 <Row>
                   <Col>
@@ -77,16 +116,21 @@ function FormSimpleView(props) {
                     </Text>
                   </Col>
                 </Row>
-                <Row>
-                  <Col>
-                    <Text style={styles.descriptionTextSize} ellipsis>
-                      {subtitle}
-                    </Text>
-                  </Col>
-                </Row>
+                {subtitle && (
+                  <Row>
+                    <Col>
+                      <Text style={styles.descriptionTextSize} ellipsis>
+                        {subtitle}
+                      </Text>
+                    </Col>
+                  </Row>
+                )}
               </Col>
               <Col cw="auto" v="center">
-                <Dropdown overlay={menu} placement="bottomRight">
+                <Dropdown
+                  overlay={menu}
+                  placement="bottomRight"
+                  trigger="click">
                   {cloneElement(<MoreOutlined />, {
                     className: 'dropdownIcon'
                   })}
@@ -99,12 +143,7 @@ function FormSimpleView(props) {
     </Card>
   )
 }
-FormSimpleView.defaultProps = {
-  imageURL:
-    'https://image.freepik.com/free-photo/growing-small-tree-in-nature-and-sunlight_34152-1460.jpg',
-  title: 'Image title',
-  subtitle: 'Image description'
-}
+FormSimpleView.defaultProps = {}
 FormSimpleView.propTypes = {
   imageURL: PropTypes.string,
   title: PropTypes.string.isRequired,
