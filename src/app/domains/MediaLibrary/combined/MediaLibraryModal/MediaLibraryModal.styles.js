@@ -16,5 +16,22 @@ export const styles = {
     height: '650px',
     padding: 0,
     zIndex: 10000
+  },
+  btnFont: {
+    fontSize: '16px',
+    fontWeight: 600,
+    color: '#fff'
+  },
+  btnStyle: {
+    width: '129px',
+    height: '40px',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    background: '#133342',
+    // borderColor: ' 133342',
+    border: '#133342',
+    borderRadius: '8px'
   }
 }

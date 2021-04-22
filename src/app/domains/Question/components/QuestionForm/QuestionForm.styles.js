@@ -1,3 +1,6 @@
+import { Box } from '@qonsoll/react-design'
+import React from 'react'
+
 export const styles = {
   rowStyle: {
     justifyContent: 'space-between',
@@ -10,7 +13,7 @@ export const styles = {
     backgroundColor: 'transparent'
   },
   columnStyle: { justifyContent: 'center', alignItems: 'center' },
-  modalButtonStyle: { borderRadius: '50%' },
+  modalButtonStyle: { padding: 0, overflow: 'hidden' },
   welcomeBtn: {
     borderRadius: '4px',
     marginRight: '4px',

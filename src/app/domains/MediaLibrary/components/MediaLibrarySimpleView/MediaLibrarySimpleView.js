@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Card } from 'antd'
+import { Button, Card, Typography } from 'antd'
 import { EditOutlined, EyeFilled, PlusOutlined } from '@ant-design/icons'
 import { styles } from './MediaLibrarySimpleView.styles'
 import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
-import { Popover } from 'components'
+import { Input, InputForm, Popover } from 'components'
+import RangeSlider from 'components/RangeSlider'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
-
+const { Text } = Typography
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible } = props
   // const { WRITE_PROPS_HERE } = props
@@ -44,28 +45,50 @@ function MediaLibrarySimpleView(props) {
   }, [])
 
   return (
-    <Row>
+    <Row noGutters>
       <Col>
-        <Row>
-          <Box width="224px" height="366px">
-            <MediaLibraryModal
-              onClick={() => {
-                setIsImageEditVisible(false)
-              }}
-              btnProps={{
-                type: 'primary',
-                icon: <EditOutlined />,
-                style: styles.btnStyle
-              }}
-            />
-          </Box>
+        <Row noGutters mb={4}>
+          <Col>
+            <Box
+              // maxWidth="200px"
+              height="150px"
+              borderRadius="8px"
+              position="relative"
+              // m={2}
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}>
+              <MediaLibraryModal
+                onClick={() => {
+                  setIsImageEditVisible(false)
+                }}
+                btnProps={{
+                  type: 'primary',
+                  icon: <EditOutlined style={styles.btnStyle} />
+                }}
+              />
+            </Box>
+          </Col>
         </Row>
-        <Row>
-          <Col>Alt text will be here</Col>
+        <Row noGutters mb={4}>
+          <Col>
+            <Text style={styles.fontStyle}>Alt text</Text>
+            <Input style={styles.inputStyle} placeholder="Enter alt here..." />
+          </Col>
         </Row>
-        <Row>
-          <Col>Brightness settings</Col>
-          <Col>Brightness value</Col>
+        <Row noGutters>
+          <Col>
+            <Row noGutters>
+              <Col>
+                <Text style={styles.fontStyle}>Brightness</Text>
+              </Col>
+            </Row>
+            <Row noGutters>
+              <Col>
+                <RangeSlider />
+              </Col>
+            </Row>
+          </Col>
         </Row>
       </Col>
     </Row>

@@ -227,7 +227,6 @@ function QuestionForm(props) {
                 <Col cw="auto" mr={4}>
                   <Popover
                     // placement="topRight"
-                    style={styles.modalButtonStyle}
                     onClick={changeImageEditVisibleState}
                     visible={isImageEditVisible}
                     onVisibleChange={changeImageEditVisibleState}
@@ -236,10 +235,11 @@ function QuestionForm(props) {
                     btnType="primary"
                     btnIcon={<EyeFilled />}
                     content={
-                      <MediaLibrarySimpleView
-                        setIsImageEditVisible={setIsImageEditVisible}
-                        style={{ top: '-50px' }}
-                      />
+                      <Box width="192px" height="366px" overflow="hidden">
+                        <MediaLibrarySimpleView
+                          setIsImageEditVisible={setIsImageEditVisible}
+                        />
+                      </Box>
                     }
                   />
                 </Col>

@@ -87,7 +87,9 @@ function MediaLibraryModal(props) {
 
   return (
     <>
-      <Button {...btnProps} onClick={modalStateChange} />
+      <Button {...btnProps} onClick={modalStateChange} style={styles.btnStyle}>
+        <Text style={styles.btnFont}>Change</Text>
+      </Button>
       <Modal
         visible={isModalVisible}
         footer={null}
