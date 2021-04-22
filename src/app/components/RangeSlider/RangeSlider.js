@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from '@qonsoll/react-design'
 import { InputNumber, Slider } from 'antd'
+import { styles } from './RangeSlider.styles'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -48,7 +49,7 @@ function RangeSlider(props) {
   // const { inputValue } = this.state
   return (
     <Row>
-      <Col pr={3}>
+      <Col px={3}>
         <Slider
           min={-50}
           max={50}
@@ -60,14 +61,7 @@ function RangeSlider(props) {
         <InputNumber
           min={-50}
           max={50}
-          style={{
-            margin: '0',
-            width: '56px',
-            height: '40px',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center'
-          }}
+          style={styles.InputNumber}
           value={inputValue}
           onChange={onSlide}
         />

@@ -160,12 +160,21 @@ function QuestionForm(props) {
               </Col>
               {question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                 <Col cw="auto" ml={2}>
-                  <MediaLibraryModal
-                    btnProps={{
-                      type: 'primary',
-                      icon: <EyeFilled />,
-                      style: styles.borderForFullScreen
-                    }}
+                  <Popover
+                    onClick={changeImageEditVisibleState}
+                    visible={isImageEditVisible}
+                    onVisibleChange={changeImageEditVisibleState}
+                    trigger={'click'}
+                    placement="rightTop"
+                    btnType="primary"
+                    btnIcon={<EyeFilled />}
+                    content={
+                      <Box width="192px" height="366px" overflow="hidden">
+                        <MediaLibrarySimpleView
+                          setIsImageEditVisible={setIsImageEditVisible}
+                        />
+                      </Box>
+                    }
                   />
                 </Col>
               )}
@@ -188,12 +197,21 @@ function QuestionForm(props) {
                     position="relative"
                     zIndex="1"
                     mb={3}>
-                    <MediaLibraryModal
-                      btnProps={{
-                        type: 'primary',
-                        icon: <EyeFilled />,
-                        style: styles.modalButtonStyle
-                      }}
+                    <Popover
+                      onClick={changeImageEditVisibleState}
+                      visible={isImageEditVisible}
+                      onVisibleChange={changeImageEditVisibleState}
+                      trigger={'click'}
+                      placement="rightTop"
+                      btnType="primary"
+                      btnIcon={<EyeFilled />}
+                      content={
+                        <Box width="192px" height="366px" overflow="hidden">
+                          <MediaLibrarySimpleView
+                            setIsImageEditVisible={setIsImageEditVisible}
+                          />
+                        </Box>
+                      }
                     />
                   </Box>
                 </Col>
