@@ -109,7 +109,6 @@ function FormsAll(props) {
   if (!data || loading) {
     return <Spinner />
   }
-  console.log(currentData)
   return (
     <Box bg="#f6f9fe" flexDirection="column" px={45} py={4} minHeight="100%">
       {/* Page Header */}
