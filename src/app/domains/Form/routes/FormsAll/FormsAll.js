@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import Fuse from 'fuse.js'
 import {
   Breadcrumb,
   Button,
@@ -36,12 +37,12 @@ const mockRoutes = [
   { path: '/images', page: 'Images' },
   { path: '/videos', page: 'Videos' }
 ]
-const mockList = [0, 1, 2, 8, 9, 10, 11, 6, 7, 8, 9, 10, 6, 7, 8, 9, 10]
 function FormsAll(props) {
   //const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
+  const searchRef = useRef()
   const history = useHistory()
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
@@ -50,6 +51,8 @@ function FormsAll(props) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [form] = Form.useForm()
+  const [currentData, setCurrentData] = useState(data)
+  const fuse = new Fuse(data, { keys: ['title'] })
 
   // [COMPUTED PROPERTIES]
   let amountFiles = data?.length
@@ -57,24 +60,17 @@ function FormsAll(props) {
   const formId = firestore.collection(COLLECTIONS.FORMS).doc().id
   // [CLEAN FUNCTIONS]
   const onFilterButtonClick = () => {}
+  const searchData = () => {
+    if (searchRef.current.input.value) {
+      const searchRes = fuse.search(searchRef.current.input.value)
+      setCurrentData(searchRes.map((item) => item.item))
+    } else setCurrentData(data)
+  }
 
   // [USE_EFFECTS]
   useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
+    data && setCurrentData(data)
+  }, [data])
 
   const onFormCreate = async (data) => {
     setLoading(true)
@@ -113,7 +109,7 @@ function FormsAll(props) {
   if (!data || loading) {
     return <Spinner />
   }
-
+  console.log(currentData)
   return (
     <Box bg="#f6f9fe" flexDirection="column" px={45} py={4} minHeight="100%">
       {/* Page Header */}
@@ -165,9 +161,10 @@ function FormsAll(props) {
       <Row pb={3}>
         <Col>
           <Input
-            prefix={<SearchOutlined />}
-            style={styles.borderRadius}
+            ref={searchRef}
             placeholder="Search folder/file by name..."
+            onSearch={searchData}
+            onChange={(input) => searchData(input.target.value)}
           />
         </Col>
         <Col cw="auto">
@@ -190,7 +187,7 @@ function FormsAll(props) {
         bg="#f6f9fe"
         className="custom-scroll">
         {/* Here should be list of data Images/Video */}
-        {data?.map((item, index) => (
+        {currentData?.map((item, index) => (
           <Box pr={3} pb={3} key={index}>
             <FormSimpleView
               withRedirect
