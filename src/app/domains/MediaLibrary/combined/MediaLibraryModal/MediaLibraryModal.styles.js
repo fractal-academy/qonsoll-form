@@ -11,5 +11,10 @@ export const styles = {
   dividerStyles: { height: '100%', margin: '0 12px 0px 12px' },
   footerButtonStyle: {
     borderRadius: '6px'
+  },
+  modalBodyStyle: {
+    height: '650px',
+    padding: 0,
+    zIndex: 10000
   }
 }

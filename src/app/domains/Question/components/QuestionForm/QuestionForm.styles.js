@@ -9,17 +9,8 @@ export const styles = {
     borderColor: '#1d6fdc',
     backgroundColor: 'transparent'
   },
-  popoverStyle: {
-    position: 'absolute',
-    top: '40px',
-    left: '40px'
-  },
   columnStyle: { justifyContent: 'center', alignItems: 'center' },
-  modalButtonStyle: {
-    position: 'absolute',
-    top: '12px',
-    right: '15px'
-  },
+  modalButtonStyle: { borderRadius: '50%' },
   welcomeBtn: {
     borderRadius: '4px',
     marginRight: '4px',

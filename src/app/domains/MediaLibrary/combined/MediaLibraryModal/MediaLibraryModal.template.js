@@ -8,12 +8,13 @@ import { styles } from './MediaLibraryModal.styles'
 import PropTypes from 'prop-types'
 import './MediaLibraryModal.styles.css'
 import { MediaLibraryFilter } from 'domains/MediaLibrary/components'
+import MediaLibrarySimpleView from 'domains/MediaLibrary/components/MediaLibrarySimpleView'
 // import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { data, btnProps } = props
+  const { data, btnProps, onClick } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -54,6 +55,8 @@ function MediaLibraryModal(props) {
   }
   const modalStateChange = () => {
     setIsModalVisible(!isModalVisible)
+    onClick && onClick()
+    // setIsImageEditVisible(false)
   }
   const onAddForm = () => {
     setFormsList((prev) => [
@@ -89,8 +92,8 @@ function MediaLibraryModal(props) {
         visible={isModalVisible}
         footer={null}
         closable={false}
-        width="750px"
-        bodyStyle={globalStyles.resetPadding}>
+        width="950px"
+        bodyStyle={styles.modalBodyStyle}>
         <Row>
           <Col>
             <Row mb={1} v="center" px={3} pt={3}>
@@ -164,7 +167,7 @@ function MediaLibraryModal(props) {
               </Col>
             </Row>
             <Box
-              height="330px"
+              height="500px"
               pl={3}
               overflow="auto"
               display="flex"
@@ -202,7 +205,7 @@ function MediaLibraryModal(props) {
                 <Divider type="horizontal" style={globalStyles.resetMargin} />
               </Col>
             </Row>
-            <Row h="right" p={3}>
+            <Row h="right" p={3} bg="white">
               <Col cw="auto">
                 <Button
                   type="text"

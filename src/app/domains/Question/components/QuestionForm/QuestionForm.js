@@ -13,13 +13,14 @@ import {
   ChoiceForm,
   SubmitButton
 } from 'components'
-import { EyeFilled, SettingOutlined } from '@ant-design/icons'
+import { EyeFilled, PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import PropTypes from 'prop-types'
+import MediaLibrarySimpleView from '../../../MediaLibrary/components/MediaLibrarySimpleView'
 
 // import { useTranslation } from 'react-i18next'
 
@@ -35,7 +36,14 @@ const rightSide = [
 ]
 
 function QuestionForm(props) {
-  const { question, onQuestionTypeChange, setshowPopover, showPopover } = props
+  const {
+    question,
+    onQuestionTypeChange,
+    setShowPopover,
+    showPopover,
+    setIsImageEditVisible,
+    isImageEditVisible
+  } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -89,7 +97,10 @@ function QuestionForm(props) {
   const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
-    setshowPopover(!showPopover)
+    setShowPopover(!showPopover)
+  }
+  const changeImageEditVisibleState = () => {
+    setIsImageEditVisible(!isImageEditVisible)
   }
   // [USE_EFFECTS]
   useEffect(() => {
@@ -137,9 +148,7 @@ function QuestionForm(props) {
                 <Popover
                   onClick={popoverShowChange}
                   visible={showPopover}
-                  onVisibleChange={() => {
-                    setshowPopover(!showPopover)
-                  }}
+                  onVisibleChange={popoverShowChange}
                   trigger={'click'}
                   placement={'bottomRight'}
                   btnType="primary"
@@ -212,16 +221,29 @@ function QuestionForm(props) {
               {...question?.layoutType.imgSize}
               backgroundRepeat="no-repeat"
               backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
-              position="relative"
-              zIndex="1"
-              m={2}>
-              <MediaLibraryModal
-                btnProps={{
-                  type: 'primary',
-                  icon: <EyeFilled />,
-                  style: styles.modalButtonStyle
-                }}
-              />
+              m={2}
+              position="relative">
+              <Row h="right">
+                <Col cw="auto" mr={4}>
+                  <Popover
+                    // placement="topRight"
+                    style={styles.modalButtonStyle}
+                    onClick={changeImageEditVisibleState}
+                    visible={isImageEditVisible}
+                    onVisibleChange={changeImageEditVisibleState}
+                    trigger={'click'}
+                    placement="rightTop"
+                    btnType="primary"
+                    btnIcon={<EyeFilled />}
+                    content={
+                      <MediaLibrarySimpleView
+                        setIsImageEditVisible={setIsImageEditVisible}
+                        style={{ top: '-50px' }}
+                      />
+                    }
+                  />
+                </Col>
+              </Row>
             </Box>
           </Col>
         )}
