@@ -1,16 +1,11 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { KeyBox } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'
-import { useEffect, useState } from 'react'
 import { Box } from '@qonsoll/react-design'
-// import { useTranslation } from 'react-i18next'
 
 function YesnoButton(props) {
   const { onClick } = props
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -57,24 +52,6 @@ function YesnoButton(props) {
     }
   )
 
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
-
   return (
     <Box display="block">
       {mappedChoices.map((item, index) => (
@@ -91,6 +68,8 @@ function YesnoButton(props) {
   )
 }
 
-YesnoButton.propTypes = {}
+YesnoButton.propTypes = {
+  onClick: PropTypes.func
+}
 
 export default YesnoButton

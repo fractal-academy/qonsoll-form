@@ -20,9 +20,21 @@ import {
 const { Title, Text } = Typography
 
 const choices = [
-  { name: 'choice 1', image: '' },
-  { name: 'choice 1', image: '' },
-  { name: 'choice 1', image: '' }
+  {
+    name: 'choice 1',
+    image:
+      'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
+  },
+  {
+    name: 'choice 1',
+    image:
+      'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
+  },
+  {
+    name: 'choice 1',
+    image:
+      'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
+  }
 ]
 
 function QuestionAdvancedView(props) {
@@ -79,19 +91,20 @@ function QuestionAdvancedView(props) {
   }
 
   const layoutTypeMap = {
-    fullscreen: { constant: LAYOUT_TYPES.FULL_SCREEN, imageOrder: '' },
-    between: { constant: LAYOUT_TYPES.BETWEEN, imageOrder: '' },
-    leftsidesmall: { constant: LAYOUT_TYPES.LEFT_SIDE_SMALL, imageOrder: 1 },
-    leftsidebig: { constant: LAYOUT_TYPES.LEFT_SIDE_BIG, imageOrder: 1 },
-    rightsidesmall: {
+    FULL_SCREEN: { constant: LAYOUT_TYPES.FULL_SCREEN, imageOrder: '' },
+    BETWEEN: { constant: LAYOUT_TYPES.BETWEEN, imageOrder: '' },
+    LEFT_SIDE_SMALL: { constant: LAYOUT_TYPES.LEFT_SIDE_SMALL, imageOrder: 1 },
+    LEFT_SIDE_BIG: { constant: LAYOUT_TYPES.LEFT_SIDE_BIG, imageOrder: 1 },
+    RIGHT_SIDE_SMALL: {
       constant: LAYOUT_TYPES.RIGHT_SIDE_SMALL,
       imageOrder: 3
     },
-    rightsidebig: { constant: LAYOUT_TYPES.RIGHT_SIDE_BIG, imageOrder: 3 }
+    RIGHT_SIDE_BIG: { constant: LAYOUT_TYPES.RIGHT_SIDE_BIG, imageOrder: 3 }
   }
 
-  const layoutType = layoutTypeMap[data.layoutType].constant
-  const imageOrder = layoutTypeMap[data.layoutType].imageOrder
+  const layoutType = data?.layoutType && layoutTypeMap[data.layoutType].constant
+  const imageOrder =
+    data?.layoutType && layoutTypeMap[data.layoutType].imageOrder
 
   const bgImage = {
     ...(layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
@@ -111,9 +124,9 @@ function QuestionAdvancedView(props) {
     <Row
       noGutters
       height="inherit"
+      backgroundSize="cover"
       backgroundImage={bgImage}
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover">
+      backgroundRepeat="no-repeat">
       <Col
         v="center"
         order={2}

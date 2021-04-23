@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { KeyBox } from 'app/components'
+import { KeyBox, ImageKeyBox } from 'app/components'
 import { useMemo, useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
@@ -51,21 +51,21 @@ function ChoiceButton(props) {
   return (
     <Box display="block">
       {mappedChoices.map((item, index) => (
-        <Box key={index} mb={2}>
-          <KeyBox
-            isActive={buttonKey === item.letter}
-            onButtonClick={onButtonClick}
-            item={item}
-            buttonKey={buttonKey}
-          />
-        </Box>
+        <ImageKeyBox
+          key={index}
+          item={item}
+          buttonKey={buttonKey}
+          onButtonClick={onButtonClick}
+          isActive={buttonKey === item.letter}
+        />
       ))}
     </Box>
   )
 }
 
 ChoiceButton.propTypes = {
-  choices: PropTypes.array
+  choices: PropTypes.array,
+  onClick: PropTypes.func
 }
 
 export default ChoiceButton

@@ -24,6 +24,8 @@ function CustomButton(props) {
 }
 
 CustomButton.propTypes = {
+  onClick: PropTypes.func,
+  children: PropTypes.node,
   buttonType: PropTypes.string.isRequired
 }
 

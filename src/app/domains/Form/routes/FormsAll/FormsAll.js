@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import {
-  Breadcrumb,
-  Button,
-  Divider,
-  Tooltip,
-  Typography,
-  Menu,
-  Input
-} from 'antd'
+import { Breadcrumb, Button, Divider, Typography, Menu, Input } from 'antd'
 import {
   ArrowLeftOutlined,
   FolderOutlined,
-  SettingOutlined,
   SearchOutlined,
-  FilterOutlined,
   PlusOutlined
 } from '@ant-design/icons'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
@@ -35,9 +23,6 @@ const mockRoutes = [
 ]
 
 function FormsAll(props) {
-  //const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const [data] = useCollectionData(firestore.collection('forms'))
@@ -59,23 +44,6 @@ function FormsAll(props) {
       }
     ])
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   const menu = (
     <Menu>
@@ -116,6 +84,7 @@ function FormsAll(props) {
           </Breadcrumb>
         </Col>
       </Row>
+
       {/* SecondaryTitle */}
       <Row mb={1} v="center" pt={3}>
         <Col>
