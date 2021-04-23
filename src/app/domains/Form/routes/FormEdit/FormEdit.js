@@ -34,12 +34,12 @@ function FormEdit(props) {
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
 
-  //[COMPONENT STATE HOOKS]
-  const [showPopover, setshowPopover] = useState(false)
-
   // [CUSTOM_HOOKS]
   const formContext = useFormContext()
   const dispatch = useFormContextDispatch()
+  // [COMPONENT STATE HOOKS]
+  const [showPopover, setShowPopover] = useState(false)
+  const [isImageEditVisible, setIsImageEditVisible] = useState(false)
 
   // [COMPUTED PROPERTIES]
   let questions, endings
@@ -68,8 +68,9 @@ function FormEdit(props) {
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key }
     })
-    setshowPopover(false)
+    setShowPopover(false)
   }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -109,7 +110,9 @@ function FormEdit(props) {
                   data={formContext}
                   onQuestionTypeChange={onQuestionTypeChange}
                   showPopover={showPopover}
-                  setshowPopover={setshowPopover}
+                  setShowPopover={setShowPopover}
+                  isImageEditVisible={isImageEditVisible}
+                  setIsImageEditVisible={setIsImageEditVisible}
                 />
               )}
             </FormContentArea>

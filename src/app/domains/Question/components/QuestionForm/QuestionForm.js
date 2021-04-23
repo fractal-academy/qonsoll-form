@@ -1,4 +1,4 @@
-import React, { useEffect, useState, cloneElement } from 'react'
+import React, { useEffect, cloneElement } from 'react'
 import { Card, Tag } from 'antd'
 import {
   DateTimeInput,
@@ -18,13 +18,21 @@ import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSele
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import PropTypes from 'prop-types'
+import MediaLibrarySimpleView from '../../../MediaLibrary/components/MediaLibrarySimpleView'
 
 // import { useTranslation } from 'react-i18next'
 
 function QuestionForm(props) {
-  const { data, onQuestionTypeChange, setshowPopover, showPopover } = props
+  const {
+    data,
+    onQuestionTypeChange,
+    setShowPopover,
+    showPopover,
+    setIsImageEditVisible,
+    isImageEditVisible
+  } = props
+
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -84,7 +92,10 @@ function QuestionForm(props) {
 
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
-    setshowPopover(!showPopover)
+    setShowPopover(!showPopover)
+  }
+  const changeImageEditVisibleState = () => {
+    setIsImageEditVisible(!isImageEditVisible)
   }
   // [USE_EFFECTS]
   useEffect(() => {
@@ -132,9 +143,7 @@ function QuestionForm(props) {
                 <Popover
                   onClick={popoverShowChange}
                   visible={showPopover}
-                  onVisibleChange={() => {
-                    setshowPopover(!showPopover)
-                  }}
+                  onVisibleChange={popoverShowChange}
                   trigger={'click'}
                   placement={'bottomRight'}
                   btnType="primary"
@@ -146,12 +155,21 @@ function QuestionForm(props) {
               </Col>
               {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                 <Col cw="auto" ml={2}>
-                  <MediaLibraryModal
-                    btnProps={{
-                      type: 'primary',
-                      icon: <EyeFilled />,
-                      style: styles.borderForFullScreen
-                    }}
+                  <Popover
+                    onClick={changeImageEditVisibleState}
+                    visible={isImageEditVisible}
+                    onVisibleChange={changeImageEditVisibleState}
+                    trigger={'click'}
+                    placement="rightTop"
+                    btnType="primary"
+                    btnIcon={<EyeFilled />}
+                    content={
+                      <Box width="192px" height="366px" overflow="hidden">
+                        <MediaLibrarySimpleView
+                          setIsImageEditVisible={setIsImageEditVisible}
+                        />
+                      </Box>
+                    }
                   />
                 </Col>
               )}
@@ -174,12 +192,21 @@ function QuestionForm(props) {
                     position="relative"
                     zIndex="1"
                     mb={3}>
-                    <MediaLibraryModal
-                      btnProps={{
-                        type: 'primary',
-                        icon: <EyeFilled />,
-                        style: styles.modalButtonStyle
-                      }}
+                    <Popover
+                      onClick={changeImageEditVisibleState}
+                      visible={isImageEditVisible}
+                      onVisibleChange={changeImageEditVisibleState}
+                      trigger={'click'}
+                      placement="rightTop"
+                      btnType="primary"
+                      btnIcon={<EyeFilled />}
+                      content={
+                        <Box width="192px" height="366px" overflow="hidden">
+                          <MediaLibrarySimpleView
+                            setIsImageEditVisible={setIsImageEditVisible}
+                          />
+                        </Box>
+                      }
                     />
                   </Box>
                 </Col>
@@ -207,16 +234,29 @@ function QuestionForm(props) {
               {...layoutType?.imgSize}
               backgroundRepeat="no-repeat"
               backgroundImage={`url(${data?.image})`}
-              position="relative"
-              zIndex="1"
-              m={2}>
-              <MediaLibraryModal
-                btnProps={{
-                  type: 'primary',
-                  icon: <EyeFilled />,
-                  style: styles.modalButtonStyle
-                }}
-              />
+              m={2}
+              position="relative">
+              <Row h="right">
+                <Col cw="auto" mr={4}>
+                  <Popover
+                    // placement="topRight"
+                    onClick={changeImageEditVisibleState}
+                    visible={isImageEditVisible}
+                    onVisibleChange={changeImageEditVisibleState}
+                    trigger={'click'}
+                    placement="rightTop"
+                    btnType="primary"
+                    btnIcon={<EyeFilled />}
+                    content={
+                      <Box width="192px" height="366px" overflow="hidden">
+                        <MediaLibrarySimpleView
+                          setIsImageEditVisible={setIsImageEditVisible}
+                        />
+                      </Box>
+                    }
+                  />
+                </Col>
+              </Row>
             </Box>
           </Col>
         )}
