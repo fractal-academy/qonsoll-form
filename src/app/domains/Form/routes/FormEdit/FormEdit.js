@@ -23,7 +23,9 @@ function FormEdit(props) {
   // [COMPONENT STATE HOOKS]
   const [activeKey, setActiveKey] = useState(LAYOUT_TYPE_KEYS[0])
   const [questionType, setQuestionType] = useState(QUESTION_TYPES.YES_NO)
-  const [showPopover, setshowPopover] = useState(false)
+  const [showPopover, setShowPopover] = useState(false)
+  const [isImageEditVisible, setIsImageEditVisible] = useState(false)
+
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
@@ -32,8 +34,9 @@ function FormEdit(props) {
   }
   const onQuestionTypeChange = ({ key }) => {
     setQuestionType(key)
-    setshowPopover(false)
+    setShowPopover(false)
   }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -69,7 +72,9 @@ function FormEdit(props) {
             }}
             onQuestionTypeChange={onQuestionTypeChange}
             showPopover={showPopover}
-            setshowPopover={setshowPopover}
+            setShowPopover={setShowPopover}
+            isImageEditVisible={isImageEditVisible}
+            setIsImageEditVisible={setIsImageEditVisible}
           />
         </FormContentArea>
       </PageLayout>

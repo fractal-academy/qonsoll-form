@@ -1,10 +1,11 @@
 export const styles = {
   inputStyle: {
-    borderRadius: '8px',
-    border: '1px solid lightgrey',
-    fontSize: '22px',
-    backgroundColor: '#f5f5f6',
-    height: '44px'
+    height: '40px',
+    width: '176px',
+    color: '#f5f5f6',
+    fontSize: '16px',
+    letterSpacing: 0,
+    lineHeight: '24px'
   },
   buttonStyles: {
     borderRadius: '4px',
