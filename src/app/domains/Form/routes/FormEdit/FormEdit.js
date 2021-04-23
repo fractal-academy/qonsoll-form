@@ -8,7 +8,7 @@ import {
 } from 'components'
 import { Box } from '@qonsoll/react-design'
 import { QuestionForm } from 'app/domains/Question/components'
-import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
+import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
 import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
@@ -59,9 +59,7 @@ function FormEdit(props) {
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
         layoutType: key,
-        image:
-          formContext?.image ||
-          'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
+        image: formContext?.image || DEFAULT_IMAGE
       }
     })
   }

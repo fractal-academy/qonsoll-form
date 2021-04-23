@@ -10,13 +10,15 @@ import { FormAdvancedView } from 'domains/Form/components'
 import { QuestionAdvancedView } from 'domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { getCollectionRef } from 'app/services/Firestore'
+import { COLLECTIONS } from 'app/constants'
 
 const { Title } = Typography
 
 function FormShow(props) {
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const [data] = useCollectionData(firestore.collection('questions'))
+  const [data] = useCollectionData(getCollectionRef(COLLECTIONS.QUESTIONS))
   useKeyPress('enter', (event) => {
     onClick()
   })
