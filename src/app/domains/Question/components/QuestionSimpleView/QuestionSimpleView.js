@@ -5,10 +5,11 @@ import './QuestionSimpleView.styles.css'
 import { MoreOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import React, { cloneElement, useEffect } from 'react'
+import { LAYOUT_TYPES } from 'app/constants'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionSimpleView(props) {
-  const { description, number, icon } = props
+  const { title, number, layoutType } = props
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -48,11 +49,13 @@ function QuestionSimpleView(props) {
         <Row h="around" v="center" noGutters ml={2}>
           <Col cw="auto" mr={2}>
             <Box display="flex" className="roundBox">
-              {cloneElement(icon, { className: 'typeIcon' })}
+              {cloneElement(LAYOUT_TYPES[layoutType].icon, {
+                className: 'typeIcon'
+              })}
             </Box>
           </Col>
           <Col width="120px" className="description">
-            {description}
+            {title}
           </Col>
           <Col cw="auto">
             <Dropdown overlay={menu} placement="bottomRight">

@@ -7,7 +7,7 @@ export const FormContextDispatch = React.createContext()
 
 const FormContextProvider = (props) => {
   const { children } = props
-  const [forms, dispatch] = useReducer(formContextReducer, [])
+  const [forms, dispatch] = useReducer(formContextReducer, {})
 
   return (
     <FormContextDispatch.Provider value={dispatch}>

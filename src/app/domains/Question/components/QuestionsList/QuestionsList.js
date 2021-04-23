@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react'
 import { DragableList } from 'app/components'
-import {
-  UnorderedListOutlined,
-  PicCenterOutlined,
-  PicRightOutlined
-} from '@ant-design/icons'
-import QuestionSimpleView from 'app/domains/Question/components/QuestionSimpleView'
+import QuestionSimpleView from 'domains/Question/components/QuestionSimpleView'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -42,21 +37,6 @@ function QuestionsList(props) {
       isComponentMounted = false
     }
   }, [])
-
-  const mockedData = [
-    {
-      icon: <UnorderedListOutlined />,
-      description: '1 Here will be very long but smart description.'
-    },
-    {
-      icon: <PicRightOutlined />,
-      description: '2 Here will be very long but smart description.'
-    },
-    {
-      icon: <PicCenterOutlined />,
-      description: '3 Here will be very long but smart description.'
-    }
-  ]
 
   return (
     <DragableList

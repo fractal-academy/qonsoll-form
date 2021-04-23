@@ -14,8 +14,9 @@ import {
   ChoiceButton,
   FileUploader,
   TextAreaForm,
-  DateTimeInput
-} from 'app/components'
+  DateTimeInput,
+  SubmitButton
+} from 'components'
 
 const { Title, Text } = Typography
 
@@ -84,37 +85,26 @@ function QuestionAdvancedView(props) {
           Start questionary
         </Button>
       )
+    },
+    [QUESTION_TYPES.ENDING]: {
+      component: <SubmitButton>Finish</SubmitButton>
     }
   }
 
-  const layoutTypeMap = {
-    fullscreen: { constant: LAYOUT_TYPES.FULL_SCREEN, imageOrder: '' },
-    between: { constant: LAYOUT_TYPES.BETWEEN, imageOrder: '' },
-    leftsidesmall: { constant: LAYOUT_TYPES.LEFT_SIDE_SMALL, imageOrder: 1 },
-    leftsidebig: { constant: LAYOUT_TYPES.LEFT_SIDE_BIG, imageOrder: 1 },
-    rightsidesmall: {
-      constant: LAYOUT_TYPES.RIGHT_SIDE_SMALL,
-      imageOrder: 3
-    },
-    rightsidebig: { constant: LAYOUT_TYPES.RIGHT_SIDE_BIG, imageOrder: 3 }
-  }
-
-  const layoutType = layoutTypeMap[data.layoutType].constant
-  const imageOrder = layoutTypeMap[data.layoutType].imageOrder
+  const layoutType = LAYOUT_TYPES[data?.layoutType]
+  const imageShowRule =
+    layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
+    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type
 
   const bgImage = {
     ...(layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
       ? {
           //mock data will be replaced
           backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
+          backgroundImage: `url(${data?.image})`
         }
       : {})
   }
-
-  const imageShowRule =
-    layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
-    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type
 
   return (
     <Row
@@ -170,7 +160,7 @@ function QuestionAdvancedView(props) {
           display="flex"
           style={styles.columnStyle}
           height="100%"
-          order={imageOrder}>
+          order={layoutType.imageOrder}>
           <Box
             {...layoutType.imgSize}
             backgroundRepeat="no-repeat"

@@ -8,7 +8,8 @@ const QUESTION_TYPES = {
   YES_NO: 'Yes/No',
   OPINION_SCALE: 'Opinion scale',
   DATE: 'Date',
-  FILE_UPLOAD: 'File upload'
+  FILE_UPLOAD: 'File upload',
+  ENDING: 'Ending'
 }
 
 const QUESTION_TYPE_KEYS = Object.keys(QUESTION_TYPES)
