@@ -35,4 +35,4 @@ export { default as ChoiceForm } from './Input/ChoiceForm'
 
 export { default as Spinner } from './Spinner'
 
-export { default as RangeSlider } from './/RangeSlider'
+export { default as RangeSlider } from './RangeSlider'
