@@ -20,24 +20,6 @@ import {
 
 const { Title, Text } = Typography
 
-const choices = [
-  {
-    name: 'choice 1',
-    image:
-      'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
-  },
-  {
-    name: 'choice 1',
-    image:
-      'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
-  },
-  {
-    name: 'choice 1',
-    image:
-      'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
-  }
-]
-
 function QuestionAdvancedView(props) {
   const { data, questionNumber, onClick } = props
 
@@ -56,7 +38,13 @@ function QuestionAdvancedView(props) {
       component: <YesnoButton onClick={onClick} />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceButton choices={choices} onClick={onClick} hasImages />
+      component: (
+        <ChoiceButton
+          choices={data?.btnProps?.children}
+          onClick={onClick}
+          hasImages
+        />
+      )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} onClick={onClick} />
