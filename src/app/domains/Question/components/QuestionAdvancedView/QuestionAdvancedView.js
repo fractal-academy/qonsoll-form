@@ -1,22 +1,22 @@
-import React, { useEffect, useState, cloneElement } from 'react'
+import PropTypes from 'prop-types'
+import { cloneElement } from 'react'
 import { Typography, Card } from 'antd'
+import { globalStyles } from 'app/styles'
+import { Col, Row, Box } from '@qonsoll/react-design'
+import { styles } from './QuestionAdvancedView.styles'
+import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import {
-  DateTimeInput,
-  FileUploader,
-  InputForm,
   Rate,
-  TextAreaForm,
+  Button,
+  InputForm,
   YesnoButton,
   RangeButton,
-  Button,
-  ChoiceButton
-} from 'app/components'
-import { Col, Row, Box } from '@qonsoll/react-design'
-import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import { styles } from './QuestionAdvancedView.styles'
-import { globalStyles } from 'app/styles'
-import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+  ChoiceButton,
+  FileUploader,
+  TextAreaForm,
+  DateTimeInput,
+  SubmitButton
+} from 'components'
 
 const { Title, Text } = Typography
 
@@ -26,19 +26,8 @@ const choices = [
   { name: 'choice 1', image: '' }
 ]
 
-const layoutSides = [
-  LAYOUT_TYPES.LEFT_SIDE_BIG.type,
-  LAYOUT_TYPES.LEFT_SIDE_SMALL.type,
-  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
-  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
-]
-const rightSide = [
-  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
-  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
-]
-
 function QuestionAdvancedView(props) {
-  const { question, questionNumber = 0 } = props
+  const { data, questionNumber, onClick } = props
 
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -52,26 +41,22 @@ function QuestionAdvancedView(props) {
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.YES_NO]: {
-      component: <YesnoButton onClick={question?.btnProps?.onClick} />
+      component: <YesnoButton onClick={onClick} />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: (
-        <ChoiceButton choices={choices} onClick={question?.btnProps?.onClick} />
-      )
+      component: <ChoiceButton choices={choices} onClick={onClick} />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: (
-        <RangeButton from={1} to={5} onClick={question?.btnProps?.onClick} />
-      )
+      component: <RangeButton from={1} to={5} onClick={onClick} />
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <InputForm />
+      component: <InputForm onClick={onClick} />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <TextAreaForm />
+      component: <TextAreaForm onClick={onClick} />
     },
     [QUESTION_TYPES.DATE]: {
       component: <DateTimeInput />
@@ -81,48 +66,45 @@ function QuestionAdvancedView(props) {
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: (
-        <Button buttonType="primary" buttonText="213" size="large">
+        <Button
+          size="large"
+          buttonText="213"
+          buttonType="primary"
+          onClick={onClick}>
           Continue
         </Button>
       )
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
-        <Button buttonType="primary" buttonText="Submit" size="large">
+        <Button
+          size="large"
+          buttonText="Submit"
+          buttonType="primary"
+          onClick={onClick}>
           Start questionary
         </Button>
       )
+    },
+    [QUESTION_TYPES.ENDING]: {
+      component: <SubmitButton>Finish</SubmitButton>
     }
   }
+
+  const layoutType = LAYOUT_TYPES[data?.layoutType]
+  const imageShowRule =
+    layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
+    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type
+
   const bgImage = {
-    ...(question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
+    ...(layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
       ? {
           //mock data will be replaced
           backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
+          backgroundImage: `url(${data?.image})`
         }
       : {})
   }
-  const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
-  // [CLEAN FUNCTIONS]
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Row
@@ -141,23 +123,23 @@ function QuestionAdvancedView(props) {
           <Row noGutters>
             <Col cw="auto">
               <Title level={4} style={globalStyles.resetMargin}>
-                {questionNumber}. Question title
+                {questionNumber}. {data?.title}
               </Title>
             </Col>
           </Row>
           <Row noGutters>
             <Col>
-              <Text>Question optional description</Text>
+              <Text>{data?.subtitle}</Text>
             </Col>
           </Row>
-          {question?.layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
+          {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
             <Row pt={25}>
               <Col cw="auto">
                 <Box
-                  {...question?.layoutType.imgSize}
+                  {...layoutType.imgSize}
                   //mock data will be replaced
                   backgroundRepeat="no-repeat"
-                  backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
+                  backgroundImage={`url(${data?.image})`}
                 />
               </Col>
             </Row>
@@ -165,24 +147,24 @@ function QuestionAdvancedView(props) {
           <Row noGutters pt={25}>
             <Col>
               {cloneElement(
-                questionTypesMap[question?.questionType].component,
-                question
+                questionTypesMap[data?.questionType].component,
+                data
               )}
             </Col>
           </Row>
         </Card>
       </Col>
-      {layoutSides.includes(question?.layoutType.type) && (
+      {imageShowRule && (
         <Col
           v="center"
           display="flex"
           style={styles.columnStyle}
           height="100%"
-          order={imageOrder}>
+          order={layoutType.imageOrder}>
           <Box
-            {...question?.layoutType.imgSize}
+            {...layoutType.imgSize}
             backgroundRepeat="no-repeat"
-            backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
+            backgroundImage={`url(${data?.image})`}
           />
         </Col>
       )}
@@ -190,6 +172,10 @@ function QuestionAdvancedView(props) {
   )
 }
 
-QuestionAdvancedView.propTypes = {}
+QuestionAdvancedView.propTypes = {
+  data: PropTypes.object,
+  onClick: PropTypes.func,
+  questionNumber: PropTypes.number
+}
 
 export default QuestionAdvancedView

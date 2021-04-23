@@ -7,7 +7,14 @@ import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function TextAreaForm(props) {
-  const { onSubmit, textAreaProps, btnProps, noBorder, longText } = props
+  const {
+    onSubmit,
+    textAreaProps,
+    btnProps,
+    noBorder,
+    longText,
+    onClick
+  } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -68,7 +75,7 @@ function TextAreaForm(props) {
               <Form.Item>
                 <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
               </Form.Item>
-              <SubmitButton />
+              <SubmitButton onClick={onClick} />
               <Text>Press enter ↵</Text>
             </Form>
           </Col>

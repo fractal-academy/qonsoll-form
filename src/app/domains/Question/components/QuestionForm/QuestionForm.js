@@ -1,4 +1,4 @@
-import React, { useEffect, useState, cloneElement } from 'react'
+import React, { useEffect, cloneElement } from 'react'
 import { Card, Tag } from 'antd'
 import {
   DateTimeInput,
@@ -13,37 +13,26 @@ import {
   ChoiceForm,
   SubmitButton
 } from 'components'
-import { EyeFilled, PlusOutlined, SettingOutlined } from '@ant-design/icons'
+import { EyeFilled, SettingOutlined } from '@ant-design/icons'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import PropTypes from 'prop-types'
 import MediaLibrarySimpleView from '../../../MediaLibrary/components/MediaLibrarySimpleView'
 
 // import { useTranslation } from 'react-i18next'
 
-const layoutSides = [
-  LAYOUT_TYPES.LEFT_SIDE_BIG.type,
-  LAYOUT_TYPES.LEFT_SIDE_SMALL.type,
-  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
-  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
-]
-const rightSide = [
-  LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
-  LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
-]
-
 function QuestionForm(props) {
   const {
-    question,
+    data,
     onQuestionTypeChange,
     setShowPopover,
     showPopover,
     setIsImageEditVisible,
     isImageEditVisible
   } = props
+
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -87,14 +76,20 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: <SubmitButton>Next</SubmitButton>
+    },
+    [QUESTION_TYPES.ENDING]: {
+      component: <SubmitButton>Finish</SubmitButton>
     }
   }
-  const imageUrl = `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
+  const layoutType = LAYOUT_TYPES[data?.layoutType]
+  const imageShowRule =
+    layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
+    layoutType?.type !== LAYOUT_TYPES.FULL_SCREEN.type &&
+    layoutType?.type !== LAYOUT_TYPES.DEFAULT.type
 
   const bgImage =
-    question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type && imageUrl
+    layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && `url(${data?.image})`
 
-  const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
     setShowPopover(!showPopover)
@@ -132,7 +127,7 @@ function QuestionForm(props) {
         style={styles.rowStyle}
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
-        backgroundImage={bgImage && bgImage}>
+        backgroundImage={bgImage}>
         <Col
           v="center"
           order={2}
@@ -158,7 +153,7 @@ function QuestionForm(props) {
                   }
                 />
               </Col>
-              {question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type && (
+              {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                 <Col cw="auto" ml={2}>
                   <Popover
                     onClick={changeImageEditVisibleState}
@@ -187,13 +182,13 @@ function QuestionForm(props) {
                 />
               </Col>
             </Row>
-            {question?.layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
+            {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
               <Row>
                 <Col cw="auto">
                   <Box
-                    {...question?.layoutType.imgSize}
+                    {...layoutType.imgSize}
                     backgroundRepeat="no-repeat"
-                    backgroundImage={imageUrl}
+                    backgroundImage={`url(${data?.image})`}
                     position="relative"
                     zIndex="1"
                     mb={3}>
@@ -220,25 +215,25 @@ function QuestionForm(props) {
             <Row noGutters>
               <Col>
                 {cloneElement(
-                  questionTypesMap[question?.questionType].component,
-                  question
+                  questionTypesMap[data?.questionType].component,
+                  data
                 )}
               </Col>
             </Row>
           </Card>
         </Col>
-        {layoutSides.includes(question?.layoutType.type) && (
+        {imageShowRule && (
           <Col
             v="center"
             display="flex"
             style={styles.columnStyle}
             height="100%"
             width="800px"
-            order={imageOrder}>
+            order={layoutType?.imageOrder}>
             <Box
-              {...question?.layoutType.imgSize}
+              {...layoutType?.imgSize}
               backgroundRepeat="no-repeat"
-              backgroundImage={imageUrl}
+              backgroundImage={`url(${data?.image})`}
               m={2}
               position="relative">
               <Row h="right">

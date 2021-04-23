@@ -3,65 +3,80 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Divider } from 'antd'
 import {
   LeftOutlined,
-  PicCenterOutlined,
-  PicRightOutlined,
   PlusOutlined,
   RightOutlined,
-  SettingOutlined,
-  UnorderedListOutlined
+  SettingOutlined
 } from '@ant-design/icons'
 import { styles } from './EditorSidebar.styles'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
-import { DragableList, Popover } from 'components'
+import { Popover } from 'components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
 import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
 import QuestionsList from 'domains/Question/components/QuestionsList'
-import QuestionSimpleView from 'domains/Question/components/QuestionSimpleView'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
+import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
+import {
+  addData,
+  firestore,
+  getCollectionRef,
+  setData
+} from 'app/services/Firestore'
+import { useParams } from 'react-router'
+import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
+import { useFormContextDispatch } from 'app/context/FormContext'
 // import { useTranslation } from 'react-i18next'
 const { Title } = Typography
-const mockedData = [
-  {
-    icon: <UnorderedListOutlined />,
-    description: 'Some optional ending.'
-  }
-]
 
 function EditorSidebar(props) {
-  const { questionsList, questionsEndingsList } = props
+  const { questions, endings } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-
+  const { id } = useParams()
+  const dispatch = useFormContextDispatch()
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
   const [showPopover, setshowPopover] = useState(false)
 
   // [COMPUTED PROPERTIES]
-  const [endingList, setEndingList] = useState(mockedData)
-  const [questionList, setQuestionList] = useState(mockedData)
+
   // [CLEAN FUNCTIONS]
-  const onUpdate = () => {}
-  const addEnding = () => {
-    setEndingList((endingList) => [
-      ...endingList,
-      {
-        icon: <PicRightOutlined />,
-        description: 'Some optional ending.'
-      }
-    ])
+
+  const addEnding = async () => {
+    const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+    const newEnding = {
+      id: questionId,
+      formId: id,
+      layoutType: LAYOUT_TYPE_KEYS[0],
+      questionType: QUESTION_TYPES.ENDING,
+      title: 'New Ending.'
+    }
+    dispatch({
+      type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
+      payload: newEnding
+    })
+    await setData(COLLECTIONS.QUESTIONS, questionId, newEnding)
+    // setEndingsList((endingsList) => [...endingsList, newEnding])
   }
-  const addQuestion = () => {
-    setQuestionList((questionList) => [
-      ...questionList,
-      {
-        icon: <PicRightOutlined />,
-        description: 'New Question.'
-      }
-    ])
+  const addQuestion = async ({ key }) => {
+    const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+    const newQuestion = {
+      id: questionId,
+      formId: id,
+      layoutType: LAYOUT_TYPE_KEYS[0],
+      questionType: key,
+      title: 'New Question.'
+    }
+    dispatch({
+      type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
+      payload: newQuestion
+    })
+    await setData(COLLECTIONS.QUESTIONS, questionId, newQuestion)
+    // setQuestionsList((questionsList) => [...questionsList, newQuestion])
     setshowPopover(!showPopover)
   }
   const popoverShowChange = () => {
@@ -139,7 +154,7 @@ function EditorSidebar(props) {
           </Box>
           {/* Question List*/}
           <Box overflow="auto" p={3}>
-            <QuestionsList data={questionList} />
+            {questions?.length && <QuestionsList data={questions} />}
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
             <Row>
@@ -172,14 +187,7 @@ function EditorSidebar(props) {
             </Row>
             <Box pb={3} px={3} maxHeight="350px" overflow="auto">
               {/*<QuestionsList />*/}
-              <DragableList
-                itemLayout="horizontal"
-                dataSource={endingList}
-                onUpdate={onUpdate}
-                renderItem={(item, index) => (
-                  <QuestionSimpleView {...item} number={index + 1} />
-                )}
-              />
+              {endings?.length && <QuestionsList data={endings} />}
             </Box>
           </Box>
         </Box>

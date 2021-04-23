@@ -5,20 +5,15 @@ import {
   Breadcrumb,
   Button,
   Divider,
-  Tooltip,
   Typography,
-  Form,
   Menu,
   Input,
-  Modal,
-  message
+  Form,
+  Modal
 } from 'antd'
 import {
   ArrowLeftOutlined,
   FolderOutlined,
-  SettingOutlined,
-  SearchOutlined,
-  FilterOutlined,
   PlusOutlined
 } from '@ant-design/icons'
 import { firestore } from 'app/services'
@@ -59,7 +54,6 @@ function FormsAll(props) {
 
   const formId = firestore.collection(COLLECTIONS.FORMS).doc().id
   // [CLEAN FUNCTIONS]
-  const onFilterButtonClick = () => {}
   const searchData = () => {
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)
@@ -144,11 +138,6 @@ function FormsAll(props) {
             Forms
           </Title>
         </Col>
-        <Col cw="auto" v="center">
-          <Tooltip placement="left" title={'Settings'}>
-            <SettingOutlined style={globalStyles.iconSize} />
-          </Tooltip>
-        </Col>
       </Row>
       <Row pb={25}>
         <Col>
@@ -167,18 +156,6 @@ function FormsAll(props) {
             onChange={(input) => searchData(input.target.value)}
           />
         </Col>
-        <Col cw="auto">
-          <Divider type="vertical" style={globalStyles.fullHeight} />
-        </Col>
-        <Col cw="auto" v="center">
-          <Button
-            icon={<FilterOutlined />}
-            type="secondary"
-            style={styles.borderRadius}
-            onClick={onFilterButtonClick}>
-            Filter
-          </Button>
-        </Col>
       </Row>
       <Box
         display="flex"
@@ -190,11 +167,10 @@ function FormsAll(props) {
         {currentData?.map((item, index) => (
           <Box pr={3} pb={3} key={index}>
             <FormSimpleView
-              withRedirect
               id={item?.id}
               key={item?.id}
-              imageURL={item?.image}
               title={item?.title}
+              imageURL={item?.image}
               subtitle={item?.subtitle}
             />
           </Box>
