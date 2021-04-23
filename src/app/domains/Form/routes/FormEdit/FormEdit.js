@@ -96,7 +96,7 @@ function FormEdit(props) {
                   defaultActive={activeKey}
                 />
               }>
-              {formContext && (
+              {!!Object.keys(formContext).length && (
                 <QuestionForm
                   // question={{
                   //   questionType: questionType,
