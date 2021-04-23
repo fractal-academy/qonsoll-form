@@ -30,7 +30,7 @@ import { useFormContextDispatch } from 'app/context/FormContext'
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings, setCurrentQuestion } = props
+  const { questions, endings } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
