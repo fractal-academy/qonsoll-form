@@ -46,7 +46,7 @@ function QuestionAdvancedView(props) {
       component: <YesnoButton onClick={onClick} />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceButton choices={choices} onClick={onClick} />
+      component: <ChoiceButton choices={choices} onClick={onClick} hasImages />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} onClick={onClick} />

@@ -7,7 +7,7 @@ import { Box } from '@qonsoll/react-design'
 let startLetter = 65
 
 function ChoiceButton(props) {
-  const { choices, onClick } = props
+  const { choices, onClick, hasImages } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -50,15 +50,25 @@ function ChoiceButton(props) {
 
   return (
     <Box display="block">
-      {mappedChoices.map((item, index) => (
-        <ImageKeyBox
-          key={index}
-          item={item}
-          buttonKey={buttonKey}
-          onButtonClick={onButtonClick}
-          isActive={buttonKey === item.letter}
-        />
-      ))}
+      {mappedChoices.map((item, index) =>
+        hasImages ? (
+          <ImageKeyBox
+            key={index}
+            item={item}
+            buttonKey={buttonKey}
+            onButtonClick={onButtonClick}
+            isActive={buttonKey === item.letter}
+          />
+        ) : (
+          <KeyBox
+            key={index}
+            item={item}
+            buttonKey={buttonKey}
+            onButtonClick={onButtonClick}
+            isActive={buttonKey === item.letter}
+          />
+        )
+      )}
     </Box>
   )
 }
