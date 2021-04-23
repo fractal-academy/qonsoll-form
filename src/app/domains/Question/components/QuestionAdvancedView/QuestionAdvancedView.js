@@ -14,8 +14,9 @@ import {
   ChoiceButton,
   FileUploader,
   TextAreaForm,
-  DateTimeInput
-} from 'app/components'
+  DateTimeInput,
+  SubmitButton
+} from 'components'
 
 const { Title, Text } = Typography
 
@@ -39,6 +40,15 @@ const choices = [
 
 function QuestionAdvancedView(props) {
   const { data, questionNumber, onClick } = props
+
+  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
+
+  // [ADDITIONAL HOOKS]
+  // const { t } = useTranslation('translation')
+  // const { currentLanguage } = t
+
+  // [COMPONENT STATE HOOKS]
+  // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -87,38 +97,26 @@ function QuestionAdvancedView(props) {
           Start questionary
         </Button>
       )
+    },
+    [QUESTION_TYPES.ENDING]: {
+      component: <SubmitButton>Finish</SubmitButton>
     }
   }
 
-  const layoutTypeMap = {
-    FULL_SCREEN: { constant: LAYOUT_TYPES.FULL_SCREEN, imageOrder: '' },
-    BETWEEN: { constant: LAYOUT_TYPES.BETWEEN, imageOrder: '' },
-    LEFT_SIDE_SMALL: { constant: LAYOUT_TYPES.LEFT_SIDE_SMALL, imageOrder: 1 },
-    LEFT_SIDE_BIG: { constant: LAYOUT_TYPES.LEFT_SIDE_BIG, imageOrder: 1 },
-    RIGHT_SIDE_SMALL: {
-      constant: LAYOUT_TYPES.RIGHT_SIDE_SMALL,
-      imageOrder: 3
-    },
-    RIGHT_SIDE_BIG: { constant: LAYOUT_TYPES.RIGHT_SIDE_BIG, imageOrder: 3 }
-  }
-
-  const layoutType = data?.layoutType && layoutTypeMap[data.layoutType].constant
-  const imageOrder =
-    data?.layoutType && layoutTypeMap[data.layoutType].imageOrder
+  const layoutType = LAYOUT_TYPES[data?.layoutType]
+  const imageShowRule =
+    layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
+    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type
 
   const bgImage = {
     ...(layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
       ? {
           //mock data will be replaced
           backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
+          backgroundImage: `url(${data?.image})`
         }
       : {})
   }
-
-  const imageShowRule =
-    layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
-    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type
 
   return (
     <Row
@@ -174,7 +172,7 @@ function QuestionAdvancedView(props) {
           display="flex"
           style={styles.columnStyle}
           height="100%"
-          order={imageOrder}>
+          order={layoutType.imageOrder}>
           <Box
             {...layoutType.imgSize}
             backgroundRepeat="no-repeat"

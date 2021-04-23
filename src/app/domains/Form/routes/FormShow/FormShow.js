@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { styles } from './FormShow.style'
@@ -7,9 +7,9 @@ import { useKeyPress } from '@umijs/hooks'
 import { Button, Divider, Typography } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FormAdvancedView } from 'domains/Form/components'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from 'domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const { Title } = Typography
 
@@ -24,11 +24,30 @@ function FormShow(props) {
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
 
+  // [COMPUTED PROPERTIES]
+
   // [CLEAN FUNCTIONS]
   const onRestart = () => {}
   const onClick = () => {
     setIsAnswered(true)
   }
+  // [USE_EFFECTS]
+  useEffect(() => {
+    let isComponentMounted = true
+
+    // [EFFECT LOGIC]
+    // write code here...
+    // code sample: isComponentMounted && setState(<your data for state updation>)
+
+    // [CLEAN UP FUNCTION]
+    return () => {
+      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
+      // write code here...
+
+      // [FINAL CLEAN UP]
+      isComponentMounted = false
+    }
+  }, [])
 
   return (
     <Box bg="#f6f9fe" display="flex" flexDirection="column" height="100%">
