@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { Modal, Button, Typography, Input, Divider } from 'antd'
+import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
-import { FormSimpleView } from 'domains/Form/components'
+import Icon, {
+  FilterOutlined,
+  PlusOutlined,
+  SearchOutlined
+} from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
 import { styles } from './MediaLibraryModal.styles'
 import PropTypes from 'prop-types'
 import './MediaLibraryModal.styles.css'
-import { MediaLibraryFilter } from 'domains/MediaLibrary/components'
+import {
+  MediaLibraryFilter,
+  MediaLibraryItemSimpleView
+} from 'domains/MediaLibrary/components'
 import MediaLibrarySimpleView from 'domains/MediaLibrary/components/MediaLibrarySimpleView'
 // import { useTranslation } from 'react-i18next'
+// import storage from 'app/services/Firebase'
+import firebase, { firestore } from 'app/services/Firebase'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { getCollectionRef, setData } from 'app/services/Firestore'
+import COLLECTIONS from 'app/constants/collection'
 
 const { Title, Text } = Typography
 
@@ -18,6 +29,14 @@ function MediaLibraryModal(props) {
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
+  const [media = []] = useCollectionData(
+    getCollectionRef(COLLECTIONS.MEDIA) /*.orderBy('creationDate', 'desc')*/
+  )
+  console.log(media)
+  const onMediaUploaded = (data) => {
+    const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
+    setData(COLLECTIONS?.MEDIA, mediaId, data)
+  }
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
@@ -25,12 +44,7 @@ function MediaLibraryModal(props) {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [switchState, setSwitchState] = useState(true)
   const [sidebarState, setSidebarState] = useState(true)
-  const [formsList, setFormsList] = useState([
-    { title: 'New title', subtitle: 'subtitle' },
-    { title: 'New title', subtitle: 'subtitle' },
-    { title: 'New title', subtitle: 'subtitle' },
-    { title: 'New title', subtitle: 'subtitle' }
-  ])
+  const [imagesList, setImagesList] = useState(media)
 
   // [COMPUTED PROPERTIES]
   let amountFiles = 0
@@ -58,24 +72,26 @@ function MediaLibraryModal(props) {
     onClick && onClick()
     // setIsImageEditVisible(false)
   }
-  const onAddForm = () => {
-    setFormsList((prev) => [
-      ...prev,
-      {
-        title: 'new Title ',
-        subtitle: 'subtitle'
-      }
-    ])
-  }
+  // const onAddForm = () => {
+  //   setImagesList((prev) => [
+  //     ...prev,
+  //     {
+  //       title: 'new Title ',
+  //       subtitle: 'subtitle'
+  //     }
+  //   ])
+  // }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
+    imagesList && setImagesList(media)
 
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
 
     // [CLEAN UP FUNCTION]
+
     return () => {
       // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
       // write code here...
@@ -83,7 +99,7 @@ function MediaLibraryModal(props) {
       // [FINAL CLEAN UP]
       isComponentMounted = false
     }
-  }, [])
+  }, [media])
 
   return (
     <>
@@ -178,29 +194,78 @@ function MediaLibraryModal(props) {
               bg="#f6f9fe"
               className="custom-scroll">
               {/* Here should be list of data Images/Video */}
-              {formsList.map((item) => (
+              {imagesList.map((item) => (
                 <Box mr={3} mb={3}>
-                  <FormSimpleView
-                    key={item}
-                    title={item.title}
-                    subtitle={item.subtitle}
+                  <MediaLibraryItemSimpleView
+                    // key={item}
+                    // title={item.title}
+                    // subtitle={item.subtitle}
+                    // image={item.imageUrl}
+                    // name={item.name}
+                    {...item}
                   />
                 </Box>
               ))}
-              <Box
-                bg="#eceff5"
-                mr={3}
-                mb={3}
-                borderRadius="8px"
-                width="150px"
-                height="150px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                style={globalStyles.cursorPointer}
-                onClick={onAddForm}>
-                <PlusOutlined />
-              </Box>
+              {/*==================================*/}
+              <Upload
+                showUploadList={false}
+                name="file"
+                customRequest={(data) => {
+                  const { onSuccess } = data
+                  const ref = firebase
+                    .storage()
+                    .ref('images')
+                    .child(data.file.uid)
+
+                  const image = ref.put(data.file)
+                  image.on(
+                    'state_changed',
+                    (snapshot) => {},
+                    (error) => {
+                      // Handle error during the upload
+                      console.error('message')
+                    },
+                    () => {
+                      image.snapshot.ref
+                        .getDownloadURL()
+                        .then((downloadURL) => {
+                          setImagesList([
+                            ...imagesList,
+                            {
+                              // key: { data.file.uid },
+                              name: data.file.name,
+                              imageUrl: downloadURL,
+                              title: 'New title',
+                              subtitle: 'subtitle'
+                            }
+                          ])
+                          onMediaUploaded({
+                            name: data.file.name,
+                            imageUrl: downloadURL,
+                            title: 'New title',
+                            subtitle: 'subtitle'
+                          })
+                        })
+                        .then(() => onSuccess())
+                    }
+                  )
+                }}>
+                <Box
+                  bg="#eceff5"
+                  mr={3}
+                  mb={3}
+                  borderRadius="8px"
+                  width="150px"
+                  height="150px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  style={globalStyles.cursorPointer}
+                  // onClick={onAddForm}
+                >
+                  <PlusOutlined />
+                </Box>
+              </Upload>
             </Box>
             <Row>
               <Col>

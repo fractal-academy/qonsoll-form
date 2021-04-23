@@ -1,5 +1,6 @@
 const COLLECTIONS = {
-  FORMS: 'forms'
+  FORMS: 'forms',
+  MEDIA: 'media'
 }
 
 export default COLLECTIONS

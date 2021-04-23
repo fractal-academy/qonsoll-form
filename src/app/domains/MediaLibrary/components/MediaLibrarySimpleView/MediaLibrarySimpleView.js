@@ -57,6 +57,7 @@ function MediaLibrarySimpleView(props) {
               backgroundSize="cover"
               backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}>
               <MediaLibraryModal
+                // data={data}
                 onClick={() => {
                   setIsImageEditVisible(false)
                 }}
