@@ -154,7 +154,7 @@ function EditorSidebar(props) {
           </Box>
           {/* Question List*/}
           <Box overflow="auto" p={3}>
-            {questions?.length && <QuestionsList data={questions} />}
+            {!!questions?.length && <QuestionsList data={questions} />}
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
             <Row>

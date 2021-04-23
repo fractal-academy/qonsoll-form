@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Container } from '@qonsoll/react-design'
 import { Button, Divider, Typography } from 'antd'
 import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
-import { useHistory } from 'react-router'
+import { generatePath, useHistory, useParams } from 'react-router'
 import PropTypes from 'prop-types'
 import { styles } from './PageHeader.styles'
 import { globalStyles } from 'app/styles'
@@ -19,14 +19,15 @@ function PageHeader(props) {
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
   const history = useHistory()
+  const { id } = useParams()
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-
+  const formPath = generatePath(ROUTES_PATHS.FORM_SHOW, { id })
   // [CLEAN FUNCTIONS]
   const onFormShow = () => {
-    history.push(ROUTES_PATHS.FORM_SHOW)
+    history.push(formPath)
   }
   // [USE_EFFECTS]
   useEffect(() => {
