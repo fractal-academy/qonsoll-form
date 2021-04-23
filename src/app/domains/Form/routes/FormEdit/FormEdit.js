@@ -35,7 +35,7 @@ function FormEdit(props) {
   )
 
   // [CUSTOM_HOOKS]
-  const formContext = useFormContext()
+  const currentQuestion = useFormContext()
   const dispatch = useFormContextDispatch()
   // [COMPONENT STATE HOOKS]
   const [showPopover, setShowPopover] = useState(false)
@@ -59,12 +59,12 @@ function FormEdit(props) {
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
         layoutType: key,
-        image: formContext?.image || DEFAULT_IMAGE
+        image: currentQuestion?.image || DEFAULT_IMAGE
       }
     })
   }
-  const onQuestionTypeChange = ({ key }) => {
-    dispatch({
+  const onQuestionTypeChange = async ({ key }) => {
+    await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key }
     })
@@ -98,16 +98,16 @@ function FormEdit(props) {
           <PageLayout title={form?.title}>
             <FormContentArea
               leftSideMenu={
-                !!Object.keys(formContext).length && (
+                !!Object.keys(currentQuestion).length && (
                   <QuestionLayoutSwitcher
                     onChange={onChangeMenuItem}
                     defaultActive={LAYOUT_TYPE_KEYS[0]}
                   />
                 )
               }>
-              {!!Object.keys(formContext).length && (
+              {!!Object.keys(currentQuestion).length && (
                 <QuestionForm
-                  data={formContext}
+                  data={currentQuestion}
                   onQuestionTypeChange={onQuestionTypeChange}
                   showPopover={showPopover}
                   setShowPopover={setShowPopover}

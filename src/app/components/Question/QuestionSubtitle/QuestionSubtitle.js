@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { TextEditable } from 'components'
 import PropTypes from 'prop-types'
-
+import {
+  useFormContextDispatch,
+  useFormContext,
+  DISPATCH_EVENTS
+} from 'app/context/FormContext'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionSubtitle(props) {
@@ -12,14 +16,25 @@ function QuestionSubtitle(props) {
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
+  // [CUSTOM HOOKS]
+  const dispatch = useFormContextDispatch()
+  const currentQuestion = useFormContext()
+
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [textValue, setTextValue] = useState()
 
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const onChange = (data) => {}
-
+  const onBlur = async () => {
+    await dispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { ...currentQuestion, subtitle: textValue }
+    })
+  }
+  const onChange = ({ target }) => {
+    setTextValue(target.value)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -38,7 +53,13 @@ function QuestionSubtitle(props) {
     }
   }, [])
   return (
-    <TextEditable onChange={onChange} placeholder={placeholder} textSecondary />
+    <TextEditable
+      defaultValue={currentQuestion?.subtitle || ''}
+      onChange={onChange}
+      onBlur={onBlur}
+      placeholder={placeholder}
+      textSecondary
+    />
   )
 }
 
