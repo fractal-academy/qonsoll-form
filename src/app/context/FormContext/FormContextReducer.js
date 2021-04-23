@@ -5,7 +5,7 @@ const formContextReducer = (state, action) => {
     case DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE:
       return { ...action.payload }
     case DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION:
-      return { ...action.payload }
+      return { ...state, ...action.payload }
     case DISPATCH_EVENTS.CHANGE_CURRENT_QUESTION:
       return { ...action.payload }
     default:

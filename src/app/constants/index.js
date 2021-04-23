@@ -7,6 +7,8 @@ import TEXT_CONDITION_RULES from './planeTextStringConditionRules'
 import ROUTES, { ROUTES_KEYS, ROUTES_VALUES } from './routes'
 import ROUTES_PATHS from './routesPaths'
 import COLLECTIONS from './collection'
+import DEFAULT_IMAGE from './defaultImage'
+
 export {
   FIREBASE_CONFIG,
   LAYOUT_TYPES,
@@ -18,5 +20,6 @@ export {
   ROUTES_KEYS,
   ROUTES_VALUES,
   ROUTES_PATHS,
-  COLLECTIONS
+  COLLECTIONS,
+  DEFAULT_IMAGE
 }

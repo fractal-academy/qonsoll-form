@@ -8,7 +8,7 @@ import {
 } from 'components'
 import { Box } from '@qonsoll/react-design'
 import { QuestionForm } from 'app/domains/Question/components'
-import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
+import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
 import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
@@ -18,18 +18,14 @@ import {
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 import { getCollectionRef } from 'app/services/Firestore'
-import COLLECTIONS from 'app/constants/collection'
 
 // import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
 
 function FormEdit(props) {
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLan guage } = t
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
@@ -37,12 +33,13 @@ function FormEdit(props) {
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
+
   //[COMPONENT STATE HOOKS]
-  const [activeKey, setActiveKey] = useState(LAYOUT_TYPE_KEYS[0])
-  const [questionType, setQuestionType] = useState(QUESTION_TYPES.YES_NO)
   const [showPopover, setshowPopover] = useState(false)
+
   // [CUSTOM_HOOKS]
   const formContext = useFormContext()
+  const dispatch = useFormContextDispatch()
 
   // [COMPUTED PROPERTIES]
   let questions, endings
@@ -58,10 +55,21 @@ function FormEdit(props) {
 
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = ({ key }) => {
-    setActiveKey(LAYOUT_TYPES[key])
+    dispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: {
+        layoutType: key,
+        image:
+          formContext?.image ||
+          'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
+      }
+    })
   }
   const onQuestionTypeChange = ({ key }) => {
-    setQuestionType(key)
+    dispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { questionType: key }
+    })
     setshowPopover(false)
   }
   // [USE_EFFECTS]
@@ -93,15 +101,11 @@ function FormEdit(props) {
               leftSideMenu={
                 <QuestionLayoutSwitcher
                   onChange={onChangeMenuItem}
-                  defaultActive={activeKey}
+                  defaultActive={LAYOUT_TYPE_KEYS[0]}
                 />
               }>
               {!!Object.keys(formContext).length && (
                 <QuestionForm
-                  // question={{
-                  //   questionType: questionType,
-                  //   layoutType: activeKey
-                  // }}
                   data={formContext}
                   onQuestionTypeChange={onQuestionTypeChange}
                   showPopover={showPopover}
