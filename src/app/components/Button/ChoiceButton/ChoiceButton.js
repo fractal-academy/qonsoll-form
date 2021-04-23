@@ -9,8 +9,6 @@ let startLetter = 65
 function ChoiceButton(props) {
   const { choices, onClick, hasImages } = props
 
-  console.log(choices)
-
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
 
