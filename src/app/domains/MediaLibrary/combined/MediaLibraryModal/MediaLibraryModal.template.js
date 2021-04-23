@@ -42,12 +42,12 @@ function MediaLibraryModal(props) {
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [switchState, setSwitchState] = useState(true)
+  const [switchState, setSwitchState] = useState(false)
   const [sidebarState, setSidebarState] = useState(true)
   const [imagesList, setImagesList] = useState(media)
 
   // [COMPUTED PROPERTIES]
-  let amountFiles = 0
+  const amountFiles = imagesList.length
   // [CLEAN FUNCTIONS]
   const onModalContinue = () => {
     setIsModalVisible(!isModalVisible)
@@ -194,6 +194,7 @@ function MediaLibraryModal(props) {
               bg="#f6f9fe"
               className="custom-scroll">
               {/* Here should be list of data Images/Video */}
+
               {imagesList.map((item) => (
                 <Box mr={3} mb={3}>
                   <MediaLibraryItemSimpleView
@@ -209,6 +210,7 @@ function MediaLibraryModal(props) {
               {/*==================================*/}
               <Upload
                 showUploadList={false}
+                multiple
                 name="file"
                 customRequest={(data) => {
                   const { onSuccess } = data
@@ -255,8 +257,8 @@ function MediaLibraryModal(props) {
                   mr={3}
                   mb={3}
                   borderRadius="8px"
-                  width="150px"
-                  height="150px"
+                  width="216px"
+                  height="206px"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"

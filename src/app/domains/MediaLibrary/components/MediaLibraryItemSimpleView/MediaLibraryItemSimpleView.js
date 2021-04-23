@@ -98,24 +98,43 @@ function MediaLibraryItemSimpleView(props) {
   }, [])
 
   return (
-    // <Card
-    // style={styles.cardStyles}
-    // bodyStyle={styles.cardBodyPadding}
-    // cover={
-    <Box>
-      <Image
-        preview={false}
-        width="200px"
-        height="200px"
-        src={imageUrl}
-        // backgroundSize="cover"
-        // alt={title}
-        // icon={<FileOutlined style={styles.iconStyles} />}
+    <Card
+      style={styles.cardStyles}
+      bodyStyle={styles.cardBodyStye}
+      cover={
+        <Box
+          borderRadius="8px"
+          display="flex"
+          bg="white"
+          justifyContent="center"
+          alignItems="center"
+          // onClick={onFormItemClick}
+        >
+          <Image
+            preview={false}
+            width="208px"
+            height="136px"
+            src={imageUrl}
+            style={styles.imageStyle}
+          />
+        </Box>
+      }>
+      <Meta
+        description={
+          <Row h="between" mt={3}>
+            <Col>
+              <Row>
+                <Col>
+                  <Text style={styles.titleStyle} ellipsis>
+                    {name.charAt(0).toUpperCase() + name.slice(1).split('.')[0]}
+                  </Text>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        }
       />
-      <Text>{name}</Text>
-    </Box>
-
-    // </Card>
+    </Card>
   )
 }
 
