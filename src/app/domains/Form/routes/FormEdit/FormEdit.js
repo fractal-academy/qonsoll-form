@@ -99,10 +99,12 @@ function FormEdit(props) {
           <PageLayout title={form?.title}>
             <FormContentArea
               leftSideMenu={
-                <QuestionLayoutSwitcher
-                  onChange={onChangeMenuItem}
-                  defaultActive={LAYOUT_TYPE_KEYS[0]}
-                />
+                !!Object.keys(formContext).length && (
+                  <QuestionLayoutSwitcher
+                    onChange={onChangeMenuItem}
+                    defaultActive={LAYOUT_TYPE_KEYS[0]}
+                  />
+                )
               }>
               {!!Object.keys(formContext).length && (
                 <QuestionForm
