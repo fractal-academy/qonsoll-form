@@ -12,13 +12,9 @@ import {
   Popconfirm,
   Typography
 } from 'antd'
-import { FormSimpleViewEdit } from 'domains/Form/components'
-import { ROUTES_PATHS } from 'app/constants'
 import { styles } from './MediaLibraryItemSimpleView.styles'
-import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
-import firebase from 'firebase/app'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
@@ -36,49 +32,8 @@ function MediaLibraryItemSimpleView(props) {
   const [confirmLoading, setConfirmLoading] = useState(false)
 
   // [COMPUTED PROPERTIES]
-  const handleCancel = () => {
-    setVisible(false)
-  }
-
-  const showPopconfirm = () => {
-    setVisible(true)
-  }
-
-  // const handleDelete = async () => {
-  //   setConfirmLoading(true)
-  //   try {
-  //     await deleteData(firebase.storage(), id)
-  //   } catch (e) {
-  //     message.error("Can't delete form")
-  //   }
-  //
-  //   setVisible(false)
-  //   setConfirmLoading(false)
-  // }
-
-  // const menu = (
-  //   <Menu>
-  //     <Menu.Item>
-  //       <FormSimpleViewEdit formData={props} />
-  //     </Menu.Item>
-  //     <Menu.Item>
-  //       <Popconfirm
-  //         title="Delete this form?"
-  //         visible={visible}
-  //         // onConfirm={handleDelete}
-  //         okButtonProps={{ loading: confirmLoading }}
-  //         onCancel={handleCancel}>
-  //         <Text onClick={showPopconfirm}>Delete</Text>
-  //       </Popconfirm>
-  //     </Menu.Item>
-  //   </Menu>
-  // )
 
   // [CLEAN FUNCTIONS]
-  const onFormItemClick = () => {
-    history.push(ROUTES_PATHS.FORM_EDIT)
-  }
-  const onItemSelect = () => {}
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -99,6 +54,7 @@ function MediaLibraryItemSimpleView(props) {
 
   return (
     <Card
+      hoverable
       style={styles.cardStyles}
       bodyStyle={styles.cardBodyStye}
       cover={
@@ -107,9 +63,7 @@ function MediaLibraryItemSimpleView(props) {
           display="flex"
           bg="white"
           justifyContent="center"
-          alignItems="center"
-          // onClick={onFormItemClick}
-        >
+          alignItems="center">
           <Image
             preview={false}
             width="208px"

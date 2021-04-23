@@ -89,10 +89,10 @@ function QuestionForm(props) {
       component: <SubmitButton>Next</SubmitButton>
     }
   }
+  const imageUrl = `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
 
   const bgImage =
-    question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type &&
-    `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
+    question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type && imageUrl
 
   const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
   // [CLEAN FUNCTIONS]
@@ -193,7 +193,7 @@ function QuestionForm(props) {
                   <Box
                     {...question?.layoutType.imgSize}
                     backgroundRepeat="no-repeat"
-                    backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
+                    backgroundImage={imageUrl}
                     position="relative"
                     zIndex="1"
                     mb={3}>
@@ -238,7 +238,7 @@ function QuestionForm(props) {
             <Box
               {...question?.layoutType.imgSize}
               backgroundRepeat="no-repeat"
-              backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}
+              backgroundImage={imageUrl}
               m={2}
               position="relative">
               <Row h="right">

@@ -32,9 +32,8 @@ function MediaLibraryModal(props) {
   const [media = []] = useCollectionData(
     getCollectionRef(COLLECTIONS.MEDIA) /*.orderBy('creationDate', 'desc')*/
   )
-  console.log(media)
   const onMediaUploaded = (data) => {
-    const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
+    const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
   // const { t } = useTranslation('translation')
@@ -70,21 +69,48 @@ function MediaLibraryModal(props) {
   const modalStateChange = () => {
     setIsModalVisible(!isModalVisible)
     onClick && onClick()
-    // setIsImageEditVisible(false)
   }
-  // const onAddForm = () => {
-  //   setImagesList((prev) => [
-  //     ...prev,
-  //     {
-  //       title: 'new Title ',
-  //       subtitle: 'subtitle'
-  //     }
-  //   ])
-  // }
+  const customRequest = (data) => {
+    const { onSuccess } = data
+    const ref = firebase.storage().ref('images').child(data.file.uid)
+
+    const image = ref.put(data.file)
+    image.on(
+      'state_changed',
+      (snapshot) => {},
+      (error) => {
+        // Handle error during the upload
+        console.error('message')
+      },
+      () => {
+        image.snapshot.ref
+          .getDownloadURL()
+          .then((downloadURL) => {
+            setImagesList([
+              ...imagesList,
+              {
+                // key: { data.file.uid },
+                name: data.file.name,
+                imageUrl: downloadURL,
+                title: 'New title',
+                subtitle: 'subtitle'
+              }
+            ])
+            onMediaUploaded({
+              name: data.file.name,
+              imageUrl: downloadURL,
+              title: 'New title',
+              subtitle: 'subtitle'
+            })
+          })
+          .then(() => onSuccess())
+      }
+    )
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-    imagesList && setImagesList(media)
+    isComponentMounted && imagesList && setImagesList(media)
 
     // [EFFECT LOGIC]
     // write code here...
@@ -197,14 +223,7 @@ function MediaLibraryModal(props) {
 
               {imagesList.map((item) => (
                 <Box mr={3} mb={3}>
-                  <MediaLibraryItemSimpleView
-                    // key={item}
-                    // title={item.title}
-                    // subtitle={item.subtitle}
-                    // image={item.imageUrl}
-                    // name={item.name}
-                    {...item}
-                  />
+                  <MediaLibraryItemSimpleView {...item} />
                 </Box>
               ))}
               {/*==================================*/}
@@ -212,46 +231,7 @@ function MediaLibraryModal(props) {
                 showUploadList={false}
                 multiple
                 name="file"
-                customRequest={(data) => {
-                  const { onSuccess } = data
-                  const ref = firebase
-                    .storage()
-                    .ref('images')
-                    .child(data.file.uid)
-
-                  const image = ref.put(data.file)
-                  image.on(
-                    'state_changed',
-                    (snapshot) => {},
-                    (error) => {
-                      // Handle error during the upload
-                      console.error('message')
-                    },
-                    () => {
-                      image.snapshot.ref
-                        .getDownloadURL()
-                        .then((downloadURL) => {
-                          setImagesList([
-                            ...imagesList,
-                            {
-                              // key: { data.file.uid },
-                              name: data.file.name,
-                              imageUrl: downloadURL,
-                              title: 'New title',
-                              subtitle: 'subtitle'
-                            }
-                          ])
-                          onMediaUploaded({
-                            name: data.file.name,
-                            imageUrl: downloadURL,
-                            title: 'New title',
-                            subtitle: 'subtitle'
-                          })
-                        })
-                        .then(() => onSuccess())
-                    }
-                  )
-                }}>
+                customRequest={customRequest}>
                 <Box
                   bg="#eceff5"
                   mr={3}
@@ -262,9 +242,7 @@ function MediaLibraryModal(props) {
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  style={globalStyles.cursorPointer}
-                  // onClick={onAddForm}
-                >
+                  style={globalStyles.cursorPointer}>
                   <PlusOutlined />
                 </Box>
               </Upload>
