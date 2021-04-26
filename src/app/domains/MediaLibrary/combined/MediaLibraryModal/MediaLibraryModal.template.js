@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
-import Fuse from 'fuse.js'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import Icon, {
   FilterOutlined,
@@ -22,6 +21,8 @@ import firebase, { firestore } from 'app/services/Firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
+import fuse from 'fuse.js'
+import Fuse from 'fuse.js'
 
 const { Title, Text } = Typography
 
@@ -38,9 +39,6 @@ function MediaLibraryModal(props) {
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
   const searchRef = useRef()
-  const fuse = new Fuse(media, { keys: ['name'] })
-  const [currentData, setCurrentData] = useState(media)
-
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
@@ -49,6 +47,7 @@ function MediaLibraryModal(props) {
   const [switchState, setSwitchState] = useState(false)
   const [sidebarState, setSidebarState] = useState(true)
   const [imagesList, setImagesList] = useState(media)
+  const fuse = new Fuse(media, { keys: ['name'] })
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
@@ -112,16 +111,18 @@ function MediaLibraryModal(props) {
       }
     )
   }
+
   const searchData = () => {
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)
-      setCurrentData(searchRes.map((item) => item.item))
-    } else setCurrentData(media)
+      setImagesList(searchRes.map((item) => item.item))
+    } else setImagesList(media)
   }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
     isComponentMounted && imagesList && setImagesList(media)
+
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -235,7 +236,7 @@ function MediaLibraryModal(props) {
               className="custom-scroll">
               {/* Here should be list of data Images/Video */}
 
-              {currentData?.map((item) => (
+              {imagesList.map((item) => (
                 <Box mr={3} mb={3}>
                   <MediaLibraryItemSimpleView {...item} />
                 </Box>
