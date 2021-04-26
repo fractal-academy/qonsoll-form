@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
+import Fuse from 'fuse.js'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import Icon, {
   FilterOutlined,
@@ -36,6 +37,10 @@ function MediaLibraryModal(props) {
     const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
+  const searchRef = useRef()
+  const fuse = new Fuse(media, { keys: ['name'] })
+  const [currentData, setCurrentData] = useState(media)
+
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
@@ -107,11 +112,16 @@ function MediaLibraryModal(props) {
       }
     )
   }
+  const searchData = () => {
+    if (searchRef.current.input.value) {
+      const searchRes = fuse.search(searchRef.current.input.value)
+      setCurrentData(searchRes.map((item) => item.item))
+    } else setCurrentData(media)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
     isComponentMounted && imagesList && setImagesList(media)
-
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -187,9 +197,13 @@ function MediaLibraryModal(props) {
             <Row px={3} pb={3}>
               <Col>
                 <Input
+                  allowClear
+                  ref={searchRef}
                   prefix={<SearchOutlined />}
                   style={styles.borderRadius}
                   placeholder="Search media file by name..."
+                  onSearch={searchData}
+                  onChange={(input) => searchData(input.target.value)}
                 />
               </Col>
               <Col cw="auto">
@@ -221,7 +235,7 @@ function MediaLibraryModal(props) {
               className="custom-scroll">
               {/* Here should be list of data Images/Video */}
 
-              {imagesList.map((item) => (
+              {currentData?.map((item) => (
                 <Box mr={3} mb={3}>
                   <MediaLibraryItemSimpleView {...item} />
                 </Box>
