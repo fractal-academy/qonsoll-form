@@ -106,8 +106,6 @@ function QuestionForm(props) {
   //   [question]
   // )
 
-  console.log(bgImage, question.layoutType)
-
   const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
@@ -133,7 +131,7 @@ function QuestionForm(props) {
       isComponentMounted = false
     }
   }, [])
-  console.log(mediaUrl)
+
   return (
     <>
       <Row
@@ -187,6 +185,8 @@ function QuestionForm(props) {
                         <MediaLibrarySimpleView
                           setMediaUrl={setMediaUrl}
                           setIsImageEditVisible={setIsImageEditVisible}
+                          imageUrl={imageUrl}
+                          bgImage={bgImage}
                         />
                       </Box>
                     }
@@ -226,6 +226,7 @@ function QuestionForm(props) {
                           <MediaLibrarySimpleView
                             setIsImageEditVisible={setIsImageEditVisible}
                             setMediaUrl={setMediaUrl}
+                            imageUrl={imageUrl}
                           />
                         </Box>
                       }
@@ -262,7 +263,6 @@ function QuestionForm(props) {
               <Row h="right">
                 <Col cw="auto" mr={4}>
                   <Popover
-                    // placement="topRight"
                     onClick={changeImageEditVisibleState}
                     visible={isImageEditVisible}
                     onVisibleChange={changeImageEditVisibleState}
@@ -275,6 +275,7 @@ function QuestionForm(props) {
                         <MediaLibrarySimpleView
                           setIsImageEditVisible={setIsImageEditVisible}
                           setMediaUrl={setMediaUrl}
+                          imageUrl={imageUrl}
                           bgImage={bgImage}
                         />
                       </Box>

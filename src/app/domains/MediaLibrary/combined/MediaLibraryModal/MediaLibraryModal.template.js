@@ -27,7 +27,7 @@ import Fuse from 'fuse.js'
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { data, btnProps, onClick, setMediaUrl } = props
+  const { data, btnProps, onClick, setMediaUrl, bgImage } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -47,6 +47,7 @@ function MediaLibraryModal(props) {
   const [switchState, setSwitchState] = useState(false)
   const [sidebarState, setSidebarState] = useState(true)
   const [imagesList, setImagesList] = useState(media)
+  const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(bgImage)
   const fuse = new Fuse(media, { keys: ['name'] })
 
   // [COMPUTED PROPERTIES]
@@ -56,6 +57,8 @@ function MediaLibraryModal(props) {
   // [CLEAN FUNCTIONS]
   const onModalContinue = () => {
     setIsModalVisible(!isModalVisible)
+    setSelectedBackgroundImg(selectedBackgroundImg)
+    console.log(selectedBackgroundImg)
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
@@ -141,7 +144,6 @@ function MediaLibraryModal(props) {
       isComponentMounted = false
     }
   }, [media])
-
   return (
     <>
       <Button {...btnProps} onClick={modalStateChange} style={styles.btnStyle}>
