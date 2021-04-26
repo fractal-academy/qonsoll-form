@@ -275,6 +275,7 @@ function QuestionForm(props) {
                         <MediaLibrarySimpleView
                           setIsImageEditVisible={setIsImageEditVisible}
                           setMediaUrl={setMediaUrl}
+                          bgImage={bgImage}
                         />
                       </Box>
                     }
