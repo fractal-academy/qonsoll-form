@@ -243,7 +243,7 @@ function MediaLibraryModal(props) {
               {/* Here should be list of data Images/Video */}
 
               {imagesList.map((item) => (
-                <Box mr={3} mt={3}>
+                <Box mr={3} mt={4}>
                   <MediaLibraryItemSimpleView
                     {...item}
                     setMediaUrl={setMediaUrl}
@@ -260,7 +260,7 @@ function MediaLibraryModal(props) {
                 <Box
                   bg="#eceff5"
                   mr={3}
-                  mt={3}
+                  mt={4}
                   borderRadius="8px"
                   width="216px"
                   height="206px"
