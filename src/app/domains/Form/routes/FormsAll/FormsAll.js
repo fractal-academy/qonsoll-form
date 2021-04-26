@@ -51,7 +51,6 @@ function FormsAll(props) {
 
   const formId = firestore.collection(COLLECTIONS.FORMS).doc().id
   // [CLEAN FUNCTIONS]
-  const onFilterButtonClick = () => {}
   const searchData = () => {
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)

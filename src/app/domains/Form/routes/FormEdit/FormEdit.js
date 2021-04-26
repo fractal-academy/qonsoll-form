@@ -20,23 +20,17 @@ import {
 import { getCollectionRef } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
-
 function FormEdit(props) {
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLan guage } = t
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
+
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
+
   //[COMPONENT STATE HOOKS]
   const [activeKey, setActiveKey] = useState(LAYOUT_TYPE_KEYS[0])
   const [questionType, setQuestionType] = useState(QUESTION_TYPES.YES_NO)

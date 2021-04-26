@@ -3,7 +3,7 @@ import { DragableList } from 'app/components'
 import QuestionSimpleView from 'app/domains/Question/components/QuestionSimpleView'
 
 function QuestionsList(props) {
-  const { data } = props
+  const { data, addQuestion } = props
 
   // [CLEAN FUNCTIONS]
   const onUpdate = () => {}
@@ -12,6 +12,7 @@ function QuestionsList(props) {
     <DragableList
       itemLayout="horizontal"
       dataSource={data}
+      addQuestion={addQuestion}
       onUpdate={onUpdate}
       renderItem={(item, index) => (
         <QuestionSimpleView {...item} number={index + 1} />

@@ -31,6 +31,7 @@ function DragableList(props) {
   const {
     dataSource,
     onUpdate,
+    addQuestion,
     renderItem,
     withWrapper = true,
     sortable = true,

@@ -31,13 +31,11 @@ const { Title } = Typography
 
 function EditorSidebar(props) {
   const { questions, endings, setCurrentQuestion } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const { id } = useParams()
   const dispatch = useFormContextDispatch()
+
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
   const [showPopover, setshowPopover] = useState(false)
@@ -45,7 +43,6 @@ function EditorSidebar(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
   const addEnding = async () => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
     const newEnding = {
@@ -62,11 +59,12 @@ function EditorSidebar(props) {
     await setData(COLLECTIONS.QUESTIONS, questionId, newEnding)
     // setEndingsList((endingsList) => [...endingsList, newEnding])
   }
-  const addQuestion = async ({ key }) => {
+  const addQuestion = async ({ key }, index) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
     const newQuestion = {
       id: questionId,
       formId: id,
+      index: index,
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key,
       title: 'New Question.'
@@ -82,6 +80,7 @@ function EditorSidebar(props) {
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -154,7 +153,9 @@ function EditorSidebar(props) {
           </Box>
           {/* Question List*/}
           <Box overflow="auto" p={3}>
-            {questions[0] && <QuestionsList data={questions} />}
+            {questions[0] && (
+              <QuestionsList addQuestion={addQuestion} data={questions} />
+            )}
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
             <Row>
