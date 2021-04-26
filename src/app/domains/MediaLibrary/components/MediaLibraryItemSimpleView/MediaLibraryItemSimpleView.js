@@ -21,7 +21,7 @@ const { Meta } = Card
 const { Text } = Typography
 
 function MediaLibraryItemSimpleView(props) {
-  const { imageUrl, name, setMediaUrl } = props
+  const { imageUrl, name, setMediaUrl, setSelectedBackgroundImg } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -54,7 +54,10 @@ function MediaLibraryItemSimpleView(props) {
 
   return (
     <Card
-      onClick={() => setMediaUrl(imageUrl)}
+      onClick={() => {
+        setMediaUrl(imageUrl)
+        setSelectedBackgroundImg(imageUrl)
+      }}
       hoverable
       style={styles.cardStyles}
       bodyStyle={styles.cardBodyStye}

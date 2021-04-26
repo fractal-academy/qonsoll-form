@@ -49,7 +49,6 @@ function MediaLibraryModal(props) {
   const [imagesList, setImagesList] = useState(media)
   const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(bgImage)
   const fuse = new Fuse(media, { keys: ['name'] })
-
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
   const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
@@ -57,11 +56,12 @@ function MediaLibraryModal(props) {
   // [CLEAN FUNCTIONS]
   const onModalContinue = () => {
     setIsModalVisible(!isModalVisible)
-    setSelectedBackgroundImg(selectedBackgroundImg)
     console.log(selectedBackgroundImg)
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
+    // setSelectedBackgroundImg('')
+    console.log(selectedBackgroundImg)
   }
   const onFilterButtonClick = () => {
     setSidebarState(!sidebarState)
@@ -243,10 +243,11 @@ function MediaLibraryModal(props) {
               {/* Here should be list of data Images/Video */}
 
               {imagesList.map((item) => (
-                <Box mr={3} mb={3}>
+                <Box mr={3} mt={3}>
                   <MediaLibraryItemSimpleView
                     {...item}
                     setMediaUrl={setMediaUrl}
+                    setSelectedBackgroundImg={setSelectedBackgroundImg}
                   />
                 </Box>
               ))}
@@ -259,7 +260,7 @@ function MediaLibraryModal(props) {
                 <Box
                   bg="#eceff5"
                   mr={3}
-                  mb={3}
+                  mt={3}
                   borderRadius="8px"
                   width="216px"
                   height="206px"
