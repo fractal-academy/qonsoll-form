@@ -1,4 +1,4 @@
-import React, { useEffect, useState, cloneElement } from 'react'
+import React, { useEffect, useState, cloneElement, useMemo } from 'react'
 import { Card, Tag } from 'antd'
 import {
   DateTimeInput,
@@ -34,6 +34,7 @@ const rightSide = [
   LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
   LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
 ]
+const imageUrl = `https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg`
 
 function QuestionForm(props) {
   const {
@@ -50,7 +51,7 @@ function QuestionForm(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [mediaUrl, setMediaUrl] = useState(imageUrl)
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -89,10 +90,23 @@ function QuestionForm(props) {
       component: <SubmitButton>Next</SubmitButton>
     }
   }
-  const imageUrl = `url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`
 
-  const bgImage =
-    question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type && imageUrl
+  const bgImage = `url(${mediaUrl})`
+
+  const fullScreenBgImage =
+    question &&
+    question.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type &&
+    bgImage
+
+  // const bgImage = useMemo(
+  //   () =>
+  //     question?.layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
+  //       ? `url(${mediaUrl})`
+  //       : '',
+  //   [question]
+  // )
+
+  console.log(bgImage, question.layoutType)
 
   const imageOrder = rightSide.includes(question?.layoutType.type) ? 3 : 1
   // [CLEAN FUNCTIONS]
@@ -119,7 +133,7 @@ function QuestionForm(props) {
       isComponentMounted = false
     }
   }, [])
-
+  console.log(mediaUrl)
   return (
     <>
       <Row
@@ -132,7 +146,7 @@ function QuestionForm(props) {
         style={styles.rowStyle}
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
-        backgroundImage={bgImage && bgImage}>
+        backgroundImage={fullScreenBgImage}>
         <Col
           v="center"
           order={2}
@@ -171,6 +185,7 @@ function QuestionForm(props) {
                     content={
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
+                          setMediaUrl={setMediaUrl}
                           setIsImageEditVisible={setIsImageEditVisible}
                         />
                       </Box>
@@ -193,7 +208,8 @@ function QuestionForm(props) {
                   <Box
                     {...question?.layoutType.imgSize}
                     backgroundRepeat="no-repeat"
-                    backgroundImage={imageUrl}
+                    backgroundSize="cover"
+                    backgroundImage={bgImage}
                     position="relative"
                     zIndex="1"
                     mb={3}>
@@ -209,6 +225,7 @@ function QuestionForm(props) {
                         <Box width="192px" height="366px" overflow="hidden">
                           <MediaLibrarySimpleView
                             setIsImageEditVisible={setIsImageEditVisible}
+                            setMediaUrl={setMediaUrl}
                           />
                         </Box>
                       }
@@ -238,7 +255,8 @@ function QuestionForm(props) {
             <Box
               {...question?.layoutType.imgSize}
               backgroundRepeat="no-repeat"
-              backgroundImage={imageUrl}
+              backgroundSize="cover"
+              backgroundImage={bgImage}
               m={2}
               position="relative">
               <Row h="right">
@@ -256,6 +274,7 @@ function QuestionForm(props) {
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
                           setIsImageEditVisible={setIsImageEditVisible}
+                          setMediaUrl={setMediaUrl}
                         />
                       </Box>
                     }

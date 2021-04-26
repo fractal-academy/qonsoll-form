@@ -27,7 +27,7 @@ import Fuse from 'fuse.js'
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { data, btnProps, onClick } = props
+  const { data, btnProps, onClick, setMediaUrl } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -51,6 +51,8 @@ function MediaLibraryModal(props) {
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
+  const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
+
   // [CLEAN FUNCTIONS]
   const onModalContinue = () => {
     setIsModalVisible(!isModalVisible)
@@ -94,6 +96,7 @@ function MediaLibraryModal(props) {
               ...imagesList,
               {
                 // key: { data.file.uid },
+                id: mediaId,
                 name: data.file.name,
                 imageUrl: downloadURL,
                 title: 'New title',
@@ -101,6 +104,7 @@ function MediaLibraryModal(props) {
               }
             ])
             onMediaUploaded({
+              id: mediaId,
               name: data.file.name,
               imageUrl: downloadURL,
               title: 'New title',
@@ -238,7 +242,10 @@ function MediaLibraryModal(props) {
 
               {imagesList.map((item) => (
                 <Box mr={3} mb={3}>
-                  <MediaLibraryItemSimpleView {...item} />
+                  <MediaLibraryItemSimpleView
+                    {...item}
+                    setMediaUrl={setMediaUrl}
+                  />
                 </Box>
               ))}
               {/*==================================*/}

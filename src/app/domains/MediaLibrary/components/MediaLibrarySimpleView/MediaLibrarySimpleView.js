@@ -11,7 +11,7 @@ import RangeSlider from 'components/RangeSlider'
 // import { useTranslation } from 'react-i18next'
 const { Text } = Typography
 function MediaLibrarySimpleView(props) {
-  const { setIsImageEditVisible } = props
+  const { setIsImageEditVisible, setMediaUrl } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -58,6 +58,7 @@ function MediaLibrarySimpleView(props) {
               backgroundImage={`url(https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg)`}>
               <MediaLibraryModal
                 // data={data}
+                setMediaUrl={setMediaUrl}
                 onClick={() => {
                   setIsImageEditVisible(false)
                 }}
