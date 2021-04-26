@@ -16,11 +16,9 @@ import {
 import { EyeFilled, SettingOutlined } from '@ant-design/icons'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
-import { QUESTION_TYPES, LAYOUT_TYPES, COLLECTIONS } from 'app/constants'
+import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
-import { useFormContext } from 'app/context/FormContext'
-import { setData } from 'app/services/Firestore'
 import PropTypes from 'prop-types'
 
 // import { useTranslation } from 'react-i18next'
@@ -40,8 +38,6 @@ function QuestionForm(props) {
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
-  //[CUSTOM HOOKS]
-  const currentQuestion = useFormContext()
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
 
@@ -85,6 +81,7 @@ function QuestionForm(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
+
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -101,6 +98,7 @@ function QuestionForm(props) {
   const changeImageEditVisibleState = () => {
     setIsImageEditVisible(!isImageEditVisible)
   }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -110,13 +108,7 @@ function QuestionForm(props) {
     // code sample: isComponentMounted && setState(<your data for state updation>)
 
     // [CLEAN UP FUNCTION]
-    return async () => {
-      currentQuestion?.id &&
-        (await setData(
-          COLLECTIONS.QUESTIONS,
-          currentQuestion?.id,
-          currentQuestion
-        ))
+    return () => {
       isComponentMounted = false
     }
   }, [])
@@ -272,7 +264,12 @@ function QuestionForm(props) {
 }
 
 QuestionForm.propTypes = {
-  question: PropTypes.object
+  data: PropTypes.object,
+  onQuestionTypeChange: PropTypes.func,
+  setShowPopover: PropTypes.func,
+  showPopover: PropTypes.bool,
+  setIsImageEditVisible: PropTypes.func,
+  isImageEditVisible: PropTypes.bool
 }
 
 export default QuestionForm

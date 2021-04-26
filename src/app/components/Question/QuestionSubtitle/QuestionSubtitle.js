@@ -6,6 +6,8 @@ import {
   useFormContext,
   DISPATCH_EVENTS
 } from 'app/context/FormContext'
+import { setData } from 'app/services/Firestore'
+import { COLLECTIONS } from 'app/constants'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionSubtitle(props) {
@@ -21,24 +23,30 @@ function QuestionSubtitle(props) {
   const currentQuestion = useFormContext()
 
   // [COMPONENT STATE HOOKS]
-  const [textValue, setTextValue] = useState()
+  const [textValue, setTextValue] = useState(currentQuestion?.subtitle || '')
 
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const onBlur = async () => {
+    const subtitle = textValue || ''
     await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { ...currentQuestion, subtitle: textValue }
+      payload: { ...currentQuestion, subtitle }
+    })
+    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
+      ...currentQuestion,
+      subtitle
     })
   }
   const onChange = ({ target }) => {
     setTextValue(target.value)
   }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-
+    setTextValue(currentQuestion?.subtitle || '')
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -51,10 +59,11 @@ function QuestionSubtitle(props) {
       // [FINAL CLEAN UP]
       isComponentMounted = false
     }
-  }, [])
+  }, [currentQuestion])
+
   return (
     <TextEditable
-      defaultValue={currentQuestion?.subtitle || ''}
+      value={textValue}
       onChange={onChange}
       onBlur={onBlur}
       placeholder={placeholder}
@@ -64,7 +73,7 @@ function QuestionSubtitle(props) {
 }
 
 QuestionSubtitle.propTypes = {
-  placeholder: PropTypes.string.isRequired
+  placeholder: PropTypes.string
 }
 
 export default QuestionSubtitle

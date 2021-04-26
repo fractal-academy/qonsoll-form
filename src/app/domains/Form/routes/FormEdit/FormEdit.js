@@ -17,7 +17,7 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { getCollectionRef } from 'app/services/Firestore'
+import { getCollectionRef, setData } from 'app/services/Firestore'
 
 // import PropTypes from 'prop-types'
 
@@ -54,7 +54,7 @@ function FormEdit(props) {
   }
 
   // [CLEAN FUNCTIONS]
-  const onChangeMenuItem = ({ key }) => {
+  const onChangeMenuItem = async ({ key }) => {
     dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
@@ -62,11 +62,20 @@ function FormEdit(props) {
         image: currentQuestion?.image || DEFAULT_IMAGE
       }
     })
+    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
+      ...currentQuestion,
+      layoutType: key,
+      image: currentQuestion?.image || DEFAULT_IMAGE
+    })
   }
   const onQuestionTypeChange = async ({ key }) => {
     await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key }
+    })
+    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
+      ...currentQuestion,
+      questionType: key
     })
     setShowPopover(false)
   }

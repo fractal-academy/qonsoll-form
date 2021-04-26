@@ -6,6 +6,8 @@ import {
   useFormContext,
   DISPATCH_EVENTS
 } from 'app/context/FormContext'
+import { setData } from 'app/services/Firestore'
+import { COLLECTIONS } from 'app/constants'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionTitle(props) {
@@ -27,10 +29,15 @@ function QuestionTitle(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const onBlur = () => {
-    dispatch({
+  const onBlur = async () => {
+    const title = textValue || ''
+    await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { title: textValue }
+      payload: { title }
+    })
+    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
+      ...currentQuestion,
+      title
     })
   }
   const onChange = ({ target }) => {
@@ -39,7 +46,7 @@ function QuestionTitle(props) {
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-
+    setTextValue(currentQuestion?.title || '')
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -48,15 +55,15 @@ function QuestionTitle(props) {
     return () => {
       // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
       // write code here...
-
       // [FINAL CLEAN UP]
+
       isComponentMounted = false
     }
-  }, [])
+  }, [currentQuestion])
 
   return (
     <TextEditable
-      defaultValue={currentQuestion?.title || ''}
+      value={textValue}
       onChange={onChange}
       onBlur={onBlur}
       placeholder={placeholder}
@@ -67,8 +74,7 @@ function QuestionTitle(props) {
 }
 
 QuestionTitle.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string.isRequired
+  placeholder: PropTypes.string
 }
 
 export default QuestionTitle

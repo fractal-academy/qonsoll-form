@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Input, Typography } from 'antd'
+import React, { useEffect } from 'react'
+import { Input } from 'antd'
 import { styles } from './TextEditable.styles'
 import PropTypes from 'prop-types'
 
@@ -7,14 +7,7 @@ const { TextArea } = Input
 // import { useTranslation } from 'react-i18next'
 
 function TextEditable(props) {
-  const {
-    textSecondary,
-    placeholder,
-    isTitle,
-    defaultValue,
-    onChange,
-    onBlur
-  } = props
+  const { textSecondary, placeholder, isTitle, onChange, onBlur, value } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -51,7 +44,7 @@ function TextEditable(props) {
         ...(isTitle ? styles.title : styles.default),
         ...(textSecondary ? styles.grayColor : styles.blackColor)
       }}
-      defaultValue={defaultValue}
+      value={value}
       onChange={onChange}
       onBlur={onBlur}
       bordered={false}
@@ -63,7 +56,9 @@ function TextEditable(props) {
 }
 
 TextEditable.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  value: PropTypes.string,
   textSecondary: PropTypes.bool,
   isTitle: PropTypes.bool,
   placeholder: PropTypes.string.isRequired
