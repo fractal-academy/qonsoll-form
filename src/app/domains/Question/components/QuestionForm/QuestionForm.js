@@ -135,7 +135,11 @@ function QuestionForm(props) {
           <Card style={styles.cardStyle} bordered={false}>
             <Row noGutters>
               <Col>
-                <Tag color="blue">Question 1</Tag>
+                {/*{currentQuestion.questionType === QUESTION_TYPES.ENDING ? (*/}
+                {/*  <Tag color="blue">Ending </Tag>*/}
+                {/*) : (*/}
+                {/*  <Tag color="blue">Question {data?.order + 1}</Tag>*/}
+                {/*)}*/}
               </Col>
               <Col cw="auto">
                 <Popover
