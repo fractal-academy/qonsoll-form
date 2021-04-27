@@ -80,7 +80,7 @@ function QuestionForm(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
-
+  const computedMediaUrl = `url(${mediaUrl})`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -88,7 +88,7 @@ function QuestionForm(props) {
     layoutType?.type !== LAYOUT_TYPES.DEFAULT.type
 
   const bgImage =
-    layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && `url(${mediaUrl})`
+    layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
@@ -187,7 +187,7 @@ function QuestionForm(props) {
                   <Box
                     {...layoutType.imgSize}
                     backgroundRepeat="no-repeat"
-                    backgroundImage={`url(${mediaUrl})`}
+                    backgroundImage={computedMediaUrl}
                     backgroundSize="cover"
                     position="relative"
                     zIndex="1"
@@ -205,7 +205,7 @@ function QuestionForm(props) {
                           <MediaLibrarySimpleView
                             setIsImageEditVisible={setIsImageEditVisible}
                             setMediaUrl={setMediaUrl}
-                            bgImage={`url(${mediaUrl})`}
+                            bgImage={computedMediaUrl}
                           />
                         </Box>
                       }
@@ -235,7 +235,7 @@ function QuestionForm(props) {
             <Box
               {...layoutType?.imgSize}
               backgroundRepeat="no-repeat"
-              backgroundImage={`url(${mediaUrl})`}
+              backgroundImage={computedMediaUrl}
               backgroundSize="cover"
               m={2}
               position="relative">
@@ -254,7 +254,7 @@ function QuestionForm(props) {
                         <MediaLibrarySimpleView
                           setIsImageEditVisible={setIsImageEditVisible}
                           setMediaUrl={setMediaUrl}
-                          bgImage={`url(${mediaUrl})`}
+                          bgImage={computedMediaUrl}
                         />
                       </Box>
                     }

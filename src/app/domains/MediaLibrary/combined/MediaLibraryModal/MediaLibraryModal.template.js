@@ -46,6 +46,7 @@ function MediaLibraryModal(props) {
   const [imagesList, setImagesList] = useState(media)
   const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(false)
   const fuse = new Fuse(media, { keys: ['name'] })
+
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
   const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
