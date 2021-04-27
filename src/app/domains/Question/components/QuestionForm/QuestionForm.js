@@ -269,7 +269,7 @@ function QuestionForm(props) {
                     trigger={'click'}
                     placement="rightTop"
                     btnType="primary"
-                    btnIcon={<EyeFilled />}
+                    btnIcon={<SettingOutlined />}
                     content={
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView

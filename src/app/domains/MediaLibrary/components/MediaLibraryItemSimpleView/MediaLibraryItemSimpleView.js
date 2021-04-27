@@ -47,7 +47,6 @@ function MediaLibraryItemSimpleView(props) {
       isComponentMounted = false
     }
   }, [])
-  console.log(selectedBackgroundImg)
   return (
     <Card
       onClick={() => {
@@ -67,7 +66,6 @@ function MediaLibraryItemSimpleView(props) {
             <Button size="small" type="primary" style={styles.iconStyle}>
               <CheckOutlined className="icon" />
             </Button>
-            // <CustomBadge style={styles.iconStyle} />
           )}
           <Image
             preview={false}
