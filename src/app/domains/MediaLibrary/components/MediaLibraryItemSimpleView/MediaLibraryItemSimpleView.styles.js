@@ -7,7 +7,8 @@ export const styles = {
     weight: '216px',
     padding: '4px',
     backgroundColor: '#eceff5',
-    borderRadius: '8px'
+    borderRadius: '8px',
+    position: 'relative'
   },
   titleStyle: {
     color: 'black',
@@ -21,7 +22,8 @@ export const styles = {
     top: 0,
     right: 0,
     zIndex: 100,
-    borderRadius: '8px'
+    borderRadius: '50%',
+    padding: '3px'
   },
   cardBodyStye: { padding: '0 8px 8px 8px' },
   imageStyle: { borderRadius: '8px' }
