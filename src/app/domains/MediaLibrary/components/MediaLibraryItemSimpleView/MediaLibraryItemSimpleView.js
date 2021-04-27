@@ -1,35 +1,27 @@
 import React, { cloneElement, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { deleteData } from 'app/services/Firestore'
-import COLLECTIONS from 'app/constants/collection'
-import {
-  Avatar,
-  Card,
-  Dropdown,
-  Image,
-  Menu,
-  message,
-  Popconfirm,
-  Typography
-} from 'antd'
+import { Button, Card, Image, Tag, Typography } from 'antd'
 import { styles } from './MediaLibraryItemSimpleView.styles'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
+import { CheckOutlined } from '@ant-design/icons'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card
 const { Text } = Typography
 
 function MediaLibraryItemSimpleView(props) {
-  const { imageUrl, name } = props
+  const {
+    imageUrl,
+    name,
+    selectedBackgroundImg,
+    setSelectedBackgroundImg
+  } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-  const history = useHistory()
   // [COMPONENT STATE HOOKS]
-  const [visible, setVisible] = useState(false)
-  const [confirmLoading, setConfirmLoading] = useState(false)
 
   // [COMPUTED PROPERTIES]
 
@@ -43,6 +35,7 @@ function MediaLibraryItemSimpleView(props) {
     // code sample: isComponentMounted && setState(<your data for state updation>)
 
     // [CLEAN UP FUNCTION]
+
     return () => {
       // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
       // write code here...
@@ -51,9 +44,11 @@ function MediaLibraryItemSimpleView(props) {
       isComponentMounted = false
     }
   }, [])
-
   return (
     <Card
+      onClick={() => {
+        setSelectedBackgroundImg(imageUrl)
+      }}
       hoverable
       style={styles.cardStyles}
       bodyStyle={styles.cardBodyStye}
@@ -64,6 +59,11 @@ function MediaLibraryItemSimpleView(props) {
           bg="white"
           justifyContent="center"
           alignItems="center">
+          {selectedBackgroundImg === imageUrl && (
+            <Button size="small" type="primary" style={styles.iconStyle}>
+              <CheckOutlined className="icon" />
+            </Button>
+          )}
           <Image
             preview={false}
             width="208px"

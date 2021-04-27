@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import Icon, {
-  FilterOutlined,
-  PlusOutlined,
-  SearchOutlined
-} from '@ant-design/icons'
+import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
 import { styles } from './MediaLibraryModal.styles'
 import PropTypes from 'prop-types'
@@ -21,21 +17,25 @@ import firebase, { firestore } from 'app/services/Firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
+import Fuse from 'fuse.js'
+import { useFormContext } from 'app/context/FormContext'
 
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { data, btnProps, onClick } = props
+  const { btnProps, onClick, setMediaUrl } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  const [media = []] = useCollectionData(
-    getCollectionRef(COLLECTIONS.MEDIA) /*.orderBy('creationDate', 'desc')*/
-  )
+  const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
   const onMediaUploaded = (data) => {
     const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
+
+  const currentQuestion = useFormContext()
+
+  const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
@@ -44,12 +44,21 @@ function MediaLibraryModal(props) {
   const [switchState, setSwitchState] = useState(false)
   const [sidebarState, setSidebarState] = useState(true)
   const [imagesList, setImagesList] = useState(media)
+  const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(false)
+  const fuse = new Fuse(media, { keys: ['name'] })
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
+  const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
+
   // [CLEAN FUNCTIONS]
   const onModalContinue = () => {
     setIsModalVisible(!isModalVisible)
+    setMediaUrl(selectedBackgroundImg)
+    setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
+      ...currentQuestion,
+      image: selectedBackgroundImg
+    })
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
@@ -70,6 +79,10 @@ function MediaLibraryModal(props) {
     setIsModalVisible(!isModalVisible)
     onClick && onClick()
   }
+  const onChange = (input) => {
+    searchData(input.target.value)
+  }
+
   const customRequest = (data) => {
     const { onSuccess } = data
     const ref = firebase.storage().ref('images').child(data.file.uid)
@@ -90,6 +103,7 @@ function MediaLibraryModal(props) {
               ...imagesList,
               {
                 // key: { data.file.uid },
+                id: mediaId,
                 name: data.file.name,
                 imageUrl: downloadURL,
                 title: 'New title',
@@ -97,6 +111,7 @@ function MediaLibraryModal(props) {
               }
             ])
             onMediaUploaded({
+              id: mediaId,
               name: data.file.name,
               imageUrl: downloadURL,
               title: 'New title',
@@ -107,26 +122,25 @@ function MediaLibraryModal(props) {
       }
     )
   }
+
+  const searchData = () => {
+    if (searchRef.current.input.value) {
+      const searchRes = fuse.search(searchRef.current.input.value)
+      setImagesList(searchRes.map((item) => item.item))
+    } else setImagesList(media)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
     isComponentMounted && imagesList && setImagesList(media)
 
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
     // [CLEAN UP FUNCTION]
 
     return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
       // [FINAL CLEAN UP]
       isComponentMounted = false
     }
   }, [media])
-
   return (
     <>
       <Button {...btnProps} onClick={modalStateChange} style={styles.btnStyle}>
@@ -187,9 +201,13 @@ function MediaLibraryModal(props) {
             <Row px={3} pb={3}>
               <Col>
                 <Input
+                  allowClear
+                  ref={searchRef}
                   prefix={<SearchOutlined />}
                   style={styles.borderRadius}
                   placeholder="Search media file by name..."
+                  onSearch={searchData}
+                  onChange={onChange}
                 />
               </Col>
               <Col cw="auto">
@@ -219,14 +237,18 @@ function MediaLibraryModal(props) {
               flexDirection="row"
               bg="#f6f9fe"
               className="custom-scroll">
-              {/* Here should be list of data Images/Video */}
+              {/* RENDER MEDIA */}
 
               {imagesList.map((item) => (
-                <Box mr={3} mb={3}>
-                  <MediaLibraryItemSimpleView {...item} />
+                <Box mr={3} mt={4}>
+                  <MediaLibraryItemSimpleView
+                    {...item}
+                    selectedBackgroundImg={selectedBackgroundImg}
+                    setSelectedBackgroundImg={setSelectedBackgroundImg}
+                    setMediaUrl={setMediaUrl}
+                  />
                 </Box>
               ))}
-              {/*==================================*/}
               <Upload
                 showUploadList={false}
                 multiple
@@ -235,7 +257,7 @@ function MediaLibraryModal(props) {
                 <Box
                   bg="#eceff5"
                   mr={3}
-                  mb={3}
+                  mt={4}
                   borderRadius="8px"
                   width="216px"
                   height="206px"

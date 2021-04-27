@@ -4,7 +4,8 @@ import React from 'react'
 export const styles = {
   rowStyle: {
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundSize: 'cover'
   },
   cardStyle: {
     width: '400px',
