@@ -6,7 +6,7 @@ function Card(props) {
   const { number, children } = props
 
   return (
-    <Box position="relative" mb={3}>
+    <Box position="relative">
       <Box className="hiddenBox"></Box>
       <Box className="contentBox">{children}</Box>
       <Box className="numberBox">{number}</Box>
