@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { Input, Typography } from 'antd'
+import React, { useEffect } from 'react'
+import { Input } from 'antd'
 import { styles } from './TextEditable.styles'
-import { styles1 } from './TextEditable.styles'
 import PropTypes from 'prop-types'
 
 const { TextArea } = Input
 // import { useTranslation } from 'react-i18next'
 
 function TextEditable(props) {
-  const { onChange, textSecondary, placeholder, isTitle } = props
+  const { textSecondary, placeholder, isTitle, onChange, onBlur, value } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -16,7 +15,6 @@ function TextEditable(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  const [textValue, setTextValue] = useState()
 
   // [COMPUTED PROPERTIES]
 
@@ -39,15 +37,17 @@ function TextEditable(props) {
       isComponentMounted = false
     }
   }, [])
-  //TODO: Replace inline colors to theme vars
+
   return (
     <TextArea
       style={{
         ...(isTitle ? styles.title : styles.default),
         ...(textSecondary ? styles.grayColor : styles.blackColor)
       }}
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
       bordered={false}
-      onChange={setTextValue}
       placeholder={placeholder}
       autoSize
       {...props}
@@ -56,7 +56,9 @@ function TextEditable(props) {
 }
 
 TextEditable.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  value: PropTypes.string,
   textSecondary: PropTypes.bool,
   isTitle: PropTypes.bool,
   placeholder: PropTypes.string.isRequired

@@ -29,7 +29,9 @@ function FormShow(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const onRestart = () => {}
+  const onRestart = () => {
+    window.location.reload(false)
+  }
   const onClick = () => {
     setIsAnswered(true)
   }

@@ -48,7 +48,7 @@ function EditorSidebar(props) {
       questionType: key || QUESTION_TYPES.ENDING,
       title: ''
     }
-    dispatch({
+    await dispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
@@ -123,7 +123,7 @@ function EditorSidebar(props) {
           </Box>
           {/* Question List*/}
           <Box overflow="auto" p={3}>
-            {questions[0] && (
+            {!!questions?.length && (
               <QuestionsList
                 setNewOrder={setNewOrder}
                 onItemClick={onItemClick}
@@ -159,7 +159,7 @@ function EditorSidebar(props) {
             </Row>
             <Box pb={3} px={3} maxHeight="350px" overflow="auto">
               {/*<QuestionsList />*/}
-              {endings[0] && (
+              {!!endings?.length && (
                 <QuestionsList
                   setNewOrder={setNewOrder}
                   onItemClick={onItemClick}
