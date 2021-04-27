@@ -1,11 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import Icon, {
-  FilterOutlined,
-  PlusOutlined,
-  SearchOutlined
-} from '@ant-design/icons'
+import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
 import { styles } from './MediaLibraryModal.styles'
 import PropTypes from 'prop-types'
@@ -21,19 +17,16 @@ import firebase, { firestore } from 'app/services/Firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
-import fuse from 'fuse.js'
 import Fuse from 'fuse.js'
 
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { data, btnProps, onClick, setMediaUrl, bgImage } = props
+  const { btnProps, onClick, setMediaUrl } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  const [media = []] = useCollectionData(
-    getCollectionRef(COLLECTIONS.MEDIA) /*.orderBy('creationDate', 'desc')*/
-  )
+  const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
   const onMediaUploaded = (data) => {
     const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
     setData(COLLECTIONS?.MEDIA, mediaId, data)
@@ -47,7 +40,7 @@ function MediaLibraryModal(props) {
   const [switchState, setSwitchState] = useState(false)
   const [sidebarState, setSidebarState] = useState(true)
   const [imagesList, setImagesList] = useState(media)
-  const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(bgImage)
+  const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(false)
   const fuse = new Fuse(media, { keys: ['name'] })
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
@@ -56,12 +49,10 @@ function MediaLibraryModal(props) {
   // [CLEAN FUNCTIONS]
   const onModalContinue = () => {
     setIsModalVisible(!isModalVisible)
-    console.log(selectedBackgroundImg)
+    setMediaUrl(selectedBackgroundImg)
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
-    // setSelectedBackgroundImg('')
-    console.log(selectedBackgroundImg)
   }
   const onFilterButtonClick = () => {
     setSidebarState(!sidebarState)
@@ -240,14 +231,15 @@ function MediaLibraryModal(props) {
               flexDirection="row"
               bg="#f6f9fe"
               className="custom-scroll">
-              {/* Here should be list of data Images/Video */}
+              {/* RENDER MEDIA */}
 
               {imagesList.map((item) => (
                 <Box mr={3} mt={4}>
                   <MediaLibraryItemSimpleView
                     {...item}
-                    setMediaUrl={setMediaUrl}
+                    selectedBackgroundImg={selectedBackgroundImg}
                     setSelectedBackgroundImg={setSelectedBackgroundImg}
+                    setMediaUrl={setMediaUrl}
                   />
                 </Box>
               ))}

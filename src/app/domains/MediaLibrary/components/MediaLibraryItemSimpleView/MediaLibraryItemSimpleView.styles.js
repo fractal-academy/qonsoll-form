@@ -15,6 +15,14 @@ export const styles = {
     fontWeight: 'bold',
     maxWidth: '190px'
   },
+
+  iconStyle: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 100,
+    borderRadius: '8px'
+  },
   cardBodyStye: { padding: '0 8px 8px 8px' },
   imageStyle: { borderRadius: '8px' }
 }
