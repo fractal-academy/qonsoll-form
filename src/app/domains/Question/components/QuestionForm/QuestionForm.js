@@ -1,4 +1,4 @@
-import React, { useEffect, cloneElement } from 'react'
+import React, { useEffect, useState, cloneElement } from 'react'
 import { Card, Tag } from 'antd'
 import {
   DateTimeInput,
@@ -20,8 +20,7 @@ import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import PropTypes from 'prop-types'
-
-// import { useTranslation } from 'react-i18next'
+import { DEFAULT_IMAGE } from 'app/constants'
 
 function QuestionForm(props) {
   const {
@@ -39,7 +38,7 @@ function QuestionForm(props) {
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [mediaUrl, setMediaUrl] = useState(data?.image || DEFAULT_IMAGE)
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -81,7 +80,7 @@ function QuestionForm(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
-
+  const computedMediaUrl = `url(${mediaUrl})`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -89,7 +88,7 @@ function QuestionForm(props) {
     layoutType?.type !== LAYOUT_TYPES.DEFAULT.type
 
   const bgImage =
-    layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && `url(${data?.image})`
+    layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
@@ -160,11 +159,13 @@ function QuestionForm(props) {
                     trigger={'click'}
                     placement="rightTop"
                     btnType="primary"
-                    btnIcon={<EyeFilled />}
+                    btnIcon={<SettingOutlined />}
                     content={
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
+                          setMediaUrl={setMediaUrl}
                           setIsImageEditVisible={setIsImageEditVisible}
+                          bgImage={bgImage}
                         />
                       </Box>
                     }
@@ -186,7 +187,8 @@ function QuestionForm(props) {
                   <Box
                     {...layoutType.imgSize}
                     backgroundRepeat="no-repeat"
-                    backgroundImage={`url(${data?.image})`}
+                    backgroundImage={computedMediaUrl}
+                    backgroundSize="cover"
                     position="relative"
                     zIndex="1"
                     mb={3}>
@@ -197,11 +199,13 @@ function QuestionForm(props) {
                       trigger={'click'}
                       placement="rightTop"
                       btnType="primary"
-                      btnIcon={<EyeFilled />}
+                      btnIcon={<SettingOutlined />}
                       content={
                         <Box width="192px" height="366px" overflow="hidden">
                           <MediaLibrarySimpleView
                             setIsImageEditVisible={setIsImageEditVisible}
+                            setMediaUrl={setMediaUrl}
+                            bgImage={computedMediaUrl}
                           />
                         </Box>
                       }
@@ -231,24 +235,26 @@ function QuestionForm(props) {
             <Box
               {...layoutType?.imgSize}
               backgroundRepeat="no-repeat"
-              backgroundImage={`url(${data?.image})`}
+              backgroundImage={computedMediaUrl}
+              backgroundSize="cover"
               m={2}
               position="relative">
               <Row h="right">
                 <Col cw="auto" mr={4}>
                   <Popover
-                    // placement="topRight"
                     onClick={changeImageEditVisibleState}
                     visible={isImageEditVisible}
                     onVisibleChange={changeImageEditVisibleState}
                     trigger={'click'}
                     placement="rightTop"
                     btnType="primary"
-                    btnIcon={<EyeFilled />}
+                    btnIcon={<SettingOutlined />}
                     content={
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
                           setIsImageEditVisible={setIsImageEditVisible}
+                          setMediaUrl={setMediaUrl}
+                          bgImage={computedMediaUrl}
                         />
                       </Box>
                     }
