@@ -1,45 +1,24 @@
 import PropTypes from 'prop-types'
+import { cloneElement } from 'react'
 import { Card } from 'app/components'
 import { Dropdown, Menu } from 'antd'
 import './QuestionSimpleView.styles.css'
+import { LAYOUT_TYPES } from 'app/constants'
 import { MoreOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import React, { cloneElement, useEffect } from 'react'
-import { LAYOUT_TYPES } from 'app/constants'
-// import { useTranslation } from 'react-i18next'
 
 function QuestionSimpleView(props) {
   const { title, number, layoutType } = props
 
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
+  // [CLEAN FUNCTIONS]
+  const handleDelete = () => {}
+  const handleDuplicate = () => {}
 
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
-
+  // [COMPUTED PROPERTIES]
   const menu = (
     <Menu>
-      <Menu.Item>Duplicate</Menu.Item>
-      <Menu.Item>Delete</Menu.Item>
+      <Menu.Item onClick={(e) => console.log(e)}>Duplicate</Menu.Item>
+      <Menu.Item onClick={handleDelete}>Delete</Menu.Item>
     </Menu>
   )
 

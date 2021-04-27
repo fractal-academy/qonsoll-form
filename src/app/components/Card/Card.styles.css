@@ -17,6 +17,10 @@
   border-radius: 16px;
   background-color: #eceff5;
 }
+.contentBox:hover {
+  background-color: #e6e6e6;
+  transition: background-color 1s;
+}
 
 .numberBox {
   position: absolute;

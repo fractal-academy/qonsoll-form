@@ -20,23 +20,8 @@ import {
 
 const { Title, Text } = Typography
 
-const choices = [
-  { name: 'choice 1', image: '' },
-  { name: 'choice 1', image: '' },
-  { name: 'choice 1', image: '' }
-]
-
 function QuestionAdvancedView(props) {
   const { data, questionNumber, onClick } = props
-
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -44,7 +29,13 @@ function QuestionAdvancedView(props) {
       component: <YesnoButton onClick={onClick} />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceButton choices={choices} onClick={onClick} />
+      component: (
+        <ChoiceButton
+          choices={data?.btnProps?.children}
+          onClick={onClick}
+          hasImages
+        />
+      )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} onClick={onClick} />
@@ -110,9 +101,9 @@ function QuestionAdvancedView(props) {
     <Row
       noGutters
       height="inherit"
+      backgroundSize="cover"
       backgroundImage={bgImage}
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover">
+      backgroundRepeat="no-repeat">
       <Col
         v="center"
         order={2}

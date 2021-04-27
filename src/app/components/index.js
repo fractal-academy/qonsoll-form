@@ -32,7 +32,7 @@ export { default as KeyBox } from './Button/KeyBox'
 export { default as MiddleContainer } from './Layout/MiddleContainer'
 export { default as Carousel } from './Carousel'
 export { default as ChoiceForm } from './Input/ChoiceForm'
-
+export { default as ImageKeyBox } from './Button/ImageKeyBox'
 export { default as Spinner } from './Spinner'
 
 export { default as RangeSlider } from './RangeSlider'

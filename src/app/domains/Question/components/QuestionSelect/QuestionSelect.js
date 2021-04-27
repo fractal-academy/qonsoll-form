@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
-import { Button, Select } from 'antd'
+import { Select } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import { styles } from './QuestionSelect.styles'
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
 
 const { Option, OptGroup } = Select
 

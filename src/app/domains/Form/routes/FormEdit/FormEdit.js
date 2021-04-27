@@ -19,12 +19,7 @@ import {
 } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 
-// import PropTypes from 'prop-types'
-
 function FormEdit(props) {
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
@@ -34,12 +29,13 @@ function FormEdit(props) {
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
 
+  //[COMPONENT STATE HOOKS]
+  const [isImageEditVisible, setIsImageEditVisible] = useState(false)
+  const [showPopover, setShowPopover] = useState(false)
+
   // [CUSTOM_HOOKS]
   const currentQuestion = useFormContext()
   const dispatch = useFormContextDispatch()
-  // [COMPONENT STATE HOOKS]
-  const [showPopover, setShowPopover] = useState(false)
-  const [isImageEditVisible, setIsImageEditVisible] = useState(false)
 
   // [COMPUTED PROPERTIES]
   let questions, endings
