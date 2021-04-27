@@ -11,17 +11,23 @@ import {
   YesnoButton,
   RangeButton,
   ChoiceForm,
-  SubmitButton
+  SubmitButton,
+  TextEditable
 } from 'components'
 import { EditOutlined, EyeFilled, SettingOutlined } from '@ant-design/icons'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
-import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import { QUESTION_TYPES, LAYOUT_TYPES, COLLECTIONS } from 'app/constants'
 import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
-import { useFormContext } from 'app/context/FormContext'
+import {
+  DISPATCH_EVENTS,
+  useFormContext,
+  useFormContextDispatch
+} from 'app/context/FormContext'
+import { setData } from 'app/services/Firestore'
 
 function QuestionForm(props) {
   const {
@@ -38,8 +44,12 @@ function QuestionForm(props) {
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
   const currentQuestion = useFormContext()
+  const dispatch = useFormContextDispatch()
+
   // [COMPONENT STATE HOOKS]
-  const [mediaUrl, setMediaUrl] = useState(data?.image || DEFAULT_IMAGE)
+  const [mediaUrl, setMediaUrl] = useState(
+    currentQuestion?.image || DEFAULT_IMAGE
+  )
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -99,10 +109,25 @@ function QuestionForm(props) {
     setIsImageEditVisible(!isImageEditVisible)
   }
 
+  const onBlur = async () => {
+    const image = mediaUrl || DEFAULT_IMAGE
+    await dispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { ...currentQuestion, image }
+    })
+    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
+      ...currentQuestion,
+      image
+    })
+  }
+  const onChange = ({ target }) => {
+    setMediaUrl(target.value)
+  }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-    setMediaUrl(data?.image || DEFAULT_IMAGE)
+    setMediaUrl(currentQuestion?.image || DEFAULT_IMAGE)
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -116,6 +141,8 @@ function QuestionForm(props) {
   return (
     <>
       <Row
+        onChange={onChange}
+        onBlur={onBlur}
         noGutters
         mb={2}
         height="100%"
