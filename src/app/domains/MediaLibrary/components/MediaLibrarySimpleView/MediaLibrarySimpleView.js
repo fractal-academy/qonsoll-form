@@ -21,7 +21,6 @@ function MediaLibrarySimpleView(props) {
 
   // [COMPONENT STATE HOOKS]
 
-  const [showPopoverIcon, setShowPopoverIcon] = useState(false)
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
