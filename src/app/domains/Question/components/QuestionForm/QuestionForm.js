@@ -13,7 +13,7 @@ import {
   ChoiceForm,
   SubmitButton
 } from 'components'
-import { EyeFilled, SettingOutlined } from '@ant-design/icons'
+import { EditOutlined, EyeFilled, SettingOutlined } from '@ant-design/icons'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
@@ -21,6 +21,7 @@ import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
+import { useFormContext } from 'app/context/FormContext'
 
 function QuestionForm(props) {
   const {
@@ -36,7 +37,7 @@ function QuestionForm(props) {
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-
+  const currentQuestion = useFormContext()
   // [COMPONENT STATE HOOKS]
   const [mediaUrl, setMediaUrl] = useState(data?.image || DEFAULT_IMAGE)
 
@@ -101,7 +102,7 @@ function QuestionForm(props) {
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-
+    setMediaUrl(data?.image || DEFAULT_IMAGE)
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -110,7 +111,7 @@ function QuestionForm(props) {
     return () => {
       isComponentMounted = false
     }
-  }, [])
+  }, [currentQuestion])
 
   return (
     <>
@@ -159,7 +160,7 @@ function QuestionForm(props) {
                     trigger={'click'}
                     placement="rightTop"
                     btnType="primary"
-                    btnIcon={<SettingOutlined />}
+                    btnIcon={<EditOutlined />}
                     content={
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
@@ -199,7 +200,7 @@ function QuestionForm(props) {
                       trigger={'click'}
                       placement="rightTop"
                       btnType="primary"
-                      btnIcon={<SettingOutlined />}
+                      btnIcon={<EditOutlined />}
                       content={
                         <Box width="192px" height="366px" overflow="hidden">
                           <MediaLibrarySimpleView
@@ -248,7 +249,7 @@ function QuestionForm(props) {
                     trigger={'click'}
                     placement="rightTop"
                     btnType="primary"
-                    btnIcon={<SettingOutlined />}
+                    btnIcon={<EditOutlined />}
                     content={
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
