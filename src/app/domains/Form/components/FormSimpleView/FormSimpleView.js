@@ -26,6 +26,11 @@ function FormSimpleView(props) {
   const [confirmLoading, setConfirmLoading] = useState(false)
 
   // [COMPUTED PROPERTIES]
+  const formRoute = generatePath(ROUTES_PATHS.FORM_EDIT, { id })
+  // [CLEAN FUNCTIONS]
+  const onFormItemClick = () => {
+    formRoute && history.push(formRoute)
+  }
   const handleCancel = () => {
     setVisible(false)
   }
@@ -45,30 +50,6 @@ function FormSimpleView(props) {
     setVisible(false)
     setConfirmLoading(false)
   }
-
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        <FormSimpleViewEdit formData={props} />
-      </Menu.Item>
-      <Menu.Item>
-        <Popconfirm
-          title="Delete this form?"
-          visible={visible}
-          onConfirm={handleDelete}
-          okButtonProps={{ loading: confirmLoading }}
-          onCancel={handleCancel}>
-          <Text onClick={showPopconfirm}>Delete</Text>
-        </Popconfirm>
-      </Menu.Item>
-    </Menu>
-  )
-
-  // [CLEAN FUNCTIONS]
-  const onFormItemClick = () => {
-    history.push(ROUTES_PATHS.FORM_EDIT)
-  }
-  const onItemSelect = () => {}
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -87,6 +68,26 @@ function FormSimpleView(props) {
     }
   }, [])
 
+  // [MENU TEMPLATE]
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <FormSimpleViewEdit formData={props} />
+      </Menu.Item>
+      <Menu.Item>
+        <Popconfirm
+          title="Delete this form?"
+          visible={visible}
+          onConfirm={handleDelete}
+          okButtonProps={{ loading: confirmLoading }}
+          onCancel={handleCancel}>
+          <Text onClick={showPopconfirm}>Delete</Text>
+        </Popconfirm>
+      </Menu.Item>
+    </Menu>
+  )
+
+  // [TEMPLATE]
   return (
     <Card
       style={styles.cardStyles}

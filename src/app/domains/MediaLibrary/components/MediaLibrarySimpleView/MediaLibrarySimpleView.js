@@ -11,7 +11,7 @@ import RangeSlider from 'components/RangeSlider'
 // import { useTranslation } from 'react-i18next'
 const { Text } = Typography
 function MediaLibrarySimpleView(props) {
-  const { setIsImageEditVisible, setMediaUrl, bgImage, imageUrl } = props
+  const { setIsImageEditVisible, setMediaUrl, bgImage } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -57,7 +57,6 @@ function MediaLibrarySimpleView(props) {
               backgroundSize="cover"
               backgroundImage={bgImage}>
               <MediaLibraryModal
-                // data={data}
                 setMediaUrl={setMediaUrl}
                 bgImage={bgImage}
                 onClick={() => {

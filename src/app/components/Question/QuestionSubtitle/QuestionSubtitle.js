@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { TextEditable } from 'components'
 import PropTypes from 'prop-types'
-
+import {
+  useFormContextDispatch,
+  useFormContext,
+  DISPATCH_EVENTS
+} from 'app/context/FormContext'
+import { setData } from 'app/services/Firestore'
+import { COLLECTIONS } from 'app/constants'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionSubtitle(props) {
@@ -12,18 +18,35 @@ function QuestionSubtitle(props) {
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
+  // [CUSTOM HOOKS]
+  const dispatch = useFormContextDispatch()
+  const currentQuestion = useFormContext()
+
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [textValue, setTextValue] = useState(currentQuestion?.subtitle || '')
 
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const onChange = (data) => {}
+  const onBlur = async () => {
+    const subtitle = textValue || ''
+    await dispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { ...currentQuestion, subtitle }
+    })
+    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
+      ...currentQuestion,
+      subtitle
+    })
+  }
+  const onChange = ({ target }) => {
+    setTextValue(target.value)
+  }
 
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-
+    setTextValue(currentQuestion?.subtitle || '')
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -36,14 +59,21 @@ function QuestionSubtitle(props) {
       // [FINAL CLEAN UP]
       isComponentMounted = false
     }
-  }, [])
+  }, [currentQuestion])
+
   return (
-    <TextEditable onChange={onChange} placeholder={placeholder} textSecondary />
+    <TextEditable
+      value={textValue}
+      onChange={onChange}
+      onBlur={onBlur}
+      placeholder={placeholder}
+      textSecondary
+    />
   )
 }
 
 QuestionSubtitle.propTypes = {
-  placeholder: PropTypes.string.isRequired
+  placeholder: PropTypes.string
 }
 
 export default QuestionSubtitle

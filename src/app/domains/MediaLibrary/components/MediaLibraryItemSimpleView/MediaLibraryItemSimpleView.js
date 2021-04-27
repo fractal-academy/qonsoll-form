@@ -1,13 +1,10 @@
 import React, { cloneElement, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { deleteData } from 'app/services/Firestore'
-import COLLECTIONS from 'app/constants/collection'
 import { Button, Card, Image, Tag, Typography } from 'antd'
 import { styles } from './MediaLibraryItemSimpleView.styles'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import { CheckOutlined } from '@ant-design/icons'
-import CustomBadge from 'components/CustomBadge'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 const { Meta } = Card

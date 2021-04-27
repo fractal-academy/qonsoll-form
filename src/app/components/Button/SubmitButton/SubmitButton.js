@@ -10,7 +10,7 @@ import { CheckOutlined } from '@ant-design/icons'
 const { Text } = Typography
 
 function SubmitButton(props) {
-  const { children } = props
+  const { children, onClick } = props
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
@@ -20,7 +20,9 @@ function SubmitButton(props) {
   // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
-  const onButtonClick = () => {}
+  const onButtonClick = () => {
+    onClick && onClick()
+  }
 
   // [CLEAN FUNCTIONS]
 

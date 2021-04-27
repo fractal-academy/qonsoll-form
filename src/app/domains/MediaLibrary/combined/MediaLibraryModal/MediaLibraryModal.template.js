@@ -18,6 +18,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import Fuse from 'fuse.js'
+import { useFormContext } from 'app/context/FormContext'
 
 const { Title, Text } = Typography
 
@@ -31,6 +32,9 @@ function MediaLibraryModal(props) {
     const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
+
+  const currentQuestion = useFormContext()
+
   const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -50,6 +54,10 @@ function MediaLibraryModal(props) {
   const onModalContinue = () => {
     setIsModalVisible(!isModalVisible)
     setMediaUrl(selectedBackgroundImg)
+    setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
+      ...currentQuestion,
+      image: selectedBackgroundImg
+    })
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
@@ -70,6 +78,10 @@ function MediaLibraryModal(props) {
     setIsModalVisible(!isModalVisible)
     onClick && onClick()
   }
+  const onChange = (input) => {
+    searchData(input.target.value)
+  }
+
   const customRequest = (data) => {
     const { onSuccess } = data
     const ref = firebase.storage().ref('images').child(data.file.uid)
@@ -121,16 +133,9 @@ function MediaLibraryModal(props) {
     let isComponentMounted = true
     isComponentMounted && imagesList && setImagesList(media)
 
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
     // [CLEAN UP FUNCTION]
 
     return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
       // [FINAL CLEAN UP]
       isComponentMounted = false
     }
@@ -201,7 +206,7 @@ function MediaLibraryModal(props) {
                   style={styles.borderRadius}
                   placeholder="Search media file by name..."
                   onSearch={searchData}
-                  onChange={(input) => searchData(input.target.value)}
+                  onChange={onChange}
                 />
               </Col>
               <Col cw="auto">
@@ -243,7 +248,6 @@ function MediaLibraryModal(props) {
                   />
                 </Box>
               ))}
-              {/*==================================*/}
               <Upload
                 showUploadList={false}
                 multiple
