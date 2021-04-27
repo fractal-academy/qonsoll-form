@@ -48,7 +48,7 @@ function FormEdit(props) {
       (item) => item.questionType === QUESTION_TYPES.ENDING
     )
   }
-  console.log(questions)
+
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = async ({ key }) => {
     dispatch({
