@@ -24,3 +24,13 @@
 .dropdownIcon {
   font-size: 26px;
 }
+
+.selectedCard {
+  position: inherit;
+  z-index: 500;
+  left: 4px;
+  padding: 16px;
+  min-height: 72px;
+  border-radius: 16px;
+  background-color: #cacaca;
+}

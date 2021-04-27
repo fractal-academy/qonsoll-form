@@ -10,6 +10,8 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 function QuestionSimpleView(props) {
   const { title, number, layoutType } = props
 
+  // [CLEAN FUNCTIONS]
+
   // [COMPUTED PROPERTIES]
   const menu = (
     <Menu>

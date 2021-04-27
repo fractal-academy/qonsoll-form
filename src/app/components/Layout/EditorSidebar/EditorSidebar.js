@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import './EditorSidebar.styles.css'
+import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Divider } from 'antd'
 import {
@@ -43,31 +44,14 @@ function EditorSidebar(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const addEnding = async () => {
-    const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
-    const newEnding = {
-      id: questionId,
-      formId: id,
-      layoutType: LAYOUT_TYPE_KEYS[0],
-      questionType: QUESTION_TYPES.ENDING,
-      title: 'New Ending.'
-    }
-    dispatch({
-      type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
-      payload: newEnding
-    })
-    await setData(COLLECTIONS.QUESTIONS, questionId, newEnding)
-    // setEndingsList((endingsList) => [...endingsList, newEnding])
-  }
-  const addQuestion = async ({ key }, index) => {
+  const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
     const newQuestion = {
       id: questionId,
       formId: id,
-      index: index,
       layoutType: LAYOUT_TYPE_KEYS[0],
-      questionType: key,
-      title: 'New Question.'
+      questionType: key || QUESTION_TYPES.ENDING,
+      title: ''
     }
     dispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
@@ -75,29 +59,17 @@ function EditorSidebar(props) {
     })
     await setData(COLLECTIONS.QUESTIONS, questionId, newQuestion)
     // setQuestionsList((questionsList) => [...questionsList, newQuestion])
-    setshowPopover(!showPopover)
+    key && setshowPopover(!showPopover)
   }
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
+  const setNewOrder = (item) => {
+    setData(COLLECTIONS.QUESTIONS, item?.id, item)
+  }
+  const onItemClick = (i) => {
+    console.log(i)
+  }
 
   return (
     <Box position="relative" display="flex">
@@ -154,7 +126,11 @@ function EditorSidebar(props) {
           {/* Question List*/}
           <Box overflow="auto" p={3}>
             {questions[0] && (
-              <QuestionsList addQuestion={addQuestion} data={questions} />
+              <QuestionsList
+                setNewOrder={setNewOrder}
+                onItemClick={onItemClick}
+                data={questions}
+              />
             )}
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
@@ -179,16 +155,19 @@ function EditorSidebar(props) {
                   Endings
                 </Title>
               </Col>
-              <Col cw="auto" px={10} py={1} borderRadius="4px" bg="#e8f0fb">
-                <PlusOutlined
-                  style={styles.plusIconColor}
-                  onClick={addEnding}
-                />
+              <Col onClick={addQuestion} cw="auto">
+                <PlusOutlined style={styles.hover} />
               </Col>
             </Row>
             <Box pb={3} px={3} maxHeight="350px" overflow="auto">
               {/*<QuestionsList />*/}
-              {endings[0] && <QuestionsList data={endings} />}
+              {endings[0] && (
+                <QuestionsList
+                  setNewOrder={setNewOrder}
+                  onItemClick={onItemClick}
+                  data={endings}
+                />
+              )}
             </Box>
           </Box>
         </Box>

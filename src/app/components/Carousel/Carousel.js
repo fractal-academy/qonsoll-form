@@ -18,10 +18,13 @@ function Carousel(props) {
   }
   const next = () => {
     carouselRef.current?.next()
-    setIsAnswered(false)
+    setIsAnswered && setIsAnswered(false)
   }
   const previous = () => {
     carouselRef.current?.prev()
+  }
+  const goTo = (slideNumber) => {
+    carouselRef.current?.goTo(slideNumber)
   }
 
   //COMPUTED PROPERTIES

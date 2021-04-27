@@ -26,7 +26,6 @@ function FormEdit(props) {
   const [form, formLoading] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
-
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
