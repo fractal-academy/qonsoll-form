@@ -11,12 +11,14 @@ function QuestionSimpleView(props) {
   const { title, number, layoutType } = props
 
   // [CLEAN FUNCTIONS]
+  const handleDelete = () => {}
+  const handleDuplicate = () => {}
 
   // [COMPUTED PROPERTIES]
   const menu = (
     <Menu>
-      <Menu.Item>Duplicate</Menu.Item>
-      <Menu.Item>Delete</Menu.Item>
+      <Menu.Item onClick={(e) => console.log(e)}>Duplicate</Menu.Item>
+      <Menu.Item onClick={handleDelete}>Delete</Menu.Item>
     </Menu>
   )
 

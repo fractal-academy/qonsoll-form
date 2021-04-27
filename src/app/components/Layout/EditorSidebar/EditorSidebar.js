@@ -18,20 +18,15 @@ import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFor
 import QuestionsList from 'domains/Question/components/QuestionsList'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
-import {
-  addData,
-  firestore,
-  getCollectionRef,
-  setData
-} from 'app/services/Firestore'
+import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useParams } from 'react-router'
 import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
 import { useFormContextDispatch } from 'app/context/FormContext'
-// import { useTranslation } from 'react-i18next'
+
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings, setCurrentQuestion } = props
+  const { questions, endings } = props
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
