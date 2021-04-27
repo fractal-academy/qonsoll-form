@@ -44,7 +44,7 @@ function QuestionForm(props) {
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
   const currentQuestion = useFormContext()
-  const dispatch = useFormContextDispatch()
+  // const dispatch = useFormContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   const [mediaUrl, setMediaUrl] = useState(
@@ -109,20 +109,20 @@ function QuestionForm(props) {
     setIsImageEditVisible(!isImageEditVisible)
   }
 
-  const onBlur = async () => {
-    const image = mediaUrl || DEFAULT_IMAGE
-    await dispatch({
-      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { ...currentQuestion, image }
-    })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      image
-    })
-  }
-  const onChange = ({ target }) => {
-    setMediaUrl(target.value)
-  }
+  // const onBlur = async () => {
+  //   const image = mediaUrl || DEFAULT_IMAGE
+  //   await dispatch({
+  //     type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+  //     payload: { ...currentQuestion, image }
+  //   })
+  //   await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
+  //     ...currentQuestion,
+  //     image
+  //   })
+  // }
+  // const onChange = ({ target }) => {
+  //   setMediaUrl(target.value)
+  // }
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -141,8 +141,8 @@ function QuestionForm(props) {
   return (
     <>
       <Row
-        onChange={onChange}
-        onBlur={onBlur}
+        // onChange={onChange}
+        // onBlur={onBlur}
         noGutters
         mb={2}
         height="100%"
