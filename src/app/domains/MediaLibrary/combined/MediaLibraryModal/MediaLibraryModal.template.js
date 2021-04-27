@@ -1,38 +1,52 @@
 import React, { useEffect, useState } from 'react'
-import { Modal, Button, Typography, Input, Divider } from 'antd'
+import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
-import { FormSimpleView } from 'domains/Form/components'
+import Icon, {
+  FilterOutlined,
+  PlusOutlined,
+  SearchOutlined
+} from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
 import { styles } from './MediaLibraryModal.styles'
 import PropTypes from 'prop-types'
 import './MediaLibraryModal.styles.css'
-import { MediaLibraryFilter } from 'domains/MediaLibrary/components'
+import {
+  MediaLibraryFilter,
+  MediaLibraryItemSimpleView
+} from 'domains/MediaLibrary/components'
+import MediaLibrarySimpleView from 'domains/MediaLibrary/components/MediaLibrarySimpleView'
 // import { useTranslation } from 'react-i18next'
+// import storage from 'app/services/Firebase'
+import firebase, { firestore } from 'app/services/Firebase'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { getCollectionRef, setData } from 'app/services/Firestore'
+import COLLECTIONS from 'app/constants/collection'
 
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { data, btnProps } = props
+  const { data, btnProps, onClick } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
+  const [media = []] = useCollectionData(
+    getCollectionRef(COLLECTIONS.MEDIA) /*.orderBy('creationDate', 'desc')*/
+  )
+  const onMediaUploaded = (data) => {
+    const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
+    setData(COLLECTIONS?.MEDIA, mediaId, data)
+  }
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [switchState, setSwitchState] = useState(true)
+  const [switchState, setSwitchState] = useState(false)
   const [sidebarState, setSidebarState] = useState(true)
-  const [formsList, setFormsList] = useState([
-    { title: 'New title', subtitle: 'subtitle' },
-    { title: 'New title', subtitle: 'subtitle' },
-    { title: 'New title', subtitle: 'subtitle' },
-    { title: 'New title', subtitle: 'subtitle' }
-  ])
+  const [imagesList, setImagesList] = useState(media)
 
   // [COMPUTED PROPERTIES]
-  let amountFiles = 0
+  const amountFiles = imagesList.length
   // [CLEAN FUNCTIONS]
   const onModalContinue = () => {
     setIsModalVisible(!isModalVisible)
@@ -54,25 +68,56 @@ function MediaLibraryModal(props) {
   }
   const modalStateChange = () => {
     setIsModalVisible(!isModalVisible)
+    onClick && onClick()
   }
-  const onAddForm = () => {
-    setFormsList((prev) => [
-      ...prev,
-      {
-        title: 'new Title ',
-        subtitle: 'subtitle'
+  const customRequest = (data) => {
+    const { onSuccess } = data
+    const ref = firebase.storage().ref('images').child(data.file.uid)
+
+    const image = ref.put(data.file)
+    image.on(
+      'state_changed',
+      (snapshot) => {},
+      (error) => {
+        // Handle error during the upload
+        console.error('message')
+      },
+      () => {
+        image.snapshot.ref
+          .getDownloadURL()
+          .then((downloadURL) => {
+            setImagesList([
+              ...imagesList,
+              {
+                // key: { data.file.uid },
+                name: data.file.name,
+                imageUrl: downloadURL,
+                title: 'New title',
+                subtitle: 'subtitle'
+              }
+            ])
+            onMediaUploaded({
+              name: data.file.name,
+              imageUrl: downloadURL,
+              title: 'New title',
+              subtitle: 'subtitle'
+            })
+          })
+          .then(() => onSuccess())
       }
-    ])
+    )
   }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
+    isComponentMounted && imagesList && setImagesList(media)
 
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
 
     // [CLEAN UP FUNCTION]
+
     return () => {
       // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
       // write code here...
@@ -80,17 +125,19 @@ function MediaLibraryModal(props) {
       // [FINAL CLEAN UP]
       isComponentMounted = false
     }
-  }, [])
+  }, [media])
 
   return (
     <>
-      <Button {...btnProps} onClick={modalStateChange} />
+      <Button {...btnProps} onClick={modalStateChange} style={styles.btnStyle}>
+        <Text style={styles.btnFont}>Change</Text>
+      </Button>
       <Modal
         visible={isModalVisible}
         footer={null}
         closable={false}
-        width="750px"
-        bodyStyle={globalStyles.resetPadding}>
+        width="950px"
+        bodyStyle={styles.modalBodyStyle}>
         <Row>
           <Col>
             <Row mb={1} v="center" px={3} pt={3}>
@@ -164,7 +211,7 @@ function MediaLibraryModal(props) {
               </Col>
             </Row>
             <Box
-              height="330px"
+              height="500px"
               pl={3}
               overflow="auto"
               display="flex"
@@ -173,36 +220,39 @@ function MediaLibraryModal(props) {
               bg="#f6f9fe"
               className="custom-scroll">
               {/* Here should be list of data Images/Video */}
-              {formsList.map((item) => (
+
+              {imagesList.map((item) => (
                 <Box mr={3} mb={3}>
-                  <FormSimpleView
-                    key={item}
-                    title={item.title}
-                    subtitle={item.subtitle}
-                  />
+                  <MediaLibraryItemSimpleView {...item} />
                 </Box>
               ))}
-              <Box
-                bg="#eceff5"
-                mr={3}
-                mb={3}
-                borderRadius="8px"
-                width="150px"
-                height="150px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                style={globalStyles.cursorPointer}
-                onClick={onAddForm}>
-                <PlusOutlined />
-              </Box>
+              {/*==================================*/}
+              <Upload
+                showUploadList={false}
+                multiple
+                name="file"
+                customRequest={customRequest}>
+                <Box
+                  bg="#eceff5"
+                  mr={3}
+                  mb={3}
+                  borderRadius="8px"
+                  width="216px"
+                  height="206px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  style={globalStyles.cursorPointer}>
+                  <PlusOutlined />
+                </Box>
+              </Upload>
             </Box>
             <Row>
               <Col>
                 <Divider type="horizontal" style={globalStyles.resetMargin} />
               </Col>
             </Row>
-            <Row h="right" p={3}>
+            <Row h="right" p={3} bg="white">
               <Col cw="auto">
                 <Button
                   type="text"

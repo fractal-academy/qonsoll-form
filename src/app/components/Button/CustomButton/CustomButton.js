@@ -13,11 +13,7 @@ function CustomButton(props) {
   const style = styleMap[buttonType].style
 
   return (
-    <Button
-      className={style}
-      onClick={onClick && onClick}
-      type={buttonType}
-      {...args}>
+    <Button className={style} onClick={onClick} type={buttonType} {...args}>
       {children}
     </Button>
   )
