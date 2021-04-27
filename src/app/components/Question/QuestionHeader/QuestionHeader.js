@@ -19,8 +19,6 @@ function QuestionHeader(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-  const onChangeTitle = (data) => {}
-  const onChangeSubtitle = (data) => {}
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -44,18 +42,12 @@ function QuestionHeader(props) {
     <>
       <Row noGutters>
         <Col>
-          <QuestionTitle
-            onChange={onChangeTitle}
-            placeholder={titlePlaceholder}
-          />
+          <QuestionTitle placeholder={titlePlaceholder} />
         </Col>
       </Row>
       <Row noGutters>
         <Col>
-          <QuestionSubtitle
-            onChange={onChangeSubtitle}
-            placeholder={subtitlePlaceholder}
-          />
+          <QuestionSubtitle placeholder={subtitlePlaceholder} />
         </Col>
       </Row>
     </>

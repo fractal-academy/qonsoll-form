@@ -46,7 +46,7 @@ function EditorSidebar(props) {
 
   // [CLEAN FUNCTIONS]
 
-  const addEnding = async () => {
+  const addEnding = () => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
     const newEnding = {
       id: questionId,
@@ -59,7 +59,7 @@ function EditorSidebar(props) {
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newEnding
     })
-    await setData(COLLECTIONS.QUESTIONS, questionId, newEnding)
+    setData(COLLECTIONS.QUESTIONS, questionId, newEnding)
     // setEndingsList((endingsList) => [...endingsList, newEnding])
   }
   const addQuestion = async ({ key }) => {
@@ -71,7 +71,7 @@ function EditorSidebar(props) {
       questionType: key,
       title: 'New Question.'
     }
-    dispatch({
+    await dispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
@@ -154,7 +154,7 @@ function EditorSidebar(props) {
           </Box>
           {/* Question List*/}
           <Box overflow="auto" p={3}>
-            {questions?.length && <QuestionsList data={questions} />}
+            {!!questions?.length && <QuestionsList data={questions} />}
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
             <Row>
@@ -187,7 +187,7 @@ function EditorSidebar(props) {
             </Row>
             <Box pb={3} px={3} maxHeight="350px" overflow="auto">
               {/*<QuestionsList />*/}
-              {endings?.length && <QuestionsList data={endings} />}
+              {!!endings?.length && <QuestionsList data={endings} />}
             </Box>
           </Box>
         </Box>

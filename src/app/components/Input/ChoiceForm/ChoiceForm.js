@@ -47,7 +47,6 @@ function ChoiceForm(props) {
       isComponentMounted = false
     }
   }, [])
-  console.log(withImage)
   return (
     <Box
       display="flex"

@@ -14,12 +14,12 @@ import {
   SubmitButton
 } from 'components'
 import { EyeFilled, SettingOutlined } from '@ant-design/icons'
-import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
+import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import PropTypes from 'prop-types'
-import MediaLibrarySimpleView from '../../../MediaLibrary/components/MediaLibrarySimpleView'
 
 // import { useTranslation } from 'react-i18next'
 
@@ -81,6 +81,7 @@ function QuestionForm(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
+
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -97,6 +98,7 @@ function QuestionForm(props) {
   const changeImageEditVisibleState = () => {
     setIsImageEditVisible(!isImageEditVisible)
   }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -107,10 +109,6 @@ function QuestionForm(props) {
 
     // [CLEAN UP FUNCTION]
     return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
       isComponentMounted = false
     }
   }, [])
@@ -266,7 +264,12 @@ function QuestionForm(props) {
 }
 
 QuestionForm.propTypes = {
-  question: PropTypes.object
+  data: PropTypes.object,
+  onQuestionTypeChange: PropTypes.func,
+  setShowPopover: PropTypes.func,
+  showPopover: PropTypes.bool,
+  setIsImageEditVisible: PropTypes.func,
+  isImageEditVisible: PropTypes.bool
 }
 
 export default QuestionForm
