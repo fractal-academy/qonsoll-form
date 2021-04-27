@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import './EditorSidebar.styles.css'
+import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Divider } from 'antd'
 import {
@@ -17,27 +18,20 @@ import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFor
 import QuestionsList from 'domains/Question/components/QuestionsList'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
-import {
-  addData,
-  firestore,
-  getCollectionRef,
-  setData
-} from 'app/services/Firestore'
+import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useParams } from 'react-router'
 import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
 import { useFormContextDispatch } from 'app/context/FormContext'
-// import { useTranslation } from 'react-i18next'
+
 const { Title } = Typography
 
 function EditorSidebar(props) {
   const { questions, endings } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const { id } = useParams()
   const dispatch = useFormContextDispatch()
+
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
   const [showPopover, setshowPopover] = useState(false)
@@ -45,31 +39,14 @@ function EditorSidebar(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
-  const addEnding = () => {
-    const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
-    const newEnding = {
-      id: questionId,
-      formId: id,
-      layoutType: LAYOUT_TYPE_KEYS[0],
-      questionType: QUESTION_TYPES.ENDING,
-      title: 'New Ending.'
-    }
-    dispatch({
-      type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
-      payload: newEnding
-    })
-    setData(COLLECTIONS.QUESTIONS, questionId, newEnding)
-    // setEndingsList((endingsList) => [...endingsList, newEnding])
-  }
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
     const newQuestion = {
       id: questionId,
       formId: id,
       layoutType: LAYOUT_TYPE_KEYS[0],
-      questionType: key,
-      title: 'New Question.'
+      questionType: key || QUESTION_TYPES.ENDING,
+      title: ''
     }
     await dispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
@@ -77,28 +54,20 @@ function EditorSidebar(props) {
     })
     await setData(COLLECTIONS.QUESTIONS, questionId, newQuestion)
     // setQuestionsList((questionsList) => [...questionsList, newQuestion])
-    setshowPopover(!showPopover)
+    key && setshowPopover(!showPopover)
   }
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
+  const setNewOrder = (item) => {
+    setData(COLLECTIONS.QUESTIONS, item?.id, item)
+  }
+  const onItemClick = (item) => {
+    dispatch({
+      type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
+      payload: item
+    })
+  }
 
   return (
     <Box position="relative" display="flex">
@@ -154,7 +123,13 @@ function EditorSidebar(props) {
           </Box>
           {/* Question List*/}
           <Box overflow="auto" p={3}>
-            {!!questions?.length && <QuestionsList data={questions} />}
+            {!!questions?.length && (
+              <QuestionsList
+                setNewOrder={setNewOrder}
+                onItemClick={onItemClick}
+                data={questions}
+              />
+            )}
           </Box>
           <Box mt="auto" style={styles.endingsPosition}>
             <Row>
@@ -178,16 +153,19 @@ function EditorSidebar(props) {
                   Endings
                 </Title>
               </Col>
-              <Col cw="auto" px={10} py={1} borderRadius="4px" bg="#e8f0fb">
-                <PlusOutlined
-                  style={styles.plusIconColor}
-                  onClick={addEnding}
-                />
+              <Col onClick={addQuestion} cw="auto">
+                <PlusOutlined style={styles.hover} />
               </Col>
             </Row>
             <Box pb={3} px={3} maxHeight="350px" overflow="auto">
               {/*<QuestionsList />*/}
-              {!!endings?.length && <QuestionsList data={endings} />}
+              {!!endings?.length && (
+                <QuestionsList
+                  setNewOrder={setNewOrder}
+                  onItemClick={onItemClick}
+                  data={endings}
+                />
+              )}
             </Box>
           </Box>
         </Box>

@@ -1,8 +1,8 @@
+import { useRef } from 'react'
 import './Carousel.styles.css'
 import PropTypes from 'prop-types'
 import { Button } from 'app/components'
 import { Carousel as AntdCarousel } from 'antd'
-import React, { useEffect, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
 
@@ -18,32 +18,17 @@ function Carousel(props) {
   }
   const next = () => {
     carouselRef.current?.next()
-    setIsAnswered(false)
+    setIsAnswered && setIsAnswered(false)
   }
   const previous = () => {
     carouselRef.current?.prev()
   }
+  const goTo = (slideNumber) => {
+    carouselRef.current?.goTo(slideNumber)
+  }
 
   //COMPUTED PROPERTIES
   isAnswered && next()
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Box onWheel={handleScroll}>

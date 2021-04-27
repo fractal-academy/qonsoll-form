@@ -47,6 +47,7 @@ function ChoiceForm(props) {
       isComponentMounted = false
     }
   }, [])
+
   return (
     <Box
       display="flex"

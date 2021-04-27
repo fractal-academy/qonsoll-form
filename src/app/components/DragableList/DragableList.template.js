@@ -4,10 +4,12 @@ import {
   sortableElement,
   sortableHandle
 } from 'react-sortable-hoc'
-import arrayMove from 'array-move'
 import { List } from 'antd'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import arrayMove from 'array-move'
 import styles from './DragableList.styles'
+import { setData } from 'app/services/Firestore'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import { COLLECTIONS } from 'app/constants'
 
 const SortableItem = sortableElement(
   sortableHandle(({ children, withWrapper }) =>
@@ -19,7 +21,7 @@ const SortableItem = sortableElement(
         </Col>
       </Row>
     ) : (
-      children
+      <Box>{children}</Box>
     )
   )
 )
@@ -29,8 +31,10 @@ const SortableContainer = sortableContainer(({ children }) => (
 
 function DragableList(props) {
   const {
+    onItemClick,
     dataSource,
     onUpdate,
+    setNewOrder,
     renderItem,
     withWrapper = true,
     sortable = true,
@@ -46,12 +50,16 @@ function DragableList(props) {
     setSortableItems(updatedItems)
 
     if (!onUpdate) return
-    onUpdate(
-      updatedItems.map((i, index) => ({
-        ...dataSource[i],
-        order: index
-      }))
-    )
+
+    let items = updatedItems.map((i, index) => ({
+      ...dataSource[i],
+      order: index
+    }))
+    onUpdate(items)
+
+    items.forEach((item) => {
+      setNewOrder(item)
+    })
   }
 
   // [USE_EFFECTS]
@@ -78,12 +86,15 @@ function DragableList(props) {
         {...args}
         dataSource={sortableItems}
         renderItem={(item, index) => (
-          <SortableWrapper
-            withWrapper={withWrapper}
-            key={`item-${index}`}
-            index={index}>
-            {renderItem ? renderItem(dataSource[item], index) : item}
-          </SortableWrapper>
+          <Box
+            onClick={() => onItemClick && onItemClick(dataSource[item], index)}>
+            <SortableWrapper
+              withWrapper={withWrapper}
+              key={`item-${index}`}
+              index={index}>
+              {renderItem ? renderItem(dataSource[item], index) : item}
+            </SortableWrapper>
+          </Box>
         )}
       />
     </Container>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import Fuse from 'fuse.js'
 import {
@@ -33,9 +33,6 @@ const mockRoutes = [
   { path: '/videos', page: 'Videos' }
 ]
 function FormsAll(props) {
-  //const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
   const history = useHistory()
@@ -131,6 +128,7 @@ function FormsAll(props) {
           </Breadcrumb>
         </Col>
       </Row>
+
       {/* SecondaryTitle */}
       <Row mb={1} v="center" pt={3}>
         <Col>

@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types'
-import './RangeButton.styles.css'
 import { useState } from 'react'
+import './RangeButton.styles.css'
+import PropTypes from 'prop-types'
 import { Button } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
@@ -55,8 +55,9 @@ function RangeButton(props) {
 }
 
 RangeButton.propTypes = {
-  from: PropTypes.number.isRequired,
-  to: PropTypes.number.isRequired
+  onClick: PropTypes.func,
+  to: PropTypes.number.isRequired,
+  from: PropTypes.number.isRequired
 }
 
 export default RangeButton
