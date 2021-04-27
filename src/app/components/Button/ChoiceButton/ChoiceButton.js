@@ -7,7 +7,7 @@ import { Box } from '@qonsoll/react-design'
 let startLetter = 65
 
 function ChoiceButton(props) {
-  const { choices, onClick } = props
+  const { choices, onClick, data } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()

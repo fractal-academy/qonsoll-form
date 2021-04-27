@@ -47,7 +47,13 @@ function Carousel(props) {
 
   return (
     <Box onWheel={handleScroll}>
-      <AntdCarousel dots={false} ref={carouselRef} dotPosition="right">
+      <AntdCarousel
+        dots={false}
+        ref={carouselRef}
+        dotPosition="right"
+        afterChange={(index) => {
+          console.log(index)
+        }}>
         {children}
       </AntdCarousel>
 
