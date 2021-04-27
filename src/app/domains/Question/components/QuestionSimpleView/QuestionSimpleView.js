@@ -37,9 +37,10 @@ function QuestionSimpleView(props) {
         <Row h="around" v="center" noGutters ml={2}>
           <Col cw="auto" mr={2}>
             <Box display="flex" className="roundBox">
-              {cloneElement(LAYOUT_TYPES[layoutType]?.icon, {
-                className: 'typeIcon'
-              })}
+              {layoutType &&
+                cloneElement(LAYOUT_TYPES[layoutType]?.icon, {
+                  className: 'typeIcon'
+                })}
             </Box>
           </Col>
           <Col width="120px" className="description">
