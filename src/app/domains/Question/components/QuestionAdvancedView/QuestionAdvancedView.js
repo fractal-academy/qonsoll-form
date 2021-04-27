@@ -23,8 +23,6 @@ const { Title, Text } = Typography
 function QuestionAdvancedView(props) {
   const { data, questionNumber, onClick } = props
 
-  console.log(data?.questionType)
-
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.YES_NO]: {
