@@ -4,42 +4,29 @@ import {
   sortableElement,
   sortableHandle
 } from 'react-sortable-hoc'
-import { List } from 'antd'
 import arrayMove from 'array-move'
-import styles from './DragableList.styles'
-import { setData } from 'app/services/Firestore'
+import { List } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { COLLECTIONS } from 'app/constants'
+import styles from './DragableList.styles'
+import { MenuOutlined } from '@ant-design/icons'
 
-const SortableItem = sortableElement(
-  sortableHandle(({ children, withWrapper }) =>
-    withWrapper ? (
-      <Row noGutters>
-        <Col style={styles.colStyles}>
-          <Box style={styles.boxStyles} />
-          {children}
-        </Col>
-      </Row>
-    ) : (
-      <Box>{children}</Box>
-    )
-  )
-)
+const DragHandle = sortableHandle(() => <MenuOutlined />)
+
+const SortableItem = sortableElement(({ children }) => (
+  <Row noGutters v="center" mb={3}>
+    <Col cw="auto" mr={1}>
+      <DragHandle />
+    </Col>
+    <Col style={styles.colStyles}>{children}</Col>
+  </Row>
+))
+
 const SortableContainer = sortableContainer(({ children }) => (
   <Box>{children}</Box>
 ))
 
-function DragableList(props) {
-  const {
-    onItemClick,
-    dataSource,
-    onUpdate,
-    setNewOrder,
-    renderItem,
-    withWrapper = true,
-    sortable = true,
-    ...args
-  } = props
+export default function DragableList(props) {
+  const { dataSource, onUpdate, renderItem, sortable = true, ...args } = props
 
   // [COMPONENT STATE HOOKS]
   const [sortableItems, setSortableItems] = useState([])
@@ -50,16 +37,12 @@ function DragableList(props) {
     setSortableItems(updatedItems)
 
     if (!onUpdate) return
-
-    let items = updatedItems.map((i, index) => ({
-      ...dataSource[i],
-      order: index
-    }))
-    onUpdate(items)
-
-    items.forEach((item) => {
-      setNewOrder(item)
-    })
+    onUpdate(
+      updatedItems.map((i, index) => ({
+        ...dataSource[i],
+        order: index
+      }))
+    )
   }
 
   // [USE_EFFECTS]
@@ -86,19 +69,11 @@ function DragableList(props) {
         {...args}
         dataSource={sortableItems}
         renderItem={(item, index) => (
-          <Box
-            onClick={() => onItemClick && onItemClick(dataSource[item], index)}>
-            <SortableWrapper
-              withWrapper={withWrapper}
-              key={`item-${index}`}
-              index={index}>
-              {renderItem ? renderItem(dataSource[item], index) : item}
-            </SortableWrapper>
-          </Box>
+          <SortableWrapper key={`item-${index}`} index={index}>
+            {renderItem ? renderItem(dataSource[item], index) : item}
+          </SortableWrapper>
         )}
       />
     </Container>
   )
 }
-
-export default DragableList

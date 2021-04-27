@@ -44,15 +44,11 @@ function EditorSidebar(props) {
     const newQuestion = {
       id: questionId,
       formId: id,
-      layoutType: LAYOUT_TYPE_KEYS[0],
+      layoutType: LAYOUT_TYPE_KEYS.DEFAULT,
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
       btnProps: {
-        children: [
-          { name: 'choice1' },
-          { name: 'choice2' },
-          { name: 'choice3' }
-        ],
+        children: [{ name: 'choice1' }],
         type: 'submit'
       }
     }
