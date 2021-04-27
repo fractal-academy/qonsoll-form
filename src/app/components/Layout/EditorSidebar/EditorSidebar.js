@@ -67,8 +67,11 @@ function EditorSidebar(props) {
   const setNewOrder = (item) => {
     setData(COLLECTIONS.QUESTIONS, item?.id, item)
   }
-  const onItemClick = (i) => {
-    console.log(i)
+  const onItemClick = (item) => {
+    dispatch({
+      type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
+      payload: item
+    })
   }
 
   return (
