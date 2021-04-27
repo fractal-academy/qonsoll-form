@@ -37,7 +37,10 @@ function QuestionSimpleView(props) {
             {title}
           </Col>
           <Col cw="auto">
-            <Dropdown overlay={menu} placement="bottomRight">
+            <Dropdown
+              overlay={menu}
+              trigger={['click']}
+              placement="bottomRight">
               {cloneElement(<MoreOutlined />, { className: 'dropdownIcon' })}
             </Dropdown>
           </Col>
