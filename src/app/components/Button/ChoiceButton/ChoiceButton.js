@@ -7,7 +7,7 @@ import { Box } from '@qonsoll/react-design'
 let startLetter = 65
 
 function ChoiceButton(props) {
-  const { choices, onClick, hasImages } = props
+  const { choices, onClick, hasImages, currentSlide, order } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -40,7 +40,7 @@ function ChoiceButton(props) {
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (letter) => {
-    if (letters.includes(letter)) {
+    if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
       onClick && onClick()
 

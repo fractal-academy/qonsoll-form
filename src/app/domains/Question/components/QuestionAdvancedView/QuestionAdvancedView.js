@@ -21,23 +21,41 @@ import {
 const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
-  const { data, questionNumber, onClick } = props
+  const { data, questionNumber, onClick, currentSlide } = props
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.YES_NO]: {
-      component: <YesnoButton onClick={onClick} />
+      component: <YesnoButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
       component: (
-        <ChoiceButton choices={data?.btnProps} onClick={onClick} hasImages />
+        <ChoiceButton
+          choices={data?.btnProps}
+          onClick={onClick}
+          hasImages
+          currentSlide={currentSlide}
+        />
       )
     },
     [QUESTION_TYPES.CHOICE]: {
-      component: <ChoiceButton choices={data?.btnProps} onClick={onClick} />
+      component: (
+        <ChoiceButton
+          choices={data?.btnProps}
+          onClick={onClick}
+          currentSlide={currentSlide}
+        />
+      )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton from={1} to={5} onClick={onClick} />
+      component: (
+        <RangeButton
+          from={1}
+          to={5}
+          onClick={onClick}
+          currentSlide={currentSlide}
+        />
+      )
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />

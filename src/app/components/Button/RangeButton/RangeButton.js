@@ -6,7 +6,7 @@ import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 
 function RangeButton(props) {
-  const { from = 0, to = 0, onClick } = props
+  const { from = 0, to = 0, onClick, currentSlide, order } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -31,7 +31,7 @@ function RangeButton(props) {
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (number) => {
-    if (range.includes(Number(number))) {
+    if (range.includes(Number(number)) && currentSlide === order) {
       setButtonKey(number)
 
       console.log(`Choice ${number} was pressed`)

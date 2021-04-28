@@ -7,7 +7,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
 
 function Carousel(props) {
-  const { children, isAnswered, setIsAnswered } = props
+  const { children, isAnswered, setIsAnswered, setCurrentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
@@ -36,8 +36,8 @@ function Carousel(props) {
         dots={false}
         ref={carouselRef}
         dotPosition="right"
-        afterChange={(index) => {
-          console.log(index)
+        afterChange={async (slideIndex) => {
+          setCurrentSlide(slideIndex)
         }}>
         {children}
       </AntdCarousel>
