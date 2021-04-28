@@ -58,11 +58,6 @@ function FormEdit(props) {
         image: currentQuestion?.image || DEFAULT_IMAGE
       }
     })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      layoutType: key,
-      image: currentQuestion?.image || DEFAULT_IMAGE
-    })
   }
   const onQuestionTypeChange = async ({ key }) => {
     const btnProps =
@@ -71,14 +66,13 @@ function FormEdit(props) {
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key, btnProps }
     })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
     setShowPopover(false)
   }
 
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-
+    setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -91,7 +85,7 @@ function FormEdit(props) {
       // [FINAL CLEAN UP]
       isComponentMounted = false
     }
-  }, [])
+  }, [currentQuestion])
 
   return (
     <>

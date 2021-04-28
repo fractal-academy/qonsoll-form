@@ -37,7 +37,7 @@ function EditorSidebar(props) {
   const [showPopover, setshowPopover] = useState(false)
 
   // [COMPUTED PROPERTIES]
-  const firstLetter = 65
+
   // [CLEAN FUNCTIONS]
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id

@@ -46,7 +46,6 @@ function ChoiceInput(props) {
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { btnProps: choiceProps }
     })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
   }
   const onDelete = async () => {
     choiceProps.splice(index, 1)
@@ -54,7 +53,6 @@ function ChoiceInput(props) {
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { btnProps: choiceProps }
     })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
   }
   // [USE_EFFECTS]
   useEffect(() => {
