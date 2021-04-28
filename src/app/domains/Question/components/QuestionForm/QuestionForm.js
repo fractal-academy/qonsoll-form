@@ -124,7 +124,7 @@ function QuestionForm(props) {
         flex={1}
         style={styles.rowStyle}
         backgroundRepeat="no-repeat"
-        backgroundSize="cover"
+        backgroundSize="contain"
         backgroundImage={bgImage}>
         <Col
           v="center"
@@ -233,13 +233,14 @@ function QuestionForm(props) {
             display="flex"
             style={styles.columnStyle}
             height="100%"
-            width="800px"
+            // width="800px"
             order={layoutType?.imageOrder}>
             <Box
               {...layoutType?.imgSize}
               backgroundRepeat="no-repeat"
               backgroundImage={computedMediaUrl}
-              backgroundSize="cover"
+              backgroundSize="contain"
+              backgroundPosition="center left"
               m={2}
               position="relative">
               <Row h="right">
