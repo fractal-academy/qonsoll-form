@@ -18,7 +18,11 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import Fuse from 'fuse.js'
-import { useFormContext } from 'app/context/FormContext'
+import {
+  DISPATCH_EVENTS,
+  useFormContext,
+  useFormContextDispatch
+} from 'app/context/FormContext'
 
 const { Title, Text } = Typography
 
@@ -34,7 +38,7 @@ function MediaLibraryModal(props) {
   }
 
   const currentQuestion = useFormContext()
-
+  const dispatch = useFormContextDispatch()
   const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -52,9 +56,14 @@ function MediaLibraryModal(props) {
   const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
 
   // [CLEAN FUNCTIONS]
-  const onModalContinue = () => {
+  const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    setMediaUrl(selectedBackgroundImg)
+    // setMediaUrl(selectedBackgroundImg)
+    await dispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { ...currentQuestion, image: selectedBackgroundImg }
+    })
+
     setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
       ...currentQuestion,
       image: selectedBackgroundImg

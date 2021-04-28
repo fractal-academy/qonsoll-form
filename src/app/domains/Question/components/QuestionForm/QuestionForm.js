@@ -91,7 +91,7 @@ function QuestionForm(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
-  const computedMediaUrl = `url(${mediaUrl})`
+  const computedMediaUrl = `url(${currentQuestion?.image || DEFAULT_IMAGE})`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -128,6 +128,7 @@ function QuestionForm(props) {
   useEffect(() => {
     let isComponentMounted = true
     setMediaUrl(currentQuestion?.image || DEFAULT_IMAGE)
+
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
