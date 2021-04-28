@@ -7,7 +7,7 @@ import { Box } from '@qonsoll/react-design'
 let startLetter = 65
 
 function ChoiceButton(props) {
-  const { choices, onClick, hasImages, data } = props
+  const { choices, onClick, hasImages } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -15,7 +15,7 @@ function ChoiceButton(props) {
   // [ADDITIONAL HOOKS]
   const mappedChoices = useMemo(
     () =>
-      choices.map((el, index) => ({
+      choices?.map((el, index) => ({
         letter: String.fromCharCode(startLetter + index),
         choice: el
       })),

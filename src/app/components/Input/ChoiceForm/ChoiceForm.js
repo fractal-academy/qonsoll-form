@@ -5,12 +5,12 @@ import { ChoiceInput, ImageUploader } from 'components'
 import { PlusOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
+import {
+  DISPATCH_EVENTS,
+  useFormContext,
+  useFormContextDispatch
+} from 'app/context/FormContext'
 // import { useTranslation } from 'react-i18next'
-
-const { Text } = Typography
-const { TextArea } = Input
-
-let startLetter = 65
 
 function ChoiceForm(props) {
   const { withImage } = props
@@ -19,16 +19,25 @@ function ChoiceForm(props) {
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
+  const currentQuestion = useFormContext()
+  const dispatch = useFormContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
-  const [choices, setChoices] = useState([])
+  // const [choices, setChoices] = useState([])
 
   // [COMPUTED PROPERTIES]
-
+  const choiceProps = currentQuestion.btnProps
   // [CLEAN FUNCTIONS]
   const onAddChoice = () => {
-    setChoices((prev) => [...prev, { value: '', keyLetter: startLetter++ }])
+    dispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: {
+        btnProps: choiceProps
+          ? [...choiceProps, { name: '', image: '' }]
+          : [{ name: '', image: '' }]
+      }
+    })
   }
   // [USE_EFFECTS]
   useEffect(() => {
@@ -53,7 +62,7 @@ function ChoiceForm(props) {
       display="flex"
       flexDirection={withImage ? 'row' : 'column'}
       flexWrap="wrap">
-      {choices.map((item, index) => (
+      {choiceProps?.map((item, index) => (
         <ChoiceInput
           key={index}
           data={item}

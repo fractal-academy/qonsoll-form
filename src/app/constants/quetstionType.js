@@ -4,6 +4,7 @@ const QUESTION_TYPES = {
   LONG_TEXT: 'Long text',
   STATEMENT: 'Statement',
   PICTURE_CHOICE: 'Picture choice',
+  CHOICE: 'Choice',
   RATING: 'Rating',
   YES_NO: 'Yes/No',
   OPINION_SCALE: 'Opinion scale',

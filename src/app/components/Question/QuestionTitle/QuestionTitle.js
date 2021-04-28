@@ -30,6 +30,7 @@ function QuestionTitle(props) {
 
   // [CLEAN FUNCTIONS]
   const onBlur = async () => {
+    if (currentQuestion?.title === textValue) return
     const title = textValue || ''
     await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,

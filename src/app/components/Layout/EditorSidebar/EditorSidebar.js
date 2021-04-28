@@ -37,7 +37,7 @@ function EditorSidebar(props) {
   const [showPopover, setshowPopover] = useState(false)
 
   // [COMPUTED PROPERTIES]
-
+  const firstLetter = 65
   // [CLEAN FUNCTIONS]
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
@@ -46,7 +46,8 @@ function EditorSidebar(props) {
       formId: id,
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
-      title: ''
+      title: '',
+      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
     }
     await dispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,

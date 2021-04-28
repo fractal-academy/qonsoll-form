@@ -65,14 +65,13 @@ function FormEdit(props) {
     })
   }
   const onQuestionTypeChange = async ({ key }) => {
+    const btnProps =
+      key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
     await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { questionType: key }
+      payload: { questionType: key, btnProps }
     })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      questionType: key
-    })
+    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
     setShowPopover(false)
   }
 

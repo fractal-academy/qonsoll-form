@@ -13,7 +13,7 @@ import {
   ChoiceForm,
   SubmitButton
 } from 'components'
-import { EditOutlined, EyeFilled, SettingOutlined } from '@ant-design/icons'
+import { EditOutlined, SettingOutlined } from '@ant-design/icons'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
@@ -51,6 +51,9 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
       component: <ChoiceForm withImage />
+    },
+    [QUESTION_TYPES.CHOICE]: {
+      component: <ChoiceForm />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} />
