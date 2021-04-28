@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { firestore } from 'app/services'
-import { useHistory } from 'react-router'
+import { useHistory, useParams, useProps } from 'react-router'
 import { styles } from './FormShow.style'
 import { globalStyles } from 'app/styles'
 import { useKeyPress } from '@umijs/hooks'
@@ -18,7 +18,10 @@ const { Title } = Typography
 function FormShow(props) {
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const [data] = useCollectionData(getCollectionRef(COLLECTIONS.QUESTIONS))
+  const { id } = useParams()
+  const [data] = useCollectionData(
+    getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
+  )
   useKeyPress('enter', (event) => {
     onClick()
   })
@@ -27,6 +30,9 @@ function FormShow(props) {
   const [isAnswered, setIsAnswered] = useState(false)
 
   // [COMPUTED PROPERTIES]
+  const sortedData =
+    data &&
+    data.sort((a, b) => (a.order > b.order ? 1 : b.order > a.order ? -1 : 0))
 
   // [CLEAN FUNCTIONS]
   const onRestart = () => {
@@ -97,7 +103,7 @@ function FormShow(props) {
         borderRadius="8px"
         bg="white">
         <FormAdvancedView isAnswered={isAnswered} setIsAnswered={setIsAnswered}>
-          {data?.map((item, index) => (
+          {sortedData?.map((item, index) => (
             <Box key={index} height="600px">
               <QuestionAdvancedView
                 data={item}

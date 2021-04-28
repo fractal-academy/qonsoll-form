@@ -46,7 +46,8 @@ function EditorSidebar(props) {
       formId: id,
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
-      title: ''
+      title: '',
+      order: questions?.length
     }
     await dispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
