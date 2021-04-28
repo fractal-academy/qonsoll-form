@@ -10,9 +10,6 @@ import {
   MediaLibraryFilter,
   MediaLibraryItemSimpleView
 } from 'domains/MediaLibrary/components'
-import MediaLibrarySimpleView from 'domains/MediaLibrary/components/MediaLibrarySimpleView'
-// import { useTranslation } from 'react-i18next'
-// import storage from 'app/services/Firebase'
 import firebase, { firestore } from 'app/services/Firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
@@ -58,7 +55,6 @@ function MediaLibraryModal(props) {
   // [CLEAN FUNCTIONS]
   const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    // setMediaUrl(selectedBackgroundImg)
     await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { ...currentQuestion, image: selectedBackgroundImg }
@@ -111,7 +107,6 @@ function MediaLibraryModal(props) {
             setImagesList([
               ...imagesList,
               {
-                // key: { data.file.uid },
                 id: mediaId,
                 name: data.file.name,
                 imageUrl: downloadURL,
@@ -254,7 +249,6 @@ function MediaLibraryModal(props) {
                     {...item}
                     selectedBackgroundImg={selectedBackgroundImg}
                     setSelectedBackgroundImg={setSelectedBackgroundImg}
-                    setMediaUrl={setMediaUrl}
                   />
                 </Box>
               ))}

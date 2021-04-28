@@ -11,23 +11,17 @@ import {
   YesnoButton,
   RangeButton,
   ChoiceForm,
-  SubmitButton,
-  TextEditable
+  SubmitButton
 } from 'components'
-import { EditOutlined, EyeFilled, SettingOutlined } from '@ant-design/icons'
+import { EditOutlined, SettingOutlined } from '@ant-design/icons'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
-import { QUESTION_TYPES, LAYOUT_TYPES, COLLECTIONS } from 'app/constants'
+import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
-import {
-  DISPATCH_EVENTS,
-  useFormContext,
-  useFormContextDispatch
-} from 'app/context/FormContext'
-import { setData } from 'app/services/Firestore'
+import { useFormContext } from 'app/context/FormContext'
 
 function QuestionForm(props) {
   const {
@@ -44,12 +38,8 @@ function QuestionForm(props) {
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
   const currentQuestion = useFormContext()
-  // const dispatch = useFormContextDispatch()
 
   // [COMPONENT STATE HOOKS]
-  const [mediaUrl, setMediaUrl] = useState(
-    currentQuestion?.image || DEFAULT_IMAGE
-  )
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -109,25 +99,9 @@ function QuestionForm(props) {
     setIsImageEditVisible(!isImageEditVisible)
   }
 
-  // const onBlur = async () => {
-  //   const image = mediaUrl || DEFAULT_IMAGE
-  //   await dispatch({
-  //     type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-  //     payload: { ...currentQuestion, image }
-  //   })
-  //   await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-  //     ...currentQuestion,
-  //     image
-  //   })
-  // }
-  // const onChange = ({ target }) => {
-  //   setMediaUrl(target.value)
-  // }
-
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-    setMediaUrl(currentQuestion?.image || DEFAULT_IMAGE)
 
     // [EFFECT LOGIC]
     // write code here...
@@ -137,13 +111,11 @@ function QuestionForm(props) {
     return () => {
       isComponentMounted = false
     }
-  }, [currentQuestion])
+  }, [])
 
   return (
     <>
       <Row
-        // onChange={onChange}
-        // onBlur={onBlur}
         noGutters
         mb={2}
         height="100%"
@@ -163,11 +135,11 @@ function QuestionForm(props) {
           <Card style={styles.cardStyle} bordered={false}>
             <Row noGutters>
               <Col>
-                {/*{currentQuestion.questionType === QUESTION_TYPES.ENDING ? (*/}
-                {/*  <Tag color="blue">Ending </Tag>*/}
-                {/*) : (*/}
-                {/*  <Tag color="blue">Question {data?.order + 1}</Tag>*/}
-                {/*)}*/}
+                {currentQuestion.questionType === QUESTION_TYPES.ENDING ? (
+                  <Tag color="blue">Ending </Tag>
+                ) : (
+                  <Tag color="blue">Question {data?.order + 1}</Tag>
+                )}
               </Col>
               <Col cw="auto">
                 <Popover
@@ -196,7 +168,6 @@ function QuestionForm(props) {
                     content={
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
-                          setMediaUrl={setMediaUrl}
                           setIsImageEditVisible={setIsImageEditVisible}
                           bgImage={bgImage}
                         />
@@ -237,7 +208,6 @@ function QuestionForm(props) {
                         <Box width="192px" height="366px" overflow="hidden">
                           <MediaLibrarySimpleView
                             setIsImageEditVisible={setIsImageEditVisible}
-                            setMediaUrl={setMediaUrl}
                             bgImage={computedMediaUrl}
                           />
                         </Box>
@@ -286,7 +256,6 @@ function QuestionForm(props) {
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
                           setIsImageEditVisible={setIsImageEditVisible}
-                          setMediaUrl={setMediaUrl}
                           bgImage={computedMediaUrl}
                         />
                       </Box>

@@ -50,19 +50,13 @@ function EditorSidebar(props) {
       btnProps: {
         children: [
           {
-            name: 'choice1',
-            image:
-              'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
+            name: 'choice1'
           },
           {
-            name: 'choice2',
-            image:
-              'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
+            name: 'choice2'
           },
           {
-            name: 'choice3',
-            image:
-              'https://www.awakenthegreatnesswithin.com/wp-content/uploads/2018/08/Nature-Quotes-1.jpg'
+            name: 'choice3'
           }
         ],
         type: 'submit'
