@@ -1,11 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
 import App from 'app'
+import React from 'react'
+import 'app/styles/index.css'
+import 'app/styles/index.less'
+import ReactDOM from 'react-dom'
+import theme from 'app/styles/theme.js'
 import { ThemeProvider } from 'styled-components'
-import theme from 'app/config/theme/customTheme'
+import { BrowserRouter as Router } from 'react-router-dom'
 import FormContextProvider from 'app/context/FormContext/FormContext'
-import './index.less'
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
