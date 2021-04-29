@@ -27,7 +27,7 @@ function ChoiceForm(props) {
   // const [choices, setChoices] = useState([])
 
   // [COMPUTED PROPERTIES]
-  const choiceProps = currentQuestion.btnProps
+  const choiceProps = currentQuestion.btnProps || []
   // [CLEAN FUNCTIONS]
   const onAddChoice = () => {
     dispatch({
