@@ -124,7 +124,7 @@ function QuestionForm(props) {
         flex={1}
         style={styles.rowStyle}
         backgroundRepeat="no-repeat"
-        backgroundSize="contain"
+        backgroundSize="cover"
         backgroundImage={bgImage}>
         <Col
           v="center"
@@ -239,7 +239,7 @@ function QuestionForm(props) {
               {...layoutType?.imgSize}
               backgroundRepeat="no-repeat"
               backgroundImage={computedMediaUrl}
-              backgroundSize="contain"
+              backgroundSize="cover"
               backgroundPosition="center left"
               m={2}
               position="relative">
