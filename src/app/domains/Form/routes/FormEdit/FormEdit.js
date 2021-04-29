@@ -81,7 +81,7 @@ function FormEdit(props) {
       {formLoading || questionsListLoading ? (
         <Spinner />
       ) : (
-        <Box bg="#f6f9fe" display="flex" height="inherit" overflowX="hidden">
+        <Box display="flex" height="inherit" overflowX="hidden">
           <PageLayout title={form?.title}>
             <FormContentArea
               leftSideMenu={

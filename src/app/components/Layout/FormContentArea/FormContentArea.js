@@ -48,18 +48,20 @@ function FormContentArea(props) {
 
   return (
     <>
-      <Box display="flex" px={45} my={3} py={3} height="100%" overflow="auto">
-        <Box pr={2}>{leftSideMenu}</Box>
-        <Box
+      <Row display="flex" my={3} px={45} py={3} height="100%" overflow="auto">
+        <Col cw="auto" pr={2}>
+          {leftSideMenu}
+        </Col>
+        <Col
           backgroundColor="white"
           className="content-style custom-scroll"
           p={3}
           overflow="auto">
           <MiddleContainer>{children}</MiddleContainer>
-        </Box>
-      </Box>
-      <Row h="right" pb={4} pr={45}>
-        <Col cw="auto">
+        </Col>
+      </Row>
+      <Row noGutters h="right" mb={4} mr={5}>
+        <Col cw="auto" mr={3}>
           <Button type="text" onClick={onCancel}>
             Cancel
           </Button>

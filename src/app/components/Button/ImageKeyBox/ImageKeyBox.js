@@ -1,7 +1,7 @@
 import './ImageKeyBox.styles.css'
 import PropTypes from 'prop-types'
 import { useHover } from '@umijs/hooks'
-import { Button } from 'app/components'
+import { Button } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 
@@ -23,10 +23,7 @@ function ImageKeyBox(props) {
 
   return (
     <Box display="inline-block" ref={hoverRef} mb={1} mr={1}>
-      <Button
-        buttonType="secondary"
-        className="imageButton"
-        onClick={() => onButtonClick(letter)}>
+      <Button className="imageButton" onClick={() => onButtonClick(letter)}>
         <Row h="center" display="flex">
           <Col
             cw="auto"

@@ -59,7 +59,7 @@ function FormShow(props) {
   }, [])
 
   return (
-    <Box bg="#f6f9fe" display="flex" flexDirection="column" height="100%">
+    <Box display="flex" flexDirection="column" height="100%">
       <Row noGutters bg="white" py={3} px={4}>
         <Col cw="auto" v="center" p={0}>
           <Button

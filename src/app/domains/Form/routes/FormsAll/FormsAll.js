@@ -19,7 +19,6 @@ import {
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
-import { styles } from './FormsAll.styles'
 import { FormSimpleForm, FormSimpleView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
@@ -101,7 +100,7 @@ function FormsAll(props) {
     return <Spinner />
   }
   return (
-    <Box bg="#f6f9fe" flexDirection="column" px={45} py={4} minHeight="100%">
+    <Box flexDirection="column" px={45} py={4} minHeight="100%">
       {/* Page Header */}
       <Row noGutters display="flex">
         <Col cw="auto" p={0} v="center">
@@ -114,7 +113,7 @@ function FormsAll(props) {
           />
         </Col>
         <Col cw="auto" p={0} v="center">
-          <Divider type="vertical" style={styles.dividerHeight} />
+          <Divider type="vertical" />
         </Col>
         <Col p={0} v="center">
           <Breadcrumb>
@@ -130,21 +129,21 @@ function FormsAll(props) {
       </Row>
 
       {/* SecondaryTitle */}
-      <Row mb={1} v="center" pt={3}>
+      <Row noGutters v="center" mb={1} mt={3}>
         <Col>
-          <Title level={2} style={(styles.boldFont, globalStyles.resetMargin)}>
+          <Title level={2} style={globalStyles.resetMargin}>
             Forms
           </Title>
         </Col>
       </Row>
-      <Row pb={25}>
+
+      <Row noGutters mb={3}>
         <Col>
-          <Text style={styles.textSecondary}>
-            You have {amountFiles} folders/files.
-          </Text>
+          <Text>You have {amountFiles} files.</Text>
         </Col>
       </Row>
-      <Row pb={3}>
+
+      <Row noGutters mb={3}>
         <Col>
           <Input
             allowClear
@@ -155,11 +154,11 @@ function FormsAll(props) {
           />
         </Col>
       </Row>
+
       <Box
         display="flex"
         flexWrap="wrap"
         flexDirection="row"
-        bg="#f6f9fe"
         className="custom-scroll">
         {/* Here should be list of data Images/Video */}
         {currentData?.map((item, index) => (
@@ -178,7 +177,7 @@ function FormsAll(props) {
           mr={3}
           mb={3}
           borderRadius="8px"
-          width="242px"
+          width="245px"
           height="214px"
           display="flex"
           alignItems="center"
@@ -187,6 +186,7 @@ function FormsAll(props) {
           onClick={showModal}>
           <PlusOutlined />
         </Box>
+
         {/*Modal window form creation*/}
         <Modal
           title={<Title level={4}>Create new typeform</Title>}
