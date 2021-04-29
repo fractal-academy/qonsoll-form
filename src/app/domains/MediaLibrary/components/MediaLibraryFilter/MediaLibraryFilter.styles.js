@@ -5,6 +5,6 @@ export const styles = {
   },
   subtitleStyle: {
     color: '#9a9ea2',
-    fontSize: '10px'
+    fontSize: '12px'
   }
 }

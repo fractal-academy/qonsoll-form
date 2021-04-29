@@ -205,7 +205,7 @@ function QuestionForm(props) {
                       btnType="primary"
                       btnIcon={<EditOutlined />}
                       content={
-                        <Box width="192px" height="366px" overflow="hidden">
+                        <Box width="224px" height="366px" overflow="hidden">
                           <MediaLibrarySimpleView
                             setIsImageEditVisible={setIsImageEditVisible}
                             bgImage={computedMediaUrl}

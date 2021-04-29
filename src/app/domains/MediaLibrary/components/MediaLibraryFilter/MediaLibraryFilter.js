@@ -69,9 +69,9 @@ function MediaLibraryFilter(props) {
   }, [])
 
   return (
-    <Box bg="white" width="220px" display="flex" flexDirection="column" p={3}>
+    <Box bg="white" width="280px" display="flex" flexDirection="column" px={4}>
       <Box>
-        <Row pb={4}>
+        <Row noGutters pb={4}>
           <Col v="center">
             <Title level={5} style={globalStyles.resetMargin}>
               Filter
@@ -84,7 +84,7 @@ function MediaLibraryFilter(props) {
           </Col>
         </Row>
       </Box>
-      <Row pb={2}>
+      <Row noGutters pb={2}>
         <Col v="center">
           <Text style={styles.subtitleStyle}>PHASE</Text>
         </Col>
@@ -98,11 +98,11 @@ function MediaLibraryFilter(props) {
           />
         </Col>
       </Row>
-      <Row>
+      <Row noGutters>
         <Col v="center">
           <Checkbox.Group onChange={onPhaseCheckboxChange}>
             {phaseOptions.map((option, index) => (
-              <Row key={index}>
+              <Row noGutters key={index} py={1}>
                 <Col>
                   <Checkbox value={option.value}>{option.label}</Checkbox>
                 </Col>
@@ -111,12 +111,12 @@ function MediaLibraryFilter(props) {
           </Checkbox.Group>
         </Col>
       </Row>
-      <Row>
+      <Row noGutters my={1}>
         <Col v="center">
           <Divider type="horizontal" />
         </Col>
       </Row>
-      <Row pb={2}>
+      <Row noGutters pb={2}>
         <Col>
           <Text style={styles.subtitleStyle}>AUDIENCE</Text>
         </Col>
@@ -134,7 +134,7 @@ function MediaLibraryFilter(props) {
         <Col v="center">
           <Checkbox.Group onChange={onAudienceCheckboxChange}>
             {audienceOptions.map((option, index) => (
-              <Row key={index}>
+              <Row noGutters key={index} py={1}>
                 <Col>
                   <Checkbox value={option.value}>{option.label}</Checkbox>
                 </Col>
@@ -143,7 +143,7 @@ function MediaLibraryFilter(props) {
           </Checkbox.Group>
         </Col>
       </Row>
-      <Row>
+      <Row noGutters my={3}>
         <Col v="center">
           <Divider type="horizontal" />
         </Col>

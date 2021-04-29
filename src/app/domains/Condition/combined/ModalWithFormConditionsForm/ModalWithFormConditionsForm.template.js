@@ -57,12 +57,13 @@ function ModalWithFormConditionsForm(props) {
       />
       <Modal
         visible={isModalVisible}
+        centered
         okText="Save"
         cancelButtonProps={{ type: 'text' }}
         onOk={onSave}
         onCancel={onCancel}
         closable={false}
-        width="950px"
+        width="1024px"
         bodyStyle={styles.modalBodyStyle}
         title={
           <>

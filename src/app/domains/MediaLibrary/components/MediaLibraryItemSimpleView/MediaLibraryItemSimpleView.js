@@ -53,12 +53,7 @@ function MediaLibraryItemSimpleView(props) {
       style={styles.cardStyles}
       bodyStyle={styles.cardBodyStye}
       cover={
-        <Box
-          borderRadius="8px"
-          display="flex"
-          bg="white"
-          justifyContent="center"
-          alignItems="center">
+        <Box>
           {selectedBackgroundImg === imageUrl && (
             <Button size="small" type="primary" style={styles.iconStyle}>
               <CheckOutlined className="icon" />
@@ -66,8 +61,8 @@ function MediaLibraryItemSimpleView(props) {
           )}
           <Image
             preview={false}
-            width="208px"
             height="136px"
+            width="208px"
             src={imageUrl}
             style={styles.imageStyle}
           />
@@ -75,9 +70,9 @@ function MediaLibraryItemSimpleView(props) {
       }>
       <Meta
         description={
-          <Row h="between" mt={3}>
+          <Row h="between" mt={2} noGutters>
             <Col>
-              <Row>
+              <Row noGutters>
                 <Col>
                   <Text style={styles.titleStyle} ellipsis>
                     {name.charAt(0).toUpperCase() + name.slice(1).split('.')[0]}

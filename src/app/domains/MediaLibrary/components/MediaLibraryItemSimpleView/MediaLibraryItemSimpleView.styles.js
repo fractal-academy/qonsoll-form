@@ -1,13 +1,14 @@
 import { Box } from '@qonsoll/react-design'
 import React from 'react'
+import theme from 'app/styles/theme'
 
 export const styles = {
   cardStyles: {
     height: '206px',
     weight: '216px',
     padding: '4px',
-    backgroundColor: '#eceff5',
-    borderRadius: '8px',
+    backgroundColor: theme.color.dark.t.lighten9,
+    borderRadius: theme.borderRadius.md,
     position: 'relative'
   },
   titleStyle: {

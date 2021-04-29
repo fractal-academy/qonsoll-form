@@ -1,6 +1,6 @@
 export const styles = {
   modalBodyStyle: {
-    height: '650px',
+    height: '700px',
     overflow: 'auto'
   }
 }
