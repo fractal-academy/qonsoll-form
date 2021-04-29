@@ -32,7 +32,7 @@ function EditorSidebar(props) {
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
-  const dispatch = useCurrentQuestionContextDispatch()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
@@ -59,7 +59,7 @@ function EditorSidebar(props) {
         type: 'submit'
       }
     }
-    await dispatch({
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
@@ -74,7 +74,7 @@ function EditorSidebar(props) {
     setData(COLLECTIONS.QUESTIONS, item?.id, item)
   }
   const onItemClick = (item) => {
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: item
     })

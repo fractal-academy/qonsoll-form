@@ -19,7 +19,7 @@ function QuestionSubtitle(props) {
   // const { currentLanguage } = t
 
   // [CUSTOM HOOKS]
-  const dispatch = useCurrentQuestionContextDispatch()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const currentQuestion = useCurrentQuestionContext()
 
   // [COMPONENT STATE HOOKS]
@@ -30,7 +30,7 @@ function QuestionSubtitle(props) {
   // [CLEAN FUNCTIONS]
   const onBlur = async () => {
     const subtitle = textValue || ''
-    await dispatch({
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { ...currentQuestion, subtitle }
     })

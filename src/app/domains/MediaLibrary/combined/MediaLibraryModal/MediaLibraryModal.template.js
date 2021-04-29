@@ -35,7 +35,7 @@ function MediaLibraryModal(props) {
   }
 
   const currentQuestion = useCurrentQuestionContext()
-  const dispatch = useCurrentQuestionContextDispatch()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -55,7 +55,7 @@ function MediaLibraryModal(props) {
   // [CLEAN FUNCTIONS]
   const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    await dispatch({
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { ...currentQuestion, image: selectedBackgroundImg }
     })

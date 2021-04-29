@@ -38,7 +38,7 @@ function FormEdit(props) {
 
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
-  const dispatch = useCurrentQuestionContextDispatch()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPUTED PROPERTIES]
   let questions, endings
@@ -54,7 +54,7 @@ function FormEdit(props) {
 
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = async ({ key }) => {
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
         layoutType: key,
@@ -68,7 +68,7 @@ function FormEdit(props) {
     })
   }
   const onQuestionTypeChange = async ({ key }) => {
-    await dispatch({
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key }
     })
