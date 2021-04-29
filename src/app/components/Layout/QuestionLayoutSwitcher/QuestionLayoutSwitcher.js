@@ -39,26 +39,8 @@ function QuestionLayoutSwitcher(props) {
 
   // [CLEAN FUNCTIONS]
 
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
-
   return (
-    <Menu style={styles.menuStyle} defaultSelectedKeys={defaultActive}>
+    <Menu style={styles.menuStyle} selectedKeys={defaultActive}>
       {menuMap.map((item) => (
         <Menu.Item
           key={item.layoutType}

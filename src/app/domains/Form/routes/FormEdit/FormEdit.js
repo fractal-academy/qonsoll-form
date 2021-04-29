@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   PageLayout,
   EditorSidebar,
@@ -8,7 +8,6 @@ import {
 } from 'components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
-import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QuestionForm } from 'app/domains/Question/components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
@@ -19,7 +18,7 @@ import {
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 
-function FormEdit(props) {
+function FormEdit() {
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
@@ -28,14 +27,14 @@ function FormEdit(props) {
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
+  // [CUSTOM HOOKS]
+  const currentQuestion = useFormContext()
+  const dispatch = useFormContextDispatch()
 
   //[COMPONENT STATE HOOKS]
   const [isImageEditVisible, setIsImageEditVisible] = useState(false)
   const [showPopover, setShowPopover] = useState(false)
-
-  // [CUSTOM_HOOKS]
-  const currentQuestion = useFormContext()
-  const dispatch = useFormContextDispatch()
+  const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
 
   // [COMPUTED PROPERTIES]
   let questions, endings
@@ -76,6 +75,11 @@ function FormEdit(props) {
     setShowPopover(false)
   }
 
+  //[USE EFFECTS]
+  useEffect(() => {
+    setDefaultTab(currentQuestion?.layoutType)
+  }, [currentQuestion])
+
   return (
     <>
       {formLoading || questionsListLoading ? (
@@ -88,7 +92,7 @@ function FormEdit(props) {
                 !!Object.keys(currentQuestion).length && (
                   <QuestionLayoutSwitcher
                     onChange={onChangeMenuItem}
-                    defaultActive={LAYOUT_TYPE_KEYS[0]}
+                    defaultActive={defaultTab}
                   />
                 )
               }>
