@@ -47,6 +47,7 @@ function EditorSidebar(props) {
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
+      order: questions?.length,
       btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
     }
     await dispatch({

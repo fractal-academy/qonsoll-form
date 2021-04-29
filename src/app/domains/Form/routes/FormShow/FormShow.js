@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react'
-import { firestore } from 'app/services'
-import { useHistory, useParams } from 'react-router'
 import { styles } from './FormShow.style'
 import { globalStyles } from 'app/styles'
 import { useKeyPress } from '@umijs/hooks'
+import { useState, useEffect } from 'react'
+import { COLLECTIONS } from 'app/constants'
 import { Button, Divider, Typography } from 'antd'
+import { useHistory, useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { getCollectionRef } from 'app/services/Firestore'
 import { FormAdvancedView } from 'domains/Form/components'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from 'domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { getCollectionRef } from 'app/services/Firestore'
-import { COLLECTIONS } from 'app/constants'
 
 const { Title } = Typography
 
@@ -31,6 +30,9 @@ function FormShow(props) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   // [COMPUTED PROPERTIES]
+  const sortedData =
+    data &&
+    data.sort((a, b) => (a.order > b.order ? 1 : b.order > a.order ? -1 : 0))
 
   // [CLEAN FUNCTIONS]
   const onRestart = () => {
@@ -104,7 +106,7 @@ function FormShow(props) {
           isAnswered={isAnswered}
           setIsAnswered={setIsAnswered}
           setCurrentSlide={setCurrentSlide}>
-          {data?.map((item, index) => (
+          {sortedData?.map((item, index) => (
             <Box key={index} height="600px">
               <QuestionAdvancedView
                 data={item}
