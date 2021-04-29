@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   PageLayout,
   EditorSidebar,
@@ -6,18 +6,18 @@ import {
   FormContentArea,
   Spinner
 } from 'components'
-import { Box } from '@qonsoll/react-design'
-import { QuestionForm } from 'app/domains/Question/components'
-import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
-import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
-import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
-import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
 import { useParams } from 'react-router'
+import { Box } from '@qonsoll/react-design'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
+import { QuestionForm } from 'app/domains/Question/components'
+import { getCollectionRef, setData } from 'app/services/Firestore'
+import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
+import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
+import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
 import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { getCollectionRef, setData } from 'app/services/Firestore'
 
 function FormEdit(props) {
   // [ADDITIONAL HOOKS]
@@ -75,24 +75,6 @@ function FormEdit(props) {
     })
     setShowPopover(false)
   }
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <>

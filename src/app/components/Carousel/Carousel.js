@@ -31,8 +31,8 @@ function Carousel(props) {
   isAnswered && next()
 
   return (
-    <Box onWheel={handleScroll}>
-      <AntdCarousel dots={false} ref={carouselRef} dotPosition="right">
+    <Box onWheel={handleScroll} width="100%">
+      <AntdCarousel ref={carouselRef} dotPosition="right" dots={false}>
         {children}
       </AntdCarousel>
 
@@ -43,8 +43,8 @@ function Carousel(props) {
           </Button>
           <Button
             buttonType="primary"
-            className="buttonGroup"
-            onClick={previous}>
+            onClick={previous}
+            className="buttonGroup">
             <UpOutlined />
           </Button>
           <Button buttonType="primary" className="buttonGroup" onClick={next}>
