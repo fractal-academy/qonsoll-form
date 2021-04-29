@@ -17,9 +17,9 @@ import COLLECTIONS from 'app/constants/collection'
 import Fuse from 'fuse.js'
 import {
   DISPATCH_EVENTS,
-  useFormContext,
-  useFormContextDispatch
-} from 'app/context/FormContext'
+  useCurrentQuestionContext,
+  useCurrentQuestionContextDispatch
+} from 'app/context/CurrentQuestion'
 
 const { Title, Text } = Typography
 
@@ -34,8 +34,8 @@ function MediaLibraryModal(props) {
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
 
-  const currentQuestion = useFormContext()
-  const dispatch = useFormContextDispatch()
+  const currentQuestion = useCurrentQuestionContext()
+  const dispatch = useCurrentQuestionContextDispatch()
   const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t

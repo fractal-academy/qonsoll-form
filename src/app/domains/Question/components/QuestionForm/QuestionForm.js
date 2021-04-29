@@ -21,7 +21,7 @@ import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
-import { useFormContext } from 'app/context/FormContext'
+import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 
 function QuestionForm(props) {
   const {
@@ -37,7 +37,7 @@ function QuestionForm(props) {
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-  const currentQuestion = useFormContext()
+  const currentQuestion = useCurrentQuestionContext()
 
   // [COMPONENT STATE HOOKS]
 

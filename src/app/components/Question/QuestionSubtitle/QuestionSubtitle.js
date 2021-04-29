@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { TextEditable } from 'components'
 import PropTypes from 'prop-types'
 import {
-  useFormContextDispatch,
-  useFormContext,
+  useCurrentQuestionContextDispatch,
+  useCurrentQuestionContext,
   DISPATCH_EVENTS
-} from 'app/context/FormContext'
+} from 'app/context/CurrentQuestion'
 import { setData } from 'app/services/Firestore'
 import { COLLECTIONS } from 'app/constants'
 // import { useTranslation } from 'react-i18next'
@@ -19,8 +19,8 @@ function QuestionSubtitle(props) {
   // const { currentLanguage } = t
 
   // [CUSTOM HOOKS]
-  const dispatch = useFormContextDispatch()
-  const currentQuestion = useFormContext()
+  const dispatch = useCurrentQuestionContextDispatch()
+  const currentQuestion = useCurrentQuestionContext()
 
   // [COMPONENT STATE HOOKS]
   const [textValue, setTextValue] = useState(currentQuestion?.subtitle || '')

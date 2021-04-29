@@ -20,8 +20,10 @@ import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useParams } from 'react-router'
-import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
-import { useFormContextDispatch } from 'app/context/FormContext'
+import {
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
 
 const { Title } = Typography
 
@@ -30,7 +32,7 @@ function EditorSidebar(props) {
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
-  const dispatch = useFormContextDispatch()
+  const dispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
