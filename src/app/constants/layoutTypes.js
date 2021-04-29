@@ -6,7 +6,7 @@ import {
   ProfileFilled,
   MenuUnfoldOutlined
 } from '@ant-design/icons'
-const smallImageSize = { width: '250px', height: '400px' }
+const smallImageSize = { width: '60%', height: '60%' }
 const imageFullSize = { width: '100%', height: '100%' }
 const imageBetweenSize = { width: '150px', height: '200px' }
 

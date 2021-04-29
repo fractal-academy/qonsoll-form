@@ -130,6 +130,7 @@ function QuestionAdvancedView(props) {
                 <Box
                   {...layoutType.imgSize}
                   //mock data will be replaced
+                  backgroundSize="cover"
                   backgroundRepeat="no-repeat"
                   backgroundImage={`url(${data?.image})`}
                 />
@@ -150,6 +151,7 @@ function QuestionAdvancedView(props) {
           order={layoutType.imageOrder}>
           <Box
             {...layoutType.imgSize}
+            backgroundSize="cover"
             backgroundRepeat="no-repeat"
             backgroundImage={`url(${data?.image})`}
           />

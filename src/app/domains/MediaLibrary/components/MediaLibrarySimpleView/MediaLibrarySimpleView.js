@@ -4,14 +4,13 @@ import { Button, Card, Typography } from 'antd'
 import { EditOutlined, EyeFilled, PlusOutlined } from '@ant-design/icons'
 import { styles } from './MediaLibrarySimpleView.styles'
 import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
-import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
-import { Input, InputForm, Popover } from 'components'
+import { Input } from 'components'
 import RangeSlider from 'components/RangeSlider'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 const { Text } = Typography
 function MediaLibrarySimpleView(props) {
-  const { setIsImageEditVisible, setMediaUrl, bgImage } = props
+  const { setIsImageEditVisible, bgImage } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
@@ -56,7 +55,6 @@ function MediaLibrarySimpleView(props) {
               backgroundSize="cover"
               backgroundImage={bgImage}>
               <MediaLibraryModal
-                setMediaUrl={setMediaUrl}
                 bgImage={bgImage}
                 onClick={() => {
                   setIsImageEditVisible(false)
