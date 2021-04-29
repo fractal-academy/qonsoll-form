@@ -43,8 +43,6 @@ function ChoiceButton(props) {
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
       onClick && onClick()
-
-      console.log(`Choice ${letter} was pressed`)
     }
   }
 

@@ -33,8 +33,6 @@ function RangeButton(props) {
   const onButtonClick = (number) => {
     if (range.includes(Number(number)) && currentSlide === order) {
       setButtonKey(number)
-
-      console.log(`Choice ${number} was pressed`)
       onClick && onClick()
     }
   }

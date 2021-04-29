@@ -26,7 +26,9 @@ function Carousel(props) {
   const goTo = (slideNumber) => {
     carouselRef.current?.goTo(slideNumber)
   }
-
+  const onCurrentSlideChange = (slideIndex) => {
+    setCurrentSlide(slideIndex)
+  }
   //COMPUTED PROPERTIES
   isAnswered && next()
 
@@ -36,9 +38,7 @@ function Carousel(props) {
         dots={false}
         ref={carouselRef}
         dotPosition="right"
-        afterChange={async (slideIndex) => {
-          setCurrentSlide(slideIndex)
-        }}>
+        afterChange={onCurrentSlideChange}>
         {children}
       </AntdCarousel>
 
