@@ -99,6 +99,7 @@ function QuestionAdvancedView(props) {
     }
   }
 
+  const component = questionTypesMap[data?.questionType].component
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   const imageShowRule =
     layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -146,6 +147,7 @@ function QuestionAdvancedView(props) {
                 <Box
                   {...layoutType.imgSize}
                   //mock data will be replaced
+                  backgroundSize="cover"
                   backgroundRepeat="no-repeat"
                   backgroundImage={`url(${data?.image})`}
                 />
@@ -153,12 +155,7 @@ function QuestionAdvancedView(props) {
             </Row>
           )}
           <Row noGutters pt={25}>
-            <Col>
-              {cloneElement(
-                questionTypesMap[data?.questionType].component,
-                data
-              )}
-            </Col>
+            <Col>{cloneElement(component, data)}</Col>
           </Row>
         </Card>
       </Col>
@@ -171,6 +168,7 @@ function QuestionAdvancedView(props) {
           order={layoutType.imageOrder}>
           <Box
             {...layoutType.imgSize}
+            backgroundSize="cover"
             backgroundRepeat="no-repeat"
             backgroundImage={`url(${data?.image})`}
           />

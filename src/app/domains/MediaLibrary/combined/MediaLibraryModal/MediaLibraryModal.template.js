@@ -10,15 +10,16 @@ import {
   MediaLibraryFilter,
   MediaLibraryItemSimpleView
 } from 'domains/MediaLibrary/components'
-import MediaLibrarySimpleView from 'domains/MediaLibrary/components/MediaLibrarySimpleView'
-// import { useTranslation } from 'react-i18next'
-// import storage from 'app/services/Firebase'
 import firebase, { firestore } from 'app/services/Firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import Fuse from 'fuse.js'
-import { useFormContext } from 'app/context/FormContext'
+import {
+  DISPATCH_EVENTS,
+  useFormContext,
+  useFormContextDispatch
+} from 'app/context/FormContext'
 
 const { Title, Text } = Typography
 
@@ -34,7 +35,7 @@ function MediaLibraryModal(props) {
   }
 
   const currentQuestion = useFormContext()
-
+  const dispatch = useFormContextDispatch()
   const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -52,9 +53,13 @@ function MediaLibraryModal(props) {
   const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
 
   // [CLEAN FUNCTIONS]
-  const onModalContinue = () => {
+  const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    setMediaUrl(selectedBackgroundImg)
+    await dispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { ...currentQuestion, image: selectedBackgroundImg }
+    })
+
     setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
       ...currentQuestion,
       image: selectedBackgroundImg
@@ -102,7 +107,6 @@ function MediaLibraryModal(props) {
             setImagesList([
               ...imagesList,
               {
-                // key: { data.file.uid },
                 id: mediaId,
                 name: data.file.name,
                 imageUrl: downloadURL,
@@ -245,7 +249,6 @@ function MediaLibraryModal(props) {
                     {...item}
                     selectedBackgroundImg={selectedBackgroundImg}
                     setSelectedBackgroundImg={setSelectedBackgroundImg}
-                    setMediaUrl={setMediaUrl}
                   />
                 </Box>
               ))}
