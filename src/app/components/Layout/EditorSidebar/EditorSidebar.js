@@ -48,14 +48,7 @@ function EditorSidebar(props) {
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
       order: questions?.length,
-      btnProps: {
-        children: [
-          { name: 'choice1' },
-          { name: 'choice2' },
-          { name: 'choice3' }
-        ],
-        type: 'submit'
-      }
+      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
     }
     await dispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,

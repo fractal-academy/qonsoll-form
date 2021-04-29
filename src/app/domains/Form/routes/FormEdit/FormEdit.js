@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   PageLayout,
   EditorSidebar,
@@ -58,23 +58,34 @@ function FormEdit(props) {
         image: currentQuestion?.image || DEFAULT_IMAGE
       }
     })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      layoutType: key,
-      image: currentQuestion?.image || DEFAULT_IMAGE
-    })
   }
   const onQuestionTypeChange = async ({ key }) => {
+    const btnProps =
+      key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
     await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { questionType: key }
-    })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      questionType: key
+      payload: { questionType: key, btnProps }
     })
     setShowPopover(false)
   }
+
+  // [USE_EFFECTS]
+  useEffect(() => {
+    let isComponentMounted = true
+    setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
+    // [EFFECT LOGIC]
+    // write code here...
+    // code sample: isComponentMounted && setState(<your data for state updation>)
+
+    // [CLEAN UP FUNCTION]
+    return () => {
+      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
+      // write code here...
+
+      // [FINAL CLEAN UP]
+      isComponentMounted = false
+    }
+  }, [currentQuestion])
 
   return (
     <>

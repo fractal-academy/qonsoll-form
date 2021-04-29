@@ -6,8 +6,7 @@ import {
   useFormContext,
   DISPATCH_EVENTS
 } from 'app/context/FormContext'
-import { setData } from 'app/services/Firestore'
-import { COLLECTIONS } from 'app/constants'
+
 // import { useTranslation } from 'react-i18next'
 
 function QuestionTitle(props) {
@@ -30,14 +29,11 @@ function QuestionTitle(props) {
 
   // [CLEAN FUNCTIONS]
   const onBlur = async () => {
+    if (currentQuestion?.title === textValue) return
     const title = textValue || ''
     await dispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { title }
-    })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      title
     })
   }
   const onChange = ({ target }) => {
