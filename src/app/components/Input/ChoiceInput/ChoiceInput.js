@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Typography, Input, Button } from 'antd'
+import { Typography, Input } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import { ImageUploader } from 'components'
@@ -7,12 +7,9 @@ import { CloseOutlined } from '@ant-design/icons'
 import { styles } from './ChoiceInput.styles'
 import {
   DISPATCH_EVENTS,
-  useFormContext,
-  useFormContextDispatch
-} from 'app/context/FormContext'
-import { setData } from '~/app/services/Firestore'
-import { COLLECTIONS } from '~/app/constants'
-import { globalStyles } from '~/app/styles'
+  useCurrentQuestionContext,
+  useCurrentQuestionContextDispatch
+} from 'app/context/CurrentQuestion'
 
 // import { useTranslation } from 'react-i18next'
 const { Text } = Typography
@@ -27,8 +24,8 @@ function ChoiceInput(props) {
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-  const currentQuestion = useFormContext()
-  const dispatch = useFormContextDispatch()
+  const currentQuestion = useCurrentQuestionContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   // [COMPONENT STATE HOOKS]
   const [value, setValue] = useState(data?.name)
   // [COMPUTED PROPERTIES]
@@ -42,14 +39,14 @@ function ChoiceInput(props) {
     if (choiceProps[index].name === value) return
 
     choiceProps[index].name = value
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { btnProps: choiceProps }
     })
   }
   const onDelete = async () => {
     choiceProps.splice(index, 1)
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { btnProps: choiceProps }
     })
@@ -118,6 +115,10 @@ function ChoiceInput(props) {
   )
 }
 
-ChoiceInput.propTypes = {}
+ChoiceInput.propTypes = {
+  index: PropTypes.number,
+  data: PropTypes.object,
+  withImage: PropTypes.bool
+}
 
 export default ChoiceInput

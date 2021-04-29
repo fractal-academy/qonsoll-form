@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Box } from '@qonsoll/react-design'
 import { ChoiceInput } from 'components'
 import { PlusOutlined } from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
 import {
   DISPATCH_EVENTS,
-  useFormContext,
-  useFormContextDispatch
-} from 'app/context/FormContext'
+  useCurrentQuestionContext,
+  useCurrentQuestionContextDispatch
+} from 'app/context/CurrentQuestion'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -18,8 +18,8 @@ function ChoiceForm(props) {
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-  const currentQuestion = useFormContext()
-  const dispatch = useFormContextDispatch()
+  const currentQuestion = useCurrentQuestionContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
@@ -28,7 +28,7 @@ function ChoiceForm(props) {
   const choiceProps = currentQuestion.btnProps || []
   // [CLEAN FUNCTIONS]
   const onAddChoice = () => {
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
         btnProps: choiceProps

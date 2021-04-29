@@ -20,8 +20,10 @@ import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useParams } from 'react-router'
-import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
-import { useFormContextDispatch } from 'app/context/FormContext'
+import {
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
 
 const { Title } = Typography
 
@@ -30,7 +32,7 @@ function EditorSidebar(props) {
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
-  const dispatch = useFormContextDispatch()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
@@ -50,7 +52,7 @@ function EditorSidebar(props) {
       order: questions?.length,
       btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
     }
-    await dispatch({
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
@@ -65,7 +67,7 @@ function EditorSidebar(props) {
     setData(COLLECTIONS.QUESTIONS, item?.id, item)
   }
   const onItemClick = (item) => {
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: item
     })

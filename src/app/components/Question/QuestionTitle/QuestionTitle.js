@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { TextEditable } from 'components'
 import PropTypes from 'prop-types'
 import {
-  useFormContextDispatch,
-  useFormContext,
+  useCurrentQuestionContextDispatch,
+  useCurrentQuestionContext,
   DISPATCH_EVENTS
-} from 'app/context/FormContext'
-
+} from 'app/context/CurrentQuestion'
 // import { useTranslation } from 'react-i18next'
 
 function QuestionTitle(props) {
@@ -18,8 +17,8 @@ function QuestionTitle(props) {
   // const { currentLanguage } = t
 
   // [CUSTOM HOOKS]
-  const dispatch = useFormContextDispatch()
-  const currentQuestion = useFormContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+  const currentQuestion = useCurrentQuestionContext()
 
   // [COMPONENT STATE HOOKS]
   const [textValue, setTextValue] = useState()
@@ -31,7 +30,7 @@ function QuestionTitle(props) {
   const onBlur = async () => {
     if (currentQuestion?.title === textValue) return
     const title = textValue || ''
-    await dispatch({
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { title }
     })

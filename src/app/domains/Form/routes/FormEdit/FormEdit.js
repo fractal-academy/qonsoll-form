@@ -11,9 +11,12 @@ import { Box } from '@qonsoll/react-design'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QuestionForm } from 'app/domains/Question/components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
-import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
-import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
+import {
+  useCurrentQuestionContext,
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
 import {
   useCollectionData,
   useDocumentData
@@ -34,8 +37,8 @@ function FormEdit(props) {
   const [showPopover, setShowPopover] = useState(false)
 
   // [CUSTOM_HOOKS]
-  const currentQuestion = useFormContext()
-  const dispatch = useFormContextDispatch()
+  const currentQuestion = useCurrentQuestionContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPUTED PROPERTIES]
   let questions, endings
@@ -51,7 +54,7 @@ function FormEdit(props) {
 
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = async ({ key }) => {
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
         layoutType: key,
@@ -62,7 +65,7 @@ function FormEdit(props) {
   const onQuestionTypeChange = async ({ key }) => {
     const btnProps =
       key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
-    await dispatch({
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key, btnProps }
     })
