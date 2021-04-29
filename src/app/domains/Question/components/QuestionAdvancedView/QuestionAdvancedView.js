@@ -103,7 +103,8 @@ function QuestionAdvancedView(props) {
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   const imageShowRule =
     layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
-    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type
+    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type &&
+    layoutType.type !== LAYOUT_TYPES.DEFAULT.type
 
   const bgImage = {
     ...(layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
