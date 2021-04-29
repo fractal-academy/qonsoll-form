@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { TextEditable } from 'components'
 import PropTypes from 'prop-types'
 import {
-  useFormContextDispatch,
-  useFormContext,
+  useCurrentQuestionContextDispatch,
+  useCurrentQuestionContext,
   DISPATCH_EVENTS
-} from 'app/context/FormContext'
-import { setData } from 'app/services/Firestore'
-import { COLLECTIONS } from 'app/constants'
+} from 'app/context/CurrentQuestion'
+
 // import { useTranslation } from 'react-i18next'
 
 function QuestionSubtitle(props) {
@@ -19,8 +18,8 @@ function QuestionSubtitle(props) {
   // const { currentLanguage } = t
 
   // [CUSTOM HOOKS]
-  const dispatch = useFormContextDispatch()
-  const currentQuestion = useFormContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+  const currentQuestion = useCurrentQuestionContext()
 
   // [COMPONENT STATE HOOKS]
   const [textValue, setTextValue] = useState(currentQuestion?.subtitle || '')
@@ -29,14 +28,11 @@ function QuestionSubtitle(props) {
 
   // [CLEAN FUNCTIONS]
   const onBlur = async () => {
+    if (currentQuestion?.subtitle === textValue) return
     const subtitle = textValue || ''
-    await dispatch({
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { ...currentQuestion, subtitle }
-    })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      subtitle
     })
   }
   const onChange = ({ target }) => {

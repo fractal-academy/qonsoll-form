@@ -10,9 +10,12 @@ import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
 import { QuestionForm } from 'app/domains/Question/components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
-import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
-import { useFormContext, useFormContextDispatch } from 'app/context/FormContext'
+import {
+  useCurrentQuestionContext,
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
 import {
   useCollectionData,
   useDocumentData
@@ -27,9 +30,9 @@ function FormEdit() {
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
-  // [CUSTOM HOOKS]
-  const currentQuestion = useFormContext()
-  const dispatch = useFormContextDispatch()
+  // [CUSTOM_HOOKS]
+  const currentQuestion = useCurrentQuestionContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   //[COMPONENT STATE HOOKS]
   const [isImageEditVisible, setIsImageEditVisible] = useState(false)
@@ -50,34 +53,41 @@ function FormEdit() {
 
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = async ({ key }) => {
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
         layoutType: key,
         image: currentQuestion?.image || DEFAULT_IMAGE
       }
     })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      layoutType: key,
-      image: currentQuestion?.image || DEFAULT_IMAGE
-    })
   }
   const onQuestionTypeChange = async ({ key }) => {
-    await dispatch({
+    const btnProps =
+      key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { questionType: key }
-    })
-    await setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, {
-      ...currentQuestion,
-      questionType: key
+      payload: { questionType: key, btnProps }
     })
     setShowPopover(false)
   }
 
-  //[USE EFFECTS]
+  // [USE_EFFECTS]
   useEffect(() => {
+    let isComponentMounted = true
     setDefaultTab(currentQuestion?.layoutType)
+    setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
+    // [EFFECT LOGIC]
+    // write code here...
+    // code sample: isComponentMounted && setState(<your data for state updation>)
+
+    // [CLEAN UP FUNCTION]
+    return () => {
+      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
+      // write code here...
+
+      // [FINAL CLEAN UP]
+      isComponentMounted = false
+    }
   }, [currentQuestion])
 
   return (

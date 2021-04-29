@@ -56,6 +56,11 @@ const questionTypeMap = [
     icon: <PictureOutlined style={styles.iconFontSize} />
   },
   {
+    type: QUESTION_TYPES.CHOICE,
+    description: 'Multiple choice',
+    icon: <PictureOutlined style={styles.iconFontSize} />
+  },
+  {
     type: QUESTION_TYPES.RATING,
     description: 'Choose from shapes like ⭐ or 🐶',
     icon: <StarOutlined style={styles.iconFontSize} />
