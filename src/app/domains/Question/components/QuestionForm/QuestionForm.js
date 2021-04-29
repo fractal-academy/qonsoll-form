@@ -13,7 +13,7 @@ import {
   ChoiceForm,
   SubmitButton
 } from 'components'
-import { EditOutlined, EyeFilled, SettingOutlined } from '@ant-design/icons'
+import { EditOutlined, SettingOutlined } from '@ant-design/icons'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
@@ -38,8 +38,8 @@ function QuestionForm(props) {
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
   const currentQuestion = useFormContext()
+
   // [COMPONENT STATE HOOKS]
-  const [mediaUrl, setMediaUrl] = useState(data?.image || DEFAULT_IMAGE)
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -81,7 +81,7 @@ function QuestionForm(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
-  const computedMediaUrl = `url(${mediaUrl})`
+  const computedMediaUrl = `url(${currentQuestion?.image || DEFAULT_IMAGE})`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -102,7 +102,7 @@ function QuestionForm(props) {
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
-    setMediaUrl(data?.image || DEFAULT_IMAGE)
+
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
@@ -111,7 +111,7 @@ function QuestionForm(props) {
     return () => {
       isComponentMounted = false
     }
-  }, [currentQuestion])
+  }, [])
 
   return (
     <>
@@ -124,7 +124,7 @@ function QuestionForm(props) {
         flex={1}
         style={styles.rowStyle}
         backgroundRepeat="no-repeat"
-        backgroundSize="cover"
+        backgroundSize="contain"
         backgroundImage={bgImage}>
         <Col
           v="center"
@@ -135,7 +135,11 @@ function QuestionForm(props) {
           <Card style={styles.cardStyle} bordered={false}>
             <Row noGutters>
               <Col>
-                <Tag color="blue">Question 1</Tag>
+                {currentQuestion.questionType === QUESTION_TYPES.ENDING ? (
+                  <Tag color="blue">Ending </Tag>
+                ) : (
+                  <Tag color="blue">Question {data?.order + 1}</Tag>
+                )}
               </Col>
               <Col cw="auto">
                 <Popover
@@ -164,7 +168,6 @@ function QuestionForm(props) {
                     content={
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
-                          setMediaUrl={setMediaUrl}
                           setIsImageEditVisible={setIsImageEditVisible}
                           bgImage={bgImage}
                         />
@@ -205,7 +208,6 @@ function QuestionForm(props) {
                         <Box width="192px" height="366px" overflow="hidden">
                           <MediaLibrarySimpleView
                             setIsImageEditVisible={setIsImageEditVisible}
-                            setMediaUrl={setMediaUrl}
                             bgImage={computedMediaUrl}
                           />
                         </Box>
@@ -231,13 +233,14 @@ function QuestionForm(props) {
             display="flex"
             style={styles.columnStyle}
             height="100%"
-            width="800px"
+            // width="800px"
             order={layoutType?.imageOrder}>
             <Box
               {...layoutType?.imgSize}
               backgroundRepeat="no-repeat"
               backgroundImage={computedMediaUrl}
-              backgroundSize="cover"
+              backgroundSize="contain"
+              backgroundPosition="center left"
               m={2}
               position="relative">
               <Row h="right">
@@ -254,7 +257,6 @@ function QuestionForm(props) {
                       <Box width="192px" height="366px" overflow="hidden">
                         <MediaLibrarySimpleView
                           setIsImageEditVisible={setIsImageEditVisible}
-                          setMediaUrl={setMediaUrl}
                           bgImage={computedMediaUrl}
                         />
                       </Box>

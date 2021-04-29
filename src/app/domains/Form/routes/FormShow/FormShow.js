@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { firestore } from 'app/services'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { styles } from './FormShow.style'
 import { globalStyles } from 'app/styles'
 import { useKeyPress } from '@umijs/hooks'
@@ -18,7 +18,11 @@ const { Title } = Typography
 function FormShow(props) {
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const [data] = useCollectionData(getCollectionRef(COLLECTIONS.QUESTIONS))
+  const { id } = useParams()
+
+  const [data] = useCollectionData(
+    getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
+  )
   useKeyPress('enter', (event) => {
     onClick()
   })

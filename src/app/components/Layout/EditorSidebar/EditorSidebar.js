@@ -46,7 +46,21 @@ function EditorSidebar(props) {
       formId: id,
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
-      title: ''
+      title: '',
+      btnProps: {
+        children: [
+          {
+            name: 'choice1'
+          },
+          {
+            name: 'choice2'
+          },
+          {
+            name: 'choice3'
+          }
+        ],
+        type: 'submit'
+      }
     }
     await dispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,

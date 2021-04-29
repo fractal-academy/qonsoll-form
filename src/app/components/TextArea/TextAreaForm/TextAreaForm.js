@@ -7,14 +7,7 @@ import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
 function TextAreaForm(props) {
-  const {
-    onSubmit,
-    textAreaProps,
-    btnProps,
-    noBorder,
-    longText,
-    onClick
-  } = props
+  const { textAreaProps, onClick } = props
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
