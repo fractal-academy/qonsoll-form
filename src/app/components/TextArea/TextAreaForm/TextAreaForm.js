@@ -69,7 +69,6 @@ function TextAreaForm(props) {
                 <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
               </Form.Item>
               <SubmitButton onClick={onClick} />
-              <Text>Press enter ↵</Text>
             </Form>
           </Col>
         </Row>

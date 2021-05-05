@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Row, Col } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import './FormContentArea.styles.css'
 import PropTypes from 'prop-types'
 import MiddleContainer from '../MiddleContainer'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router'
-// import { useTranslation } from 'react-i18next'
 
 function FormContentArea(props) {
   const { children, leftSideMenu } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const history = useHistory()
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
-  // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const onCancel = () => {
@@ -28,28 +19,11 @@ function FormContentArea(props) {
   const onCreateForm = () => {
     history.push(ROUTES_PATHS.FORMS_ALL)
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <>
-      <Row display="flex" my={3} px={45} py={3} height="100%" overflow="auto">
-        <Col cw="auto" pr={2}>
+      <Row noGutters display="flex" m={4} height="100%" overflow="auto">
+        <Col cw="auto" mr={3}>
           {leftSideMenu}
         </Col>
         <Col
@@ -60,7 +34,7 @@ function FormContentArea(props) {
           <MiddleContainer>{children}</MiddleContainer>
         </Col>
       </Row>
-      <Row noGutters h="right" mb={4} mr={5}>
+      <Row noGutters h="right" mb={4} mx={4}>
         <Col cw="auto" mr={3}>
           <Button type="text" onClick={onCancel}>
             Cancel

@@ -125,7 +125,7 @@ function QuestionAdvancedView(props) {
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row pt={25}>
+            <Row pt={25} noGutters>
               <Col cw="auto">
                 <Box
                   {...layoutType.imgSize}
