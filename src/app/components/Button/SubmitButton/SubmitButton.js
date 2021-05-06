@@ -16,14 +16,16 @@ function SubmitButton(props) {
   }
 
   return (
-    <Row display="flex" v="center">
-      <Col cw="auto" mr={2}>
+    <Row display="flex" v="center" noGutters>
+      <Col cw="auto" mr={3}>
         <Button buttonType="primary" className="submit" onClick={onButtonClick}>
           {children ? (
             children
           ) : (
-            <Row display="flex">
-              <Col mr={2}>OK</Col>
+            <Row display="flex" noGutters>
+              <Col cw="auto" mr={2}>
+                OK
+              </Col>
               <Col>
                 <CheckOutlined />
               </Col>
@@ -32,9 +34,7 @@ function SubmitButton(props) {
         </Button>
       </Col>
       <Col>
-        <Text>
-          Press <b>Enter ↵</b>
-        </Text>
+        <Text>Press enter ↵</Text>
       </Col>
     </Row>
   )

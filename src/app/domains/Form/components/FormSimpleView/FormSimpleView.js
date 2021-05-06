@@ -1,32 +1,31 @@
-import { Card, Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
-import React, { useEffect, useState, cloneElement } from 'react'
 import PropTypes from 'prop-types'
-import { generatePath, useHistory } from 'react-router-dom'
-import { FileOutlined, MoreOutlined } from '@ant-design/icons'
-import { styles } from './FormSimpleView.style'
-import { Row, Col, Box } from '@qonsoll/react-design'
 import { ROUTES_PATHS } from 'app/constants'
-import { FormSimpleViewEdit } from 'domains/Form/components'
-import { deleteData } from 'app/services/Firestore'
+import { useState, cloneElement } from 'react'
+import { styles } from './FormSimpleView.style'
 import COLLECTIONS from 'app/constants/collection'
-// import { useTranslation } from 'react-i18next'
-const { Meta } = Card
+import { deleteData } from 'app/services/Firestore'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import { generatePath, useHistory } from 'react-router-dom'
+import { FormSimpleViewEdit } from 'domains/Form/components'
+import { FileOutlined, MoreOutlined } from '@ant-design/icons'
+import { Card, Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 
+const { Meta } = Card
 const { Text } = Typography
 
 function FormSimpleView(props) {
   const { title, subtitle, id } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
+
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const history = useHistory()
+
   // [COMPONENT STATE HOOKS]
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
 
   // [COMPUTED PROPERTIES]
   const formRoute = generatePath(ROUTES_PATHS.FORM_EDIT, { id })
+
   // [CLEAN FUNCTIONS]
   const onFormItemClick = () => {
     formRoute && history.push(formRoute)
@@ -50,23 +49,6 @@ function FormSimpleView(props) {
     setVisible(false)
     setConfirmLoading(false)
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   // [MENU TEMPLATE]
   const menu = (
@@ -74,33 +56,31 @@ function FormSimpleView(props) {
       <Menu.Item>
         <FormSimpleViewEdit formData={props} />
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item onClick={showPopconfirm}>
         <Popconfirm
           title="Delete this form?"
-          visible={visible}
           onConfirm={handleDelete}
-          okButtonProps={{ loading: confirmLoading }}
-          onCancel={handleCancel}>
-          <Text onClick={showPopconfirm}>Delete</Text>
+          onCancel={handleCancel}
+          okButtonProps={{ loading: confirmLoading }}>
+          <Text>Delete</Text>
         </Popconfirm>
       </Menu.Item>
     </Menu>
   )
 
-  // [TEMPLATE]
+  // [COMPONENT TEMPLATE]
   return (
     <Card
       style={styles.cardStyles}
       bodyStyle={styles.cardBodyPadding}
       cover={
         <Box
-          height="136px"
-          weight="226px"
-          display="flex"
           bg="white"
+          display="flex"
+          height="140px"
           borderRadius="8px"
-          justifyContent="center"
           alignItems="center"
+          justifyContent="center"
           onClick={onFormItemClick}>
           <FileOutlined style={styles.iconStyles} />
         </Box>
@@ -108,25 +88,17 @@ function FormSimpleView(props) {
       <Meta
         description={
           <>
-            <Row h="between" mt={3}>
-              <Col>
-                <Row>
-                  <Col>
-                    <Text style={styles.titleStyle} ellipsis>
-                      {title}
-                    </Text>
-                  </Col>
-                </Row>
-                {subtitle && (
-                  <Row>
-                    <Col>
-                      <Text style={styles.descriptionTextSize} ellipsis>
-                        {subtitle}
-                      </Text>
-                    </Col>
-                  </Row>
-                )}
+            <Row noGutters h="between" mt={3}>
+              <Col display="grid">
+                <Text style={styles.titleStyle} ellipsis>
+                  {title}
+                </Text>
+
+                <Text style={styles.descriptionTextSize} ellipsis>
+                  {subtitle || 'No description'}
+                </Text>
               </Col>
+
               <Col cw="auto" v="center">
                 <Dropdown
                   overlay={menu}
