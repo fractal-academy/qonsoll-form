@@ -84,8 +84,10 @@ function QuestionForm(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
+
   const computedMediaUrl = `url(${currentQuestion?.image || DEFAULT_IMAGE})`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
+  //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
     layoutType?.type !== LAYOUT_TYPES.FULL_SCREEN.type &&

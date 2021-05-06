@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
+import {
+  Modal,
+  Button,
+  Typography,
+  Input,
+  Divider,
+  Upload,
+  message
+} from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
@@ -29,10 +37,6 @@ function MediaLibraryModal(props) {
 
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
-  const onMediaUploaded = (data) => {
-    const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
-    setData(COLLECTIONS?.MEDIA, mediaId, data)
-  }
 
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -53,16 +57,18 @@ function MediaLibraryModal(props) {
   const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
 
   // [CLEAN FUNCTIONS]
+  const onMediaUploaded = (data) => {
+    const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
+    setData(COLLECTIONS?.MEDIA, mediaId, data).catch((e) =>
+      message.error(e.message)
+    )
+  }
+
   const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { ...currentQuestion, image: selectedBackgroundImg }
-    })
-
-    setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
-      ...currentQuestion,
-      image: selectedBackgroundImg
+      payload: { image: selectedBackgroundImg }
     })
   }
   const onModalCancel = () => {
@@ -98,7 +104,7 @@ function MediaLibraryModal(props) {
       (snapshot) => {},
       (error) => {
         // Handle error during the upload
-        console.error('message')
+        message.error(error.message)
       },
       () => {
         image.snapshot.ref
