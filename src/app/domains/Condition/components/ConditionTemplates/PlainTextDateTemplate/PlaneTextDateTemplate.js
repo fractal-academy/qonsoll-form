@@ -1,20 +1,22 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, DatePicker, Input, Select } from 'antd'
-import Text from 'antd/lib/typography/Text'
-import React from 'react'
-import { DATE_CONDITION_RULES_VALUES } from 'app/constants/dateConditionRules'
-import { QuestionSelect } from 'domains/Question/components'
 import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import { QuestionSelect } from 'domains/Question/components'
+import { Button, DatePicker, Select, Typography } from 'antd'
+import { DATE_CONDITION_RULES_VALUES } from 'app/constants/dateConditionRules'
 import { styles } from 'domains/Condition/components/ConditionTemplates/PlainShortTextStringTemplate/PlainShortTextStringTemplate.style'
+
 const { Option } = Select
+const { Text } = Typography
 
 function PlaneTextDateTemplate(props) {
-  const { answers, id, addCondition, questionList, addRedirectQuestion } = props
+  const { answers, addCondition, questionList, addRedirectQuestion } = props
+
   // [CLEAN FUNCTIONS]
   const onClick = () => {
     addCondition({ name: '', redirectQuestion: null })
   }
+
   return (
     <>
       {answers.map((item, index) => (
@@ -71,10 +73,12 @@ function PlaneTextDateTemplate(props) {
     </>
   )
 }
+
 PlaneTextDateTemplate.propTypes = {
   answers: PropTypes.array,
   addCondition: PropTypes.func,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }
+
 export default PlaneTextDateTemplate

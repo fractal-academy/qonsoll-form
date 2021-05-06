@@ -1,10 +1,9 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Select } from 'antd'
-import Text from 'antd/lib/typography/Text'
-import React from 'react'
-import { QuestionSelect } from 'domains/Question/components'
-import { styles } from './YesNoChoiceTemplate.styles'
+import { Button } from 'antd'
 import PropTypes from 'prop-types'
+import Text from 'antd/lib/typography/Text'
+import { styles } from './YesNoChoiceTemplate.styles'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import { QuestionSelect } from 'domains/Question/components'
 
 function YesNoChoiceTemplate(props) {
   const { answers, questionList, addRedirectQuestion } = props
@@ -40,9 +39,11 @@ function YesNoChoiceTemplate(props) {
     </>
   )
 }
+
 YesNoChoiceTemplate.propTypes = {
   answers: PropTypes.array,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }
+
 export default YesNoChoiceTemplate

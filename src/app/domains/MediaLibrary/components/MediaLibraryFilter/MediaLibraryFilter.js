@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Typography, Divider, Checkbox } from 'antd'
-import { ReloadOutlined } from '@ant-design/icons'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import { globalStyles } from 'app/styles'
-import { styles } from './MediaLibraryFilter.styles'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
-
-// import { useTranslation } from 'react-i18next'
+import { globalStyles } from 'app/styles'
+import { ReloadOutlined } from '@ant-design/icons'
+import { styles } from './MediaLibraryFilter.styles'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import { Button, Typography, Divider, Checkbox } from 'antd'
 
 const { Text, Title } = Typography
 
@@ -22,16 +20,10 @@ const audienceOptions = [
 
 function MediaLibraryFilter(props) {
   const { onApplyFilter, onCancelFilter } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
   const [audienceFilterValues, setAudienceFilterValues] = useState([])
   const [phaseFilterValues, setPhaseFilterValues] = useState([])
-  // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const resetFilters = () => {
@@ -50,23 +42,6 @@ function MediaLibraryFilter(props) {
   const resetAudienceFilter = () => {
     setAudienceFilterValues([])
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Box bg="white" width="220px" display="flex" flexDirection="column" p={3}>

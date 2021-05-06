@@ -10,7 +10,7 @@ const App = (props) => {
       {ROUTES_VALUES.map((route) => {
         if (route.path === ROUTES.FORM_EDIT.path)
           return (
-            <Route exact path={ROUTES_PATHS.FORM_EDIT}>
+            <Route exact path={ROUTES_PATHS.FORM_EDIT} key={route}>
               <CurrentQuestionContextProvider>
                 <FormEdit />
               </CurrentQuestionContextProvider>

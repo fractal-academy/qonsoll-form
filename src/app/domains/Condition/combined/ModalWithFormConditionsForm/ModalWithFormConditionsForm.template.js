@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
+import PropTypes from 'prop-types'
+import { globalStyles } from 'app/styles'
 import { Modal, Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
-import { globalStyles } from 'app/styles'
 import { styles } from './ModalWithFormConditionsForm.styles'
-import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
 
 const { Title, Text } = Typography
 
 function ModalWithFormConditionsForm(props) {
-  const { data, btnProps, children } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
+  const { btnProps, children } = props
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
-  // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const resetLogic = () => {}
@@ -28,24 +21,6 @@ function ModalWithFormConditionsForm(props) {
   const onCancel = () => {
     setIsModalVisible(!isModalVisible)
   }
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <>
@@ -90,11 +65,8 @@ function ModalWithFormConditionsForm(props) {
     </>
   )
 }
-ModalWithFormConditionsForm.defaultProps = {
-  btnProps: { children: 'Pass btn text as child' }
-}
+
 ModalWithFormConditionsForm.propTypes = {
-  data: PropTypes.array,
   btnProps: PropTypes.object.isRequired,
   children: PropTypes.node
 }

@@ -1,24 +1,22 @@
-import { Button, Form, message, Modal } from 'antd'
 import { useState } from 'react'
-import { firestore, updateData } from 'app/services/Firestore'
-import Title from 'antd/lib/typography/Title'
 import COLLECTIONS from 'app/constants/collection'
+import { updateData } from 'app/services/Firestore'
 import { FormSimpleForm } from 'domains/Form/components'
-import Text from 'antd/es/typography/Text'
+import { Button, Form, message, Modal, Typography } from 'antd'
+
+const { Title, Text } = Typography
 
 const FormSimpleViewEdit = (props) => {
   const { formData } = props
+
   // [STATE]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [loading, setLoading] = useState(false)
-  // [ADDITIONAL_HOOKS]
 
+  // [ADDITIONAL_HOOKS]
   const [form] = Form.useForm()
 
-  // [COMPUTED PROPERTIES]
-
   // [HELPER_FUNCTIONS]
-
   const showModal = () => {
     setIsModalVisible(true)
   }

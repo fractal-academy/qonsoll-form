@@ -1,1 +1,1 @@
-export { default as QuestionTypeView } from './QuestionTypeView'
+export { default as QuestionTypeSelect } from './QuestionTypeSelect'

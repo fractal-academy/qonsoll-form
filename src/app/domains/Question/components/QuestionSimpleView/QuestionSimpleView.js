@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
 import { Card } from 'app/components'
 import './QuestionSimpleView.styles.css'
+import { Popconfirm, message } from 'antd'
 import { LAYOUT_TYPES } from 'app/constants'
 import COLLECTIONS from 'app/constants/collection'
 import { deleteData } from 'app/services/Firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Popconfirm, message } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
 
 function QuestionSimpleView(props) {
   const { title, number, layoutType, onClick, id } = props
+
   // [COMPONENT STATE HOOKS]
   const [visible, setVisible] = useState(false)
 
@@ -22,7 +23,6 @@ function QuestionSimpleView(props) {
   const handleCancel = () => {
     setVisible(false)
   }
-
   const handleDelete = async () => {
     try {
       await deleteData(COLLECTIONS.QUESTIONS, id)
@@ -62,8 +62,10 @@ function QuestionSimpleView(props) {
 
 QuestionSimpleView.propTypes = {
   number: PropTypes.number.isRequired,
-  description: PropTypes.string,
-  icon: PropTypes.node
+  onClick: PropTypes.func,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  layoutType: PropTypes.string
 }
 
 export default QuestionSimpleView

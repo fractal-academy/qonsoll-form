@@ -10,11 +10,11 @@ import {
   MediaLibraryFilter,
   MediaLibraryItemSimpleView
 } from 'domains/MediaLibrary/components'
+import Fuse from 'fuse.js'
+import COLLECTIONS from 'app/constants/collection'
 import firebase, { firestore } from 'app/services/Firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
-import COLLECTIONS from 'app/constants/collection'
-import Fuse from 'fuse.js'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
@@ -24,8 +24,7 @@ import {
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { btnProps, onClick, setMediaUrl } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
+  const { btnProps, onClick } = props
 
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
@@ -33,12 +32,9 @@ function MediaLibraryModal(props) {
     const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
-
+  const searchRef = useRef()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const searchRef = useRef()
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -126,25 +122,23 @@ function MediaLibraryModal(props) {
       }
     )
   }
-
   const searchData = () => {
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)
       setImagesList(searchRes.map((item) => item.item))
     } else setImagesList(media)
   }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
     isComponentMounted && imagesList && setImagesList(media)
 
-    // [CLEAN UP FUNCTION]
-
     return () => {
-      // [FINAL CLEAN UP]
       isComponentMounted = false
     }
   }, [media])
+
   return (
     <>
       <Button {...btnProps} onClick={modalStateChange} style={styles.btnStyle}>

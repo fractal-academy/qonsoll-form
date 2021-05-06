@@ -1,17 +1,13 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Select } from 'antd'
-import Text from 'antd/lib/typography/Text'
-import React from 'react'
-import { QuestionSelect } from 'domains/Question/components'
+import { Button } from 'antd'
 import PropTypes from 'prop-types'
+import Text from 'antd/lib/typography/Text'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import { styles } from './OpinionScaleTemplate.styles'
+import { QuestionSelect } from 'domains/Question/components'
 
-const { Option, OptGroup } = Select
-
+let startLetter = 65
 function OpinionScaleTemplate(props) {
   const { answers, questionList, addRedirectQuestion } = props
-
-  let startLetter = 65
 
   return (
     <>
