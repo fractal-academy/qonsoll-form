@@ -1,20 +1,34 @@
-import { useState } from 'react'
-import { ChoiceInput } from 'components'
-import { globalStyles } from 'app/styles'
 import { Box } from '@qonsoll/react-design'
+import { ChoiceInput } from 'components'
 import { PlusOutlined } from '@ant-design/icons'
-
-let startLetter = 65
+import { globalStyles } from 'app/styles'
+import {
+  DISPATCH_EVENTS,
+  useCurrentQuestionContext,
+  useCurrentQuestionContextDispatch
+} from 'app/context/CurrentQuestion'
+import PropTypes from 'prop-types'
 
 function ChoiceForm(props) {
   const { withImage } = props
 
-  // [COMPONENT STATE HOOKS]
-  const [choices, setChoices] = useState([])
+  // [ADDITIONAL HOOKS]
+  const currentQuestion = useCurrentQuestionContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+
+  // [COMPUTED PROPERTIES]
+  const choiceProps = currentQuestion.btnProps || []
 
   // [CLEAN FUNCTIONS]
   const onAddChoice = () => {
-    setChoices((prev) => [...prev, { value: '', keyLetter: startLetter++ }])
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: {
+        btnProps: choiceProps
+          ? [...choiceProps, { name: '', image: '' }]
+          : [{ name: '', image: '' }]
+      }
+    })
   }
 
   return (
@@ -22,7 +36,7 @@ function ChoiceForm(props) {
       display="flex"
       flexDirection={withImage ? 'row' : 'column'}
       flexWrap="wrap">
-      {choices.map((item, index) => (
+      {choiceProps?.map((item, index) => (
         <ChoiceInput
           key={index}
           data={item}
@@ -47,6 +61,8 @@ function ChoiceForm(props) {
   )
 }
 
-ChoiceForm.propTypes = {}
+ChoiceForm.propTypes = {
+  withImage: PropTypes.bool
+}
 
 export default ChoiceForm

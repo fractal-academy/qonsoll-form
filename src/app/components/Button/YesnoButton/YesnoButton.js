@@ -5,7 +5,7 @@ import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 
 function YesnoButton(props) {
-  const { onClick } = props
+  const { onClick, currentSlide, order } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -31,7 +31,7 @@ function YesnoButton(props) {
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (letter) => {
-    if (letters.includes(letter)) {
+    if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
       onClick && onClick()
 

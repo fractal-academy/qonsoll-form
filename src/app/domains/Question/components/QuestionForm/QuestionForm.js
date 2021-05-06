@@ -1,25 +1,25 @@
 import { Card, Tag } from 'antd'
 import { cloneElement } from 'react'
 import {
-  DateTimeInput,
-  FileUploader,
-  InputForm,
-  Popover,
-  QuestionHeader,
   Rate,
-  TextAreaForm,
+  Popover,
+  InputForm,
+  ChoiceForm,
   YesnoButton,
   RangeButton,
-  ChoiceForm,
-  SubmitButton
+  SubmitButton,
+  FileUploader,
+  TextAreaForm,
+  DateTimeInput,
+  QuestionHeader
 } from 'components'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
 import { styles } from './QuestionForm.styles'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { useFormContext } from 'app/context/FormContext'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { EditOutlined, SettingOutlined } from '@ant-design/icons'
+import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 
@@ -34,7 +34,7 @@ function QuestionForm(props) {
   } = props
 
   // [ADDITIONAL HOOKS]
-  const currentQuestion = useFormContext()
+  const currentQuestion = useCurrentQuestionContext()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -46,6 +46,9 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
       component: <ChoiceForm withImage />
+    },
+    [QUESTION_TYPES.CHOICE]: {
+      component: <ChoiceForm />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} />

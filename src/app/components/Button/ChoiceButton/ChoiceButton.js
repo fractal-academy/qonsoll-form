@@ -7,7 +7,7 @@ import { Box } from '@qonsoll/react-design'
 let startLetter = 65
 
 function ChoiceButton(props) {
-  const { choices, onClick, hasImages } = props
+  const { choices, onClick, hasImages, currentSlide, order } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -15,7 +15,7 @@ function ChoiceButton(props) {
   // [ADDITIONAL HOOKS]
   const mappedChoices = useMemo(
     () =>
-      choices.map((el, index) => ({
+      choices?.map((el, index) => ({
         letter: String.fromCharCode(startLetter + index),
         choice: el
       })),
@@ -40,11 +40,9 @@ function ChoiceButton(props) {
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (letter) => {
-    if (letters.includes(letter)) {
+    if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
       onClick && onClick()
-
-      console.log(`Choice ${letter} was pressed`)
     }
   }
 

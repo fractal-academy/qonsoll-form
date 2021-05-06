@@ -7,7 +7,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
 
 function Carousel(props) {
-  const { children, isAnswered, setIsAnswered } = props
+  const { children, isAnswered, setIsAnswered, setCurrentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
@@ -26,13 +26,19 @@ function Carousel(props) {
   const goTo = (slideNumber) => {
     carouselRef.current?.goTo(slideNumber)
   }
-
+  const onCurrentSlideChange = (slideIndex) => {
+    setCurrentSlide(slideIndex)
+  }
   //COMPUTED PROPERTIES
   isAnswered && next()
 
   return (
     <Box onWheel={handleScroll} width="100%">
-      <AntdCarousel ref={carouselRef} dotPosition="right" dots={false}>
+      <AntdCarousel
+        ref={carouselRef}
+        dotPosition="right"
+        dots={false}
+        afterChange={onCurrentSlideChange}>
         {children}
       </AntdCarousel>
 

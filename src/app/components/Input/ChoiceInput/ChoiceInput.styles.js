@@ -9,5 +9,15 @@ export const styles = {
   textAreaStyles: {
     cursor: 'pointer',
     color: '#0445af'
+  },
+  deleteBtnStyles: {
+    position: 'absolute',
+    right: -6,
+    top: -6,
+    cursor: 'pointer',
+    backgroundColor: '#cacaca'
+  },
+  deleteIconStyles: {
+    fontSize: '10px'
   }
 }

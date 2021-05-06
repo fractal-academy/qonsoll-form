@@ -28,7 +28,7 @@ function QuestionLayoutSwitcher(props) {
   const { onChange, defaultActive } = props
 
   return (
-    <Menu style={styles.menuStyle} defaultSelectedKeys={defaultActive}>
+    <Menu style={styles.menuStyle} selectedKeys={defaultActive}>
       {menuMap.map((item) => (
         <Menu.Item
           key={item.layoutType}
