@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import './Carousel.styles.css'
 import PropTypes from 'prop-types'
-import { Button } from 'app/components'
+import { Button } from 'antd'
 import { Carousel as AntdCarousel } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'

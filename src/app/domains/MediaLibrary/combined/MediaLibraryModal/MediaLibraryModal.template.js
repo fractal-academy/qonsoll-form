@@ -210,7 +210,6 @@ function MediaLibraryModal(props) {
                   prefix={<SearchOutlined />}
                   style={styles.borderRadius}
                   placeholder="Search media file by name..."
-                  onSearch={searchData}
                   onChange={onChange}
                 />
               </Col>

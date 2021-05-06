@@ -50,12 +50,10 @@
 }
 .imageButton {
   height: 170px !important;
-  /* width: 170px; */
   border-radius: 8px !important;
   background-color: #d6e1f2 !important;
   color: #307bde !important;
   font-weight: 700;
-  /* padding: 5px !important; */
 }
 .imageButton:hover {
   background-color: #b3c7e7 !important;

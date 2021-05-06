@@ -1,12 +1,9 @@
-import { Box } from '@qonsoll/react-design'
-import React from 'react'
-
 export const styles = {
-  rowStyle: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundSize: 'cover'
-  },
+  // rowStyle: {
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   backgroundSize: 'cover'
+  // },
   cardStyle: {
     width: '400px',
     borderRadius: '8px',

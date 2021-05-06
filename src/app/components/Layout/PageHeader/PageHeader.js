@@ -1,51 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { Row, Col, Container } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
+import { globalStyles } from 'app/styles'
+import { styles } from './PageHeader.styles'
+import { ROUTES_PATHS } from 'app/constants'
 import { Button, Divider, Typography } from 'antd'
+import { Row, Col, Container } from '@qonsoll/react-design'
 import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
 import { generatePath, useHistory, useParams } from 'react-router'
-import PropTypes from 'prop-types'
-import { styles } from './PageHeader.styles'
-import { globalStyles } from 'app/styles'
-import { ROUTES_PATHS } from 'app/constants'
 
-// import { useTranslation } from 'react-i18next'
 const { Title } = Typography
 
 function PageHeader(props) {
   const { title } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const history = useHistory()
   const { id } = useParams()
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
   const formPath = generatePath(ROUTES_PATHS.FORM_SHOW, { id })
+
   // [CLEAN FUNCTIONS]
   const onFormShow = () => {
     history.push(formPath)
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Container>

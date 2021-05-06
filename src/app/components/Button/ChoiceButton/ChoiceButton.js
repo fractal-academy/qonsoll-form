@@ -75,7 +75,8 @@ function ChoiceButton(props) {
 
 ChoiceButton.propTypes = {
   choices: PropTypes.array,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  hasImages: PropTypes.bool
 }
 
 export default ChoiceButton

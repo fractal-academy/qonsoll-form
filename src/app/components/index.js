@@ -19,7 +19,6 @@ export { default as QuestionLayoutSwitcher } from './Layout/QuestionLayoutSwitch
 export { default as FormContentArea } from './Layout/FormContentArea'
 export { default as PageEditorWrapper } from './Layout/PageEditorWrapper'
 export { default as EditorSidebar } from './Layout/EditorSidebar'
-export { default as Button } from './Button/CustomButton'
 export { default as SubmitButton } from './Button/SubmitButton'
 export { default as YesnoButton } from './Button/YesnoButton'
 export { default as RangeButton } from './Button/RangeButton'
@@ -34,5 +33,4 @@ export { default as Carousel } from './Carousel'
 export { default as ChoiceForm } from './Input/ChoiceForm'
 export { default as ImageKeyBox } from './Button/ImageKeyBox'
 export { default as Spinner } from './Spinner'
-
 export { default as RangeSlider } from './RangeSlider'

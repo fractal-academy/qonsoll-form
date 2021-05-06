@@ -1,46 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { Typography, Input, Button } from 'antd'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import PropTypes from 'prop-types'
+import { useState } from 'react'
+import { Typography, Input } from 'antd'
 import { ImageUploader } from 'components'
-import { PlusOutlined } from '@ant-design/icons'
 import { styles } from './ChoiceInput.styles'
+import { Row, Col, Box } from '@qonsoll/react-design'
 
-// import { useTranslation } from 'react-i18next'
 const { Text } = Typography
 const { TextArea } = Input
 
 function ChoiceInput(props) {
   const { index, data, withImage } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
 
   // [COMPONENT STATE HOOKS]
   const [value, setValue] = useState(data.value)
-  // [COMPUTED PROPERTIES]
-
-  // [CLEAN FUNCTIONS]
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Box

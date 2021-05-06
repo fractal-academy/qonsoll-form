@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import { Upload } from 'antd'
-import { InboxOutlined } from '@ant-design/icons'
-import { Col, Row } from '@qonsoll/react-design'
 import { Text } from 'antd-styled'
 import { IconLabel } from 'components'
 import { globalStyles } from 'app/styles'
+import { Col, Row } from '@qonsoll/react-design'
+import { InboxOutlined } from '@ant-design/icons'
 
 const { Dragger } = Upload
 
@@ -18,24 +17,6 @@ const UploadArea = (props) => {
 
   // [CLEAN FUNCTIONS]
   const onChange = () => {}
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Row>

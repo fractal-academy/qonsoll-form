@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Avatar, Spin, Typography } from 'antd'
+import { Avatar, Spin } from 'antd'
 import { PlusOutlined, EditOutlined } from '@ant-design/icons'
 import FileUploader from 'react-firebase-file-uploader'
 import { ImageLabel } from 'components'
@@ -7,8 +7,6 @@ import PropTypes from 'prop-types'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { globalStyles } from 'app/styles'
 import { styles } from './ImageUploader.styles'
-
-const { Text } = Typography
 
 const ImageUploader = (props) => {
   const { imageUrl, isResetImage } = props
