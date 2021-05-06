@@ -11,18 +11,8 @@ const { Option } = Select
 const rattingRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 function RatingCustomConfig(props) {
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-
   // [CUSTOM HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
-  // [COMPUTED PROPERTIES]
-
   // [CLEAN FUNCTIONS]
   const onRattingSelectChange = (starsAmount) => {
     currentQuestionDispatch({

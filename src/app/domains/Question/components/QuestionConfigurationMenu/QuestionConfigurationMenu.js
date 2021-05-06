@@ -13,18 +13,10 @@ import {
 
 const { Text } = Typography
 
-function QuestionConfigurationMenu(props) {
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-
+function QuestionConfigurationMenu() {
   // [CUSTOM HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  // [COMPONENT STATE HOOKS]
-
-  // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const requireStateChange = (switchValue) => {

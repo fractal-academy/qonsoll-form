@@ -11,17 +11,10 @@ const { Option } = Select
 
 const opinionScaleTo = [5, 6, 7, 8, 9, 10]
 
-function OpinionScaleCustomConfig(props) {
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-
+function OpinionScaleCustomConfig() {
   // [CUSTOM HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
 
   // [COMPUTED PROPERTIES]
   const btnProps = currentQuestion?.btnProps
