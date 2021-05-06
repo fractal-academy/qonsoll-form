@@ -14,9 +14,9 @@
   border-radius: 12px;
 }
 .content-style {
-  display: flex;
   flex: 1;
-  flex-direction: column;
+  display: flex;
   overflow: auto;
   border-radius: 12px;
+  flex-direction: column;
 }

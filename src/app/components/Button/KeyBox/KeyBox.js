@@ -1,7 +1,7 @@
 import './KeyBox.styles.css'
 import PropTypes from 'prop-types'
 import { useHover } from '@umijs/hooks'
-import { Button } from 'app/components'
+import { Button } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 
@@ -23,7 +23,7 @@ function KeyBox(props) {
 
   return (
     <Box ref={hoverRef} mb={2}>
-      <Button buttonType="secondary" onClick={() => onButtonClick(letter)}>
+      <Button type="secondary" onClick={() => onButtonClick(letter)}>
         <Row display="flex" v="center" noGutters>
           <Col className={classes} mr={2}>
             {isHovering ? `Key ${letter}` : letter}

@@ -1,30 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { Form, Typography } from 'antd'
-import { Row, Col, Container } from '@qonsoll/react-design'
-import { Input, Button, SubmitButton } from 'components'
-// import { withTheme } from 'styled-components'
+import { Form } from 'antd'
 import PropTypes from 'prop-types'
-import { styles } from './InputForm.styles'
 import { globalStyles } from 'app/styles'
-
-const { Text, Title } = Typography
-// import { useTranslation } from 'react-i18next'
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+import { styles } from './InputForm.styles'
+import { Input, SubmitButton } from 'components'
+import { Row, Col, Container } from '@qonsoll/react-design'
 
 function InputForm(props) {
-  const { onSubmit, inputProps, isRequired, onClick, btnProps } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
+  const { onSubmit, inputProps, isRequired, onClick } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
-  // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const onFinish = (values) => {
@@ -34,23 +19,6 @@ function InputForm(props) {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
@@ -69,13 +37,10 @@ function InputForm(props) {
             </Form.Item>
           </Col>
         </Row>
-        {/* //TODO:REPLACE ON CUSTOM SUBMIT BUTTON */}
-        <Row mt={24}>
+
+        <Row mt={4} noGutters>
           <Col cw="auto">
             <SubmitButton onClick={onClick} />
-          </Col>
-          <Col cw="auto" v="center" ml={10}>
-            <Text>Press enter ↵</Text>
           </Col>
         </Row>
       </Container>

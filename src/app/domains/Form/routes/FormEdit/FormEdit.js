@@ -8,7 +8,6 @@ import {
 } from 'components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
-import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QuestionForm } from 'app/domains/Question/components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
@@ -22,7 +21,7 @@ import {
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 
-function FormEdit(props) {
+function FormEdit() {
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
@@ -31,14 +30,14 @@ function FormEdit(props) {
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
+  // [CUSTOM_HOOKS]
+  const currentQuestion = useCurrentQuestionContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   //[COMPONENT STATE HOOKS]
   const [isImageEditVisible, setIsImageEditVisible] = useState(false)
   const [showPopover, setShowPopover] = useState(false)
-
-  // [CUSTOM_HOOKS]
-  const currentQuestion = useCurrentQuestionContext()
-  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+  const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
 
   // [COMPUTED PROPERTIES]
   let questions, endings
@@ -75,6 +74,7 @@ function FormEdit(props) {
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
+    setDefaultTab(currentQuestion?.layoutType)
     setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
     // [EFFECT LOGIC]
     // write code here...
@@ -95,14 +95,14 @@ function FormEdit(props) {
       {formLoading || questionsListLoading ? (
         <Spinner />
       ) : (
-        <Box bg="#f6f9fe" display="flex" height="inherit" overflowX="hidden">
+        <Box display="flex" height="inherit" overflowX="hidden">
           <PageLayout title={form?.title}>
             <FormContentArea
               leftSideMenu={
                 !!Object.keys(currentQuestion).length && (
                   <QuestionLayoutSwitcher
                     onChange={onChangeMenuItem}
-                    defaultActive={LAYOUT_TYPE_KEYS[0]}
+                    defaultActive={defaultTab}
                   />
                 )
               }>
