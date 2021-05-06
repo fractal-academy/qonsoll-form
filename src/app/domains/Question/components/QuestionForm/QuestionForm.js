@@ -168,7 +168,6 @@ function QuestionForm(props) {
                     <>
                       <Row
                         noGutters
-                        px={2}
                         borderRadius={`${theme.borderRadius.md} ${theme.borderRadius.md} 0 0`}
                         onClick={changeQuestionConfigState}
                         bg={theme.color.text.dark}
