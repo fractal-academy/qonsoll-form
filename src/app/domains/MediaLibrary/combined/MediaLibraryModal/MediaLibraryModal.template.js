@@ -15,11 +15,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import Fuse from 'fuse.js'
-import {
-  DISPATCH_EVENTS,
-  useCurrentQuestionContext,
-  useCurrentQuestionContextDispatch
-} from 'app/context/CurrentQuestion'
 
 const { Title, Text } = Typography
 
@@ -34,8 +29,6 @@ function MediaLibraryModal(props) {
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
 
-  const currentQuestion = useCurrentQuestionContext()
-  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
