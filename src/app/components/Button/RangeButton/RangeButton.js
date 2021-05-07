@@ -43,7 +43,6 @@ function RangeButton(props) {
         <Button
           key={item}
           onClick={() => onButtonClick(item)}
-          type="text"
           className={(Number(buttonKey) === item && 'active') || 'range'}>
           {item}
         </Button>

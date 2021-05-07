@@ -73,7 +73,7 @@ function QuestionAdvancedView(props) {
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: (
-        <Button size="large" buttonText="213" type="primary" onClick={onClick}>
+        <Button size="large" type="primary" onClick={onClick}>
           Continue
         </Button>
       )

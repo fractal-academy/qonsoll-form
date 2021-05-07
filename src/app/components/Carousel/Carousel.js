@@ -44,16 +44,10 @@ function Carousel(props) {
 
       <Row h="right">
         <Col cw="auto" mt={4}>
-          <Button buttonType="primary" className="buttonGroup">
-            Powered by<b> Qonsoll</b>
-          </Button>
-          <Button
-            buttonType="primary"
-            onClick={previous}
-            className="buttonGroup">
+          <Button type="primary" onClick={previous} className="buttonGroup">
             <UpOutlined />
           </Button>
-          <Button buttonType="primary" className="buttonGroup" onClick={next}>
+          <Button type="primary" className="buttonGroup" onClick={next}>
             <DownOutlined />
           </Button>
         </Col>

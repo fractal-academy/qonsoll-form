@@ -23,7 +23,7 @@ function KeyBox(props) {
 
   return (
     <Box ref={hoverRef} mb={2}>
-      <Button type="secondary" onClick={() => onButtonClick(letter)}>
+      <Button onClick={() => onButtonClick(letter)}>
         <Row display="flex" v="center" noGutters>
           <Col className={classes} mr={2}>
             {isHovering ? `Key ${letter}` : letter}
