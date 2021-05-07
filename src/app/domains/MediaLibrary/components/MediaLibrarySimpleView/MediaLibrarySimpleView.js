@@ -6,6 +6,10 @@ import { styles } from './MediaLibrarySimpleView.styles'
 import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import { Input } from 'components'
 import RangeSlider from 'components/RangeSlider'
+import {
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 const { Text } = Typography
@@ -14,6 +18,8 @@ function MediaLibrarySimpleView(props) {
   // const { WRITE_PROPS_HERE } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
+  // [CUSTOM HOOKS]
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -23,7 +29,12 @@ function MediaLibrarySimpleView(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
-
+  const onMediaModalContinue = (selectedImage) => {
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { image: selectedImage }
+    })
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -59,6 +70,7 @@ function MediaLibrarySimpleView(props) {
                 onClick={() => {
                   setIsImageEditVisible(false)
                 }}
+                onContinue={onMediaModalContinue}
                 btnProps={{
                   type: 'primary',
                   icon: <EditOutlined style={styles.btnStyle} />

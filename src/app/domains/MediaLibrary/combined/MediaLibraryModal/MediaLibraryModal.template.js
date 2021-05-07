@@ -24,7 +24,7 @@ import {
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { btnProps, onClick, setMediaUrl } = props
+  const { btnProps, onClick, onContinue } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -55,15 +55,7 @@ function MediaLibraryModal(props) {
   // [CLEAN FUNCTIONS]
   const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    await currentQuestionDispatch({
-      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { ...currentQuestion, image: selectedBackgroundImg }
-    })
-
-    setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
-      ...currentQuestion,
-      image: selectedBackgroundImg
-    })
+    onContinue && onContinue(selectedBackgroundImg)
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
