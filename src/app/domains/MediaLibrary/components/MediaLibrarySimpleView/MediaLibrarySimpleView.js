@@ -1,46 +1,30 @@
-import React, { useEffect, useState } from 'react'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Card, Typography } from 'antd'
-import { EditOutlined, EyeFilled, PlusOutlined } from '@ant-design/icons'
+import { Typography } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 import { styles } from './MediaLibrarySimpleView.styles'
 import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import { Input } from 'components'
 import RangeSlider from 'components/RangeSlider'
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+import {
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
+import PropTypes from 'prop-types'
+
 const { Text } = Typography
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible, bgImage } = props
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-
-  // [COMPONENT STATE HOOKS]
-
-  // [COMPUTED PROPERTIES]
+  // [CUSTOM HOOKS]
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [CLEAN FUNCTIONS]
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
+  const onMediaModalContinue = (selectedImage) => {
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { image: selectedImage }
+    })
+  }
 
   return (
     <Row noGutters>
@@ -59,6 +43,7 @@ function MediaLibrarySimpleView(props) {
                 onClick={() => {
                   setIsImageEditVisible(false)
                 }}
+                onContinue={onMediaModalContinue}
                 btnProps={{
                   type: 'primary',
                   icon: <EditOutlined style={styles.btnStyle} />
@@ -92,6 +77,9 @@ function MediaLibrarySimpleView(props) {
   )
 }
 
-MediaLibrarySimpleView.propTypes = {}
+MediaLibrarySimpleView.propTypes = {
+  setIsImageEditVisible: PropTypes.bool,
+  bgImage: PropTypes.string
+}
 
 export default MediaLibrarySimpleView

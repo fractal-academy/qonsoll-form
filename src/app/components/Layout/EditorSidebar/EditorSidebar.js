@@ -58,10 +58,6 @@ function EditorSidebar(props) {
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
-    // add to database
-    await setData(COLLECTIONS.QUESTIONS, questionId, newQuestion).catch((e) =>
-      message.error(e.message)
-    )
     key && setshowPopover(!showPopover)
   }
   const popoverShowChange = () => {
