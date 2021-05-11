@@ -15,16 +15,11 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import Fuse from 'fuse.js'
-import {
-  DISPATCH_EVENTS,
-  useCurrentQuestionContext,
-  useCurrentQuestionContextDispatch
-} from 'app/context/CurrentQuestion'
 
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { btnProps, onClick, setMediaUrl } = props
+  const { btnProps, onClick, onContinue } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
@@ -34,8 +29,6 @@ function MediaLibraryModal(props) {
     setData(COLLECTIONS?.MEDIA, mediaId, data)
   }
 
-  const currentQuestion = useCurrentQuestionContext()
-  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -55,15 +48,7 @@ function MediaLibraryModal(props) {
   // [CLEAN FUNCTIONS]
   const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    await currentQuestionDispatch({
-      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { ...currentQuestion, image: selectedBackgroundImg }
-    })
-
-    setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
-      ...currentQuestion,
-      image: selectedBackgroundImg
-    })
+    onContinue && onContinue(selectedBackgroundImg)
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)

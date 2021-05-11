@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Typography, Input } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
-import { ImageUploader } from 'components'
-import { CloseOutlined } from '@ant-design/icons'
+import { CloseOutlined, EditOutlined } from '@ant-design/icons'
 import { styles } from './ChoiceInput.styles'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from 'app/context/CurrentQuestion'
+import { DEFAULT_IMAGE } from 'app/constants'
+import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
+import theme from 'app/styles/theme'
 
 // import { useTranslation } from 'react-i18next'
 const { Text } = Typography
@@ -31,13 +33,16 @@ function ChoiceInput(props) {
   // [COMPUTED PROPERTIES]
   const choiceProps = currentQuestion.btnProps
   const letter = String.fromCharCode(startLetter + index)
+  const bgImage = `url(${data?.image || DEFAULT_IMAGE})`
+
   // [CLEAN FUNCTIONS]
   const onChange = (e) => {
     setValue(e.target.value)
   }
   const onBlur = async () => {
+    //if the value has not changed do nothing, reduce the number of queries to the database
     if (choiceProps[index].name === value) return
-
+    // update the choice we need
     choiceProps[index].name = value
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
@@ -45,7 +50,16 @@ function ChoiceInput(props) {
     })
   }
   const onDelete = async () => {
+    //remove item from array with 'index' position,
+    //'1' - amount of deleted elements from index position till the end(check how splice works for details)
     choiceProps.splice(index, 1)
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { btnProps: choiceProps }
+    })
+  }
+  const onMediaModalContinue = (selectedImage) => {
+    choiceProps[index].image = selectedImage
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { btnProps: choiceProps }
@@ -53,38 +67,36 @@ function ChoiceInput(props) {
   }
   // [USE_EFFECTS]
   useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
+    //update text area value when delete element
+    setValue(data?.name)
+  }, [data])
 
   return (
     <Box
       bg="#d6e1f2"
+      borderRadius={theme.borderRadius.md}
       p={2}
-      borderRadius="8px"
       m={1}
       width={withImage ? 'auto' : '150px'}
       position="relative">
       {withImage && (
-        <Row>
-          <Col cw="auto">
-            <ImageUploader />
-          </Col>
-        </Row>
+        <Box
+          height="100px"
+          borderRadius={theme.borderRadius.md}
+          position="relative"
+          backgroundRepeat="no-repeat"
+          backgroundSize="cover"
+          backgroundImage={bgImage}>
+          <MediaLibraryModal
+            btnProps={{
+              type: 'primary',
+              icon: <EditOutlined style={styles.btnStyle} />
+            }}
+            onContinue={onMediaModalContinue}
+          />
+        </Box>
       )}
-      <Row pt={withImage && 2}>
+      <Row pt={withImage && 2} noGutters>
         <Col cw="auto" pt={1}>
           <Text style={styles.keyLetterStyles}>{letter}</Text>
         </Col>
@@ -109,7 +121,7 @@ function ChoiceInput(props) {
         borderRadius="50%"
         style={styles.deleteBtnStyles}
         onClick={onDelete}>
-        <CloseOutlined style={styles.deleteIconStyles} />
+        <CloseOutlined />
       </Box>
     </Box>
   )
