@@ -1,7 +1,7 @@
-import { Typography } from 'antd'
-import './SubmitButton.styles.css'
-import PropTypes from 'prop-types'
+import '../Button.styles.css'
 import { Button } from 'antd'
+import { Typography } from 'antd'
+import PropTypes from 'prop-types'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 

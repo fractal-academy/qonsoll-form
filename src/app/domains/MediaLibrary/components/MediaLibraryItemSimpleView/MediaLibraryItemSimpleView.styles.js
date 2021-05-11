@@ -1,6 +1,3 @@
-import { Box } from '@qonsoll/react-design'
-import React from 'react'
-
 export const styles = {
   cardStyles: {
     height: '206px',

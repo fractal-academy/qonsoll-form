@@ -50,7 +50,7 @@ function EditorSidebar(props) {
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
       order: questions?.length,
-      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
+      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     }
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,

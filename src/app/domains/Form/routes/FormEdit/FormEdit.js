@@ -63,7 +63,7 @@ function FormEdit() {
   }
   const onQuestionTypeChange = async ({ key }) => {
     const btnProps =
-      key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
+      key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key, btnProps }

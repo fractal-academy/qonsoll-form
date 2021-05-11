@@ -20,7 +20,7 @@ code {
 
 @import "~antd/dist/antd.less";
 
-// [Custom scrollbar]
+// [CUSTOM SCROLLBAR]
 ::-webkit-scrollbar {
   width: 7px;
 }
@@ -32,4 +32,10 @@ code {
 ::-webkit-scrollbar-thumb {
   background: #282c34;
   border-radius: 10px;
+}
+
+// [FIX CAROUSEL HEIGHT WITH ONE ITEM BUG ]
+.ant-carousel .slick-slider .slick-track,
+.ant-carousel .slick-slider .slick-list {
+  height: 500px;
 }
