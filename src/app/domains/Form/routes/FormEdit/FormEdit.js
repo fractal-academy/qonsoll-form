@@ -52,7 +52,7 @@ function FormEdit() {
   }
 
   // [CLEAN FUNCTIONS]
-  const onChangeMenuItem = async ({ key }) => {
+  const onChangeMenuItem = ({ key }) => {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
