@@ -40,11 +40,9 @@ function FormSimpleView(props) {
 
   const handleDelete = async () => {
     setConfirmLoading(true)
-    try {
-      await deleteData(COLLECTIONS.FORMS, id)
-    } catch (e) {
-      message.error("Can't delete form")
-    }
+    await deleteData(COLLECTIONS.FORMS, id).catch((e) =>
+      message.error(e.message)
+    )
 
     setVisible(false)
     setConfirmLoading(false)

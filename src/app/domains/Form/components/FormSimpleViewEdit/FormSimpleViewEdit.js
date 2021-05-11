@@ -31,14 +31,11 @@ const FormSimpleViewEdit = (props) => {
   }
   const onFormEdit = async (data) => {
     setLoading(true)
-    try {
-      await updateData(COLLECTIONS.FORMS, formData.id, {
-        title: data?.name,
-        subtitle: data?.description
-      })
-    } catch (e) {
-      message.error(e)
-    }
+
+    await updateData(COLLECTIONS.FORMS, formData.id, {
+      title: data?.name,
+      subtitle: data?.description
+    }).catch((e) => message.error(e.message))
 
     form.resetFields()
     setLoading(false)
