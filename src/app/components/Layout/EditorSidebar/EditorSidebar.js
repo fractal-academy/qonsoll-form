@@ -56,8 +56,6 @@ function EditorSidebar(props) {
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
-    await setData(COLLECTIONS.QUESTIONS, questionId, newQuestion)
-    // setQuestionsList((questionsList) => [...questionsList, newQuestion])
     key && setshowPopover(!showPopover)
   }
   const popoverShowChange = () => {
