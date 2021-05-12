@@ -13,7 +13,6 @@ import {
   DateTimeInput
   // QuestionHeader
 } from 'components'
-import QuestionHeader from 'app/domains/Question/components/QuestionHeader'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
 import {
@@ -27,9 +26,12 @@ import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
-import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
+import {
+  QuestionTypeSelect,
+  QuestionConfigurationMenu,
+  QuestionHeader
+} from 'domains/Question/components'
 import theme from 'app/styles/theme'
-import { QuestionConfigurationMenu } from '..'
 import { globalStyles } from 'app/styles'
 
 const { Title } = Typography

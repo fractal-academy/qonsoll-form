@@ -1,3 +1,3 @@
-import MediaLibraryModal from './MediaLibraryModal.template'
+import MediaLibraryModal from './MediaLibraryModal'
 
 export default MediaLibraryModal

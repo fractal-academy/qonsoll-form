@@ -1,4 +1,4 @@
-import RatingCustomConfig from './RatingCustomConfig.template'
-import OpinionScaleCustomConfig from './OpinionScaleCustomConfig.template'
+import RatingCustomConfig from './RatingCustomConfig'
+import OpinionScaleCustomConfig from './OpinionScaleCustomConfig'
 
 export { RatingCustomConfig, OpinionScaleCustomConfig }
