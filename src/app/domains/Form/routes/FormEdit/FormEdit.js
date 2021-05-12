@@ -79,11 +79,12 @@ function FormEdit() {
     //set default active tab for questionLayout switcher every time when we change current question
     setDefaultTab(currentQuestion?.layoutType)
     //save data of current question to database, when it change
-    setData(
-      COLLECTIONS.QUESTIONS,
-      currentQuestion?.id,
-      currentQuestion
-    ).catch((e) => message.error(e.message))
+    !!Object.keys(currentQuestion).length &&
+      setData(
+        COLLECTIONS.QUESTIONS,
+        currentQuestion?.id,
+        currentQuestion
+      ).catch((e) => message.error(e.message))
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)
