@@ -20,7 +20,7 @@ function RatingTemplate(props) {
               display="flex"
               alignItems="center"
               key={index}
-              p={2}
+              p={1}
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">

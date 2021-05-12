@@ -12,6 +12,7 @@ import { PlaneShortTextStringTemplate } from 'domains/Condition/components/Condi
 import { PlaneLongTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
 import { FileUploadTemplate } from 'domains/Condition/components/ConditionTemplates'
 import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -51,20 +52,22 @@ function ConditionForm(props) {
     getQuestionListRedirect
   } = props
   return (
-    <Card number={mockQuestionIndex + 2} key={mockQuestionIndex}>
-      <Box ml={3}>
-        <Title level={5} strong>
-          {item.name}
-        </Title>
-        {cloneElement(questionTypesMap[item.questionType].component, {
-          ...item,
-          addCondition: (answer) => addCondition(answer, mockQuestionIndex),
-          addRedirectQuestion: (question, answerIndex) =>
-            addRedirectQuestion(question, answerIndex, mockQuestionIndex),
-          questionList: getQuestionListRedirect(mockQuestionIndex)
-        })}
-      </Box>
-    </Card>
+    <Box mb={3}>
+      <Card number={mockQuestionIndex + 2} key={mockQuestionIndex}>
+        <Box ml={3}>
+          <Title level={5} strong>
+            {item.name}
+          </Title>
+          {cloneElement(questionTypesMap[item.questionType].component, {
+            ...item,
+            addCondition: (answer) => addCondition(answer, mockQuestionIndex),
+            addRedirectQuestion: (question, answerIndex) =>
+              addRedirectQuestion(question, answerIndex, mockQuestionIndex),
+            questionList: getQuestionListRedirect(mockQuestionIndex)
+          })}
+        </Box>
+      </Card>
+    </Box>
   )
 }
 ConditionForm.propTypes = {

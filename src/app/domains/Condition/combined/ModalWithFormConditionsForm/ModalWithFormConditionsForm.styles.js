@@ -1,6 +1,9 @@
+import theme from 'app/styles/theme'
+
 export const styles = {
   modalBodyStyle: {
     height: '700px',
-    overflow: 'auto'
+    overflow: 'auto',
+    backgroundColor: theme.color.dark.lighten8
   }
 }

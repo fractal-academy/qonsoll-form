@@ -19,41 +19,47 @@ function PlaneTextDateTemplate(props) {
     <>
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
-          <Col cw="auto">
-            <Box
-              display="flex"
-              border="1px solid #bbbbbb"
-              borderRadius="4px"
-              mr={2}
-              width={210}>
-              <Select
-                showSearch
-                allowClear
-                bordered={false}
-                defaultValue={DATE_CONDITION_RULES_VALUES[0]}
-                style={styles.selectStyle}>
-                {DATE_CONDITION_RULES_VALUES.map((item, index) => (
-                  <Option key={index} value={item} onClick={() => {}}>
-                    {item}
-                  </Option>
-                ))}
-              </Select>
-            </Box>
+          <Col cw={6}>
+            <Row noGutters>
+              <Col cw="6">
+                <Box
+                  display="flex"
+                  border="1px solid #bbbbbb"
+                  borderRadius="4px"
+                  mr={2}
+                  // width={210}
+                >
+                  <Select
+                    showSearch
+                    allowClear
+                    bordered={false}
+                    defaultValue={DATE_CONDITION_RULES_VALUES[0]}
+                    style={styles.selectStyle}>
+                    {DATE_CONDITION_RULES_VALUES.map((item, index) => (
+                      <Option key={index} value={item} onClick={() => {}}>
+                        {item}
+                      </Option>
+                    ))}
+                  </Select>
+                </Box>
+              </Col>
+              <Col cw="6">
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  key={index}
+                  // width="200px"
+                  // p={2}
+                  mr={2}
+                  border="1px solid #bbbbbb"
+                  borderRadius="4px">
+                  <DatePicker style={styles.selectStyle} bordered={false} />
+                </Box>
+              </Col>
+            </Row>
           </Col>
-          <Col cw="auto">
-            <Box
-              display="flex"
-              alignItems="center"
-              key={index}
-              width="200px"
-              p={2}
-              mr={2}
-              border="1px solid #bbbbbb"
-              borderRadius="4px">
-              <DatePicker style={globalStyles.fullWidth} bordered={false} />
-            </Box>
-          </Col>
-          <Col>
+
+          <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
               answers={answers}
@@ -63,7 +69,7 @@ function PlaneTextDateTemplate(props) {
           </Col>
         </Row>
       ))}
-      <Button size="large" style={styles.bgc} onClick={onClick}>
+      <Button size="medium" style={styles.bgc} onClick={onClick}>
         <Text strong style={styles.fontColor}>
           + Add condition
         </Text>

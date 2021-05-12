@@ -21,7 +21,7 @@ function OpinionScaleTemplate(props) {
             <Box
               display="flex"
               alignItems="center"
-              p={2}
+              p={1}
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">

@@ -12,12 +12,12 @@ function YesNoChoiceTemplate(props) {
   return (
     <>
       {answers.map((item, index) => (
-        <Row mb={2} key={index}>
-          <Col>
+        <Row mb={2} key={index} noGutters>
+          <Col cw={6}>
             <Box
               display="flex"
               alignItems="center"
-              p={2}
+              p={1}
               mr={2}
               border="1px solid #bbbbbb"
               borderRadius="4px">
@@ -27,7 +27,7 @@ function YesNoChoiceTemplate(props) {
               {item.name}
             </Box>
           </Col>
-          <Col>
+          <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
               answers={answers}
