@@ -10,9 +10,10 @@ import {
   SubmitButton,
   FileUploader,
   TextAreaForm,
-  DateTimeInput,
-  QuestionHeader
+  DateTimeInput
+  // QuestionHeader
 } from 'components'
+import QuestionHeader from 'app/domains/Question/components/QuestionHeader'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
 import {

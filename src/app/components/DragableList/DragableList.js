@@ -1,36 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import {
-  sortableContainer,
-  sortableElement,
-  sortableHandle
-} from 'react-sortable-hoc'
-import arrayMove from 'array-move'
 import { List } from 'antd'
-import { Box, Col, Row } from '@qonsoll/react-design'
-import styles from './DragableList.styles'
-import { MoreOutlined } from '@ant-design/icons'
+import arrayMove from 'array-move'
+import SortableItem from './SortableItem'
+import { Box } from '@qonsoll/react-design'
+import SortableContainer from './SortableContainer'
+import { useEffect, useMemo, useState } from 'react'
 
-const DragHandle = sortableHandle(() => (
-  <Box>
-    <MoreOutlined style={{ marginRight: '-10px' }} />
-    <MoreOutlined />
-  </Box>
-))
-
-const SortableItem = sortableElement(({ children }) => (
-  <Row noGutters v="center" mb={3}>
-    <Col cw="auto" mr={1}>
-      <DragHandle />
-    </Col>
-    <Col style={styles.colStyles}>{children}</Col>
-  </Row>
-))
-
-const SortableContainer = sortableContainer(({ children }) => (
-  <Box>{children}</Box>
-))
-
-export default function DragableList(props) {
+function DragableList(props) {
   const { dataSource, onUpdate, renderItem, sortable = true, ...args } = props
 
   // [COMPONENT STATE HOOKS]
@@ -82,3 +57,5 @@ export default function DragableList(props) {
     </Container>
   )
 }
+
+export default DragableList
