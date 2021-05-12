@@ -1,40 +1,37 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
-import { globalStyles } from 'app/styles'
-import { styles } from './MediaLibraryModal.styles'
+import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
 import './MediaLibraryModal.styles.css'
+import { globalStyles } from 'app/styles'
+import COLLECTIONS from 'app/constants/collection'
+import { styles } from './MediaLibraryModal.styles'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import React, { useEffect, useRef, useState } from 'react'
+import firebase, { firestore } from 'app/services/Firebase'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { getCollectionRef, setData } from 'app/services/Firestore'
+import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import {
   MediaLibraryFilter,
   MediaLibraryItemSimpleView
 } from 'domains/MediaLibrary/components'
-import Fuse from 'fuse.js'
-import COLLECTIONS from 'app/constants/collection'
-import firebase, { firestore } from 'app/services/Firebase'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { getCollectionRef, setData } from 'app/services/Firestore'
 import {
-  DISPATCH_EVENTS,
-  useCurrentQuestionContext,
-  useCurrentQuestionContextDispatch
-} from 'app/context/CurrentQuestion'
+  Modal,
+  Button,
+  Typography,
+  Input,
+  Divider,
+  Upload,
+  message
+} from 'antd'
 
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { btnProps, onClick } = props
+  const { btnProps, onClick, onContinue } = props
 
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
-  const onMediaUploaded = (data) => {
-    const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
-    setData(COLLECTIONS?.MEDIA, mediaId, data)
-  }
   const searchRef = useRef()
-  const currentQuestion = useCurrentQuestionContext()
-  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -49,17 +46,15 @@ function MediaLibraryModal(props) {
   const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
 
   // [CLEAN FUNCTIONS]
+  const onMediaUploaded = (data) => {
+    const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
+    setData(COLLECTIONS?.MEDIA, mediaId, data).catch((e) =>
+      message.error(e.message)
+    )
+  }
   const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    await currentQuestionDispatch({
-      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { ...currentQuestion, image: selectedBackgroundImg }
-    })
-
-    setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
-      ...currentQuestion,
-      image: selectedBackgroundImg
-    })
+    onContinue && onContinue(selectedBackgroundImg)
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
@@ -83,18 +78,16 @@ function MediaLibraryModal(props) {
   const onChange = (input) => {
     searchData(input.target.value)
   }
-
   const customRequest = (data) => {
     const { onSuccess } = data
     const ref = firebase.storage().ref('images').child(data.file.uid)
-
     const image = ref.put(data.file)
     image.on(
       'state_changed',
       (snapshot) => {},
       (error) => {
         // Handle error during the upload
-        console.error('message')
+        message.error(error.message)
       },
       () => {
         image.snapshot.ref

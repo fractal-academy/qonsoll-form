@@ -4,7 +4,7 @@ import { COLLECTIONS } from 'app/constants'
 import { DragableList } from 'app/components'
 import { setData } from 'app/services/Firestore'
 import QuestionSimpleView from 'app/domains/Question/components/QuestionSimpleView'
-
+import { message } from 'antd'
 function QuestionsList(props) {
   const { data, setNewOrder, onItemClick } = props
 
@@ -13,7 +13,7 @@ function QuestionsList(props) {
     data.forEach((item) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         order: item?.order
-      })
+      }).catch((e) => message.error(e.message))
     )
   }
   const dataSource = useMemo(

@@ -9,7 +9,8 @@ import {
   Menu,
   Input,
   Form,
-  Modal
+  Modal,
+  message
 } from 'antd'
 import {
   ArrowLeftOutlined,
@@ -64,16 +65,13 @@ function FormsAll(props) {
 
   const onFormCreate = async (data) => {
     setLoading(true)
-    try {
-      await setData(COLLECTIONS.FORMS, formId, {
-        id: formId,
-        title: data?.name,
-        subtitle: data?.description || '',
-        creationDate: getTimestamp().now()
-      })
-    } catch (e) {
-      console.error(e.message)
-    }
+    await setData(COLLECTIONS.FORMS, formId, {
+      id: formId,
+      title: data?.name,
+      subtitle: data?.description || '',
+      creationDate: getTimestamp().now()
+    }).catch((e) => message.error(e.message))
+
     setLoading(false)
     setIsModalVisible(false)
     form.resetFields()

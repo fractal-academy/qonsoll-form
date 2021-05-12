@@ -24,11 +24,9 @@ function QuestionSimpleView(props) {
     setVisible(false)
   }
   const handleDelete = async () => {
-    try {
-      await deleteData(COLLECTIONS.QUESTIONS, id)
-    } catch (e) {
-      message.error('Oops! Something went wrong.')
-    }
+    await deleteData(COLLECTIONS.QUESTIONS, id).catch((e) =>
+      message.error(e.message)
+    )
   }
 
   return (

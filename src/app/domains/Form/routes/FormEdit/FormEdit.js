@@ -20,7 +20,7 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-
+import { message } from 'antd'
 function FormEdit() {
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
@@ -40,19 +40,20 @@ function FormEdit() {
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
 
   // [COMPUTED PROPERTIES]
-  let questions, endings
-  if (!formLoading && !questionsListLoading) {
-    questions = questionsList.filter(
-      (item) => item.questionType !== QUESTION_TYPES.ENDING
-    )
 
-    endings = questionsList.filter(
-      (item) => item.questionType === QUESTION_TYPES.ENDING
-    )
+  // divide all tasks of current form into 2 groups
+  let questions = [],
+    endings = []
+  if (!formLoading && !questionsListLoading) {
+    questionsList.forEach((item) => {
+      item.questionType !== QUESTION_TYPES.ENDING
+        ? questions.push(item)
+        : endings.push(item)
+    })
   }
 
   // [CLEAN FUNCTIONS]
-  const onChangeMenuItem = async ({ key }) => {
+  const onChangeMenuItem = ({ key }) => {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
@@ -62,6 +63,7 @@ function FormEdit() {
     })
   }
   const onQuestionTypeChange = async ({ key }) => {
+    //when we change question type on choice, set default choice, else empty field
     const btnProps =
       key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     await currentQuestionDispatch({
@@ -74,8 +76,14 @@ function FormEdit() {
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
+    //set default active tab for questionLayout switcher every time when we change current question
     setDefaultTab(currentQuestion?.layoutType)
-    setData(COLLECTIONS.QUESTIONS, currentQuestion?.id, currentQuestion)
+    //save data of current question to database, when it change
+    setData(
+      COLLECTIONS.QUESTIONS,
+      currentQuestion?.id,
+      currentQuestion
+    ).catch((e) => message.error(e.message))
     // [EFFECT LOGIC]
     // write code here...
     // code sample: isComponentMounted && setState(<your data for state updation>)

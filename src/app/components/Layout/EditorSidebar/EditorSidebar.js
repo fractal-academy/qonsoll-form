@@ -1,7 +1,7 @@
 import './EditorSidebar.styles.css'
 import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, Divider } from 'antd'
+import { Typography, Divider, message } from 'antd'
 import {
   LeftOutlined,
   PlusOutlined,
@@ -43,6 +43,7 @@ function EditorSidebar(props) {
   // [CLEAN FUNCTIONS]
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+    // default data for created question
     const newQuestion = {
       id: questionId,
       formId: id,
@@ -52,19 +53,20 @@ function EditorSidebar(props) {
       order: questions?.length,
       btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     }
+    // set it into context as current
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
-    await setData(COLLECTIONS.QUESTIONS, questionId, newQuestion)
-    // setQuestionsList((questionsList) => [...questionsList, newQuestion])
     key && setshowPopover(!showPopover)
   }
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }
   const setNewOrder = (item) => {
-    setData(COLLECTIONS.QUESTIONS, item?.id, item)
+    setData(COLLECTIONS.QUESTIONS, item?.id, item).catch((e) =>
+      message.error(e.message)
+    )
   }
   const onItemClick = (item) => {
     currentQuestionDispatch({
