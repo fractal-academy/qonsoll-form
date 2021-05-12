@@ -8,7 +8,7 @@ import {
 } from 'components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
-import { QuestionForm } from 'app/domains/Question/components'
+import { QuestionForm } from 'domains/Question/components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
 import {

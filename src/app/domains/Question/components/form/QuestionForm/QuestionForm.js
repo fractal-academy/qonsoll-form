@@ -28,8 +28,8 @@ import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import {
   QuestionTypeSelect,
-  QuestionConfigurationMenu,
-  QuestionHeader
+  QuestionHeader,
+  QuestionConfigurationMenu
 } from 'domains/Question/components'
 import theme from 'app/styles/theme'
 import { globalStyles } from 'app/styles'

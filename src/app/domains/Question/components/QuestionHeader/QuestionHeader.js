@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Row, Col } from '@qonsoll/react-design'
-import QuestionTitle from 'app/domains/Question/components/QuestionTitle'
-import QuestionSubtitle from 'app/domains/Question/components/QuestionSubtitle'
+import QuestionTitle from 'domains/Question/components/QuestionTitle'
+import QuestionSubtitle from 'domains/Question/components/QuestionSubtitle'
 
 function QuestionHeader(props) {
   const { titlePlaceholder, subtitlePlaceholder } = props
