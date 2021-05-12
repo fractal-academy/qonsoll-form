@@ -75,27 +75,15 @@ function FormEdit() {
 
   // [USE_EFFECTS]
   useEffect(() => {
-    let isComponentMounted = true
     //set default active tab for questionLayout switcher every time when we change current question
     setDefaultTab(currentQuestion?.layoutType)
     //save data of current question to database, when it change
-    setData(
-      COLLECTIONS.QUESTIONS,
-      currentQuestion?.id,
-      currentQuestion
-    ).catch((e) => message.error(e.message))
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
+    !!Object.keys(currentQuestion).length &&
+      setData(
+        COLLECTIONS.QUESTIONS,
+        currentQuestion?.id,
+        currentQuestion
+      ).catch((e) => message.error(e.message))
   }, [currentQuestion])
 
   return (
