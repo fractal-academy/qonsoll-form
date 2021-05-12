@@ -6,10 +6,15 @@ import COLLECTIONS from 'app/constants/collection'
 import { FormSimpleForm } from 'domains/Form/components'
 import Text from 'antd/es/typography/Text'
 
-const FormSimpleViewEdit = (props) => {
-  const { formData } = props
+const FormSimpleFormWithModal = (props) => {
+  const {
+    formData,
+    isModalVisible,
+    setIsModalVisible,
+    onModalSubmit,
+    isEdit
+  } = props
   // [STATE]
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   // [ADDITIONAL_HOOKS]
 
@@ -19,24 +24,14 @@ const FormSimpleViewEdit = (props) => {
 
   // [HELPER_FUNCTIONS]
 
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
-
   const handleCancel = () => {
     setLoading(false)
     setIsModalVisible(false)
-
     form.resetFields()
   }
   const onFormEdit = async (data) => {
     setLoading(true)
-
-    await updateData(COLLECTIONS.FORMS, formData.id, {
-      title: data?.name,
-      subtitle: data?.description
-    }).catch((e) => message.error(e.message))
-
+    onModalSubmit()
     form.resetFields()
     setLoading(false)
     setIsModalVisible(false)
@@ -44,12 +39,10 @@ const FormSimpleViewEdit = (props) => {
 
   return (
     <>
-      <Text onClick={showModal} key={'showModal'}>
-        Rename
-      </Text>
-
       <Modal
-        title={<Title level={4}>Edit form</Title>}
+        title={
+          <Title level={4}>{isEdit ? 'Edit form' : 'Create new form'}</Title>
+        }
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={[
@@ -58,7 +51,7 @@ const FormSimpleViewEdit = (props) => {
             onClick={() => form.submit()}
             type="primary"
             loading={loading}>
-            Save changes
+            {isEdit ? 'Save changes' : 'Create form'}
           </Button>
         ]}>
         <FormSimpleForm form={form} onFinish={onFormEdit} formData={formData} />
@@ -67,4 +60,4 @@ const FormSimpleViewEdit = (props) => {
   )
 }
 
-export default FormSimpleViewEdit
+export default FormSimpleFormWithModal

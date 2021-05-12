@@ -3,12 +3,13 @@ import { ROUTES_PATHS } from 'app/constants'
 import { useState, cloneElement } from 'react'
 import { styles } from './FormSimpleView.style'
 import COLLECTIONS from 'app/constants/collection'
-import { deleteData } from 'app/services/Firestore'
+import { deleteData, updateData } from 'app/services/Firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { generatePath, useHistory } from 'react-router-dom'
 import { FormSimpleViewEdit } from 'domains/Form/components'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { Card, Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
+import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
 
 const { Meta } = Card
 const { Text } = Typography
@@ -20,6 +21,7 @@ function FormSimpleView(props) {
   const history = useHistory()
 
   // [COMPONENT STATE HOOKS]
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
 
@@ -37,6 +39,9 @@ function FormSimpleView(props) {
   const showPopconfirm = () => {
     setVisible(true)
   }
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
 
   const handleDelete = async () => {
     setConfirmLoading(true)
@@ -47,12 +52,28 @@ function FormSimpleView(props) {
     setVisible(false)
     setConfirmLoading(false)
   }
-
+  const onModalSubmit = async (data) => {
+    await updateData(COLLECTIONS.FORMS, id, {
+      title: data?.name,
+      subtitle: data?.description
+    }).catch((e) => message.error(e.message))
+  }
   // [MENU TEMPLATE]
   const menu = (
     <Menu>
       <Menu.Item>
-        <FormSimpleViewEdit formData={props} />
+        <>
+          <Text onClick={showModal} key={'showModal'}>
+            Rename
+          </Text>
+          <FormSimpleFormWithModal
+            formData={props}
+            isModalVisible={isModalVisible}
+            setIsModalVisible={setIsModalVisible}
+            onModalSubmit={onModalSubmit}
+            isEdit
+          />
+        </>
       </Menu.Item>
       <Menu.Item onClick={showPopconfirm}>
         <Popconfirm

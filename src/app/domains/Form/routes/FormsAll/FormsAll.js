@@ -25,6 +25,8 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import { Spinner } from 'components'
+import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
+import { styles } from './FormsAll.style'
 
 const { Title, Text } = Typography
 const mockRoutes = [
@@ -64,17 +66,12 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
-    setLoading(true)
     await setData(COLLECTIONS.FORMS, formId, {
       id: formId,
       title: data?.name,
       subtitle: data?.description || '',
       creationDate: getTimestamp().now()
     }).catch((e) => message.error(e.message))
-
-    setLoading(false)
-    setIsModalVisible(false)
-    form.resetFields()
   }
 
   const menu = (
@@ -171,42 +168,17 @@ function FormsAll(props) {
           </Box>
         ))}
         <Box
-          bg="#eceff5"
-          mr={3}
-          mb={3}
-          borderRadius="8px"
-          width="245px"
-          height="214px"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
+          {...styles.addNewItemStyles}
           style={globalStyles.cursorPointer}
           onClick={showModal}>
           <PlusOutlined />
         </Box>
 
-        {/*Modal window form creation*/}
-        <Modal
-          title={<Title level={4}>Create new typeform</Title>}
-          visible={isModalVisible}
-          onCancel={handleCancel}
-          destroyOnClose
-          footer={[
-            <Button key="back" onClick={handleCancel}>
-              Cancel
-            </Button>,
-            <Button
-              key="submit"
-              loading={loading}
-              onClick={() => {
-                form.submit()
-              }}
-              type="primary">
-              Create
-            </Button>
-          ]}>
-          <FormSimpleForm form={form} onFinish={onFormCreate} />
-        </Modal>
+        <FormSimpleFormWithModal
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+          onModalSubmit={onFormCreate}
+        />
       </Box>
     </Box>
   )
