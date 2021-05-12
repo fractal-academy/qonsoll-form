@@ -21,24 +21,41 @@ import {
 const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
-  const { data, questionNumber, onClick } = props
+  const { data, questionNumber, onClick, currentSlide } = props
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.YES_NO]: {
-      component: <YesnoButton onClick={onClick} />
+      component: <YesnoButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
       component: (
         <ChoiceButton
-          choices={data?.btnProps?.children}
+          choices={data?.btnProps}
           onClick={onClick}
           hasImages
+          currentSlide={currentSlide}
+        />
+      )
+    },
+    [QUESTION_TYPES.CHOICE]: {
+      component: (
+        <ChoiceButton
+          choices={data?.btnProps}
+          onClick={onClick}
+          currentSlide={currentSlide}
         />
       )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton from={1} to={5} onClick={onClick} />
+      component: (
+        <RangeButton
+          from={1}
+          to={5}
+          onClick={onClick}
+          currentSlide={currentSlide}
+        />
+      )
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
@@ -81,17 +98,17 @@ function QuestionAdvancedView(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
-
+  //component for recieved question according to question type
   const component = questionTypesMap[data?.questionType].component
   const layoutType = LAYOUT_TYPES[data?.layoutType]
+  //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
     layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
-    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type
-
+    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type &&
+    layoutType.type !== LAYOUT_TYPES.DEFAULT.type
   const bgImage = {
     ...(layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
       ? {
-          //mock data will be replaced
           backgroundRepeat: 'no-repeat',
           backgroundImage: `url(${data?.image})`
         }
@@ -125,7 +142,7 @@ function QuestionAdvancedView(props) {
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row pt={25}>
+            <Row pt={25} noGutters>
               <Col cw="auto">
                 <Box
                   {...layoutType.imgSize}

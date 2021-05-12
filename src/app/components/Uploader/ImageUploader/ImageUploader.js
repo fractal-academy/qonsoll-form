@@ -37,7 +37,7 @@ const ImageUploader = (props) => {
   const handleUploadSuccess = (filename) => {}
 
   return (
-    <Row h="center">
+    <Row h="center" noGutters>
       <Col cw="auto">
         <Box justifyContent="center" display="flex" width="100%">
           <Box>

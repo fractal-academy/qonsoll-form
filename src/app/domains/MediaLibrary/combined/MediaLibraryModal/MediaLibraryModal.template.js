@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Modal, Button, Typography, Input, Divider, Upload } from 'antd'
+import {
+  Modal,
+  Button,
+  Typography,
+  Input,
+  Divider,
+  Upload,
+  message
+} from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
@@ -15,28 +23,17 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import Fuse from 'fuse.js'
-import {
-  DISPATCH_EVENTS,
-  useFormContext,
-  useFormContextDispatch
-} from 'app/context/FormContext'
 import theme from 'app/styles/theme'
 
 const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
-  const { btnProps, onClick, setMediaUrl } = props
+  const { btnProps, onClick, onContinue } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
-  const onMediaUploaded = (data) => {
-    const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
-    setData(COLLECTIONS?.MEDIA, mediaId, data)
-  }
 
-  const currentQuestion = useFormContext()
-  const dispatch = useFormContextDispatch()
   const searchRef = useRef()
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
@@ -54,17 +51,16 @@ function MediaLibraryModal(props) {
   const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
 
   // [CLEAN FUNCTIONS]
+  const onMediaUploaded = (data) => {
+    const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
+    setData(COLLECTIONS?.MEDIA, mediaId, data).catch((e) =>
+      message.error(e.message)
+    )
+  }
+
   const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    await dispatch({
-      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { ...currentQuestion, image: selectedBackgroundImg }
-    })
-
-    setData(COLLECTIONS.QUESTIONS, currentQuestion.id, {
-      ...currentQuestion,
-      image: selectedBackgroundImg
-    })
+    onContinue && onContinue(selectedBackgroundImg)
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
@@ -99,7 +95,7 @@ function MediaLibraryModal(props) {
       (snapshot) => {},
       (error) => {
         // Handle error during the upload
-        console.error('message')
+        message.error(error.message)
       },
       () => {
         image.snapshot.ref
@@ -239,7 +235,6 @@ function MediaLibraryModal(props) {
               display="flex"
               flexWrap="wrap"
               flexDirection="row"
-              // bg="#f6f9fe"
               bg={theme.color.dark.t.lighten9}
               className="custom-scroll">
               {/* RENDER MEDIA */}

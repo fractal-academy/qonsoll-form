@@ -27,6 +27,7 @@ function FormShow(props) {
 
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   // [COMPUTED PROPERTIES]
   const sortedData =
@@ -59,7 +60,7 @@ function FormShow(props) {
   }, [])
 
   return (
-    <Box bg="#f6f9fe" display="flex" flexDirection="column" height="100%">
+    <Box display="flex" flexDirection="column" height="100%">
       <Row noGutters bg="white" py={3} px={4}>
         <Col cw="auto" v="center" p={0}>
           <Button
@@ -101,13 +102,17 @@ function FormShow(props) {
         m={4}
         borderRadius="8px"
         bg="white">
-        <FormAdvancedView isAnswered={isAnswered} setIsAnswered={setIsAnswered}>
+        <FormAdvancedView
+          isAnswered={isAnswered}
+          setIsAnswered={setIsAnswered}
+          setCurrentSlide={setCurrentSlide}>
           {sortedData?.map((item, index) => (
             <Box key={index} height="600px">
               <QuestionAdvancedView
                 data={item}
                 questionNumber={index + 1}
                 onClick={onClick}
+                currentSlide={currentSlide}
               />
             </Box>
           ))}

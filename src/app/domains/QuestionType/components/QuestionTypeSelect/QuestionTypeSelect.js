@@ -56,6 +56,11 @@ const questionTypeMap = [
     icon: <PictureOutlined style={styles.iconFontSize} />
   },
   {
+    type: QUESTION_TYPES.CHOICE,
+    description: 'Multiple choice',
+    icon: <PictureOutlined style={styles.iconFontSize} />
+  },
+  {
     type: QUESTION_TYPES.RATING,
     description: 'Choose from shapes like ⭐ or 🐶',
     icon: <StarOutlined style={styles.iconFontSize} />
@@ -107,7 +112,7 @@ function QuestionTypeSelect(props) {
 
   return (
     <>
-      <Row h="center" v={'center'} noGutters>
+      <Row h="center" v={'center'} pl={2} noGutters>
         <Col>
           <Menu onChange={onChange} style={styles.menuStyle}>
             {questionTypeMap.map((item, index) => (
@@ -120,10 +125,10 @@ function QuestionTypeSelect(props) {
                     {item.icon}
                   </Col>
                   <Col>
-                    <Row noGutters v="center">
-                      <Text style={styles.questionName}>
-                        <Col v="center">{item.type}</Col>
-                      </Text>
+                    <Row noGutters>
+                      <Col v="center">
+                        <Text style={styles.questionName}>{item.type}</Text>
+                      </Col>
                     </Row>
                     <Row noGutters>
                       <Col>

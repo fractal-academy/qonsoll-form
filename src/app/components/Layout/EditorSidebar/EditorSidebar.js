@@ -1,7 +1,7 @@
 import './EditorSidebar.styles.css'
 import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, Divider } from 'antd'
+import { Typography, Divider, message } from 'antd'
 import {
   LeftOutlined,
   PlusOutlined,
@@ -20,8 +20,10 @@ import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useParams } from 'react-router'
-import DISPATCH_EVENTS from 'app/context/FormContext/DispatchEventsTypes'
-import { useFormContextDispatch } from 'app/context/FormContext'
+import {
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
 
 const { Title } = Typography
 
@@ -30,7 +32,7 @@ function EditorSidebar(props) {
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
-  const dispatch = useFormContextDispatch()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   const [open, setOpen] = useState(true)
@@ -41,6 +43,7 @@ function EditorSidebar(props) {
   // [CLEAN FUNCTIONS]
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+    // default data for created question
     const newQuestion = {
       id: questionId,
       formId: id,
@@ -48,31 +51,25 @@ function EditorSidebar(props) {
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
       order: questions?.length,
-      btnProps: {
-        children: [
-          { name: 'choice1' },
-          { name: 'choice2' },
-          { name: 'choice3' }
-        ],
-        type: 'submit'
-      }
+      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
     }
-    await dispatch({
+    // set it into context as current
+    await currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
-    await setData(COLLECTIONS.QUESTIONS, questionId, newQuestion)
-    // setQuestionsList((questionsList) => [...questionsList, newQuestion])
     key && setshowPopover(!showPopover)
   }
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }
   const setNewOrder = (item) => {
-    setData(COLLECTIONS.QUESTIONS, item?.id, item)
+    setData(COLLECTIONS.QUESTIONS, item?.id, item).catch((e) =>
+      message.error(e.message)
+    )
   }
   const onItemClick = (item) => {
-    dispatch({
+    currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: item
     })

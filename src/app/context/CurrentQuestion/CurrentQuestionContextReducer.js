@@ -1,6 +1,6 @@
 import DISPATCH_EVENTS from './DispatchEventsTypes'
 
-const formContextReducer = (state, action) => {
+const CurrentQuestionContextReducer = (state, action) => {
   switch (action.type) {
     case DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE:
       return action.payload
@@ -13,4 +13,4 @@ const formContextReducer = (state, action) => {
   }
 }
 
-export default formContextReducer
+export default CurrentQuestionContextReducer

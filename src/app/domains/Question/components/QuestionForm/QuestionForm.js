@@ -1,5 +1,5 @@
 import React, { useEffect, useState, cloneElement } from 'react'
-import { Card, Tag } from 'antd'
+import { Card, Tag, Typography } from 'antd'
 import {
   DateTimeInput,
   FileUploader,
@@ -13,7 +13,12 @@ import {
   ChoiceForm,
   SubmitButton
 } from 'components'
-import { EditOutlined, SettingOutlined } from '@ant-design/icons'
+import {
+  EditOutlined,
+  SettingOutlined,
+  LeftOutlined,
+  RightOutlined
+} from '@ant-design/icons'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
@@ -21,8 +26,12 @@ import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
-import { useFormContext } from 'app/context/FormContext'
+import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
+import theme from 'app/styles/theme'
+import { QuestionConfigurationMenu } from '..'
+import { globalStyles } from 'app/styles'
 
+const { Title } = Typography
 function QuestionForm(props) {
   const {
     data,
@@ -37,10 +46,10 @@ function QuestionForm(props) {
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
-  const currentQuestion = useFormContext()
+  const currentQuestion = useCurrentQuestionContext()
 
   // [COMPONENT STATE HOOKS]
-
+  const [isQuestionConfig, setIsQuestionConfig] = useState(false)
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
@@ -51,6 +60,9 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
       component: <ChoiceForm withImage />
+    },
+    [QUESTION_TYPES.CHOICE]: {
+      component: <ChoiceForm />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} />
@@ -81,8 +93,10 @@ function QuestionForm(props) {
       component: <SubmitButton>Finish</SubmitButton>
     }
   }
+
   const computedMediaUrl = `url(${currentQuestion?.image || DEFAULT_IMAGE})`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
+  //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
     layoutType?.type !== LAYOUT_TYPES.FULL_SCREEN.type &&
@@ -98,7 +112,9 @@ function QuestionForm(props) {
   const changeImageEditVisibleState = () => {
     setIsImageEditVisible(!isImageEditVisible)
   }
-
+  const changeQuestionConfigState = () => {
+    setIsQuestionConfig(!isQuestionConfig)
+  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -151,7 +167,46 @@ function QuestionForm(props) {
                   btnType="primary"
                   btnIcon={<SettingOutlined />}
                   content={
-                    <QuestionTypeSelect onClick={onQuestionTypeChange} />
+                    <>
+                      <Row
+                        noGutters
+                        borderRadius={`${theme.borderRadius.md} ${theme.borderRadius.md} 0 0`}
+                        onClick={changeQuestionConfigState}
+                        bg={theme.color.text.dark}
+                        style={globalStyles.cursorPointer}
+                        width="300px"
+                        mb={1}
+                        p={2}>
+                        <Col
+                          v="center"
+                          cw="auto"
+                          order={isQuestionConfig ? 1 : 3}>
+                          {isQuestionConfig ? (
+                            <LeftOutlined />
+                          ) : (
+                            <RightOutlined />
+                          )}
+                        </Col>
+                        <Col order={2} ml={2}>
+                          <Title level={4}>
+                            {isQuestionConfig
+                              ? currentQuestion?.questionType
+                              : 'Question Type'}
+                          </Title>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col px={0}>
+                          {isQuestionConfig ? (
+                            <QuestionConfigurationMenu />
+                          ) : (
+                            <QuestionTypeSelect
+                              onClick={onQuestionTypeChange}
+                            />
+                          )}
+                        </Col>
+                      </Row>
+                    </>
                   }
                 />
               </Col>
@@ -254,7 +309,11 @@ function QuestionForm(props) {
                     btnType="primary"
                     btnIcon={<EditOutlined />}
                     content={
-                      <Box width="192px" height="366px" overflow="hidden">
+                      <Box
+                        width="192px"
+                        height="366px"
+                        overflow="hidden"
+                        margin={1}>
                         <MediaLibrarySimpleView
                           setIsImageEditVisible={setIsImageEditVisible}
                           bgImage={computedMediaUrl}

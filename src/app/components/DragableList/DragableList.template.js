@@ -8,9 +8,14 @@ import arrayMove from 'array-move'
 import { List } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import styles from './DragableList.styles'
-import { DragOutlined } from '@ant-design/icons'
+import { MoreOutlined } from '@ant-design/icons'
 
-const DragHandle = sortableHandle(() => <DragOutlined />)
+const DragHandle = sortableHandle(() => (
+  <Box>
+    <MoreOutlined style={{ marginRight: '-10px' }} />
+    <MoreOutlined />
+  </Box>
+))
 
 const SortableItem = sortableElement(({ children }) => (
   <Row noGutters v="center" mb={3}>
