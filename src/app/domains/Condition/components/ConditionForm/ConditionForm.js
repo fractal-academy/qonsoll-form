@@ -1,4 +1,4 @@
-import { Card } from 'components'
+import { NumberedCard } from 'app/components'
 import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
 import { Box } from '@qonsoll/react-design'
@@ -49,7 +49,7 @@ function ConditionForm(props) {
     getQuestionListRedirect
   } = props
   return (
-    <Card number={mockQuestionIndex + 2} key={mockQuestionIndex}>
+    <NumberedCard number={mockQuestionIndex + 2} key={mockQuestionIndex}>
       <Box ml={3}>
         <Title level={5} strong>
           {item.name}
@@ -62,7 +62,7 @@ function ConditionForm(props) {
           questionList: getQuestionListRedirect(mockQuestionIndex)
         })}
       </Box>
-    </Card>
+    </NumberedCard>
   )
 }
 ConditionForm.propTypes = {

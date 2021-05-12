@@ -1,10 +1,14 @@
 import { DatePicker } from 'antd'
 
 const DateTimeInput = (props) => {
-  // [CLEAN FUNCTIONS]
-  const onChange = (date) => {}
+  const { onClick } = props
 
-  return <DatePicker onChange={onChange} {...props} />
+  // [CLEAN FUNCTIONS]
+  const onChange = (date) => {
+    onClick && onClick()
+  }
+
+  return <DatePicker onPanelChange={onChange} {...props} />
 }
 
 export default DateTimeInput
