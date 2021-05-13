@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react'
-import {
-  PageLayout,
-  EditorSidebar,
-  QuestionLayoutSwitcher,
-  FormContentArea,
-  Spinner
-} from 'components'
+import { PageLayout, EditorSidebar, FormContentArea, Spinner } from 'components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
-import { QuestionForm } from 'domains/Question/components'
+import {
+  QuestionForm,
+  QuestionLayoutSwitcher
+} from 'domains/Question/components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
 import {
@@ -35,8 +32,6 @@ function FormEdit() {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   //[COMPONENT STATE HOOKS]
-  const [isImageEditVisible, setIsImageEditVisible] = useState(false)
-  const [showPopover, setShowPopover] = useState(false)
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
 
   // [COMPUTED PROPERTIES]
@@ -70,7 +65,6 @@ function FormEdit() {
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key, btnProps }
     })
-    setShowPopover(false)
   }
 
   // [USE_EFFECTS]
@@ -106,10 +100,6 @@ function FormEdit() {
                 <QuestionForm
                   data={currentQuestion}
                   onQuestionTypeChange={onQuestionTypeChange}
-                  showPopover={showPopover}
-                  setShowPopover={setShowPopover}
-                  isImageEditVisible={isImageEditVisible}
-                  setIsImageEditVisible={setIsImageEditVisible}
                 />
               )}
             </FormContentArea>
