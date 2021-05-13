@@ -8,7 +8,7 @@ const DateTimeInput = (props) => {
     onClick && onClick()
   }
 
-  return <DatePicker onPanelChange={onChange} {...props} />
+  return <DatePicker onChange={onChange} {...props} />
 }
 
 export default DateTimeInput

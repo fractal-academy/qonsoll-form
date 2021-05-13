@@ -19,9 +19,9 @@ function NumberedCard(props) {
     left: 4px;
     padding: 16px;
     border-radius: 16px;
-    background-color: #eceff5;
+    background-color: #f5f5f6;
     &:hover {
-      background-color: #e6e6e6;
+      background-color: #ebeced;
       transition: background-color 1s;
     }
   `
