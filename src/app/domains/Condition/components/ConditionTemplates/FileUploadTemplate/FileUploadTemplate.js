@@ -11,7 +11,7 @@ function FileUploadTemplate(props) {
     <>
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
-          <Col>
+          <Col cw={6}>
             <Box
               display="flex"
               alignItems="center"
@@ -28,7 +28,7 @@ function FileUploadTemplate(props) {
               )}
             </Box>
           </Col>
-          <Col>
+          <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
               answers={answers}

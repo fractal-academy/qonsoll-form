@@ -21,6 +21,7 @@ function QuestionSelect(props) {
         showSearch
         allowClear
         bordered={false}
+        // cursor="pointer"
         onChange={(name) => onChange(name, index)}
         defaultValue="Go to the next question"
         style={styles.selectStyle}>

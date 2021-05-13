@@ -8,12 +8,12 @@ export const styles = {
   borderRadius: {
     borderRadius: '8px'
   },
-  dividerStyles: { height: '100%', margin: '0 12px 0px 12px' },
+  dividerStyles: { height: '100%', padding: '0' },
   footerButtonStyle: {
     borderRadius: '6px'
   },
   modalBodyStyle: {
-    height: '650px',
+    height: '768px',
     padding: 0,
     zIndex: 10000
   },
