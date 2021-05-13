@@ -1,7 +1,7 @@
+import '../Button.styles.css'
+import { Button } from 'antd'
 import { Typography } from 'antd'
-import './SubmitButton.styles.css'
 import PropTypes from 'prop-types'
-import { Button } from 'app/components'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 
@@ -18,7 +18,7 @@ function SubmitButton(props) {
   return (
     <Row display="flex" v="center" noGutters>
       <Col cw="auto" mr={3}>
-        <Button buttonType="primary" className="submit" onClick={onButtonClick}>
+        <Button type="primary" className="submit" onClick={onButtonClick}>
           {children ? (
             children
           ) : (

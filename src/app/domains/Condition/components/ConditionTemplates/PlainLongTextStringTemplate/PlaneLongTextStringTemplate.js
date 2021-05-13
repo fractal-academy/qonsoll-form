@@ -1,21 +1,22 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Input, Select } from 'antd'
-import Text from 'antd/lib/typography/Text'
-import React from 'react'
-import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
-import { QuestionSelect } from 'domains/Question/components'
 import PropTypes from 'prop-types'
-import { styles } from './PlainLongTextStringTemplate.style'
 import { globalStyles } from 'app/styles'
+import Text from 'antd/lib/typography/Text'
+import { Button, Input, Select } from 'antd'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import { styles } from './PlainLongTextStringTemplate.style'
+import { QuestionSelect } from 'domains/Question/components'
+import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
 
-const { Option, OptGroup } = Select
+const { Option } = Select
 
 function PlaneLongTextStringTemplate(props) {
   const { answers, addCondition, questionList, addRedirectQuestion } = props
+
   // [CLEAN FUNCTIONS]
   const onClick = () => {
     addCondition({ name: '', redirectQuestion: null })
   }
+
   return (
     <>
       {answers.map((item, index) => (

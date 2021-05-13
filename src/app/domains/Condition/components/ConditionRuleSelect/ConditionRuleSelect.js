@@ -1,21 +1,17 @@
-import { Popover } from 'components'
-import { Button, Menu, Select } from 'antd'
+import { Select } from 'antd'
 import { Col, Row } from '@qonsoll/react-design'
-import React from 'react'
-import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
 import { DATE_CONDITION_RULES_VALUES } from 'app/constants/dateConditionRules'
+import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
 
 const Option = Select
 
 const ConditionRuleSelect = (props) => {
   const { onChange, conditionType } = props
-  let menu
-  {
-    // conditionType expect for conditionType="date"  if need to display conditionType date //
-    conditionType == 'date'
-      ? (menu = DATE_CONDITION_RULES_VALUES)
-      : (menu = TEXT_CONDITION_RULES_VALUES)
-  }
+
+  let menu =
+    conditionType === 'date'
+      ? DATE_CONDITION_RULES_VALUES
+      : TEXT_CONDITION_RULES_VALUES
 
   return (
     <Row h="center" noGutters>

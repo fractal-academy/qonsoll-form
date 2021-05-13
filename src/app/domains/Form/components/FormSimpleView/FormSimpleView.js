@@ -136,7 +136,7 @@ function FormSimpleView(props) {
     </Card>
   )
 }
-FormSimpleView.defaultProps = {}
+
 FormSimpleView.propTypes = {
   imageURL: PropTypes.string,
   title: PropTypes.string.isRequired,

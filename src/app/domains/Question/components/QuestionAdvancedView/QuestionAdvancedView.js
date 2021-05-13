@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
-import { Typography, Card } from 'antd'
+import { Typography, Button, Card } from 'antd'
 import { globalStyles } from 'app/styles'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionAdvancedView.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import {
   Rate,
-  Button,
   InputForm,
   YesnoButton,
   RangeButton,
@@ -67,18 +66,14 @@ function QuestionAdvancedView(props) {
       component: <TextAreaForm onClick={onClick} />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput />
+      component: <DateTimeInput onClick={onClick} />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: (
-        <Button
-          size="large"
-          buttonText="213"
-          buttonType="primary"
-          onClick={onClick}>
+        <Button size="large" type="primary" onClick={onClick}>
           Continue
         </Button>
       )
@@ -142,7 +137,7 @@ function QuestionAdvancedView(props) {
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row pt={25} noGutters>
+            <Row noGutters>
               <Col cw="auto">
                 <Box
                   {...layoutType.imgSize}
@@ -154,7 +149,7 @@ function QuestionAdvancedView(props) {
               </Col>
             </Row>
           )}
-          <Row noGutters pt={25}>
+          <Row noGutters>
             <Col>{cloneElement(component, data)}</Col>
           </Row>
         </Card>

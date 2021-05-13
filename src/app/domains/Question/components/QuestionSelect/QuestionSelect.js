@@ -1,45 +1,18 @@
-import React, { useEffect } from 'react'
 import { Select } from 'antd'
+import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { Box } from '@qonsoll/react-design'
-import PropTypes from 'prop-types'
 import { styles } from './QuestionSelect.styles'
 
 const { Option, OptGroup } = Select
 
 function QuestionSelect(props) {
   const { questionList, answers, index, addRedirectQuestion } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
-  // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   const onChange = (question, index) => {
     addRedirectQuestion(question, index)
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Box display="flex" border="1px solid #bbbbbb" borderRadius="4px">

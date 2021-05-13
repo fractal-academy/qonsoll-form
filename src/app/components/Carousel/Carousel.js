@@ -1,7 +1,6 @@
+import { Button } from 'antd'
 import { useRef } from 'react'
-import './Carousel.styles.css'
 import PropTypes from 'prop-types'
-import { Button } from 'app/components'
 import { Carousel as AntdCarousel } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
@@ -23,6 +22,8 @@ function Carousel(props) {
   const previous = () => {
     carouselRef.current?.prev()
   }
+
+  //For logic jumps
   const goTo = (slideNumber) => {
     carouselRef.current?.goTo(slideNumber)
   }
@@ -42,18 +43,14 @@ function Carousel(props) {
         {children}
       </AntdCarousel>
 
-      <Row h="right">
-        <Col cw="auto" mt={4}>
-          <Button buttonType="primary" className="buttonGroup">
-            Powered by<b> Qonsoll</b>
-          </Button>
-          <Button
-            buttonType="primary"
-            onClick={previous}
-            className="buttonGroup">
+      <Row noGutters h="right" mt={4}>
+        <Col cw="auto" mr={2}>
+          <Button type="primary" onClick={previous}>
             <UpOutlined />
           </Button>
-          <Button buttonType="primary" className="buttonGroup" onClick={next}>
+        </Col>
+        <Col cw="auto">
+          <Button type="primary" onClick={next}>
             <DownOutlined />
           </Button>
         </Col>
@@ -63,7 +60,10 @@ function Carousel(props) {
 }
 
 Carousel.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  isAnswered: PropTypes.bool,
+  setIsAnswered: PropTypes.func,
+  setCurrentSlide: PropTypes.func
 }
 
 export default Carousel

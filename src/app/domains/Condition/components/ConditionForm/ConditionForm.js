@@ -1,20 +1,17 @@
-import React, { cloneElement, useState } from 'react'
-import { Box } from '@qonsoll/react-design'
-import { QUESTION_TYPES } from 'app/constants'
-import { YesNoChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { PlaneTextDateTemplate } from 'domains/Condition/components/ConditionTemplates'
-import Title from 'antd/lib/typography/Title'
-import { Card } from 'components'
-import { PictureChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { OpinionScaleTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { RatingTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { PlaneShortTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { PlaneLongTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { FileUploadTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { NumberedCard } from 'app/components'
 import PropTypes from 'prop-types'
-import theme from 'app/styles/theme'
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+import { cloneElement } from 'react'
+import { Box } from '@qonsoll/react-design'
+import Title from 'antd/lib/typography/Title'
+import { QUESTION_TYPES } from 'app/constants'
+import { RatingTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { FileUploadTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { YesNoChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { OpinionScaleTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { PlaneTextDateTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { PictureChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { PlaneLongTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { PlaneShortTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
 
 const questionTypesMap = {
   [QUESTION_TYPES.YES_NO]: {
@@ -52,22 +49,20 @@ function ConditionForm(props) {
     getQuestionListRedirect
   } = props
   return (
-    <Box mb={3}>
-      <Card number={mockQuestionIndex + 2} key={mockQuestionIndex}>
-        <Box ml={3}>
-          <Title level={5} strong>
-            {item.name}
-          </Title>
-          {cloneElement(questionTypesMap[item.questionType].component, {
-            ...item,
-            addCondition: (answer) => addCondition(answer, mockQuestionIndex),
-            addRedirectQuestion: (question, answerIndex) =>
-              addRedirectQuestion(question, answerIndex, mockQuestionIndex),
-            questionList: getQuestionListRedirect(mockQuestionIndex)
-          })}
-        </Box>
-      </Card>
-    </Box>
+    <NumberedCard number={mockQuestionIndex + 2} key={mockQuestionIndex}>
+      <Box ml={3}>
+        <Title level={5} strong>
+          {item.name}
+        </Title>
+        {cloneElement(questionTypesMap[item.questionType].component, {
+          ...item,
+          addCondition: (answer) => addCondition(answer, mockQuestionIndex),
+          addRedirectQuestion: (question, answerIndex) =>
+            addRedirectQuestion(question, answerIndex, mockQuestionIndex),
+          questionList: getQuestionListRedirect(mockQuestionIndex)
+        })}
+      </Box>
+    </NumberedCard>
   )
 }
 ConditionForm.propTypes = {

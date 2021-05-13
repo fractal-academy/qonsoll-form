@@ -17,10 +17,7 @@ const FormSimpleFormWithModal = (props) => {
   // [STATE]
   const [loading, setLoading] = useState(false)
   // [ADDITIONAL_HOOKS]
-
   const [form] = Form.useForm()
-
-  // [COMPUTED PROPERTIES]
 
   // [HELPER_FUNCTIONS]
   const handleCancel = async () => {

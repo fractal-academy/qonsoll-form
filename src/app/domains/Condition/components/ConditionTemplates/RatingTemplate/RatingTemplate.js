@@ -1,15 +1,14 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Select } from 'antd'
-import Text from 'antd/lib/typography/Text'
-import React from 'react'
-import { QuestionSelect } from 'domains/Question/components'
+import { Button } from 'antd'
 import PropTypes from 'prop-types'
+import Text from 'antd/lib/typography/Text'
 import { styles } from './RatingTemplate.styles'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import { QuestionSelect } from 'domains/Question/components'
+
+let startLetter = 65
 
 function RatingTemplate(props) {
   const { answers, questionList, addRedirectQuestion } = props
-
-  let startLetter = 65
 
   return (
     <>
@@ -43,9 +42,11 @@ function RatingTemplate(props) {
     </>
   )
 }
+
 RatingTemplate.propTypes = {
   answers: PropTypes.array,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }
+
 export default RatingTemplate

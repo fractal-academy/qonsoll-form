@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { ConditionForm, ConditionsList } from 'domains/Condition/components'
+import { useState } from 'react'
+import { ConditionForm } from 'domains/Condition/components'
 import { QUESTION_TYPES, ANSWER_TYPES } from 'app/constants'
-import PropTypes from 'prop-types'
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+
 const mockQuestion = [
   {
     id: 1,
@@ -79,18 +77,6 @@ const mockQuestion = [
 ]
 
 function FormConditionsForm(props) {
-  // const { WRITE_PROPS_HERE } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
-  // [COMPUTED PROPERTIES]
-
   // [CLEAN FUNCTIONS]
   const [questionsData, setQuestionsData] = useState(mockQuestion)
   const getQuestionListRedirect = (itemIndex) => {
@@ -106,23 +92,6 @@ function FormConditionsForm(props) {
 
     setQuestionsData([...questionsData])
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <>

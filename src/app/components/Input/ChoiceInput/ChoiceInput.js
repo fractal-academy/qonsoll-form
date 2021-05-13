@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { Typography, Input } from 'antd'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { CloseOutlined, EditOutlined } from '@ant-design/icons'
+import theme from 'app/styles/theme'
+import { Typography, Input } from 'antd'
 import { styles } from './ChoiceInput.styles'
+import { DEFAULT_IMAGE } from 'app/constants'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import { CloseOutlined, EditOutlined } from '@ant-design/icons'
+import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from 'app/context/CurrentQuestion'
-import { DEFAULT_IMAGE } from 'app/constants'
-import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
-import theme from 'app/styles/theme'
 
-// import { useTranslation } from 'react-i18next'
 const { Text } = Typography
 const { TextArea } = Input
 
@@ -21,15 +20,14 @@ let startLetter = 65
 
 function ChoiceInput(props) {
   const { index, data, withImage } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+
   // [COMPONENT STATE HOOKS]
   const [value, setValue] = useState(data?.name)
+
   // [COMPUTED PROPERTIES]
   const choiceProps = currentQuestion.btnProps
   const letter = String.fromCharCode(startLetter + index)

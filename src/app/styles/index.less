@@ -20,7 +20,7 @@ code {
 
 @import "~antd/dist/antd.less";
 
-// [Custom scrollbar]
+// [CUSTOM SCROLLBAR]
 ::-webkit-scrollbar {
   width: 7px;
 }
@@ -34,6 +34,13 @@ code {
   border-radius: 10px;
 }
 
+// [FIX CAROUSEL HEIGHT WITH ONE ITEM BUG ]
+.ant-carousel .slick-slider .slick-track,
+.ant-carousel .slick-slider .slick-list {
+  height: 500px;
+}
+
+// [ REWRITING POPOVER CONTENT PLACEMENT ]
 .ant-popover-inner-content {
   padding: 4px;
 }

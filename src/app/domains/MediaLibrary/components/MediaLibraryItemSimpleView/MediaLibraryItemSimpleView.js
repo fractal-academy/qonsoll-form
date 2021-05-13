@@ -1,12 +1,9 @@
-import React, { cloneElement, useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import { Button, Card, Image, Tag, Typography } from 'antd'
-import { styles } from './MediaLibraryItemSimpleView.styles'
-import { Box, Col, Row } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import { CheckOutlined } from '@ant-design/icons'
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import { Button, Card, Image, Typography } from 'antd'
+import { styles } from './MediaLibraryItemSimpleView.styles'
+
 const { Meta } = Card
 const { Text } = Typography
 
@@ -17,33 +14,7 @@ function MediaLibraryItemSimpleView(props) {
     selectedBackgroundImg,
     setSelectedBackgroundImg
   } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-  // [COMPONENT STATE HOOKS]
 
-  // [COMPUTED PROPERTIES]
-
-  // [CLEAN FUNCTIONS]
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
   return (
     <Card
       onClick={() => {

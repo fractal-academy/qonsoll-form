@@ -1,31 +1,24 @@
-import React, { useEffect } from 'react'
-import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 import { ChoiceInput } from 'components'
-import { PlusOutlined } from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
+import { Box } from '@qonsoll/react-design'
+import { PlusOutlined } from '@ant-design/icons'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from 'app/context/CurrentQuestion'
-import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
 
 function ChoiceForm(props) {
   const { withImage } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
   // [COMPUTED PROPERTIES]
   const choiceProps = currentQuestion.btnProps || []
+
   // [CLEAN FUNCTIONS]
   const onAddChoice = () => {
     currentQuestionDispatch({
@@ -37,23 +30,6 @@ function ChoiceForm(props) {
       }
     })
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Box

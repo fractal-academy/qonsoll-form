@@ -1,7 +1,7 @@
+import { Button } from 'antd'
+import '../Button.styles.css'
 import { useState } from 'react'
-import './RangeButton.styles.css'
 import PropTypes from 'prop-types'
-import { Button } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 
@@ -43,9 +43,8 @@ function RangeButton(props) {
         <Button
           key={item}
           onClick={() => onButtonClick(item)}
-          buttonType="secondary"
           className={(Number(buttonKey) === item && 'active') || 'range'}>
-          <b>{item}</b>
+          {item}
         </Button>
       ))}
     </Box>

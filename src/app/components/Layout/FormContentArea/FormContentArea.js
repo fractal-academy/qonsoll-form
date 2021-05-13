@@ -51,7 +51,7 @@ function FormContentArea(props) {
 }
 
 FormContentArea.propTypes = {
-  leftSideMenu: PropTypes.element,
+  leftSideMenu: PropTypes.node,
   children: PropTypes.node
 }
 

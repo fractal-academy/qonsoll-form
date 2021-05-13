@@ -141,10 +141,8 @@ function FormsAll(props) {
       <Row noGutters mb={3}>
         <Col>
           <Input
-            allowClear
             ref={searchRef}
             placeholder="Search folder/file by name..."
-            onSearch={searchData}
             onChange={(input) => searchData(input.target.value)}
           />
         </Col>

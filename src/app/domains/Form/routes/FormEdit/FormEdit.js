@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react'
-import {
-  PageLayout,
-  EditorSidebar,
-  QuestionLayoutSwitcher,
-  FormContentArea,
-  Spinner
-} from 'components'
+import { PageLayout, EditorSidebar, FormContentArea, Spinner } from 'components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
-import { QuestionForm } from 'app/domains/Question/components'
+import {
+  QuestionForm,
+  QuestionLayoutSwitcher
+} from 'domains/Question/components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
 import {
@@ -35,8 +32,6 @@ function FormEdit() {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   //[COMPONENT STATE HOOKS]
-  const [isImageEditVisible, setIsImageEditVisible] = useState(false)
-  const [showPopover, setShowPopover] = useState(false)
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
 
   // [COMPUTED PROPERTIES]
@@ -65,17 +60,15 @@ function FormEdit() {
   const onQuestionTypeChange = async ({ key }) => {
     //when we change question type on choice, set default choice, else empty field
     const btnProps =
-      key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
+      key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key, btnProps }
     })
-    setShowPopover(false)
   }
 
   // [USE_EFFECTS]
   useEffect(() => {
-    let isComponentMounted = true
     //set default active tab for questionLayout switcher every time when we change current question
     setDefaultTab(currentQuestion?.layoutType)
     //save data of current question to database, when it change
@@ -85,18 +78,6 @@ function FormEdit() {
         currentQuestion?.id,
         currentQuestion
       ).catch((e) => message.error(e.message))
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
   }, [currentQuestion])
 
   return (
@@ -119,10 +100,6 @@ function FormEdit() {
                 <QuestionForm
                   data={currentQuestion}
                   onQuestionTypeChange={onQuestionTypeChange}
-                  showPopover={showPopover}
-                  setShowPopover={setShowPopover}
-                  isImageEditVisible={isImageEditVisible}
-                  setIsImageEditVisible={setIsImageEditVisible}
                 />
               )}
             </FormContentArea>

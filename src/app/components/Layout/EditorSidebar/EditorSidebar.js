@@ -1,7 +1,7 @@
 import './EditorSidebar.styles.css'
 import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, Divider, message } from 'antd'
+import { Typography, Divider, message, Button, Popover } from 'antd'
 import {
   LeftOutlined,
   PlusOutlined,
@@ -11,11 +11,9 @@ import {
 import { styles } from './EditorSidebar.styles'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
-import QuestionTypeSelect from 'domains/QuestionType/components/QuestionTypeSelect'
-import { Popover } from 'components'
+import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
 import ModalWithFormConditionsForm from 'domains/Condition/combined/ModalWithFormConditionsForm'
-import QuestionsList from 'domains/Question/components/QuestionsList'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
 import { getCollectionRef, setData } from 'app/services/Firestore'
@@ -51,7 +49,7 @@ function EditorSidebar(props) {
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
       order: questions?.length,
-      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', iamge: '' }] : ''
+      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     }
     // set it into context as current
     await currentQuestionDispatch({
@@ -107,17 +105,19 @@ function EditorSidebar(props) {
               </Col>
               <Col cw="auto" px={10} py={1} mr={2} borderRadius="4px">
                 <Popover
-                  onClick={popoverShowChange}
                   visible={showPopover}
                   onVisibleChange={() => {
                     setshowPopover(!showPopover)
                   }}
                   trigger={'click'}
                   placement={'bottomRight'}
-                  btnType="text"
-                  btnIcon={<PlusOutlined style={styles.hover} />}
-                  content={<QuestionTypeSelect onClick={addQuestion} />}
-                />
+                  content={<QuestionTypeSelect onClick={addQuestion} />}>
+                  <Button
+                    type="text"
+                    icon={<PlusOutlined style={styles.hover} />}
+                    onClick={popoverShowChange}
+                  />
+                </Popover>
               </Col>
               <Col cw="auto" px={1} borderRadius="4px" v="center">
                 <ModalWithFormConditionsForm
