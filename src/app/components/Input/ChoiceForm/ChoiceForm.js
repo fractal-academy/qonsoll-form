@@ -1,13 +1,13 @@
-import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 import { ChoiceInput } from 'components'
-import { PlusOutlined } from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
+import { Box } from '@qonsoll/react-design'
+import { PlusOutlined } from '@ant-design/icons'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from 'app/context/CurrentQuestion'
-import PropTypes from 'prop-types'
 
 function ChoiceForm(props) {
   const { withImage } = props

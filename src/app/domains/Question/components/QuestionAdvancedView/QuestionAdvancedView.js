@@ -66,7 +66,7 @@ function QuestionAdvancedView(props) {
       component: <TextAreaForm onClick={onClick} />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput />
+      component: <DateTimeInput onClick={onClick} />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
       component: <FileUploader />

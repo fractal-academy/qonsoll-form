@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
-import { Card } from 'app/components'
+import { NumberedCard } from 'app/components'
 import './QuestionSimpleView.styles.css'
 import { Popconfirm, message } from 'antd'
 import { LAYOUT_TYPES } from 'app/constants'
@@ -31,7 +31,7 @@ function QuestionSimpleView(props) {
 
   return (
     <Box onClick={onClick}>
-      <Card number={number}>
+      <NumberedCard number={number}>
         <Row h="around" v="center" noGutters ml={2}>
           <Col cw="auto" mr={2}>
             <Box display="flex" className="roundBox">
@@ -53,7 +53,7 @@ function QuestionSimpleView(props) {
             </Popconfirm>
           </Col>
         </Row>
-      </Card>
+      </NumberedCard>
     </Box>
   )
 }
