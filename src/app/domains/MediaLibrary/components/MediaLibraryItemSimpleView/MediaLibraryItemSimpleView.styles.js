@@ -20,7 +20,7 @@ export const styles = {
 
   iconStyle: {
     position: 'absolute',
-    top: 0,
+    bottom: 0,
     right: 0,
     zIndex: 100,
     borderRadius: '50%',

@@ -31,7 +31,7 @@ const FormSimpleFormWithModal = (props) => {
   }
   const onFormEdit = async (data) => {
     setLoading(true)
-    onModalSubmit()
+    onModalSubmit(data)
     form.resetFields()
     setLoading(false)
     setIsModalVisible(false)
