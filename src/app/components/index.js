@@ -1,6 +1,5 @@
 export { default as FileUploader } from './Uploader/FileUploader'
 export { default as IconLabel } from './Uploader/IconLabel'
-export { default as ImageLabel } from './Uploader/ImageLabel'
 export { default as TextArea } from './TextArea/TextArea'
 export { default as Input } from './Input/Input'
 export { default as DateTimeInput } from './Input/DateTimeInput'

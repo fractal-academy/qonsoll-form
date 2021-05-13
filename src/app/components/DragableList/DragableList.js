@@ -25,6 +25,14 @@ function DragableList(props) {
     )
   }
 
+  // [COMPUTED PROPERTIES]
+  const Container = useMemo(() => (sortable ? SortableContainer : Box), [
+    sortable
+  ])
+  const SortableWrapper = useMemo(() => (sortable ? SortableItem : Box), [
+    sortable
+  ])
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -34,14 +42,6 @@ function DragableList(props) {
       isComponentMounted = false
     }
   }, [dataSource])
-
-  // [COMPUTED PROPERTIES]
-  const Container = useMemo(() => (sortable ? SortableContainer : Box), [
-    sortable
-  ])
-  const SortableWrapper = useMemo(() => (sortable ? SortableItem : Box), [
-    sortable
-  ])
 
   return (
     <Container onSortEnd={onSortEnd} useDragHandle>
