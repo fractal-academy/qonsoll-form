@@ -5,10 +5,10 @@ export const styles = {
     display: 'inline-block',
     width: '245px',
     height: '214px',
-    cursor: 'pointer',
+    // cursor: 'pointer',
     padding: '4px'
   },
-  cardBodyPadding: { padding: '0 8px' },
+  cardBodyStyle: { padding: '0 8px' },
   imageStyle: {
     padding: '3px',
     borderRadius: '8px'
@@ -18,6 +18,7 @@ export const styles = {
     maxWidth: '190px',
     fontWeight: 'bold'
   },
+  boxStyles: { cursor: 'pointer' },
   // descriptionTextSize: { fontSize: '14px', maxWidth: '190px', opacity: '.5' },
   iconStyles: { fontSize: '40px', opacity: '.5' }
 }

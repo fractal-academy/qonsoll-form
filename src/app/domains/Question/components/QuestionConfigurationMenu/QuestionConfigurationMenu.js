@@ -10,6 +10,7 @@ import {
   OpinionScaleCustomConfig,
   RatingCustomConfig
 } from './QuestionCustomConfigurations'
+import { styles } from './QuestionCustomConfigurations/QuestionConfigurationMenu.styles'
 
 const { Text } = Typography
 
@@ -27,10 +28,10 @@ function QuestionConfigurationMenu() {
   }
 
   return (
-    <Box py={2}>
+    <Box p={2}>
       <Row mb={3} noGutters>
         <Col>
-          <Text>Required</Text>
+          <Text style={styles.requiredStyle}>Required</Text>
         </Col>
         <Col cw="auto">
           <Switch size="small" onChange={requireStateChange} />

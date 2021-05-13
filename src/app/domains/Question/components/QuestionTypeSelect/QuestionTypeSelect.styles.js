@@ -1,3 +1,5 @@
+import theme from 'app/styles/theme'
+
 export const styles = {
   menuItemStyle: {
     display: 'flex',
@@ -19,6 +21,9 @@ export const styles = {
     overflow: 'auto'
   },
   iconFontSize: {
-    fontSize: '24px'
+    fontSize: '24px',
+    backgroundColor: theme.color.dark.t.lighten7,
+    padding: '8px',
+    borderRadius: '50%'
   }
 }
