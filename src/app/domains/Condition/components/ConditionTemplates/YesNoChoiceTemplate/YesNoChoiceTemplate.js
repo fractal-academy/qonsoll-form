@@ -18,7 +18,7 @@ function YesNoChoiceTemplate(props) {
               display="flex"
               alignItems="center"
               p={1}
-              mr={2}
+              mr={4}
               border="1px solid #bbbbbb"
               borderRadius="4px">
               <Button type="outline" style={styles.buttonM}>

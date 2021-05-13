@@ -23,11 +23,10 @@ const FormSimpleFormWithModal = (props) => {
   // [COMPUTED PROPERTIES]
 
   // [HELPER_FUNCTIONS]
-
-  const handleCancel = () => {
-    setLoading(false)
-    setIsModalVisible(false)
-    form.resetFields()
+  const handleCancel = async () => {
+    await setLoading(false)
+    await setIsModalVisible(false)
+    await form.resetFields()
   }
   const onFormEdit = async (data) => {
     setLoading(true)
@@ -36,7 +35,6 @@ const FormSimpleFormWithModal = (props) => {
     setLoading(false)
     setIsModalVisible(false)
   }
-
   return (
     <>
       <Modal
@@ -46,7 +44,12 @@ const FormSimpleFormWithModal = (props) => {
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={[
-          <Button onClick={handleCancel}>Cancel</Button>,
+          <Button
+            onClick={() => {
+              handleCancel()
+            }}>
+            Cancel
+          </Button>,
           <Button
             onClick={() => form.submit()}
             type="primary"
