@@ -78,40 +78,38 @@ function QuestionTypeSelect(props) {
   const { onClick } = props
 
   return (
-    <>
-      <Row h="center" v={'center'} pl={2} noGutters>
-        <Col>
-          <Menu style={styles.menuStyle}>
-            {questionTypeMap.map((item, index) => (
-              <Menu.Item
-                style={styles.menuItemStyle}
-                key={item.type}
-                onClick={onClick}>
-                <Row noGutters v="center">
-                  <Col v="center" cw="auto">
-                    {item.icon}
-                  </Col>
-                  <Col>
-                    <Row noGutters>
-                      <Col v="center">
-                        <Text style={styles.questionName}>{item.type}</Text>
-                      </Col>
-                    </Row>
-                    <Row noGutters>
-                      <Col>
-                        <Text style={styles.questionDescr}>
-                          {item.description}
-                        </Text>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </Menu.Item>
-            ))}
-          </Menu>
-        </Col>
-      </Row>
-    </>
+    <Row h="center" v={'center'} pl={2} noGutters>
+      <Col>
+        <Menu style={styles.menuStyle}>
+          {questionTypeMap.map((item, index) => (
+            <Menu.Item
+              style={styles.menuItemStyle}
+              key={item.type}
+              onClick={onClick}>
+              <Row noGutters v="center">
+                <Col v="center" cw="auto">
+                  {item.icon}
+                </Col>
+                <Col>
+                  <Row noGutters>
+                    <Col v="center">
+                      <Text style={styles.questionName}>{item.type}</Text>
+                    </Col>
+                  </Row>
+                  <Row noGutters>
+                    <Col>
+                      <Text style={styles.questionDescr}>
+                        {item.description}
+                      </Text>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Menu.Item>
+          ))}
+        </Menu>
+      </Col>
+    </Row>
   )
 }
 

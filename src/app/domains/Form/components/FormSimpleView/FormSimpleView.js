@@ -3,12 +3,10 @@ import { ROUTES_PATHS } from 'app/constants'
 import { useState, cloneElement } from 'react'
 import { styles } from './FormSimpleView.style'
 import COLLECTIONS from 'app/constants/collection'
-import { deleteData, updateData } from 'app/services/Firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { generatePath, useHistory } from 'react-router-dom'
-import { FormSimpleViewEdit } from 'domains/Form/components'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
-
+import { deleteData, updateData } from 'app/services/Firestore'
 import { Card, Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
 
@@ -108,30 +106,24 @@ function FormSimpleView(props) {
       }>
       <Meta
         description={
-          <>
-            <Row noGutters h="between" mt={3}>
-              <Col display="grid">
-                <Text style={styles.titleStyle} ellipsis>
-                  {title}
-                </Text>
+          <Row noGutters h="between" mt={3}>
+            <Col display="grid">
+              <Text style={styles.titleStyle} ellipsis>
+                {title}
+              </Text>
+              <Text style={styles.descriptionTextSize} ellipsis>
+                {subtitle || 'No description'}
+              </Text>
+            </Col>
 
-                <Text style={styles.descriptionTextSize} ellipsis>
-                  {subtitle || 'No description'}
-                </Text>
-              </Col>
-
-              <Col cw="auto" v="center">
-                <Dropdown
-                  overlay={menu}
-                  placement="bottomRight"
-                  trigger="click">
-                  {cloneElement(<MoreOutlined />, {
-                    className: 'dropdownIcon'
-                  })}
-                </Dropdown>
-              </Col>
-            </Row>
-          </>
+            <Col cw="auto" v="center">
+              <Dropdown overlay={menu} placement="bottomRight" trigger="click">
+                {cloneElement(<MoreOutlined />, {
+                  className: 'dropdownIcon'
+                })}
+              </Dropdown>
+            </Col>
+          </Row>
         }
       />
     </Card>

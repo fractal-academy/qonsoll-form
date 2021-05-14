@@ -1,32 +1,30 @@
+import Fuse from 'fuse.js'
 import { useState, useEffect, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import Fuse from 'fuse.js'
 import {
   Breadcrumb,
-  Button,
-  Divider,
   Typography,
+  message,
+  Divider,
+  Button,
   Menu,
-  Input,
-  Form,
-  Modal,
-  message
+  Input
 } from 'antd'
 import {
   ArrowLeftOutlined,
   FolderOutlined,
   PlusOutlined
 } from '@ant-design/icons'
+import { Spinner } from 'components'
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
-import { FormSimpleForm, FormSimpleView } from 'domains/Form/components'
+import { styles } from './FormsAll.style'
+import COLLECTIONS from 'app/constants/collection'
+import { FormSimpleView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
-import COLLECTIONS from 'app/constants/collection'
-import { Spinner, NewListItem, StaticList, ListItem } from 'components'
 import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
-import { styles } from './FormsAll.style'
 
 const { Title, Text } = Typography
 const mockRoutes = [
@@ -43,8 +41,6 @@ function FormsAll(props) {
   )
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [form] = Form.useForm()
   const [currentData, setCurrentData] = useState(data)
   const fuse = new Fuse(data, { keys: ['title'] })
 
@@ -84,16 +80,13 @@ function FormsAll(props) {
       ))}
     </Menu>
   )
-  const handleCancel = () => {
-    setIsModalVisible(false)
-    form.resetFields()
-  }
   const showModal = () => {
     setIsModalVisible(true)
   }
-  if (!data || loading) {
+  if (!data) {
     return <Spinner />
   }
+
   return (
     <Box flexDirection="column" px={45} py={4} minHeight="100%">
       {/* Page Header */}

@@ -1,4 +1,4 @@
-import React, { useEffect, cloneElement } from 'react'
+import { cloneElement } from 'react'
 import { Card, Tag } from 'antd'
 import {
   Rate,
@@ -86,20 +86,6 @@ function QuestionForm(props) {
     layoutType?.type !== LAYOUT_TYPES.DEFAULT.type
   const bgImage =
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Row

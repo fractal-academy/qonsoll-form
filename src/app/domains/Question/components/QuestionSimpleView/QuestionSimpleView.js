@@ -1,28 +1,18 @@
-import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
-import { NumberedCard } from 'app/components'
 import './QuestionSimpleView.styles.css'
 import { Popconfirm, message } from 'antd'
 import { LAYOUT_TYPES } from 'app/constants'
+import { NumberedCard } from 'app/components'
+import { CloseOutlined } from '@ant-design/icons'
 import COLLECTIONS from 'app/constants/collection'
 import { deleteData } from 'app/services/Firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { CloseOutlined } from '@ant-design/icons'
 
 function QuestionSimpleView(props) {
   const { title, number, layoutType, onClick, id } = props
 
-  // [COMPONENT STATE HOOKS]
-  const [visible, setVisible] = useState(false)
-
   // [CLEAN FUNCTIONS]
-  const showPopconfirm = () => {
-    setVisible(true)
-  }
-  const handleCancel = () => {
-    setVisible(false)
-  }
   const handleDelete = async () => {
     await deleteData(COLLECTIONS.QUESTIONS, id).catch((e) =>
       message.error(e.message)
@@ -45,11 +35,8 @@ function QuestionSimpleView(props) {
             {title}
           </Col>
           <Col cw="auto">
-            <Popconfirm
-              title="Delete this question?"
-              onConfirm={handleDelete}
-              onCancel={handleCancel}>
-              <CloseOutlined onClick={showPopconfirm} />
+            <Popconfirm title="Delete this question?" onConfirm={handleDelete}>
+              <CloseOutlined />
             </Popconfirm>
           </Col>
         </Row>

@@ -1,6 +1,6 @@
 import { List } from 'antd'
 import PropTypes from 'prop-types'
-import { ListItem } from 'components'
+// import { ListItem } from 'components'
 import { FormSimpleView } from 'domains/Form/components'
 
 function StaticList(props) {
