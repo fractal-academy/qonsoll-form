@@ -119,7 +119,9 @@ function QuestionForm(props) {
             </Col>
             {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
               <Col cw="auto" ml={2}>
-                <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
+                <QuestionMediaPopover
+                  MediaModalButtonBackground={computedMediaUrl}
+                />
               </Col>
             )}
           </Row>
@@ -138,7 +140,9 @@ function QuestionForm(props) {
                   {...layoutType.imgSize}
                   {...styles.imageBetweenStyle}
                   backgroundImage={computedMediaUrl}>
-                  <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
+                  <QuestionMediaPopover
+                    MediaModalButtonBackground={computedMediaUrl}
+                  />
                 </Box>
               </Col>
             </Row>
@@ -164,7 +168,9 @@ function QuestionForm(props) {
             backgroundImage={computedMediaUrl}>
             <Row h="right">
               <Col cw="auto" mr={4}>
-                <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
+                <QuestionMediaPopover
+                  MediaModalButtonBackground={computedMediaUrl}
+                />
               </Col>
             </Row>
           </Box>
