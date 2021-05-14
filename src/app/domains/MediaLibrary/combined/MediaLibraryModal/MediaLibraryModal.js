@@ -1,19 +1,4 @@
-import Fuse from 'fuse.js'
-import PropTypes from 'prop-types'
-import './MediaLibraryModal.styles.css'
-import { globalStyles } from 'app/styles'
-import COLLECTIONS from 'app/constants/collection'
-import { styles } from './MediaLibraryModal.styles'
-import { Row, Col, Box } from '@qonsoll/react-design'
 import React, { useEffect, useRef, useState } from 'react'
-import firebase, { firestore } from 'app/services/Firebase'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { getCollectionRef, setData } from 'app/services/Firestore'
-import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
-import {
-  MediaLibraryFilter,
-  MediaLibraryItemSimpleView
-} from 'domains/MediaLibrary/components'
 import {
   Modal,
   Button,
@@ -23,6 +8,22 @@ import {
   Upload,
   message
 } from 'antd'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
+import { globalStyles } from 'app/styles'
+import { styles } from './MediaLibraryModal.styles'
+import PropTypes from 'prop-types'
+import './MediaLibraryModal.styles.css'
+import {
+  MediaLibraryFilter,
+  MediaLibraryItemSimpleView
+} from 'domains/MediaLibrary/components'
+import firebase, { firestore } from 'app/services/Firebase'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { getCollectionRef, setData } from 'app/services/Firestore'
+import COLLECTIONS from 'app/constants/collection'
+import Fuse from 'fuse.js'
+import theme from 'app/styles/theme'
 
 const { Title, Text } = Typography
 
@@ -31,6 +32,7 @@ function MediaLibraryModal(props) {
 
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
+
   const searchRef = useRef()
 
   // [COMPONENT STATE HOOKS]
@@ -121,17 +123,18 @@ function MediaLibraryModal(props) {
       setImagesList(searchRes.map((item) => item.item))
     } else setImagesList(media)
   }
-
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
     isComponentMounted && imagesList && setImagesList(media)
 
+    // [CLEAN UP FUNCTION]
+
     return () => {
+      // [FINAL CLEAN UP]
       isComponentMounted = false
     }
   }, [media])
-
   return (
     <>
       <Button {...btnProps} onClick={modalStateChange} style={styles.btnStyle}>
@@ -141,11 +144,12 @@ function MediaLibraryModal(props) {
         visible={isModalVisible}
         footer={null}
         closable={false}
-        width="950px"
+        width="1024px"
+        centered
         bodyStyle={styles.modalBodyStyle}>
-        <Row>
+        <Row noGutters pt={4}>
           <Col>
-            <Row mb={1} v="center" px={3} pt={3}>
+            <Row mb={1} v="center" px={3}>
               <Col>
                 <Title
                   level={3}
@@ -154,27 +158,29 @@ function MediaLibraryModal(props) {
                 </Title>
               </Col>
               <Col cw="auto" v="center">
-                <Box bg="#eceff5" p={1} borderRadius="4px">
+                <Box bg="#eceff5" p={1} borderRadius="8px">
                   <Button
-                    size="small"
-                    type={switchState ? 'text' : 'secondary'}
+                    size="medium"
+                    type={!switchState ? 'text' : 'secondary'}
                     //can`t move style to separate file because of state dependency
                     style={{
-                      borderRadius: '4px',
+                      borderRadius: '8px',
                       border: 0,
-                      color: switchState ? '#82868c' : '#1d6fdc'
+                      color: !switchState ? '#1d6fdc' : '#82868c',
+                      backgroundColor: !switchState ? 'white' : '#eceff5'
                     }}
                     onClick={onSwitchChange}>
                     Image
                   </Button>
                   <Button
-                    size="small"
-                    type={!switchState ? 'text' : 'secondary'}
+                    size="medium"
+                    type={switchState ? 'secondary' : 'text'}
                     //same here
                     style={{
-                      borderRadius: '4px',
+                      borderRadius: '8px',
                       border: 0,
-                      color: !switchState ? '#82868c' : '#1d6fdc'
+                      color: switchState ? '#1d6fdc' : '#82868c',
+                      backgroundColor: !switchState ? '#eceff5' : 'white'
                     }}
                     onClick={onSwitchChange}>
                     Video
@@ -189,7 +195,7 @@ function MediaLibraryModal(props) {
                 </Text>
               </Col>
             </Row>
-            <Row px={3} pb={3}>
+            <Row px={3} pb={3} borderBottom="1px solid #d9d9d9">
               <Col>
                 <Input
                   allowClear
@@ -197,10 +203,11 @@ function MediaLibraryModal(props) {
                   prefix={<SearchOutlined />}
                   style={styles.borderRadius}
                   placeholder="Search media file by name..."
+                  onSearch={searchData}
                   onChange={onChange}
                 />
               </Col>
-              <Col cw="auto">
+              <Col cw="auto" noGutters>
                 <Divider type="vertical" style={styles.dividerStyles} />
               </Col>
               <Col cw="auto" v="center">
@@ -213,19 +220,15 @@ function MediaLibraryModal(props) {
                 </Button>
               </Col>
             </Row>
-            <Row>
-              <Col>
-                <Divider type="horizontal" style={globalStyles.resetMargin} />
-              </Col>
-            </Row>
+
             <Box
               height="500px"
-              pl={3}
+              pl={4}
               overflow="auto"
               display="flex"
               flexWrap="wrap"
               flexDirection="row"
-              bg="#f6f9fe"
+              bg={theme.color.dark.t.lighten9}
               className="custom-scroll">
               {/* RENDER MEDIA */}
 
@@ -258,12 +261,8 @@ function MediaLibraryModal(props) {
                 </Box>
               </Upload>
             </Box>
-            <Row>
-              <Col>
-                <Divider type="horizontal" style={globalStyles.resetMargin} />
-              </Col>
-            </Row>
-            <Row h="right" p={3} bg="white">
+            <Row borderBottom="1px solid #d9d9d9"></Row>
+            <Row noGutters h="right" p={3} bg="#fff">
               <Col cw="auto">
                 <Button
                   type="text"

@@ -75,13 +75,13 @@ const questionTypeMap = [
   }
 ]
 function QuestionTypeSelect(props) {
-  const { onChange, onClick } = props
+  const { onClick } = props
 
   return (
     <>
-      <Row h="center" v={'center'} noGutters>
+      <Row h="center" v={'center'} pl={2} noGutters>
         <Col>
-          <Menu onChange={onChange} style={styles.menuStyle}>
+          <Menu style={styles.menuStyle}>
             {questionTypeMap.map((item, index) => (
               <Menu.Item
                 style={styles.menuItemStyle}
@@ -92,10 +92,10 @@ function QuestionTypeSelect(props) {
                     {item.icon}
                   </Col>
                   <Col>
-                    <Row noGutters v="center">
-                      <Text style={styles.questionName}>
-                        <Col v="center">{item.type}</Col>
-                      </Text>
+                    <Row noGutters>
+                      <Col v="center">
+                        <Text style={styles.questionName}>{item.type}</Text>
+                      </Col>
                     </Row>
                     <Row noGutters>
                       <Col>

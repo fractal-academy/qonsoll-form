@@ -12,7 +12,11 @@ import {
   Modal,
   message
 } from 'antd'
-import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
+import {
+  ArrowLeftOutlined,
+  FolderOutlined,
+  PlusOutlined
+} from '@ant-design/icons'
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
@@ -21,6 +25,8 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 import { Spinner, NewListItem, StaticList, ListItem } from 'components'
+import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
+import { styles } from './FormsAll.style'
 
 const { Title, Text } = Typography
 const mockRoutes = [
@@ -60,17 +66,12 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
-    setLoading(true)
     await setData(COLLECTIONS.FORMS, formId, {
       id: formId,
       title: data?.name,
       subtitle: data?.description || '',
       creationDate: getTimestamp().now()
     }).catch((e) => message.error(e.message))
-
-    setLoading(false)
-    setIsModalVisible(false)
-    form.resetFields()
   }
 
   const menu = (
@@ -121,7 +122,6 @@ function FormsAll(props) {
           </Breadcrumb>
         </Col>
       </Row>
-
       {/* SecondaryTitle */}
       <Row noGutters v="center" mb={1} mt={3}>
         <Col>
@@ -130,13 +130,11 @@ function FormsAll(props) {
           </Title>
         </Col>
       </Row>
-
       <Row noGutters mb={3}>
         <Col>
           <Text>You have {amountFiles} files.</Text>
         </Col>
       </Row>
-
       <Row noGutters mb={3}>
         <Col>
           <Input
@@ -146,15 +144,13 @@ function FormsAll(props) {
           />
         </Col>
       </Row>
-
       <Box
         display="flex"
         flexWrap="wrap"
         flexDirection="row"
         className="custom-scroll">
-        <ListItem id={1} />
         {/* Here should be list of data Images/Video */}
-        {/* {currentData?.map((item, index) => (
+        {currentData?.map((item, index) => (
           <Box pr={3} pb={3} key={index}>
             <FormSimpleView
               id={item?.id}
@@ -164,34 +160,19 @@ function FormsAll(props) {
               subtitle={item?.subtitle}
             />
           </Box>
-        ))} */}
+        ))}
+        <Box
+          {...styles.addNewItemStyles}
+          style={globalStyles.cursorPointer}
+          onClick={showModal}>
+          <PlusOutlined />
+        </Box>
 
-        <StaticList currentData={currentData} />
-
-        <NewListItem showModal={showModal} />
-
-        {/*Modal window form creation*/}
-        <Modal
-          title={<Title level={4}>Create new typeform</Title>}
-          visible={isModalVisible}
-          onCancel={handleCancel}
-          destroyOnClose
-          footer={[
-            <Button key="back" onClick={handleCancel}>
-              Cancel
-            </Button>,
-            <Button
-              key="submit"
-              loading={loading}
-              onClick={() => {
-                form.submit()
-              }}
-              type="primary">
-              Create
-            </Button>
-          ]}>
-          <FormSimpleForm form={form} onFinish={onFormCreate} />
-        </Modal>
+        <FormSimpleFormWithModal
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+          onModalSubmit={onFormCreate}
+        />
       </Box>
     </Box>
   )

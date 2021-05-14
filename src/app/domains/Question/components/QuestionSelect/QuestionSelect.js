@@ -15,16 +15,13 @@ function QuestionSelect(props) {
   }
 
   return (
-    <Box
-      display="flex"
-      border="1px solid #bbbbbb"
-      borderRadius="4px"
-      width={420}>
+    <Box {...styles.mainContainer}>
       <Select
         value={answers[index].redirectQuestion || 'Go to the next question'}
         showSearch
         allowClear
         bordered={false}
+        // cursor="pointer"
         onChange={(name) => onChange(name, index)}
         defaultValue="Go to the next question"
         style={styles.selectStyle}>

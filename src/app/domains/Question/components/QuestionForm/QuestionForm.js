@@ -1,8 +1,7 @@
-import React, { useEffect, useState, cloneElement } from 'react'
-import { Card, Tag, Typography } from 'antd'
+import React, { useEffect, cloneElement } from 'react'
+import { Card, Tag } from 'antd'
 import {
   Rate,
-  Popover,
   InputForm,
   ChoiceForm,
   YesnoButton,
@@ -11,45 +10,25 @@ import {
   FileUploader,
   TextAreaForm,
   DateTimeInput
-  // QuestionHeader
 } from 'components'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
-import {
-  EditOutlined,
-  SettingOutlined,
-  LeftOutlined,
-  RightOutlined
-} from '@ant-design/icons'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
-import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
 import {
-  QuestionTypeSelect,
-  QuestionConfigurationMenu,
-  QuestionHeader
+  QuestionConfigurationPopover,
+  QuestionHeader,
+  QuestionMediaPopover
 } from 'domains/Question/components'
-import theme from 'app/styles/theme'
-import { globalStyles } from 'app/styles'
 
-const { Title } = Typography
 function QuestionForm(props) {
-  const {
-    data,
-    showPopover,
-    setShowPopover,
-    isImageEditVisible,
-    onQuestionTypeChange,
-    setIsImageEditVisible
-  } = props
+  const { data, onQuestionTypeChange } = props
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
 
-  // [COMPONENT STATE HOOKS]
-  const [isQuestionConfig, setIsQuestionConfig] = useState(false)
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
@@ -95,7 +74,7 @@ function QuestionForm(props) {
   }
 
   const computedMediaUrl = `url(${currentQuestion?.image || DEFAULT_IMAGE})`
-  const label =
+  const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
       ? 'Ending'
       : `Question ${data?.order + 1}`
@@ -108,16 +87,6 @@ function QuestionForm(props) {
   const bgImage =
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
-  // [CLEAN FUNCTIONS]
-  const popoverShowChange = () => {
-    setShowPopover(!showPopover)
-  }
-  const changeImageEditVisibleState = () => {
-    setIsImageEditVisible(!isImageEditVisible)
-  }
-  const changeQuestionConfigState = () => {
-    setIsQuestionConfig(!isQuestionConfig)
-  }
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -134,97 +103,23 @@ function QuestionForm(props) {
 
   return (
     <Row
-      noGutters
-      mb={2}
-      height="100%"
-      width="100%"
-      display="flex"
-      flex={1}
+      {...styles.mainRowStyle}
       style={styles.rowStyle}
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
       backgroundImage={bgImage}>
-      <Col
-        v="center"
-        order={2}
-        mx={4}
-        display="flex"
-        style={styles.columnStyle}>
+      <Col {...styles.questionCardColumnStyle} style={styles.columnStyle}>
         <Card style={styles.cardStyle} bordered={false}>
           <Row noGutters>
             <Col>
-              <Tag color="blue">{label}</Tag>
+              <Tag color="blue">{questionTag}</Tag>
             </Col>
             <Col cw="auto">
-              <Popover
-                onClick={popoverShowChange}
-                visible={showPopover}
-                onVisibleChange={popoverShowChange}
-                trigger={'click'}
-                placement={'bottomRight'}
-                btnType="primary"
-                btnIcon={<SettingOutlined />}
-                content={
-                  <>
-                    <Row
-                      noGutters
-                      borderRadius={`${theme.borderRadius.md} ${theme.borderRadius.md} 0 0`}
-                      onClick={changeQuestionConfigState}
-                      bg={theme.color.text.dark}
-                      style={globalStyles.cursorPointer}
-                      width="300px"
-                      mb={1}
-                      py={2}>
-                      <Col
-                        v="center"
-                        cw="auto"
-                        order={isQuestionConfig ? 1 : 3}>
-                        {isQuestionConfig ? (
-                          <LeftOutlined />
-                        ) : (
-                          <RightOutlined />
-                        )}
-                      </Col>
-                      <Col order={2} ml={2}>
-                        <Title level={4}>
-                          {isQuestionConfig
-                            ? currentQuestion?.questionType
-                            : 'Question Type'}
-                        </Title>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col pr={0}>
-                        {isQuestionConfig ? (
-                          <QuestionConfigurationMenu />
-                        ) : (
-                          <QuestionTypeSelect onClick={onQuestionTypeChange} />
-                        )}
-                      </Col>
-                    </Row>
-                  </>
-                }
+              <QuestionConfigurationPopover
+                onQuestionTypeChange={onQuestionTypeChange}
               />
             </Col>
             {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
               <Col cw="auto" ml={2}>
-                <Popover
-                  onClick={changeImageEditVisibleState}
-                  visible={isImageEditVisible}
-                  onVisibleChange={changeImageEditVisibleState}
-                  trigger={'click'}
-                  placement="rightTop"
-                  btnType="primary"
-                  btnIcon={<EditOutlined />}
-                  content={
-                    <Box width="192px" height="366px" overflow="hidden">
-                      <MediaLibrarySimpleView
-                        setIsImageEditVisible={setIsImageEditVisible}
-                        bgImage={bgImage}
-                      />
-                    </Box>
-                  }
-                />
+                <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
               </Col>
             )}
           </Row>
@@ -241,29 +136,9 @@ function QuestionForm(props) {
               <Col cw="auto">
                 <Box
                   {...layoutType.imgSize}
-                  backgroundRepeat="no-repeat"
-                  backgroundImage={computedMediaUrl}
-                  backgroundSize="cover"
-                  position="relative"
-                  zIndex="1"
-                  mb={3}>
-                  <Popover
-                    onClick={changeImageEditVisibleState}
-                    visible={isImageEditVisible}
-                    onVisibleChange={changeImageEditVisibleState}
-                    trigger={'click'}
-                    placement="rightTop"
-                    btnType="primary"
-                    btnIcon={<EditOutlined />}
-                    content={
-                      <Box width="192px" height="366px" overflow="hidden">
-                        <MediaLibrarySimpleView
-                          setIsImageEditVisible={setIsImageEditVisible}
-                          bgImage={computedMediaUrl}
-                        />
-                      </Box>
-                    }
-                  />
+                  {...styles.imageBetweenStyle}
+                  backgroundImage={computedMediaUrl}>
+                  <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
                 </Box>
               </Col>
             </Row>
@@ -280,39 +155,16 @@ function QuestionForm(props) {
       </Col>
       {imageShowRule && (
         <Col
-          v="center"
-          display="flex"
+          {...styles.sideImageColumnStyle}
           style={styles.columnStyle}
-          height="100%"
-          // width="800px"
           order={layoutType?.imageOrder}>
           <Box
             {...layoutType?.imgSize}
-            backgroundRepeat="no-repeat"
-            backgroundImage={computedMediaUrl}
-            backgroundSize="cover"
-            backgroundPosition="center left"
-            m={2}
-            position="relative">
+            {...styles.sideImageBoxStyle}
+            backgroundImage={computedMediaUrl}>
             <Row h="right">
               <Col cw="auto" mr={4}>
-                <Popover
-                  onClick={changeImageEditVisibleState}
-                  visible={isImageEditVisible}
-                  onVisibleChange={changeImageEditVisibleState}
-                  trigger={'click'}
-                  placement="rightTop"
-                  btnType="primary"
-                  btnIcon={<EditOutlined />}
-                  content={
-                    <Box width="192px" height="366px" overflow="hidden">
-                      <MediaLibrarySimpleView
-                        setIsImageEditVisible={setIsImageEditVisible}
-                        bgImage={computedMediaUrl}
-                      />
-                    </Box>
-                  }
-                />
+                <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
               </Col>
             </Row>
           </Box>

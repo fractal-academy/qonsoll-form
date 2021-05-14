@@ -111,18 +111,8 @@ function QuestionAdvancedView(props) {
   }
 
   return (
-    <Row
-      noGutters
-      height="inherit"
-      backgroundSize="cover"
-      backgroundImage={bgImage}
-      backgroundRepeat="no-repeat">
-      <Col
-        v="center"
-        order={2}
-        mx={4}
-        display="flex"
-        style={styles.columnStyle}>
+    <Row {...styles.mainRowStyle} backgroundImage={bgImage}>
+      <Col {...styles.questionCardColumnStyle} style={styles.columnStyle}>
         <Card bordered={false} style={styles.cardStyle}>
           <Row noGutters>
             <Col cw="auto">
@@ -141,7 +131,6 @@ function QuestionAdvancedView(props) {
               <Col cw="auto">
                 <Box
                   {...layoutType.imgSize}
-                  //mock data will be replaced
                   backgroundSize="cover"
                   backgroundRepeat="no-repeat"
                   backgroundImage={`url(${data?.image})`}
@@ -156,10 +145,8 @@ function QuestionAdvancedView(props) {
       </Col>
       {imageShowRule && (
         <Col
-          v="center"
-          display="flex"
+          {...styles.sideImageColumnStyle}
           style={styles.columnStyle}
-          height="100%"
           order={layoutType.imageOrder}>
           <Box
             {...layoutType.imgSize}

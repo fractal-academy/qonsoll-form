@@ -1,18 +1,17 @@
-import { Typography } from 'antd'
-import { Input } from 'components'
-import PropTypes from 'prop-types'
-import { EditOutlined } from '@ant-design/icons'
-import RangeSlider from 'components/RangeSlider'
 import { Box, Col, Row } from '@qonsoll/react-design'
+import { Typography } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 import { styles } from './MediaLibrarySimpleView.styles'
 import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
+import { Input } from 'components'
+import RangeSlider from 'components/RangeSlider'
 import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
 } from 'app/context/CurrentQuestion'
+import PropTypes from 'prop-types'
 
 const { Text } = Typography
-
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible, bgImage } = props
 
@@ -28,52 +27,59 @@ function MediaLibrarySimpleView(props) {
   }
 
   return (
-    <>
-      <Row noGutters mb={4}>
-        <Col>
-          <Box
-            height="150px"
-            borderRadius="8px"
-            position="relative"
-            backgroundRepeat="no-repeat"
-            backgroundSize="cover"
-            backgroundImage={bgImage}>
-            <MediaLibraryModal
-              bgImage={bgImage}
-              onClick={() => {
-                setIsImageEditVisible(false)
-              }}
-              onContinue={onMediaModalContinue}
-              btnProps={{
-                type: 'primary',
-                icon: <EditOutlined style={styles.btnStyle} />
-              }}
-            />
-          </Box>
-        </Col>
-      </Row>
-      <Row noGutters mb={4}>
-        <Col>
-          <Text style={styles.fontStyle}>Alt text</Text>
-          <Input style={styles.inputStyle} placeholder="Enter alt here..." />
-        </Col>
-      </Row>
-      <Row noGutters>
-        <Col>
-          <Text style={styles.fontStyle}>Brightness</Text>
-        </Col>
-      </Row>
-      <Row noGutters>
-        <Col>
-          <RangeSlider />
-        </Col>
-      </Row>
-    </>
+    <Row noGutters>
+      <Col>
+        <Row noGutters mb={4}>
+          <Col>
+            <Box
+              padding={4}
+              height="150px"
+              borderRadius="8px"
+              position="relative"
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              backgroundImage={bgImage}>
+              <MediaLibraryModal
+                bgImage={bgImage}
+                onClick={() => {
+                  setIsImageEditVisible(false)
+                }}
+                onContinue={onMediaModalContinue}
+                btnProps={{
+                  type: 'primary',
+                  icon: <EditOutlined style={styles.btnStyle} />
+                }}
+              />
+            </Box>
+          </Col>
+        </Row>
+        <Row noGutters mb={4}>
+          <Col>
+            <Text style={styles.fontStyle}>Alt text</Text>
+            <Input style={styles.inputStyle} placeholder="Enter alt here..." />
+          </Col>
+        </Row>
+        <Row noGutters>
+          <Col>
+            <Row noGutters>
+              <Col>
+                <Text style={styles.fontStyle}>Brightness</Text>
+              </Col>
+            </Row>
+            <Row noGutters>
+              <Col>
+                <RangeSlider />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
   )
 }
 
 MediaLibrarySimpleView.propTypes = {
-  setIsImageEditVisible: PropTypes.func,
+  setIsImageEditVisible: PropTypes.bool,
   bgImage: PropTypes.string
 }
 

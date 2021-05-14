@@ -3,13 +3,14 @@ import { ROUTES_PATHS } from 'app/constants'
 import { useState, cloneElement } from 'react'
 import { styles } from './FormSimpleView.style'
 import COLLECTIONS from 'app/constants/collection'
-import { deleteData } from 'app/services/Firestore'
+import { deleteData, updateData } from 'app/services/Firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { generatePath, useHistory } from 'react-router-dom'
 import { FormSimpleViewEdit } from 'domains/Form/components'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 
 import { Card, Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
+import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
 
 const { Meta } = Card
 const { Text } = Typography
@@ -21,6 +22,7 @@ function FormSimpleView(props) {
   const history = useHistory()
 
   // [COMPONENT STATE HOOKS]
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const [visible, setVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
 
@@ -36,7 +38,10 @@ function FormSimpleView(props) {
   }
 
   const showPopconfirm = () => {
-    setVisible(true)
+    setVisible(!visible)
+  }
+  const showModal = () => {
+    setIsModalVisible(true)
   }
 
   const handleDelete = async () => {
@@ -48,20 +53,36 @@ function FormSimpleView(props) {
     setVisible(false)
     setConfirmLoading(false)
   }
-
+  const onModalSubmit = async (data) => {
+    await updateData(COLLECTIONS.FORMS, id, {
+      title: data?.name,
+      subtitle: data?.description
+    }).catch((e) => message.error(e.message))
+  }
   // [MENU TEMPLATE]
   const menu = (
     <Menu>
-      <Menu.Item>
-        <FormSimpleViewEdit formData={props} />
+      <Menu.Item onClick={showModal} key={'showModal'}>
+        <Text>Rename</Text>
+        <FormSimpleFormWithModal
+          formData={props}
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+          onModalSubmit={onModalSubmit}
+          isEdit
+        />
       </Menu.Item>
-      <Menu.Item onClick={showPopconfirm}>
+
+      <Menu.Item onClick={showPopconfirm} key={'showPopconfirm'}>
         <Popconfirm
           title="Delete this form?"
           onConfirm={handleDelete}
           onCancel={handleCancel}
+          visible={visible}
           okButtonProps={{ loading: confirmLoading }}>
+          {/*<Box display="block">*/}
           <Text>Delete</Text>
+          {/*</Box>*/}
         </Popconfirm>
       </Menu.Item>
     </Menu>
@@ -71,7 +92,7 @@ function FormSimpleView(props) {
   return (
     <Card
       style={styles.cardStyles}
-      bodyStyle={styles.cardBodyPadding}
+      bodyStyle={styles.cardBodyStyle}
       cover={
         <Box
           bg="white"
@@ -80,6 +101,7 @@ function FormSimpleView(props) {
           borderRadius="8px"
           alignItems="center"
           justifyContent="center"
+          style={styles.boxStyles}
           onClick={onFormItemClick}>
           <FileOutlined style={styles.iconStyles} />
         </Box>

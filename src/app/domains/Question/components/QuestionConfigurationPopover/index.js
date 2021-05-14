@@ -1,0 +1,3 @@
+import QuestionConfigurationPopover from './QuestionConfigurationPopover'
+
+export default QuestionConfigurationPopover

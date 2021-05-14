@@ -5,7 +5,7 @@ import COLLECTIONS from 'app/constants/collection'
 import { deleteData } from 'app/services/Firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { generatePath, useHistory } from 'react-router-dom'
-import { FormSimpleViewEdit } from 'domains/Form/components'
+// import { FormSimpleViewEdit } from 'domains/Form/components'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { Card, Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 
@@ -39,9 +39,7 @@ function ListItem(props) {
   // [MENU TEMPLATE]
   const menu = (
     <Menu>
-      <Menu.Item>
-        <FormSimpleViewEdit formData={props} />
-      </Menu.Item>
+      <Menu.Item>{/* <FormSimpleViewEdit formData={props} /> */}</Menu.Item>
       <Menu.Item onClick={showPopconfirm}>
         <Popconfirm
           title="Delete this form?"
