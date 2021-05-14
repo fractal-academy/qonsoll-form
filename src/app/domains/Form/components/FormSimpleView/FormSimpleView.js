@@ -8,6 +8,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { generatePath, useHistory } from 'react-router-dom'
 import { FormSimpleViewEdit } from 'domains/Form/components'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
+
 import { Card, Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 
 const { Meta } = Card

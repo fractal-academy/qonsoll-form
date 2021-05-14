@@ -12,11 +12,7 @@ import {
   Modal,
   message
 } from 'antd'
-import {
-  ArrowLeftOutlined,
-  FolderOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
+import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
@@ -24,7 +20,7 @@ import { FormSimpleForm, FormSimpleView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
-import { Spinner } from 'components'
+import { Spinner, NewListItem, StaticList, ListItem } from 'components'
 
 const { Title, Text } = Typography
 const mockRoutes = [
@@ -156,8 +152,9 @@ function FormsAll(props) {
         flexWrap="wrap"
         flexDirection="row"
         className="custom-scroll">
+        <ListItem id={1} />
         {/* Here should be list of data Images/Video */}
-        {currentData?.map((item, index) => (
+        {/* {currentData?.map((item, index) => (
           <Box pr={3} pb={3} key={index}>
             <FormSimpleView
               id={item?.id}
@@ -167,21 +164,11 @@ function FormsAll(props) {
               subtitle={item?.subtitle}
             />
           </Box>
-        ))}
-        <Box
-          bg="#eceff5"
-          mr={3}
-          mb={3}
-          borderRadius="8px"
-          width="245px"
-          height="214px"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          style={globalStyles.cursorPointer}
-          onClick={showModal}>
-          <PlusOutlined />
-        </Box>
+        ))} */}
+
+        <StaticList currentData={currentData} />
+
+        <NewListItem showModal={showModal} />
 
         {/*Modal window form creation*/}
         <Modal
