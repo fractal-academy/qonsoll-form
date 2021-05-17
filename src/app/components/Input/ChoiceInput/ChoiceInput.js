@@ -6,7 +6,7 @@ import { styles } from './ChoiceInput.styles'
 import { DEFAULT_IMAGE } from 'app/constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { CloseOutlined, EditOutlined } from '@ant-design/icons'
-import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
+import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,

@@ -2,7 +2,7 @@ import { Box, Col, Row } from '@qonsoll/react-design'
 import { Typography } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { styles } from './MediaLibrarySimpleView.styles'
-import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
+import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import { Input } from 'components'
 import RangeSlider from 'components/RangeSlider'
 import {

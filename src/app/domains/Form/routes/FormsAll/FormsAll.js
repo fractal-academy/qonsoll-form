@@ -128,6 +128,7 @@ function FormsAll(props) {
           <Text>You have {amountFiles} files.</Text>
         </Col>
       </Row>
+
       <Row noGutters mb={3}>
         <Col>
           <Input
@@ -137,6 +138,7 @@ function FormsAll(props) {
           />
         </Col>
       </Row>
+
       <Box
         display="flex"
         flexWrap="wrap"
