@@ -27,6 +27,7 @@ import COLLECTIONS from 'app/constants/collection'
 import { Spinner } from 'components'
 import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
 import { styles } from './FormsAll.style'
+import theme from 'app/styles/theme'
 
 const { Title, Text } = Typography
 const mockRoutes = [
@@ -141,6 +142,7 @@ function FormsAll(props) {
       <Row noGutters mb={3}>
         <Col>
           <Input
+            style={{ backgroundColor: theme.color.dark.t.lighten9 }}
             ref={searchRef}
             placeholder="Search folder/file by name..."
             onChange={(input) => searchData(input.target.value)}
