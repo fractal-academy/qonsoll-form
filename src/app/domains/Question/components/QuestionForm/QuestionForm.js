@@ -2,7 +2,7 @@ import { cloneElement } from 'react'
 import { Card, Tag } from 'antd'
 import {
   Rate,
-  InputForm,
+  ShortText,
   ChoiceEditableGroup,
   YesnoButton,
   RangeButton,
@@ -51,7 +51,7 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
       component: (
-        <InputForm btnProps={{ type: 'primary', children: 'Submit' }} />
+        <ShortText btnProps={{ type: 'primary', children: 'Submit' }} />
       )
     },
     [QUESTION_TYPES.LONG_TEXT]: {

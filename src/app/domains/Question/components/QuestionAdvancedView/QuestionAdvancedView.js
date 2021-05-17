@@ -7,7 +7,7 @@ import { styles } from './QuestionAdvancedView.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import {
   Rate,
-  InputForm,
+  ShortText,
   YesnoButton,
   RangeButton,
   ChoiceButton,
@@ -60,7 +60,7 @@ function QuestionAdvancedView(props) {
       component: <Rate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <InputForm onClick={onClick} />
+      component: <ShortText onClick={onClick} />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
       component: <TextAreaForm onClick={onClick} />
