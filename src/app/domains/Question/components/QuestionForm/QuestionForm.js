@@ -2,8 +2,8 @@ import { cloneElement } from 'react'
 import { Card, Tag } from 'antd'
 import {
   Rate,
-  InputForm,
-  ChoiceForm,
+  ShortText,
+  ChoiceEditableGroup,
   YesnoButton,
   RangeButton,
   SubmitButton,
@@ -38,10 +38,10 @@ function QuestionForm(props) {
       component: <YesnoButton />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceForm withImage />
+      component: <ChoiceEditableGroup withImage />
     },
     [QUESTION_TYPES.CHOICE]: {
-      component: <ChoiceForm />
+      component: <ChoiceEditableGroup />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} />
@@ -51,7 +51,7 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
       component: (
-        <InputForm btnProps={{ type: 'primary', children: 'Submit' }} />
+        <ShortText btnProps={{ type: 'primary', children: 'Submit' }} />
       )
     },
     [QUESTION_TYPES.LONG_TEXT]: {
