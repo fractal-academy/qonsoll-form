@@ -5,21 +5,17 @@ import theme from 'app/styles/theme'
 
 const { TextArea } = Input
 
-const TextEditable = styled(TextArea).attrs((props) => ({
-  bordered: false,
-  autoSize: true
+const TextEditable = styled(TextArea).attrs(() => ({
+  autoSize: { minRows: 1, maxRows: 3 },
+  bordered: false
 }))`
   padding-left: 0;
   ${(props) =>
-    props.isTitle
-      ? css`
-          font-size: ${theme.typography.fontSize.h4};
-          font-weight: bold;
-        `
-      : css`
-          font-size: ${theme.typography.fontSize.body1};
-          font-weight: normal;
-        `};
+    props.isTitle &&
+    css`
+      font-size: ${theme.typography.fontSize.h4};
+      font-weight: bold;
+    `};
   color: ${(props) =>
     props.textSecondary
       ? `${theme.color.dark.t.lighten2}`
