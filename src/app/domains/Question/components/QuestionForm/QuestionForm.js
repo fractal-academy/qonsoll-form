@@ -3,7 +3,7 @@ import { Card, Tag } from 'antd'
 import {
   Rate,
   InputForm,
-  ChoiceForm,
+  ChoiceEditableGroup,
   YesnoButton,
   RangeButton,
   SubmitButton,
@@ -38,10 +38,10 @@ function QuestionForm(props) {
       component: <YesnoButton />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceForm withImage />
+      component: <ChoiceEditableGroup withImage />
     },
     [QUESTION_TYPES.CHOICE]: {
-      component: <ChoiceForm />
+      component: <ChoiceEditableGroup />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} />

@@ -6,8 +6,8 @@ export { default as TextArea } from './TextArea/TextArea'
 export { default as TextEditable } from './TextEditable'
 
 export { default as DateTimeInput } from './Input/DateTimeInput'
-export { default as ChoiceInput } from './Input/ChoiceInput'
-export { default as ChoiceForm } from './Input/ChoiceForm'
+export { default as ChoiceEditable } from './Input/ChoiceEditable'
+export { default as ChoiceEditableGroup } from './Input/ChoiceEditableGroup'
 export { default as InputForm } from './Input/InputForm'
 export { default as Input } from './Input/Input'
 
