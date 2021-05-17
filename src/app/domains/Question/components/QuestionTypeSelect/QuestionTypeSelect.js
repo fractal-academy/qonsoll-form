@@ -78,7 +78,7 @@ function QuestionTypeSelect(props) {
   const { onClick } = props
 
   return (
-    <Row h="center" v={'center'} pl={2} noGutters>
+    <Row h="center" v={'center'} pl={2} pr={0} noGutters>
       <Col>
         <Menu style={styles.menuStyle}>
           {questionTypeMap.map((item, index) => (

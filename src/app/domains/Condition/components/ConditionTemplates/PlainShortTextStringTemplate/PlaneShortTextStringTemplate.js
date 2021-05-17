@@ -28,10 +28,7 @@ function PlaneShortTextStringTemplate(props) {
                   display="flex"
                   alignItems="center"
                   border="1px solid #bbbbbb"
-                  borderRadius="4px"
-                  mr={2}
-                  // width={210}
-                >
+                  borderRadius="4px">
                   <Select
                     showSearch
                     allowClear
@@ -52,8 +49,7 @@ function PlaneShortTextStringTemplate(props) {
                   alignItems="center"
                   key={index}
                   p={2}
-                  mr={2}
-                  // width={200}
+                  mr={4}
                   height="50px"
                   border="1px solid #bbbbbb"
                   borderRadius="4px">

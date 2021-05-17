@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
+import theme from 'app/styles/theme'
 
 function NumberedCard(props) {
   const { number, children } = props
@@ -19,9 +20,9 @@ function NumberedCard(props) {
     left: 4px;
     padding: 16px;
     border-radius: 16px;
-    background-color: #f5f5f6;
+    background-color: ${theme.color.dark.t.lighten9};
     &:hover {
-      background-color: #ebeced;
+      background-color: ${theme.color.dark.t.lighten8};
       transition: background-color 1s;
     }
   `

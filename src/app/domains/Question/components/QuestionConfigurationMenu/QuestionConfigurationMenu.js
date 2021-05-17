@@ -28,7 +28,7 @@ function QuestionConfigurationMenu() {
   }
 
   return (
-    <Box p={2}>
+    <Box>
       <Row mb={3} noGutters>
         <Col>
           <Text style={styles.requiredStyle}>Required</Text>
