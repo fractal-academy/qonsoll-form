@@ -14,6 +14,7 @@ code {
   height: inherit;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
@@ -42,5 +43,11 @@ code {
 
 // [ REWRITING POPOVER CONTENT PLACEMENT ]
 .ant-popover-inner-content {
-  //padding: 4px;
+  padding: 0px;
+}
+
+// [ REWRITING POPOVER DELETE CONTENT PLACEMENT ]
+.ant-popconfirm .ant-popover-content .ant-popover-inner {
+  padding: 12px;
+
 }

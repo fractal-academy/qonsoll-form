@@ -27,10 +27,7 @@ function PlaneTextDateTemplate(props) {
                 <Box
                   display="flex"
                   border="1px solid #bbbbbb"
-                  borderRadius="4px"
-                  mr={2}
-                  // width={210}
-                >
+                  borderRadius="4px">
                   <Select
                     showSearch
                     allowClear
@@ -50,9 +47,7 @@ function PlaneTextDateTemplate(props) {
                   display="flex"
                   alignItems="center"
                   key={index}
-                  // width="200px"
-                  // p={2}
-                  mr={2}
+                  mr={4}
                   border="1px solid #bbbbbb"
                   borderRadius="4px">
                   <DatePicker style={styles.selectStyle} bordered={false} />

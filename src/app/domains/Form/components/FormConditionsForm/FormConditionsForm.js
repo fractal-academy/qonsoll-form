@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ConditionForm } from 'domains/Condition/components'
 import { QUESTION_TYPES, ANSWER_TYPES } from 'app/constants'
+import { Box } from '@qonsoll/react-design'
 
 const mockQuestion = [
   {
@@ -96,14 +97,16 @@ function FormConditionsForm(props) {
   return (
     <>
       {mockQuestion.map((item, mockQuestionIndex) => (
-        <ConditionForm
-          key={mockQuestionIndex}
-          mockQuestionIndex={mockQuestionIndex}
-          item={item}
-          addCondition={addCondition}
-          addRedirectQuestion={addRedirectQuestion}
-          getQuestionListRedirect={getQuestionListRedirect}
-        />
+        <Box mb={3}>
+          <ConditionForm
+            key={mockQuestionIndex}
+            mockQuestionIndex={mockQuestionIndex}
+            item={item}
+            addCondition={addCondition}
+            addRedirectQuestion={addRedirectQuestion}
+            getQuestionListRedirect={getQuestionListRedirect}
+          />
+        </Box>
       ))}
     </>
   )

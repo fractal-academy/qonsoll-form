@@ -28,10 +28,7 @@ function PlaneLongTextStringTemplate(props) {
                   display="flex"
                   alignItems="center"
                   border="1px solid #bbbbbb"
-                  borderRadius="4px"
-                  mr={2}
-                  // width={210}
-                >
+                  borderRadius="4px">
                   <Select
                     showSearch
                     allowClear
@@ -51,10 +48,9 @@ function PlaneLongTextStringTemplate(props) {
                   display="flex"
                   alignItems="center"
                   key={index}
-                  p={2}
-                  mr={2}
-                  // width={200}
-                  height="50px"
+                  // p={2}
+                  mr={4}
+                  // height="50px"
                   border="1px solid #bbbbbb"
                   borderRadius="4px">
                   <Input style={globalStyles.fullWidth} bordered={false} />
