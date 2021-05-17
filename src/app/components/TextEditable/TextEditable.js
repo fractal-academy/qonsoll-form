@@ -1,28 +1,30 @@
 import { Input } from 'antd'
 import PropTypes from 'prop-types'
-import { styles } from './TextEditable.styles'
+import styled, { css } from 'styled-components'
+import theme from 'app/styles/theme'
 
 const { TextArea } = Input
 
-function TextEditable(props) {
-  const { textSecondary, placeholder, isTitle, onChange, onBlur, value } = props
-
-  return (
-    <TextArea
-      style={{
-        ...(isTitle ? styles.title : styles.default),
-        ...(textSecondary ? styles.grayColor : styles.blackColor)
-      }}
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
-      bordered={false}
-      placeholder={placeholder}
-      autoSize
-      {...props}
-    />
-  )
-}
+const TextEditable = styled(TextArea).attrs((props) => ({
+  bordered: false,
+  autoSize: true
+}))`
+  padding-left: 0;
+  ${(props) =>
+    props.isTitle
+      ? css`
+          font-size: ${theme.typography.fontSize.h4};
+          font-weight: bold;
+        `
+      : css`
+          font-size: ${theme.typography.fontSize.body1};
+          font-weight: normal;
+        `};
+  color: ${(props) =>
+    props.textSecondary
+      ? `${theme.color.dark.t.lighten2}`
+      : `${theme.color.dark.default}`};
+`
 
 TextEditable.propTypes = {
   onChange: PropTypes.func,
