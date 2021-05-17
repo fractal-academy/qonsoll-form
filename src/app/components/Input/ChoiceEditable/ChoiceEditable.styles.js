@@ -19,13 +19,12 @@ export const styles = {
   }
 }
 
-export const LetterBox = styled(Text)`
-  padding: 0 5px;
-  width: 25px;
-  height: 25px;
+export const LetterBox = styled(Box)`
+  width: 20px;
+  border: 1px solid ${theme.color.primary.t.lighten2};
+  text-align: center;
   font-size: ${theme.typography.fontSize.body2};
   line-height: ${theme.typography.lineHeight.body2};
-  border: 1px solid lightblue;
   color: ${theme.color.primary.default};
   background-color: ${theme.color.white.default};
 `

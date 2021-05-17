@@ -42,9 +42,9 @@ function ChoiceEditableGroup(props) {
         />
       ))}
       <Box
-        {...styles.AddNewChoiceBox}
-        width={withImage ? '165px' : '150px'}
-        height={withImage ? '145px' : '45px'}
+        height={withImage ? '146px' : '38px'}
+        width={withImage ? '166px' : '150px'}
+        {...styles.addNewChoiceBox}
         onClick={onAddChoice}>
         <PlusOutlined />
       </Box>
