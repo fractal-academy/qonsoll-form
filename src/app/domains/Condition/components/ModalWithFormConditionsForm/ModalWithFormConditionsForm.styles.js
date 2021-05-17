@@ -4,6 +4,6 @@ export const styles = {
   modalBodyStyle: {
     height: '700px',
     overflow: 'auto',
-    backgroundColor: theme.color.dark.lighten8
+    backgroundColor: theme.color.primary.t.lighten9
   }
 }

@@ -15,7 +15,7 @@ function QuestionSelect(props) {
   }
 
   return (
-    <Box {...styles.mainContainer}>
+    <Box>
       <Select
         value={answers[index].redirectQuestion || 'Go to the next question'}
         showSearch

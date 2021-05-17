@@ -3,7 +3,7 @@ export const styles = {
   fontColor: { color: '#1d6fdc' },
   selectStyle: {
     width: '100%',
-    height: '48px',
+    // height: '48px',
     display: 'flex',
     alignItems: 'center'
   }

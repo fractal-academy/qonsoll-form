@@ -47,6 +47,7 @@ export const styles = {
     backgroundSize: 'cover',
     backgroundPosition: 'center left',
     m: 2,
-    position: 'relative'
+    position: 'relative',
+    p: -42
   }
 }

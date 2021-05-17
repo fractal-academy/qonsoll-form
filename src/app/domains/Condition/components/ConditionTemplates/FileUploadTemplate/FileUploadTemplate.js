@@ -17,7 +17,7 @@ function FileUploadTemplate(props) {
               alignItems="center"
               key={index}
               p={2}
-              mr={2}
+              mr={4}
               height="50px"
               border="1px solid #bbbbbb"
               borderRadius="4px">
