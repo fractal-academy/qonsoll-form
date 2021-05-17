@@ -3,7 +3,7 @@ import { Typography } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { styles } from './MediaLibrarySimpleView.styles'
 import { MediaLibraryModal } from 'domains/MediaLibrary/components'
-import { Input } from 'components'
+import { Input } from 'antd'
 import RangeSlider from 'components/RangeSlider'
 import {
   useCurrentQuestionContextDispatch,
