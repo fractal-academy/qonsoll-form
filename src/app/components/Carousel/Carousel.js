@@ -22,14 +22,14 @@ function Carousel(props) {
   const previous = () => {
     carouselRef.current?.prev()
   }
-
-  //For logic jumps
-  const goTo = (slideNumber) => {
-    carouselRef.current?.goTo(slideNumber)
-  }
   const onCurrentSlideChange = (slideIndex) => {
     setCurrentSlide(slideIndex)
   }
+  //For logic jumps
+  // const goTo = (slideNumber) => {
+  //   carouselRef.current?.goTo(slideNumber)
+  // }
+
   //COMPUTED PROPERTIES
   isAnswered && next()
 

@@ -1,7 +1,7 @@
+import { useState } from 'react'
 import { styles } from './FormShow.style'
 import { globalStyles } from 'app/styles'
 import { useKeyPress } from '@umijs/hooks'
-import { useState, useEffect } from 'react'
 import { COLLECTIONS } from 'app/constants'
 import { Button, Divider, Typography } from 'antd'
 import { useHistory, useParams } from 'react-router'
@@ -41,23 +41,6 @@ function FormShow(props) {
   const onClick = () => {
     setIsAnswered(true)
   }
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
 
   return (
     <Box display="flex" flexDirection="column" height="100%">

@@ -10,7 +10,7 @@ import {
   OpinionScaleCustomConfig,
   RatingCustomConfig
 } from './QuestionCustomConfigurations'
-import { styles } from './QuestionCustomConfigurations/QuestionConfigurationMenu.styles'
+import { styles } from './QuestionConfigurationMenu.styles'
 
 const { Text } = Typography
 

@@ -18,33 +18,28 @@ function TextAreaForm(props) {
   }
 
   return (
-    <>
-      <Container>
-        <Row noGutters>
-          <Col>
-            <Form
-              form={form}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}>
-              <Form.Item
-                style={{ marginBottom: '0px' }}
-                name="answer"
-                rules={[
-                  {
-                    required: true
-                  }
-                ]}>
-                <TextArea {...textAreaProps} />
-              </Form.Item>
-              <Form.Item>
-                <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
-              </Form.Item>
-              <SubmitButton onClick={onClick} />
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <Container>
+      <Row noGutters>
+        <Col>
+          <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+            <Form.Item
+              style={{ marginBottom: '0px' }}
+              name="answer"
+              rules={[
+                {
+                  required: true
+                }
+              ]}>
+              <TextArea {...textAreaProps} />
+            </Form.Item>
+            <Form.Item>
+              <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
+            </Form.Item>
+            <SubmitButton onClick={onClick} />
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

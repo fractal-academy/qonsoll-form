@@ -1,5 +1,3 @@
-import { Box } from '@qonsoll/react-design'
-import React from 'react'
 import theme from 'app/styles/theme'
 
 export const styles = {
