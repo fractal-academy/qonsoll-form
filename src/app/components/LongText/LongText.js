@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types'
-import { Form, Typography } from 'antd'
-import { TextArea, SubmitButton } from 'components'
+import { Form, Typography, Input } from 'antd'
+import { SubmitButton } from 'components'
 import { Col, Container, Row } from '@qonsoll/react-design'
 
-function TextAreaForm(props) {
+const { TextArea } = Input
+
+function LongText(props) {
   const { textAreaProps, onClick } = props
 
   // [ADDITIONAL HOOKS]
@@ -30,7 +32,12 @@ function TextAreaForm(props) {
                   required: true
                 }
               ]}>
-              <TextArea {...textAreaProps} />
+              <TextArea
+                bordered
+                autoSize={{ minRows: 1, maxRows: 4 }}
+                placeholder="Type your answer here..."
+                {...textAreaProps}
+              />
             </Form.Item>
             <Form.Item>
               <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
@@ -43,9 +50,9 @@ function TextAreaForm(props) {
   )
 }
 
-TextAreaForm.propTypes = {
+LongText.propTypes = {
   textAreaProps: PropTypes.object,
   onClick: PropTypes.func
 }
 
-export default TextAreaForm
+export default LongText

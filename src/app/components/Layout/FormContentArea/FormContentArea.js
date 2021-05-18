@@ -1,6 +1,5 @@
 import { Row, Col } from '@qonsoll/react-design'
 import { Button } from 'antd'
-import './FormContentArea.styles.css'
 import PropTypes from 'prop-types'
 import MiddleContainer from '../MiddleContainer'
 import { ROUTES_PATHS } from 'app/constants'
@@ -26,11 +25,7 @@ function FormContentArea(props) {
         <Col cw="auto" mr={3}>
           {leftSideMenu}
         </Col>
-        <Col
-          backgroundColor="white"
-          className="content-style custom-scroll"
-          p={3}
-          overflow="auto">
+        <Col backgroundColor="white" p={3} overflow="auto">
           <MiddleContainer>{children}</MiddleContainer>
         </Col>
       </Row>

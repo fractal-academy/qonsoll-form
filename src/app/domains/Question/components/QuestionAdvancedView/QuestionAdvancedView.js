@@ -12,7 +12,7 @@ import {
   RangeButton,
   ChoiceButton,
   FileUploader,
-  TextAreaForm,
+  LongText,
   DateTimeInput,
   SubmitButton
 } from 'components'
@@ -63,7 +63,7 @@ function QuestionAdvancedView(props) {
       component: <ShortText onClick={onClick} />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <TextAreaForm onClick={onClick} />
+      component: <LongText onClick={onClick} />
     },
     [QUESTION_TYPES.DATE]: {
       component: <DateTimeInput onClick={onClick} />

@@ -13,13 +13,14 @@ const TextEditable = styled(TextArea).attrs(() => ({
   ${(props) =>
     props.isTitle &&
     css`
-      font-size: ${theme.typography.fontSize.h4};
+      font-size: ${theme.typography.fontSize.h3};
       font-weight: bold;
     `};
-  color: ${(props) =>
-    props.textSecondary
-      ? `${theme.color.dark.t.lighten2}`
-      : `${theme.color.dark.default}`};
+  ${(props) =>
+    props.textSecondary &&
+    css`
+      color: ${theme.color.dark.t.lighten2};
+    `};
 `
 
 TextEditable.propTypes = {

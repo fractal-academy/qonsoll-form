@@ -8,7 +8,7 @@ import {
   RangeButton,
   SubmitButton,
   FileUploader,
-  TextAreaForm,
+  LongText,
   DateTimeInput
 } from 'components'
 import PropTypes from 'prop-types'
@@ -50,14 +50,10 @@ function QuestionForm(props) {
       component: <Rate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: (
-        <ShortText btnProps={{ type: 'primary', children: 'Submit' }} />
-      )
+      component: <ShortText />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: (
-        <TextAreaForm btnProps={{ type: 'primary', children: 'Submit' }} />
-      )
+      component: <LongText />
     },
     [QUESTION_TYPES.DATE]: {
       component: <DateTimeInput />
