@@ -88,10 +88,10 @@ function FormsAll(props) {
   }
 
   return (
-    <Box flexDirection="column" px={45} py={4} minHeight="100%">
+    <Box {...styles.mainWrapper}>
       {/* Page Header */}
       <Row noGutters display="flex">
-        <Col cw="auto" p={0} v="center">
+        <Col cw="auto" v="center">
           <Button
             size="small"
             type="text"
@@ -100,10 +100,10 @@ function FormsAll(props) {
             onClick={() => history.goBack()}
           />
         </Col>
-        <Col cw="auto" p={0} v="center">
+        <Col cw="auto" v="center">
           <Divider type="vertical" />
         </Col>
-        <Col p={0} v="center">
+        <Col v="center">
           <Breadcrumb>
             <Breadcrumb.Item>
               <FolderOutlined />
