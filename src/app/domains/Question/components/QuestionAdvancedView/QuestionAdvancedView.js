@@ -115,13 +115,15 @@ function QuestionAdvancedView(props) {
       <Col {...styles.questionCardColumnStyle} style={styles.columnStyle}>
         <Card bordered={false} style={styles.cardStyle}>
           <Row noGutters>
-            <Col cw="auto">
-              <Title level={4} style={globalStyles.resetMargin}>
-                {questionNumber}. {data?.title}
-              </Title>
+            <Col cw={12}>
+              <Box>
+                <Title level={4} style={globalStyles.resetMargin}>
+                  {questionNumber}. {data?.title}
+                </Title>
+              </Box>
             </Col>
           </Row>
-          <Row noGutters>
+          <Row noGutters mb={3}>
             <Col>
               <Text>{data?.subtitle}</Text>
             </Col>
