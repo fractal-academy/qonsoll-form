@@ -1,5 +1,4 @@
-import './EditorSidebar.styles.css'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Divider, message, Button, Popover } from 'antd'
 import {
@@ -8,7 +7,7 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
-import { styles } from './EditorSidebar.styles'
+import { SidebarStateSwitcher, styles } from './EditorSidebar.styles'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
@@ -75,35 +74,22 @@ function EditorSidebar(props) {
 
   return (
     <Box position="relative" display="flex">
-      <Box
-        position="absolute"
-        bg="white"
-        borderRadius="0 0 0 8px"
-        style={styles.siderStateSwitcherStyle}
+      <SidebarStateSwitcher
         onClick={() => {
           setOpen(!open)
         }}>
-        {open ? (
-          <RightOutlined style={styles.siderStateSwithcerIcon} />
-        ) : (
-          <LeftOutlined style={styles.siderStateSwithcerIcon} />
-        )}
-      </Box>
+        {open ? <RightOutlined /> : <LeftOutlined />}
+      </SidebarStateSwitcher>
       {open && (
-        <Box
-          bg="white"
-          width="300px"
-          display="flex"
-          flexDirection="column"
-          position="relative">
+        <Box {...styles.sidebarBoxWrapper}>
           <Box p={3}>
-            <Row display="flex" flex={1}>
+            <Row>
               <Col v="center">
                 <Title level={5} style={globalStyles.resetMargin}>
                   Questions
                 </Title>
               </Col>
-              <Col cw="auto" px={10} py={1} mr={2} borderRadius="4px">
+              <Col cw="auto">
                 <Popover
                   visible={showPopover}
                   onVisibleChange={() => {
@@ -114,12 +100,12 @@ function EditorSidebar(props) {
                   content={<QuestionTypeSelect onClick={addQuestion} />}>
                   <Button
                     type="text"
-                    icon={<PlusOutlined style={styles.hover} />}
+                    icon={<PlusOutlined />}
                     onClick={popoverShowChange}
                   />
                 </Popover>
               </Col>
-              <Col cw="auto" px={1} borderRadius="4px" v="center">
+              <Col cw="auto" v="center" px={1}>
                 <ModalWithFormConditionsForm
                   btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
                   <FormConditionsForm />
@@ -137,20 +123,15 @@ function EditorSidebar(props) {
               />
             )}
           </Box>
-          <Box mt="auto" style={styles.endingsPosition}>
+          <Box mt="auto">
             <Row>
               <Col>
                 <Divider type="horizontal" style={globalStyles.resetMargin} />
               </Col>
             </Row>
-            <Row h="center" mt={1} style={globalStyles.cursorGrab}>
+            <Row h="center" mt={1}>
               <Col cw="auto">
-                <Box
-                  height="3px"
-                  bg="#282c34"
-                  width="50px"
-                  borderRadius="8px"
-                />
+                <Box {...styles.dragbleCeiling} />
               </Col>
             </Row>
             <Row p={3}>
@@ -159,11 +140,15 @@ function EditorSidebar(props) {
                   Endings
                 </Title>
               </Col>
-              <Col onClick={addQuestion} cw="auto">
-                <PlusOutlined style={styles.hover} />
+              <Col cw="auto">
+                <Button
+                  type="text"
+                  icon={<PlusOutlined />}
+                  onClick={addQuestion}
+                />
               </Col>
             </Row>
-            <Box pb={3} px={3} maxHeight="350px" overflow="auto">
+            <Box {...styles.endingsList}>
               {/*<QuestionsList />*/}
               {!!endings?.length && (
                 <QuestionsList
