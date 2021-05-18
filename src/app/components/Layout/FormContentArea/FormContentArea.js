@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import MiddleContainer from '../MiddleContainer'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router'
+import { styles } from './FormContentArea.styles'
 
 function FormContentArea(props) {
   const { children, leftSideMenu } = props
@@ -21,15 +22,15 @@ function FormContentArea(props) {
 
   return (
     <>
-      <Row noGutters display="flex" m={4} height="100%" overflow="auto">
+      <Row noGutters {...styles.contentRow}>
         <Col cw="auto" mr={3}>
           {leftSideMenu}
         </Col>
-        <Col backgroundColor="white" p={3} overflow="auto">
+        <Col {...styles.contentCol}>
           <MiddleContainer>{children}</MiddleContainer>
         </Col>
       </Row>
-      <Row noGutters h="right" mb={4} mx={4}>
+      <Row noGutters {...styles.footerButtons}>
         <Col cw="auto" mr={3}>
           <Button type="text" onClick={onCancel}>
             Cancel
