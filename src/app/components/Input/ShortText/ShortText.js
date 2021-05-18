@@ -1,7 +1,6 @@
-import { Form } from 'antd'
+import { Form, Input } from 'antd'
 import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
-import { ShortTextInput, styles } from './ShortText.styles'
 import { SubmitButton } from 'components'
 import { Row, Col, Container } from '@qonsoll/react-design'
 
@@ -29,10 +28,7 @@ function ShortText(props) {
               style={globalStyles.resetMarginB}
               name="input"
               rules={[{ required: isRequired }]}>
-              <ShortTextInput
-                {...inputProps}
-                placeholder="Type your answer here..."
-              />
+              <Input {...inputProps} placeholder="Type your answer here..." />
             </Form.Item>
           </Col>
         </Row>

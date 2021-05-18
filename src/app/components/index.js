@@ -1,8 +1,7 @@
 export { default as FileUploader } from './Uploader/FileUploader'
 export { default as IconLabel } from './Uploader/IconLabel'
 
-export { default as TextAreaForm } from './TextArea/TextAreaForm'
-export { default as TextArea } from './TextArea/TextArea'
+export { default as LongText } from './LongText'
 export { default as TextEditable } from './TextEditable'
 
 export { default as DateTimeInput } from './Input/DateTimeInput'
