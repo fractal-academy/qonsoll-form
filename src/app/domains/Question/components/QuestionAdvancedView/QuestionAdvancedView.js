@@ -3,7 +3,7 @@ import { cloneElement } from 'react'
 import { Typography, Button } from 'antd'
 import { globalStyles } from 'app/styles'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { QuestionCard, StyledCol, styles } from './QuestionAdvancedView.styles'
+import { styles, StyledCard } from './QuestionAdvancedView.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import {
   Rate,
@@ -112,8 +112,8 @@ function QuestionAdvancedView(props) {
 
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage}>
-      <StyledCol {...styles.questionCardColumnStyle}>
-        <QuestionCard bordered={false}>
+      <Col {...styles.questionCardColumnStyle}>
+        <StyledCard bordered={false}>
           <Row noGutters>
             <Col cw={12}>
               <Box>
@@ -143,8 +143,8 @@ function QuestionAdvancedView(props) {
           <Row noGutters>
             <Col>{cloneElement(component, data)}</Col>
           </Row>
-        </QuestionCard>
-      </StyledCol>
+        </StyledCard>
+      </Col>
       {imageShowRule && (
         <Col
           {...styles.sideImageColumnStyle}
