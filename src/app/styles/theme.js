@@ -65,10 +65,6 @@ theme.color.dark.t.lighten7 = 'rgba(3,11,23,0.10)'
 theme.color.dark.t.lighten8 = 'rgba(3,11,23,0.08)'
 theme.color.dark.t.lighten9 = 'rgba(3,11,23,0.04)'
 
-//CustomColor
-theme.color.dark.lighten10 = 'rgb(245,245,246)'
-theme.color.dark.lighten11 = 'rgb(235,236,237)'
-
 // White pure
 theme.color.white = {}
 theme.color.white.default = '#fff'

@@ -11,7 +11,13 @@ import {
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { globalStyles } from 'app/styles'
-import { styles } from './MediaLibraryModal.styles'
+import {
+  CustomBox,
+  CustomButton,
+  CustomInput,
+  CustomText,
+  styles
+} from './MediaLibraryModal.styles'
 import PropTypes from 'prop-types'
 import './MediaLibraryModal.styles.css'
 import {
@@ -151,57 +157,42 @@ function MediaLibraryModal(props) {
           <Col>
             <Row mb={1} v="center" px={3}>
               <Col>
-                <Title
-                  level={3}
-                  style={(styles.boldFont, globalStyles.resetMargin)}>
-                  Media Library
-                </Title>
+                <Title level={3}>Media Library</Title>
               </Col>
               <Col cw="auto" v="center">
-                <Box bg="#eceff5" p={1} borderRadius="8px">
-                  <Button
+                <Box
+                  bg={theme.color.dark.t.lighten7}
+                  p={1}
+                  borderRadius={theme.borderRadius.md}
+                  display="flex">
+                  <CustomBox
                     size="medium"
-                    type={!switchState ? 'text' : 'secondary'}
-                    //can`t move style to separate file because of state dependency
-                    style={{
-                      borderRadius: '8px',
-                      border: 0,
-                      color: !switchState ? '#1d6fdc' : '#82868c',
-                      backgroundColor: !switchState ? 'white' : '#eceff5'
-                    }}
+                    type={switchState ? 'text' : 'secondary'}
+                    switchState={switchState}
                     onClick={onSwitchChange}>
                     Image
-                  </Button>
-                  <Button
+                  </CustomBox>
+                  <CustomBox
                     size="medium"
                     type={switchState ? 'secondary' : 'text'}
-                    //same here
-                    style={{
-                      borderRadius: '8px',
-                      border: 0,
-                      color: switchState ? '#1d6fdc' : '#82868c',
-                      backgroundColor: !switchState ? '#eceff5' : 'white'
-                    }}
+                    switchState={!switchState}
                     onClick={onSwitchChange}>
                     Video
-                  </Button>
+                  </CustomBox>
                 </Box>
               </Col>
             </Row>
             <Row pb={25} px={3}>
               <Col>
-                <Text style={styles.textSecondary}>
-                  You have {amountFiles} files.
-                </Text>
+                <CustomText>You have {amountFiles} files.</CustomText>
               </Col>
             </Row>
-            <Row px={3} pb={3} borderBottom="1px solid #d9d9d9">
+            <Row px={3} pb={3}>
               <Col>
-                <Input
+                <CustomInput
                   allowClear
                   ref={searchRef}
                   prefix={<SearchOutlined />}
-                  style={styles.borderRadius}
                   placeholder="Search media file by name..."
                   onSearch={searchData}
                   onChange={onChange}

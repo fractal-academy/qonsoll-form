@@ -1,7 +1,7 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { Typography } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
-import { styles } from './MediaLibrarySimpleView.styles'
+import { CustomText, styles } from './MediaLibrarySimpleView.styles'
 import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import { Input } from 'antd'
 import RangeSlider from 'components/RangeSlider'
@@ -11,7 +11,6 @@ import {
 } from 'app/context/CurrentQuestion'
 import PropTypes from 'prop-types'
 
-const { Text } = Typography
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible, bgImage } = props
 
@@ -31,23 +30,15 @@ function MediaLibrarySimpleView(props) {
       <Col>
         <Row noGutters mb={4}>
           <Col>
-            <Box
-              padding={4}
-              height="150px"
-              borderRadius="8px"
-              position="relative"
-              backgroundRepeat="no-repeat"
-              backgroundSize="cover"
-              backgroundImage={bgImage}>
+            <Box {...styles.CustomBox} backgroundImage={bgImage}>
               <MediaLibraryModal
-                bgImage={bgImage}
                 onClick={() => {
                   setIsImageEditVisible(false)
                 }}
                 onContinue={onMediaModalContinue}
                 btnProps={{
                   type: 'primary',
-                  icon: <EditOutlined style={styles.btnStyle} />
+                  icon: <EditOutlined />
                 }}
               />
             </Box>
@@ -55,15 +46,15 @@ function MediaLibrarySimpleView(props) {
         </Row>
         <Row noGutters mb={4}>
           <Col>
-            <Text style={styles.fontStyle}>Alt text</Text>
-            <Input style={styles.inputStyle} placeholder="Enter alt here..." />
+            <CustomText>Alt text</CustomText>
+            <Input placeholder="Enter alt here..." />
           </Col>
         </Row>
         <Row noGutters>
           <Col>
             <Row noGutters>
               <Col>
-                <Text style={styles.fontStyle}>Brightness</Text>
+                <CustomText>Brightness</CustomText>
               </Col>
             </Row>
             <Row noGutters>
