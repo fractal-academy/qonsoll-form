@@ -2,8 +2,6 @@ import { Card } from 'antd'
 import styled from 'styled-components'
 
 export const styles = {
-  cardStyle: { width: '400px' },
-  //?
   mainRowStyle: {
     noGutters: true,
     height: 'inherit',
