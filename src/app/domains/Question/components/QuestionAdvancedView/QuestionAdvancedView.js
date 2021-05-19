@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
-import { Typography, Button, Card } from 'antd'
+import { Typography, Button } from 'antd'
 import { globalStyles } from 'app/styles'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { styles } from './QuestionAdvancedView.styles'
+import { QuestionCard, StyledCol, styles } from './QuestionAdvancedView.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import {
   Rate,
@@ -112,8 +112,8 @@ function QuestionAdvancedView(props) {
 
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage}>
-      <Col {...styles.questionCardColumnStyle} style={styles.columnStyle}>
-        <Card bordered={false} style={styles.cardStyle}>
+      <StyledCol {...styles.questionCardColumnStyle}>
+        <QuestionCard bordered={false}>
           <Row noGutters>
             <Col cw={12}>
               <Box>
@@ -143,8 +143,8 @@ function QuestionAdvancedView(props) {
           <Row noGutters>
             <Col>{cloneElement(component, data)}</Col>
           </Row>
-        </Card>
-      </Col>
+        </QuestionCard>
+      </StyledCol>
       {imageShowRule && (
         <Col
           {...styles.sideImageColumnStyle}

@@ -1,8 +1,8 @@
+import { Col } from '@qonsoll/react-design'
+import { Card } from 'antd'
+import styled from 'styled-components'
+
 export const styles = {
-  //!Replace to styled components
-  columnStyle: { justifyContent: 'center', alignItems: 'center' },
-  cardStyle: { width: '400px', backgroundColor: 'transparent' },
-  //?
   mainRowStyle: {
     noGutters: true,
     height: 'inherit',
@@ -21,3 +21,11 @@ export const styles = {
     height: '100%'
   }
 }
+
+export const QuestionCard = styled(Card)`
+  width: 400px;
+`
+export const StyledCol = styled(Col)`
+  justify-content: center;
+  align-items: 'center';
+`
