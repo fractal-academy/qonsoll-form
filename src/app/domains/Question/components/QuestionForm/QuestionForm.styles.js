@@ -1,53 +1,44 @@
+import { Col } from '@qonsoll/react-design'
+import { Card } from 'antd'
+import styled from 'styled-components'
+
 export const styles = {
-  //! remove from this const and replace on styled components
-  cardStyle: {
-    width: '400px',
-    borderRadius: '8px',
-    borderColor: '#1d6fdc',
-    backgroundColor: 'transparent'
-  },
-  columnStyle: { justifyContent: 'center', alignItems: 'center' },
-  modalButtonStyle: { padding: 0, overflow: 'hidden' },
-  welcomeBtn: {
-    borderRadius: '4px',
-    marginRight: '4px',
-    fontWeight: 'bold'
-  },
-  //? leave everything below
   mainRowStyle: {
-    noGutters: true,
-    mb: 2,
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    flex: 1,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
+    backgroundSize: 'cover',
+    h: 'center',
+    height: '100%'
   },
   questionCardColumnStyle: {
-    v: 'center',
     order: 2,
-    mx: 4,
-    display: 'flex'
+    v: 'center'
   },
   imageBetweenStyle: {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     position: 'relative',
-    zIndex: '1',
     mb: 3
   },
   sideImageColumnStyle: {
-    v: 'center',
-    display: 'flex',
-    height: '100%'
+    height: '100%',
+    v: 'center'
   },
   sideImageBoxStyle: {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center left',
     m: 2,
-    position: 'relative',
-    p: -42
+    position: 'relative'
   }
 }
+
+export const StyledCol = styled(Col)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`
+export const CustomCard = styled(Card)`
+  width: 100%;
+  background: transparent;
+`
