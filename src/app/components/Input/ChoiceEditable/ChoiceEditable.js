@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import theme from 'app/styles/theme'
 import {
   styles,
   LetterBox,
   DeleteButton,
   ChoiceInput
 } from './ChoiceEditable.styles'
+import theme from 'app/styles/theme'
 import { DEFAULT_IMAGE } from 'app/constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { CloseOutlined, EditOutlined } from '@ant-design/icons'
