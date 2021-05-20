@@ -85,7 +85,7 @@ function QuestionForm(props) {
 
   return (
     <Row noGutters {...styles.mainRowStyle} backgroundImage={bgImage}>
-      <Col {...styles.questionCardColumnStyle} cw={imageShowRule ? 6 : 8}>
+      <Col {...styles.questionCardColumnStyle} cw={6}>
         <CustomCard bordered={false}>
           <Row noGutters>
             <Col>
