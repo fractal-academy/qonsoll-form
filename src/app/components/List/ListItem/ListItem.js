@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { StyledItem } from 'components'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
-import { useState, cloneElement } from 'react'
+import { useState, cloneElement, useEffect, useRef } from 'react'
 import COLLECTIONS from 'app/constants/collection'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
@@ -31,12 +31,14 @@ function ListItem(props) {
   const { data, size } = props
 
   // [ADDITIONAL HOOKS]
+  const DropdownRef = useRef()
   const history = useHistory()
 
   // [COMPONENT STATE HOOKS]
-  const [visible, setVisible] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false)
+  const [isPopconfirmVisible, setIsPopconfirmVisible] = useState(false)
 
   // [COMPUTED PROPERTIES]
   const description = data?.subtitle || 'No description'
@@ -45,23 +47,24 @@ function ListItem(props) {
   // [CLEAN FUNCTIONS]
   const handleDropdownClick = (e) => {
     e.stopPropagation()
+    setIsDropdownVisible(true)
   }
-  const onFormItemClick = () => {
-    formRoute && history.push(formRoute)
+  const onFormItemClick = (e) => {
+    isDropdownVisible === false && formRoute && history.push(formRoute)
   }
   const showPopconfirm = () => {
-    setVisible(!visible)
+    setIsDropdownVisible(true)
+    setIsPopconfirmVisible(!isPopconfirmVisible)
   }
   const showModal = () => {
     setIsModalVisible(true)
   }
-  const handleDelete = async (e) => {
-    e.stopPropagation()
+  const handleDelete = async () => {
     setConfirmLoading(true)
     await deleteData(COLLECTIONS.FORMS, data?.id).catch((e) =>
       message.error(e.message)
     )
-    setVisible(false)
+    setIsPopconfirmVisible(false)
     setConfirmLoading(false)
   }
   const onModalSubmit = async (values) => {
@@ -87,7 +90,7 @@ function ListItem(props) {
 
       <Menu.Item onClick={showPopconfirm} key={'showPopconfirm'}>
         <Popconfirm
-          visible={visible}
+          visible={isPopconfirmVisible}
           onConfirm={handleDelete}
           title="Delete this form?"
           okButtonProps={{ loading: confirmLoading }}>
@@ -113,10 +116,11 @@ function ListItem(props) {
 
           <Col cw="auto" v="center">
             <Dropdown
-              onClick={handleDropdownClick}
+              ref={DropdownRef}
               overlay={menu}
+              trigger="click"
               placement="bottomRight"
-              trigger="click">
+              onClick={handleDropdownClick}>
               {cloneElement(<MoreOutlined />, {
                 className: 'dropdownIcon'
               })}
