@@ -1,11 +1,34 @@
+import { Box } from '@qonsoll/react-design'
+import styled from 'styled-components'
+import theme from 'app/styles/theme'
+
 export const styles = {
-  siderStateSwitcherStyle: {
-    left: '-15px',
-    cursor: 'pointer'
+  sidebarBoxWrapper: {
+    bg: theme.color.white.default,
+    width: '300px',
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative'
   },
-  siderStateSwithcerIcon: {
-    padding: '5px 5px 0 0'
+
+  dragbleCeiling: {
+    height: '3px',
+    width: '50px',
+    borderRadius: theme.borderRadius.md,
+    bg: theme.color.dark.t.lighten1
   },
-  endingsPosition: { marginTop: 'auto' },
-  plusIconColor: { color: '#1d6fdc' }
+  endingsList: {
+    pb: 3,
+    px: 3,
+    maxHeight: '350px',
+    overflow: 'auto'
+  }
 }
+export const SidebarStateSwitcher = styled(Box)`
+  left: -20px;
+  cursor: pointer;
+  position: absolute;
+  padding-right: 5px;
+  background-color: ${theme.color.white.default};
+  border-radius: 0 0 0 ${theme.borderRadius.md};
+`
