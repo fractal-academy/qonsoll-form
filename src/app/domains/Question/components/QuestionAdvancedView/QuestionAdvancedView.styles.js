@@ -1,16 +1,17 @@
+import { Card } from 'antd'
+import styled from 'styled-components'
+
 export const styles = {
-  //!Replace to styled components
-  columnStyle: { justifyContent: 'center', alignItems: 'center' },
-  cardStyle: { width: '400px', backgroundColor: 'transparent' },
-  //?
   mainRowStyle: {
     noGutters: true,
     height: 'inherit',
+    h: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat'
   },
   questionCardColumnStyle: {
     v: 'center',
+    cw: 'auto',
     order: 2,
     mx: 4,
     display: 'flex'
@@ -21,3 +22,7 @@ export const styles = {
     height: '100%'
   }
 }
+
+export const StyledCard = styled(Card)`
+  width: 400px;
+`

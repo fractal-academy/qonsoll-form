@@ -1,7 +1,6 @@
 import { Row, Col } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
-import MiddleContainer from '../MiddleContainer'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router'
 import { styles } from './FormContentArea.styles'
@@ -26,9 +25,7 @@ function FormContentArea(props) {
         <Col cw="auto" mr={3}>
           {leftSideMenu}
         </Col>
-        <Col {...styles.contentCol}>
-          <MiddleContainer>{children}</MiddleContainer>
-        </Col>
+        <Col {...styles.contentCol}>{children}</Col>
       </Row>
       <Row noGutters {...styles.footerButtons}>
         <Col cw="auto" mr={3}>
