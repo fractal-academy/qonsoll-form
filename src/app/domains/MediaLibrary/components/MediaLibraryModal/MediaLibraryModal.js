@@ -167,15 +167,15 @@ function MediaLibraryModal(props) {
                   display="flex">
                   <CustomBox
                     size="medium"
-                    type={switchState ? 'text' : 'secondary'}
-                    switchState={switchState}
+                    type={!switchState ? 'text' : 'secondary'}
+                    switchState={!switchState}
                     onClick={onSwitchChange}>
                     Image
                   </CustomBox>
                   <CustomBox
                     size="medium"
                     type={switchState ? 'secondary' : 'text'}
-                    switchState={!switchState}
+                    switchState={switchState}
                     onClick={onSwitchChange}>
                     Video
                   </CustomBox>
