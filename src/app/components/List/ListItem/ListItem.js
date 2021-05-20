@@ -42,7 +42,7 @@ function ListItem(props) {
 
   // [COMPUTED PROPERTIES]
   const description = data?.subtitle || 'No description'
-  const formRoute = ROUTES_PATHS.FORM_EDIT.replace(':/id', data?.id)
+  const formRoute = ROUTES_PATHS.FORM_EDIT.replace(':id', data?.id)
 
   // [CLEAN FUNCTIONS]
   const handleDropdownClick = (e) => {
@@ -50,7 +50,7 @@ function ListItem(props) {
     setIsDropdownVisible(true)
   }
   const onFormItemClick = (e) => {
-    isDropdownVisible === false && formRoute && history.push(formRoute)
+    formRoute && history.push(formRoute)
   }
   const showPopconfirm = () => {
     setIsDropdownVisible(true)
