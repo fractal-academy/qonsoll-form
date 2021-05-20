@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types'
 import { CheckOutlined } from '@ant-design/icons'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { Button, Card, Image, Typography } from 'antd'
-import { styles } from './MediaLibraryItemSimpleView.styles'
+import { Card } from 'antd'
+import {
+  CustomButton,
+  CustomCard,
+  CustomImage,
+  CustomText,
+  styles
+} from './MediaLibraryItemSimpleView.styles'
 
 const { Meta } = Card
-const { Text } = Typography
 
 function MediaLibraryItemSimpleView(props) {
   const {
@@ -16,26 +21,24 @@ function MediaLibraryItemSimpleView(props) {
   } = props
 
   return (
-    <Card
+    <CustomCard
       onClick={() => {
         setSelectedBackgroundImg(imageUrl)
       }}
       hoverable
-      style={styles.cardStyles}
       bodyStyle={styles.cardBodyStye}
       cover={
         <Box>
           {selectedBackgroundImg === imageUrl && (
-            <Button size="small" type="primary" style={styles.iconStyle}>
-              <CheckOutlined className="icon" />
-            </Button>
+            <CustomButton size="small" type="primary">
+              <CheckOutlined />
+            </CustomButton>
           )}
-          <Image
+          <CustomImage
             preview={false}
             height="136px"
             width="208px"
             src={imageUrl}
-            style={styles.imageStyle}
           />
         </Box>
       }>
@@ -45,16 +48,16 @@ function MediaLibraryItemSimpleView(props) {
             <Col>
               <Row noGutters>
                 <Col>
-                  <Text style={styles.titleStyle} ellipsis>
+                  <CustomText ellipsis>
                     {name.charAt(0).toUpperCase() + name.slice(1).split('.')[0]}
-                  </Text>
+                  </CustomText>
                 </Col>
               </Row>
             </Col>
           </Row>
         }
       />
-    </Card>
+    </CustomCard>
   )
 }
 

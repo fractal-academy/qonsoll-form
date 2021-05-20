@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from 'domains/Question/components'
+import theme from 'app/styles/theme'
 
 function FileUploadTemplate(props) {
   const { answers, isUploaded, questionList, addRedirectQuestion } = props
@@ -16,11 +17,12 @@ function FileUploadTemplate(props) {
               display="flex"
               alignItems="center"
               key={index}
-              p={2}
+              bg={theme.color.dark.t.lighten9}
+              p={`${theme.grid.gutters.sm / 2 - 2}px`}
               mr={4}
-              height="50px"
-              border="1px solid #bbbbbb"
-              borderRadius="4px">
+              border="1px solid"
+              borderColor={theme.color.dark.t.lighten5}
+              borderRadius={theme.borderRadius.md}>
               {isUploaded ? (
                 <Text>is uploaded</Text>
               ) : (

@@ -1,7 +1,10 @@
+import styled from 'styled-components'
+import { Input, Typography } from 'antd'
+import theme from 'app/styles/theme'
+import { Box } from '@qonsoll/react-design'
+const { Text } = Typography
+
 export const styles = {
-  boldFont: {
-    fontWeight: 'bold'
-  },
   textSecondary: {
     color: '#5d626a'
   },
@@ -35,3 +38,24 @@ export const styles = {
     borderRadius: '8px'
   }
 }
+export const CustomBox = styled(Box)`
+  border-radius: ${theme.borderRadius.md};
+  border: none;
+  display: flex;
+  padding: 6px 16px;
+  cursor: pointer;
+  //flex-direction: row;
+  font-weight: 600;
+  color: ${({ switchState }) =>
+    switchState
+      ? theme.color.primary.default
+      : theme.color.text.dark.secondary};
+  background-color: ${({ switchState }) =>
+    switchState ? `${theme.color.white.default}` : 'none'};
+`
+export const CustomText = styled(Text)`
+  color: ${theme.color.dark.t.lighten1};
+`
+export const CustomInput = styled(Input)`
+  border-radius: ${theme.borderRadius.md};
+`
