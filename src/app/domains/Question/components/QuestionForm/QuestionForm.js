@@ -2,19 +2,19 @@ import { cloneElement } from 'react'
 import { Card, Tag } from 'antd'
 import {
   Rate,
-  InputForm,
-  ChoiceForm,
+  ShortText,
+  ChoiceEditableGroup,
   YesnoButton,
   RangeButton,
   SubmitButton,
   FileUploader,
-  TextAreaForm,
+  LongText,
   DateTimeInput
 } from 'components'
 import PropTypes from 'prop-types'
 import { DEFAULT_IMAGE } from 'app/constants'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { styles } from './QuestionForm.styles'
+import { styles, StyledCol, CustomCard } from './QuestionForm.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 import {
@@ -38,10 +38,10 @@ function QuestionForm(props) {
       component: <YesnoButton />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: <ChoiceForm withImage />
+      component: <ChoiceEditableGroup withImage />
     },
     [QUESTION_TYPES.CHOICE]: {
-      component: <ChoiceForm />
+      component: <ChoiceEditableGroup />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <RangeButton from={1} to={5} />
@@ -50,14 +50,10 @@ function QuestionForm(props) {
       component: <Rate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: (
-        <InputForm btnProps={{ type: 'primary', children: 'Submit' }} />
-      )
+      component: <ShortText />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: (
-        <TextAreaForm btnProps={{ type: 'primary', children: 'Submit' }} />
-      )
+      component: <LongText />
     },
     [QUESTION_TYPES.DATE]: {
       component: <DateTimeInput />
@@ -88,12 +84,9 @@ function QuestionForm(props) {
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
   return (
-    <Row
-      {...styles.mainRowStyle}
-      style={styles.rowStyle}
-      backgroundImage={bgImage}>
-      <Col {...styles.questionCardColumnStyle} style={styles.columnStyle}>
-        <Card style={styles.cardStyle} bordered={false}>
+    <Row noGutters {...styles.mainRowStyle} backgroundImage={bgImage}>
+      <Col {...styles.questionCardColumnStyle} cw={imageShowRule ? 6 : 8}>
+        <CustomCard bordered={false}>
           <Row noGutters>
             <Col>
               <Tag color="blue">{questionTag}</Tag>
@@ -105,7 +98,9 @@ function QuestionForm(props) {
             </Col>
             {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
               <Col cw="auto" ml={2}>
-                <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
+                <QuestionMediaPopover
+                  MediaModalButtonBackground={computedMediaUrl}
+                />
               </Col>
             )}
           </Row>
@@ -118,13 +113,15 @@ function QuestionForm(props) {
             </Col>
           </Row>
           {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row>
+            <Row noGutters>
               <Col cw="auto">
                 <Box
                   {...layoutType.imgSize}
                   {...styles.imageBetweenStyle}
                   backgroundImage={computedMediaUrl}>
-                  <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
+                  <QuestionMediaPopover
+                    MediaModalButtonBackground={computedMediaUrl}
+                  />
                 </Box>
               </Col>
             </Row>
@@ -137,24 +134,25 @@ function QuestionForm(props) {
               )}
             </Col>
           </Row>
-        </Card>
+        </CustomCard>
       </Col>
       {imageShowRule && (
-        <Col
-          {...styles.sideImageColumnStyle}
-          style={styles.columnStyle}
-          order={layoutType?.imageOrder}>
+        <StyledCol
+          order={layoutType?.imageOrder}
+          {...styles.sideImageColumnStyle}>
           <Box
-            {...layoutType?.imgSize}
             {...styles.sideImageBoxStyle}
+            {...layoutType?.imgSize}
             backgroundImage={computedMediaUrl}>
             <Row h="right">
               <Col cw="auto" mr={4}>
-                <QuestionMediaPopover MediaModalButtonBackground={bgImage} />
+                <QuestionMediaPopover
+                  MediaModalButtonBackground={computedMediaUrl}
+                />
               </Col>
             </Row>
           </Box>
-        </Col>
+        </StyledCol>
       )}
     </Row>
   )

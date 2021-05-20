@@ -1,10 +1,12 @@
+import theme from 'app/styles/theme'
+
 export const styles = {
-  bgc: { backgroundColor: '#d6e1f2' },
-  fontColor: { color: '#1d6fdc' },
+  bgc: { backgroundColor: theme.color.primary.t.lighten7 },
+  fontColor: { color: theme.color.primary.default },
   selectStyle: {
     width: '100%',
-    height: '48px',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderColor: theme.color.dark.t.lighten5
   }
 }

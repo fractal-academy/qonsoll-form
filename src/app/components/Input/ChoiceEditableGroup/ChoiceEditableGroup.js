@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
-import { ChoiceInput } from 'components'
-import { globalStyles } from 'app/styles'
+import { ChoiceEditable } from 'components'
 import { Box } from '@qonsoll/react-design'
 import { PlusOutlined } from '@ant-design/icons'
 import {
@@ -8,8 +7,9 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from 'app/context/CurrentQuestion'
+import { styles } from './ChoiceEditableGroup.styles'
 
-function ChoiceForm(props) {
+function ChoiceEditableGroup(props) {
   const { withImage } = props
 
   // [ADDITIONAL HOOKS]
@@ -32,12 +32,9 @@ function ChoiceForm(props) {
   }
 
   return (
-    <Box
-      display="flex"
-      flexDirection={withImage ? 'row' : 'column'}
-      flexWrap="wrap">
+    <Box {...styles.mainBox} flexDirection={withImage ? 'row' : 'column'}>
       {choiceProps?.map((item, index) => (
-        <ChoiceInput
+        <ChoiceEditable
           key={index}
           data={item}
           index={index}
@@ -45,15 +42,9 @@ function ChoiceForm(props) {
         />
       ))}
       <Box
-        bg="#d6e1f2"
-        m={1}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
+        height={withImage ? '146px' : '38px'}
         width={withImage ? '166px' : '150px'}
-        height={withImage ? '154px' : '45px'}
-        borderRadius="8px"
-        style={globalStyles.cursorPointer}
+        {...styles.addNewChoiceBox}
         onClick={onAddChoice}>
         <PlusOutlined />
       </Box>
@@ -61,8 +52,8 @@ function ChoiceForm(props) {
   )
 }
 
-ChoiceForm.propTypes = {
+ChoiceEditableGroup.propTypes = {
   withImage: PropTypes.bool
 }
 
-export default ChoiceForm
+export default ChoiceEditableGroup

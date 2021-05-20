@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { InputNumber, Slider } from 'antd'
-import { styles } from './RangeSlider.styles'
+import { CustomInputNumber, styles } from './RangeSlider.styles'
 import { Col, Row } from '@qonsoll/react-design'
 
 function RangeSlider(props) {
@@ -14,15 +14,14 @@ function RangeSlider(props) {
   const value = typeof inputValue === 'number' ? inputValue : 0
 
   return (
-    <Row>
-      <Col px={3}>
+    <Row noGutters>
+      <Col>
         <Slider min={-50} max={50} onChange={onSlide} value={value} />
       </Col>
       <Col cw="auto">
-        <InputNumber
+        <CustomInputNumber
           min={-50}
           max={50}
-          style={styles.InputNumber}
           value={inputValue}
           onChange={onSlide}
         />

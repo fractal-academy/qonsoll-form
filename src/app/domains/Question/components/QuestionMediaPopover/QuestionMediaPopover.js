@@ -22,7 +22,7 @@ function QuestionMediaPopover(props) {
       trigger={'click'}
       placement="rightTop"
       content={
-        <Box width="192px" height="366px" overflow="hidden">
+        <Box width="192px">
           <MediaLibrarySimpleView
             setIsImageEditVisible={setIsImageEditVisible}
             bgImage={MediaModalButtonBackground}

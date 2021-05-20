@@ -1,20 +1,17 @@
+import styled from 'styled-components'
+import theme from 'app/styles/theme'
+import { Typography } from 'antd'
+const { Text } = Typography
+
+export const CustomText = styled(Text)`
+  font-size: ${theme.typography.fontSize.body2};
+`
 export const styles = {
-  btnStyle: {
-    fontSize: '20px'
-  },
-  inputStyle: {
-    borderRadius: '8px',
-    border: '1px solid lightgrey',
-    color: '#565c64',
-    backgroundColor: '#f5f5f6',
-    height: '44px'
-  },
-  fontStyle: {
-    height: '20px',
-    width: '200px',
-    color: '#50565e',
-    fontSize: '14px',
-    letterSpacing: 0,
-    lineHeight: '20px'
+  CustomBox: {
+    height: '150px',
+    borderRadius: `${theme.borderRadius.md}`,
+    position: 'relative',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
   }
 }

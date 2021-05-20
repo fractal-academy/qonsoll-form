@@ -6,7 +6,6 @@ const Wrapper = styled(Box)`
   border-radius: 12px;
   background-color: white;
 `
-
 function ContentCard(props) {
   const { children } = props
 

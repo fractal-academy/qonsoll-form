@@ -24,17 +24,10 @@ function PlaneTextDateTemplate(props) {
           <Col cw={6}>
             <Row noGutters>
               <Col cw="6">
-                <Box
-                  display="flex"
-                  border="1px solid #bbbbbb"
-                  borderRadius="4px"
-                  mr={2}
-                  // width={210}
-                >
+                <Box display="flex" mr={2}>
                   <Select
                     showSearch
                     allowClear
-                    bordered={false}
                     defaultValue={DATE_CONDITION_RULES_VALUES[0]}
                     style={styles.selectStyle}>
                     {DATE_CONDITION_RULES_VALUES.map((item, index) => (
@@ -46,16 +39,8 @@ function PlaneTextDateTemplate(props) {
                 </Box>
               </Col>
               <Col cw="6">
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  key={index}
-                  // width="200px"
-                  // p={2}
-                  mr={2}
-                  border="1px solid #bbbbbb"
-                  borderRadius="4px">
-                  <DatePicker style={styles.selectStyle} bordered={false} />
+                <Box display="flex" alignItems="center" key={index} mr={4}>
+                  <DatePicker style={styles.selectStyle} />
                 </Box>
               </Col>
             </Row>

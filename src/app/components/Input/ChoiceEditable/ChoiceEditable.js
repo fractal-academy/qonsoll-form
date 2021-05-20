@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import {
+  styles,
+  LetterBox,
+  DeleteButton,
+  ChoiceInput
+} from './ChoiceEditable.styles'
 import theme from 'app/styles/theme'
-import { Typography, Input } from 'antd'
-import { styles } from './ChoiceInput.styles'
 import { DEFAULT_IMAGE } from 'app/constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { CloseOutlined, EditOutlined } from '@ant-design/icons'
-import MediaLibraryModal from 'domains/MediaLibrary/combined/MediaLibraryModal'
+import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from 'app/context/CurrentQuestion'
 
-const { Text } = Typography
-const { TextArea } = Input
-
 let startLetter = 65
 
-function ChoiceInput(props) {
+function ChoiceEditable(props) {
   const { index, data, withImage } = props
 
   // [ADDITIONAL HOOKS]
@@ -71,20 +72,13 @@ function ChoiceInput(props) {
 
   return (
     <Box
-      bg="#d6e1f2"
+      bg={theme.color.primary.lighten6}
       borderRadius={theme.borderRadius.md}
-      p={2}
-      m={1}
       width={withImage ? 'auto' : '150px'}
+      m={1}
       position="relative">
       {withImage && (
-        <Box
-          height="100px"
-          borderRadius={theme.borderRadius.md}
-          position="relative"
-          backgroundRepeat="no-repeat"
-          backgroundSize="cover"
-          backgroundImage={bgImage}>
+        <Box {...styles.MediaBox} backgroundImage={bgImage}>
           <MediaLibraryModal
             btnProps={{
               type: 'primary',
@@ -94,41 +88,32 @@ function ChoiceInput(props) {
           />
         </Box>
       )}
-      <Row pt={withImage && 2} noGutters>
-        <Col cw="auto" pt={1}>
-          <Text style={styles.keyLetterStyles}>{letter}</Text>
+      <Row noGutters mx={2}>
+        <Col cw="auto" v="center">
+          <LetterBox>{letter}</LetterBox>
         </Col>
-        <Col cw="auto" width={withImage ? '130px' : '100px'}>
-          <TextArea
+        <Col width={withImage ? '130px' : '100px'}>
+          <ChoiceInput
             value={value}
             onBlur={onBlur}
             placeholder={`choice ${index}`}
             autoSize={{ minRows: 1, maxRows: 6 }}
             bordered={false}
-            style={styles.textAreaStyles}
             onChange={onChange}
           />
         </Col>
       </Row>
-      <Box
-        height="16px"
-        width="16px"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        borderRadius="50%"
-        style={styles.deleteBtnStyles}
-        onClick={onDelete}>
+      <DeleteButton onClick={onDelete}>
         <CloseOutlined />
-      </Box>
+      </DeleteButton>
     </Box>
   )
 }
 
-ChoiceInput.propTypes = {
+ChoiceEditable.propTypes = {
   index: PropTypes.number,
   data: PropTypes.object,
   withImage: PropTypes.bool
 }
 
-export default ChoiceInput
+export default ChoiceEditable

@@ -6,6 +6,7 @@ import { Box, Col, Row } from '@qonsoll/react-design'
 import { styles } from './PlainLongTextStringTemplate.style'
 import { QuestionSelect } from 'domains/Question/components'
 import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
+import theme from 'app/styles/theme'
 
 const { Option } = Select
 
@@ -24,18 +25,10 @@ function PlaneLongTextStringTemplate(props) {
           <Col cw={6}>
             <Row noGutters>
               <Col cw="6">
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  border="1px solid #bbbbbb"
-                  borderRadius="4px"
-                  mr={2}
-                  // width={210}
-                >
+                <Box display="flex" alignItems="center" mr={2}>
                   <Select
                     showSearch
                     allowClear
-                    bordered={false}
                     defaultValue={TEXT_CONDITION_RULES_VALUES[0]}
                     style={styles.selectStyle}>
                     {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
@@ -47,17 +40,14 @@ function PlaneLongTextStringTemplate(props) {
                 </Box>
               </Col>
               <Col cw="6">
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  key={index}
-                  p={2}
-                  mr={2}
-                  // width={200}
-                  height="50px"
-                  border="1px solid #bbbbbb"
-                  borderRadius="4px">
-                  <Input style={globalStyles.fullWidth} bordered={false} />
+                <Box display="flex" alignItems="center" key={index} mr={4}>
+                  <Input
+                    style={{
+                      backgroundColor: theme.color.dark.t.lighten9,
+                      border: '1px solid',
+                      borderColor: theme.color.dark.t.lighten5
+                    }}
+                  />
                 </Box>
               </Col>
             </Row>

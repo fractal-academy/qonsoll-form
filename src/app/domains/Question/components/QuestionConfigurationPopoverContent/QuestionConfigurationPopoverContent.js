@@ -39,7 +39,7 @@ function QuestionConfigurationPopoverContent(props) {
         bg={theme.color.text.dark}
         style={globalStyles.cursorPointer}
         width="300px"
-        mb={1}
+        px={2}
         py={2}>
         <Col v="center" cw="auto" order={isQuestionConfig ? 1 : 3}>
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
@@ -50,7 +50,7 @@ function QuestionConfigurationPopoverContent(props) {
           </Title>
         </Col>
       </Row>
-      <Row>
+      <Row noGutters>
         <Col pr={0}>
           {isQuestionConfig ? (
             <QuestionConfigurationMenu />

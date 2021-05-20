@@ -1,19 +1,15 @@
 export { default as FileUploader } from './Uploader/FileUploader'
 export { default as IconLabel } from './Uploader/IconLabel'
 
-export { default as TextAreaForm } from './TextArea/TextAreaForm'
-export { default as TextArea } from './TextArea/TextArea'
+export { default as LongText } from './LongText'
 export { default as TextEditable } from './TextEditable'
 
 export { default as DateTimeInput } from './Input/DateTimeInput'
-export { default as ChoiceInput } from './Input/ChoiceInput'
-export { default as ChoiceForm } from './Input/ChoiceForm'
-export { default as InputForm } from './Input/InputForm'
-export { default as Input } from './Input/Input'
+export { default as ChoiceEditable } from './Input/ChoiceEditable'
+export { default as ChoiceEditableGroup } from './Input/ChoiceEditableGroup'
+export { default as ShortText } from './Input/ShortText'
 
-export { default as PageEditorWrapper } from './Layout/PageEditorWrapper'
 export { default as FormContentArea } from './Layout/FormContentArea'
-export { default as MiddleContainer } from './Layout/MiddleContainer'
 export { default as EditorSidebar } from './Layout/EditorSidebar'
 export { default as PageHeader } from './Layout/PageHeader'
 export { default as PageLayout } from './Layout/PageLayout'

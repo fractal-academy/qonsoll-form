@@ -13,6 +13,7 @@ import {
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
+import { styles } from './FormsAll.style'
 import { Spinner, StaticList } from 'components'
 import COLLECTIONS from 'app/constants/collection'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -81,10 +82,10 @@ function FormsAll(props) {
   }
 
   return (
-    <Box flexDirection="column" px={45} py={4} minHeight="100%">
+    <Box {...styles.mainWrapper}>
       {/* Page Header */}
       <Row noGutters display="flex">
-        <Col cw="auto" p={0} v="center">
+        <Col cw="auto" v="center">
           <Button
             size="small"
             type="text"
@@ -93,10 +94,10 @@ function FormsAll(props) {
             onClick={() => history.goBack()}
           />
         </Col>
-        <Col cw="auto" p={0} v="center">
+        <Col cw="auto" v="center">
           <Divider type="vertical" />
         </Col>
-        <Col p={0} v="center">
+        <Col v="center">
           <Breadcrumb>
             <Breadcrumb.Item>
               <FolderOutlined />
@@ -121,6 +122,7 @@ function FormsAll(props) {
           <Text>You have {amountFiles} files.</Text>
         </Col>
       </Row>
+
       <Row noGutters mb={3}>
         <Col>
           <Input
@@ -130,6 +132,7 @@ function FormsAll(props) {
           />
         </Col>
       </Row>
+
       <Box
         display="flex"
         flexWrap="wrap"

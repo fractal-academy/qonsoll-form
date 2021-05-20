@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
-import { Typography, Button, Card } from 'antd'
+import { Typography, Button } from 'antd'
 import { globalStyles } from 'app/styles'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { styles } from './QuestionAdvancedView.styles'
+import { styles, StyledCard } from './QuestionAdvancedView.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import {
   Rate,
-  InputForm,
+  ShortText,
   YesnoButton,
   RangeButton,
   ChoiceButton,
   FileUploader,
-  TextAreaForm,
+  LongText,
   DateTimeInput,
   SubmitButton
 } from 'components'
@@ -60,10 +60,10 @@ function QuestionAdvancedView(props) {
       component: <Rate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <InputForm onClick={onClick} />
+      component: <ShortText onClick={onClick} />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <TextAreaForm onClick={onClick} />
+      component: <LongText onClick={onClick} />
     },
     [QUESTION_TYPES.DATE]: {
       component: <DateTimeInput onClick={onClick} />
@@ -112,16 +112,18 @@ function QuestionAdvancedView(props) {
 
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage}>
-      <Col {...styles.questionCardColumnStyle} style={styles.columnStyle}>
-        <Card bordered={false} style={styles.cardStyle}>
+      <Col {...styles.questionCardColumnStyle}>
+        <StyledCard bordered={false}>
           <Row noGutters>
-            <Col cw="auto">
-              <Title level={4} style={globalStyles.resetMargin}>
-                {questionNumber}. {data?.title}
-              </Title>
+            <Col cw={12}>
+              <Box>
+                <Title level={4} style={globalStyles.resetMargin}>
+                  {questionNumber}. {data?.title}
+                </Title>
+              </Box>
             </Col>
           </Row>
-          <Row noGutters>
+          <Row noGutters mb={3}>
             <Col>
               <Text>{data?.subtitle}</Text>
             </Col>
@@ -141,7 +143,7 @@ function QuestionAdvancedView(props) {
           <Row noGutters>
             <Col>{cloneElement(component, data)}</Col>
           </Row>
-        </Card>
+        </StyledCard>
       </Col>
       {imageShowRule && (
         <Col

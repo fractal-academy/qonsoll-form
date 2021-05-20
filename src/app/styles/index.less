@@ -7,13 +7,14 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  monospace;
 }
 
 #root {
   height: inherit;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
@@ -42,5 +43,29 @@ code {
 
 // [ REWRITING POPOVER CONTENT PLACEMENT ]
 .ant-popover-inner-content {
-  padding: 4px;
+  padding: 0px;
 }
+
+// [ REWRITING POPOVER DELETE CONTENT PLACEMENT ]
+.ant-popconfirm .ant-popover-content .ant-popover-inner, .ant-popover-placement-rightTop .ant-popover-content .ant-popover-inner {
+  padding: 12px;
+
+}
+
+//Question select on condition form override
+.ant-select .ant-select-selector {
+  background-color: rgba(3, 11, 23, 0.04) !important;
+  border-color: rgba(3, 11, 23, 0.15) !important;
+}
+
+.ant-select-clear {
+ border-radius: 50%;
+  font-size: 14px;
+}
+.ant-picker{
+  background-color: rgba(3,11,23,0.04);
+  .ant-picker-clear{
+    border-radius: 50%;
+  }
+}
+

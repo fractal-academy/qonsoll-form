@@ -4,6 +4,7 @@ import Text from 'antd/lib/typography/Text'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { styles } from './OpinionScaleTemplate.styles'
 import { QuestionSelect } from 'domains/Question/components'
+import theme from 'app/styles/theme'
 
 let startLetter = 65
 function OpinionScaleTemplate(props) {
@@ -17,13 +18,15 @@ function OpinionScaleTemplate(props) {
             <Box
               display="flex"
               alignItems="center"
-              p={1}
-              mr={2}
-              border="1px solid #bbbbbb"
-              borderRadius="4px">
-              <Button type="outline" style={styles.buttonM}>
+              bg={theme.color.dark.t.lighten9}
+              p={`${theme.grid.gutters.sm / 2 - 2}px`}
+              mr={4}
+              border="1px solid"
+              borderColor={theme.color.dark.t.lighten5}
+              borderRadius={theme.borderRadius.md}>
+              <Box style={styles.buttonM}>
                 <Text strong>{String.fromCharCode(startLetter++)}</Text>
-              </Button>
+              </Box>
               {item.name}
             </Box>
           </Col>
