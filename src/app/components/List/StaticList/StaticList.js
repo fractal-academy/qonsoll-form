@@ -1,29 +1,27 @@
-import { List } from 'antd'
 import PropTypes from 'prop-types'
-// import { ListItem } from 'components'
-import { FormSimpleView } from 'domains/Form/components'
+import { Box } from '@qonsoll/react-design'
+import { ListItem, NewListItem } from 'components'
 
 function StaticList(props) {
-  const { currentData } = props
+  const { data, size, onClick } = props
 
   return (
-    <List
-      dataSource={currentData}
-      renderItem={(item) => (
-        <FormSimpleView
-          id={item?.id}
-          key={item?.id}
-          title={item?.title}
-          imageURL={item?.image}
-          subtitle={item?.subtitle}
-        />
-      )}
-    />
+    <Box display="contents">
+      {data?.map((item) => (
+        <Box mr={4} mb={4}>
+          <ListItem data={item} size={size} />
+        </Box>
+      ))}
+
+      <NewListItem size={size} onClick={onClick} />
+    </Box>
   )
 }
 
 StaticList.propTypes = {
-  currentData: PropTypes.object
+  size: PropTypes.array,
+  data: PropTypes.object,
+  onClick: PropTypes.func
 }
 
 export default StaticList

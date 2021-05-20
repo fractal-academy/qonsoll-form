@@ -23,6 +23,7 @@ export { default as ContentCard } from './Card/ContentCard'
 
 export { default as DragableList } from './List/DragableList'
 export { default as NewListItem } from './List/NewListItem'
+export { default as StyledItem } from './List/StyledItem'
 export { default as StaticList } from './List/StaticList'
 export { default as ListItem } from './List/ListItem'
 

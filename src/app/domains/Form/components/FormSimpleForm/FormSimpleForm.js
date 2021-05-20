@@ -2,7 +2,7 @@ import { Form, Input } from 'antd'
 import { Col, Row } from '@qonsoll/react-design'
 
 function FormSimpleForm(props) {
-  const { onFinish, form, formData } = props
+  const { onFinish, form, formData, children } = props
 
   // [COMPUTED PROPERTIES]
   const initialValues = {
@@ -28,6 +28,11 @@ function FormSimpleForm(props) {
               </Form.Item>
             </Col>
           </Row>
+          {children && (
+            <Row>
+              <Col>{children}</Col>
+            </Row>
+          )}
         </Col>
       </Row>
     </Form>

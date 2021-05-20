@@ -9,7 +9,8 @@ const FormSimpleFormWithModal = (props) => {
     isModalVisible,
     setIsModalVisible,
     onModalSubmit,
-    isEdit
+    isEdit,
+    children
   } = props
 
   // [STATE]
@@ -50,7 +51,12 @@ const FormSimpleFormWithModal = (props) => {
           {isEdit ? 'Save changes' : 'Create form'}
         </Button>
       ]}>
-      <FormSimpleForm form={form} onFinish={onFormEdit} formData={formData} />
+      <FormSimpleForm
+        form={form}
+        formData={formData}
+        children={children}
+        onFinish={onFormEdit}
+      />
     </Modal>
   )
 }

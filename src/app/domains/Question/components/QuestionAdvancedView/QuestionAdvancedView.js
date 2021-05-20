@@ -90,7 +90,7 @@ function QuestionAdvancedView(props) {
       )
     },
     [QUESTION_TYPES.ENDING]: {
-      component: <SubmitButton>Finish</SubmitButton>
+      component: <SubmitButton onClick={onClick}>Finish</SubmitButton>
     }
   }
   //component for recieved question according to question type

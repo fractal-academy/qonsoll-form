@@ -10,19 +10,13 @@ import {
   Menu,
   Input
 } from 'antd'
-import {
-  ArrowLeftOutlined,
-  FolderOutlined,
-  PlusOutlined
-} from '@ant-design/icons'
-import { Spinner } from 'components'
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
-import { styles } from './FormsAll.style'
+import { Spinner, StaticList } from 'components'
 import COLLECTIONS from 'app/constants/collection'
-import { FormSimpleView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
 import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
 import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
 
@@ -74,7 +68,6 @@ function FormsAll(props) {
     <Menu>
       {mockRoutes.map((item, index) => (
         <Menu.Item key={index}>
-          {/* <Link to={item.path}>{item.page}</Link> */}
           <Text>{item.page}</Text>
         </Menu.Item>
       ))}
@@ -142,24 +135,7 @@ function FormsAll(props) {
         flexWrap="wrap"
         flexDirection="row"
         className="custom-scroll">
-        {/* Here should be list of data Images/Video */}
-        {currentData?.map((item, index) => (
-          <Box pr={3} pb={3} key={index}>
-            <FormSimpleView
-              id={item?.id}
-              key={item?.id}
-              title={item?.title}
-              imageURL={item?.image}
-              subtitle={item?.subtitle}
-            />
-          </Box>
-        ))}
-        <Box
-          {...styles.addNewItemStyles}
-          style={globalStyles.cursorPointer}
-          onClick={showModal}>
-          <PlusOutlined />
-        </Box>
+        <StaticList data={currentData} size={[240, 210]} onClick={showModal} />
 
         <FormSimpleFormWithModal
           isModalVisible={isModalVisible}

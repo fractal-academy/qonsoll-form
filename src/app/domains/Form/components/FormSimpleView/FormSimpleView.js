@@ -78,9 +78,7 @@ function FormSimpleView(props) {
           onCancel={handleCancel}
           visible={visible}
           okButtonProps={{ loading: confirmLoading }}>
-          {/*<Box display="block">*/}
           <Text>Delete</Text>
-          {/*</Box>*/}
         </Popconfirm>
       </Menu.Item>
     </Menu>
