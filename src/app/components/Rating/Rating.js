@@ -1,13 +1,14 @@
 import { Rate } from 'antd'
 import styled from 'styled-components'
 import { Col, Container, Row } from '@qonsoll/react-design'
+import theme from 'app/styles/theme'
 
 function CustomRating(props) {
   const { allowClear, character, count, tooltips } = props
   const StyledRate = styled(Rate)`
     &.ant-rate {
       font-size: 40px;
-      color: #1890ff;
+      color: ${theme.color.primary.default};
       //&:active {
       //  color: blue;
       //}
