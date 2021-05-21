@@ -58,9 +58,12 @@ function FormEdit() {
     })
   }
   const onQuestionTypeChange = async ({ key }) => {
-    //when we change question type on choice, set default choice, else empty field
-    const btnProps =
-      key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
+    //when we change question type on choice or picture choice - set default choice, else empty field
+    const isChoices = [
+      QUESTION_TYPES.CHOICE,
+      QUESTION_TYPES.PICTURE_CHOICE
+    ].includes(key)
+    const btnProps = isChoices ? [{ name: '', image: '' }] : ''
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key, btnProps }
