@@ -13,7 +13,7 @@ import {
 import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
-import { styles } from './FormsAll.style'
+import { styles } from './FormsAll.styles'
 import { Spinner, StaticList } from 'components'
 import COLLECTIONS from 'app/constants/collection'
 import { useCollectionData } from 'react-firebase-hooks/firestore'

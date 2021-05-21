@@ -43,21 +43,20 @@ function FormShow(props) {
   }
 
   return (
-    <Box display="flex" flexDirection="column" height="100%">
-      <Row noGutters bg="white" py={3} px={4}>
+    <Box {...styles.mainWrapper}>
+      <Row {...styles.headerRow} noGutters>
         <Col cw="auto" v="center" p={0}>
           <Button
             type="text"
             size="small"
             onClick={() => history.goBack()}
-            style={globalStyles.resetPadding}
-            icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
+            icon={<ArrowLeftOutlined />}
           />
         </Col>
-        <Col style={styles.textAlign}>
-          <Title level={5} style={globalStyles.resetMargin}>
-            Live Preview
-          </Title>
+        <Col v="center">
+          <Box textAlign="center">
+            <Title level={5}>Live Preview</Title>
+          </Box>
         </Col>
         <Col cw="auto" v="center">
           <Button
@@ -70,21 +69,13 @@ function FormShow(props) {
         </Col>
       </Row>
 
-      <Row>
+      <Row noGutters>
         <Col>
           <Divider style={globalStyles.resetMargin} />
         </Col>
       </Row>
 
-      <Box
-        flex={1}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        p={4}
-        m={4}
-        borderRadius="8px"
-        bg="white">
+      <Box {...styles.questionContainer}>
         <FormAdvancedView
           isAnswered={isAnswered}
           setIsAnswered={setIsAnswered}
