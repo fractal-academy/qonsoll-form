@@ -83,9 +83,9 @@ function QuestionAdvancedView(props) {
         <Button
           size="large"
           buttonText="Submit"
-          buttonType="primary"
+          type="primary"
           onClick={onClick}>
-          Start questionary
+          Answer questions
         </Button>
       )
     },
