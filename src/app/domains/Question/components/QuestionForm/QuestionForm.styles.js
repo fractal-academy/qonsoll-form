@@ -39,6 +39,7 @@ export const StyledCol = styled(Col)`
   flex: 1;
 `
 export const CustomCard = styled(Card)`
+  padding-left: 20px;
   width: 100%;
   background: transparent;
 `

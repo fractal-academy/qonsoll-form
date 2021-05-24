@@ -4,6 +4,7 @@ import Title from 'antd/lib/typography/Title'
 import { FormSimpleForm } from 'domains/Form/components'
 
 const FormSimpleFormWithModal = (props) => {
+  // <<<<<<< Updated upstream
   const {
     formData,
     isModalVisible,
@@ -12,6 +13,10 @@ const FormSimpleFormWithModal = (props) => {
     isEdit,
     children
   } = props
+  // =======
+  //   const { formData, isModalVisible, setIsModalVisible, onModalSubmit, isEdit } =
+  //     props
+  // >>>>>>> Stashed changes
 
   // [STATE]
   const [loading, setLoading] = useState(false)

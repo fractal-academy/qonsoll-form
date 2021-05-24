@@ -1,25 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {
-  Modal,
-  Button,
-  Typography,
-  Input,
-  Divider,
-  Upload,
-  message
-} from 'antd'
+import { Modal, Button, Typography, Divider, Upload, message } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
-import { globalStyles } from 'app/styles'
 import {
   CustomBox,
   CustomButton,
+  CustomChangeButtonText,
+  CustomDivider,
   CustomInput,
   CustomText,
   styles
 } from './MediaLibraryModal.styles'
 import PropTypes from 'prop-types'
-import './MediaLibraryModal.styles.css'
 import {
   MediaLibraryFilter,
   MediaLibraryItemSimpleView
@@ -143,9 +135,9 @@ function MediaLibraryModal(props) {
   }, [media])
   return (
     <>
-      <Button {...btnProps} onClick={modalStateChange} style={styles.btnStyle}>
-        <Text style={styles.btnFont}>Change</Text>
-      </Button>
+      <CustomButton {...btnProps} onClick={modalStateChange}>
+        <CustomChangeButtonText>Change</CustomChangeButtonText>
+      </CustomButton>
       <Modal
         visible={isModalVisible}
         footer={null}
@@ -199,13 +191,12 @@ function MediaLibraryModal(props) {
                 />
               </Col>
               <Col cw="auto" noGutters>
-                <Divider type="vertical" style={styles.dividerStyles} />
+                <CustomDivider type="vertical" />
               </Col>
               <Col cw="auto" v="center">
                 <Button
                   icon={<FilterOutlined />}
                   type="text"
-                  style={styles.borderRadius}
                   onClick={onFilterButtonClick}>
                   Filter
                 </Button>
@@ -219,8 +210,7 @@ function MediaLibraryModal(props) {
               display="flex"
               flexWrap="wrap"
               flexDirection="row"
-              bg={theme.color.dark.t.lighten9}
-              className="custom-scroll">
+              bg={theme.color.dark.t.lighten9}>
               {/* RENDER MEDIA */}
 
               {imagesList.map((item) => (
@@ -238,41 +228,37 @@ function MediaLibraryModal(props) {
                 name="file"
                 customRequest={customRequest}>
                 <Box
-                  bg="#eceff5"
+                  {...styles.addButton}
+                  bg={theme.color.dark.t.lighten9}
                   mr={3}
                   mt={4}
-                  borderRadius="8px"
+                  borderRadius={theme.borderRadius.md}
                   width="216px"
-                  height="206px"
+                  height="182px"
                   display="flex"
                   alignItems="center"
-                  justifyContent="center"
-                  style={globalStyles.cursorPointer}>
+                  justifyContent="center">
                   <PlusOutlined />
                 </Box>
               </Upload>
             </Box>
-            <Row borderBottom="1px solid #d9d9d9"></Row>
-            <Row noGutters h="right" p={3} bg="#fff">
+            <Row
+              borderBottom="1px solid"
+              borderColor={theme.color.text.dark}></Row>
+            <Row noGutters h="right" p={3} bg={theme.color.white.default}>
               <Col cw="auto">
-                <Button
-                  type="text"
-                  style={styles.footerButtonStyle}
-                  onClick={onModalCancel}>
+                <Button type="text" onClick={onModalCancel}>
                   Cancel
                 </Button>
               </Col>
               <Col cw="auto">
-                <Button
-                  type="primary"
-                  style={styles.footerButtonStyle}
-                  onClick={onModalContinue}>
+                <Button type="primary" onClick={onModalContinue}>
                   Continue
                 </Button>
               </Col>
             </Row>
           </Col>
-          {sidebarState && (
+          {!sidebarState && (
             <MediaLibraryFilter
               onApplyFilter={onApplyFilter}
               onCancelFilter={onCancelFilter}

@@ -1,7 +1,7 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { Typography } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
-import { CustomText, styles } from './MediaLibrarySimpleView.styles'
+import { CustomBox, CustomText, styles } from './MediaLibrarySimpleView.styles'
 import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import { Input } from 'antd'
 import RangeSlider from 'components/RangeSlider'
@@ -30,7 +30,7 @@ function MediaLibrarySimpleView(props) {
       <Col>
         <Row noGutters mb={4}>
           <Col>
-            <Box {...styles.CustomBox} backgroundImage={bgImage}>
+            <CustomBox backgroundImage={bgImage}>
               <MediaLibraryModal
                 onClick={() => {
                   setIsImageEditVisible(false)
@@ -41,7 +41,7 @@ function MediaLibrarySimpleView(props) {
                   icon: <EditOutlined />
                 }}
               />
-            </Box>
+            </CustomBox>
           </Col>
         </Row>
         <Row noGutters mb={4}>
