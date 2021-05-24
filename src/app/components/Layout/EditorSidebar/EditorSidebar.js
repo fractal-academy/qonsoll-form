@@ -7,7 +7,12 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
-import { SidebarStateSwitcher, styles } from './EditorSidebar.styles'
+import {
+  CustomDivider,
+  SidebarBoxWrapper,
+  SidebarStateSwitcher,
+  styles
+} from './EditorSidebar.styles'
 import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
@@ -81,13 +86,11 @@ function EditorSidebar(props) {
         {open ? <RightOutlined /> : <LeftOutlined />}
       </SidebarStateSwitcher>
       {open && (
-        <Box {...styles.sidebarBoxWrapper}>
+        <SidebarBoxWrapper>
           <Box p={3}>
-            <Row>
+            <Row noGutters>
               <Col v="center">
-                <Title level={5} style={globalStyles.resetMargin}>
-                  Questions
-                </Title>
+                <Title level={5}>Questions</Title>
               </Col>
               <Col cw="auto">
                 <Popover
@@ -126,19 +129,17 @@ function EditorSidebar(props) {
           <Box mt="auto">
             <Row>
               <Col>
-                <Divider type="horizontal" style={globalStyles.resetMargin} />
+                <CustomDivider type="horizontal" />
               </Col>
             </Row>
             <Row h="center" mt={1}>
               <Col cw="auto">
-                <Box {...styles.dragbleCeiling} />
+                <dragbleCeiling />
               </Col>
             </Row>
             <Row p={3}>
               <Col v="center">
-                <Title level={5} style={globalStyles.resetMargin}>
-                  Endings
-                </Title>
+                <Title level={5}>Endings</Title>
               </Col>
               <Col cw="auto">
                 <Button
@@ -159,7 +160,7 @@ function EditorSidebar(props) {
               )}
             </Box>
           </Box>
-        </Box>
+        </SidebarBoxWrapper>
       )}
     </Box>
   )
