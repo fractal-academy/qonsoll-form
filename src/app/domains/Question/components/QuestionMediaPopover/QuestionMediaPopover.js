@@ -19,7 +19,7 @@ function QuestionMediaPopover(props) {
     <Popover
       visible={isImageEditVisible}
       onVisibleChange={changeImageEditVisibleState}
-      trigger={'click'}
+      trigger="click"
       placement="rightTop"
       content={
         <Box width="192px">

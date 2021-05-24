@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
 import { Typography, Button } from 'antd'
-import { globalStyles } from 'app/styles'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
@@ -117,7 +116,7 @@ function QuestionAdvancedView(props) {
           <Row noGutters>
             <Col cw={12}>
               <Box>
-                <Title level={4} style={globalStyles.resetMargin}>
+                <Title level={4}>
                   {questionNumber}. {data?.title}
                 </Title>
               </Box>

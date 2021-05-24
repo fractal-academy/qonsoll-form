@@ -1,17 +1,8 @@
-import theme from 'app/styles/theme'
+import { Select } from 'antd'
+import styled from 'styled-components'
 
-export const styles = {
-  selectStyle: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    // border: `1px solid ${theme.color.dark.t.lighten5}`,
-    borderRadius: theme.borderRadius.md
-    // maxHight: '40px'
-  },
-  //?new styles
-  mainContainer: {
-    display: 'flex',
-    border: 'none'
-  }
-}
+export const StyledSelect = styled(Select)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`

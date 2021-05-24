@@ -35,12 +35,11 @@ function QuestionConfigurationPopoverContent(props) {
       <Row
         noGutters
         borderRadius={`${theme.borderRadius.md} ${theme.borderRadius.md} 0 0`}
-        onClick={changeQuestionConfigState}
         bg={theme.color.text.dark}
-        style={globalStyles.cursorPointer}
         width="300px"
-        px={2}
-        py={2}>
+        p={2}
+        style={globalStyles.cursorPointer}
+        onClick={changeQuestionConfigState}>
         <Col v="center" cw="auto" order={isQuestionConfig ? 1 : 3}>
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>

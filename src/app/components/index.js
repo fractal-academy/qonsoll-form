@@ -33,3 +33,5 @@ export { default as RangeSlider } from './RangeSlider'
 export { default as Carousel } from './Carousel'
 export { default as Spinner } from './Spinner'
 export { default as Rate } from './Rating'
+
+export { default as IconRoundContainer } from './/IconRoundContainer'

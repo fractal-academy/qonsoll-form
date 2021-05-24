@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types'
 import { cloneElement } from 'react'
-import './QuestionSimpleView.styles.css'
 import { Popconfirm, message } from 'antd'
 import { LAYOUT_TYPES } from 'app/constants'
-import { NumberedCard } from 'app/components'
+import { NumberedCard, IconRoundContainer } from 'components'
 import { CloseOutlined } from '@ant-design/icons'
 import COLLECTIONS from 'app/constants/collection'
 import { deleteData } from 'app/services/Firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
-
+import { DescriptionContainer } from './QuestionSimpleView.styles'
 function QuestionSimpleView(props) {
   const { title, number, layoutType, onClick, id } = props
 
@@ -24,15 +23,12 @@ function QuestionSimpleView(props) {
       <NumberedCard number={number}>
         <Row h="around" v="center" noGutters ml={2}>
           <Col cw="auto" mr={2}>
-            <Box display="flex" className="roundBox">
-              {layoutType &&
-                cloneElement(LAYOUT_TYPES[layoutType]?.icon, {
-                  className: 'typeIcon'
-                })}
-            </Box>
+            <IconRoundContainer>
+              {layoutType && cloneElement(LAYOUT_TYPES[layoutType]?.icon)}
+            </IconRoundContainer>
           </Col>
-          <Col width="120px" className="description">
-            {title}
+          <Col width="120px">
+            <DescriptionContainer>{title}</DescriptionContainer>
           </Col>
           <Col cw="auto">
             <Popconfirm title="Delete this question?" onConfirm={handleDelete}>
