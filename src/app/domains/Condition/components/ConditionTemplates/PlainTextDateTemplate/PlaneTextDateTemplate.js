@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { globalStyles } from 'app/styles'
+import React from 'react'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from 'domains/Question/components'
 import { Button, DatePicker, Select, Typography } from 'antd'

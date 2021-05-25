@@ -1,3 +1,4 @@
+import React from 'react'
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
 import { useState, useEffect, useRef } from 'react'

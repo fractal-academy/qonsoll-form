@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { ROUTES_PATHS } from 'app/constants'
-import { useState, cloneElement } from 'react'
+import React, { useState, cloneElement } from 'react'
 import { styles } from './FormSimpleView.style'
 import COLLECTIONS from 'app/constants/collection'
 import { Row, Col, Box } from '@qonsoll/react-design'

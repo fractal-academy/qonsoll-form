@@ -1,5 +1,5 @@
+import React from 'react'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { Typography } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { CustomBox, CustomText, styles } from './MediaLibrarySimpleView.styles'
 import { MediaLibraryModal } from 'domains/MediaLibrary/components'

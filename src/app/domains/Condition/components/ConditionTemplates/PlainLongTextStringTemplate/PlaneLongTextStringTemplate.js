@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { globalStyles } from 'app/styles'
+import React from 'react'
 import Text from 'antd/lib/typography/Text'
 import { Button, Input, Select } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
