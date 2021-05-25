@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, Divider, message, Button, Popover } from 'antd'
+import { Typography, message, Button, Popover } from 'antd'
 import {
   LeftOutlined,
   PlusOutlined,
@@ -13,7 +13,6 @@ import {
   SidebarStateSwitcher,
   styles
 } from './EditorSidebar.styles'
-import { globalStyles } from 'app/styles'
 import PropTypes from 'prop-types'
 import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'

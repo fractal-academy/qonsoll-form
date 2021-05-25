@@ -1,7 +1,7 @@
+import React from 'react'
 import { Upload } from 'antd'
 import { Text } from 'antd-styled'
 import { IconLabel } from 'components'
-import { globalStyles } from 'app/styles'
 import { Col, Row } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
 
@@ -24,11 +24,8 @@ const UploadArea = (props) => {
         <Dragger {...rest} {...config} onChange={onChange}>
           <Row h="center" v="center">
             <Col cw="auto">
-              <IconLabel size="medium">
-                <InboxOutlined
-                  style={globalStyles.iconSize}
-                  className="animate__animated  animate__zoomIn"
-                />
+              <IconLabel size="large">
+                <InboxOutlined />
               </IconLabel>
             </Col>
           </Row>

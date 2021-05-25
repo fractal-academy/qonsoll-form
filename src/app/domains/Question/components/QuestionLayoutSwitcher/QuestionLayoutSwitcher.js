@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   PicCenterOutlined,
   PicRightOutlined,
@@ -7,7 +8,7 @@ import {
   MenuUnfoldOutlined
 } from '@ant-design/icons'
 import PropTypes from 'prop-types'
-import { styles, StyledMenu, StyledItem } from './QuestionLayoutSwitcher.styles'
+import { StyledMenu, StyledItem } from './QuestionLayoutSwitcher.styles'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 
 const menuMap = [
