@@ -1,12 +1,13 @@
+import { message } from 'antd'
 import { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { COLLECTIONS } from 'app/constants'
 import { DragableList } from 'app/components'
 import { setData } from 'app/services/Firestore'
 import { QuestionSimpleView } from 'domains/Question/components'
-import { message } from 'antd'
+
 function QuestionsList(props) {
-  const { data, setNewOrder, onItemClick } = props
+  const { action, data, setNewOrder, onItemClick } = props
 
   // [CLEAN FUNCTIONS]
   const onUpdate = (data) => {
@@ -20,6 +21,7 @@ function QuestionsList(props) {
     () => (data ? data.sort((a, b) => a.order - b.order) : []),
     [data]
   )
+
   return (
     <DragableList
       itemLayout="horizontal"
@@ -29,6 +31,7 @@ function QuestionsList(props) {
       renderItem={(item, index) => (
         <QuestionSimpleView
           {...item}
+          action={action}
           number={index + 1}
           onClick={() => onItemClick(item, index)}
         />
@@ -38,7 +41,10 @@ function QuestionsList(props) {
 }
 
 QuestionsList.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  action: PropTypes.func,
+  setNewOrder: PropTypes.func,
+  onItemClick: PropTypes.func
 }
 
 export default QuestionsList

@@ -1,11 +1,17 @@
-import '../Button.styles.css'
 import { Button } from 'antd'
 import { Typography } from 'antd'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 
 const { Text } = Typography
+
+const StyledSubmit = styled(Button)`
+  width: 93px;
+  height: 56px;
+  font-size: 20px;
+`
 
 function SubmitButton(props) {
   const { children, onClick } = props
@@ -18,7 +24,7 @@ function SubmitButton(props) {
   return (
     <Row display="flex" v="center" noGutters>
       <Col cw="auto" mr={3}>
-        <Button type="primary" className="submit" onClick={onButtonClick}>
+        <StyledSubmit type="primary" onClick={onButtonClick}>
           {children ? (
             children
           ) : (
@@ -31,9 +37,9 @@ function SubmitButton(props) {
               </Col>
             </Row>
           )}
-        </Button>
+        </StyledSubmit>
       </Col>
-      <Col>
+      <Col cw="auto">
         <Text>Press enter ↵</Text>
       </Col>
     </Row>

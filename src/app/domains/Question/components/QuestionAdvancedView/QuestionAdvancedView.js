@@ -83,7 +83,7 @@ function QuestionAdvancedView(props) {
         <Button
           size="large"
           buttonText="Submit"
-          buttonType="primary"
+          type="primary"
           onClick={onClick}>
           Start questionary
         </Button>
@@ -96,6 +96,10 @@ function QuestionAdvancedView(props) {
   //component for recieved question according to question type
   const component = questionTypesMap[data?.questionType].component
   const layoutType = LAYOUT_TYPES[data?.layoutType]
+  // defines special question layouts
+  const specialLayoutRule =
+    data?.questionType === QUESTION_TYPES.WELCOME_SCREEN ||
+    data?.questionType === QUESTION_TYPES.ENDING
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
     layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -113,7 +117,7 @@ function QuestionAdvancedView(props) {
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage}>
       <Col {...styles.questionCardColumnStyle}>
-        <StyledCard bordered={false}>
+        <StyledCard bordered={false} specialLayoutRule={specialLayoutRule}>
           <Row noGutters>
             <Col cw={12}>
               <Box>

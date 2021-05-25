@@ -1,26 +1,26 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
+import { useParams } from 'react-router'
+import { globalStyles } from 'app/styles'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { Typography, Divider, message, Button, Popover } from 'antd'
+import { SidebarStateSwitcher, styles } from './EditorSidebar.styles'
+import { ModalWithFormConditionsForm } from 'domains/Condition/components'
+import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
+import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
+import { getCollectionRef, setData, deleteData } from 'app/services/Firestore'
+import {
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
 import {
   LeftOutlined,
   PlusOutlined,
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
-import { SidebarStateSwitcher, styles } from './EditorSidebar.styles'
-import { globalStyles } from 'app/styles'
-import PropTypes from 'prop-types'
-import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
-import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
-import { ModalWithFormConditionsForm } from 'domains/Condition/components'
-import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
-import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
-import { getCollectionRef, setData } from 'app/services/Firestore'
-import { useParams } from 'react-router'
-import {
-  useCurrentQuestionContextDispatch,
-  DISPATCH_EVENTS
-} from 'app/context/CurrentQuestion'
 
 const { Title } = Typography
 
@@ -35,9 +35,19 @@ function EditorSidebar(props) {
   const [open, setOpen] = useState(true)
   const [showPopover, setshowPopover] = useState(false)
 
-  // [COMPUTED PROPERTIES]
-
   // [CLEAN FUNCTIONS]
+  const handleDelete = async (questionId) => {
+    await deleteData(COLLECTIONS.QUESTIONS, questionId)
+      .catch((e) => message.error(e.message))
+      .then(updateQuestionOrder())
+  }
+  const updateQuestionOrder = async () => {
+    questions.forEach((item, index) =>
+      setData(COLLECTIONS.QUESTIONS, item.id, {
+        order: index
+      })
+    )
+  }
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
     // default data for created question
@@ -47,7 +57,8 @@ function EditorSidebar(props) {
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
-      order: questions?.length,
+      //fix lettering later, as will added logic jumps
+      order: (key && questions?.length) || String.fromCharCode(65),
       btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     }
     // set it into context as current
@@ -83,7 +94,7 @@ function EditorSidebar(props) {
       {open && (
         <Box {...styles.sidebarBoxWrapper}>
           <Box p={3}>
-            <Row>
+            <Row noGutters>
               <Col v="center">
                 <Title level={5} style={globalStyles.resetMargin}>
                   Questions
@@ -117,6 +128,7 @@ function EditorSidebar(props) {
           <Box overflow="auto" p={3}>
             {!!questions?.length && (
               <QuestionsList
+                action={handleDelete}
                 setNewOrder={setNewOrder}
                 onItemClick={onItemClick}
                 data={questions}
@@ -142,6 +154,7 @@ function EditorSidebar(props) {
               </Col>
               <Col cw="auto">
                 <Button
+                  disabled={endings.length >= 1}
                   type="text"
                   icon={<PlusOutlined />}
                   onClick={addQuestion}
@@ -152,6 +165,7 @@ function EditorSidebar(props) {
               {/*<QuestionsList />*/}
               {!!endings?.length && (
                 <QuestionsList
+                  firstElement={questions?.length}
                   setNewOrder={setNewOrder}
                   onItemClick={onItemClick}
                   data={endings}

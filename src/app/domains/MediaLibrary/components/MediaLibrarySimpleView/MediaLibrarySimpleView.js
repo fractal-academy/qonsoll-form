@@ -1,10 +1,9 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { Typography } from 'antd'
-import { EditOutlined } from '@ant-design/icons'
-import { CustomText, styles } from './MediaLibrarySimpleView.styles'
-import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import { Input } from 'antd'
 import RangeSlider from 'components/RangeSlider'
+import { EditOutlined } from '@ant-design/icons'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import { CustomText, styles } from './MediaLibrarySimpleView.styles'
+import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS

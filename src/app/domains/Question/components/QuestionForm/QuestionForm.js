@@ -1,5 +1,5 @@
 import { cloneElement } from 'react'
-import { Card, Tag } from 'antd'
+import { Tag } from 'antd'
 import {
   Rate,
   ShortText,

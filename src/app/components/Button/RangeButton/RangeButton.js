@@ -1,12 +1,35 @@
 import { Button } from 'antd'
-import '../Button.styles.css'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
+import styled from 'styled-components'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 
+const StyledRangeButton = styled(Button)`
+  width: 65px;
+  height: 65px;
+  margin-left: 5px;
+  border-color: ${theme.color.primary.default};
+  background-color: ${(props) =>
+    props.isActive
+      ? theme.color.primary.default
+      : theme.color.primary.t.lighten5};
+  color: ${(props) =>
+    props.isActive ? theme.color.white.default : theme.color.primary.default};
+
+  &:hover {
+    color: ${(props) => props.isActive && theme.color.white.default};
+    border-color: ${(props) => props.isActive && theme.color.primary.default};
+    background-color: ${(props) =>
+      props.isActive
+        ? theme.color.primary.t.lighten1
+        : theme.color.primary.t.lighten3};
+  }
+`
+
 function RangeButton(props) {
-  const { from = 0, to = 0, onClick, currentSlide, order } = props
+  const { from, to, onClick, currentSlide, order } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -40,12 +63,12 @@ function RangeButton(props) {
   return (
     <Box display="flex">
       {range.map((item) => (
-        <Button
+        <StyledRangeButton
           key={item}
           onClick={() => onButtonClick(item)}
-          className={(Number(buttonKey) === item && 'active') || 'range'}>
+          isActive={Number(buttonKey) === item}>
           {item}
-        </Button>
+        </StyledRangeButton>
       ))}
     </Box>
   )
@@ -55,6 +78,10 @@ RangeButton.propTypes = {
   onClick: PropTypes.func,
   to: PropTypes.number.isRequired,
   from: PropTypes.number.isRequired
+}
+RangeButton.defaultProps = {
+  from: 0,
+  to: 0
 }
 
 export default RangeButton

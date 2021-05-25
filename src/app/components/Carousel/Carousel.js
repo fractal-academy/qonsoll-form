@@ -13,7 +13,8 @@ function Carousel(props) {
 
   // [CLEAN FUNCTIONS]
   const handleScroll = (e) => {
-    e.deltaY > 0 ? next() : previous()
+    // return this after adding isRequired and condition rules
+    // e.deltaY > 0 ? next() : previous()
   }
   const next = () => {
     carouselRef.current?.next()

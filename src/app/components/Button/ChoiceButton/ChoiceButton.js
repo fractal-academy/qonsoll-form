@@ -44,6 +44,7 @@ function ChoiceButton(props) {
       setButtonKey(letter)
       onClick && onClick()
     }
+    console.log(currentSlide, order)
   }
 
   return (

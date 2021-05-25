@@ -8,7 +8,9 @@ export const styles = {
     // cursor: 'pointer',
     padding: '4px'
   },
-  cardBodyStyle: { padding: '0 8px' },
+  cardBodyStyle: {
+    padding: '0 8px'
+  },
   imageStyle: {
     padding: '3px',
     borderRadius: '8px'

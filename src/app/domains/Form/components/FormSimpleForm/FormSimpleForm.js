@@ -3,7 +3,6 @@ import { Col, Row } from '@qonsoll/react-design'
 
 function FormSimpleForm(props) {
   const { onFinish, form, formData, children } = props
-
   // [COMPUTED PROPERTIES]
   const initialValues = {
     name: formData?.title,

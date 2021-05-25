@@ -25,4 +25,8 @@ export const styles = {
 
 export const StyledCard = styled(Card)`
   width: 400px;
+  display: grid;
+  text-align: ${(props) => props.specialLayoutRule && 'center'};
+  justify-content: ${(props) => props.specialLayoutRule && 'center'};
+  background-color: transparent;
 `
