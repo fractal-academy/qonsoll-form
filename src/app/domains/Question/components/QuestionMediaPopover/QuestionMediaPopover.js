@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Popover, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { Box } from '@qonsoll/react-design'

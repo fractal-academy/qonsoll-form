@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { QUESTION_TYPES } from 'app/constants'

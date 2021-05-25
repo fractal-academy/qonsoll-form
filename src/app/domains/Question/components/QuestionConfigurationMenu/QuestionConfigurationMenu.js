@@ -1,3 +1,4 @@
+import React from 'react'
 import { Typography, Switch } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from 'app/constants'

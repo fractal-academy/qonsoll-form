@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { COLLECTIONS } from 'app/constants'
 import { DragableList } from 'app/components'
