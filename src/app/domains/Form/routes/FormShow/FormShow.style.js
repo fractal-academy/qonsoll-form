@@ -13,6 +13,7 @@ export const styles = {
   questionContainer: {
     flex: 1,
     display: 'flex',
+    alignItems: 'center',
     m: 4,
     borderRadius: theme.borderRadius.md,
     bg: theme.color.white.default
