@@ -11,7 +11,7 @@ export const styles = {
   boxWithSelect: {
     display: 'flex',
     alignItems: 'center',
-    border: '1px solid #bbbbbb',
+    border: '1px solid red',
     borderColor: theme.color.dark.t.lighten5
   }
 }

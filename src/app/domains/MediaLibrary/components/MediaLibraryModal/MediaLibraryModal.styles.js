@@ -7,7 +7,7 @@ const { Text } = Typography
 
 export const styles = {
   textSecondary: {
-    color: '#5d626a'
+    color: theme.color.text.dark.secondary
   },
 
   modalBodyStyle: {

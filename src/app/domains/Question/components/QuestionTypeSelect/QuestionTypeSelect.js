@@ -11,6 +11,7 @@ import {
   CalendarOutlined,
   CopyrightOutlined,
   FileTextOutlined,
+  GoldOutlined,
   HomeOutlined,
   PictureOutlined,
   ShareAltOutlined,
@@ -60,7 +61,7 @@ const questionTypeMap = [
   {
     type: QUESTION_TYPES.CHOICE,
     description: 'Multiple choice',
-    icon: <PictureOutlined />
+    icon: <GoldOutlined />
   },
   {
     type: QUESTION_TYPES.RATING,

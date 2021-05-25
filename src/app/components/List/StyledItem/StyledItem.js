@@ -1,19 +1,19 @@
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import theme from 'app/styles/theme'
 
 const Item = styled(Button)`
-  background: #eceff5;
+  background: ${theme.color.dark.t.lighten9};
   width: ${(props) => props.size[0]}px;
   height: ${(props) => props.size[1]}px;
   display: flex;
-  border-radius: 8px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   &:hover {
-    background-color: #ebeced;
-    border-color: #ebeced;
+    background-color: ${theme.color.dark.t.lighten8};
+    border-color: ${theme.color.dark.t.lighten8};
   }
 `
 
