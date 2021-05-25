@@ -31,6 +31,8 @@ export const CustomButton = styled(Button)`
   height: 24px;
 `
 export const CustomImage = styled(Image)`
+  height: 136px;
+  width: 208px;
   border-radius: ${theme.borderRadius.md} !important;
 `
 export const CustomText = styled(Text)`
