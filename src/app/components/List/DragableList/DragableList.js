@@ -3,7 +3,7 @@ import arrayMove from 'array-move'
 import SortableItem from './SortableItem'
 import { Box } from '@qonsoll/react-design'
 import SortableContainer from './SortableContainer'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 function DragableList(props) {
   const { dataSource, onUpdate, renderItem, sortable = true, ...args } = props
@@ -26,14 +26,12 @@ function DragableList(props) {
   }
 
   // [COMPUTED PROPERTIES]
-  const Container = useMemo(
-    () => (sortable ? SortableContainer : Box),
-    [sortable]
-  )
-  const SortableWrapper = useMemo(
-    () => (sortable ? SortableItem : Box),
-    [sortable]
-  )
+  const Container = useMemo(() => (sortable ? SortableContainer : Box), [
+    sortable
+  ])
+  const SortableWrapper = useMemo(() => (sortable ? SortableItem : Box), [
+    sortable
+  ])
 
   // [USE_EFFECTS]
   useEffect(() => {

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Row, Col } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'

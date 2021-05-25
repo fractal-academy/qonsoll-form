@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { ChoiceEditable } from 'components'
 import { Box } from '@qonsoll/react-design'
