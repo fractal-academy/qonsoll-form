@@ -6,7 +6,7 @@ import { Box } from '@qonsoll/react-design'
 import {
   QuestionForm,
   QuestionLayoutSwitcher
-} from 'domains/Question/components'
+} from '../../../../domains/Question/components'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from '../../../../constants'
 import {
   useCurrentQuestionContext,
