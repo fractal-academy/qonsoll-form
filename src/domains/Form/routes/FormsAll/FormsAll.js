@@ -20,7 +20,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
 import { getCollectionRef, getTimestamp, setData } from '../../../../services/Firestore'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
+import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
 
 const { Title, Text } = Typography
 
@@ -30,7 +30,7 @@ const mockRoutes = [
   { path: '/videos', page: 'Videos' }
 ]
 function FormsAll(props) {
-  const { configurations } = props
+  const { firebase } = props
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
@@ -86,7 +86,7 @@ function FormsAll(props) {
   }
 
   return (
-    <TypeformConfigurationContext.Provider value={configurations}>
+    <TypeformConfigurationProvider firebase={firebase}>
       <Box {...styles.mainWrapper}>
         {/* Page Header */}
         <Row noGutters display="flex">
@@ -156,7 +156,7 @@ function FormsAll(props) {
           />
         </Box>
       </Box>
-    </TypeformConfigurationContext.Provider>
+    </TypeformConfigurationProvider>
   )
 }
 
