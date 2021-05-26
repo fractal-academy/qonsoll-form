@@ -121,7 +121,7 @@ function FormEdit(props) {
 }
 
 FormEdit.propTypes = {
-  configurations: PropTypes.object
+  firebase: PropTypes.object
 }
 
 export default FormEdit

@@ -111,7 +111,7 @@ function FormShow(props) {
   )
 }
 FormShow.propTypes = {
-  configurations: PropTypes.object
+  firebase: PropTypes.object
 }
 
 export default FormShow
