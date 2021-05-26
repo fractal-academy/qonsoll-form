@@ -1,8 +1,8 @@
-import { Button } from 'antd'
 import React from 'react'
-import { Typography } from 'antd'
 import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
 import styled from 'styled-components'
+import { Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 
@@ -11,7 +11,7 @@ const { Text } = Typography
 const StyledSubmit = styled(Button)`
   width: 93px;
   height: 56px;
-  font-size: 20px;
+  font-size: ${theme.typography.fontSize.h4};
 `
 
 function SubmitButton(props) {
