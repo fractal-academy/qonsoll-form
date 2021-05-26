@@ -1,26 +1,25 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
-import { PageLayout, EditorSidebar, FormContentArea, Spinner } from '~/components'
+import React,{ useState, useEffect } from 'react'
+import { PageLayout, EditorSidebar, FormContentArea, Spinner } from '../../../../components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
 import {
   QuestionForm,
   QuestionLayoutSwitcher
 } from 'domains/Question/components'
-import { getCollectionRef, setData } from 'app/services/Firestore'
-import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
+import { getCollectionRef, setData } from '../../../../services/Firestore'
+import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from '../../../../constants'
 import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
-} from 'app/context/CurrentQuestion'
+} from '../../../../context/CurrentQuestion'
 import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
-import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 
 function FormEdit(props) {
   const { configurations } = props

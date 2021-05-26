@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { QuestionSelect } from 'domains/Question/components'
+import { QuestionSelect } from '../../../../../domains/Question/components'
 import { Button, DatePicker, Select, Typography } from 'antd'
-import { DATE_CONDITION_RULES_VALUES } from 'app/constants/dateConditionRules'
+import { DATE_CONDITION_RULES_VALUES } from '../../../../../constants/dateConditionRules'
 import { styles } from './PlainTextDateTemplate.style'
 
 const { Option } = Select

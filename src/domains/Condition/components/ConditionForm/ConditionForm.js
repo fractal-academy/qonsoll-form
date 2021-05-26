@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
 import { Box } from '@qonsoll/react-design'
-import { NumberedCard } from '~/components'
+import { NumberedCard } from '../../../../components'
 import Title from 'antd/lib/typography/Title'
-import { QUESTION_TYPES } from 'app/constants'
-import { RatingTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { FileUploadTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { YesNoChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { OpinionScaleTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { PlaneTextDateTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { PictureChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { PlaneLongTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
-import { PlaneShortTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
+import { QUESTION_TYPES } from '../../../../constants'
+import {
+  RatingTemplate,
+  FileUploadTemplate,
+  YesNoChoiceTemplate,
+  OpinionScaleTemplate,
+  PlaneTextDateTemplate,
+  PictureChoiceTemplate,
+  PlaneLongTextStringTemplate,
+  PlaneShortTextStringTemplate
+} from '../../../../domains/Condition/components/ConditionTemplates'
 
 const questionTypesMap = {
   [QUESTION_TYPES.YES_NO]: {
