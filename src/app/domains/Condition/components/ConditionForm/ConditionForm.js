@@ -1,6 +1,6 @@
 import { NumberedCard } from 'app/components'
 import PropTypes from 'prop-types'
-import { cloneElement } from 'react'
+import React, { cloneElement } from 'react'
 import { Box } from '@qonsoll/react-design'
 import Title from 'antd/lib/typography/Title'
 import { QUESTION_TYPES } from 'app/constants'

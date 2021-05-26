@@ -1,3 +1,4 @@
+import React from 'react'
 import { Typography, Select } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import {
@@ -43,7 +44,7 @@ function OpinionScaleCustomConfig() {
   return (
     <Row noGutters>
       <Col cw="auto" mr={3}>
-        <Text>From</Text>
+        <Text strong>From</Text>
       </Col>
       <Col>
         <Select defaultValue="0" size="small" onChange={onSelectFromChange}>
@@ -52,7 +53,7 @@ function OpinionScaleCustomConfig() {
         </Select>
       </Col>
       <Col v="center" cw="auto" mr={3}>
-        <Text>to</Text>
+        <Text strong>to</Text>
       </Col>
       <Col cw="auto">
         <Select

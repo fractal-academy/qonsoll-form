@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   PicCenterOutlined,
   PicRightOutlined,
@@ -6,9 +7,8 @@ import {
   ProfileFilled,
   MenuUnfoldOutlined
 } from '@ant-design/icons'
-import { Menu } from 'antd'
 import PropTypes from 'prop-types'
-import { styles } from './QuestionLayoutSwitcher.styles'
+import { StyledMenu, StyledItem } from './QuestionLayoutSwitcher.styles'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 
 const menuMap = [
@@ -28,16 +28,11 @@ function QuestionLayoutSwitcher(props) {
   const { onChange, defaultActive } = props
 
   return (
-    <Menu style={styles.menuStyle} selectedKeys={defaultActive}>
+    <StyledMenu selectedKeys={defaultActive}>
       {menuMap.map((item) => (
-        <Menu.Item
-          key={item.layoutType}
-          icon={item.icon}
-          onClick={onChange}
-          style={styles.menuItemStyle}
-        />
+        <StyledItem key={item.layoutType} icon={item.icon} onClick={onChange} />
       ))}
-    </Menu>
+    </StyledMenu>
   )
 }
 

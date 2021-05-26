@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 import { PageLayout, EditorSidebar, FormContentArea, Spinner } from 'components'
 import { useParams } from 'react-router'
@@ -18,7 +20,10 @@ import {
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
-function FormEdit() {
+import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
+
+function FormEdit(props) {
+  const { configurations } = props
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
@@ -58,9 +63,12 @@ function FormEdit() {
     })
   }
   const onQuestionTypeChange = async ({ key }) => {
-    //when we change question type on choice, set default choice, else empty field
-    const btnProps =
-      key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
+    //when we change question type on choice or picture choice - set default choice, else empty field
+    const isChoices = [
+      QUESTION_TYPES.CHOICE,
+      QUESTION_TYPES.PICTURE_CHOICE
+    ].includes(key)
+    const btnProps = isChoices ? [{ name: '', image: '' }] : ''
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionType: key, btnProps }
@@ -81,7 +89,7 @@ function FormEdit() {
   }, [currentQuestion])
 
   return (
-    <>
+    <TypeformConfigurationContext.Provider value={configurations}>
       {formLoading || questionsListLoading ? (
         <Spinner />
       ) : (
@@ -108,10 +116,12 @@ function FormEdit() {
           <EditorSidebar questions={questions} endings={endings} />
         </Box>
       )}
-    </>
+    </TypeformConfigurationContext.Provider>
   )
 }
 
-FormEdit.propTypes = {}
+FormEdit.propTypes = {
+  configurations: PropTypes.object.isRequired
+}
 
 export default FormEdit

@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { globalStyles } from 'app/styles'
 import { ReloadOutlined } from '@ant-design/icons'
-import { styles } from './MediaLibraryFilter.styles'
+import { CustomApplyButton, CustomText } from './MediaLibraryFilter.styles'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Typography, Divider, Checkbox } from 'antd'
 
@@ -48,11 +47,9 @@ function MediaLibraryFilter(props) {
       <Box>
         <Row noGutters pb={4}>
           <Col v="center">
-            <Title level={5} style={globalStyles.resetMargin}>
-              Filter
-            </Title>
+            <Title level={5}>Filter</Title>
           </Col>
-          <Col cw="auto" borderRadius="4px">
+          <Col cw="auto">
             <Button type="text" onClick={resetFilters}>
               Reset filters
             </Button>
@@ -61,7 +58,7 @@ function MediaLibraryFilter(props) {
       </Box>
       <Row noGutters pb={2}>
         <Col v="center">
-          <Text style={styles.subtitleStyle}>PHASE</Text>
+          <CustomText>PHASE</CustomText>
         </Col>
         <Col cw="auto" v="center">
           <Button
@@ -93,7 +90,7 @@ function MediaLibraryFilter(props) {
       </Row>
       <Row noGutters pb={2}>
         <Col>
-          <Text style={styles.subtitleStyle}>AUDIENCE</Text>
+          <CustomText>AUDIENCE</CustomText>
         </Col>
         <Col cw="auto">
           <Button
@@ -125,22 +122,16 @@ function MediaLibraryFilter(props) {
       </Row>
       <Row>
         <Col>
-          <Button
-            type="primary"
-            style={styles.siderButtonsStyle}
-            onClick={onApplyFilter}>
+          <CustomApplyButton type="primary" onClick={onApplyFilter}>
             Apply filter
-          </Button>
+          </CustomApplyButton>
         </Col>
       </Row>
       <Row>
         <Col>
-          <Button
-            type="text"
-            style={styles.siderButtonsStyle}
-            onClick={onCancelFilter}>
+          <CustomApplyButton type="text" onClick={onCancelFilter}>
             Cancel
-          </Button>
+          </CustomApplyButton>
         </Col>
       </Row>
     </Box>

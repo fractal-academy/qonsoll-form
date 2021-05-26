@@ -1,8 +1,9 @@
+import React from 'react'
 import { Select } from 'antd'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { Box } from '@qonsoll/react-design'
-import { styles } from './QuestionSelect.styles'
+import { StyledSelect } from './QuestionSelect.styles'
 
 const { Option, OptGroup } = Select
 
@@ -16,14 +17,13 @@ function QuestionSelect(props) {
 
   return (
     <Box>
-      <Select
+      <StyledSelect
         value={answers[index].redirectQuestion || 'Go to the next question'}
         showSearch
         allowClear
         onChange={(name) => onChange(name, index)}
-        defaultValue="Go to the next question"
-        style={styles.selectStyle}>
-        <Option value={'Submit form'}>
+        defaultValue="Go to the next question">
+        <Option value="Submit form">
           <Text strong>Submit form</Text>
         </Option>
         <OptGroup label="JUMP TO...">
@@ -33,7 +33,7 @@ function QuestionSelect(props) {
             </Option>
           ))}
         </OptGroup>
-      </Select>
+      </StyledSelect>
     </Box>
   )
 }

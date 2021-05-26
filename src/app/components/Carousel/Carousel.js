@@ -1,5 +1,5 @@
 import { Button } from 'antd'
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Carousel as AntdCarousel } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'

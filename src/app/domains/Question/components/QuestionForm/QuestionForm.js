@@ -1,5 +1,16 @@
-import { cloneElement } from 'react'
 import { Tag } from 'antd'
+import PropTypes from 'prop-types'
+import React, { cloneElement } from 'react'
+import { DEFAULT_IMAGE } from 'app/constants'
+import { Col, Row, Box } from '@qonsoll/react-design'
+import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import { styles, StyledCol, CustomCard } from './QuestionForm.styles'
+import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
+import {
+  QuestionConfigurationPopover,
+  QuestionHeader,
+  QuestionMediaPopover
+} from 'domains/Question/components'
 import {
   Rate,
   ShortText,
@@ -11,17 +22,6 @@ import {
   LongText,
   DateTimeInput
 } from 'components'
-import PropTypes from 'prop-types'
-import { DEFAULT_IMAGE } from 'app/constants'
-import { Col, Row, Box } from '@qonsoll/react-design'
-import { styles, StyledCol, CustomCard } from './QuestionForm.styles'
-import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
-import {
-  QuestionConfigurationPopover,
-  QuestionHeader,
-  QuestionMediaPopover
-} from 'domains/Question/components'
 
 function QuestionForm(props) {
   const { data, onQuestionTypeChange } = props
@@ -85,7 +85,7 @@ function QuestionForm(props) {
 
   return (
     <Row noGutters {...styles.mainRowStyle} backgroundImage={bgImage}>
-      <Col {...styles.questionCardColumnStyle} cw={imageShowRule ? 6 : 8}>
+      <Col {...styles.questionCardColumnStyle} cw={6}>
         <CustomCard bordered={false}>
           <Row noGutters>
             <Col>

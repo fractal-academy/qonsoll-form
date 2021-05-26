@@ -1,3 +1,4 @@
+import React from 'react'
 import { Typography, Select } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import {
@@ -24,7 +25,7 @@ function RatingCustomConfig(props) {
   return (
     <Row noGutters>
       <Col>
-        <Text>Amount of stars</Text>
+        <Text strong>Amount of stars</Text>
       </Col>
       <Col cw="auto">
         <Select

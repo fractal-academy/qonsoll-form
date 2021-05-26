@@ -1,6 +1,6 @@
 import { message } from 'antd'
-import { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import React, { useMemo } from 'react'
 import { COLLECTIONS } from 'app/constants'
 import { DragableList } from 'app/components'
 import { setData } from 'app/services/Firestore'

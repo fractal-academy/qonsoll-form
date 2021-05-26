@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react'
 import { ConditionForm } from 'domains/Condition/components'
 import { QUESTION_TYPES, ANSWER_TYPES } from 'app/constants'

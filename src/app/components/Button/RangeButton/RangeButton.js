@@ -1,8 +1,8 @@
 import { Button } from 'antd'
-import { useState } from 'react'
 import PropTypes from 'prop-types'
 import theme from 'app/styles/theme'
 import styled from 'styled-components'
+import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Popover, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { Box } from '@qonsoll/react-design'
@@ -19,7 +19,7 @@ function QuestionMediaPopover(props) {
     <Popover
       visible={isImageEditVisible}
       onVisibleChange={changeImageEditVisibleState}
-      trigger={'click'}
+      trigger="click"
       placement="rightTop"
       content={
         <Box width="192px">

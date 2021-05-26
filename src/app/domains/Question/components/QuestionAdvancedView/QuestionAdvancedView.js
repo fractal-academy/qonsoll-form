@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types'
-import { cloneElement } from 'react'
 import { Typography, Button } from 'antd'
-import { globalStyles } from 'app/styles'
+import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { styles, StyledCard } from './QuestionAdvancedView.styles'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -85,7 +84,7 @@ function QuestionAdvancedView(props) {
           buttonText="Submit"
           type="primary"
           onClick={onClick}>
-          Start questionary
+          Answer questions
         </Button>
       )
     },
@@ -115,13 +114,13 @@ function QuestionAdvancedView(props) {
   }
 
   return (
-    <Row {...styles.mainRowStyle} backgroundImage={bgImage}>
-      <Col {...styles.questionCardColumnStyle}>
+    <Row {...styles.mainRowStyle} backgroundImage={bgImage} noGutters>
+      <Col {...styles.questionCardColumnStyle} cw={6}>
         <StyledCard bordered={false} specialLayoutRule={specialLayoutRule}>
           <Row noGutters>
             <Col cw={12}>
               <Box>
-                <Title level={4} style={globalStyles.resetMargin}>
+                <Title level={4}>
                   {questionNumber}. {data?.title}
                 </Title>
               </Box>
@@ -133,7 +132,7 @@ function QuestionAdvancedView(props) {
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row noGutters>
+            <Row noGutters mb={3}>
               <Col cw="auto">
                 <Box
                   {...layoutType.imgSize}
@@ -150,9 +149,8 @@ function QuestionAdvancedView(props) {
         </StyledCard>
       </Col>
       {imageShowRule && (
-        <Col
+        <StyledCol
           {...styles.sideImageColumnStyle}
-          style={styles.columnStyle}
           order={layoutType.imageOrder}>
           <Box
             {...layoutType.imgSize}
@@ -160,7 +158,7 @@ function QuestionAdvancedView(props) {
             backgroundRepeat="no-repeat"
             backgroundImage={`url(${data?.image})`}
           />
-        </Col>
+        </StyledCol>
       )}
     </Row>
   )

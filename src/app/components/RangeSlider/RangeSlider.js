@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import { Slider } from 'antd'
-import { CustomInputNumber } from './RangeSlider.styles'
+import React, { useState } from 'react'
 import { Col, Row } from '@qonsoll/react-design'
+import { CustomInputNumber } from './RangeSlider.styles'
 
 function RangeSlider(props) {
   // [COMPONENT STATE HOOKS]

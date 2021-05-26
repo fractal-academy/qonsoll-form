@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { CheckOutlined } from '@ant-design/icons'
 import { Box, Col, Row } from '@qonsoll/react-design'
@@ -34,12 +35,7 @@ function MediaLibraryItemSimpleView(props) {
               <CheckOutlined />
             </CustomButton>
           )}
-          <CustomImage
-            preview={false}
-            height="136px"
-            width="208px"
-            src={imageUrl}
-          />
+          <CustomImage preview={false} src={imageUrl} />
         </Box>
       }>
       <Meta

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
 import theme from 'app/styles/theme'

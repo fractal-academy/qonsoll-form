@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { StyledItem } from 'components'
 import { PlusOutlined } from '@ant-design/icons'

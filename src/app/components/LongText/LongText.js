@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Form, Typography, Input } from 'antd'
 import { SubmitButton } from 'components'
@@ -22,7 +23,7 @@ function LongText(props) {
   return (
     <Container>
       <Row noGutters>
-        <Col>
+        <Col d="block">
           <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
             <Form.Item
               style={{ marginBottom: '0px' }}

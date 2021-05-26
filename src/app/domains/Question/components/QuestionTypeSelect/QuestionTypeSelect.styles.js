@@ -1,29 +1,17 @@
+import { Menu } from 'antd'
+import Text from 'antd/lib/typography/Text'
 import theme from 'app/styles/theme'
+import styled from 'styled-components'
 
-export const styles = {
-  menuItemStyle: {
-    display: 'flex',
-    height: '60px',
-    lineHeight: '1',
-    paddingLeft: '0',
-    paddingRight: '0'
-  },
-  questionName: {
-    fontSize: '16px',
-    fontWeight: '500'
-  },
-  questionDescr: {
-    fontSize: '12px',
-    color: '#737373'
-  },
-  menuStyle: {
-    height: '300px',
-    overflow: 'auto'
-  },
-  iconFontSize: {
-    fontSize: '24px',
-    backgroundColor: theme.color.dark.t.lighten7,
-    padding: '8px',
-    borderRadius: '50%'
-  }
-}
+export const QuestionsTypeMenu = styled(Menu)`
+  height: 300px;
+  overflow: auto;
+  padding: 8px 0;
+`
+export const QuestionMenuItem = styled(Menu.Item)`
+  line-height: ${theme.typography.lineHeight.caption1} !important;
+  padding: 0 !important;
+`
+export const Description = styled(Text)`
+  font-size: ${theme.typography.fontSize.caption1};
+`
