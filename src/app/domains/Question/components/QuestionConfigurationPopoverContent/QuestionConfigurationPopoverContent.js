@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Row, Col } from '@qonsoll/react-design'
 import { Typography } from 'antd'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { KeyBox } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'

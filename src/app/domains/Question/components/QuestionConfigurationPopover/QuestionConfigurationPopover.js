@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Popover, Button } from 'antd'
 import { SettingOutlined } from '@ant-design/icons'
 import { QuestionConfigurationPopoverContent } from 'domains/Question/components'

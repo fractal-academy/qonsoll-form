@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { cloneElement } from 'react'
+import React, { cloneElement } from 'react'
 import { Typography, Button } from 'antd'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'

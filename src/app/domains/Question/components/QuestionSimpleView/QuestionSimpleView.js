@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { cloneElement } from 'react'
+import React, { cloneElement } from 'react'
 import { Popconfirm, message } from 'antd'
 import { LAYOUT_TYPES } from 'app/constants'
 import { NumberedCard, IconRoundContainer } from 'components'

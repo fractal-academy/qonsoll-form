@@ -1,3 +1,4 @@
+import React from 'react'
 import { Rate } from 'antd'
 import styled from 'styled-components'
 import { Col, Container, Row } from '@qonsoll/react-design'
@@ -9,9 +10,6 @@ function CustomRating(props) {
     &.ant-rate {
       font-size: 40px;
       color: ${theme.color.primary.default};
-      //&:active {
-      //  color: blue;
-      //}
     }
   `
 

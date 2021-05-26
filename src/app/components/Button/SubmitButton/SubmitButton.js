@@ -1,5 +1,6 @@
 import '../Button.styles.css'
 import { Button } from 'antd'
+import React from 'react'
 import { Typography } from 'antd'
 import PropTypes from 'prop-types'
 import { Row, Col } from '@qonsoll/react-design'
