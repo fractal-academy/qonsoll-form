@@ -161,7 +161,7 @@ function FormsAll(props) {
 }
 
 FormsAll.propTypes = {
-  configurations: PropTypes.object.isRequired
+  firebase: PropTypes.object
 }
 
 export default FormsAll
