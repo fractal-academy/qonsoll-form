@@ -1,7 +1,6 @@
-import React from 'react'
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
-import { useState, useEffect, useRef } from 'react'
+import React,{ useState, useEffect, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import {
   Breadcrumb,
@@ -13,15 +12,15 @@ import {
   Input
 } from 'antd'
 import { useHistory } from 'react-router'
-import { globalStyles } from 'app/styles'
+import { globalStyles } from '../../../../../styles'
 import { styles } from './FormsAll.styles'
-import { Spinner, StaticList } from '~/components'
-import COLLECTIONS from 'app/constants/collection'
+import { Spinner, StaticList } from '../../../../components'
+import COLLECTIONS from '../../../../constants/collection'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
-import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
-import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
-import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
+import { getCollectionRef, getTimestamp, setData } from '../../../../services/Firestore'
+import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 
 const { Title, Text } = Typography
 

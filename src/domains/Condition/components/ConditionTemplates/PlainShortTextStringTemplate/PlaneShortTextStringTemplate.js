@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { Button, Input, Select } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { QuestionSelect } from 'domains/Question/components'
+import { QuestionSelect } from '../../../../../domains/Question/components'
 import { styles } from './PlainShortTextStringTemplate.style'
-import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
-import theme from 'app/styles/theme'
+import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
+import theme from '../../../../../../styles/theme'
 
 const { Option } = Select
 
