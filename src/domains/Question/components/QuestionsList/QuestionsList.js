@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import { COLLECTIONS } from '../../../../constants'
 import { DragableList } from '../../../../components'
-import { setData } from '../../../../services/Firestore'
 import { QuestionSimpleView } from '../../../../domains/Question/components'
+import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
 
 function QuestionsList(props) {
   const { action, data, setNewOrder, onItemClick } = props
 
+  // [CUSTOM_HOOKS]
+  const {setData} = useTypeformConfiguration(firebase)
   // [CLEAN FUNCTIONS]
   const onUpdate = (data) => {
     data.forEach((item) =>
