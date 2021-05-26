@@ -2,7 +2,7 @@ import React from 'react'
 import { Rate } from 'antd'
 import styled from 'styled-components'
 import { Col, Container, Row } from '@qonsoll/react-design'
-import theme from 'app/styles/theme'
+import theme from '../../../styles/theme'
 
 function CustomRating(props) {
   const { allowClear, character, count, tooltips } = props

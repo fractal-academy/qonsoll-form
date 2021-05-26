@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { QuestionSelect } from 'domains/Question/components'
-import theme from 'app/styles/theme'
+import { QuestionSelect } from '../../../../../domains/Question/components'
+import theme from '../../../../../../styles/theme'
 
 function FileUploadTemplate(props) {
   const { answers, isUploaded, questionList, addRedirectQuestion } = props

@@ -1,30 +1,33 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
-import { PageLayout, EditorSidebar, FormContentArea, Spinner } from '~/components'
+import React,{ useState, useEffect } from 'react'
+import { PageLayout, EditorSidebar, FormContentArea, Spinner } from '../../../../components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
 import {
   QuestionForm,
   QuestionLayoutSwitcher
 } from 'domains/Question/components'
-import { getCollectionRef, setData } from 'app/services/Firestore'
-import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
+import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from '../../../../constants'
 import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
-} from 'app/context/CurrentQuestion'
+} from '../../../../context/CurrentQuestion'
 import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
-import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
+import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
+import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
 
 function FormEdit(props) {
-  const { configurations } = props
+  const { firebase } = props
 
+  // [CUSTOM_HOOKS]
+  const currentQuestion = useCurrentQuestionContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+  const {getCollectionRef, setData} = useTypeformConfiguration(firebase)
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
@@ -33,10 +36,6 @@ function FormEdit(props) {
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
-
-  // [CUSTOM_HOOKS]
-  const currentQuestion = useCurrentQuestionContext()
-  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
@@ -90,7 +89,7 @@ function FormEdit(props) {
   }, [currentQuestion])
 
   return (
-    <TypeformConfigurationContext.Provider value={configurations}>
+    <TypeformConfigurationProvider firebase={firebase}>
       {formLoading || questionsListLoading ? (
         <Spinner />
       ) : (
@@ -117,12 +116,12 @@ function FormEdit(props) {
           <EditorSidebar questions={questions} endings={endings} />
         </Box>
       )}
-    </TypeformConfigurationContext.Provider>
+    </TypeformConfigurationProvider>
   )
 }
 
 FormEdit.propTypes = {
-  configurations: PropTypes.object
+  firebase: PropTypes.object
 }
 
 export default FormEdit

@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from './FormShow.style'
-import { globalStyles } from 'app/styles'
+import { globalStyles } from '../../../../../styles'
 // import { useKeyPress } from '@umijs/hooks'
-import { COLLECTIONS } from 'app/constants'
+import { COLLECTIONS } from '../../../../constants'
 import { Button, Divider, Typography } from 'antd'
 import { useHistory, useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { getCollectionRef } from 'app/services/Firestore'
-import { FormAdvancedView } from 'domains/Form/components'
+import { FormAdvancedView } from '../../../../domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { QuestionAdvancedView } from 'domains/Question/components'
+import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
-import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
+import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
+import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
 
 const { Title } = Typography
 
 function FormShow(props) {
-  const { configurations } = props
+  const { firebase } = props
 
+  // [CUSTOM_HOOKS]
+  const {getCollectionRef} = useTypeformConfiguration(firebase)
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const { id } = useParams()
@@ -56,7 +58,7 @@ function FormShow(props) {
   }
 
   return (
-    <TypeformConfigurationContext.Provider value={configurations}>
+    <TypeformConfigurationProvider firebase={firebase}>
       <Box {...styles.mainWrapper}>
         <Row {...styles.headerRow} noGutters>
           <Col cw="auto" v="center" p={0}>
@@ -107,11 +109,11 @@ function FormShow(props) {
           </FormAdvancedView>
         </Box>
       </Box>
-    </TypeformConfigurationContext.Provider>
+    </TypeformConfigurationProvider>
   )
 }
 FormShow.propTypes = {
-  configurations: PropTypes.object
+  firebase: PropTypes.object
 }
 
 export default FormShow

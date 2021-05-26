@@ -1,7 +1,6 @@
-import React from 'react'
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
-import { useState, useEffect, useRef } from 'react'
+import React,{ useState, useEffect, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import {
   Breadcrumb,
@@ -13,15 +12,15 @@ import {
   Input
 } from 'antd'
 import { useHistory } from 'react-router'
-import { globalStyles } from 'app/styles'
+import { globalStyles } from '../../../../../styles'
 import { styles } from './FormsAll.styles'
-import { Spinner, StaticList } from '~/components'
-import COLLECTIONS from 'app/constants/collection'
+import { Spinner, StaticList } from '../../../../components'
+import COLLECTIONS from '../../../../constants/collection'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
-import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
-import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
-import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
+import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
+import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
+import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
 
 const { Title, Text } = Typography
 
@@ -31,7 +30,10 @@ const mockRoutes = [
   { path: '/videos', page: 'Videos' }
 ]
 function FormsAll(props) {
-  const { configurations } = props
+  const { firebase } = props
+
+  // [CUSTOM_HOOKS]
+  const {getCollectionRef, getTimestamp, setData} = useTypeformConfiguration(firebase)
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
@@ -87,7 +89,7 @@ function FormsAll(props) {
   }
 
   return (
-    <TypeformConfigurationContext.Provider value={configurations}>
+    <TypeformConfigurationProvider firebase={firebase}>
       <Box {...styles.mainWrapper}>
         {/* Page Header */}
         <Row noGutters display="flex">
@@ -157,12 +159,12 @@ function FormsAll(props) {
           />
         </Box>
       </Box>
-    </TypeformConfigurationContext.Provider>
+    </TypeformConfigurationProvider>
   )
 }
 
 FormsAll.propTypes = {
-  configurations: PropTypes.object.isRequired
+  firebase: PropTypes.object
 }
 
 export default FormsAll

@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
-import { ROUTES_PATHS } from 'app/constants'
+import { ROUTES_PATHS } from '../../../constants'
 import { useHistory } from 'react-router'
 import { styles } from './FormContentArea.styles'
 

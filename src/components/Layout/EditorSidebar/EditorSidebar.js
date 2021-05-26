@@ -3,16 +3,15 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, message, Button, Popover } from 'antd'
-import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
-import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
-import { ModalWithFormConditionsForm } from 'domains/Condition/components'
-import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
-import { getCollectionRef, setData, deleteData } from 'app/services/Firestore'
-import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
+import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
+import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
+import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
+import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
+import { QuestionTypeSelect, QuestionsList } from '../../../domains/Question/components'
 import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
-} from 'app/context/CurrentQuestion'
+} from '../../../context/CurrentQuestion'
 import {
   CustomDivider,
   SidebarBoxWrapper,
@@ -25,12 +24,13 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
+import useFunctions from "../../../hooks/useFunctions";
 
 const { Title } = Typography
 
 function EditorSidebar(props) {
   const { questions, endings } = props
-
+  const {getCollectionRef, setData,deleteData} = useFunctions()
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
