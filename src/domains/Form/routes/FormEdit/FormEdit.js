@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React,{ useState, useEffect } from 'react'
 import { PageLayout, EditorSidebar, FormContentArea, Spinner } from '../../../../components'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { Box } from '@qonsoll/react-design'
 import {
   QuestionForm,
