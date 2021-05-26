@@ -4,11 +4,11 @@ import { Text } from 'antd-styled'
 import { IconLabel } from '../../../components'
 import { Col, Row } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
-import { storage } from '../../../services/Firebase'
-import { getCollectionRef, setData } from '../../../services/Firestore'
+import  storage  from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
-
+import useFunctions from "../../../hooks/useFunctions";
 const { Dragger } = Upload
+
 
 const config = {
   name: 'file',
@@ -18,6 +18,7 @@ const config = {
 const UploadArea = (props) => {
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
+  const {getCollectionRef, setData} = useFunctions()
   // [COMPUTED PROPERTIES]
 
   const fileId = getCollectionRef(COLLECTIONS.RESPONSES).doc().id

@@ -7,9 +7,9 @@ import COLLECTIONS from '../../../constants/collection'
 import React, { useState, cloneElement } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
-import { deleteData, updateData } from '../../../services/Firestore'
 import { Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 import FormSimpleFormWithModal from '../../../domains/Form/components/FormSimpleFormWithModal'
+import useFunctions from "../../../hooks/useFunctions";
 
 const { Text } = Typography
 
@@ -30,6 +30,7 @@ const StyledIcon = styled(FileOutlined)`
 
 function ListItem(props) {
   const { data, size } = props
+  const { updateData,deleteData} = useFunctions()
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()

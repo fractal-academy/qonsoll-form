@@ -7,7 +7,6 @@ import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
 import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
-import { getCollectionRef, setData, deleteData } from '../../../services/Firestore'
 import { QuestionTypeSelect, QuestionsList } from '../../../domains/Question/components'
 import {
   useCurrentQuestionContextDispatch,
@@ -25,12 +24,13 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
+import useFunctions from "../../../hooks/useFunctions";
 
 const { Title } = Typography
 
 function EditorSidebar(props) {
   const { questions, endings } = props
-
+  const {getCollectionRef, setData,deleteData} = useFunctions()
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
