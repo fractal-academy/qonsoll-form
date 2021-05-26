@@ -86,6 +86,7 @@
   },
   "homepage": "https://github.com/fractal-academy/feedback-typeform-app.git#readme",
   "dependencies": {
-    "@rollup/plugin-json": "^4.1.0"
+    "@rollup/plugin-json": "^4.1.0",
+    "prop-types": "^15.7.2"
   }
 }

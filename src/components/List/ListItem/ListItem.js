@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { StyledItem } from '~/components'
-import { ROUTES_PATHS } from 'app/constants'
+import { StyledItem } from '../../../components'
+import { ROUTES_PATHS } from '../../../constants'
 import { useHistory } from 'react-router-dom'
-import COLLECTIONS from 'app/constants/collection'
+import COLLECTIONS from '../../../constants/collection'
 import React, { useState, cloneElement } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
-import { deleteData, updateData } from 'app/services/Firestore'
+import { deleteData, updateData } from '../../../services/Firestore'
 import { Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
-import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
+import FormSimpleFormWithModal from '../../../domains/Form/components/FormSimpleFormWithModal'
 
 const { Text } = Typography
 

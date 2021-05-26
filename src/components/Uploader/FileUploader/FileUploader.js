@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Upload, message } from 'antd'
 import { Text } from 'antd-styled'
-import { IconLabel } from '~/components'
+import { IconLabel } from '../../../components'
 import { Col, Row } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
-import { storage } from 'app/services/Firebase'
-import { getCollectionRef, setData } from 'app/services/Firestore'
-import COLLECTIONS from 'app/constants/collection'
+import { storage } from '../../../services/Firebase'
+import { getCollectionRef, setData } from '../../../services/Firestore'
+import COLLECTIONS from '../../../constants/collection'
 
 const { Dragger } = Upload
 

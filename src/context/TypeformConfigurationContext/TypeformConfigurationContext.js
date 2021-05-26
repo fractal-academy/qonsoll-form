@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react'
+import React, from 'react'
 
 export const TypeformConfigurationContext = React.createContext()
 

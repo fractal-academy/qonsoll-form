@@ -1,6 +1,6 @@
 import { Box } from '@qonsoll/react-design'
 import { Input } from 'antd'
-import theme from 'app/styles/theme'
+import theme from '../../../styles/theme'
 import styled from 'styled-components'
 
 const { TextArea } = Input

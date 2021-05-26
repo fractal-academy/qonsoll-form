@@ -6,16 +6,16 @@ import {
   DeleteButton,
   ChoiceInput
 } from './ChoiceEditable.styles'
-import theme from 'app/styles/theme'
-import { DEFAULT_IMAGE } from 'app/constants'
+import theme from '../../../styles/theme'
+import { DEFAULT_IMAGE } from '../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { CloseOutlined, EditOutlined } from '@ant-design/icons'
-import { MediaLibraryModal } from 'domains/MediaLibrary/components'
+import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
-} from 'app/context/CurrentQuestion'
+} from '../../context/CurrentQuestion'
 
 let startLetter = 65
 

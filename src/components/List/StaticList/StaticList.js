@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Box } from '@qonsoll/react-design'
-import { ListItem, NewListItem } from '~/components'
+import { ListItem, NewListItem } from '../../../components'
 
 function StaticList(props) {
   const { data, size, onClick } = props

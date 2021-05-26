@@ -1,7 +1,7 @@
 import { Input } from 'antd'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import theme from 'app/styles/theme'
+import theme from '../../../styles/theme'
 
 const { TextArea } = Input
 

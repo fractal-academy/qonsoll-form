@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
 import { Box } from '@qonsoll/react-design'
+<<<<<<< Updated upstream
 import { NumberedCard } from '../../../../components'
 import Title from 'antd/lib/typography/Title'
 import { QUESTION_TYPES } from '../../../../constants'
@@ -14,6 +15,19 @@ import {
   PlaneLongTextStringTemplate,
   PlaneShortTextStringTemplate
 } from '../../../../domains/Condition/components/ConditionTemplates'
+=======
+import { NumberedCard } from '../../components'
+import Title from 'antd/lib/typography/Title'
+import { QUESTION_TYPES } from '../../../../constants'
+import { RatingTemplate } from '../../../../domains/Condition/components/ConditionTemplates'
+import { FileUploadTemplate } from '../../../../domains/Condition/components/ConditionTemplates'
+import { YesNoChoiceTemplate } from '../../../../domains/Condition/components/ConditionTemplates'
+import { OpinionScaleTemplate } from '../../../../domains/Condition/components/ConditionTemplates'
+import { PlaneTextDateTemplate } from '../../../../domains/Condition/components/ConditionTemplates'
+import { PictureChoiceTemplate } from '../../../../domains/Condition/components/ConditionTemplates'
+import { PlaneLongTextStringTemplate } from '../../../../domains/Condition/components/ConditionTemplates'
+import { PlaneShortTextStringTemplate } from '../../../../domains/Condition/components/ConditionTemplates'
+>>>>>>> Stashed changes
 
 const questionTypesMap = {
   [QUESTION_TYPES.YES_NO]: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Typography } from 'antd'
 import PropTypes from 'prop-types'
-import theme from 'app/styles/theme'
+import theme from '../../../../styles/theme'
 import styled from 'styled-components'
 import { useHover } from '@umijs/hooks'
 import { CheckOutlined } from '@ant-design/icons'
