@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
 import Text from 'antd/lib/typography/Text'
 import { styles } from './RatingTemplate.styles'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from 'domains/Question/components'
-import theme from 'app/styles/theme'
 
 let startLetter = 65
 

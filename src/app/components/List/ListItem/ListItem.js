@@ -4,8 +4,8 @@ import { StyledItem } from 'components'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
 import COLLECTIONS from 'app/constants/collection'
+import React, { useState, cloneElement } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import React, { useState, cloneElement, useRef } from 'react'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { deleteData, updateData } from 'app/services/Firestore'
 import { Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
@@ -32,7 +32,6 @@ function ListItem(props) {
   const { data, size } = props
 
   // [ADDITIONAL HOOKS]
-  const DropdownRef = useRef()
   const history = useHistory()
 
   // [COMPONENT STATE HOOKS]
@@ -111,11 +110,7 @@ function ListItem(props) {
           </Col>
 
           <Col cw="auto" v="center">
-            <Dropdown
-              ref={DropdownRef}
-              overlay={menu}
-              trigger="click"
-              placement="bottomRight">
+            <Dropdown overlay={menu} trigger="click" placement="bottomRight">
               {cloneElement(<MoreOutlined />, {
                 className: 'dropdownIcon'
               })}

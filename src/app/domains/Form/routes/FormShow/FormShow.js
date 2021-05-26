@@ -111,7 +111,7 @@ function FormShow(props) {
   )
 }
 FormShow.propTypes = {
-  configurations: PropTypes.object.isRequired
+  configurations: PropTypes.object
 }
 
 export default FormShow

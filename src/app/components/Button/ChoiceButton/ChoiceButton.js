@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { KeyBox } from 'app/components'
-import React, { useMemo, useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
+import React, { useMemo, useState } from 'react'
 
 let startLetter = 65
 
@@ -44,7 +44,6 @@ function ChoiceButton(props) {
       setButtonKey(letter)
       onClick && onClick()
     }
-    console.log(currentSlide, order)
   }
 
   return (
@@ -64,9 +63,11 @@ function ChoiceButton(props) {
 }
 
 ChoiceButton.propTypes = {
-  choices: PropTypes.array,
+  order: PropTypes.number,
   onClick: PropTypes.func,
-  hasImages: PropTypes.bool
+  choices: PropTypes.array,
+  hasImages: PropTypes.bool,
+  currentSlide: PropTypes.number
 }
 
 export default ChoiceButton

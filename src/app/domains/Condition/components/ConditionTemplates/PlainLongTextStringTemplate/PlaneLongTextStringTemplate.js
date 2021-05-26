@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
 import Text from 'antd/lib/typography/Text'
 import { Button, Input, Select } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { styles } from './PlainLongTextStringTemplate.style'
 import { QuestionSelect } from 'domains/Question/components'
 import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
-import theme from 'app/styles/theme'
 
 const { Option } = Select
 

@@ -1,7 +1,7 @@
-import { NumberedCard } from 'app/components'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
 import { Box } from '@qonsoll/react-design'
+import { NumberedCard } from 'app/components'
 import Title from 'antd/lib/typography/Title'
 import { QUESTION_TYPES } from 'app/constants'
 import { RatingTemplate } from 'domains/Condition/components/ConditionTemplates'
@@ -12,7 +12,6 @@ import { PlaneTextDateTemplate } from 'domains/Condition/components/ConditionTem
 import { PictureChoiceTemplate } from 'domains/Condition/components/ConditionTemplates'
 import { PlaneLongTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
 import { PlaneShortTextStringTemplate } from 'domains/Condition/components/ConditionTemplates'
-import theme from 'app/styles/theme'
 
 const questionTypesMap = {
   [QUESTION_TYPES.YES_NO]: {

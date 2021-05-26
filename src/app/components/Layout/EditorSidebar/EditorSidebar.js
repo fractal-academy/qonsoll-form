@@ -143,11 +143,6 @@ function EditorSidebar(props) {
                 <CustomDivider type="horizontal" />
               </Col>
             </Row>
-            <Row h="center" mt={1}>
-              <Col cw="auto">
-                <dragbleCeiling />
-              </Col>
-            </Row>
             <Row p={3}>
               <Col v="center">
                 <Title level={5}>Endings</Title>
@@ -162,7 +157,6 @@ function EditorSidebar(props) {
               </Col>
             </Row>
             <Box {...styles.endingsList}>
-              {/*<QuestionsList />*/}
               {!!endings?.length && (
                 <QuestionsList
                   firstElement={questions?.length}

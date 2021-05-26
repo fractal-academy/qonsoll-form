@@ -70,7 +70,7 @@ function MediaLibrarySimpleView(props) {
 }
 
 MediaLibrarySimpleView.propTypes = {
-  setIsImageEditVisible: PropTypes.bool,
+  setIsImageEditVisible: PropTypes.func,
   bgImage: PropTypes.string
 }
 

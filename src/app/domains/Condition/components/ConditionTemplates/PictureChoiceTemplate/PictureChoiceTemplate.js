@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
 import Text from 'antd/lib/typography/Text'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { styles } from './PictureChoiceTemplate.styles'
 import { QuestionSelect } from 'domains/Question/components'
-import theme from 'app/styles/theme'
 
 let startLetter = 65
+
 function PictureChoiceTemplate(props) {
   const { answers, questionList, addRedirectQuestion } = props
 
