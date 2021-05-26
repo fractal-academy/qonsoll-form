@@ -18,9 +18,9 @@ import { Spinner, StaticList } from '../../../../components'
 import COLLECTIONS from '../../../../constants/collection'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
-import { getCollectionRef, getTimestamp, setData } from '../../../../services/Firestore'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
 import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
+import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
 
 const { Title, Text } = Typography
 
@@ -31,6 +31,9 @@ const mockRoutes = [
 ]
 function FormsAll(props) {
   const { firebase } = props
+
+  // [CUSTOM_HOOKS]
+  const {getCollectionRef, getTimestamp, setData} = useTypeformConfiguration(firebase)
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()

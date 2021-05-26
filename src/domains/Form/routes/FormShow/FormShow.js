@@ -7,18 +7,20 @@ import { COLLECTIONS } from '../../../../constants'
 import { Button, Divider, Typography } from 'antd'
 import { useHistory, useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { getCollectionRef } from '../../../../services/Firestore'
 import { FormAdvancedView } from '../../../../domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
+import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
 
 const { Title } = Typography
 
 function FormShow(props) {
   const { firebase } = props
 
+  // [CUSTOM_HOOKS]
+  const {getCollectionRef} = useTypeformConfiguration(firebase)
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const { id } = useParams()

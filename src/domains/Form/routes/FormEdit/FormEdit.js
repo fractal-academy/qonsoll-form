@@ -7,7 +7,6 @@ import {
   QuestionForm,
   QuestionLayoutSwitcher
 } from 'domains/Question/components'
-import { getCollectionRef, setData } from '../../../../services/Firestore'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from '../../../../constants'
 import {
   useCurrentQuestionContext,
@@ -20,10 +19,15 @@ import {
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
 import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
+import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
 
 function FormEdit(props) {
   const { firebase } = props
 
+  // [CUSTOM_HOOKS]
+  const currentQuestion = useCurrentQuestionContext()
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+  const {getCollectionRef, setData} = useTypeformConfiguration(firebase)
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
@@ -32,10 +36,6 @@ function FormEdit(props) {
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
-
-  // [CUSTOM_HOOKS]
-  const currentQuestion = useCurrentQuestionContext()
-  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
