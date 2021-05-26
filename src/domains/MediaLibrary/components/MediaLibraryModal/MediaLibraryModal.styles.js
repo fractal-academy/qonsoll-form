@@ -1,6 +1,6 @@
-import theme from 'app/styles/theme'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
+import theme from '../../../../../styles/theme'
 import { Input, Typography, Button, Divider } from 'antd'
 
 const { Text } = Typography

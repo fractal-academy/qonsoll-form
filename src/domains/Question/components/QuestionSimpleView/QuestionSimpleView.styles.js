@@ -1,6 +1,6 @@
-import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
-import theme from 'app/styles/theme'
+import { Box } from '@qonsoll/react-design'
+import theme from '../../../../../styles/theme'
 
 export const DescriptionContainer = styled(Box)`
   overflow: hidden;

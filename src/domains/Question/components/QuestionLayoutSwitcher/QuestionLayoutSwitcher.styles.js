@@ -1,6 +1,6 @@
 import { Menu } from 'antd'
 import styled from 'styled-components'
-import theme from 'app/styles/theme'
+import theme from '../../../../../styles/theme'
 
 export const StyledMenu = styled(Menu)`
   background-color: ${theme.color.dark.t.lighten6};

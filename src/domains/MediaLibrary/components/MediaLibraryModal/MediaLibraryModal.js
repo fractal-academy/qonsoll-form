@@ -1,13 +1,13 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
-import theme from 'app/styles/theme'
-import { storage } from 'app/services/Firebase'
-import COLLECTIONS from 'app/constants/collection'
+import theme from '../../../../../styles/theme'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { storage } from '../../../../services/Firebase'
+import COLLECTIONS from '../../../../constants/collection'
 import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Upload, message } from 'antd'
-import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { getCollectionRef, setData } from '../../../../services/Firestore'
 import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import {
   CustomBox,
@@ -21,7 +21,7 @@ import {
 import {
   MediaLibraryFilter,
   MediaLibraryItemSimpleView
-} from 'domains/MediaLibrary/components'
+} from '../../../../domains/MediaLibrary/components'
 
 const { Title } = Typography
 

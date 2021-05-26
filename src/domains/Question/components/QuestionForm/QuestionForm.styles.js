@@ -1,6 +1,6 @@
-import { Col } from '@qonsoll/react-design'
 import { Card } from 'antd'
 import styled from 'styled-components'
+import { Col } from '@qonsoll/react-design'
 
 export const styles = {
   mainRowStyle: {

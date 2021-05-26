@@ -1,16 +1,15 @@
 import { Tag } from 'antd'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import { DEFAULT_IMAGE } from 'app/constants'
+import { DEFAULT_IMAGE, QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
 import { styles, StyledCol, CustomCard } from './QuestionForm.styles'
-import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
+import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import {
   QuestionConfigurationPopover,
   QuestionHeader,
   QuestionMediaPopover
-} from 'domains/Question/components'
+} from '../../../../domains/Question/components'
 import {
   Rate,
   ShortText,
@@ -21,7 +20,7 @@ import {
   FileUploader,
   LongText,
   DateTimeInput
-} from '~/components'
+} from '../../../../components'
 
 function QuestionForm(props) {
   const { data, onQuestionTypeChange } = props

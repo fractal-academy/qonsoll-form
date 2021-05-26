@@ -1,7 +1,7 @@
 import { Menu } from 'antd'
-import Text from 'antd/lib/typography/Text'
-import theme from 'app/styles/theme'
 import styled from 'styled-components'
+import Text from 'antd/lib/typography/Text'
+import theme from '../../../../../styles/theme'
 
 export const QuestionsTypeMenu = styled(Menu)`
   height: 300px;

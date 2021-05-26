@@ -1,7 +1,8 @@
-import styled from 'styled-components'
-import theme from 'app/styles/theme'
 import { Typography } from 'antd'
+import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
+import theme from '../../../../../styles/theme'
+
 const { Text } = Typography
 
 export const CustomText = styled(Text)`

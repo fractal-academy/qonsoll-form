@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
-import { QUESTION_TYPES } from 'app/constants'
 import { Col, Row } from '@qonsoll/react-design'
+import { QUESTION_TYPES } from '../../../../constants'
+import { IconRoundContainer } from '../../../../components'
 import {
   QuestionsTypeMenu,
   QuestionMenuItem,
@@ -20,7 +21,6 @@ import {
   StarOutlined,
   UploadOutlined
 } from '@ant-design/icons'
-import { IconRoundContainer } from '~/components'
 
 const questionTypeMap = [
   {

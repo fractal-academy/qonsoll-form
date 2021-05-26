@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { Row, Col } from '@qonsoll/react-design'
 import { Typography } from 'antd'
+import React, { useState } from 'react'
+import theme from '../../../../../styles/theme'
+import { Row, Col } from '@qonsoll/react-design'
+import { globalStyles } from '../../../../../styles'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import {
   QuestionTypeSelect,
   QuestionConfigurationMenu
-} from 'domains/Question/components'
-import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
-import theme from 'app/styles/theme'
-import { globalStyles } from 'app/styles'
+} from '../../../../domains/Question/components'
 
 const { Title } = Typography
 

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { Typography, Button } from 'antd'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
 import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'
 import {
   Rate,
@@ -14,7 +14,7 @@ import {
   LongText,
   DateTimeInput,
   SubmitButton
-} from '~/components'
+} from '../../../../components'
 
 const { Title, Text } = Typography
 

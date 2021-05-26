@@ -1,15 +1,15 @@
 import React from 'react'
 import { Input } from 'antd'
 import PropTypes from 'prop-types'
-import RangeSlider from '~/components/RangeSlider'
 import { EditOutlined } from '@ant-design/icons'
 import { Col, Row } from '@qonsoll/react-design'
-import { MediaLibraryModal } from 'domains/MediaLibrary/components'
+import RangeSlider from '../../../../components/RangeSlider'
+import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
 import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
 import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
-} from 'app/context/CurrentQuestion'
+} from '../../../../context/CurrentQuestion'
 
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible, bgImage } = props

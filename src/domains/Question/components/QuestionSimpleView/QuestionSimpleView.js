@@ -1,11 +1,12 @@
 import { Popconfirm } from 'antd'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import { LAYOUT_TYPES } from 'app/constants'
 import { CloseOutlined } from '@ant-design/icons'
+import { LAYOUT_TYPES } from '../../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { NumberedCard, IconRoundContainer } from '~/components'
 import { DescriptionContainer } from './QuestionSimpleView.styles'
+import { NumberedCard, IconRoundContainer } from '../../../../components'
+
 function QuestionSimpleView(props) {
   const { title, action, number, layoutType, onClick, id } = props
 

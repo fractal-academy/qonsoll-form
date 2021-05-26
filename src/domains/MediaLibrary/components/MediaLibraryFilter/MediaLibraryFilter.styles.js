@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Typography, Button } from 'antd'
-import theme from 'app/styles/theme'
+import theme from '../../../../../styles/theme'
+
 const { Text } = Typography
 
 export const CustomText = styled(Text)`

@@ -8,8 +8,8 @@ import {
   MenuUnfoldOutlined
 } from '@ant-design/icons'
 import PropTypes from 'prop-types'
+import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
 import { StyledMenu, StyledItem } from './QuestionLayoutSwitcher.styles'
-import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 
 const menuMap = [
   { icon: <AlignLeftOutlined />, layoutType: LAYOUT_TYPE_KEYS[0] },
