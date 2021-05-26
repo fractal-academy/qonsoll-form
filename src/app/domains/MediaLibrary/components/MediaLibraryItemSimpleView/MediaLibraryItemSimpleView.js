@@ -14,8 +14,12 @@ import {
 const { Meta } = Card
 
 function MediaLibraryItemSimpleView(props) {
-  const { imageUrl, name, selectedBackgroundImg, setSelectedBackgroundImg } =
-    props
+  const {
+    imageUrl,
+    name,
+    selectedBackgroundImg,
+    setSelectedBackgroundImg
+  } = props
 
   return (
     <CustomCard
