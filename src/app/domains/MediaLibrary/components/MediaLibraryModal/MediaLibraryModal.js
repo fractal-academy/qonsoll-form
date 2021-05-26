@@ -1,10 +1,10 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
 import theme from 'app/styles/theme'
+import { storage } from 'app/services/Firebase'
 import COLLECTIONS from 'app/constants/collection'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import React, { useEffect, useRef, useState } from 'react'
-import firebase, { firestore } from 'app/services/Firebase'
 import { Modal, Button, Typography, Upload, message } from 'antd'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -43,7 +43,7 @@ function MediaLibraryModal(props) {
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
-  const mediaId = firestore.collection(COLLECTIONS.MEDIA).doc().id
+  const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
 
   // [CLEAN FUNCTIONS]
   const onMediaUploaded = (data) => {
@@ -73,14 +73,14 @@ function MediaLibraryModal(props) {
   }
   const modalStateChange = () => {
     setIsModalVisible(!isModalVisible)
-    onClick && onClick()
+    onClick?.()
   }
   const onChange = (input) => {
     searchData(input.target.value)
   }
   const customRequest = (data) => {
     const { onSuccess } = data
-    const ref = firebase.storage().ref('images').child(data.file.uid)
+    const ref = storage.ref('images').child(data.file.uid)
     const image = ref.put(data.file)
     image.on(
       'state_changed',
