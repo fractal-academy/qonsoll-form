@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from './FormShow.style'
 import { globalStyles } from 'app/styles'
-import { useKeyPress } from '@umijs/hooks'
+// import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS } from 'app/constants'
 import { Button, Divider, Typography } from 'antd'
 import { useHistory, useParams } from 'react-router'
@@ -25,9 +25,10 @@ function FormShow(props) {
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
-  useKeyPress('enter', (event) => {
-    onClick()
-  })
+  // return this after adding isRequired and condition rules
+  // useKeyPress('enter', (event) => {
+  //   onClick()
+  // })
 
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
@@ -38,9 +39,17 @@ function FormShow(props) {
     data &&
     data.sort((a, b) => (a.order > b.order ? 1 : b.order > a.order ? -1 : 0))
 
+  //temporary solution for ending logic; fix after adding logic jumps
+  sortedData &&
+    sortedData.forEach(
+      (item) =>
+        item.questionType === 'Ending' &&
+        sortedData.push(sortedData.splice(sortedData.indexOf(item), 1)[0])
+    )
+
   // [CLEAN FUNCTIONS]
   const onRestart = () => {
-    window.location.reload(false)
+    window.location.reload()
   }
   const onClick = () => {
     setIsAnswered(true)
@@ -102,7 +111,7 @@ function FormShow(props) {
   )
 }
 FormShow.propTypes = {
-  configurations: PropTypes.object.isRequired
+  configurations: PropTypes.object
 }
 
 export default FormShow

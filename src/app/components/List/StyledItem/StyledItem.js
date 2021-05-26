@@ -1,10 +1,12 @@
 import React from 'react'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
 import styled from 'styled-components'
 
 const Item = styled(Button)`
-  background: #eceff5;
+  cursor: ${(props) => props.isCard && 'default !important'};
+  background: ${theme.color.dark.t.lighten9};
   width: ${(props) => props.size[0]}px;
   height: ${(props) => props.size[1]}px;
   display: flex;
@@ -13,16 +15,16 @@ const Item = styled(Button)`
   justify-content: center;
   cursor: pointer;
   &:hover {
-    background-color: #ebeced;
-    border-color: #ebeced;
+    background-color: ${theme.color.dark.t.lighten8};
+    border-color: ${theme.color.dark.t.lighten8};
   }
 `
 
 function StyledItem(props) {
-  const { children, onClick, size } = props
+  const { children, onClick, size, isCard } = props
 
   return (
-    <Item size={size} onClick={onClick}>
+    <Item isCard={isCard} size={size} onClick={onClick}>
       {children}
     </Item>
   )

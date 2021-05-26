@@ -1,15 +1,15 @@
 import React from 'react'
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { EditOutlined } from '@ant-design/icons'
-import { CustomBox, CustomText, styles } from './MediaLibrarySimpleView.styles'
-import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import { Input } from 'antd'
+import PropTypes from 'prop-types'
 import RangeSlider from 'components/RangeSlider'
+import { EditOutlined } from '@ant-design/icons'
+import { Col, Row } from '@qonsoll/react-design'
+import { MediaLibraryModal } from 'domains/MediaLibrary/components'
+import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
 import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
 } from 'app/context/CurrentQuestion'
-import PropTypes from 'prop-types'
 
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible, bgImage } = props
@@ -70,7 +70,7 @@ function MediaLibrarySimpleView(props) {
 }
 
 MediaLibrarySimpleView.propTypes = {
-  setIsImageEditVisible: PropTypes.bool,
+  setIsImageEditVisible: PropTypes.func,
   bgImage: PropTypes.string
 }
 

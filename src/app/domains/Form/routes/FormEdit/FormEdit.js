@@ -24,6 +24,7 @@ import TypeformConfigurationContext from 'app/context/TypeformConfigurationConte
 
 function FormEdit(props) {
   const { configurations } = props
+
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(
@@ -32,6 +33,7 @@ function FormEdit(props) {
   const [questionsList, questionsListLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
+
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -40,7 +42,6 @@ function FormEdit(props) {
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
 
   // [COMPUTED PROPERTIES]
-
   // divide all tasks of current form into 2 groups
   let questions = [],
     endings = []
@@ -121,7 +122,7 @@ function FormEdit(props) {
 }
 
 FormEdit.propTypes = {
-  configurations: PropTypes.object.isRequired
+  configurations: PropTypes.object
 }
 
 export default FormEdit

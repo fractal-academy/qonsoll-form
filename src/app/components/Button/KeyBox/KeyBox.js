@@ -1,10 +1,44 @@
-import '../Button.styles.css'
 import React from 'react'
-import PropTypes from 'prop-types'
-import { useHover } from '@umijs/hooks'
 import { Button } from 'antd'
+import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
+import styled from 'styled-components'
+import { useHover } from '@umijs/hooks'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
+
+const StyledKeybox = styled(Col)`
+  padding: 2px 5px;
+  border-width: 1px;
+  text-align: center;
+  border-style: solid;
+  border-color: ${theme.color.primary.default};
+  color: ${(props) => props.isActive && theme.color.white.default};
+  margin-left: ${(props) => props.isHovering && '-20px'};
+  background-color: ${(props) =>
+    props.isActive ? theme.color.primary.default : theme.color.white.default};
+  width: ${(props) =>
+    props.isHovering ? '60px !important' : ' 28px !important'};
+`
+const ImageContainer = styled(Box)`
+  width: 150px;
+  height: 120px;
+  background-size: cover;
+  background-image: url(${(props) => props.image});
+`
+const StyledButton = styled(Button)`
+  width: 160px;
+  color: ${theme.color.primary.default};
+  background-color: ${theme.color.primary.t.lighten5};
+  height: ${(props) => (props.hasImages ? '170px' : '45px')};
+
+  &:hover {
+    background-color: ${theme.color.primary.t.lighten3};
+  }
+`
+const StyledIcon = styled(CheckOutlined)`
+  font-size: 18px;
+`
 
 function KeyBox(props) {
   const { onButtonClick, item, isActive, hasImages } = props
@@ -13,20 +47,9 @@ function KeyBox(props) {
   // [ADDITIONAL HOOKS]
   const [isHovering, hoverRef] = useHover()
 
-  // [COMPUTED PROPERTIES]
-  const classes = isActive
-    ? isHovering
-      ? 'selectedHovered'
-      : 'selected'
-    : isHovering
-    ? 'hovered'
-    : 'buttonBox'
-
   return (
-    <Box ref={hoverRef} display={hasImages && 'inline-block'} mb={2} mr={1}>
-      <Button
-        className={hasImages && 'imageButton'}
-        onClick={() => onButtonClick(letter)}>
+    <Box ref={hoverRef} display={hasImages && 'inline-block'} mb={2} mr={3}>
+      <StyledButton hasImages={hasImages} onClick={() => onButtonClick(letter)}>
         {hasImages && (
           <Row h="center" display="flex">
             <Col
@@ -35,25 +58,22 @@ function KeyBox(props) {
               display="flex"
               textAlign="center"
               style={{ justifyContent: 'center' }}>
-              <img
-                alt=""
-                className="imageContainer"
-                src={item?.choice?.image}></img>
+              <ImageContainer image={item?.choice?.image} />
             </Col>
           </Row>
         )}
         <Row display="flex" v="center" noGutters>
-          <Col className={classes} mr={2}>
+          <StyledKeybox isHovering={isHovering} isActive={isActive} mr={2}>
             {isHovering ? `Key ${letter}` : letter}
-          </Col>
+          </StyledKeybox>
           <Col>
             <Box className="text" display="flex" justifyContent="space-between">
               {item?.choice?.name}
-              {isActive && <CheckOutlined className="icon" />}
+              {isActive && <StyledIcon />}
             </Box>
           </Col>
         </Row>
-      </Button>
+      </StyledButton>
     </Box>
   )
 }
@@ -61,8 +81,7 @@ function KeyBox(props) {
 KeyBox.propTypes = {
   item: PropTypes.object,
   hasImages: PropTypes.bool,
-  onButtonClick: PropTypes.func,
-  startLetter: PropTypes.string
+  onButtonClick: PropTypes.func
 }
 
 export default KeyBox

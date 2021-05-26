@@ -1,6 +1,13 @@
+import Fuse from 'fuse.js'
+import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
+import { storage } from 'app/services/Firebase'
+import COLLECTIONS from 'app/constants/collection'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Upload, message } from 'antd'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { getCollectionRef, setData } from 'app/services/Firestore'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import {
   CustomBox,
@@ -11,19 +18,12 @@ import {
   CustomText,
   styles
 } from './MediaLibraryModal.styles'
-import PropTypes from 'prop-types'
 import {
   MediaLibraryFilter,
   MediaLibraryItemSimpleView
 } from 'domains/MediaLibrary/components'
-import { storage } from 'app/services/Firebase'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { getCollectionRef, setData } from 'app/services/Firestore'
-import COLLECTIONS from 'app/constants/collection'
-import Fuse from 'fuse.js'
-import theme from 'app/styles/theme'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 function MediaLibraryModal(props) {
   const { btnProps, onClick, onContinue } = props
@@ -214,7 +214,7 @@ function MediaLibraryModal(props) {
               {/* RENDER MEDIA */}
 
               {imagesList.map((item) => (
-                <Box mr={3} mt={4}>
+                <Box key={item} mr={3} mt={4}>
                   <MediaLibraryItemSimpleView
                     {...item}
                     selectedBackgroundImg={selectedBackgroundImg}

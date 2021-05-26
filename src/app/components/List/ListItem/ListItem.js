@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { StyledItem } from 'components'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
-import React, { useState, cloneElement, useRef } from 'react'
 import COLLECTIONS from 'app/constants/collection'
+import React, { useState, cloneElement } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { deleteData, updateData } from 'app/services/Firestore'
@@ -19,6 +19,7 @@ const StyledImage = styled(Box)`
   height: ${(props) => (props.size[1] / 3) * 2}px;
   border-radius: 8px;
   align-items: center;
+  cursor: pointer;
   justify-content: center;
   background-color: white;
 `
@@ -31,13 +32,11 @@ function ListItem(props) {
   const { data, size } = props
 
   // [ADDITIONAL HOOKS]
-  const DropdownRef = useRef()
   const history = useHistory()
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false)
   const [isPopconfirmVisible, setIsPopconfirmVisible] = useState(false)
 
   // [COMPUTED PROPERTIES]
@@ -45,15 +44,10 @@ function ListItem(props) {
   const formRoute = ROUTES_PATHS.FORM_EDIT.replace(':id', data?.id)
 
   // [CLEAN FUNCTIONS]
-  const handleDropdownClick = (e) => {
-    e.stopPropagation()
-    setIsDropdownVisible(true)
-  }
   const onFormItemClick = (e) => {
     formRoute && history.push(formRoute)
   }
   const showPopconfirm = () => {
-    setIsDropdownVisible(true)
     setIsPopconfirmVisible(!isPopconfirmVisible)
   }
   const showModal = () => {
@@ -64,6 +58,7 @@ function ListItem(props) {
     await deleteData(COLLECTIONS.FORMS, data?.id).catch((e) =>
       message.error(e.message)
     )
+
     setIsPopconfirmVisible(false)
     setConfirmLoading(false)
   }
@@ -81,7 +76,7 @@ function ListItem(props) {
         <Text>Rename</Text>
         <FormSimpleFormWithModal
           isEdit
-          formData={props}
+          formData={data}
           isModalVisible={isModalVisible}
           setIsModalVisible={setIsModalVisible}
           onModalSubmit={onModalSubmit}
@@ -101,9 +96,9 @@ function ListItem(props) {
   )
 
   return (
-    <StyledItem size={size} onClick={onFormItemClick}>
+    <StyledItem size={size} isCard>
       <Box display="block">
-        <StyledImage size={size}>
+        <StyledImage onClick={onFormItemClick} size={size}>
           <StyledIcon />
         </StyledImage>
         <Row noGutters h="between" mt={2}>
@@ -115,12 +110,7 @@ function ListItem(props) {
           </Col>
 
           <Col cw="auto" v="center">
-            <Dropdown
-              ref={DropdownRef}
-              overlay={menu}
-              trigger="click"
-              placement="bottomRight"
-              onClick={handleDropdownClick}>
+            <Dropdown overlay={menu} trigger="click" placement="bottomRight">
               {cloneElement(<MoreOutlined />, {
                 className: 'dropdownIcon'
               })}
