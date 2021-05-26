@@ -12,12 +12,12 @@ import { FormAdvancedView } from '../../../../domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
+import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
 
 const { Title } = Typography
 
 function FormShow(props) {
-  const { configurations } = props
+  const { firebase } = props
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -56,7 +56,7 @@ function FormShow(props) {
   }
 
   return (
-    <TypeformConfigurationContext.Provider value={configurations}>
+    <TypeformConfigurationProvider firebase={firebase}>
       <Box {...styles.mainWrapper}>
         <Row {...styles.headerRow} noGutters>
           <Col cw="auto" v="center" p={0}>
@@ -107,7 +107,7 @@ function FormShow(props) {
           </FormAdvancedView>
         </Box>
       </Box>
-    </TypeformConfigurationContext.Provider>
+    </TypeformConfigurationProvider>
   )
 }
 FormShow.propTypes = {
