@@ -23,7 +23,10 @@ export const styles = {
 
 export const StyledCard = styled(Card)`
   width: 100%;
+  display: grid;
   background-color: transparent;
+  text-align: ${(props) => props.specialLayoutRule && 'center'};
+  justify-content: ${(props) => props.specialLayoutRule && 'center'};
 `
 export const StyledCol = styled(Col)`
   display: flex;

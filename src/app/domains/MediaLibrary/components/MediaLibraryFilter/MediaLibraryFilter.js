@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { ReloadOutlined } from '@ant-design/icons'
-import { CustomApplyButton, CustomText } from './MediaLibraryFilter.styles'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Typography, Divider, Checkbox } from 'antd'
+import { CustomApplyButton, CustomText } from './MediaLibraryFilter.styles'
 
-const { Text, Title } = Typography
+const { Title } = Typography
 
 const phaseOptions = [
   { label: 'Welcome stage', value: 'Welcome stage' },
@@ -74,7 +74,7 @@ function MediaLibraryFilter(props) {
         <Col v="center">
           <Checkbox.Group onChange={onPhaseCheckboxChange}>
             {phaseOptions.map((option, index) => (
-              <Row noGutters key={index} py={1}>
+              <Row key={index} py={1} noGutters>
                 <Col>
                   <Checkbox value={option.value}>{option.label}</Checkbox>
                 </Col>

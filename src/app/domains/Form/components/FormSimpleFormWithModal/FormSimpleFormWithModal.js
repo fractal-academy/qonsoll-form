@@ -24,12 +24,12 @@ const FormSimpleFormWithModal = (props) => {
   const handleCancel = async () => {
     await setLoading(false)
     await setIsModalVisible(false)
-    await form.resetFields()
+    form.resetFields()
   }
   const onFormEdit = async (data) => {
     setLoading(true)
     onModalSubmit(data)
-    form.resetFields()
+    !isEdit && form.resetFields()
     setLoading(false)
     setIsModalVisible(false)
   }

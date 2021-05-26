@@ -9,7 +9,7 @@ function StaticList(props) {
   return (
     <Box display="contents">
       {data?.map((item) => (
-        <Box mr={4} mb={4}>
+        <Box key={item.id} mr={4} mb={4}>
           <ListItem data={item} size={size} />
         </Box>
       ))}
@@ -21,7 +21,7 @@ function StaticList(props) {
 
 StaticList.propTypes = {
   size: PropTypes.array,
-  data: PropTypes.object,
+  data: PropTypes.array,
   onClick: PropTypes.func
 }
 

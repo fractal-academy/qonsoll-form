@@ -1,22 +1,13 @@
+import { Popconfirm } from 'antd'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import { Popconfirm, message } from 'antd'
 import { LAYOUT_TYPES } from 'app/constants'
-import { NumberedCard, IconRoundContainer } from 'components'
 import { CloseOutlined } from '@ant-design/icons'
-import COLLECTIONS from 'app/constants/collection'
-import { deleteData } from 'app/services/Firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { NumberedCard, IconRoundContainer } from 'components'
 import { DescriptionContainer } from './QuestionSimpleView.styles'
 function QuestionSimpleView(props) {
-  const { title, number, layoutType, onClick, id } = props
-
-  // [CLEAN FUNCTIONS]
-  const handleDelete = async () => {
-    await deleteData(COLLECTIONS.QUESTIONS, id).catch((e) =>
-      message.error(e.message)
-    )
-  }
+  const { title, action, number, layoutType, onClick, id } = props
 
   return (
     <Box onClick={onClick}>
@@ -31,7 +22,9 @@ function QuestionSimpleView(props) {
             <DescriptionContainer>{title}</DescriptionContainer>
           </Col>
           <Col cw="auto">
-            <Popconfirm title="Delete this question?" onConfirm={handleDelete}>
+            <Popconfirm
+              title="Delete this question?"
+              onConfirm={() => action(id)}>
               <CloseOutlined />
             </Popconfirm>
           </Col>
@@ -42,11 +35,12 @@ function QuestionSimpleView(props) {
 }
 
 QuestionSimpleView.propTypes = {
-  number: PropTypes.number.isRequired,
-  onClick: PropTypes.func,
   id: PropTypes.string,
+  action: PropTypes.func,
   title: PropTypes.string,
-  layoutType: PropTypes.string
+  onClick: PropTypes.func,
+  layoutType: PropTypes.string,
+  number: PropTypes.number.isRequired
 }
 
 export default QuestionSimpleView

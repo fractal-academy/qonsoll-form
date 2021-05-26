@@ -1,30 +1,30 @@
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, message, Button, Popover } from 'antd'
+import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
+import { ModalWithFormConditionsForm } from 'domains/Condition/components'
+import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
+import { getCollectionRef, setData, deleteData } from 'app/services/Firestore'
+import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
 import {
-  LeftOutlined,
-  PlusOutlined,
-  RightOutlined,
-  SettingOutlined
-} from '@ant-design/icons'
+  useCurrentQuestionContextDispatch,
+  DISPATCH_EVENTS
+} from 'app/context/CurrentQuestion'
 import {
   CustomDivider,
   SidebarBoxWrapper,
   SidebarStateSwitcher,
   styles
 } from './EditorSidebar.styles'
-import PropTypes from 'prop-types'
-import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
-import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
-import { ModalWithFormConditionsForm } from 'domains/Condition/components'
-import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
-import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
-import { getCollectionRef, setData } from 'app/services/Firestore'
-import { useParams } from 'react-router'
 import {
-  useCurrentQuestionContextDispatch,
-  DISPATCH_EVENTS
-} from 'app/context/CurrentQuestion'
+  LeftOutlined,
+  PlusOutlined,
+  RightOutlined,
+  SettingOutlined
+} from '@ant-design/icons'
 
 const { Title } = Typography
 
@@ -39,9 +39,19 @@ function EditorSidebar(props) {
   const [open, setOpen] = useState(true)
   const [showPopover, setshowPopover] = useState(false)
 
-  // [COMPUTED PROPERTIES]
-
   // [CLEAN FUNCTIONS]
+  const handleDelete = async (questionId) => {
+    await deleteData(COLLECTIONS.QUESTIONS, questionId)
+      .catch((e) => message.error(e.message))
+      .then(updateQuestionOrder())
+  }
+  const updateQuestionOrder = async () => {
+    questions.forEach((item, index) =>
+      setData(COLLECTIONS.QUESTIONS, item.id, {
+        order: index
+      })
+    )
+  }
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
     // default data for created question
@@ -51,7 +61,8 @@ function EditorSidebar(props) {
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
-      order: questions?.length,
+      //fix lettering later, as will added logic jumps
+      order: (key && questions?.length) || String.fromCharCode(65),
       btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     }
     // set it into context as current
@@ -119,6 +130,7 @@ function EditorSidebar(props) {
           <Box overflow="auto" p={3}>
             {!!questions?.length && (
               <QuestionsList
+                action={handleDelete}
                 setNewOrder={setNewOrder}
                 onItemClick={onItemClick}
                 data={questions}
@@ -131,17 +143,13 @@ function EditorSidebar(props) {
                 <CustomDivider type="horizontal" />
               </Col>
             </Row>
-            <Row h="center" mt={1}>
-              <Col cw="auto">
-                <dragbleCeiling />
-              </Col>
-            </Row>
             <Row p={3}>
               <Col v="center">
                 <Title level={5}>Endings</Title>
               </Col>
               <Col cw="auto">
                 <Button
+                  disabled={endings.length >= 1}
                   type="text"
                   icon={<PlusOutlined />}
                   onClick={addQuestion}
@@ -149,9 +157,9 @@ function EditorSidebar(props) {
               </Col>
             </Row>
             <Box {...styles.endingsList}>
-              {/*<QuestionsList />*/}
               {!!endings?.length && (
                 <QuestionsList
+                  firstElement={questions?.length}
                   setNewOrder={setNewOrder}
                   onItemClick={onItemClick}
                   data={endings}

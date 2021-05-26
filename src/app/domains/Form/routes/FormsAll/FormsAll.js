@@ -12,7 +12,6 @@ import {
   Menu,
   Input
 } from 'antd'
-import { firestore } from 'app/services'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
@@ -48,7 +47,7 @@ function FormsAll(props) {
   // [COMPUTED PROPERTIES]
   let amountFiles = data?.length
 
-  const formId = firestore.collection(COLLECTIONS.FORMS).doc().id
+  const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
   // [CLEAN FUNCTIONS]
   const searchData = () => {
     if (searchRef.current.input.value) {
@@ -59,7 +58,7 @@ function FormsAll(props) {
 
   // [USE_EFFECTS]
   useEffect(() => {
-    data && setCurrentData(data)
+    setCurrentData(data)
   }, [data])
 
   const onFormCreate = async (data) => {
