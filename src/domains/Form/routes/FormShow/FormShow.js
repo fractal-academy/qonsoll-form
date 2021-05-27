@@ -12,7 +12,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
-import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
+import useFunctions from "../../../../hooks/useFunctions";
 
 const { Title } = Typography
 
@@ -20,7 +20,7 @@ function FormShow(props) {
   const { firebase } = props
 
   // [CUSTOM_HOOKS]
-  const {getCollectionRef} = useTypeformConfiguration(firebase)
+  const {getCollectionRef} = useFunctions(firebase)
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const { id } = useParams()

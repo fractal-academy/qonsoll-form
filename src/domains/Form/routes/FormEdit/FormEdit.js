@@ -19,7 +19,7 @@ import {
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
 import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
-import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
+import useFunctions from "../../../../hooks/useFunctions";
 
 function FormEdit(props) {
   const { firebase } = props
@@ -27,7 +27,7 @@ function FormEdit(props) {
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const {getCollectionRef, setData} = useTypeformConfiguration(firebase)
+  const {getCollectionRef, setData} = useFunctions(firebase)
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
   const [form, formLoading] = useDocumentData(

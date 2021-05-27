@@ -20,7 +20,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
 import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
-import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
+import useFunctions from "../../../../hooks/useFunctions";
 
 const { Title, Text } = Typography
 
@@ -33,7 +33,7 @@ function FormsAll(props) {
   const { firebase } = props
 
   // [CUSTOM_HOOKS]
-  const {getCollectionRef, getTimestamp, setData} = useTypeformConfiguration(firebase)
+  const {getCollectionRef, getTimestamp, setData} = useFunctions(firebase)
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()

@@ -20,7 +20,7 @@ import {
   MediaLibraryFilter,
   MediaLibraryItemSimpleView
 } from '../../../../domains/MediaLibrary/components'
-import { useTypeformConfiguration } from '../../../../context/TypeformConfigurationContext/useTypeformConfiguration'
+import useFunctions from "../../../../hooks/useFunctions";
 
 const { Title } = Typography
 
@@ -28,7 +28,7 @@ function MediaLibraryModal(props) {
   const { btnProps, onClick, onContinue } = props
 
   // [CUSTOM_HOOKS]
-  const {getCollectionRef, setData, storage} = useTypeformConfiguration(firebase)
+  const {getCollectionRef, setData, storage} = useFunctions()
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
 
