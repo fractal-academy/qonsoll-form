@@ -12,28 +12,18 @@ function FormSimpleForm(props) {
 
   return (
     <Form onFinish={onFinish} form={form} initialValues={initialValues}>
-      <Row h="center" mb={2}>
-        <Col>
-          <Row mb={2}>
-            <Col>
-              <Form.Item name="name" rules={[{ required: true }]}>
-                <Input allowClear placeholder="Type form name" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row mb={2}>
-            <Col>
-              <Form.Item name="description">
-                <Input allowClear placeholder="Form short description" />
-              </Form.Item>
-            </Col>
-          </Row>
-          {children && (
-            <Row>
-              <Col>{children}</Col>
-            </Row>
-          )}
+      <Row h="center">
+        <Col cw={12}>
+          <Form.Item name="name" rules={[{ required: true }]}>
+            <Input allowClear placeholder="Type form name" />
+          </Form.Item>
         </Col>
+        <Col cw={12}>
+          <Form.Item name="description">
+            <Input allowClear placeholder="Form short description" />
+          </Form.Item>
+        </Col>
+        {children && <Col cw={12}>{children}</Col>}
       </Row>
     </Form>
   )
