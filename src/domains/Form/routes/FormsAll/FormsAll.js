@@ -21,7 +21,7 @@ import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import useFunctions from "../../../../hooks/useFunctions"
-import RoutesContext from '../../../../context/Routes/RoutesContext'
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
 const { Title, Text } = Typography
 
@@ -31,13 +31,13 @@ const mockRoutes = [
   { path: '/videos', page: 'Videos' }
 ]
 function FormsAll(props) {
-  const { firebase, routes, onCreate } = props
+  const { firebase, actions } = props
 
   // [CUSTOM_HOOKS]
   const {getCollectionRef, getTimestamp, setData} = useFunctions(firebase)
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
-  const history = useHistory()
+  // const history = useHistory()
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
@@ -71,8 +71,7 @@ function FormsAll(props) {
       creationDate: getTimestamp().now()
     }
     await setData(COLLECTIONS.FORMS, formId, formData).catch((e) => message.error(e.message))
-    
-    onCreate?.(data, formData)
+    on
   }
 
   const menu = (
@@ -93,7 +92,7 @@ function FormsAll(props) {
 
   return (
     <FirebaseContext.Provider value={firebase}>
-      <RoutesContext.Provider value={routes}>
+      <ActionsFunctionsContext.Provider value={actions}>
       <Box {...styles.mainWrapper}>
         {/* Page Header */}
         <Row noGutters display="flex">
@@ -103,7 +102,7 @@ function FormsAll(props) {
               type="text"
               style={globalStyles.resetPadding}
               icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
-              onClick={() => history.goBack()}
+              // onClick={() => history.goBack()}
             />
           </Col>
           <Col cw="auto" v="center">
@@ -163,7 +162,7 @@ function FormsAll(props) {
           />
         </Box>
       </Box>
-      </RoutesContext.Provider>
+      </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )
 }

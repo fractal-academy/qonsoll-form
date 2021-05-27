@@ -4,22 +4,24 @@ import { Button } from 'antd'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router'
 import { styles } from './FormContentArea.styles'
-import { useRoutesContext } from '../../../context/Routes/useRoutesContext'
+import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 function FormContentArea(props) {
   const { children, leftSideMenu } = props
 
   // [CUSTOM_HOOKS]
-  const routes = useRoutesContext()
+  // const {onFormCancel, onFormCreate} = useActionsFunctionsContext()
   // [ADDITIONAL HOOKS]
-  const history = useHistory()
+  // const history = useHistory()
 
   // [CLEAN FUNCTIONS]
   const onCancel = () => {
-    history.push(routes?.ALL)
+    //onFormCancel?.()
+    // history.push(routes?.ALL)
   }
   const onCreateForm = () => {
-    history.push(routes?.ALL)
+    //onFormCreate?.()
+    // history.push(routes?.ALL)
   }
 
   return (
@@ -30,7 +32,7 @@ function FormContentArea(props) {
         </Col>
         <Col {...styles.contentCol}>{children}</Col>
       </Row>
-      <Row noGutters {...styles.footerButtons}>
+      {/* <Row noGutters {...styles.footerButtons}>
         <Col cw="auto" mr={3}>
           <Button type="text" onClick={onCancel}>
             Cancel
@@ -41,7 +43,7 @@ function FormContentArea(props) {
             Create form
           </Button>
         </Col>
-      </Row>
+      </Row> */}
     </>
   )
 }

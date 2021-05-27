@@ -6,7 +6,7 @@ import { Button, Divider, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
 import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
 import { generatePath, useHistory, useParams } from 'react-router'
-import {useRoutesContext} from '../../../context/Routes/useRoutesContext'
+import useActionsFunctionsContext from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 const { Title } = Typography
 
@@ -14,17 +14,18 @@ function PageHeader(props) {
   const { title } = props
 
   // [CUSTOM_HOOKS]
-  const routes = useRoutesContext()
+  const {onFormShow} = useActionsFunctionsContext()
   // [ADDITIONAL HOOKS]
-  const history = useHistory()
+  // const history = useHistory()
   const { id } = useParams()
 
   // [COMPUTED PROPERTIES]
-  const formPath = generatePath(routes?.SHOW, { id })
+  // const formPath = generatePath(routes?.SHOW, { id })
 
   // [CLEAN FUNCTIONS]
-  const onFormShow = () => {
-    history.push(formPath)
+  const onFormShowDisplay = () => {
+    onFormShow?.(id)
+    // history.push(formPath)
   }
 
   return (
@@ -36,7 +37,7 @@ function PageHeader(props) {
             type="text"
             style={globalStyles.resetPadding}
             icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
-            onClick={() => history.goBack()}
+            // onClick={() => history.goBack()}
           />
         </Col>
         <Col cw="auto" p={0} v="center">
@@ -52,7 +53,7 @@ function PageHeader(props) {
             type="text"
             shape="circle"
             icon={<EyeOutlined style={globalStyles.iconSize} />}
-            onClick={onFormShow}
+            onClick={onFormShowDisplay}
           />
         </Col>
       </Row>

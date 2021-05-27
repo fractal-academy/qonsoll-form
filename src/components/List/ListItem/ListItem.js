@@ -9,7 +9,8 @@ import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 import FormSimpleFormWithModal from '../../../domains/Form/components/FormSimpleFormWithModal'
 import useFunctions from "../../../hooks/useFunctions"
-import {useRoutesContext} from '../../../context/Routes/useRoutesContext'
+import useActionsFunctionsContext from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+
 const { Text } = Typography
 
 const StyledImage = styled(Box)`
@@ -32,9 +33,9 @@ function ListItem(props) {
   const { updateData,deleteData} = useFunctions()
 
   // [CUSTOM_HOOKS]
-  const routes = useRoutesContext()
+  const {onFormItemClick} = useActionsFunctionsContext()
   // [ADDITIONAL HOOKS]
-  const history = useHistory()
+  // const history = useHistory()
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -43,11 +44,12 @@ function ListItem(props) {
 
   // [COMPUTED PROPERTIES]
   const description = data?.subtitle || 'No description'
-  const formRoute = routes?.EDIT.replace(':id', data?.id)
+  // const formRoute = routes?.EDIT.replace(':id', data?.id)
 
   // [CLEAN FUNCTIONS]
-  const onFormItemClick = (e) => {
-    formRoute && history.push(formRoute)
+  const onFormItemClickDisplay = () => {
+    onFormItemClick?.(data?.id)
+    // formRoute && history.push(formRoute)
   }
   const showPopconfirm = () => {
     setIsPopconfirmVisible(!isPopconfirmVisible)
@@ -100,7 +102,7 @@ function ListItem(props) {
   return (
     <StyledItem size={size} isCard>
       <Box display="block">
-        <StyledImage onClick={onFormItemClick} size={size}>
+        <StyledImage onClick={onFormItemClickDisplay} size={size}>
           <StyledIcon />
         </StyledImage>
         <Row noGutters h="between" mt={2}>

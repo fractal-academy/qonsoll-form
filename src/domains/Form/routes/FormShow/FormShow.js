@@ -13,18 +13,18 @@ import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import useFunctions from "../../../../hooks/useFunctions"
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import RoutesContext from '../../../../context/Routes/RoutesContext'
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
 
 const { Title } = Typography
 
 function FormShow(props) {
-  const { firebase, routes } = props
+  const { firebase, actions } = props
 
   // [CUSTOM_HOOKS]
   const {getCollectionRef} = useFunctions(firebase)
   // [ADDITIONAL HOOKS]
-  const history = useHistory()
+  // const history = useHistory()
   const { id } = useParams()
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
@@ -61,14 +61,14 @@ function FormShow(props) {
 
   return (
     <FirebaseContext.Provider value={firebase}>
-      <RoutesContext.Provider value={routes}>
+      <ActionsFunctionsContext.Provider value={actions}>
       <Box {...styles.mainWrapper}>
         <Row {...styles.headerRow} noGutters>
           <Col cw="auto" v="center" p={0}>
             <Button
               type="text"
               size="small"
-              onClick={() => history.goBack()}
+              // onClick={() => history.goBack()}
               icon={<ArrowLeftOutlined />}
             />
           </Col>
@@ -112,7 +112,7 @@ function FormShow(props) {
           </FormAdvancedView>
         </Box>
       </Box>
-      </RoutesContext.Provider>
+      </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )
 }

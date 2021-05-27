@@ -20,10 +20,10 @@ import {
 import { message } from 'antd'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import useFunctions from "../../../../hooks/useFunctions"
-import RoutesContext from '../../../../context/Routes/RoutesContext'
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
 function FormEdit(props) {
-  const { firebase, routes } = props
+  const { firebase, actions } = props
 
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
@@ -91,7 +91,7 @@ function FormEdit(props) {
 
   return (
     <FirebaseContext.Provider value={firebase}>
-      <RoutesContext.Provider value={routes}>
+      <ActionsFunctionsContext.Provider value={actions}>
       {formLoading || questionsListLoading ? (
         <Spinner />
       ) : (
@@ -118,7 +118,7 @@ function FormEdit(props) {
           <EditorSidebar questions={questions} endings={endings} />
         </Box>
       )}
-      </RoutesContext.Provider>
+      </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )
 }
