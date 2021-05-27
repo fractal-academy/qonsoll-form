@@ -31,11 +31,10 @@ const mockRoutes = [
   { path: '/videos', page: 'Videos' }
 ]
 function FormsAll(props) {
-  const { firebase, routes } = props
+  const { firebase, routes, onCreate } = props
 
   // [CUSTOM_HOOKS]
   const {getCollectionRef, getTimestamp, setData} = useFunctions(firebase)
-
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
   const history = useHistory()
@@ -65,12 +64,9 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
-    await setData(COLLECTIONS.FORMS, formId, {
-      id: formId,
-      title: data?.name,
-      subtitle: data?.description || '',
-      creationDate: getTimestamp().now()
-    }).catch((e) => message.error(e.message))
+    const handledData =  await setData(COLLECTIONS.FORMS, formId, handledData).catch((e) => message.error(e.message))
+    
+    onCreate?.(data,handledData)
   }
 
   const menu = (
