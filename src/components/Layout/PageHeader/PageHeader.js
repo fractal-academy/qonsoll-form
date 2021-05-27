@@ -6,7 +6,7 @@ import { Button, Divider, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
 import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
 import { generatePath, useHistory, useParams } from 'react-router'
-import useActionsFunctionsContext from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import {useActionsFunctionsContext} from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 const { Title } = Typography
 

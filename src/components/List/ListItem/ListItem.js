@@ -9,7 +9,7 @@ import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 import FormSimpleFormWithModal from '../../../domains/Form/components/FormSimpleFormWithModal'
 import useFunctions from "../../../hooks/useFunctions"
-import useActionsFunctionsContext from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import {useActionsFunctionsContext} from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 const { Text } = Typography
 
