@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { StyledItem } from '../../../components'
-import { ROUTES_PATHS } from '../../../constants'
 import { useHistory } from 'react-router-dom'
 import COLLECTIONS from '../../../constants/collection'
 import React, { useState, cloneElement } from 'react'
@@ -9,7 +8,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
 import FormSimpleFormWithModal from '../../../domains/Form/components/FormSimpleFormWithModal'
-import useFunctions from "../../../hooks/useFunctions";
+import useFunctions from "../../../hooks/useFunctions"
 
 const { Text } = Typography
 
@@ -21,7 +20,7 @@ const StyledImage = styled(Box)`
   align-items: center;
   cursor: pointer;
   justify-content: center;
-  background-color: white;
+  background-color: ${({theme})=>theme.color.white.default};
 `
 const StyledIcon = styled(FileOutlined)`
   font-size: 40px;
@@ -32,6 +31,8 @@ function ListItem(props) {
   const { data, size } = props
   const { updateData,deleteData} = useFunctions()
 
+  // [CUSTOM_HOOKS]
+  const routes = useRoutesContext()
   // [ADDITIONAL HOOKS]
   const history = useHistory()
 
@@ -42,7 +43,7 @@ function ListItem(props) {
 
   // [COMPUTED PROPERTIES]
   const description = data?.subtitle || 'No description'
-  const formRoute = ROUTES_PATHS.FORM_EDIT.replace(':id', data?.id)
+  const formRoute = routes?.EDIT.replace(':id', data?.id)
 
   // [CLEAN FUNCTIONS]
   const onFormItemClick = (e) => {

@@ -1,4 +1,4 @@
-import {useTypeformConfiguration} from "../context/TypeformConfigurationContext/useTypeformConfiguration"
+import {useFirebaseContext} from "../context/Firebase/useFirebaseContext"
 import getCollectionRef from "../services/getCollectionRef"
 import getTimestamp from "../services/getTimestamp"
 import setData from "../services/setData"
@@ -9,7 +9,7 @@ import storage from "../services/storage"
 
 
 const useFunctions = (FB) => {
-const firebase = useTypeformConfiguration()
+const firebase = useFirebaseContext()
   return {
     getCollectionRef: (collection)=> getCollectionRef(firebase||FB,collection),
     getTimestamp:()=>getTimestamp(firebase||FB),

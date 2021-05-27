@@ -2,22 +2,24 @@ import React from 'react'
 import { Row, Col } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
-import { ROUTES_PATHS } from '../../../constants'
 import { useHistory } from 'react-router'
 import { styles } from './FormContentArea.styles'
+import { useRoutesContext } from '../../../context/Routes/useRoutesContext'
 
 function FormContentArea(props) {
   const { children, leftSideMenu } = props
 
+  // [CUSTOM_HOOKS]
+  const routes = useRoutesContext()
   // [ADDITIONAL HOOKS]
   const history = useHistory()
 
   // [CLEAN FUNCTIONS]
   const onCancel = () => {
-    history.push(ROUTES_PATHS.FORMS_ALL)
+    history.push(routes?.ALL)
   }
   const onCreateForm = () => {
-    history.push(ROUTES_PATHS.FORMS_ALL)
+    history.push(routes?.ALL)
   }
 
   return (

@@ -24,7 +24,7 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
-import useFunctions from "../../../hooks/useFunctions";
+import useFunctions from "../../../hooks/useFunctions"
 
 const { Title } = Typography
 

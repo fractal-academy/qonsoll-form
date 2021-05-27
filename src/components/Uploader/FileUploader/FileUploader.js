@@ -6,9 +6,9 @@ import { Col, Row } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
 import  storage  from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
-import useFunctions from "../../../hooks/useFunctions";
-const { Dragger } = Upload
+import useFunctions from "../../../hooks/useFunctions"
 
+const { Dragger } = Upload
 
 const config = {
   name: 'file',

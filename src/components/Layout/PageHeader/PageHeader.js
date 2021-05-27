@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { globalStyles } from '../../../../styles'
 import { styles } from './PageHeader.styles'
-import { ROUTES_PATHS } from '../../../constants'
 import { Button, Divider, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
 import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
@@ -13,12 +12,14 @@ const { Title } = Typography
 function PageHeader(props) {
   const { title } = props
 
+  // [CUSTOM_HOOKS]
+  const routes = useRoutesContext()
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const { id } = useParams()
 
   // [COMPUTED PROPERTIES]
-  const formPath = generatePath(ROUTES_PATHS.FORM_SHOW, { id })
+  const formPath = generatePath(routes?.SHOW, { id })
 
   // [CLEAN FUNCTIONS]
   const onFormShow = () => {

@@ -18,11 +18,12 @@ import {
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
-import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
-import useFunctions from "../../../../hooks/useFunctions";
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import useFunctions from "../../../../hooks/useFunctions"
+import RoutesContext from '../../../../context/Routes/RoutesContext'
 
 function FormEdit(props) {
-  const { firebase } = props
+  const { firebase, routes } = props
 
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
@@ -89,7 +90,8 @@ function FormEdit(props) {
   }, [currentQuestion])
 
   return (
-    <TypeformConfigurationProvider firebase={firebase}>
+    <FirebaseContext.Provider value={firebase}>
+      <RoutesContext.Provider value={routes}>
       {formLoading || questionsListLoading ? (
         <Spinner />
       ) : (
@@ -116,7 +118,8 @@ function FormEdit(props) {
           <EditorSidebar questions={questions} endings={endings} />
         </Box>
       )}
-    </TypeformConfigurationProvider>
+      </RoutesContext.Provider>
+    </FirebaseContext.Provider>
   )
 }
 

@@ -11,13 +11,15 @@ import { FormAdvancedView } from '../../../../domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
-import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
-import useFunctions from "../../../../hooks/useFunctions";
+import useFunctions from "../../../../hooks/useFunctions"
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import RoutesContext from '../../../../context/Routes/RoutesContext'
+
 
 const { Title } = Typography
 
 function FormShow(props) {
-  const { firebase } = props
+  const { firebase, routes } = props
 
   // [CUSTOM_HOOKS]
   const {getCollectionRef} = useFunctions(firebase)
@@ -58,7 +60,8 @@ function FormShow(props) {
   }
 
   return (
-    <TypeformConfigurationProvider firebase={firebase}>
+    <FirebaseContext.Provider value={firebase}>
+      <RoutesContext.Provider value={routes}>
       <Box {...styles.mainWrapper}>
         <Row {...styles.headerRow} noGutters>
           <Col cw="auto" v="center" p={0}>
@@ -109,7 +112,8 @@ function FormShow(props) {
           </FormAdvancedView>
         </Box>
       </Box>
-    </TypeformConfigurationProvider>
+      </RoutesContext.Provider>
+    </FirebaseContext.Provider>
   )
 }
 FormShow.propTypes = {

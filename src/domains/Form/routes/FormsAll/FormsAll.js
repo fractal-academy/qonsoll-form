@@ -19,8 +19,9 @@ import COLLECTIONS from '../../../../constants/collection'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
-import TypeformConfigurationProvider from '../../../../context/TypeformConfigurationContext/TypeformConfigurationContext'
-import useFunctions from "../../../../hooks/useFunctions";
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import useFunctions from "../../../../hooks/useFunctions"
+import RoutesContext from '../../../../context/Routes/RoutesContext'
 
 const { Title, Text } = Typography
 
@@ -30,7 +31,7 @@ const mockRoutes = [
   { path: '/videos', page: 'Videos' }
 ]
 function FormsAll(props) {
-  const { firebase } = props
+  const { firebase, routes } = props
 
   // [CUSTOM_HOOKS]
   const {getCollectionRef, getTimestamp, setData} = useFunctions(firebase)
@@ -89,7 +90,8 @@ function FormsAll(props) {
   }
 
   return (
-    <TypeformConfigurationProvider firebase={firebase}>
+    <FirebaseContext.Provider value={firebase}>
+      <RoutesContext.Provider value={routes}>
       <Box {...styles.mainWrapper}>
         {/* Page Header */}
         <Row noGutters display="flex">
@@ -159,7 +161,8 @@ function FormsAll(props) {
           />
         </Box>
       </Box>
-    </TypeformConfigurationProvider>
+      </RoutesContext.Provider>
+    </FirebaseContext.Provider>
   )
 }
 
