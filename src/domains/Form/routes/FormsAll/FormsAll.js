@@ -64,9 +64,15 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
-    const handledData =  await setData(COLLECTIONS.FORMS, formId, handledData).catch((e) => message.error(e.message))
+    const handledData = 
+    await setData(COLLECTIONS.FORMS, formId, {
+      id: formId,
+      title: data?.name,
+      subtitle: data?.description || '',
+      creationDate: getTimestamp().now()
+    }).catch((e) => message.error(e.message))
     
-    onCreate?.(data,handledData)
+    onCreate?.(data, handledData)
   }
 
   const menu = (
