@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, message, Button, Popover } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
@@ -29,10 +28,9 @@ import useFunctions from "../../../hooks/useFunctions"
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings } = props
+  const { questions, endings,id } = props
   const {getCollectionRef, setData,deleteData} = useFunctions()
   // [ADDITIONAL HOOKS]
-  const { id } = useParams()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]

@@ -11,13 +11,13 @@ import {useActionsFunctionsContext} from '../../../context/ActionsFunctions/useA
 const { Title } = Typography
 
 function PageHeader(props) {
-  const { title } = props
+  const { title ,id} = props
 
   // [CUSTOM_HOOKS]
   const {onFormShow} = useActionsFunctionsContext()
   // [ADDITIONAL HOOKS]
   // const history = useHistory()
-  const { id } = useParams()
+  // const { id } = useParams()
 
   // [COMPUTED PROPERTIES]
   // const formPath = generatePath(routes?.SHOW, { id })

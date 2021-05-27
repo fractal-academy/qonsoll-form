@@ -5,7 +5,6 @@ import { globalStyles } from '../../../../../styles'
 // import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS } from '../../../../constants'
 import { Button, Divider, Typography } from 'antd'
-import { useHistory, useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { FormAdvancedView } from '../../../../domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -19,13 +18,12 @@ import ActionsFunctionsContext from '../../../../context/ActionsFunctions/Action
 const { Title } = Typography
 
 function FormShow(props) {
-  const { firebase, actions } = props
+  const { firebase, actions,id } = props
 
   // [CUSTOM_HOOKS]
   const {getCollectionRef} = useFunctions(firebase)
   // [ADDITIONAL HOOKS]
   // const history = useHistory()
-  const { id } = useParams()
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
