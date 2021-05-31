@@ -50,7 +50,7 @@ function QuestionConfigurationPopoverContent(props) {
         </Col>
       </Row>
       <Row noGutters>
-        <Col pr={0}>
+        <Col pr={0} display="block">
           {isQuestionConfig ? (
             <QuestionConfigurationMenu />
           ) : (

@@ -1,5 +1,8 @@
 const theme = {}
 
+//// SPACE
+theme.space = [0, '4px', '8px', '16px', '32px', '64px']
+
 //// GRID
 theme.breakpoints = ['576px', '768px', '1024px', '1200px', '1600px']
 
