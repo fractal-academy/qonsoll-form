@@ -1,7 +1,6 @@
 import { Card } from 'antd'
 import { Col, Row } from '@qonsoll/react-design'
 import styled from 'styled-components'
-import { Col } from '@qonsoll/react-design'
 
 export const styles = {
   questionCardColumnStyle: {
