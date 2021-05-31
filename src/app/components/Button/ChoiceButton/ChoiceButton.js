@@ -7,7 +7,7 @@ import React, { useMemo, useState } from 'react'
 let startLetter = 65
 
 function ChoiceButton(props) {
-  const { choices, onClick, hasImages, currentSlide, order } = props
+  const { choices, onClick, hasImages, currentSlide, order, id } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -42,7 +42,9 @@ function ChoiceButton(props) {
   const onButtonClick = (letter) => {
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
-      onClick && onClick()
+      const data = { questionId: id, answer: letter }
+
+      onClick && onClick(data)
     }
   }
 
