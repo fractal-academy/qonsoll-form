@@ -104,7 +104,7 @@ function FormsAll(props) {
                 type="text"
                 style={globalStyles.resetPadding}
                 icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
-                // onClick={() => history.goBack()}
+                onClick={() => history.goBack()}
               />
             </Col>
             <Col cw="auto" v="center">
@@ -123,11 +123,16 @@ function FormsAll(props) {
             </Col>
           </Row>
           {/* SecondaryTitle */}
-          <Row noGutters v="center" mb={1} mt={3}>
+          <Row noGutters h="between" v="center" mb={1} mt={3}>
             <Col>
               <Title level={2} style={globalStyles.resetMargin}>
                 Forms
               </Title>
+            </Col>
+            <Col cw="auto">
+              <Button type="primary" onClick={showModal}>
+                + Add
+              </Button>
             </Col>
           </Row>
           <Row noGutters mb={3}>
@@ -147,22 +152,17 @@ function FormsAll(props) {
           </Row>
 
           <Box
+            mr="-10px"
             display="flex"
             flexWrap="wrap"
             flexDirection="row"
             className="custom-scroll">
-            <StaticList
-              disableAddButton={disableAddButton}
-              data={currentData}
-              size={[240, 210]}
-              onClick={showModal}
-            />
+            <StaticList data={currentData} columnWidth={2} />
 
             <FormSimpleFormWithModal
               isModalVisible={isModalVisible}
               setIsModalVisible={setIsModalVisible}
               onModalSubmit={onFormCreate}
-              children={childrenModal}
             />
           </Box>
         </Box>

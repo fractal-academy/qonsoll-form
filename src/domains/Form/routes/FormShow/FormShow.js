@@ -13,7 +13,11 @@ import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import useFunctions from '../../../../hooks/useFunctions'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
-
+import {
+  useAnswersContext,
+  useAnswersContextDispatch
+} from 'app/context/Answers/useAnswersContext'
+import ANSWERS_DISPATCH_EVENTS from '~/app/context/Answers/DispatchEventsTypes'
 // const { Title } = Typography
 
 function FormShow(props) {
@@ -21,6 +25,8 @@ function FormShow(props) {
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
+  const answers = useAnswersContext()
+  const responsesDispatch = useAnswersContextDispatch()
   // [ADDITIONAL HOOKS]
   // const history = useHistory()
   const [data] = useCollectionData(
@@ -53,6 +59,13 @@ function FormShow(props) {
   //   window.location.reload()
   // }
   const onClick = () => {
+    !!data &&
+    !!data?.answer &&
+    responsesDispatch({
+      type: ANSWERS_DISPATCH_EVENTS.ADD_RESPONSE,
+      payload: data
+    })
+
     setIsAnswered(true)
   }
 

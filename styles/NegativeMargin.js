@@ -1,4 +1,4 @@
-import theme from 'app/styles/theme'
+import theme from './theme'
 
 const fs = theme.typography.fontSize.body1.replace('px', '')
 const spaceVertical = Number(fs) - 4
