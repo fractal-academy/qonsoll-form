@@ -23,7 +23,7 @@ function RatingCustomConfig(props) {
   }
 
   return (
-    <Row noGutters>
+    <Row noGutters mb={2}>
       <Col>
         <Text strong>Amount of stars</Text>
       </Col>

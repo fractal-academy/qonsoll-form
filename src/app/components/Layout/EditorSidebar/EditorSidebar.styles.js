@@ -2,6 +2,7 @@ import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 import theme from 'app/styles/theme'
 import { Divider } from 'antd'
+import { QuestionTypeSelect } from 'domains/Question/components'
 
 export const styles = {
   dragbleCeiling: {

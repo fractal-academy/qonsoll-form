@@ -42,7 +42,7 @@ function OpinionScaleCustomConfig() {
   }
 
   return (
-    <Row noGutters>
+    <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>
         <Text strong>From</Text>
       </Col>

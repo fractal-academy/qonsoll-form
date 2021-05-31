@@ -1,10 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from 'domains/Question/components'
-import { Button, DatePicker, Select, Typography } from 'antd'
+import { Select, Typography } from 'antd'
 import { DATE_CONDITION_RULES_VALUES } from 'app/constants/dateConditionRules'
-import { styles } from './PlainTextDateTemplate.style'
+import {
+  CustomButton,
+  CustomText,
+  StyledDatePicker,
+  StyledSelect
+} from './PlainTextDateTemplate.style'
 
 const { Option } = Select
 const { Text } = Typography
@@ -22,21 +27,18 @@ function PlaneTextDateTemplate(props) {
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw="6">
-            <Select
+            <StyledSelect
               showSearch
               allowClear
-              defaultValue={DATE_CONDITION_RULES_VALUES[0]}
-              style={styles.selectStyle}>
+              defaultValue={DATE_CONDITION_RULES_VALUES[0]}>
               {DATE_CONDITION_RULES_VALUES.map((item, index) => (
                 <Option key={index} value={item} onClick={() => {}}>
                   {item}
                 </Option>
               ))}
-            </Select>
+            </StyledSelect>
 
-            {/*<Col cw={6}>*/}
-            <DatePicker a style={styles.datePickerStyle} />
-            {/*</Col>*/}
+            <StyledDatePicker />
           </Col>
 
           <Col cw={6}>
@@ -49,11 +51,9 @@ function PlaneTextDateTemplate(props) {
           </Col>
         </Row>
       ))}
-      <Button size="medium" style={styles.bgc} onClick={onClick}>
-        <Text strong style={styles.fontColor}>
-          + Add condition
-        </Text>
-      </Button>
+      <CustomButton size="medium" onClick={onClick}>
+        <CustomText strong>+ Add condition</CustomText>
+      </CustomButton>
     </>
   )
 }
