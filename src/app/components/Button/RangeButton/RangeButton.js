@@ -4,12 +4,12 @@ import theme from 'app/styles/theme'
 import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
-import { Box } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
+import useMedia from 'use-media'
 
 const StyledRangeButton = styled(Button)`
-  width: 65px;
-  height: 65px;
-  margin-left: 5px;
+  width: -webkit-fill-available;
+  height: 60px;
   border-color: ${theme.color.primary.default};
   background-color: ${(props) =>
     props.isActive
@@ -33,6 +33,8 @@ function RangeButton(props) {
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
+  const cwMedium = useMedia({ minWidth: '1100px' })
+  const cwSmall = useMedia({ minWidth: '500px' })
 
   // [ADDITIONAL HOOKS]
   useKeyPress(
@@ -51,6 +53,7 @@ function RangeButton(props) {
   const range = Array(to - from + 1)
     .fill(0)
     .map((el, index) => from + index)
+  const columnWidth = (cwMedium && 2) || (cwSmall && 3) || 12
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (number) => {
@@ -61,16 +64,18 @@ function RangeButton(props) {
   }
 
   return (
-    <Box display="flex">
+    <Row display="flex" width="100%" noGutters>
       {range.map((item) => (
-        <StyledRangeButton
-          key={item}
-          onClick={() => onButtonClick(item)}
-          isActive={Number(buttonKey) === item}>
-          {item}
-        </StyledRangeButton>
+        <Col key={item} cw={columnWidth} mr={2} mb={2}>
+          <StyledRangeButton
+            key={item}
+            onClick={() => onButtonClick(item)}
+            isActive={Number(buttonKey) === item}>
+            {item}
+          </StyledRangeButton>
+        </Col>
       ))}
-    </Box>
+    </Row>
   )
 }
 
@@ -80,8 +85,8 @@ RangeButton.propTypes = {
   from: PropTypes.number.isRequired
 }
 RangeButton.defaultProps = {
-  from: 0,
-  to: 0
+  from: 1,
+  to: 5
 }
 
 export default RangeButton

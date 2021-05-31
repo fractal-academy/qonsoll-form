@@ -11,7 +11,7 @@ const Item = styled(Box)`
   cursor: ${(props) => props.isCard && 'default !important'};
   background: ${theme.color.dark.t.lighten9};
   width: -webkit-fill-available;
-  height: auto;
+  height: fit-content;
   display: flex;
   border-radius: 8px;
   align-items: center;

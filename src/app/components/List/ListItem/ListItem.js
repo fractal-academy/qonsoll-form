@@ -1,20 +1,34 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import React, { useState } from 'react'
 import { StyledItem } from 'components'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
 import COLLECTIONS from 'app/constants/collection'
-import React, { useState, cloneElement } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { FileOutlined, MoreOutlined, CloseOutlined } from '@ant-design/icons'
 import { deleteData, updateData } from 'app/services/Firestore'
-import { Typography, Dropdown, Menu, Popconfirm, Image, message } from 'antd'
+import {
+  Popconfirm,
+  Typography,
+  Dropdown,
+  Menu,
+  Image,
+  Button,
+  message
+} from 'antd'
 import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
+import {
+  FileOutlined,
+  MoreOutlined,
+  CloseOutlined,
+  CheckOutlined
+} from '@ant-design/icons'
 
 const { Text } = Typography
 
 const ItemPreview = styled(Box)`
   display: flex;
+  position: relative;
   width: -webkit-fill-available;
   height: 140px;
   border-radius: 8px;
@@ -30,9 +44,19 @@ const StyledIcon = styled(FileOutlined)`
 const StyledImage = styled(Image)`
   border-radius: 8px;
 `
+const StyledBadge = styled(Button)`
+  position: absolute;
+  border-radius: 50%;
+  height: 24px;
+  z-index: 100;
+  padding: 3px;
+  width: 24px;
+  right: -4px;
+  top: -4px;
+`
 
 function ListItem(props) {
-  const { data, onClick } = props
+  const { data, selectedBackgroundImg, setSelectedBackgroundImg } = props
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -45,6 +69,7 @@ function ListItem(props) {
   // [COMPUTED PROPERTIES]
   const description = data?.subtitle || 'No description'
   const formRoute = ROUTES_PATHS.FORM_EDIT.replace(':id', data?.id)
+  const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
   const onFormItemClick = (e) => {
@@ -58,7 +83,7 @@ function ListItem(props) {
   }
   const handleDelete = async () => {
     setConfirmLoading(true)
-    await deleteData(COLLECTIONS.FORMS, data?.id).catch((e) =>
+    await deleteData(collection, data?.id).catch((e) =>
       message.error(e.message)
     )
 
@@ -101,9 +126,25 @@ function ListItem(props) {
   return (
     <StyledItem isCard>
       <Box display="block" width="inherit">
-        <ItemPreview onClick={!data?.imageUrl && onFormItemClick}>
+        <ItemPreview
+          onClick={
+            !data?.imageUrl
+              ? onFormItemClick
+              : () => setSelectedBackgroundImg(data?.imageUrl)
+          }>
           {data?.imageUrl ? (
-            <StyledImage preview={false} height="inherit" src={data.imageUrl} />
+            <>
+              {selectedBackgroundImg === data?.imageUrl && (
+                <StyledBadge size="small" type="primary">
+                  <CheckOutlined />
+                </StyledBadge>
+              )}
+              <StyledImage
+                preview={false}
+                height="inherit"
+                src={data.imageUrl}
+              />
+            </>
           ) : (
             <StyledIcon />
           )}
@@ -118,7 +159,12 @@ function ListItem(props) {
           </Col>
           <Col cw="auto" display="flex" v="center">
             {data?.imageUrl ? (
-              <CloseOutlined />
+              <Popconfirm
+                title="Delete this image?"
+                onConfirm={handleDelete}
+                okButtonProps={{ loading: confirmLoading }}>
+                <CloseOutlined />
+              </Popconfirm>
             ) : (
               <Dropdown overlay={menu} trigger="click" placement="bottomRight">
                 <MoreOutlined />
@@ -133,7 +179,8 @@ function ListItem(props) {
 
 ListItem.propTypes = {
   data: PropTypes.object,
-  onClick: PropTypes.func
+  selectedBackgroundImg: PropTypes.bool,
+  setSelectedBackgroundImg: PropTypes.func
 }
 
 export default ListItem

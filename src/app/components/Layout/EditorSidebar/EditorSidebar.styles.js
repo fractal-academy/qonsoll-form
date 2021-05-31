@@ -12,7 +12,7 @@ export const styles = {
   },
   endingsList: {
     pb: 3,
-    px: 3,
+    pr: 3,
     maxHeight: '350px',
     overflow: 'auto'
   }

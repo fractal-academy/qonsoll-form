@@ -127,7 +127,7 @@ function EditorSidebar(props) {
             </Row>
           </Box>
           {/* Question List*/}
-          <Box overflow="auto" p={3}>
+          <Box overflow="auto" pr={3}>
             {!!questions?.length && (
               <QuestionsList
                 action={handleDelete}
@@ -159,7 +159,7 @@ function EditorSidebar(props) {
             <Box {...styles.endingsList}>
               {!!endings?.length && (
                 <QuestionsList
-                  firstElement={questions?.length}
+                  action={handleDelete}
                   setNewOrder={setNewOrder}
                   onItemClick={onItemClick}
                   data={endings}

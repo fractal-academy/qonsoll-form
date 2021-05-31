@@ -4,14 +4,17 @@ import { Box } from '@qonsoll/react-design'
 import { MoreOutlined } from '@ant-design/icons'
 import { sortableHandle } from 'react-sortable-hoc'
 
-const StyledIcon = styled(MoreOutlined)`
+const FirstIcon = styled(MoreOutlined)`
   margin-right: -10px;
+`
+const SecondIcon = styled(MoreOutlined)`
+  margin-right: -5px;
 `
 
 const DragHandler = sortableHandle(() => (
   <Box>
-    <StyledIcon />
-    <MoreOutlined />
+    <FirstIcon />
+    <SecondIcon />
   </Box>
 ))
 

@@ -49,7 +49,7 @@ function QuestionAdvancedView(props) {
       component: (
         <RangeButton
           from={1}
-          to={5}
+          to={10}
           onClick={onClick}
           currentSlide={currentSlide}
         />

@@ -1,6 +1,6 @@
 import { Slider } from 'antd'
 import React, { useState } from 'react'
-import { Box, Col, Container, Row } from '@qonsoll/react-design'
+import { Box } from '@qonsoll/react-design'
 import { CustomInputNumber } from './RangeSlider.styles'
 
 function RangeSlider(props) {

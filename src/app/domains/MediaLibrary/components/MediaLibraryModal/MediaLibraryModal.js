@@ -9,12 +9,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Upload, message } from 'antd'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { FilterOutlined, SearchOutlined } from '@ant-design/icons'
 import { MediaLibraryFilter } from 'domains/MediaLibrary/components'
-import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import {
-  CustomBox,
-  CustomButton,
   CustomChangeButtonText,
+  CustomButton,
   CustomDivider,
   CustomInput,
   CustomText,
@@ -32,20 +31,19 @@ function MediaLibraryModal(props) {
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [switchState, setSwitchState] = useState(false)
+  // const [switchState, setSwitchState] = useState(false)
   const [sidebarState, setSidebarState] = useState(true)
   const [imagesList, setImagesList] = useState(media)
   const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(false)
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
-  const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
   const fuse = new Fuse(media, { keys: ['name'] })
 
   // [CLEAN FUNCTIONS]
   const onMediaUploaded = (data) => {
     const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
-    setData(COLLECTIONS?.MEDIA, mediaId, data).catch((e) =>
+    setData(COLLECTIONS?.MEDIA, mediaId, { id: mediaId, ...data }).catch((e) =>
       message.error(e.message)
     )
   }
@@ -65,9 +63,9 @@ function MediaLibraryModal(props) {
   const onCancelFilter = () => {
     setSidebarState(!sidebarState)
   }
-  const onSwitchChange = () => {
-    setSwitchState(!switchState)
-  }
+  // const onSwitchChange = () => {
+  //   setSwitchState(!switchState)
+  // }
   const modalStateChange = () => {
     setIsModalVisible(!isModalVisible)
     onClick?.()
@@ -93,18 +91,13 @@ function MediaLibraryModal(props) {
             setImagesList([
               ...imagesList,
               {
-                id: mediaId,
-                name: data.file.name,
-                imageUrl: downloadURL,
-                title: 'New title'
+                title: data.file.name,
+                imageUrl: downloadURL
               }
             ])
             onMediaUploaded({
-              id: mediaId,
-              name: data.file.name,
-              imageUrl: downloadURL,
-              title: 'New title',
-              subtitle: 'subtitle'
+              title: data.file.name,
+              imageUrl: downloadURL
             })
           })
           .then(() => onSuccess())
@@ -130,140 +123,6 @@ function MediaLibraryModal(props) {
     }
   }, [media])
   return (
-    // <>
-    //   <CustomButton {...btnProps} onClick={modalStateChange}>
-    //     <CustomChangeButtonText>Change</CustomChangeButtonText>
-    //   </CustomButton>
-    //   <Modal
-    //     visible={isModalVisible}
-    //     footer={null}
-    //     closable={false}
-    //     width="1024px"
-    //     centered
-    //     bodyStyle={styles.modalBodyStyle}>
-    //     <Row noGutters pt={4}>
-    //       <Col>
-    //         <Row mb={1} v="center" px={3}>
-    //           <Col>
-    //             <Title level={3}>Media Library</Title>
-    //           </Col>
-    //           <Col cw="auto" v="center">
-    //             <Box
-    //               bg={theme.color.dark.t.lighten7}
-    //               p={1}
-    //               borderRadius={theme.borderRadius.md}
-    //               display="flex">
-    //               <CustomBox
-    //                 size="medium"
-    //                 type={!switchState ? 'text' : 'secondary'}
-    //                 switchState={!switchState}
-    //                 onClick={onSwitchChange}>
-    //                 Image
-    //               </CustomBox>
-    //               <CustomBox
-    //                 size="medium"
-    //                 type={switchState ? 'secondary' : 'text'}
-    //                 switchState={switchState}
-    //                 onClick={onSwitchChange}>
-    //                 Video
-    //               </CustomBox>
-    //             </Box>
-    //           </Col>
-    //         </Row>
-    //         <Row pb={25} px={3}>
-    //           <Col>
-    //             <CustomText>You have {amountFiles} files.</CustomText>
-    //           </Col>
-    //         </Row>
-    //         <Row px={3} pb={3}>
-    //           <Col>
-    //             <CustomInput
-    //               allowClear
-    //               ref={searchRef}
-    //               prefix={<SearchOutlined />}
-    //               placeholder="Search media file by name..."
-    //               onSearch={searchData}
-    //               onChange={onChange}
-    //             />
-    //           </Col>
-    //           <Col cw="auto" noGutters>
-    //             <CustomDivider type="vertical" />
-    //           </Col>
-    //           <Col cw="auto" v="center">
-    //             <Button
-    //               icon={<FilterOutlined />}
-    //               type="text"
-    //               onClick={onFilterButtonClick}>
-    //               Filter
-    //             </Button>
-    //           </Col>
-    //         </Row>
-    //
-    //         <Box
-    //           height="500px"
-    //           pl={4}
-    //           overflow="auto"
-    //           display="flex"
-    //           flexWrap="wrap"
-    //           flexDirection="row"
-    //           bg={theme.color.dark.t.lighten9}>
-    //           {/* RENDER MEDIA */}
-    //
-    //           {imagesList.map((item) => (
-    //             <Box key={item} mr={3} mt={4}>
-    //               <MediaLibraryItemSimpleView
-    //                 {...item}
-    //                 selectedBackgroundImg={selectedBackgroundImg}
-    //                 setSelectedBackgroundImg={setSelectedBackgroundImg}
-    //               />
-    //             </Box>
-    //           ))}
-    //           <Upload
-    //             showUploadList={false}
-    //             multiple
-    //             name="file"
-    //             customRequest={customRequest}>
-    //             <Box
-    //               {...styles.addButton}
-    //               bg={theme.color.dark.t.lighten9}
-    //               mr={3}
-    //               mt={4}
-    //               borderRadius={theme.borderRadius.md}
-    //               width="216px"
-    //               height="182px"
-    //               display="flex"
-    //               alignItems="center"
-    //               justifyContent="center">
-    //               <PlusOutlined />
-    //             </Box>
-    //           </Upload>
-    //         </Box>
-    //         <Row
-    //           borderBottom="1px solid"
-    //           borderColor={theme.color.text.dark}></Row>
-    //         <Row noGutters h="right" p={3} bg={theme.color.white.default}>
-    //           <Col cw="auto">
-    //             <Button type="text" onClick={onModalCancel}>
-    //               Cancel
-    //             </Button>
-    //           </Col>
-    //           <Col cw="auto">
-    //             <Button type="primary" onClick={onModalContinue}>
-    //               Continue
-    //             </Button>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       {!sidebarState && (
-    //         <MediaLibraryFilter
-    //           onApplyFilter={onApplyFilter}
-    //           onCancelFilter={onCancelFilter}
-    //         />
-    //       )}
-    //     </Row>
-    //   </Modal>
-    // </>
-
     <>
       <CustomButton {...btnProps} onClick={modalStateChange}>
         <CustomChangeButtonText>Change</CustomChangeButtonText>
@@ -282,6 +141,7 @@ function MediaLibraryModal(props) {
                 <Title level={3}>Media Library</Title>
               </Col>
               <Col cw="auto" v="center">
+                {/* For future improvements.
                 <Box
                   bg={theme.color.dark.t.lighten7}
                   p={1}
@@ -301,7 +161,14 @@ function MediaLibraryModal(props) {
                     onClick={onSwitchChange}>
                     Video
                   </CustomBox>
-                </Box>
+                </Box> */}
+                <Upload
+                  showUploadList={false}
+                  multiple
+                  name="file"
+                  customRequest={customRequest}>
+                  <Button type="primary">+ Add</Button>
+                </Upload>
               </Col>
             </Row>
             <Row pb={25} px={3}>
@@ -335,44 +202,20 @@ function MediaLibraryModal(props) {
 
             <Box
               height="500px"
-              pl={4}
+              pl={2}
+              pt={2}
               overflow="auto"
               display="flex"
               flexWrap="wrap"
               flexDirection="row"
               bg={theme.color.dark.t.lighten9}>
               {/* RENDER MEDIA */}
-
-              <StaticList data={imagesList} columnWidth={3} />
-
-              {/* {imagesList.map((item) => (
-                <Box key={item} mr={3} mt={4}>
-                  <MediaLibraryItemSimpleView
-                    {...item}
-                    selectedBackgroundImg={selectedBackgroundImg}
-                    setSelectedBackgroundImg={setSelectedBackgroundImg}
-                  />
-                </Box>
-              ))} */}
-              {/* <Upload
-                showUploadList={false}
-                multiple
-                name="file"
-                customRequest={customRequest}>
-                <Box
-                  {...styles.addButton}
-                  bg={theme.color.dark.t.lighten9}
-                  mr={3}
-                  mt={4}
-                  borderRadius={theme.borderRadius.md}
-                  width="216px"
-                  height="182px"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center">
-                  <PlusOutlined />
-                </Box>
-              </Upload> */}
+              <StaticList
+                data={imagesList}
+                columnWidth={(sidebarState && 3) || 4}
+                selectedBackgroundImg={selectedBackgroundImg}
+                setSelectedBackgroundImg={setSelectedBackgroundImg}
+              />
             </Box>
             <Row
               borderBottom="1px solid"
