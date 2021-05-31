@@ -4,7 +4,13 @@ import React, { cloneElement } from 'react'
 import { DEFAULT_IMAGE } from 'app/constants'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import { styles, StyledCol, CustomCard } from './QuestionForm.styles'
+import {
+  styles,
+  StyledCol,
+  CustomCard,
+  CustomRow,
+  CustomCol
+} from './QuestionForm.styles'
 import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 import {
   QuestionConfigurationPopover,
@@ -84,10 +90,10 @@ function QuestionForm(props) {
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
   return (
-    <Row noGutters {...styles.mainRowStyle} backgroundImage={bgImage}>
+    <CustomRow noGutters backgroundImage={bgImage}>
       <Col {...styles.questionCardColumnStyle} cw={6}>
         <CustomCard bordered={false}>
-          <Row noGutters>
+          <Row noGutters v="center">
             <Col>
               <Tag color="blue">{questionTag}</Tag>
             </Col>
@@ -105,12 +111,12 @@ function QuestionForm(props) {
             )}
           </Row>
           <Row noGutters h="between" mb={4}>
-            <Col cw="auto">
+            <CustomCol cw="auto">
               <QuestionHeader
                 titlePlaceholder={'Editable question title'}
                 subtitlePlaceholder={'Description(optional)'}
               />
-            </Col>
+            </CustomCol>
           </Row>
           {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
             <Row noGutters>
@@ -154,7 +160,7 @@ function QuestionForm(props) {
           </Box>
         </StyledCol>
       )}
-    </Row>
+    </CustomRow>
   )
 }
 
