@@ -13,6 +13,7 @@ const Item = styled(Button)`
   border-radius: 8px;
   align-items: center;
   justify-content: center;
+
   &:hover {
     background-color: ${theme.color.dark.t.lighten8};
     border-color: ${theme.color.dark.t.lighten8};
@@ -20,15 +21,10 @@ const Item = styled(Button)`
 `
 
 function StyledItem(props) {
-  const { children, onClick, size, isCard } = props
+  const { onClick, disable } = props
 
-  return (
-    <Item isCard={isCard} size={size} onClick={onClick}>
-      {children}
-    </Item>
-  )
+  return <Item {...props} onClick={!disable && onClick} />
 }
-
 StyledItem.propTypes = {
   size: PropTypes.array,
   onClick: PropTypes.func,

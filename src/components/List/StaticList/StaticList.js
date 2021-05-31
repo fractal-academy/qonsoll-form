@@ -4,7 +4,7 @@ import { Box } from '@qonsoll/react-design'
 import { ListItem, NewListItem } from '../../../components'
 
 function StaticList(props) {
-  const { data, size, onClick } = props
+  const { data, size, onClick, disableAddButton } = props
 
   return (
     <Box display="contents">
@@ -13,8 +13,13 @@ function StaticList(props) {
           <ListItem data={item} size={size} />
         </Box>
       ))}
-
-      <NewListItem size={size} onClick={onClick} />
+      {!disableAddButton && (
+        <NewListItem
+          size={size}
+          onClick={onClick}
+          disableAddButton={disableAddButton}
+        />
+      )}
     </Box>
   )
 }

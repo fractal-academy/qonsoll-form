@@ -1,27 +1,26 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { styles } from './FormShow.style'
-import { globalStyles } from '../../../../../styles'
+// import { globalStyles } from '../../../../../styles'
 // import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS } from '../../../../constants'
-import { Button, Divider, Typography } from 'antd'
-import { Row, Col, Box } from '@qonsoll/react-design'
+// import { Button, Divider, Typography } from 'antd'
+import { Box } from '@qonsoll/react-design'
 import { FormAdvancedView } from '../../../../domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from '../../../../domains/Question/components'
-import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
-import useFunctions from "../../../../hooks/useFunctions"
+// import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
+import useFunctions from '../../../../hooks/useFunctions'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
-
-const { Title } = Typography
+// const { Title } = Typography
 
 function FormShow(props) {
-  const { firebase, actions,id } = props
+  const { firebase, actions, id } = props
 
   // [CUSTOM_HOOKS]
-  const {getCollectionRef} = useFunctions(firebase)
+  const { getCollectionRef } = useFunctions(firebase)
   // [ADDITIONAL HOOKS]
   // const history = useHistory()
   const [data] = useCollectionData(
@@ -50,9 +49,9 @@ function FormShow(props) {
     )
 
   // [CLEAN FUNCTIONS]
-  const onRestart = () => {
-    window.location.reload()
-  }
+  // const onRestart = () => {
+  //   window.location.reload()
+  // }
   const onClick = () => {
     setIsAnswered(true)
   }
@@ -60,56 +59,56 @@ function FormShow(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-      <Box {...styles.mainWrapper}>
-        <Row {...styles.headerRow} noGutters>
-          <Col cw="auto" v="center" p={0}>
-            <Button
-              type="text"
-              size="small"
-              // onClick={() => history.goBack()}
-              icon={<ArrowLeftOutlined />}
-            />
-          </Col>
-          <Col v="center">
-            <Box textAlign="center">
-              <Title level={5}>Live Preview</Title>
-            </Box>
-          </Col>
-          <Col cw="auto" v="center">
-            <Button
-              type="text"
-              size="small"
-              icon={<ReloadOutlined />}
-              onClick={onRestart}>
-              Restart
-            </Button>
-          </Col>
-        </Row>
+        <Box {...styles.mainWrapper}>
+          {/*<Row {...styles.headerRow} noGutters>*/}
+          {/*  <Col cw="auto" v="center" p={0}>*/}
+          {/*    <Button*/}
+          {/*      type="text"*/}
+          {/*      size="small"*/}
+          {/*      // onClick={() => history.goBack()}*/}
+          {/*      icon={<ArrowLeftOutlined />}*/}
+          {/*    />*/}
+          {/*  </Col>*/}
+          {/*  <Col v="center">*/}
+          {/*    <Box textAlign="center">*/}
+          {/*      <Title level={5}>Live Preview</Title>*/}
+          {/*    </Box>*/}
+          {/*  </Col>*/}
+          {/*  <Col cw="auto" v="center">*/}
+          {/*    <Button*/}
+          {/*      type="text"*/}
+          {/*      size="small"*/}
+          {/*      icon={<ReloadOutlined />}*/}
+          {/*      onClick={onRestart}>*/}
+          {/*      Restart*/}
+          {/*    </Button>*/}
+          {/*  </Col>*/}
+          {/*</Row>*/}
 
-        <Row noGutters>
-          <Col>
-            <Divider style={globalStyles.resetMargin} />
-          </Col>
-        </Row>
+          {/*<Row noGutters>*/}
+          {/*  <Col>*/}
+          {/*    <Divider style={globalStyles.resetMargin} />*/}
+          {/*  </Col>*/}
+          {/*</Row>*/}
 
-        <Box {...styles.questionContainer}>
-          <FormAdvancedView
-            isAnswered={isAnswered}
-            setIsAnswered={setIsAnswered}
-            setCurrentSlide={setCurrentSlide}>
-            {sortedData?.map((item, index) => (
-              <Box key={index} height="600px" overflowY="auto">
-                <QuestionAdvancedView
-                  data={item}
-                  questionNumber={index + 1}
-                  onClick={onClick}
-                  currentSlide={currentSlide}
-                />
-              </Box>
-            ))}
-          </FormAdvancedView>
+          <Box {...styles.questionContainer}>
+            <FormAdvancedView
+              isAnswered={isAnswered}
+              setIsAnswered={setIsAnswered}
+              setCurrentSlide={setCurrentSlide}>
+              {sortedData?.map((item, index) => (
+                <Box key={index} height="600px" overflowY="auto">
+                  <QuestionAdvancedView
+                    data={item}
+                    questionNumber={index + 1}
+                    onClick={onClick}
+                    currentSlide={currentSlide}
+                  />
+                </Box>
+              ))}
+            </FormAdvancedView>
+          </Box>
         </Box>
-      </Box>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

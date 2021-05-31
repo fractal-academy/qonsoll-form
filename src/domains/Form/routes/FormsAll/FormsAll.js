@@ -1,6 +1,6 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
-import React,{ useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import {
   Breadcrumb,
@@ -19,7 +19,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import useFunctions from "../../../../hooks/useFunctions"
+import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
 const { Title, Text } = Typography
@@ -30,10 +30,10 @@ const mockRoutes = [
   { path: '/videos', page: 'Videos' }
 ]
 function FormsAll(props) {
-  const { firebase, actions,childrenModal } = props
+  const { firebase, actions, childrenModal, disableAddButton } = props
 
   // [CUSTOM_HOOKS]
-  const {getCollectionRef, getTimestamp, setData} = useFunctions(firebase)
+  const { getCollectionRef, getTimestamp, setData } = useFunctions(firebase)
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
   // const history = useHistory()
@@ -63,7 +63,7 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
-    const {name,description,...restData}=data
+    const { name, description, ...restData } = data
     const formData = {
       ...restData,
       id: formId,
@@ -71,7 +71,9 @@ function FormsAll(props) {
       subtitle: data?.description || '',
       creationDate: getTimestamp().now()
     }
-    await setData(COLLECTIONS.FORMS, formId, formData).catch((e) => message.error(e.message))
+    await setData(COLLECTIONS.FORMS, formId, formData).catch((e) =>
+      message.error(e.message)
+    )
   }
 
   const menu = (
@@ -93,83 +95,85 @@ function FormsAll(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-      <Box {...styles.mainWrapper}>
-        {/* Page Header */}
-        <Row noGutters display="flex">
-          <Col cw="auto" v="center">
-            <Button
-              size="small"
-              type="text"
-              style={globalStyles.resetPadding}
-              icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
-              // onClick={() => history.goBack()}
+        <Box {...styles.mainWrapper}>
+          {/* Page Header */}
+          <Row noGutters display="flex">
+            <Col cw="auto" v="center">
+              <Button
+                size="small"
+                type="text"
+                style={globalStyles.resetPadding}
+                icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
+                // onClick={() => history.goBack()}
+              />
+            </Col>
+            <Col cw="auto" v="center">
+              <Divider type="vertical" />
+            </Col>
+            <Col v="center">
+              <Breadcrumb>
+                <Breadcrumb.Item>
+                  <FolderOutlined />
+                  <Text>Folder</Text>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item overlay={menu}>
+                  <Text>Forms</Text>
+                </Breadcrumb.Item>
+              </Breadcrumb>
+            </Col>
+          </Row>
+          {/* SecondaryTitle */}
+          <Row noGutters v="center" mb={1} mt={3}>
+            <Col>
+              <Title level={2} style={globalStyles.resetMargin}>
+                Forms
+              </Title>
+            </Col>
+          </Row>
+          <Row noGutters mb={3}>
+            <Col>
+              <Text>You have {amountFiles} files.</Text>
+            </Col>
+          </Row>
+
+          <Row noGutters mb={3}>
+            <Col>
+              <Input
+                ref={searchRef}
+                placeholder="Search folder/file by name..."
+                onChange={(input) => searchData(input.target.value)}
+              />
+            </Col>
+          </Row>
+
+          <Box
+            display="flex"
+            flexWrap="wrap"
+            flexDirection="row"
+            className="custom-scroll">
+            <StaticList
+              disableAddButton={disableAddButton}
+              data={currentData}
+              size={[240, 210]}
+              onClick={showModal}
             />
-          </Col>
-          <Col cw="auto" v="center">
-            <Divider type="vertical" />
-          </Col>
-          <Col v="center">
-            <Breadcrumb>
-              <Breadcrumb.Item>
-                <FolderOutlined />
-                <Text>Folder</Text>
-              </Breadcrumb.Item>
-              <Breadcrumb.Item overlay={menu}>
-                <Text>Forms</Text>
-              </Breadcrumb.Item>
-            </Breadcrumb>
-          </Col>
-        </Row>
-        {/* SecondaryTitle */}
-        <Row noGutters v="center" mb={1} mt={3}>
-          <Col>
-            <Title level={2} style={globalStyles.resetMargin}>
-              Forms
-            </Title>
-          </Col>
-        </Row>
-        <Row noGutters mb={3}>
-          <Col>
-            <Text>You have {amountFiles} files.</Text>
-          </Col>
-        </Row>
 
-        <Row noGutters mb={3}>
-          <Col>
-            <Input
-              ref={searchRef}
-              placeholder="Search folder/file by name..."
-              onChange={(input) => searchData(input.target.value)}
+            <FormSimpleFormWithModal
+              isModalVisible={isModalVisible}
+              setIsModalVisible={setIsModalVisible}
+              onModalSubmit={onFormCreate}
+              children={childrenModal}
             />
-          </Col>
-        </Row>
-
-        <Box
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          className="custom-scroll">
-          <StaticList
-            data={currentData}
-            size={[240, 210]}
-            onClick={showModal}
-          />
-
-          <FormSimpleFormWithModal
-            isModalVisible={isModalVisible}
-            setIsModalVisible={setIsModalVisible}
-            onModalSubmit={onFormCreate}
-            children={childrenModal}
-          />
+          </Box>
         </Box>
-      </Box>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )
 }
 
 FormsAll.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object,
+  disableAddButton: PropTypes.bool
 }
 
 export default FormsAll
