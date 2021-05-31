@@ -1,17 +1,12 @@
-import { Col } from '@qonsoll/react-design'
+import { Col, Row } from '@qonsoll/react-design'
 import { Card } from 'antd'
 import styled from 'styled-components'
 
 export const styles = {
-  mainRowStyle: {
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    h: 'center',
-    height: '100%'
-  },
   questionCardColumnStyle: {
     order: 2,
-    v: 'center'
+    v: 'center',
+    flexDirection: 'column'
   },
   imageBetweenStyle: {
     backgroundRepeat: 'no-repeat',
@@ -42,4 +37,18 @@ export const CustomCard = styled(Card)`
   padding-left: 20px;
   width: 100%;
   background: transparent;
+`
+export const CustomRow = styled(Row)`
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+`
+export const CustomCol = styled(Col)`
+  order: 2;
+  justify-content: center;
+  flex-direction: column;
 `
