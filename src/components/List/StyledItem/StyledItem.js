@@ -24,7 +24,7 @@ const Item = styled(Box)`
 `
 
 function StyledItem(props) {
-  const { children, onClick, isCard,disable } = props
+  const { children, onClick, isCard, disable } = props
 
   return (
     <Item isCard={isCard} onClick={!disable && onClick}>

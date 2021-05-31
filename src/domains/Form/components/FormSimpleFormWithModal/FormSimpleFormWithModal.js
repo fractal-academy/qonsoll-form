@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Form, Modal } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import { FormSimpleForm } from '../../../../domains/Form/components'

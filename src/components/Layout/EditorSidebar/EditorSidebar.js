@@ -6,7 +6,10 @@ import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
 import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
-import { QuestionTypeSelect, QuestionsList } from '../../../domains/Question/components'
+import {
+  QuestionTypeSelect,
+  QuestionsList
+} from '../../../domains/Question/components'
 import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
@@ -23,14 +26,14 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
-import useFunctions from "../../../hooks/useFunctions"
-import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
+import useFunctions from '../../../hooks/useFunctions'
+import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings,id } = props
-  const {getCollectionRef, setData,deleteData} = useFunctions()
+  const { questions, endings, id } = props
+  const { getCollectionRef, setData, deleteData } = useFunctions()
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 

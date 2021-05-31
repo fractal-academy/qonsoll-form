@@ -2,7 +2,6 @@ import React from 'react'
 import { Row, Col } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
-import { useHistory } from 'react-router'
 import { styles } from './FormContentArea.styles'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 

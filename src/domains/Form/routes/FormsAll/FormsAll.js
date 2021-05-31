@@ -104,7 +104,7 @@ function FormsAll(props) {
                 type="text"
                 style={globalStyles.resetPadding}
                 icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
-                onClick={() => history.goBack()}
+                // onClick={() => history.goBack()}
               />
             </Col>
             <Col cw="auto" v="center">

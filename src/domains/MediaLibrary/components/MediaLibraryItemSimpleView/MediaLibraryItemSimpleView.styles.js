@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 import theme from '../../../../../styles/theme'
 import { Card, Button, Image, Typography } from 'antd'
 

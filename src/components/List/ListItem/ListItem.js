@@ -1,11 +1,9 @@
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { StyledItem } from 'components'
-import { ROUTES_PATHS } from 'app/constants'
-import { useHistory } from 'react-router-dom'
-import COLLECTIONS from 'app/constants/collection'
+import { StyledItem } from '../../../components'
+import { COLLECTIONS } from '../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { deleteData, updateData } from 'app/services/Firestore'
 import {
   Popconfirm,
   Typography,
@@ -15,13 +13,15 @@ import {
   Button,
   message
 } from 'antd'
-import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
+import { FormSimpleFormWithModal } from '../../../domains/Form/components'
 import {
   FileOutlined,
   MoreOutlined,
   CloseOutlined,
   CheckOutlined
 } from '@ant-design/icons'
+import useFunctions from '../../../hooks/useFunctions'
+import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 const { Text } = Typography
 
@@ -34,7 +34,7 @@ const ItemPreview = styled(Box)`
   align-items: center;
   cursor: pointer;
   justify-content: center;
-  background-color: ${({theme})=>theme.color.white.default};
+  background-color: ${({ theme }) => theme.color.white.default};
 `
 const StyledIcon = styled(FileOutlined)`
   font-size: 40px;
@@ -55,13 +55,12 @@ const StyledBadge = styled(Button)`
 `
 
 function ListItem(props) {
-    const { updateData,deleteData} = useFunctions()
+  const { updateData, deleteData } = useFunctions()
   const { data, selectedBackgroundImg, setSelectedBackgroundImg } = props
 
   // [CUSTOM_HOOKS]
-  const {onFormItemClick} = useActionsFunctionsContext()
+  const { onFormItemClick } = useActionsFunctionsContext()
   // [ADDITIONAL HOOKS]
-  const history = useHistory()
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -70,7 +69,6 @@ function ListItem(props) {
 
   // [COMPUTED PROPERTIES]
   const description = data?.subtitle || 'No description'
-  const formRoute = ROUTES_PATHS.FORM_EDIT.replace(':id', data?.id)
   const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
@@ -132,7 +130,7 @@ function ListItem(props) {
         <ItemPreview
           onClick={
             !data?.imageUrl
-              ? onFormItemClick
+              ? onFormItemClickDisplay
               : () => setSelectedBackgroundImg(data?.imageUrl)
           }>
           {data?.imageUrl ? (

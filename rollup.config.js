@@ -32,11 +32,7 @@ export default {
     }
   ],
 
-  external: [
-    'react',
-    'react-dom',
-    'react-hook-form'
-  ],
+  external: ['react', 'react-dom', 'react-hook-form'],
   plugins: [
     babel({
       exclude: 'node_modules/**'

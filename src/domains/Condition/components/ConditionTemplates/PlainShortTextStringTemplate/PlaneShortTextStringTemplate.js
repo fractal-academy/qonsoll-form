@@ -1,22 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Text from 'antd/lib/typography/Text'
-import { Button, Input, Select } from 'antd'
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { QuestionSelect } from '../../../../../domains/Question/components'
-import { styles } from './PlainShortTextStringTemplate.style'
-import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
-import theme from '../../../../../../styles/theme'
 import { Select } from 'antd'
 import { Col, Row } from '@qonsoll/react-design'
-import { QuestionSelect } from 'domains/Question/components'
+import { QuestionSelect } from '../../../../../domains/Question/components'
+import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
 import {
   CustomButton,
   CustomInput,
   CustomText,
   StyledSelect
 } from './PlainShortTextStringTemplate.style'
-import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
 
 const { Option } = Select
 

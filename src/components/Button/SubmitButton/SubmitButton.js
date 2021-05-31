@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
-import { useAnswersContext } from 'app/context/Answers/useAnswersContext'
+import { useAnswersContext } from '../../../context/Answers'
 
 const { Text } = Typography
 

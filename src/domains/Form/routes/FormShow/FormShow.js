@@ -15,9 +15,9 @@ import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
   useAnswersContext,
-  useAnswersContextDispatch
-} from 'app/context/Answers/useAnswersContext'
-import ANSWERS_DISPATCH_EVENTS from '~/app/context/Answers/DispatchEventsTypes'
+  useAnswersContextDispatch,
+  ANSWERS_DISPATCH_EVENTS
+} from '../../../../context/Answers'
 // const { Title } = Typography
 
 function FormShow(props) {
@@ -26,7 +26,7 @@ function FormShow(props) {
   // [CUSTOM_HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
   const answers = useAnswersContext()
-  const responsesDispatch = useAnswersContextDispatch()
+  const answersDispatch = useAnswersContextDispatch()
   // [ADDITIONAL HOOKS]
   // const history = useHistory()
   const [data] = useCollectionData(
@@ -60,11 +60,11 @@ function FormShow(props) {
   // }
   const onClick = () => {
     !!data &&
-    !!data?.answer &&
-    responsesDispatch({
-      type: ANSWERS_DISPATCH_EVENTS.ADD_RESPONSE,
-      payload: data
-    })
+      !!data?.answer &&
+      answersDispatch({
+        type: ANSWERS_DISPATCH_EVENTS.ADD_ANSWER,
+        payload: data
+      })
 
     setIsAnswered(true)
   }

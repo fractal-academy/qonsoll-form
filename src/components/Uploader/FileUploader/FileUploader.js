@@ -4,9 +4,9 @@ import { Text } from 'antd-styled'
 import { IconLabel } from '../../../components'
 import { Col, Row } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
-import  storage  from '../../../services/storage'
+import storage from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
-import useFunctions from "../../../hooks/useFunctions"
+import useFunctions from '../../../hooks/useFunctions'
 
 const { Dragger } = Upload
 
@@ -18,7 +18,7 @@ const config = {
 const UploadArea = (props) => {
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
-  const {getCollectionRef, setData} = useFunctions()
+  const { getCollectionRef, setData } = useFunctions()
   // [COMPUTED PROPERTIES]
 
   const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
@@ -34,17 +34,15 @@ const UploadArea = (props) => {
   const onChange = (data) => {
     const { file } = data
     const currentFile = {
-      name: file.name,
+      name: file?.name,
       status: 'uploading',
       percent: 0,
-      uid: file.uid
+      uid: file?.uid
     }
-    setFilesList((files) => ({ ...files, [currentFile.uid]: currentFile }))
-    // !!filesList
-    //   ? setFilesList((files) => ({ ...files, [currentFile.uid]: currentFile }))
-    //   : setFilesList({ [currentFile.uid]: currentFile })
+    currentFile?.name &&
+      setFilesList((files) => ({ ...files, [currentFile.uid]: currentFile }))
 
-    const ref = storage.ref('files').child(file.uid)
+    const ref = storage.ref('files').child(file?.uid)
     const uploadFile = ref.put(file)
     uploadFile.on(
       'state_changed',
@@ -55,42 +53,44 @@ const UploadArea = (props) => {
         ).toFixed(0)
         // Update item while it uploading
         const currentFile = {
-          name: uploadFile.name,
+          name: uploadFile?.name,
           status: 'uploading',
           percent: progress,
-          uid: uploadFile.uid
+          uid: uploadFile?.uid
         }
-        setFilesList((files) => ({
-          ...files,
-          [currentFile.uid]: currentFile
-        }))
+        currentFile?.name &&
+          setFilesList((files) => ({
+            ...files,
+            [currentFile?.uid]: currentFile
+          }))
       },
       (error) => {
         // Handle error during the upload
         message.error(error.message)
         const failedUploadFile = {
-          name: file.name,
+          name: file?.name,
           status: 'error',
-          uid: file.uid
+          uid: file?.uid
         }
-        setFilesList((files) => ({
-          ...files,
-          [failedUploadFile.uid]: failedUploadFile
-        }))
-      },
-      () => {
-        uploadFile.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          const currentFile = {
-            id: fileId,
-            name: file.name,
-            fileUrl: downloadURL,
-            uid: file.uid
-          }
+        failedUploadFile?.name &&
           setFilesList((files) => ({
             ...files,
-            [currentFile.uid]: currentFile
+            [failedUploadFile?.uid]: failedUploadFile
           }))
-
+      },
+      () => {
+        uploadFile.snapshot.ref.getDownloadURL().then(async (downloadURL) => {
+          const currentFile = {
+            id: fileId,
+            name: file?.name,
+            fileUrl: downloadURL,
+            uid: file?.uid
+          }
+          currentFile?.name &&
+            setFilesList((files) => ({
+              ...files,
+              [currentFile?.uid]: currentFile
+            }))
           onMediaUploaded(currentFile)
         })
       }

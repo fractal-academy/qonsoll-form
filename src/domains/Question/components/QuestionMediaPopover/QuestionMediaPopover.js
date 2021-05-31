@@ -3,8 +3,7 @@ import { Popover, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { Box } from '@qonsoll/react-design'
 import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
-import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
-import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
+import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 
 function QuestionMediaPopover(props) {
   const { MediaModalButtonBackground } = props

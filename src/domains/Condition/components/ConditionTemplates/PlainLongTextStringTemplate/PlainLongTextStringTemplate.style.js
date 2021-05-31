@@ -1,5 +1,4 @@
 import theme from '../../../../../../styles/theme'
-import theme from 'app/styles/theme'
 import styled from 'styled-components'
 import { Input, Select, Button, Typography } from 'antd'
 

@@ -1,10 +1,9 @@
 import { Button } from 'antd'
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
-import { Carousel as AntdCarousel } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import { CastomCarousel } from 'components/Carousel/Carousel.style'
+import { CastomCarousel } from './Carousel.style'
 
 function Carousel(props) {
   const { children, isAnswered, setIsAnswered, setCurrentSlide } = props

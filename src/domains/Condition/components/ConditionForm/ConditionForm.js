@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
 import { Box } from '@qonsoll/react-design'
-
 import { NumberedCard } from '../../../../components'
 import Title from 'antd/lib/typography/Title'
 import { QUESTION_TYPES } from '../../../../constants'
@@ -15,7 +14,6 @@ import {
   PlaneLongTextStringTemplate,
   PlaneShortTextStringTemplate
 } from '../../../../domains/Condition/components/ConditionTemplates'
-
 
 const questionTypesMap = {
   [QUESTION_TYPES.YES_NO]: {

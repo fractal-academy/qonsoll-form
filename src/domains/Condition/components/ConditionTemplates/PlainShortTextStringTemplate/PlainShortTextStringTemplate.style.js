@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Button, Input, Select, Typography } from 'antd'
+import theme from '../../../../../../styles/theme'
 
 const { Text } = Typography
-import theme from '../../../../../../styles/theme'
 
 export const CustomText = styled(Text)`
   color: ${theme.color.primary.default};

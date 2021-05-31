@@ -1,13 +1,22 @@
 import PropTypes from 'prop-types'
-import React,{ useState, useEffect } from 'react'
-import { PageLayout, EditorSidebar, FormContentArea, Spinner } from '../../../../components'
+import React, { useState, useEffect } from 'react'
+import {
+  PageLayout,
+  EditorSidebar,
+  FormContentArea,
+  Spinner
+} from '../../../../components'
 import { Box } from '@qonsoll/react-design'
 import {
   QuestionForm,
   QuestionLayoutSwitcher
 } from '../../../../domains/Question/components'
-import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from '../../../../constants'
-import CurrentQuestionContextProvider, {
+import {
+  QUESTION_TYPES,
+  COLLECTIONS,
+  DEFAULT_IMAGE
+} from '../../../../constants'
+import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
@@ -18,7 +27,7 @@ import {
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import useFunctions from "../../../../hooks/useFunctions"
+import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
 function FormEdit(props) {
@@ -26,7 +35,7 @@ function FormEdit(props) {
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const {getCollectionRef, setData} = useFunctions(firebase)
+  const { getCollectionRef, setData } = useFunctions(firebase)
   // [ADDITIONAL HOOKS]
   const [form, formLoading] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
@@ -91,32 +100,32 @@ function FormEdit(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-      {formLoading || questionsListLoading ? (
-        <Spinner />
-      ) : (
-        <Box display="flex" height="inherit" overflowX="hidden">
-          <PageLayout title={form?.title} id={id}>
-            <FormContentArea
-              leftSideMenu={
-                !!Object.keys(currentQuestion).length && (
-                  <QuestionLayoutSwitcher
-                    onChange={onChangeMenuItem}
-                    defaultActive={defaultTab}
+        {formLoading || questionsListLoading ? (
+          <Spinner />
+        ) : (
+          <Box display="flex" height="inherit" overflowX="hidden">
+            <PageLayout title={form?.title} id={id}>
+              <FormContentArea
+                leftSideMenu={
+                  !!Object.keys(currentQuestion).length && (
+                    <QuestionLayoutSwitcher
+                      onChange={onChangeMenuItem}
+                      defaultActive={defaultTab}
+                    />
+                  )
+                }>
+                {!!Object.keys(currentQuestion).length && (
+                  <QuestionForm
+                    data={currentQuestion}
+                    onQuestionTypeChange={onQuestionTypeChange}
                   />
-                )
-              }>
-              {!!Object.keys(currentQuestion).length && (
-                <QuestionForm
-                  data={currentQuestion}
-                  onQuestionTypeChange={onQuestionTypeChange}
-                />
-              )}
-            </FormContentArea>
-          </PageLayout>
+                )}
+              </FormContentArea>
+            </PageLayout>
 
-          <EditorSidebar questions={questions} endings={endings} id={id}/>
-        </Box>
-      )}
+            <EditorSidebar questions={questions} endings={endings} id={id} />
+          </Box>
+        )}
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

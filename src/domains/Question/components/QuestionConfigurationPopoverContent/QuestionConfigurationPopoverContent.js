@@ -1,19 +1,15 @@
 import { Typography } from 'antd'
 import React, { useState } from 'react'
-import theme from '../../../../../styles/theme'
 import { Row, Col } from '@qonsoll/react-design'
+import theme from '../../../../../styles/theme'
 import { globalStyles } from '../../../../../styles'
-import { Typography } from 'antd'
+import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import {
   QuestionTypeSelect,
   QuestionConfigurationMenu
 } from '../../../../domains/Question/components'
-import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
-import theme from 'app/styles/theme'
-import { globalStyles } from 'app/styles'
-import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Title } = Typography
 

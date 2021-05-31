@@ -5,16 +5,15 @@ import { styles } from './PageHeader.styles'
 import { Button, Divider, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
 import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
-import { generatePath, useHistory, useParams } from 'react-router'
-import {useActionsFunctionsContext} from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 const { Title } = Typography
 
 function PageHeader(props) {
-  const { title ,id} = props
+  const { title, id } = props
 
   // [CUSTOM_HOOKS]
-  const {onFormShow} = useActionsFunctionsContext()
+  const { onFormShow } = useActionsFunctionsContext()
   // [ADDITIONAL HOOKS]
   // const history = useHistory()
   // const { id } = useParams()

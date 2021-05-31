@@ -7,7 +7,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Upload, message } from 'antd'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { FilterOutlined, SearchOutlined } from '@ant-design/icons'
-import { MediaLibraryFilter } from 'domains/MediaLibrary/components'
 import {
   CustomChangeButtonText,
   CustomButton,
@@ -16,11 +15,8 @@ import {
   CustomText,
   styles
 } from './MediaLibraryModal.styles'
-import {
-  MediaLibraryFilter,
-  MediaLibraryItemSimpleView
-} from '../../../../domains/MediaLibrary/components'
-import useFunctions from "../../../../hooks/useFunctions";
+import { MediaLibraryFilter } from '../../../../domains/MediaLibrary/components'
+import useFunctions from '../../../../hooks/useFunctions'
 
 const { Title } = Typography
 
@@ -28,7 +24,7 @@ function MediaLibraryModal(props) {
   const { btnProps, onClick, onContinue } = props
 
   // [CUSTOM_HOOKS]
-  const {getCollectionRef, setData, storage} = useFunctions()
+  const { getCollectionRef, setData, storage } = useFunctions()
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
 
