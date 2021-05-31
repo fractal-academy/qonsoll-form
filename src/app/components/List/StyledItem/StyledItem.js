@@ -1,14 +1,17 @@
 import React from 'react'
-import { Button } from 'antd'
+import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import theme from 'app/styles/theme'
 import styled from 'styled-components'
 
-const Item = styled(Button)`
+const Item = styled(Box)`
+  margin-right: 10px;
+  margin-bottom: 20px;
+  padding: 6px;
   cursor: ${(props) => props.isCard && 'default !important'};
   background: ${theme.color.dark.t.lighten9};
-  width: ${(props) => props.size[0]}px;
-  height: ${(props) => props.size[1]}px;
+  width: -webkit-fill-available;
+  height: auto;
   display: flex;
   border-radius: 8px;
   align-items: center;
@@ -20,10 +23,10 @@ const Item = styled(Button)`
 `
 
 function StyledItem(props) {
-  const { children, onClick, size, isCard } = props
+  const { children, onClick, isCard } = props
 
   return (
-    <Item isCard={isCard} size={size} onClick={onClick}>
+    <Item isCard={isCard} onClick={onClick}>
       {children}
     </Item>
   )

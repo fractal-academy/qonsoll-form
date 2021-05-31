@@ -4,10 +4,10 @@ import { StyledItem } from 'components'
 import { PlusOutlined } from '@ant-design/icons'
 
 function NewListItem(props) {
-  const { size, onClick } = props
+  const { onClick } = props
 
   return (
-    <StyledItem size={size} onClick={onClick}>
+    <StyledItem onClick={onClick}>
       <PlusOutlined />
     </StyledItem>
   )

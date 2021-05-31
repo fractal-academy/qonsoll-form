@@ -1,28 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box } from '@qonsoll/react-design'
-import { ListItem, NewListItem } from 'components'
+import { ListItem } from 'components'
+import { Row, Col } from '@qonsoll/react-design'
 
 function StaticList(props) {
-  const { data, size, onClick } = props
+  const { data, columnWidth } = props
 
   return (
-    <Box display="contents">
+    <Row display="flex" width="100%" noGutters>
       {data?.map((item) => (
-        <Box key={item.id} mr={4} mb={4}>
-          <ListItem data={item} size={size} />
-        </Box>
+        <Col key={item.id} cw={columnWidth}>
+          <ListItem data={item} />
+        </Col>
       ))}
-
-      <NewListItem size={size} onClick={onClick} />
-    </Box>
+    </Row>
   )
 }
 
 StaticList.propTypes = {
-  size: PropTypes.array,
   data: PropTypes.array,
-  onClick: PropTypes.func
+  columnWidth: PropTypes.number
 }
 
 export default StaticList

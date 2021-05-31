@@ -1,6 +1,7 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
 import theme from 'app/styles/theme'
+import { StaticList } from 'components'
 import { storage } from 'app/services/Firebase'
 import COLLECTIONS from 'app/constants/collection'
 import { Row, Col, Box } from '@qonsoll/react-design'
@@ -8,6 +9,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Modal, Button, Typography, Upload, message } from 'antd'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { MediaLibraryFilter } from 'domains/MediaLibrary/components'
 import { FilterOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import {
   CustomBox,
@@ -18,10 +20,6 @@ import {
   CustomText,
   styles
 } from './MediaLibraryModal.styles'
-import {
-  MediaLibraryFilter,
-  MediaLibraryItemSimpleView
-} from 'domains/MediaLibrary/components'
 
 const { Title } = Typography
 
@@ -29,9 +27,8 @@ function MediaLibraryModal(props) {
   const { btnProps, onClick, onContinue } = props
 
   // [ADDITIONAL HOOKS]
-  const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
-
   const searchRef = useRef()
+  const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -39,11 +36,11 @@ function MediaLibraryModal(props) {
   const [sidebarState, setSidebarState] = useState(true)
   const [imagesList, setImagesList] = useState(media)
   const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(false)
-  const fuse = new Fuse(media, { keys: ['name'] })
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
   const mediaId = getCollectionRef(COLLECTIONS.MEDIA).doc().id
+  const fuse = new Fuse(media, { keys: ['name'] })
 
   // [CLEAN FUNCTIONS]
   const onMediaUploaded = (data) => {
@@ -99,8 +96,7 @@ function MediaLibraryModal(props) {
                 id: mediaId,
                 name: data.file.name,
                 imageUrl: downloadURL,
-                title: 'New title',
-                subtitle: 'subtitle'
+                title: 'New title'
               }
             ])
             onMediaUploaded({
@@ -213,7 +209,9 @@ function MediaLibraryModal(props) {
               bg={theme.color.dark.t.lighten9}>
               {/* RENDER MEDIA */}
 
-              {imagesList.map((item) => (
+              <StaticList data={imagesList} columnWidth={3} />
+
+              {/* {imagesList.map((item) => (
                 <Box key={item} mr={3} mt={4}>
                   <MediaLibraryItemSimpleView
                     {...item}
@@ -221,8 +219,8 @@ function MediaLibraryModal(props) {
                     setSelectedBackgroundImg={setSelectedBackgroundImg}
                   />
                 </Box>
-              ))}
-              <Upload
+              ))} */}
+              {/* <Upload
                 showUploadList={false}
                 multiple
                 name="file"
@@ -240,7 +238,7 @@ function MediaLibraryModal(props) {
                   justifyContent="center">
                   <PlusOutlined />
                 </Box>
-              </Upload>
+              </Upload> */}
             </Box>
             <Row
               borderBottom="1px solid"

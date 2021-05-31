@@ -6,17 +6,17 @@ import { useHistory } from 'react-router-dom'
 import COLLECTIONS from 'app/constants/collection'
 import React, { useState, cloneElement } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { FileOutlined, MoreOutlined } from '@ant-design/icons'
+import { FileOutlined, MoreOutlined, CloseOutlined } from '@ant-design/icons'
 import { deleteData, updateData } from 'app/services/Firestore'
-import { Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
+import { Typography, Dropdown, Menu, Popconfirm, Image, message } from 'antd'
 import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
 
 const { Text } = Typography
 
-const StyledImage = styled(Box)`
+const ItemPreview = styled(Box)`
   display: flex;
-  width: ${(props) => props.size[0] - 16}px;
-  height: ${(props) => (props.size[1] / 3) * 2}px;
+  width: -webkit-fill-available;
+  height: 140px;
   border-radius: 8px;
   align-items: center;
   cursor: pointer;
@@ -27,9 +27,12 @@ const StyledIcon = styled(FileOutlined)`
   font-size: 40px;
   opacity: 0.5;
 `
+const StyledImage = styled(Image)`
+  border-radius: 8px;
+`
 
 function ListItem(props) {
-  const { data, size } = props
+  const { data, onClick } = props
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -96,25 +99,31 @@ function ListItem(props) {
   )
 
   return (
-    <StyledItem size={size} isCard>
-      <Box display="block">
-        <StyledImage onClick={onFormItemClick} size={size}>
-          <StyledIcon />
-        </StyledImage>
+    <StyledItem isCard>
+      <Box display="block" width="inherit">
+        <ItemPreview onClick={!data?.imageUrl && onFormItemClick}>
+          {data?.imageUrl ? (
+            <StyledImage preview={false} height="inherit" src={data.imageUrl} />
+          ) : (
+            <StyledIcon />
+          )}
+        </ItemPreview>
+
         <Row noGutters h="between" mt={2}>
           <Col display="grid">
             <Text ellipsis>{data?.title}</Text>
-            <Text type="secondary" ellipsis>
+            <Text ellipsis type="secondary">
               {description}
             </Text>
           </Col>
-
-          <Col cw="auto" v="center">
-            <Dropdown overlay={menu} trigger="click" placement="bottomRight">
-              {cloneElement(<MoreOutlined />, {
-                className: 'dropdownIcon'
-              })}
-            </Dropdown>
+          <Col cw="auto" display="flex" v="center">
+            {data?.imageUrl ? (
+              <CloseOutlined />
+            ) : (
+              <Dropdown overlay={menu} trigger="click" placement="bottomRight">
+                <MoreOutlined />
+              </Dropdown>
+            )}
           </Col>
         </Row>
       </Box>
@@ -123,8 +132,8 @@ function ListItem(props) {
 }
 
 ListItem.propTypes = {
-  size: PropTypes.array,
-  data: PropTypes.object
+  data: PropTypes.object,
+  onClick: PropTypes.func
 }
 
 export default ListItem
