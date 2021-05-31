@@ -1,6 +1,6 @@
 {
   "name": "feedback-typeform",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "main": "build/index.js",
   "module": "build/index.esm.js",
   "description": "Type-Form",
@@ -20,7 +20,7 @@
   "scripts": {
     "start": "craco start",
     "deploy-package": "npm run build && npm publish",
-    "build": "rollup -c",
+    "build": " rollup -c",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

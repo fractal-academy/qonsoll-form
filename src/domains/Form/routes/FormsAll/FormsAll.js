@@ -30,7 +30,7 @@ const mockRoutes = [
   { path: '/videos', page: 'Videos' }
 ]
 function FormsAll(props) {
-  const { firebase, actions } = props
+  const { firebase, actions,childrenModal } = props
 
   // [CUSTOM_HOOKS]
   const {getCollectionRef, getTimestamp, setData} = useFunctions(firebase)
@@ -63,14 +63,15 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
+    const {name,description,...restData}=data
     const formData = {
+      ...restData,
       id: formId,
       title: data?.name,
       subtitle: data?.description || '',
       creationDate: getTimestamp().now()
     }
     await setData(COLLECTIONS.FORMS, formId, formData).catch((e) => message.error(e.message))
-    on
   }
 
   const menu = (
@@ -158,6 +159,7 @@ function FormsAll(props) {
             isModalVisible={isModalVisible}
             setIsModalVisible={setIsModalVisible}
             onModalSubmit={onFormCreate}
+            children={childrenModal}
           />
         </Box>
       </Box>
