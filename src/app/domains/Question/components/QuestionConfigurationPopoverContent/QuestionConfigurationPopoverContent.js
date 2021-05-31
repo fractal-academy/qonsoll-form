@@ -12,9 +12,6 @@ import { globalStyles } from 'app/styles'
 import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Title } = Typography
-// const fs = theme.typography.fontSize.body1.replace('px', '')
-// const spaceVertical = Number(fs) - 4
-// const spaceHorizontal = Number(fs) + 8
 
 function QuestionConfigurationPopoverContent(props) {
   const { onQuestionTypeChange, setShowPopover } = props

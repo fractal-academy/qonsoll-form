@@ -27,9 +27,7 @@ function MediaLibrarySimpleView(props) {
   }
 
   return (
-    <Box
-    // my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}
-    >
+    <Box>
       <CustomBox backgroundImage={bgImage}>
         <MediaLibraryModal
           onClick={() => {
