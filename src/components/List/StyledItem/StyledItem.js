@@ -1,14 +1,17 @@
 import React from 'react'
-import { Button } from 'antd'
+import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import theme from '../../../../styles/theme'
 import styled from 'styled-components'
 
-const Item = styled(Button)`
+const Item = styled(Box)`
+  margin-right: 10px;
+  margin-bottom: 20px;
+  padding: 6px;
   cursor: ${(props) => props.isCard && 'default !important'};
   background: ${theme.color.dark.t.lighten9};
-  width: ${(props) => props.size[0]}px;
-  height: ${(props) => props.size[1]}px;
+  width: -webkit-fill-available;
+  height: fit-content;
   display: flex;
   border-radius: 8px;
   align-items: center;
@@ -21,9 +24,13 @@ const Item = styled(Button)`
 `
 
 function StyledItem(props) {
-  const { onClick, disable } = props
+  const { children, onClick, isCard,disable } = props
 
-  return <Item {...props} onClick={!disable && onClick} />
+  return (
+    <Item isCard={isCard} onClick={!disable && onClick}>
+      {children}
+    </Item>
+  )
 }
 StyledItem.propTypes = {
   size: PropTypes.array,

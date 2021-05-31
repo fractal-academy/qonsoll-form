@@ -5,6 +5,7 @@ import theme from '../../../../../styles/theme'
 export const StyledMenu = styled(Menu)`
   background-color: ${theme.color.dark.t.lighten6};
   border-radius: ${theme.borderRadius.md};
+  height: fit-content;
 `
 export const StyledItem = styled(Menu.Item)`
   display: flex;

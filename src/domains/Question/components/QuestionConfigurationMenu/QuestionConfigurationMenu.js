@@ -28,12 +28,12 @@ function QuestionConfigurationMenu() {
   }
 
   return (
-    <Box px={3} pt={2} pb={2}>
-      <Row mb={3} noGutters>
-        <Col>
+    <Box px={3} pt={2} h="between">
+      <Row mb={3} noGutters v="center">
+        <Col v="center">
           <Text strong>Required</Text>
         </Col>
-        <Col cw="auto">
+        <Col cw="auto" px={2}>
           <Switch size="small" onChange={requireStateChange} />
         </Col>
       </Row>

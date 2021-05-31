@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
+import { useAnswersContext } from 'app/context/Answers/useAnswersContext'
 
 const { Text } = Typography
 
@@ -15,20 +16,23 @@ const StyledSubmit = styled(Button)`
 `
 
 function SubmitButton(props) {
-  const { children, onClick } = props
+  const { children, onClick, finish, formId } = props
+
+  const answers = useAnswersContext()
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = () => {
-    onClick && onClick()
+    if (finish) {
+      const updatedAnswers = { formId, answers }
+      //add function from b2g and provide updatedAnswers
+    } else onClick && onClick()
   }
 
   return (
     <Row display="flex" v="center" noGutters>
       <Col cw="auto" mr={3}>
         <StyledSubmit type="primary" onClick={onButtonClick}>
-          {children ? (
-            children
-          ) : (
+          {children || (
             <Row display="flex" noGutters>
               <Col cw="auto" mr={2}>
                 OK

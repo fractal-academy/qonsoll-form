@@ -5,6 +5,15 @@ import { DEFAULT_IMAGE, QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constan
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { styles, StyledCol, CustomCard } from './QuestionForm.styles'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
+import {
+  styles,
+  StyledCol,
+  CustomCard,
+  CustomRow,
+  CustomCol
+} from './QuestionForm.styles'
+import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 import {
   QuestionConfigurationPopover,
   QuestionHeader,
@@ -43,7 +52,7 @@ function QuestionForm(props) {
       component: <ChoiceEditableGroup />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton from={1} to={5} />
+      component: <RangeButton />
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
@@ -83,10 +92,10 @@ function QuestionForm(props) {
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
   return (
-    <Row noGutters {...styles.mainRowStyle} backgroundImage={bgImage}>
+    <CustomRow noGutters backgroundImage={bgImage}>
       <Col {...styles.questionCardColumnStyle} cw={6}>
         <CustomCard bordered={false}>
-          <Row noGutters>
+          <Row noGutters v="center">
             <Col>
               <Tag color="blue">{questionTag}</Tag>
             </Col>
@@ -104,12 +113,12 @@ function QuestionForm(props) {
             )}
           </Row>
           <Row noGutters h="between" mb={4}>
-            <Col cw="auto">
+            <CustomCol cw="auto">
               <QuestionHeader
                 titlePlaceholder={'Editable question title'}
                 subtitlePlaceholder={'Description(optional)'}
               />
-            </Col>
+            </CustomCol>
           </Row>
           {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
             <Row noGutters>
@@ -153,7 +162,7 @@ function QuestionForm(props) {
           </Box>
         </StyledCol>
       )}
-    </Row>
+    </CustomRow>
   )
 }
 

@@ -26,46 +26,28 @@ function MediaLibrarySimpleView(props) {
   }
 
   return (
-    <Row noGutters>
-      <Col>
-        <Row noGutters mb={4}>
-          <Col>
-            <CustomBox backgroundImage={bgImage}>
-              <MediaLibraryModal
-                onClick={() => {
-                  setIsImageEditVisible(false)
-                }}
-                onContinue={onMediaModalContinue}
-                btnProps={{
-                  type: 'primary',
-                  icon: <EditOutlined />
-                }}
-              />
-            </CustomBox>
-          </Col>
-        </Row>
-        <Row noGutters mb={4}>
-          <Col>
-            <CustomText>Alt text</CustomText>
-            <Input placeholder="Enter alt here..." />
-          </Col>
-        </Row>
-        <Row noGutters>
-          <Col>
-            <Row noGutters>
-              <Col>
-                <CustomText>Brightness</CustomText>
-              </Col>
-            </Row>
-            <Row noGutters>
-              <Col>
-                <RangeSlider />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
+    <Box>
+      <CustomBox backgroundImage={bgImage}>
+        <MediaLibraryModal
+          onClick={() => {
+            setIsImageEditVisible(false)
+          }}
+          onContinue={onMediaModalContinue}
+          btnProps={{
+            type: 'primary',
+            icon: <EditOutlined />
+          }}
+        />
+      </CustomBox>
+      <Box mb={32}>
+        <CustomText>Alt text</CustomText>
+        <Input placeholder="Enter alt here..." />
+      </Box>
+      <CustomText>Brightness</CustomText>
+      <Box>
+        <RangeSlider />
+      </Box>
+    </Box>
   )
 }
 

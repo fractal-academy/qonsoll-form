@@ -3,6 +3,8 @@ import { Popover, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { Box } from '@qonsoll/react-design'
 import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
+import { MediaLibrarySimpleView } from 'domains/MediaLibrary/components'
+import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 function QuestionMediaPopover(props) {
   const { MediaModalButtonBackground } = props
@@ -22,7 +24,7 @@ function QuestionMediaPopover(props) {
       trigger="click"
       placement="rightTop"
       content={
-        <Box width="192px">
+        <Box width="192px" mx={PopoverNegativeMarin.h / 2}>
           <MediaLibrarySimpleView
             setIsImageEditVisible={setIsImageEditVisible}
             bgImage={MediaModalButtonBackground}

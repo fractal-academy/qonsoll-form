@@ -21,12 +21,12 @@ const UploadArea = (props) => {
   const {getCollectionRef, setData} = useFunctions()
   // [COMPUTED PROPERTIES]
 
-  const fileId = getCollectionRef(COLLECTIONS.RESPONSES).doc().id
+  const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
 
   // [CLEAN FUNCTIONS]
   const onMediaUploaded = (data) => {
-    const fileId = getCollectionRef(COLLECTIONS.RESPONSES).doc().id
-    setData(COLLECTIONS?.RESPONSES, fileId, data).catch((e) =>
+    const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
+    setData(COLLECTIONS?.ANSWERS, fileId, data).catch((e) =>
       message.error(e.message)
     )
   }

@@ -7,14 +7,15 @@ import { Col, Container, Row } from '@qonsoll/react-design'
 const { TextArea } = Input
 
 function LongText(props) {
-  const { textAreaProps, onClick } = props
+  const { textAreaProps, onClick, id } = props
 
   // [ADDITIONAL HOOKS]
-  const { form } = Form.useForm()
+  const [form] = Form.useForm()
 
   // [CLEAN FUNCTIONS]
-  const onFinish = (values) => {
-    console.log('Success:', values)
+  const onFinish = ({ answer }) => {
+    const data = { questionId: id, answer }
+    onClick && onClick(data)
   }
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
@@ -43,7 +44,7 @@ function LongText(props) {
             <Form.Item>
               <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
             </Form.Item>
-            <SubmitButton onClick={onClick} />
+            <SubmitButton onClick={() => form.submit()} />
           </Form>
         </Col>
       </Row>

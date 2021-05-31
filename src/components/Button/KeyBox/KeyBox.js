@@ -1,11 +1,12 @@
 import React from 'react'
-import { Button, Typography } from 'antd'
 import PropTypes from 'prop-types'
 import theme from '../../../../styles/theme'
 import styled from 'styled-components'
 import { useHover } from '@umijs/hooks'
+import { Button, Typography } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
+
 const { Text } = Typography
 
 const StyledKeybox = styled(Col)`
@@ -15,7 +16,7 @@ const StyledKeybox = styled(Col)`
   border-style: solid;
   border-color: ${theme.color.primary.default};
   color: ${(props) => props.isActive && theme.color.white.default};
-  margin-left: ${(props) => props.isHovering && '-20px'};
+  margin-left: ${(props) => props.isHovering && '-30px'};
   background-color: ${(props) =>
     props.isActive ? theme.color.primary.default : theme.color.white.default};
   width: ${(props) =>
@@ -24,11 +25,13 @@ const StyledKeybox = styled(Col)`
 const ImageContainer = styled(Box)`
   width: 150px;
   height: 120px;
+  border-radius: 8px;
   background-size: cover;
   background-image: url(${(props) => props.image});
 `
 const StyledButton = styled(Button)`
   width: 160px;
+  padding: 4px;
   color: ${theme.color.primary.default};
   background-color: ${theme.color.primary.t.lighten5};
   height: ${(props) => (props.hasImages ? '170px' : '45px')};
@@ -39,10 +42,6 @@ const StyledButton = styled(Button)`
 `
 const StyledIcon = styled(CheckOutlined)`
   font-size: 18px;
-`
-const StyledBox = styled(Box)`
-  position: absolute;
-  right: -10px;
 `
 const StyledText = styled(Text)`
   width: 75px;
@@ -70,19 +69,15 @@ function KeyBox(props) {
             </Col>
           </Row>
         )}
-        <Row display="flex" v="center" noGutters>
-          <StyledKeybox isHovering={isHovering} isActive={isActive} mr={2}>
-            {isHovering ? `Key ${letter}` : letter}
-          </StyledKeybox>
-          <Col>
-            <Box
-              className="text"
-              display="flex"
-              position="relative"
-              justifyContent="space-between">
-              <StyledText ellipsis>{item?.choice?.name}</StyledText>
-              <StyledBox>{isActive && <StyledIcon />}</StyledBox>
-            </Box>
+        <Row v="center" h="between" noGutters>
+          <Col cw="auto" v="center">
+            <StyledKeybox isHovering={isHovering} isActive={isActive} mr={1}>
+              {isHovering ? `Key ${letter}` : letter}
+            </StyledKeybox>
+            <StyledText ellipsis>{item?.choice?.name}</StyledText>
+          </Col>
+          <Col cw="auto">
+            <Box>{isActive && <StyledIcon />}</Box>
           </Col>
         </Row>
       </StyledButton>

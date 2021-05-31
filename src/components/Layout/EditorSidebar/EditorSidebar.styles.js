@@ -2,6 +2,7 @@ import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 import { Divider } from 'antd'
+import { QuestionTypeSelect } from 'domains/Question/components'
 
 export const styles = {
   dragbleCeiling: {
@@ -12,7 +13,7 @@ export const styles = {
   },
   endingsList: {
     pb: 3,
-    px: 3,
+    pr: 3,
     maxHeight: '350px',
     overflow: 'auto'
   }

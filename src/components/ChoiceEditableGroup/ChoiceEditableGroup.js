@@ -18,14 +18,14 @@ function ChoiceEditableGroup(props) {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPUTED PROPERTIES]
-  const choiceProps = currentQuestion.btnProps || []
+  const choiceProps = currentQuestion.questionConfigurations || []
 
   // [CLEAN FUNCTIONS]
   const onAddChoice = () => {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
-        btnProps: choiceProps
+        questionConfigurations: choiceProps
           ? [...choiceProps, { name: '', image: '' }]
           : [{ name: '', image: '' }]
       }

@@ -13,13 +13,13 @@ function QuestionSimpleView(props) {
   return (
     <Box onClick={onClick}>
       <NumberedCard number={number}>
-        <Row h="around" v="center" noGutters ml={2}>
+        <Row h="around" v="center" ml={2} noGutters>
           <Col cw="auto" mr={2}>
             <IconRoundContainer>
               {layoutType && cloneElement(LAYOUT_TYPES[layoutType]?.icon)}
             </IconRoundContainer>
           </Col>
-          <Col width="120px">
+          <Col width="150px">
             <DescriptionContainer>{title}</DescriptionContainer>
           </Col>
           <Col cw="auto">

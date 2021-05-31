@@ -24,6 +24,7 @@ import {
   SettingOutlined
 } from '@ant-design/icons'
 import useFunctions from "../../../hooks/useFunctions"
+import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Title } = Typography
 
@@ -61,7 +62,8 @@ function EditorSidebar(props) {
       title: '',
       //fix lettering later, as will added logic jumps
       order: (key && questions?.length) || String.fromCharCode(65),
-      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
+      questionConfigurations:
+        key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     }
     // set it into context as current
     await currentQuestionDispatch({
@@ -108,7 +110,13 @@ function EditorSidebar(props) {
                   }}
                   trigger={'click'}
                   placement={'bottomRight'}
-                  content={<QuestionTypeSelect onClick={addQuestion} />}>
+                  content={
+                    <Box
+                      my={PopoverNegativeMarin.v}
+                      mx={PopoverNegativeMarin.h}>
+                      <QuestionTypeSelect onClick={addQuestion} />
+                    </Box>
+                  }>
                   <Button
                     type="text"
                     icon={<PlusOutlined />}
@@ -125,7 +133,7 @@ function EditorSidebar(props) {
             </Row>
           </Box>
           {/* Question List*/}
-          <Box overflow="auto" p={3}>
+          <Box overflow="auto" pr={3}>
             {!!questions?.length && (
               <QuestionsList
                 action={handleDelete}
@@ -157,7 +165,7 @@ function EditorSidebar(props) {
             <Box {...styles.endingsList}>
               {!!endings?.length && (
                 <QuestionsList
-                  firstElement={questions?.length}
+                  action={handleDelete}
                   setNewOrder={setNewOrder}
                   onItemClick={onItemClick}
                   data={endings}

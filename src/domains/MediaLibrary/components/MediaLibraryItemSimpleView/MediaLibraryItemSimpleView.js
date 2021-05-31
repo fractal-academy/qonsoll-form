@@ -10,16 +10,13 @@ import {
   CustomText,
   styles
 } from './MediaLibraryItemSimpleView.styles'
+import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Meta } = Card
 
 function MediaLibraryItemSimpleView(props) {
-  const {
-    imageUrl,
-    name,
-    selectedBackgroundImg,
-    setSelectedBackgroundImg
-  } = props
+  const { imageUrl, selectedBackgroundImg, setSelectedBackgroundImg, title } =
+    props
 
   return (
     <CustomCard
@@ -45,7 +42,8 @@ function MediaLibraryItemSimpleView(props) {
               <Row noGutters>
                 <Col>
                   <CustomText ellipsis>
-                    {name.charAt(0).toUpperCase() + name.slice(1).split('.')[0]}
+                    {title?.charAt(0).toUpperCase() +
+                      title?.slice(1).split('.')[0]}
                   </CustomText>
                 </Col>
               </Row>

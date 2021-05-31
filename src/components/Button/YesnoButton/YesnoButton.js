@@ -5,7 +5,7 @@ import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 
 function YesnoButton(props) {
-  const { onClick, currentSlide, order } = props
+  const { onClick, currentSlide, order, id } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -33,7 +33,8 @@ function YesnoButton(props) {
   const onButtonClick = (letter) => {
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
-      onClick && onClick()
+      const data = { questionId: id, answer: letter }
+      onClick && onClick(data)
 
       console.log(`${letter} was pressed`)
     }

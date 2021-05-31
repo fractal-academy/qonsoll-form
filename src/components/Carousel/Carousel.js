@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Carousel as AntdCarousel } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
+import { CastomCarousel } from 'components/Carousel/Carousel.style'
 
 function Carousel(props) {
   const { children, isAnswered, setIsAnswered, setCurrentSlide } = props
@@ -36,13 +37,13 @@ function Carousel(props) {
 
   return (
     <Box onWheel={handleScroll} width="100%">
-      <AntdCarousel
+      <CastomCarousel
         ref={carouselRef}
         dotPosition="right"
         dots={false}
         afterChange={onCurrentSlideChange}>
         {children}
-      </AntdCarousel>
+      </CastomCarousel>
 
       <Row noGutters h="right" mt={4}>
         <Col cw="auto" mr={2}>

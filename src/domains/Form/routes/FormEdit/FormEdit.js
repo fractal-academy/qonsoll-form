@@ -66,10 +66,12 @@ function FormEdit(props) {
       QUESTION_TYPES.CHOICE,
       QUESTION_TYPES.PICTURE_CHOICE
     ].includes(key)
-    const btnProps = isChoices ? [{ name: '', image: '' }] : ''
+    const questionConfigurations = isChoices
+      ? [{ name: 'default', image: '' }]
+      : ''
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { questionType: key, btnProps }
+      payload: { questionType: key, questionConfigurations }
     })
   }
 
