@@ -1,22 +1,36 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import React, { useState } from 'react'
 import { StyledItem } from 'components'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
 import COLLECTIONS from 'app/constants/collection'
-import React, { useState, cloneElement } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { FileOutlined, MoreOutlined } from '@ant-design/icons'
 import { deleteData, updateData } from 'app/services/Firestore'
-import { Typography, Dropdown, Menu, Popconfirm, message } from 'antd'
+import {
+  Popconfirm,
+  Typography,
+  Dropdown,
+  Menu,
+  Image,
+  Button,
+  message
+} from 'antd'
 import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
+import {
+  FileOutlined,
+  MoreOutlined,
+  CloseOutlined,
+  CheckOutlined
+} from '@ant-design/icons'
 
 const { Text } = Typography
 
-const StyledImage = styled(Box)`
+const ItemPreview = styled(Box)`
   display: flex;
-  width: ${(props) => props.size[0] - 16}px;
-  height: ${(props) => (props.size[1] / 3) * 2}px;
+  position: relative;
+  width: -webkit-fill-available;
+  height: 140px;
   border-radius: 8px;
   align-items: center;
   cursor: pointer;
@@ -27,9 +41,22 @@ const StyledIcon = styled(FileOutlined)`
   font-size: 40px;
   opacity: 0.5;
 `
+const StyledImage = styled(Image)`
+  border-radius: 8px;
+`
+const StyledBadge = styled(Button)`
+  position: absolute;
+  border-radius: 50%;
+  height: 24px;
+  z-index: 100;
+  padding: 3px;
+  width: 24px;
+  right: -4px;
+  top: -4px;
+`
 
 function ListItem(props) {
-  const { data, size } = props
+  const { data, selectedBackgroundImg, setSelectedBackgroundImg } = props
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -42,6 +69,7 @@ function ListItem(props) {
   // [COMPUTED PROPERTIES]
   const description = data?.subtitle || 'No description'
   const formRoute = ROUTES_PATHS.FORM_EDIT.replace(':id', data?.id)
+  const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
   const onFormItemClick = (e) => {
@@ -55,7 +83,7 @@ function ListItem(props) {
   }
   const handleDelete = async () => {
     setConfirmLoading(true)
-    await deleteData(COLLECTIONS.FORMS, data?.id).catch((e) =>
+    await deleteData(collection, data?.id).catch((e) =>
       message.error(e.message)
     )
 
@@ -96,25 +124,52 @@ function ListItem(props) {
   )
 
   return (
-    <StyledItem size={size} isCard>
-      <Box display="block">
-        <StyledImage onClick={onFormItemClick} size={size}>
-          <StyledIcon />
-        </StyledImage>
+    <StyledItem isCard>
+      <Box display="block" width="inherit">
+        <ItemPreview
+          onClick={
+            !data?.imageUrl
+              ? onFormItemClick
+              : () => setSelectedBackgroundImg(data?.imageUrl)
+          }>
+          {data?.imageUrl ? (
+            <>
+              {selectedBackgroundImg === data?.imageUrl && (
+                <StyledBadge size="small" type="primary">
+                  <CheckOutlined />
+                </StyledBadge>
+              )}
+              <StyledImage
+                preview={false}
+                height="inherit"
+                src={data.imageUrl}
+              />
+            </>
+          ) : (
+            <StyledIcon />
+          )}
+        </ItemPreview>
+
         <Row noGutters h="between" mt={2}>
           <Col display="grid">
             <Text ellipsis>{data?.title}</Text>
-            <Text type="secondary" ellipsis>
+            <Text ellipsis type="secondary">
               {description}
             </Text>
           </Col>
-
-          <Col cw="auto" v="center">
-            <Dropdown overlay={menu} trigger="click" placement="bottomRight">
-              {cloneElement(<MoreOutlined />, {
-                className: 'dropdownIcon'
-              })}
-            </Dropdown>
+          <Col cw="auto" display="flex" v="center">
+            {data?.imageUrl ? (
+              <Popconfirm
+                title="Delete this image?"
+                onConfirm={handleDelete}
+                okButtonProps={{ loading: confirmLoading }}>
+                <CloseOutlined />
+              </Popconfirm>
+            ) : (
+              <Dropdown overlay={menu} trigger="click" placement="bottomRight">
+                <MoreOutlined />
+              </Dropdown>
+            )}
           </Col>
         </Row>
       </Box>
@@ -123,8 +178,9 @@ function ListItem(props) {
 }
 
 ListItem.propTypes = {
-  size: PropTypes.array,
-  data: PropTypes.object
+  data: PropTypes.object,
+  selectedBackgroundImg: PropTypes.bool,
+  setSelectedBackgroundImg: PropTypes.func
 }
 
 export default ListItem

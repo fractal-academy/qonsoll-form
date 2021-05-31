@@ -18,36 +18,39 @@ function OpinionScaleCustomConfig() {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPUTED PROPERTIES]
-  const btnProps = currentQuestion?.btnProps
+  const questionConfigurations = currentQuestion?.questionConfigurations
   // [CLEAN FUNCTIONS]
   const onSelectFromChange = (switchFromValue) => {
-    const computedBtnProps = btnProps
-      ? { ...btnProps, to: switchFromValue }
-      : { to: switchFromValue }
+    const computedBtnProps = questionConfigurations
+      ? { ...questionConfigurations, from: switchFromValue }
+      : { from: switchFromValue }
 
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { btnProps: computedBtnProps }
+      payload: { questionConfigurations: computedBtnProps }
     })
   }
   const onSelectToChange = (switchToValue) => {
-    const computedBtnProps = btnProps
-      ? { ...btnProps, to: switchToValue }
+    const computedBtnProps = questionConfigurations
+      ? { ...questionConfigurations, to: switchToValue }
       : { to: switchToValue }
 
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { btnProps: computedBtnProps }
+      payload: { questionConfigurations: computedBtnProps }
     })
   }
-
+  console.log(questionConfigurations)
   return (
     <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>
         <Text strong>From</Text>
       </Col>
       <Col>
-        <Select defaultValue="0" size="small" onChange={onSelectFromChange}>
+        <Select
+          defaultValue={questionConfigurations?.from || 0}
+          size="small"
+          onChange={onSelectFromChange}>
           <Option value="0">0</Option>
           <Option value="1">1</Option>
         </Select>
@@ -57,7 +60,7 @@ function OpinionScaleCustomConfig() {
       </Col>
       <Col cw="auto">
         <Select
-          defaultValue={opinionScaleTo[0]}
+          defaultValue={questionConfigurations?.to || opinionScaleTo[0]}
           size="small"
           onChange={onSelectToChange}>
           {opinionScaleTo.map((item) => (

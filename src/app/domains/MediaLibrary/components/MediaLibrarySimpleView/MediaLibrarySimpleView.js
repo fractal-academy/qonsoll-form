@@ -1,9 +1,9 @@
 import React from 'react'
 import { Input } from 'antd'
 import PropTypes from 'prop-types'
+import { Box } from '@qonsoll/react-design'
 import RangeSlider from 'components/RangeSlider'
 import { EditOutlined } from '@ant-design/icons'
-import { Box, Col, Row } from '@qonsoll/react-design'
 import { MediaLibraryModal } from 'domains/MediaLibrary/components'
 import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
 import {

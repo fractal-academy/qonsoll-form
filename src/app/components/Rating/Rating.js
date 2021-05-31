@@ -4,28 +4,29 @@ import styled from 'styled-components'
 import { Col, Container, Row } from '@qonsoll/react-design'
 import theme from 'app/styles/theme'
 
+const StyledRate = styled(Rate)`
+  &.ant-rate {
+    font-size: 40px;
+    color: ${theme.color.primary.default};
+  }
+`
 function CustomRating(props) {
-  const { allowClear, character, count, tooltips } = props
-  const StyledRate = styled(Rate)`
-    &.ant-rate {
-      font-size: 40px;
-      color: ${theme.color.primary.default};
-    }
-  `
+  const { allowClear, tooltips, questionConfigurations, onClick, id } = props
 
+  const onChange = (value) => {
+    const data = { questionId: id, answer: value }
+
+    onClick && onClick(data)
+  }
   return (
     <Container>
-      <Row noGutters>
-        <Col>
-          <StyledRate
-            autoFocus={false}
-            character={character}
-            count={count}
-            allowClear={allowClear}
-            tooltips={tooltips}
-          />
-        </Col>
-      </Row>
+      <StyledRate
+        autoFocus={false}
+        count={questionConfigurations?.starsAmount}
+        allowClear={allowClear}
+        tooltips={tooltips}
+        onChange={onChange}
+      />
     </Container>
   )
 }

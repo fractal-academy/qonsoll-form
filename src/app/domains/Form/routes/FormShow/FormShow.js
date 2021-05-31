@@ -13,12 +13,20 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { QuestionAdvancedView } from 'domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
+import {
+  useAnswersContext,
+  useAnswersContextDispatch
+} from 'app/context/Answers/useAnswersContext'
+import ANSWERS_DISPATCH_EVENTS from '~/app/context/Answers/DispatchEventsTypes'
 
 const { Title } = Typography
 
 function FormShow(props) {
   const { configurations } = props
 
+  // [CUSTOM HOOKS]
+  const answers = useAnswersContext()
+  const responsesDispatch = useAnswersContextDispatch()
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const { id } = useParams()
@@ -51,7 +59,14 @@ function FormShow(props) {
   const onRestart = () => {
     window.location.reload()
   }
-  const onClick = () => {
+  const onClick = (data) => {
+    !!data &&
+      !!data?.answer &&
+      responsesDispatch({
+        type: ANSWERS_DISPATCH_EVENTS.ADD_RESPONSE,
+        payload: data
+      })
+
     setIsAnswered(true)
   }
 
