@@ -10,6 +10,7 @@ import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
 } from 'app/context/CurrentQuestion'
+import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible, bgImage } = props
@@ -26,7 +27,7 @@ function MediaLibrarySimpleView(props) {
   }
 
   return (
-    <>
+    <Box>
       <CustomBox backgroundImage={bgImage}>
         <MediaLibraryModal
           onClick={() => {
@@ -47,7 +48,7 @@ function MediaLibrarySimpleView(props) {
       <Box>
         <RangeSlider />
       </Box>
-    </>
+    </Box>
   )
 }
 

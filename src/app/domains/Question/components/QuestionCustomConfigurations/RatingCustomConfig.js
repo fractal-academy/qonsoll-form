@@ -26,7 +26,7 @@ function RatingCustomConfig() {
   // [COMPUTED PROPERTIES]
   const questionConfigurations = currentQuestion?.questionConfigurations
   return (
-    <Row noGutters>
+    <Row noGutters mb={2}>
       <Col>
         <Text strong>Amount of stars</Text>
       </Col>

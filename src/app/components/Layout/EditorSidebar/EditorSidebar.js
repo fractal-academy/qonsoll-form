@@ -25,6 +25,7 @@ import {
   RightOutlined,
   SettingOutlined
 } from '@ant-design/icons'
+import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Title } = Typography
 
@@ -111,7 +112,13 @@ function EditorSidebar(props) {
                   }}
                   trigger={'click'}
                   placement={'bottomRight'}
-                  content={<QuestionTypeSelect onClick={addQuestion} />}>
+                  content={
+                    <Box
+                      my={PopoverNegativeMarin.v}
+                      mx={PopoverNegativeMarin.h}>
+                      <QuestionTypeSelect onClick={addQuestion} />
+                    </Box>
+                  }>
                   <Button
                     type="text"
                     icon={<PlusOutlined />}

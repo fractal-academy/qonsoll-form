@@ -16,9 +16,10 @@ function FileUploadTemplate(props) {
             <Box
               display="flex"
               alignItems="center"
+              width="100%"
               key={index}
               bg={theme.color.dark.t.lighten9}
-              p={`${theme.grid.gutters.sm / 2 - 2}px`}
+              pl={theme.space[2]}
               mr={4}
               border="1px solid"
               borderColor={theme.color.dark.t.lighten5}

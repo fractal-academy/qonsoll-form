@@ -16,25 +16,23 @@ function QuestionSelect(props) {
   }
 
   return (
-    <Box>
-      <StyledSelect
-        value={answers[index].redirectQuestion || 'Go to the next question'}
-        showSearch
-        allowClear
-        onChange={(name) => onChange(name, index)}
-        defaultValue="Go to the next question">
-        <Option value="Submit form">
-          <Text strong>Submit form</Text>
-        </Option>
-        <OptGroup label="JUMP TO...">
-          {questionList.map((item, index) => (
-            <Option key={index} value={item.name} onClick={() => {}}>
-              {item.name}
-            </Option>
-          ))}
-        </OptGroup>
-      </StyledSelect>
-    </Box>
+    <StyledSelect
+      value={answers[index].redirectQuestion || 'Go to the next question'}
+      showSearch
+      allowClear
+      onChange={(name) => onChange(name, index)}
+      defaultValue="Go to the next question">
+      <Option value="Submit form">
+        <Text strong>Submit form</Text>
+      </Option>
+      <OptGroup label="JUMP TO...">
+        {questionList.map((item, index) => (
+          <Option key={index} value={item.name} onClick={() => {}}>
+            {item.name}
+          </Option>
+        ))}
+      </OptGroup>
+    </StyledSelect>
   )
 }
 

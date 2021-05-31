@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography } from 'antd'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import {
@@ -9,6 +9,7 @@ import {
 import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 import theme from 'app/styles/theme'
 import { globalStyles } from 'app/styles'
+import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Title } = Typography
 
@@ -29,9 +30,8 @@ function QuestionConfigurationPopoverContent(props) {
     onQuestionTypeChange(data)
     setShowPopover(false)
   }
-
   return (
-    <>
+    <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
       <Row
         noGutters
         borderRadius={`${theme.borderRadius.md} ${theme.borderRadius.md} 0 0`}
@@ -58,7 +58,7 @@ function QuestionConfigurationPopoverContent(props) {
           )}
         </Col>
       </Row>
-    </>
+    </Box>
   )
 }
 

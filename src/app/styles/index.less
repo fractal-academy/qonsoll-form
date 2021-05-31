@@ -22,59 +22,27 @@ code {
 @import "~antd/dist/antd.less";
 
 // [CUSTOM SCROLLBAR]
-::-webkit-scrollbar {
-  width: 7px;
-}
+//================Commented scroll to prevent override b2g custom scroll - working and usefull=============
+//::-webkit-scrollbar {
+//  width: 7px;
+//}
+//
+//::-webkit-scrollbar-track {
+//  box-shadow: inset 0 0 10px gray;
+//}
+//
+//::-webkit-scrollbar-thumb {
+//  background: #282c34;
+//  border-radius: 10px;
+//}
+//================Commented scroll to prevent override b2g custom scroll - working and usefull=============
 
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px gray;
-}
 
-::-webkit-scrollbar-thumb {
-  background: #282c34;
-  border-radius: 10px;
-}
-
-// [FIX CAROUSEL HEIGHT WITH ONE ITEM BUG ]
-.ant-carousel .slick-slider .slick-track,
-.ant-carousel .slick-slider .slick-list {
-  height: 500px;
-}
 
 // [ REWRITING POPOVER CONTENT PLACEMENT ]
-.ant-popover-inner-content {
-  padding: 0;
-}
 
 // [ REWRITING POPOVER DELETE CONTENT PLACEMENT ]
-.ant-popconfirm .ant-popover-content .ant-popover-inner,
-.ant-popover-placement-rightTop .ant-popover-content .ant-popover-inner {
-  padding: 12px;
-}
-.ant-popover-arrow {
-  display: none;
-}
-//Question select on condition form override
-.ant-select .ant-select-selector {
-  background-color: rgba(3, 11, 23, 0.04) !important;
-  border-color: rgba(3, 11, 23, 0.15) !important;
-}
 
-.ant-select-clear {
-  border-radius: 50%;
-  font-size: 14px;
-}
-.ant-picker {
-  background-color: rgba(3, 11, 23, 0.04);
-  .ant-picker-clear {
-    border-radius: 50%;
-  }
-}
-
-//.col {
-//  display: block;
+//.ant-popover-arrow {
+//  display: none;
 //}
-
-.ant-menu-item .anticon {
-  margin-right: 0;
-}
