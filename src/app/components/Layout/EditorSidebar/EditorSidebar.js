@@ -63,7 +63,8 @@ function EditorSidebar(props) {
       title: '',
       //fix lettering later, as will added logic jumps
       order: (key && questions?.length) || String.fromCharCode(65),
-      btnProps: key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
+      questionConfigurations:
+        key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
     }
     // set it into context as current
     await currentQuestionDispatch({

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Typography, Button } from 'antd'
+import { Typography } from 'antd'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
@@ -29,7 +29,7 @@ function QuestionAdvancedView(props) {
     [QUESTION_TYPES.PICTURE_CHOICE]: {
       component: (
         <ChoiceButton
-          choices={data?.btnProps}
+          choices={data?.questionConfigurations}
           onClick={onClick}
           hasImages
           currentSlide={currentSlide}
@@ -39,24 +39,17 @@ function QuestionAdvancedView(props) {
     [QUESTION_TYPES.CHOICE]: {
       component: (
         <ChoiceButton
-          choices={data?.btnProps}
+          choices={data?.questionConfigurations}
           onClick={onClick}
           currentSlide={currentSlide}
         />
       )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: (
-        <RangeButton
-          from={1}
-          to={10}
-          onClick={onClick}
-          currentSlide={currentSlide}
-        />
-      )
+      component: <RangeButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.RATING]: {
-      component: <Rate />
+      component: <Rate onClick={onClick} />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
       component: <ShortText onClick={onClick} />
@@ -65,31 +58,23 @@ function QuestionAdvancedView(props) {
       component: <LongText onClick={onClick} />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput onClick={onClick} />
+      component: <DateTimeInput onDateChange={onClick} />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: (
-        <Button size="large" type="primary" onClick={onClick}>
-          Continue
-        </Button>
-      )
+      component: <SubmitButton onClick={onClick}>Continue</SubmitButton>
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: (
-        <Button
-          size="large"
-          buttonText="Submit"
-          type="primary"
-          onClick={onClick}>
-          Answer questions
-        </Button>
-      )
+      component: <SubmitButton onClick={onClick}>Answer questions</SubmitButton>
     },
     [QUESTION_TYPES.ENDING]: {
-      component: <SubmitButton onClick={onClick}>Finish</SubmitButton>
+      component: (
+        <SubmitButton onClick={onClick} finish>
+          Finish
+        </SubmitButton>
+      )
     }
   }
   //component for recieved question according to question type

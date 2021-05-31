@@ -30,7 +30,7 @@ function ChoiceEditable(props) {
   const [value, setValue] = useState(data?.name)
 
   // [COMPUTED PROPERTIES]
-  const choiceProps = currentQuestion.btnProps
+  const choiceProps = currentQuestion.questionConfigurations
   const letter = String.fromCharCode(startLetter + index)
   const bgImage = `url(${data?.image || DEFAULT_IMAGE})`
 
@@ -45,7 +45,7 @@ function ChoiceEditable(props) {
     choiceProps[index].name = value
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { btnProps: choiceProps }
+      payload: { questionConfigurations: choiceProps }
     })
   }
   const onDelete = async () => {
@@ -54,14 +54,14 @@ function ChoiceEditable(props) {
     choiceProps.splice(index, 1)
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { btnProps: choiceProps }
+      payload: { questionConfigurations: choiceProps }
     })
   }
   const onMediaModalContinue = (selectedImage) => {
     choiceProps[index].image = selectedImage
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { btnProps: choiceProps }
+      payload: { questionConfigurations: choiceProps }
     })
   }
   // [USE_EFFECTS]

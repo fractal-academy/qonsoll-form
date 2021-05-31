@@ -50,7 +50,7 @@ function QuestionForm(props) {
       component: <ChoiceEditableGroup />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton from={1} to={10} />
+      component: <RangeButton />
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />

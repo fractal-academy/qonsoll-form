@@ -2,7 +2,7 @@ const COLLECTIONS = {
   FORMS: 'forms',
   QUESTIONS: 'questions',
   MEDIA: 'media',
-  RESPONSES: 'responses'
+  ANSWERS: 'answers'
 }
 
 export default COLLECTIONS
