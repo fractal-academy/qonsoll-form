@@ -4,7 +4,7 @@ import Text from 'antd/lib/typography/Text'
 import { Button, Input, Select } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from 'domains/Question/components'
-import { styles } from './PlainShortTextStringTemplate.style'
+import { CustomInput, styles } from './PlainShortTextStringTemplate.style'
 import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
 import theme from 'app/styles/theme'
 
@@ -23,34 +23,19 @@ function PlaneShortTextStringTemplate(props) {
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
-            <Row noGutters>
-              <Col cw="6">
-                <Box display="flex" alignItems="center" mr={2}>
-                  <Select
-                    showSearch
-                    allowClear
-                    defaultValue={TEXT_CONDITION_RULES_VALUES[0]}
-                    style={styles.selectStyle}>
-                    {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
-                      <Option key={index} value={item} onClick={() => {}}>
-                        {item}
-                      </Option>
-                    ))}
-                  </Select>
-                </Box>
-              </Col>
-              <Col cw="6">
-                <Box key={index} mr={4}>
-                  <Input
-                    style={{
-                      backgroundColor: theme.color.dark.t.lighten9,
-                      border: '1px solid',
-                      borderColor: theme.color.dark.t.lighten5
-                    }}
-                  />
-                </Box>
-              </Col>
-            </Row>
+            <Select
+              showSearch
+              allowClear
+              defaultValue={TEXT_CONDITION_RULES_VALUES[0]}
+              style={styles.selectStyle}>
+              {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
+                <Option key={index} value={item} onClick={() => {}}>
+                  {item}
+                </Option>
+              ))}
+            </Select>
+
+            <CustomInput />
           </Col>
 
           <Col cw={6}>

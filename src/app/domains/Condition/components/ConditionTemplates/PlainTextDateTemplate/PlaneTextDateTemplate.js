@@ -21,29 +21,22 @@ function PlaneTextDateTemplate(props) {
     <>
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
-          <Col cw={6}>
-            <Row noGutters>
-              <Col cw="6">
-                <Box display="flex" mr={2}>
-                  <Select
-                    showSearch
-                    allowClear
-                    defaultValue={DATE_CONDITION_RULES_VALUES[0]}
-                    style={styles.selectStyle}>
-                    {DATE_CONDITION_RULES_VALUES.map((item, index) => (
-                      <Option key={index} value={item} onClick={() => {}}>
-                        {item}
-                      </Option>
-                    ))}
-                  </Select>
-                </Box>
-              </Col>
-              <Col cw="6">
-                <Box display="flex" alignItems="center" key={index} mr={4}>
-                  <DatePicker style={styles.selectStyle} />
-                </Box>
-              </Col>
-            </Row>
+          <Col cw="6">
+            <Select
+              showSearch
+              allowClear
+              defaultValue={DATE_CONDITION_RULES_VALUES[0]}
+              style={styles.selectStyle}>
+              {DATE_CONDITION_RULES_VALUES.map((item, index) => (
+                <Option key={index} value={item} onClick={() => {}}>
+                  {item}
+                </Option>
+              ))}
+            </Select>
+
+            {/*<Col cw={6}>*/}
+            <DatePicker a style={styles.datePickerStyle} />
+            {/*</Col>*/}
           </Col>
 
           <Col cw={6}>
