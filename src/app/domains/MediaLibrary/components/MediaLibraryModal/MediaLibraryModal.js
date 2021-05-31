@@ -130,6 +130,140 @@ function MediaLibraryModal(props) {
     }
   }, [media])
   return (
+    // <>
+    //   <CustomButton {...btnProps} onClick={modalStateChange}>
+    //     <CustomChangeButtonText>Change</CustomChangeButtonText>
+    //   </CustomButton>
+    //   <Modal
+    //     visible={isModalVisible}
+    //     footer={null}
+    //     closable={false}
+    //     width="1024px"
+    //     centered
+    //     bodyStyle={styles.modalBodyStyle}>
+    //     <Row noGutters pt={4}>
+    //       <Col>
+    //         <Row mb={1} v="center" px={3}>
+    //           <Col>
+    //             <Title level={3}>Media Library</Title>
+    //           </Col>
+    //           <Col cw="auto" v="center">
+    //             <Box
+    //               bg={theme.color.dark.t.lighten7}
+    //               p={1}
+    //               borderRadius={theme.borderRadius.md}
+    //               display="flex">
+    //               <CustomBox
+    //                 size="medium"
+    //                 type={!switchState ? 'text' : 'secondary'}
+    //                 switchState={!switchState}
+    //                 onClick={onSwitchChange}>
+    //                 Image
+    //               </CustomBox>
+    //               <CustomBox
+    //                 size="medium"
+    //                 type={switchState ? 'secondary' : 'text'}
+    //                 switchState={switchState}
+    //                 onClick={onSwitchChange}>
+    //                 Video
+    //               </CustomBox>
+    //             </Box>
+    //           </Col>
+    //         </Row>
+    //         <Row pb={25} px={3}>
+    //           <Col>
+    //             <CustomText>You have {amountFiles} files.</CustomText>
+    //           </Col>
+    //         </Row>
+    //         <Row px={3} pb={3}>
+    //           <Col>
+    //             <CustomInput
+    //               allowClear
+    //               ref={searchRef}
+    //               prefix={<SearchOutlined />}
+    //               placeholder="Search media file by name..."
+    //               onSearch={searchData}
+    //               onChange={onChange}
+    //             />
+    //           </Col>
+    //           <Col cw="auto" noGutters>
+    //             <CustomDivider type="vertical" />
+    //           </Col>
+    //           <Col cw="auto" v="center">
+    //             <Button
+    //               icon={<FilterOutlined />}
+    //               type="text"
+    //               onClick={onFilterButtonClick}>
+    //               Filter
+    //             </Button>
+    //           </Col>
+    //         </Row>
+    //
+    //         <Box
+    //           height="500px"
+    //           pl={4}
+    //           overflow="auto"
+    //           display="flex"
+    //           flexWrap="wrap"
+    //           flexDirection="row"
+    //           bg={theme.color.dark.t.lighten9}>
+    //           {/* RENDER MEDIA */}
+    //
+    //           {imagesList.map((item) => (
+    //             <Box key={item} mr={3} mt={4}>
+    //               <MediaLibraryItemSimpleView
+    //                 {...item}
+    //                 selectedBackgroundImg={selectedBackgroundImg}
+    //                 setSelectedBackgroundImg={setSelectedBackgroundImg}
+    //               />
+    //             </Box>
+    //           ))}
+    //           <Upload
+    //             showUploadList={false}
+    //             multiple
+    //             name="file"
+    //             customRequest={customRequest}>
+    //             <Box
+    //               {...styles.addButton}
+    //               bg={theme.color.dark.t.lighten9}
+    //               mr={3}
+    //               mt={4}
+    //               borderRadius={theme.borderRadius.md}
+    //               width="216px"
+    //               height="182px"
+    //               display="flex"
+    //               alignItems="center"
+    //               justifyContent="center">
+    //               <PlusOutlined />
+    //             </Box>
+    //           </Upload>
+    //         </Box>
+    //         <Row
+    //           borderBottom="1px solid"
+    //           borderColor={theme.color.text.dark}></Row>
+    //         <Row noGutters h="right" p={3} bg={theme.color.white.default}>
+    //           <Col cw="auto">
+    //             <Button type="text" onClick={onModalCancel}>
+    //               Cancel
+    //             </Button>
+    //           </Col>
+    //           <Col cw="auto">
+    //             <Button type="primary" onClick={onModalContinue}>
+    //               Continue
+    //             </Button>
+    //           </Col>
+    //         </Row>
+    //       </Col>
+    //       {!sidebarState && (
+    //         <MediaLibraryFilter
+    //           onApplyFilter={onApplyFilter}
+    //           onCancelFilter={onCancelFilter}
+    //         />
+    //       )}
+    //     </Row>
+    //   </Modal>
+    // </>
+
     <>
       <CustomButton {...btnProps} onClick={modalStateChange}>
         <CustomChangeButtonText>Change</CustomChangeButtonText>
@@ -142,7 +276,7 @@ function MediaLibraryModal(props) {
         centered
         bodyStyle={styles.modalBodyStyle}>
         <Row noGutters pt={4}>
-          <Col>
+          <Col style={{ flexDirection: 'column' }}>
             <Row mb={1} v="center" px={3}>
               <Col>
                 <Title level={3}>Media Library</Title>

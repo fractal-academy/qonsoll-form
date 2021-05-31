@@ -13,4 +13,5 @@ export const CustomBox = styled(Box)`
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-bottom: 32px;
 `
