@@ -3,6 +3,7 @@ import { Typography, Select } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
+  useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from 'app/context/CurrentQuestion'
 
@@ -11,17 +12,19 @@ const { Option } = Select
 
 const rattingRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-function RatingCustomConfig(props) {
+function RatingCustomConfig() {
   // [CUSTOM HOOKS]
+  const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   // [CLEAN FUNCTIONS]
   const onRattingSelectChange = (starsAmount) => {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { btnProps: starsAmount }
+      payload: { questionConfigurations: { starsAmount } }
     })
   }
-
+  // [COMPUTED PROPERTIES]
+  const questionConfigurations = currentQuestion?.questionConfigurations
   return (
     <Row noGutters>
       <Col>
@@ -29,7 +32,7 @@ function RatingCustomConfig(props) {
       </Col>
       <Col cw="auto">
         <Select
-          defaultValue={rattingRange[0]}
+          defaultValue={questionConfigurations?.starsAmount || rattingRange[0]}
           size="small"
           onChange={onRattingSelectChange}>
           {rattingRange.map((item) => (

@@ -29,7 +29,7 @@ const StyledRangeButton = styled(Button)`
 `
 
 function RangeButton(props) {
-  const { from, to, onClick, currentSlide, order } = props
+  const { questionConfigurations, onClick, currentSlide, order, id } = props
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -48,6 +48,9 @@ function RangeButton(props) {
   )
 
   // [COMPUTED PROPERTIES]
+  const from = questionConfigurations?.from || 1
+  const to = questionConfigurations?.to || 5
+
   const range = Array(to - from + 1)
     .fill(0)
     .map((el, index) => from + index)
@@ -56,7 +59,8 @@ function RangeButton(props) {
   const onButtonClick = (number) => {
     if (range.includes(Number(number)) && currentSlide === order) {
       setButtonKey(number)
-      onClick && onClick()
+      const data = { questionId: id, answer: number }
+      onClick && onClick(data)
     }
   }
 
