@@ -64,10 +64,10 @@ function QuestionAdvancedView(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton onClick={onClick}>Continue</SubmitButton>
+      component: <SubmitButton onClick={onClick}>Next</SubmitButton>
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton onClick={onClick}>Answer questions</SubmitButton>
+      component: <SubmitButton onClick={onClick}>Start</SubmitButton>
     },
     [QUESTION_TYPES.ENDING]: {
       component: (

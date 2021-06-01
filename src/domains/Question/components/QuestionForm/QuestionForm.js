@@ -41,7 +41,7 @@ function QuestionForm(props) {
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton>START</SubmitButton>
+      component: <SubmitButton>Start</SubmitButton>
     },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
