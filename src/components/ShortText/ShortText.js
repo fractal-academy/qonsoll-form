@@ -1,3 +1,4 @@
+import React from 'react'
 import { Form, Input } from 'antd'
 import PropTypes from 'prop-types'
 import { globalStyles } from '../../../styles'
