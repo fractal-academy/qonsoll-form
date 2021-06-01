@@ -7,6 +7,7 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+import { useTranslation } from '../../../../context/Translation'
 import {
   OpinionScaleCustomConfig,
   RatingCustomConfig
@@ -15,7 +16,8 @@ import {
 const { Text } = Typography
 
 function QuestionConfigurationMenu() {
-  // [CUSTOM HOOKS]
+  // [ADDITIONAL_HOOKS]
+  const { t } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -31,7 +33,7 @@ function QuestionConfigurationMenu() {
     <Box px={3} pt={2} h="between">
       <Row mb={3} noGutters v="center">
         <Col v="center">
-          <Text strong>Required</Text>
+          <Text strong>{t('Required')}</Text>
         </Col>
         <Col cw="auto" px={2}>
           <Switch size="small" onChange={requireStateChange} />

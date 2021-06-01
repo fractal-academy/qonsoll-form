@@ -16,7 +16,7 @@ function CustomRating(props) {
   const onChange = (value) => {
     const data = { questionId: id, answer: value }
 
-    onClick && onClick(data)
+    onClick?.(data)
   }
   return (
     <Container>

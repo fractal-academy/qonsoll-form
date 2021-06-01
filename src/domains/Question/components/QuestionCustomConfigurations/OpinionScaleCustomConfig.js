@@ -6,6 +6,7 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+import { useTranslation } from '../../../../context/Translation'
 
 const { Text } = Typography
 const { Option } = Select
@@ -13,7 +14,8 @@ const { Option } = Select
 const opinionScaleTo = [5, 6, 7, 8, 9, 10]
 
 function OpinionScaleCustomConfig() {
-  // [CUSTOM HOOKS]
+  // [ADDITIONAL_HOOKS]
+  const { t } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -40,11 +42,11 @@ function OpinionScaleCustomConfig() {
       payload: { questionConfigurations: computedBtnProps }
     })
   }
-  console.log(questionConfigurations)
+
   return (
     <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>
-        <Text strong>From</Text>
+        <Text strong>{t('From')}</Text>
       </Col>
       <Col>
         <Select
@@ -56,7 +58,7 @@ function OpinionScaleCustomConfig() {
         </Select>
       </Col>
       <Col v="center" cw="auto" mr={3}>
-        <Text strong>to</Text>
+        <Text strong>{t('to')}</Text>
       </Col>
       <Col cw="auto">
         <Select

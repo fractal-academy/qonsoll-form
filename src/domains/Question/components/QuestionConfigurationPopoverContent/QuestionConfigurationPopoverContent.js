@@ -6,6 +6,7 @@ import { globalStyles } from '../../../../../styles'
 import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { useTranslation } from '../../../../context/Translation'
 import {
   QuestionTypeSelect,
   QuestionConfigurationMenu
@@ -18,6 +19,7 @@ function QuestionConfigurationPopoverContent(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
+  const { t } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [isQuestionConfig, setIsQuestionConfig] = useState(false)
@@ -45,7 +47,9 @@ function QuestionConfigurationPopoverContent(props) {
         </Col>
         <Col order={2} ml={2}>
           <Title level={4}>
-            {isQuestionConfig ? currentQuestion?.questionType : 'Question Type'}
+            {isQuestionConfig
+              ? currentQuestion?.questionType
+              : t('Question Type')}
           </Title>
         </Col>
       </Row>

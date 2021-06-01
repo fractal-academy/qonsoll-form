@@ -8,6 +8,7 @@ import {
 } from '../../../../constants'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { useTranslation } from '../../../../context/Translation'
 import {
   styles,
   StyledCol,
@@ -36,12 +37,13 @@ function QuestionForm(props) {
   const { data, onQuestionTypeChange } = props
 
   // [ADDITIONAL HOOKS]
+  const { t } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton>Start</SubmitButton>
+      component: <SubmitButton>{t('Start')}</SubmitButton>
     },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
@@ -71,18 +73,18 @@ function QuestionForm(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton>Next</SubmitButton>
+      component: <SubmitButton>{t('Next')}</SubmitButton>
     },
     [QUESTION_TYPES.ENDING]: {
-      component: <SubmitButton>Finish</SubmitButton>
+      component: <SubmitButton>{t('Finish')}</SubmitButton>
     }
   }
 
   const computedMediaUrl = `url(${currentQuestion?.image || DEFAULT_IMAGE})`
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
-      ? 'Ending'
-      : `Question ${data?.order + 1}`
+      ? t('Ending')
+      : `${t('Question')} ${data?.order + 1}`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =

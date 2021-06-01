@@ -4,6 +4,7 @@ import Text from 'antd/lib/typography/Text'
 import { Col, Row } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
 import { IconRoundContainer } from '../../../../components'
+import { useTranslation } from '../../../../context/Translation'
 import {
   QuestionsTypeMenu,
   QuestionMenuItem,
@@ -22,66 +23,71 @@ import {
   UploadOutlined
 } from '@ant-design/icons'
 
-const questionTypeMap = [
-  {
-    type: QUESTION_TYPES.WELCOME_SCREEN,
-    description: 'Invite your audience in',
-    icon: <HomeOutlined />
-  },
-  {
-    type: QUESTION_TYPES.LONG_TEXT,
-    description: 'Mote space to spill the beans',
-    icon: <FileTextOutlined />
-  },
-  {
-    type: QUESTION_TYPES.SHORT_TEXT,
-    description: 'For short answers, like names',
-    icon: <SmallDashOutlined />
-  },
-  {
-    type: QUESTION_TYPES.DATE,
-    description: 'Collect answers in date format',
-    icon: <CalendarOutlined />
-  },
-  {
-    type: QUESTION_TYPES.FILE_UPLOAD,
-    description: 'Upload a file up to 10MB',
-    icon: <UploadOutlined />
-  },
-
-  {
-    type: QUESTION_TYPES.OPINION_SCALE,
-    description: 'A customizable, numbered scale',
-    icon: <HomeOutlined />
-  },
-  {
-    type: QUESTION_TYPES.PICTURE_CHOICE,
-    description: 'Multiple choice but prettier',
-    icon: <PictureOutlined />
-  },
-  {
-    type: QUESTION_TYPES.CHOICE,
-    description: 'Multiple choice',
-    icon: <GoldOutlined />
-  },
-  {
-    type: QUESTION_TYPES.RATING,
-    description: 'Choose from shapes like ⭐ or 🐶',
-    icon: <StarOutlined />
-  },
-  {
-    type: QUESTION_TYPES.STATEMENT,
-    description: 'Take the mic for a moment',
-    icon: <CopyrightOutlined />
-  },
-  {
-    type: QUESTION_TYPES.YES_NO,
-    description: 'Just 2 options: Yes or No',
-    icon: <ShareAltOutlined />
-  }
-]
 function QuestionTypeSelect(props) {
   const { onClick } = props
+
+  // [ADDITIONAL_HOOKS]
+  const { t } = useTranslation()
+
+  // [COMPUTED_PROPERTIES]
+  const questionTypeMap = [
+    {
+      type: QUESTION_TYPES.WELCOME_SCREEN,
+      description: t('Invite your audience in'),
+      icon: <HomeOutlined />
+    },
+    {
+      type: QUESTION_TYPES.LONG_TEXT,
+      description: t('Mote space to spill the beans'),
+      icon: <FileTextOutlined />
+    },
+    {
+      type: QUESTION_TYPES.SHORT_TEXT,
+      description: t('For short answers, like names'),
+      icon: <SmallDashOutlined />
+    },
+    {
+      type: QUESTION_TYPES.DATE,
+      description: t('Collect answers in date format'),
+      icon: <CalendarOutlined />
+    },
+    {
+      type: QUESTION_TYPES.FILE_UPLOAD,
+      description: t('Upload a file up to 10MB'),
+      icon: <UploadOutlined />
+    },
+
+    {
+      type: QUESTION_TYPES.OPINION_SCALE,
+      description: t('A customizable, numbered scale'),
+      icon: <HomeOutlined />
+    },
+    {
+      type: QUESTION_TYPES.PICTURE_CHOICE,
+      description: t('Multiple choice but prettier'),
+      icon: <PictureOutlined />
+    },
+    {
+      type: QUESTION_TYPES.CHOICE,
+      description: t('Multiple choice'),
+      icon: <GoldOutlined />
+    },
+    {
+      type: QUESTION_TYPES.RATING,
+      description: t('Choose from shapes like ⭐ or 🐶'),
+      icon: <StarOutlined />
+    },
+    {
+      type: QUESTION_TYPES.STATEMENT,
+      description: t('Take the mic for a moment'),
+      icon: <CopyrightOutlined />
+    },
+    {
+      type: QUESTION_TYPES.YES_NO,
+      description: t('Just 2 options: Yes or No'),
+      icon: <ShareAltOutlined />
+    }
+  ]
 
   return (
     <Row
