@@ -3,6 +3,7 @@ import { Typography } from 'antd'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
+import { useTranslation } from '../../../../context/Translation'
 import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'
 import {
   Rate,
@@ -20,6 +21,9 @@ const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
   const { data, questionNumber, onClick, currentSlide } = props
+
+  // [ADDITIONAL_HOOKS]
+  const { t } = useTranslation()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -64,15 +68,15 @@ function QuestionAdvancedView(props) {
       component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton onClick={onClick}>Next</SubmitButton>
+      component: <SubmitButton onClick={onClick}>{t('Next')}</SubmitButton>
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton onClick={onClick}>Start</SubmitButton>
+      component: <SubmitButton onClick={onClick}>{t('Start')}</SubmitButton>
     },
     [QUESTION_TYPES.ENDING]: {
       component: (
         <SubmitButton onClick={onClick} finish>
-          Finish
+          {t('Finish')}
         </SubmitButton>
       )
     }

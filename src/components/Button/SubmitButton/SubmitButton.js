@@ -7,6 +7,7 @@ import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useAnswersContext } from '../../../context/Answers'
+import { useTranslation } from '../../../context/Translation'
 
 const { Text } = Typography
 
@@ -19,8 +20,11 @@ const StyledSubmit = styled(Button)`
 function SubmitButton(props) {
   const { children, onClick, finish, formId } = props
 
+  // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
+  const { t } = useTranslation()
+
   // [CLEAN FUNCTIONS]
   const onButtonClick = () => {
     if (finish) {
@@ -37,7 +41,7 @@ function SubmitButton(props) {
           {children || (
             <Row display="flex" noGutters>
               <Col cw="auto" mr={2}>
-                OK
+                {t('OK')}
               </Col>
               <Col>
                 <CheckOutlined />
@@ -47,7 +51,7 @@ function SubmitButton(props) {
         </StyledSubmit>
       </Col>
       <Col cw="auto">
-        <Text>Press enter ↵</Text>
+        <Text>{t('Press enter')} ↵</Text>
       </Col>
     </Row>
   )

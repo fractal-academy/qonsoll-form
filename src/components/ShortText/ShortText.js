@@ -4,12 +4,14 @@ import PropTypes from 'prop-types'
 import { globalStyles } from '../../../styles'
 import { SubmitButton } from '../../components'
 import { Row, Col, Container } from '@qonsoll/react-design'
+import { useTranslation } from '../../context/Translation'
 
 function ShortText(props) {
   const { inputProps, isRequired, onClick, id } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
+  const { t } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
@@ -29,7 +31,10 @@ function ShortText(props) {
               style={globalStyles.resetMarginB}
               name="answer"
               rules={[{ required: isRequired }]}>
-              <Input {...inputProps} placeholder="Type your answer here..." />
+              <Input
+                {...inputProps}
+                placeholder={`${t('Type your answer here')}...`}
+              />
             </Form.Item>
           </Col>
         </Row>

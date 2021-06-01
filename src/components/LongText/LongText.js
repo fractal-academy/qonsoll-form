@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Form, Typography, Input } from 'antd'
 import { SubmitButton } from '../../components'
 import { Col, Container, Row } from '@qonsoll/react-design'
+import { useTranslation } from '../../context/Translation'
 
 const { TextArea } = Input
 
@@ -11,6 +12,7 @@ function LongText(props) {
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
+  const { t } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
@@ -20,6 +22,9 @@ function LongText(props) {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
+
+  // [COMPUTED_PROPERTIES]
+  const explanation = t('Shift ⇧ + Enter ↵ to make a line break')
 
   return (
     <Container>
@@ -37,12 +42,12 @@ function LongText(props) {
               <TextArea
                 bordered
                 autoSize={{ minRows: 1, maxRows: 4 }}
-                placeholder="Type your answer here..."
+                placeholder={`${t('Type your answer here')}...`}
                 {...textAreaProps}
               />
             </Form.Item>
             <Form.Item>
-              <Typography>Shift ⇧ + Enter ↵ to make a line break</Typography>
+              <Typography>{explanation}</Typography>
             </Form.Item>
             <SubmitButton onClick={() => form.submit()} />
           </Form>

@@ -4,6 +4,7 @@ import { Text } from 'antd-styled'
 import { IconLabel } from '../../../components'
 import { Col, Row } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
+import { useTranslation } from '../../../context/Translation'
 import storage from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
 import useFunctions from '../../../hooks/useFunctions'
@@ -16,11 +17,14 @@ const config = {
 }
 
 const UploadArea = (props) => {
+  // [ADDITIONAL_HOOKS]
+  const { t } = useTranslation()
+  const { getCollectionRef, setData } = useFunctions()
+
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
-  const { getCollectionRef, setData } = useFunctions()
-  // [COMPUTED PROPERTIES]
 
+  // [COMPUTED PROPERTIES]
   const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
 
   // [CLEAN FUNCTIONS]
@@ -112,12 +116,12 @@ const UploadArea = (props) => {
       </Row>
       <Row>
         <Col>
-          <Text>Click or drag file to this area to upload</Text>
+          <Text>{t('Click or drag file to this area to upload')}</Text>
         </Col>
       </Row>
       <Row>
         <Col>
-          <Text type="secondary">Upload files</Text>
+          <Text type="secondary">{t('Upload files')}</Text>
         </Col>
       </Row>
     </Dragger>

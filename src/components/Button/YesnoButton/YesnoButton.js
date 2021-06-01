@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 import { KeyBox } from '../../../components'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
+import { useTranslation } from '../../../context/Translation'
 
 function YesnoButton(props) {
   const { onClick, currentSlide, order, id } = props
+
+  // [ADDITIONAL_HOOKS]
+  const { t } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -13,15 +17,15 @@ function YesnoButton(props) {
   // [COMPUTED PROPERTIES]
   const mappedChoices = [
     {
-      letter: 'Y',
+      letter: t('Y'),
       choice: {
-        name: 'Yes'
+        name: t('Yes')
       }
     },
     {
-      letter: 'N',
+      letter: t('N'),
       choice: {
-        name: 'No'
+        name: t('No')
       }
     }
   ]

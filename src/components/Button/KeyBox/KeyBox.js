@@ -6,6 +6,7 @@ import { useHover } from '@umijs/hooks'
 import { Button, Typography } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { useTranslation } from '../../../context/Translation'
 
 const { Text } = Typography
 
@@ -53,6 +54,7 @@ function KeyBox(props) {
 
   // [ADDITIONAL HOOKS]
   const [isHovering, hoverRef] = useHover()
+  const { t } = useTranslation()
 
   return (
     <Box ref={hoverRef} display={hasImages && 'inline-block'} mb={2} mr={3}>
@@ -72,7 +74,7 @@ function KeyBox(props) {
         <Row v="center" h="between" noGutters>
           <Col cw="auto" v="center">
             <StyledKeybox isHovering={isHovering} isActive={isActive} mr={1}>
-              {isHovering ? `Key ${letter}` : letter}
+              {isHovering ? `${t('Key')} ${letter}` : letter}
             </StyledKeybox>
             <StyledText ellipsis>{item?.choice?.name}</StyledText>
           </Col>
