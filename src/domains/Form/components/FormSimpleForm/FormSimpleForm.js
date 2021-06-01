@@ -1,8 +1,13 @@
 import React from 'react'
 import { Form, Input } from 'antd'
+import { useTranslation } from '../../../../context/Translation'
 
 function FormSimpleForm(props) {
-  const { onFinish, form, formData, children } = props
+  const { formData, children, ...rest } = props
+
+  // [ADDITIONAL_HOOKS]
+  const { t } = useTranslation()
+
   // [COMPUTED PROPERTIES]
   const initialValues = {
     name: formData?.title,
@@ -10,12 +15,12 @@ function FormSimpleForm(props) {
   }
 
   return (
-    <Form onFinish={onFinish} form={form} initialValues={initialValues}>
+    <Form {...rest} initialValues={initialValues}>
       <Form.Item name="name" rules={[{ required: true }]}>
-        <Input allowClear placeholder="Type form name" />
+        <Input allowClear placeholder={t('Type form name')} />
       </Form.Item>
       <Form.Item name="description">
-        <Input allowClear placeholder="Form short description" />
+        <Input allowClear placeholder={t('Form short description')} />
       </Form.Item>
       {children}
     </Form>

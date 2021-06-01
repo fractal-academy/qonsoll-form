@@ -4,14 +4,8 @@ import { ListItem } from '../../../components'
 import { Row, Col } from '@qonsoll/react-design'
 
 function StaticList(props) {
-  const {
-    data,
-    columnWidth,
-    selectedBackgroundImg,
-    setSelectedBackgroundImg,
-    onClick,
-    disableAddButton
-  } = props
+  const { data, columnWidth, selectedBackgroundImg, setSelectedBackgroundImg } =
+    props
 
   return (
     <Row display="flex" width="100%" noGutters>

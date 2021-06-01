@@ -13,6 +13,7 @@ import {
   Button,
   message
 } from 'antd'
+import { useTranslation } from '../../../context/Translation'
 import { FormSimpleFormWithModal } from '../../../domains/Form/components'
 import {
   FileOutlined,
@@ -58,9 +59,9 @@ function ListItem(props) {
   const { updateData, deleteData } = useFunctions()
   const { data, selectedBackgroundImg, setSelectedBackgroundImg } = props
 
-  // [CUSTOM_HOOKS]
-  const { onFormItemClick } = useActionsFunctionsContext()
   // [ADDITIONAL HOOKS]
+  const { onFormItemClick } = useActionsFunctionsContext()
+  const { t } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -68,7 +69,7 @@ function ListItem(props) {
   const [isPopconfirmVisible, setIsPopconfirmVisible] = useState(false)
 
   // [COMPUTED PROPERTIES]
-  const description = data?.subtitle || 'No description'
+  const description = data?.subtitle || t('No description')
   const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
@@ -102,7 +103,7 @@ function ListItem(props) {
   const menu = (
     <Menu>
       <Menu.Item onClick={showModal} key={'showModal'}>
-        <Text>Rename</Text>
+        <Text>{t('Rename')}</Text>
         <FormSimpleFormWithModal
           isEdit
           formData={data}
@@ -116,9 +117,9 @@ function ListItem(props) {
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
-          title="Delete this form?"
+          title={t('Delete this form?')}
           okButtonProps={{ loading: confirmLoading }}>
-          <Text>Delete</Text>
+          <Text>{t('Delete')}</Text>
         </Popconfirm>
       </Menu.Item>
     </Menu>
@@ -161,7 +162,7 @@ function ListItem(props) {
           <Col cw="auto" display="flex" v="center">
             {data?.imageUrl ? (
               <Popconfirm
-                title="Delete this image?"
+                title={t('Delete this image?')}
                 onConfirm={handleDelete}
                 okButtonProps={{ loading: confirmLoading }}>
                 <CloseOutlined />

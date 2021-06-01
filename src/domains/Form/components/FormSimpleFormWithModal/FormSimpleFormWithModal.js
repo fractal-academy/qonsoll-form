@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Form, Modal } from 'antd'
 import Title from 'antd/lib/typography/Title'
+import { useTranslation } from '../../../../context/Translation'
 import { FormSimpleForm } from '../../../../domains/Form/components'
 
 const FormSimpleFormWithModal = (props) => {
@@ -18,6 +19,7 @@ const FormSimpleFormWithModal = (props) => {
 
   // [ADDITIONAL_HOOKS]
   const [form] = Form.useForm()
+  const { t } = useTranslation()
 
   // [HELPER_FUNCTIONS]
   const handleCancel = async () => {
@@ -36,7 +38,9 @@ const FormSimpleFormWithModal = (props) => {
   return (
     <Modal
       title={
-        <Title level={4}>{isEdit ? 'Edit form' : 'Create new form'}</Title>
+        <Title level={4}>
+          {isEdit ? t('Edit form') : t('Create new form')}
+        </Title>
       }
       visible={isModalVisible}
       onCancel={handleCancel}
@@ -48,7 +52,7 @@ const FormSimpleFormWithModal = (props) => {
           Cancel
         </Button>,
         <Button onClick={() => form.submit()} type="primary" loading={loading}>
-          {isEdit ? 'Save changes' : 'Create form'}
+          {isEdit ? t('Save changes') : t('Create form')}
         </Button>
       ]}>
       <FormSimpleForm
