@@ -4,11 +4,11 @@ import { PageHeader } from '../../../components'
 import { Box } from '@qonsoll/react-design'
 
 function PageLayout(props) {
-  const { title = 'New Form', children, id } = props
+  const { title = 'New Form', children, id, onBack } = props
 
   return (
     <Box display="flex" flex={1} flexDirection="column">
-      <PageHeader title={title} id={id} />
+      <PageHeader title={title} id={id} onBack={onBack} />
       {children}
     </Box>
   )

@@ -31,7 +31,7 @@ import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
 function FormEdit(props) {
-  const { firebase, actions, id } = props
+  const { firebase, actions, id, onBack } = props
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -104,7 +104,7 @@ function FormEdit(props) {
           <Spinner />
         ) : (
           <Box display="flex" height="inherit" overflowX="hidden">
-            <PageLayout title={form?.title} id={id}>
+            <PageLayout title={form?.title} id={id} onBack={onBack}>
               <FormContentArea
                 leftSideMenu={
                   !!Object.keys(currentQuestion).length && (
@@ -132,7 +132,9 @@ function FormEdit(props) {
 }
 
 FormEdit.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  onBack: PropTypes.func
 }
 
 export default FormEdit
