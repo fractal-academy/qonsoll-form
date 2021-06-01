@@ -9,7 +9,7 @@ import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
 } from '../../../../context/CurrentQuestion'
-
+import { Box } from '@qonsoll/react-design'
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible, bgImage } = props
 

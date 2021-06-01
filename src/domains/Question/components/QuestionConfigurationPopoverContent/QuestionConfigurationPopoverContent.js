@@ -1,6 +1,6 @@
 import { Typography } from 'antd'
 import React, { useState } from 'react'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import theme from '../../../../../styles/theme'
 import { globalStyles } from '../../../../../styles'
 import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
