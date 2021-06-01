@@ -20,7 +20,7 @@ const useFunctions = (FB) => {
       deleteData(firebase || FB, collection, document),
     updateData: (collection, document, data) =>
       updateData(firebase || FB, collection, document, data),
-    storage: () => storage(firebase || FB)
+    storage: storage(firebase || FB)
   }
 }
 export default useFunctions
