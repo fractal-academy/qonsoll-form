@@ -17,6 +17,7 @@ import {
 } from './MediaLibraryModal.styles'
 import { MediaLibraryFilter } from '../../../../domains/MediaLibrary/components'
 import useFunctions from '../../../../hooks/useFunctions'
+import { StaticList } from '../../../../components'
 
 const { Title } = Typography
 
@@ -123,6 +124,7 @@ function MediaLibraryModal(props) {
       isComponentMounted = false
     }
   }, [media])
+
   return (
     <>
       <CustomButton {...btnProps} onClick={modalStateChange}>
