@@ -4,13 +4,13 @@ import React, { useMemo } from 'react'
 import { COLLECTIONS } from '../../../../constants'
 import { DragableList } from '../../../../components'
 import { QuestionSimpleView } from '../../../../domains/Question/components'
-import  useFunctions from '../../../../hooks/useFunctions'
+import useFunctions from '../../../../hooks/useFunctions'
 
 function QuestionsList(props) {
   const { action, data, setNewOrder, onItemClick } = props
 
   // [CUSTOM_HOOKS]
-  const {setData} = useFunctions()
+  const { setData } = useFunctions()
   // [CLEAN FUNCTIONS]
   const onUpdate = (data) => {
     data.forEach((item) =>
