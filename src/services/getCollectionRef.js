@@ -1,11 +1,10 @@
-
-
 /**
+ * @param {firebase} firebase - path to a collection.
  * @param {string} collection - path to a collection.
  * @returns The CollectionReference instance.
  * */
 
-function getCollectionRef(firebase,collection) {
+function getCollectionRef(firebase, collection) {
   return firebase?.firestore().collection(collection)
 }
 
