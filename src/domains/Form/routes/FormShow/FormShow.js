@@ -14,19 +14,18 @@ import useFunctions from '../../../../hooks/useFunctions'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
-  useAnswersContext,
   useAnswersContextDispatch,
   ANSWERS_DISPATCH_EVENTS
 } from '../../../../context/Answers'
 // const { Title } = Typography
 
 function FormShow(props) {
-  const { firebase, actions, id } = props
+  const { firebase, actions = {}, id } = props
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
-  const answers = useAnswersContext()
   const answersDispatch = useAnswersContextDispatch()
+
   // [ADDITIONAL HOOKS]
   // const history = useHistory()
   const [data] = useCollectionData(
@@ -58,7 +57,7 @@ function FormShow(props) {
   // const onRestart = () => {
   //   window.location.reload()
   // }
-  const onClick = () => {
+  const onClick = (data) => {
     !!data &&
       !!data?.answer &&
       answersDispatch({
@@ -127,7 +126,9 @@ function FormShow(props) {
   )
 }
 FormShow.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  actions: PropTypes.shape({ onFinish: PropTypes.func })
 }
 
 export default FormShow

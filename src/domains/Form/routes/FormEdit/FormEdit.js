@@ -31,7 +31,7 @@ import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
 function FormEdit(props) {
-  const { firebase, actions, id, onBack } = props
+  const { firebase, actions = {}, id, onBack, showCondition } = props
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -95,6 +95,7 @@ function FormEdit(props) {
         currentQuestion?.id,
         currentQuestion
       ).catch((e) => message.error(e.message))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestion])
 
   return (
@@ -123,7 +124,12 @@ function FormEdit(props) {
               </FormContentArea>
             </PageLayout>
 
-            <EditorSidebar questions={questions} endings={endings} id={id} />
+            <EditorSidebar
+              questions={questions}
+              endings={endings}
+              id={id}
+              showCondition={showCondition}
+            />
           </Box>
         )}
       </ActionsFunctionsContext.Provider>
@@ -134,7 +140,8 @@ function FormEdit(props) {
 FormEdit.propTypes = {
   firebase: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
-  onBack: PropTypes.func
+  onBack: PropTypes.func,
+  showCondition: PropTypes.bool
 }
 
 export default FormEdit

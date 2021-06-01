@@ -34,7 +34,7 @@ function FormsAll(props) {
   const {
     firebase,
     translate,
-    actions,
+    actions = {},
     childrenModal,
     disableAddButton,
     titleText,

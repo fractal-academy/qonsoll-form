@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
+import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useAnswersContext } from '../../../context/Answers'
 
 const { Text } = Typography
@@ -19,12 +20,13 @@ function SubmitButton(props) {
   const { children, onClick, finish, formId } = props
 
   const answers = useAnswersContext()
-
+  const { onFinish } = useActionsFunctionsContext()
   // [CLEAN FUNCTIONS]
   const onButtonClick = () => {
     if (finish) {
       const updatedAnswers = { formId, answers }
       //add function from b2g and provide updatedAnswers
+      onFinish?.(updatedAnswers)
     } else onClick && onClick()
   }
 
