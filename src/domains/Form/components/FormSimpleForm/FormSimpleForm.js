@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Input } from 'antd'
-import { Col } from '@qonsoll/react-design'
 
 function FormSimpleForm(props) {
   const { onFinish, form, formData, children } = props
@@ -18,7 +17,7 @@ function FormSimpleForm(props) {
       <Form.Item name="description">
         <Input allowClear placeholder="Form short description" />
       </Form.Item>
-      {children && <Col cw={12}>{children}</Col>}
+      {children}
     </Form>
   )
 }
