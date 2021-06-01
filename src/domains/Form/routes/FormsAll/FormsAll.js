@@ -130,7 +130,10 @@ function FormsAll(props) {
               </Title>
             </Col>
             <Col cw="auto">
-              <Button type="primary" onClick={showModal}>
+              <Button
+                type="primary"
+                onClick={showModal}
+                disabled={disableAddButton}>
                 + Add
               </Button>
             </Col>
@@ -162,8 +165,9 @@ function FormsAll(props) {
             <FormSimpleFormWithModal
               isModalVisible={isModalVisible}
               setIsModalVisible={setIsModalVisible}
-              onModalSubmit={onFormCreate}
-            />
+              onModalSubmit={onFormCreate}>
+              {childrenModal}
+            </FormSimpleFormWithModal>
           </Box>
         </Box>
       </ActionsFunctionsContext.Provider>
