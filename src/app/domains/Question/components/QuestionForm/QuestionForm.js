@@ -62,7 +62,7 @@ function QuestionForm(props) {
       component: <LongText />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput />
+      component: <DateTimeInput disabled />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
       component: <FileUploader />
@@ -111,7 +111,7 @@ function QuestionForm(props) {
             )}
           </Row>
           <Row noGutters h="between" mb={4}>
-            <CustomCol cw="auto">
+            <CustomCol cw="12">
               <QuestionHeader
                 titlePlaceholder={'Editable question title'}
                 subtitlePlaceholder={'Description(optional)'}

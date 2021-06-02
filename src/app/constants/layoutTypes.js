@@ -7,9 +7,9 @@ import {
   ProfileFilled,
   MenuUnfoldOutlined
 } from '@ant-design/icons'
-const smallImageSize = { width: '50%', height: '50%' }
+const smallImageSize = { width: '70%', height: '80%' }
 const imageFullSize = { width: '100%', height: '100%' }
-const imageBetweenSize = { width: '150px', height: '200px' }
+const imageBetweenSize = { width: '250px', height: '300px' }
 
 const LAYOUT_TYPES = {
   DEFAULT: { type: 'default', icon: <AlignLeftOutlined /> },
