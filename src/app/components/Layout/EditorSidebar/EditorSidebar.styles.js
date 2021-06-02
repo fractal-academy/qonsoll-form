@@ -2,7 +2,6 @@ import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 import theme from 'app/styles/theme'
 import { Divider } from 'antd'
-import { QuestionTypeSelect } from 'domains/Question/components'
 
 export const styles = {
   dragbleCeiling: {
@@ -28,7 +27,8 @@ export const SidebarStateSwitcher = styled(Box)`
 `
 export const SidebarBoxWrapper = styled(Box)`
   background-color: ${theme.color.white.default};
-  width: 300px;
+  width: fit-content;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   position: relative;

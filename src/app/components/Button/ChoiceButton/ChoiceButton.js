@@ -49,7 +49,7 @@ function ChoiceButton(props) {
   }
 
   return (
-    <Box display="block">
+    <Box>
       {mappedChoices?.map((item, index) => (
         <KeyBox
           key={index}
