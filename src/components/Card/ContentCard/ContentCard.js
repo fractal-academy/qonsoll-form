@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import theme from 'app/styles/theme'
+import theme from '../../../../styles/theme'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
 
