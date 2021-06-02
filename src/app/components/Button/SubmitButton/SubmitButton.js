@@ -10,7 +10,6 @@ import { useAnswersContext } from 'app/context/Answers/useAnswersContext'
 const { Text } = Typography
 
 const StyledSubmit = styled(Button)`
-  width: 93px;
   height: 56px;
   font-size: ${theme.typography.fontSize.h4};
 `

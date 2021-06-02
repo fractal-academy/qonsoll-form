@@ -1,11 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import theme from 'app/styles/theme'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
 
 const Wrapper = styled(Box)`
-  border-radius: 12px;
-  background-color: white;
+  margin: 24px;
+  padding-bottom: 2px;
+  height: -webkit-fill-available;
+  border-radius: ${theme.borderRadius.md};
+  background-color: ${theme.color.white.default};
 `
 function ContentCard(props) {
   const { children } = props

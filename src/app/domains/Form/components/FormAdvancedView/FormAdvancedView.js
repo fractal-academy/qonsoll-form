@@ -15,6 +15,11 @@ function FormAdvancedView(props) {
   )
 }
 
-FormAdvancedView.propTypes = { children: PropTypes.node }
+FormAdvancedView.propTypes = {
+  children: PropTypes.node,
+  isAnswered: PropTypes.bool,
+  setIsAnswered: PropTypes.func,
+  setCurrentSlide: PropTypes.func
+}
 
 export default FormAdvancedView

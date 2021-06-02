@@ -56,7 +56,7 @@ function KeyBox(props) {
   const [isHovering, hoverRef] = useHover()
 
   return (
-    <Box ref={hoverRef} display={hasImages && 'inline-block'} mb={2} mr={3}>
+    <Box ref={hoverRef} display={hasImages && 'inline-block'} mb={2} mr={2}>
       <StyledButton hasImages={hasImages} onClick={() => onButtonClick(letter)}>
         {hasImages && <ImageContainer image={item?.choice?.image} />}
         <Row v="center" h="between" noGutters>

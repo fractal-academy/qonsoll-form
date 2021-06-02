@@ -1,6 +1,6 @@
 import { Button } from 'antd'
-import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
+import React, { useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
 import { CustomCarousel } from 'components/Carousel/Carousel.style'
@@ -37,20 +37,20 @@ function Carousel(props) {
   return (
     <Box onWheel={handleScroll} height="100%" width="100%">
       <CustomCarousel
+        dots={false}
         ref={carouselRef}
         dotPosition="right"
-        dots={false}
         afterChange={onCurrentSlideChange}>
         {children}
       </CustomCarousel>
 
-      <Row h="right" mt={2} noGutters>
+      <Row h="right" m={2} noGutters>
         <Col cw="auto" mr={2}>
           <Button type="primary" onClick={previous}>
             <UpOutlined />
           </Button>
         </Col>
-        <Col cw="auto" mr={2}>
+        <Col cw="auto">
           <Button type="primary" onClick={next}>
             <DownOutlined />
           </Button>
