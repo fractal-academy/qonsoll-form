@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { TranslationContext } from '../../../../context/Translation'
 import { styles } from './FormShow.style'
 // import { globalStyles } from '../../../../../styles'
 // import { useKeyPress } from '@umijs/hooks'
@@ -20,7 +21,7 @@ import {
 // const { Title } = Typography
 
 function FormShow(props) {
-  const { firebase, actions = {}, id } = props
+  const { firebase, actions = {}, id, translate } = props
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
@@ -71,56 +72,58 @@ function FormShow(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <Box {...styles.mainWrapper}>
-          {/*<Row {...styles.headerRow} noGutters>*/}
-          {/*  <Col cw="auto" v="center" p={0}>*/}
-          {/*    <Button*/}
-          {/*      type="text"*/}
-          {/*      size="small"*/}
-          {/*      // onClick={() => history.goBack()}*/}
-          {/*      icon={<ArrowLeftOutlined />}*/}
-          {/*    />*/}
-          {/*  </Col>*/}
-          {/*  <Col v="center">*/}
-          {/*    <Box textAlign="center">*/}
-          {/*      <Title level={5}>Live Preview</Title>*/}
-          {/*    </Box>*/}
-          {/*  </Col>*/}
-          {/*  <Col cw="auto" v="center">*/}
-          {/*    <Button*/}
-          {/*      type="text"*/}
-          {/*      size="small"*/}
-          {/*      icon={<ReloadOutlined />}*/}
-          {/*      onClick={onRestart}>*/}
-          {/*      Restart*/}
-          {/*    </Button>*/}
-          {/*  </Col>*/}
-          {/*</Row>*/}
+        <TranslationContext.Provider value={{ t: translate }}>
+          <Box {...styles.mainWrapper}>
+            {/*<Row {...styles.headerRow} noGutters>*/}
+            {/*  <Col cw="auto" v="center" p={0}>*/}
+            {/*    <Button*/}
+            {/*      type="text"*/}
+            {/*      size="small"*/}
+            {/*      // onClick={() => history.goBack()}*/}
+            {/*      icon={<ArrowLeftOutlined />}*/}
+            {/*    />*/}
+            {/*  </Col>*/}
+            {/*  <Col v="center">*/}
+            {/*    <Box textAlign="center">*/}
+            {/*      <Title level={5}>Live Preview</Title>*/}
+            {/*    </Box>*/}
+            {/*  </Col>*/}
+            {/*  <Col cw="auto" v="center">*/}
+            {/*    <Button*/}
+            {/*      type="text"*/}
+            {/*      size="small"*/}
+            {/*      icon={<ReloadOutlined />}*/}
+            {/*      onClick={onRestart}>*/}
+            {/*      Restart*/}
+            {/*    </Button>*/}
+            {/*  </Col>*/}
+            {/*</Row>*/}
 
-          {/*<Row noGutters>*/}
-          {/*  <Col>*/}
-          {/*    <Divider style={globalStyles.resetMargin} />*/}
-          {/*  </Col>*/}
-          {/*</Row>*/}
+            {/*<Row noGutters>*/}
+            {/*  <Col>*/}
+            {/*    <Divider style={globalStyles.resetMargin} />*/}
+            {/*  </Col>*/}
+            {/*</Row>*/}
 
-          <Box {...styles.questionContainer}>
-            <FormAdvancedView
-              isAnswered={isAnswered}
-              setIsAnswered={setIsAnswered}
-              setCurrentSlide={setCurrentSlide}>
-              {sortedData?.map((item, index) => (
-                <Box key={index} height="600px" overflowY="auto">
-                  <QuestionAdvancedView
-                    data={item}
-                    questionNumber={index + 1}
-                    onClick={onClick}
-                    currentSlide={currentSlide}
-                  />
-                </Box>
-              ))}
-            </FormAdvancedView>
+            <Box {...styles.questionContainer}>
+              <FormAdvancedView
+                isAnswered={isAnswered}
+                setIsAnswered={setIsAnswered}
+                setCurrentSlide={setCurrentSlide}>
+                {sortedData?.map((item, index) => (
+                  <Box key={index} height="600px" overflowY="auto">
+                    <QuestionAdvancedView
+                      data={item}
+                      questionNumber={index + 1}
+                      onClick={onClick}
+                      currentSlide={currentSlide}
+                    />
+                  </Box>
+                ))}
+              </FormAdvancedView>
+            </Box>
           </Box>
-        </Box>
+        </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

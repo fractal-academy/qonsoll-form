@@ -7,6 +7,7 @@ import {
   Spinner
 } from '../../../../components'
 import { Box } from '@qonsoll/react-design'
+import { TranslationContext } from '../../../../context/Translation'
 import {
   QuestionForm,
   QuestionLayoutSwitcher
@@ -31,7 +32,7 @@ import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
 function FormEdit(props) {
-  const { firebase, actions = {}, id, onBack, showCondition } = props
+  const { firebase, actions = {}, id, translate, onBack, showCondition } = props
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -101,37 +102,39 @@ function FormEdit(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        {formLoading || questionsListLoading ? (
-          <Spinner />
-        ) : (
-          <Box display="flex" height="inherit" overflowX="hidden">
-            <PageLayout title={form?.title} id={id} onBack={onBack}>
-              <FormContentArea
-                leftSideMenu={
-                  !!Object.keys(currentQuestion).length && (
-                    <QuestionLayoutSwitcher
-                      onChange={onChangeMenuItem}
-                      defaultActive={defaultTab}
+        <TranslationContext.Provider value={{ t: translate }}>
+          {formLoading || questionsListLoading ? (
+            <Spinner />
+          ) : (
+            <Box display="flex" height="inherit" overflowX="hidden">
+              <PageLayout title={form?.title} id={id} onBack={onBack}>
+                <FormContentArea
+                  leftSideMenu={
+                    !!Object.keys(currentQuestion).length && (
+                      <QuestionLayoutSwitcher
+                        onChange={onChangeMenuItem}
+                        defaultActive={defaultTab}
+                      />
+                    )
+                  }>
+                  {!!Object.keys(currentQuestion).length && (
+                    <QuestionForm
+                      data={currentQuestion}
+                      onQuestionTypeChange={onQuestionTypeChange}
                     />
-                  )
-                }>
-                {!!Object.keys(currentQuestion).length && (
-                  <QuestionForm
-                    data={currentQuestion}
-                    onQuestionTypeChange={onQuestionTypeChange}
-                  />
-                )}
-              </FormContentArea>
-            </PageLayout>
+                  )}
+                </FormContentArea>
+              </PageLayout>
 
-            <EditorSidebar
-              questions={questions}
-              endings={endings}
-              id={id}
-              showCondition={showCondition}
-            />
-          </Box>
-        )}
+              <EditorSidebar
+                questions={questions}
+                endings={endings}
+                id={id}
+                showCondition={showCondition}
+              />
+            </Box>
+          )}
+        </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )
