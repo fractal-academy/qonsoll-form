@@ -35,7 +35,7 @@ function Carousel(props) {
   isAnswered && next()
 
   return (
-    <Box onWheel={handleScroll} height="100%" width="100%">
+    <Box onWheel={handleScroll} /*height="100%"*/ width="100%">
       <CustomCarousel
         dots={false}
         ref={carouselRef}

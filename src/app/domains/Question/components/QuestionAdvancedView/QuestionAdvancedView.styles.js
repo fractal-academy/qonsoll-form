@@ -9,8 +9,7 @@ export const styles = {
     h: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    borderRadius: `${theme.borderRadius.md}`,
-    overflow: 'auto'
+    borderRadius: `${theme.borderRadius.md}`
   },
   questionCardColumnStyle: {
     v: 'center',
@@ -30,6 +29,11 @@ export const StyledCard = styled(Card)`
   background-color: transparent;
   text-align: ${(props) => props.specialLayoutRule && 'center'};
   justify-content: ${(props) => props.specialLayoutRule && 'center'};
+  max-height: 75vh;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 export const StyledCol = styled(Col)`
   display: flex;
