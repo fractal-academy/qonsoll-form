@@ -45,7 +45,7 @@ function Carousel(props) {
         {children}
       </CastomCarousel>
 
-      <Row noGutters h="right" mt={4}>
+      <Row noGutters h="right">
         <Col cw="auto" mr={2}>
           <Button type="primary" onClick={previous}>
             <UpOutlined />

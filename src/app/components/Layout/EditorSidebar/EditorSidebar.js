@@ -135,7 +135,7 @@ function EditorSidebar(props) {
             </Row>
           </Box>
           {/* Question List*/}
-          <Box overflow="auto" pr={3}>
+          <Box overflow="auto">
             {!!questions?.length && (
               <QuestionsList
                 action={handleDelete}
