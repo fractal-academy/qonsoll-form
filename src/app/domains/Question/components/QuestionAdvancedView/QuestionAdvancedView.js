@@ -15,6 +15,7 @@ import {
   DateTimeInput,
   SubmitButton
 } from 'components'
+import theme from 'app/styles/theme'
 
 const { Title, Text } = Typography
 
@@ -122,6 +123,7 @@ function QuestionAdvancedView(props) {
                 <Box
                   {...layoutType.imgSize}
                   backgroundSize="cover"
+                  borderRadius={theme.borderRadius.md}
                   backgroundRepeat="no-repeat"
                   backgroundImage={`url(${data?.image})`}
                 />
@@ -141,6 +143,7 @@ function QuestionAdvancedView(props) {
             {...layoutType.imgSize}
             backgroundSize="cover"
             backgroundRepeat="no-repeat"
+            borderRadius={theme.borderRadius.md}
             backgroundImage={`url(${data?.image})`}
           />
         </StyledCol>

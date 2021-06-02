@@ -1,13 +1,16 @@
 import { Card } from 'antd'
 import styled from 'styled-components'
 import { Col } from '@qonsoll/react-design'
+import theme from 'app/styles/theme'
 
 export const styles = {
   mainRowStyle: {
     height: 'inherit',
     h: 'center',
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
+    borderRadius: `${theme.borderRadius.md}`,
+    overflow: 'auto'
   },
   questionCardColumnStyle: {
     v: 'center',
