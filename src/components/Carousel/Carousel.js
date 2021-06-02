@@ -1,9 +1,10 @@
 import { Button } from 'antd'
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
+import { Carousel as AntdCarousel } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import { CastomCarousel } from './Carousel.style'
+import { CustomCarousel } from '../../components/Carousel/Carousel.style'
 
 function Carousel(props) {
   const { children, isAnswered, setIsAnswered, setCurrentSlide } = props
@@ -35,16 +36,17 @@ function Carousel(props) {
   isAnswered && next()
 
   return (
-    <Box onWheel={handleScroll} width="100%">
-      <CastomCarousel
+    <Box onWheel={handleScroll} /*height="100%"*/ width="100%">
+      <CustomCarousel
+        dots={false}
         ref={carouselRef}
         dotPosition="right"
         dots={false}
         afterChange={onCurrentSlideChange}>
         {children}
-      </CastomCarousel>
+      </CustomCarousel>
 
-      <Row noGutters h="right" mt={4}>
+      <Row h="right" m={2} noGutters>
         <Col cw="auto" mr={2}>
           <Button type="primary" onClick={previous}>
             <UpOutlined />

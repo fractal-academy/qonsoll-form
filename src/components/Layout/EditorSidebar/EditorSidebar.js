@@ -92,94 +92,91 @@ function EditorSidebar(props) {
 
   return (
     <Box position="relative" display="flex">
-      <SidebarStateSwitcher
+      {/* <SidebarStateSwitcher
         onClick={() => {
           setOpen(!open)
         }}>
         {open ? <RightOutlined /> : <LeftOutlined />}
-      </SidebarStateSwitcher>
-      {open && (
-        <SidebarBoxWrapper>
-          <Box p={3}>
-            <Row noGutters>
-              <Col v="center">
-                <Title level={5}>Questions</Title>
-              </Col>
-              <Col cw="auto">
-                <Popover
-                  visible={showPopover}
-                  onVisibleChange={() => {
-                    setshowPopover(!showPopover)
-                  }}
-                  trigger={'click'}
-                  placement={'bottomRight'}
-                  content={
-                    <Box
-                      my={PopoverNegativeMarin.v}
-                      mx={PopoverNegativeMarin.h}>
-                      <QuestionTypeSelect onClick={addQuestion} />
-                    </Box>
-                  }>
-                  <Button
-                    type="text"
-                    icon={<PlusOutlined />}
-                    onClick={popoverShowChange}
-                  />
-                </Popover>
-              </Col>
-              {showCondition && (
+      </SidebarStateSwitcher> */}
+      {/* {open && ( */}
+      <SidebarBoxWrapper my={4}>
+        <Box p={3}>
+          <Row noGutters>
+            <Col v="center">
+              <Title level={5}>Questions</Title>
+            </Col>
+            <Col cw="auto">
+              <Popover
+                visible={showPopover}
+                onVisibleChange={() => {
+                  setshowPopover(!showPopover)
+                }}
+                trigger={'click'}
+                placement={'bottomRight'}
+                content={
+                  <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
+                    <QuestionTypeSelect onClick={addQuestion} />
+                  </Box>
+                }>
+                <Button
+                  type="text"
+                  icon={<PlusOutlined />}
+                  onClick={popoverShowChange}
+                />
+              </Popover>
+            </Col>
+            {showCondition && (
                 <Col cw="auto" v="center" px={1}>
-                  <ModalWithFormConditionsForm
-                    btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
+                  <ModalWithFormConditionsForm btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
                     <FormConditionsForm />
                   </ModalWithFormConditionsForm>
                 </Col>
-              )}
-            </Row>
-          </Box>
-          {/* Question List*/}
-          <Box overflow="auto" pr={3}>
-            {!!questions?.length && (
+            )}
+          </Row>
+        </Box>
+        {/* Question List*/}
+        <Box overflow="auto">
+          {!!questions?.length && (
+            <QuestionsList
+              action={handleDelete}
+              setNewOrder={setNewOrder}
+              onItemClick={onItemClick}
+              data={questions}
+            />
+          )}
+        </Box>
+        <Box mt="auto">
+          <Row>
+            <Col>
+              <CustomDivider type="horizontal" />
+            </Col>
+          </Row>
+          <Row p={3}>
+            <Col v="center">
+              <Title level={5}>Endings</Title>
+            </Col>
+            <Col cw="auto">
+              <Button
+                disabled={endings.length >= 1}
+                type="text"
+                icon={<PlusOutlined />}
+                onClick={addQuestion}
+              />
+            </Col>
+          </Row>
+          <Box {...styles.endingsList}>
+            {!!endings?.length && (
               <QuestionsList
                 action={handleDelete}
                 setNewOrder={setNewOrder}
                 onItemClick={onItemClick}
-                data={questions}
+                data={endings}
               />
             )}
           </Box>
-          <Box mt="auto">
-            <Row>
-              <Col>
-                <CustomDivider type="horizontal" />
-              </Col>
-            </Row>
-            <Row p={3}>
-              <Col v="center">
-                <Title level={5}>Endings</Title>
-              </Col>
-              <Col cw="auto">
-                <Button
-                  disabled={endings.length >= 1}
-                  type="text"
-                  icon={<PlusOutlined />}
-                  onClick={addQuestion}
-                />
-              </Col>
-            </Row>
-            <Box {...styles.endingsList}>
-              {!!endings?.length && (
-                <QuestionsList
-                  action={handleDelete}
-                  setNewOrder={setNewOrder}
-                  onItemClick={onItemClick}
-                  data={endings}
-                />
-              )}
-            </Box>
-          </Box>
-        </SidebarBoxWrapper>
-      )}
+        </Box>
+      </SidebarBoxWrapper>
+      {/* )} */}
     </Box>
   )
 }

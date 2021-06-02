@@ -19,6 +19,7 @@ import {
   ANSWERS_DISPATCH_EVENTS
 } from '../../../../context/Answers'
 // const { Title } = Typography
+import { ContentCard } from '../../../../components'
 
 function FormShow(props) {
   const { firebase, actions = {}, id, translate } = props
@@ -73,7 +74,7 @@ function FormShow(props) {
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={{ t: translate }}>
-          <Box {...styles.mainWrapper}>
+          <Box>
             {/*<Row {...styles.headerRow} noGutters>*/}
             {/*  <Col cw="auto" v="center" p={0}>*/}
             {/*    <Button*/}
@@ -105,13 +106,14 @@ function FormShow(props) {
             {/*  </Col>*/}
             {/*</Row>*/}
 
-            <Box {...styles.questionContainer}>
+            <ContentCard>
               <FormAdvancedView
                 isAnswered={isAnswered}
                 setIsAnswered={setIsAnswered}
                 setCurrentSlide={setCurrentSlide}>
                 {sortedData?.map((item, index) => (
-                  <Box key={index} height="600px" overflowY="auto">
+                  // fix height - important
+                  <Box key={index} height="760px" overflowY="auto">
                     <QuestionAdvancedView
                       data={item}
                       questionNumber={index + 1}
@@ -121,7 +123,7 @@ function FormShow(props) {
                   </Box>
                 ))}
               </FormAdvancedView>
-            </Box>
+            </ContentCard>
           </Box>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>

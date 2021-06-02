@@ -1,6 +1,6 @@
-import { Divider } from 'antd'
 import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
+import { Divider } from 'antd'
 import theme from '../../../../styles/theme'
 
 export const styles = {
@@ -27,7 +27,11 @@ export const SidebarStateSwitcher = styled(Box)`
 `
 export const SidebarBoxWrapper = styled(Box)`
   background-color: ${theme.color.white.default};
-  width: 300px;
+  //REMOVE OR REPLACE THIS CODE BY MORE RELATIVE
+  width: fit-content;
+  overflow-x: hidden;
+  //REMOVE OR REPLACE THIS CODE BY MORE RELATIVE
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   position: relative;

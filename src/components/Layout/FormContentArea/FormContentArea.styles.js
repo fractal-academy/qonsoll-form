@@ -4,14 +4,11 @@ export const styles = {
   contentRow: {
     display: 'flex',
     m: 4,
-    height: '100%',
-    overflow: 'auto'
+    height: '100%'
   },
   contentCol: {
     backgroundColor: theme.color.white.default,
-    p: 3,
-    overflow: 'auto',
-    borderRadius: `${theme.grid.gutters.sm - 4}px`
+    borderRadius: `${theme.borderRadius.md}`
   },
   footerButtons: {
     h: 'right',

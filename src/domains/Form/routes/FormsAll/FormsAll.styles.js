@@ -11,11 +11,11 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  mainWrapper: {
-    flexDirection: 'column',
-    px: 45,
-    py: 4,
-    minHeight: '100%'
   }
+  // mainWrapper: {
+  //   flexDirection: 'column',
+  //   px: 45,
+  //   py: 4,
+  //   minHeight: '100%'
+  // }
 }
