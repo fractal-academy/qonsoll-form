@@ -17,7 +17,7 @@ import {
   useAnswersContext,
   useAnswersContextDispatch
 } from 'app/context/Answers/useAnswersContext'
-import ANSWERS_DISPATCH_EVENTS from '~/app/context/Answers/DispatchEventsTypes'
+import ANSWERS_DISPATCH_EVENTS from 'app/context/Answers/DispatchEventsTypes'
 
 const { Title } = Typography
 
