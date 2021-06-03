@@ -37,24 +37,14 @@ function EditorSidebar(props) {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
-  const [open, setOpen] = useState(true)
+  // const [open, setOpen] = useState(true)
   const [showPopover, setshowPopover] = useState(false)
 
   // [CLEAN FUNCTIONS]
-  const handleDelete = async (questionId) => {
-    await deleteData(COLLECTIONS.QUESTIONS, questionId)
-      .catch((e) => message.error(e.message))
-      .then(updateQuestionOrder())
-  }
-  const updateQuestionOrder = async () => {
-    questions.forEach((item, index) =>
-      setData(COLLECTIONS.QUESTIONS, item.id, {
-        order: index
-      })
-    )
-  }
+
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+    console.log(questions.length)
     // default data for created question
     const newQuestion = {
       id: questionId,
@@ -77,11 +67,7 @@ function EditorSidebar(props) {
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }
-  const setNewOrder = (item) => {
-    setData(COLLECTIONS.QUESTIONS, item?.id, item).catch((e) =>
-      message.error(e.message)
-    )
-  }
+
   const onItemClick = (item) => {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
@@ -135,12 +121,7 @@ function EditorSidebar(props) {
         {/* Question List*/}
         <Box overflow="auto">
           {!!questions?.length && (
-            <QuestionsList
-              action={handleDelete}
-              setNewOrder={setNewOrder}
-              onItemClick={onItemClick}
-              data={questions}
-            />
+            <QuestionsList data={questions} onItemClick={onItemClick} />
           )}
         </Box>
         <Box mt="auto">
@@ -164,12 +145,7 @@ function EditorSidebar(props) {
           </Row>
           <Box {...styles.endingsList}>
             {!!endings?.length && (
-              <QuestionsList
-                action={handleDelete}
-                setNewOrder={setNewOrder}
-                onItemClick={onItemClick}
-                data={endings}
-              />
+              <QuestionsList data={endings} onItemClick={onItemClick} />
             )}
           </Box>
         </Box>
