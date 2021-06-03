@@ -100,7 +100,7 @@ function FormShow(props) {
             setCurrentSlide={setCurrentSlide}>
             {sortedData?.map((item, index) => (
               // fix height - important
-              <Box key={index} height="760px" overflowY="auto">
+              <Box key={index} height="750px" overflowY="auto">
                 <QuestionAdvancedView
                   data={item}
                   questionNumber={index + 1}

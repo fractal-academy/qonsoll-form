@@ -20,10 +20,14 @@ function ShortText(props) {
   }
 
   return (
-    <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+    <Form
+      style={{ width: '70%' }}
+      form={form}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}>
       <Container>
         <Row noGutters>
-          <Col>
+          <Col display="block">
             <Form.Item
               style={globalStyles.resetMarginB}
               name="answer"

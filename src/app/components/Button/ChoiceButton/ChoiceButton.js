@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { KeyBox } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'
-import { Box } from '@qonsoll/react-design'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
 
 let startLetter = 65
@@ -49,18 +49,21 @@ function ChoiceButton(props) {
   }
 
   return (
-    <Box>
+    <Row noGutters>
       {mappedChoices?.map((item, index) => (
-        <KeyBox
-          key={index}
-          item={item}
-          hasImages={hasImages}
-          buttonKey={buttonKey}
-          onButtonClick={onButtonClick}
-          isActive={buttonKey === item.letter}
-        />
+        <Col cw={hasImages ? 'auto' : '12'}>
+          <KeyBox
+            key={index}
+            index={index}
+            item={item}
+            hasImages={hasImages}
+            buttonKey={buttonKey}
+            onButtonClick={onButtonClick}
+            isActive={buttonKey === item.letter}
+          />
+        </Col>
       ))}
-    </Box>
+    </Row>
   )
 }
 

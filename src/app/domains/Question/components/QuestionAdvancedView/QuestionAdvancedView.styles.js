@@ -25,11 +25,12 @@ export const styles = {
 
 export const StyledCard = styled(Card)`
   width: 100%;
+  padding-left: 8px;
   display: grid;
   background-color: transparent;
   text-align: ${(props) => props.specialLayoutRule && 'center'};
   justify-content: ${(props) => props.specialLayoutRule && 'center'};
-  max-height: 75vh;
+  max-height: 85vh;
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;

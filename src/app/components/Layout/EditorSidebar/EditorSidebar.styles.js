@@ -27,7 +27,7 @@ export const SidebarStateSwitcher = styled(Box)`
 `
 export const SidebarBoxWrapper = styled(Box)`
   background-color: ${theme.color.white.default};
-  width: fit-content;
+  //width: fit-content;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
