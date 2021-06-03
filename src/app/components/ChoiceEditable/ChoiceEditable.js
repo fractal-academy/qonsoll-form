@@ -4,7 +4,9 @@ import {
   styles,
   LetterBox,
   DeleteButton,
-  ChoiceInput
+  ChoiceInput,
+  CustomCol,
+  ChoiceOptionCol
 } from './ChoiceEditable.styles'
 import theme from 'app/styles/theme'
 import { DEFAULT_IMAGE } from 'app/constants'
@@ -88,11 +90,11 @@ function ChoiceEditable(props) {
           />
         </Box>
       )}
-      <Row noGutters mx={2}>
-        <Col cw="auto" v="center">
+      <Row noGutters px={2}>
+        <CustomCol cw="auto" v="center">
           <LetterBox>{letter}</LetterBox>
-        </Col>
-        <Col width={withImage ? '130px' : '100px'}>
+        </CustomCol>
+        <ChoiceOptionCol width={withImage ? '130px' : '100px'}>
           <ChoiceInput
             maxlength="100"
             value={value}
@@ -102,7 +104,7 @@ function ChoiceEditable(props) {
             bordered={false}
             onChange={onChange}
           />
-        </Col>
+        </ChoiceOptionCol>
       </Row>
       <DeleteButton onClick={onDelete}>
         <CloseOutlined />
