@@ -4,8 +4,13 @@ import { ListItem } from 'components'
 import { Row, Col } from '@qonsoll/react-design'
 
 function StaticList(props) {
-  const { data, columnWidth, selectedBackgroundImg, setSelectedBackgroundImg } =
-    props
+  const {
+    data,
+    setEdit,
+    columnWidth,
+    selectedBackgroundImg,
+    setSelectedBackgroundImg
+  } = props
 
   return (
     <Row display="flex" width="100%" noGutters>
@@ -13,6 +18,7 @@ function StaticList(props) {
         <Col key={item.id} cw={columnWidth}>
           <ListItem
             data={item}
+            setEdit={setEdit}
             selectedBackgroundImg={selectedBackgroundImg}
             setSelectedBackgroundImg={setSelectedBackgroundImg}
           />

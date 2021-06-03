@@ -16,9 +16,10 @@ import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
 import { Spinner, StaticList } from 'components'
-import COLLECTIONS from 'app/constants/collection'
+import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
+import { COLLECTIONS, QUESTION_TYPES } from 'app/constants'
 import { getCollectionRef, getTimestamp, setData } from 'app/services/Firestore'
 import FormSimpleFormWithModal from 'domains/Form/components/FormSimpleFormWithModal'
 import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
@@ -42,12 +43,14 @@ function FormsAll(props) {
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [currentData, setCurrentData] = useState(data)
+  const [edit, setEdit] = useState(false)
   const fuse = new Fuse(data, { keys: ['title'] })
 
   // [COMPUTED PROPERTIES]
   let amountFiles = data?.length
-
   const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
+  const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+
   // [CLEAN FUNCTIONS]
   const searchData = () => {
     if (searchRef.current.input.value) {
@@ -67,7 +70,19 @@ function FormsAll(props) {
       title: data?.name,
       subtitle: data?.description || '',
       creationDate: getTimestamp().now()
-    }).catch((e) => message.error(e.message))
+    })
+      .then(
+        edit === false &&
+          (await setData(COLLECTIONS.QUESTIONS, questionId, {
+            formId: formId,
+            id: questionId,
+            layoutType: LAYOUT_TYPE_KEYS[0],
+            questionType: QUESTION_TYPES.WELCOME_SCREEN,
+            title: 'WS.',
+            order: 0
+          }))
+      )
+      .catch((e) => message.error(e.message))
   }
 
   const menu = (
@@ -150,7 +165,7 @@ function FormsAll(props) {
           flexWrap="wrap"
           flexDirection="row"
           className="custom-scroll">
-          <StaticList data={currentData} columnWidth={2} />
+          <StaticList columnWidth={2} data={currentData} setEdit={setEdit} />
 
           <FormSimpleFormWithModal
             isModalVisible={isModalVisible}

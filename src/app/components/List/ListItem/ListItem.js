@@ -56,7 +56,8 @@ const StyledBadge = styled(Button)`
 `
 
 function ListItem(props) {
-  const { data, selectedBackgroundImg, setSelectedBackgroundImg } = props
+  const { data, setEdit, selectedBackgroundImg, setSelectedBackgroundImg } =
+    props
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -105,6 +106,7 @@ function ListItem(props) {
         <FormSimpleFormWithModal
           isEdit
           formData={data}
+          setEdit={setEdit}
           isModalVisible={isModalVisible}
           setIsModalVisible={setIsModalVisible}
           onModalSubmit={onModalSubmit}

@@ -116,7 +116,7 @@ function FormEdit(props) {
             </FormContentArea>
           </PageLayout>
 
-          <EditorSidebar questions={questions} endings={endings} />
+          <EditorSidebar transparent questions={questions} endings={endings} />
         </Box>
       )}
     </TypeformConfigurationContext.Provider>

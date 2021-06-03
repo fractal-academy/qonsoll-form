@@ -30,7 +30,7 @@ import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings } = props
+  const { questions, endings, transparent } = props
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
@@ -59,7 +59,7 @@ function EditorSidebar(props) {
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
       //fix lettering later, as will added logic jumps
-      order: (key && questions?.length) || String.fromCharCode(65),
+      order: questions?.length,
       questionConfigurations: questionConfigurations
     }
     // set it into context as current
@@ -89,7 +89,7 @@ function EditorSidebar(props) {
         {open ? <RightOutlined /> : <LeftOutlined />}
       </SidebarStateSwitcher> */}
       {/* {open && ( */}
-      <SidebarBoxWrapper my={4}>
+      <SidebarBoxWrapper transparent={transparent} my={4}>
         <Box p={3}>
           <Row noGutters>
             <Col v="center">
