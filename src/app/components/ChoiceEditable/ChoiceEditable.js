@@ -74,7 +74,7 @@ function ChoiceEditable(props) {
     <Box
       bg={theme.color.primary.lighten6}
       borderRadius={theme.borderRadius.md}
-      width={withImage ? 'auto' : '150px'}
+      width={withImage ? 'auto' : '100%'}
       m={1}
       position="relative">
       {withImage && (
@@ -94,10 +94,11 @@ function ChoiceEditable(props) {
         </Col>
         <Col width={withImage ? '130px' : '100px'}>
           <ChoiceInput
+            maxlength="100"
             value={value}
             onBlur={onBlur}
             placeholder={`choice ${index}`}
-            autoSize={{ minRows: 1, maxRows: 6 }}
+            autoSize={{ minRows: 1, maxRows: 12 }}
             bordered={false}
             onChange={onChange}
           />

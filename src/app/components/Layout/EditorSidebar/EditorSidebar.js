@@ -44,7 +44,13 @@ function EditorSidebar(props) {
 
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
-    console.log(questions.length)
+    const isChoices = [
+      QUESTION_TYPES.CHOICE,
+      QUESTION_TYPES.PICTURE_CHOICE
+    ].includes(key)
+    const questionConfigurations = isChoices
+      ? [{ name: 'default', image: '' }]
+      : ''
     // default data for created question
     const newQuestion = {
       id: questionId,
@@ -54,8 +60,7 @@ function EditorSidebar(props) {
       title: '',
       //fix lettering later, as will added logic jumps
       order: (key && questions?.length) || String.fromCharCode(65),
-      questionConfigurations:
-        key === QUESTION_TYPES.CHOICE ? [{ name: '', image: '' }] : ''
+      questionConfigurations: questionConfigurations
     }
     // set it into context as current
     await currentQuestionDispatch({
@@ -119,7 +124,7 @@ function EditorSidebar(props) {
           </Row>
         </Box>
         {/* Question List*/}
-        <Box overflow="auto">
+        <Box overflow="auto" pr={2}>
           {!!questions?.length && (
             <QuestionsList data={questions} onItemClick={onItemClick} />
           )}

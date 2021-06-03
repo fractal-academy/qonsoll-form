@@ -25,7 +25,11 @@ function LongText(props) {
     <Container>
       <Row noGutters>
         <Col d="block">
-          <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
+          <Form
+            form={form}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            style={{ width: '70%' }}>
             <Form.Item
               style={{ marginBottom: '0px' }}
               name="answer"
