@@ -4,7 +4,8 @@ import { globalStyles } from '../../../styles'
 export const styles = {
   mainBox: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    width: '100%'
   },
   addNewChoiceBox: {
     bg: theme.color.primary.lighten6,

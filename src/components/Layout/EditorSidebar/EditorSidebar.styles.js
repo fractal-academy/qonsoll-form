@@ -31,6 +31,7 @@ export const SidebarBoxWrapper = styled(Box)`
   width: fit-content;
   overflow-x: hidden;
   //REMOVE OR REPLACE THIS CODE BY MORE RELATIVE
+  min-width: 300px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;

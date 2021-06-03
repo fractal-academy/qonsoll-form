@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from 'antd'
+import { Button, Typography } from 'antd'
 import PropTypes from 'prop-types'
 import theme from '../../../../styles/theme'
 import styled from 'styled-components'
@@ -11,6 +11,9 @@ import { useTranslation } from '../../../context/Translation'
 const { Text } = Typography
 
 const StyledKeybox = styled(Col)`
+  position: absolute;
+  bottom: 8px;
+
   border-width: 1px;
   text-align: center;
   border-style: solid;
@@ -31,26 +34,36 @@ const ImageContainer = styled(Box)`
   background-image: url(${(props) => props.image});
 `
 const StyledButton = styled(Box)`
-  width: fit-content;
+  position: relative;
+  width: 100%;
   border-radius: 8px;
   padding: 8px;
   color: ${theme.color.primary.default};
   background-color: ${theme.color.primary.t.lighten5};
-  height: fit-content;
+  height: 100%;
 
   &:hover {
     background-color: ${theme.color.primary.t.lighten3};
   }
 `
-const StyledIcon = styled(CheckOutlined)`
-  font-size: 18px;
-`
 const StyledText = styled(Text)`
-  width: 10ch;
+  width: ${({ hasImages }) => (hasImages ? '15ch' : '100%')};
+  padding-left: 30px;
+`
+
+const StyledBadge = styled(Button)`
+  position: absolute;
+  border-radius: 50%;
+  height: 24px;
+  z-index: 100;
+  padding: 3px;
+  width: 24px;
+  right: -4px;
+  top: -4px;
 `
 
 function KeyBox(props) {
-  const { onButtonClick, item, isActive, hasImages } = props
+  const { onButtonClick, item, index, isActive, hasImages } = props
   const { letter } = item || {}
 
   // [ADDITIONAL HOOKS]
@@ -58,18 +71,31 @@ function KeyBox(props) {
   const { t } = useTranslation()
 
   return (
-    <Box ref={hoverRef} display={hasImages && 'inline-block'} mb={2} mr={2}>
+    <Box
+      ref={hoverRef}
+      display={hasImages && 'inline-block'}
+      mb={2}
+      mr={2}
+      width="100%">
       <StyledButton hasImages={hasImages} onClick={() => onButtonClick(letter)}>
         {hasImages && <ImageContainer image={item?.choice?.image} />}
-        <Row v="center" h="between" noGutters>
-          <Col cw="auto" v="center">
+        <Row v="center" h="between" noGutters position="relative">
+          <Col cw="12" v="center">
             <StyledKeybox isHovering={isHovering} isActive={isActive} mr={1}>
               {isHovering ? `${t('Key')} ${letter}` : letter}
             </StyledKeybox>
-            <StyledText ellipsis>{item?.choice?.name}</StyledText>
+            <StyledText hasImages={hasImages}>
+              {item?.choice?.name || `Choice ${index + 1}`}
+            </StyledText>
           </Col>
           <Col cw="auto">
-            <Box>{isActive && <StyledIcon />}</Box>
+            <Box position="absolute" top="0" right="0">
+              {isActive && (
+                <StyledBadge size="small" type="primary">
+                  <CheckOutlined />
+                </StyledBadge>
+              )}
+            </Box>
           </Col>
         </Row>
       </StyledButton>

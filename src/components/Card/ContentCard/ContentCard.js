@@ -8,7 +8,7 @@ const Wrapper = styled(Box)`
   margin: 24px;
   padding-bottom: 2px;
   //height: -webkit-fill-available;
-  height: 85vh;
+  //height: 85vh;
   display: flex;
   align-items: center;
   border-radius: ${theme.borderRadius.md};

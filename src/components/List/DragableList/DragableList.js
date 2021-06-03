@@ -6,16 +6,23 @@ import SortableContainer from './SortableContainer'
 import React, { useEffect, useMemo, useState } from 'react'
 
 function DragableList(props) {
-  const { dataSource, onUpdate, renderItem, sortable = true, ...args } = props
+  const {
+    dataSource,
+    setNewOrder,
+    onUpdate,
+    renderItem,
+    sortable = true,
+    ...args
+  } = props
 
   // [COMPONENT STATE HOOKS]
   const [sortableItems, setSortableItems] = useState([])
 
   // [CLEAN FUNCTIONS]
-  function onSortEnd({ oldIndex, newIndex }) {
+  function onSortEnd(data) {
+    const { oldIndex, newIndex } = data
     const updatedItems = [...arrayMove(sortableItems, oldIndex, newIndex)]
     setSortableItems(updatedItems)
-
     if (!onUpdate) return
     onUpdate(
       updatedItems.map((i, index) => ({
@@ -23,8 +30,8 @@ function DragableList(props) {
         order: index
       }))
     )
+    // setNewOrder(dataSource)
   }
-
   // [COMPUTED PROPERTIES]
   const Container = useMemo(
     () => (sortable ? SortableContainer : Box),
@@ -39,6 +46,7 @@ function DragableList(props) {
   useEffect(() => {
     let isComponentMounted = true
     isComponentMounted && setSortableItems(Object.keys(dataSource))
+
     // [CLEAN UP FUNCTION]
     return () => {
       isComponentMounted = false

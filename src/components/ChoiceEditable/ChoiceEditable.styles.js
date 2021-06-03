@@ -1,4 +1,4 @@
-import { Box } from '@qonsoll/react-design'
+import { Box, Col } from '@qonsoll/react-design'
 import { Input } from 'antd'
 import theme from '../../../styles/theme'
 import styled from 'styled-components'
@@ -44,4 +44,12 @@ export const DeleteButton = styled(Box)`
 export const ChoiceInput = styled(TextArea)`
   cursor: pointer;
   color: ${theme.color.primary.default};
+`
+export const CustomCol = styled(Col)`
+  position: absolute;
+  bottom: 8px;
+`
+export const ChoiceOptionCol = styled(Col)`
+  padding-left: 15px;
+  //bottom: 0;
 `

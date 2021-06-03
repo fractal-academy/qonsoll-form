@@ -43,9 +43,7 @@ function FormShow(props) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   // [COMPUTED PROPERTIES]
-  const sortedData =
-    data &&
-    data.sort((a, b) => (a.order > b.order ? 1 : b.order > a.order ? -1 : 0))
+  const sortedData = data && data.sort((a, b) => a.order - b.order)
 
   //temporary solution for ending logic; fix after adding logic jumps
   sortedData &&
@@ -113,7 +111,7 @@ function FormShow(props) {
                 setCurrentSlide={setCurrentSlide}>
                 {sortedData?.map((item, index) => (
                   // fix height - important
-                  <Box key={index} height="760px" overflowY="auto">
+                  <Box key={index} height="750px" overflowY="auto">
                     <QuestionAdvancedView
                       data={item}
                       questionNumber={index + 1}
