@@ -12,18 +12,26 @@ function QuestionsList(props) {
   // [CLEAN FUNCTIONS]
   const onUpdate = (data) => {
     data.forEach((item) =>
-      setData(COLLECTIONS.QUESTIONS, item?.id, {
-        order: item?.order,
-        ...item
-      }).catch((e) => message.error(e.message))
+      setData(COLLECTIONS.QUESTIONS, item?.id, item).catch((e) =>
+        message.error(e.message)
+      )
     )
   }
-  const handleDelete = (questionId) => {
-    deleteData(COLLECTIONS.QUESTIONS, questionId)
-      .then()
-      .then(console.log('success'))
-      .catch((e) => message.error(e.message))
+
+  const handleDelete = async (questionId) => {
+    const updatedData = data.filter((item) => item.id !== questionId)
+    await deleteData(COLLECTIONS.QUESTIONS, questionId).catch((e) =>
+      message.error(e.message)
+    )
+    console.log(updatedData)
+    updatedData.forEach((item, index) => {
+      setData(COLLECTIONS.QUESTIONS, item?.id, {
+        ...item,
+        order: index
+      }).catch((e) => message.error(e.message))
+    })
   }
+  // [COMPUTED PROPERTIES]
   const dataSource = useMemo(
     () => (data ? data.sort((a, b) => a.order - b.order) : []),
     [data]

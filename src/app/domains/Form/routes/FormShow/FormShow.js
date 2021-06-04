@@ -44,9 +44,7 @@ function FormShow(props) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   // [COMPUTED PROPERTIES]
-  const sortedData =
-    data &&
-    data.sort((a, b) => (a.order > b.order ? 1 : b.order > a.order ? -1 : 0))
+  const sortedData = data && data.sort((a, b) => a.order - b.order)
 
   //temporary solution for ending logic; fix after adding logic jumps
   sortedData &&

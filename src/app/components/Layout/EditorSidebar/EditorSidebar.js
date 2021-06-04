@@ -2,12 +2,12 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, message, Button, Popover } from 'antd'
+import { Typography, Button, Popover } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { ModalWithFormConditionsForm } from 'domains/Condition/components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
-import { getCollectionRef, setData, deleteData } from 'app/services/Firestore'
+import { getCollectionRef } from 'app/services/Firestore'
 import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
 import {
   useCurrentQuestionContextDispatch,
@@ -16,15 +16,9 @@ import {
 import {
   CustomDivider,
   SidebarBoxWrapper,
-  SidebarStateSwitcher,
   styles
 } from './EditorSidebar.styles'
-import {
-  LeftOutlined,
-  PlusOutlined,
-  RightOutlined,
-  SettingOutlined
-} from '@ant-design/icons'
+import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Title } = Typography
@@ -58,7 +52,6 @@ function EditorSidebar(props) {
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
-      //fix lettering later, as will added logic jumps
       order: questions?.length,
       questionConfigurations: questionConfigurations
     }
@@ -69,6 +62,7 @@ function EditorSidebar(props) {
     })
     key && setshowPopover(!showPopover)
   }
+
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }

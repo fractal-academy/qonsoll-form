@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 import { PageLayout, EditorSidebar, FormContentArea, Spinner } from 'components'
@@ -43,15 +43,24 @@ function FormEdit(props) {
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
-  let questions = [],
-    endings = []
-  if (!formLoading && !questionsListLoading) {
-    questionsList.forEach((item) => {
-      item.questionType !== QUESTION_TYPES.ENDING
-        ? questions.push(item)
-        : endings.push(item)
-    })
-  }
+  const questions = useMemo(
+    () =>
+      questionsList
+        ? questionsList.filter(
+            (item) => item.questionType !== QUESTION_TYPES.ENDING
+          )
+        : [],
+    [questionsList]
+  )
+  const endings = useMemo(
+    () =>
+      questionsList
+        ? questionsList.filter(
+            (item) => item.questionType === QUESTION_TYPES.ENDING
+          )
+        : [],
+    [questionsList]
+  )
 
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = ({ key }) => {
