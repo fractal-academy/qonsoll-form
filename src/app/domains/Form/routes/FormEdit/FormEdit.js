@@ -89,6 +89,14 @@ function FormEdit(props) {
 
   // [USE_EFFECTS]
   useEffect(() => {
+    !questionsListLoading &&
+      currentQuestionDispatch({
+        type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
+        payload: questionsList?.[0]
+      })
+  }, [questionsListLoading])
+
+  useEffect(() => {
     //set default active tab for questionLayout switcher every time when we change current question
     setDefaultTab(currentQuestion?.layoutType)
     //save data of current question to database, when it change
