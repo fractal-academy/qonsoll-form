@@ -5,7 +5,7 @@ import { SubmitButton } from 'components'
 import { Row, Col, Container } from '@qonsoll/react-design'
 
 function ShortText(props) {
-  const { onSubmit, inputProps, isRequired, onClick, id } = props
+  const { inputProps, isRequired, onClick, id } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()

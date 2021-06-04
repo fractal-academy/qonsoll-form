@@ -33,7 +33,6 @@ const ItemPreview = styled(Box)`
   height: 140px;
   border-radius: 8px;
   align-items: center;
-  cursor: pointer;
   justify-content: center;
   background-color: white;
 `
@@ -74,12 +73,15 @@ function ListItem(props) {
 
   // [CLEAN FUNCTIONS]
   const onFormItemClick = (e) => {
+    e.stopPropagation()
     formRoute && history.push(formRoute)
   }
-  const showPopconfirm = () => {
+  const showPopconfirm = ({ domEvent }) => {
+    domEvent.stopPropagation()
     setIsPopconfirmVisible(!isPopconfirmVisible)
   }
-  const showModal = () => {
+  const showModal = ({ domEvent }) => {
+    domEvent.stopPropagation()
     setIsModalVisible(true)
   }
   const handleDelete = async () => {
@@ -101,7 +103,7 @@ function ListItem(props) {
   // [MENU TEMPLATE]
   const menu = (
     <Menu>
-      <Menu.Item onClick={showModal} key={'showModal'}>
+      <Menu.Item onClick={(e) => showModal(e)} key={'showModal'}>
         <Text>Rename</Text>
         <FormSimpleFormWithModal
           isEdit
@@ -113,7 +115,7 @@ function ListItem(props) {
         />
       </Menu.Item>
 
-      <Menu.Item onClick={showPopconfirm} key={'showPopconfirm'}>
+      <Menu.Item onClick={(e) => showPopconfirm(e)} key={'showPopconfirm'}>
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
@@ -126,14 +128,15 @@ function ListItem(props) {
   )
 
   return (
-    <StyledItem isCard>
+    <StyledItem
+      isCard
+      onClick={
+        !data?.imageUrl
+          ? onFormItemClick
+          : () => setSelectedBackgroundImg(data?.imageUrl)
+      }>
       <Box display="block" width="inherit">
-        <ItemPreview
-          onClick={
-            !data?.imageUrl
-              ? onFormItemClick
-              : () => setSelectedBackgroundImg(data?.imageUrl)
-          }>
+        <ItemPreview>
           {data?.imageUrl ? (
             <>
               {selectedBackgroundImg === data?.imageUrl && (
@@ -168,8 +171,12 @@ function ListItem(props) {
                 <CloseOutlined />
               </Popconfirm>
             ) : (
-              <Dropdown overlay={menu} trigger="click" placement="bottomRight">
-                <MoreOutlined />
+              <Dropdown overlay={menu} placement="bottomRight">
+                <MoreOutlined
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
+                />
               </Dropdown>
             )}
           </Col>

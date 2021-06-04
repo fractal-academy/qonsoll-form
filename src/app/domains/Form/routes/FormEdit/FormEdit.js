@@ -46,7 +46,7 @@ function FormEdit(props) {
   const questions = useMemo(
     () =>
       questionsList
-        ? questionsList.filter(
+        ? questionsList?.filter(
             (item) => item.questionType !== QUESTION_TYPES.ENDING
           )
         : [],
@@ -55,7 +55,7 @@ function FormEdit(props) {
   const endings = useMemo(
     () =>
       questionsList
-        ? questionsList.filter(
+        ? questionsList?.filter(
             (item) => item.questionType === QUESTION_TYPES.ENDING
           )
         : [],
@@ -92,7 +92,7 @@ function FormEdit(props) {
     !questionsListLoading &&
       currentQuestionDispatch({
         type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
-        payload: questionsList?.[0]
+        payload: questionsList?.[0] || {}
       })
   }, [questionsListLoading])
 
