@@ -8,7 +8,7 @@ const Item = styled(Box)`
   margin-right: 10px;
   margin-bottom: 20px;
   padding: 6px;
-  cursor: ${(props) => props.isCard && 'default !important'};
+  cursor: pointer;
   background: ${theme.color.dark.t.lighten9};
   width: -webkit-fill-available;
   height: fit-content;

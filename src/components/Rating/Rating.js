@@ -11,10 +11,12 @@ const StyledRate = styled(Rate)`
   }
 `
 function CustomRating(props) {
-  const { allowClear, tooltips, questionConfigurations, onClick, id } = props
+  const { allowClear, tooltips, onClick, question } = props
+  const { questionConfigurations } = question
 
+  // [CLEAN FUNCTIONS]
   const onChange = (value) => {
-    const data = { questionId: id, answer: value }
+    const data = { question, answer: { value } }
 
     onClick?.(data)
   }

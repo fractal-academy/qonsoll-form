@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, message, Button, Popover } from 'antd'
+import { Typography, Button, Popover } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
@@ -17,13 +17,9 @@ import {
 import {
   CustomDivider,
   SidebarBoxWrapper,
-  SidebarStateSwitcher,
   styles
 } from './EditorSidebar.styles'
-import {
-  LeftOutlined,
-  PlusOutlined,
-  RightOutlined,
+import {  PlusOutlined,
   SettingOutlined
 } from '@ant-design/icons'
 import useFunctions from '../../../hooks/useFunctions'
@@ -32,8 +28,9 @@ import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings, id, showCondition } = props
+  const { questions, endings, id, showCondition, transparent } = props
   const { getCollectionRef, setData, deleteData } = useFunctions()
+
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -59,8 +56,7 @@ function EditorSidebar(props) {
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
-      //fix lettering later, as will added logic jumps
-      order: (key && questions?.length) || String.fromCharCode(65),
+      order: questions?.length,
       questionConfigurations: questionConfigurations
     }
     // set it into context as current
@@ -90,7 +86,7 @@ function EditorSidebar(props) {
         {open ? <RightOutlined /> : <LeftOutlined />}
       </SidebarStateSwitcher> */}
       {/* {open && ( */}
-      <SidebarBoxWrapper my={4}>
+      <SidebarBoxWrapper transparent={transparent} my={4}>
         <Box p={3}>
           <Row noGutters>
             <Col v="center">

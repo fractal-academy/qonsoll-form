@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useMemo } from 'react'
 import {
   PageLayout,
   EditorSidebar,
@@ -33,11 +33,11 @@ import ActionsFunctionsContext from '../../../../context/ActionsFunctions/Action
 
 function FormEdit(props) {
   const { firebase, actions = {}, id, translate, onBack, showCondition } = props
-  // [CUSTOM_HOOKS]
+
+  // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
-  // [ADDITIONAL HOOKS]
   const [form, formLoading] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
@@ -50,15 +50,24 @@ function FormEdit(props) {
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
-  let questions = [],
-    endings = []
-  if (!formLoading && !questionsListLoading) {
-    questionsList.forEach((item) => {
-      item.questionType !== QUESTION_TYPES.ENDING
-        ? questions.push(item)
-        : endings.push(item)
-    })
-  }
+  const questions = useMemo(
+    () =>
+      questionsList
+        ? questionsList?.filter(
+            (item) => item.questionType !== QUESTION_TYPES.ENDING
+          )
+        : [],
+    [questionsList]
+  )
+  const endings = useMemo(
+    () =>
+      questionsList
+        ? questionsList?.filter(
+            (item) => item.questionType === QUESTION_TYPES.ENDING
+          )
+        : [],
+    [questionsList]
+  )
 
   // [CLEAN FUNCTIONS]
   const onChangeMenuItem = ({ key }) => {
@@ -86,6 +95,15 @@ function FormEdit(props) {
   }
 
   // [USE_EFFECTS]
+  useEffect(() => {
+    !questionsListLoading &&
+      currentQuestionDispatch({
+        type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
+        payload: questionsList?.[0] || {}
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionsListLoading])
+
   useEffect(() => {
     //set default active tab for questionLayout switcher every time when we change current question
     setDefaultTab(currentQuestion?.layoutType)
@@ -127,6 +145,7 @@ function FormEdit(props) {
               </PageLayout>
 
               <EditorSidebar
+                  transparent
                 questions={questions}
                 endings={endings}
                 id={id}

@@ -7,7 +7,7 @@ import { Row, Col, Container } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 
 function ShortText(props) {
-  const { inputProps, isRequired, onClick, id } = props
+  const { inputProps, isRequired, onClick, id,question } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
@@ -15,7 +15,7 @@ function ShortText(props) {
 
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
-    const data = { questionId: id, answer }
+    const data = { question, answer: { value: answer || '' } }
     onClick && onClick(data)
   }
   const onFinishFailed = (errorInfo) => {

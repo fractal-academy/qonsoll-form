@@ -29,8 +29,8 @@ const StyledRangeButton = styled(Button)`
 `
 
 function RangeButton(props) {
-  const { questionConfigurations, onClick, currentSlide, order, id } = props
-
+  const { onClick, currentSlide, question } = props
+  const { order, questionConfigurations } = question
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
   const cwMedium = useMedia({ minWidth: '1100px' })
@@ -62,7 +62,10 @@ function RangeButton(props) {
   const onButtonClick = (number) => {
     if (range.includes(Number(number)) && currentSlide === order) {
       setButtonKey(number)
-      const data = { questionId: id, answer: number }
+      const data = {
+        question,
+        answer: { value: number }
+      }
       onClick && onClick(data)
     }
   }

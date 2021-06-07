@@ -21,10 +21,11 @@ const UploadArea = (props) => {
   const { t } = useTranslation()
   const { getCollectionRef, setData } = useFunctions()
 
+  const { action, question } = props
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
-
   // [COMPUTED PROPERTIES]
+
   const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
 
   // [CLEAN FUNCTIONS]
@@ -100,6 +101,13 @@ const UploadArea = (props) => {
       }
     )
   }
+  // const onAply = () => {
+  //   const data = {
+  //     question,
+  //     answer: { value: filesList }
+  //   }
+  //   action && action(data)
+  // }
 
   return (
     <Dragger
@@ -125,6 +133,7 @@ const UploadArea = (props) => {
         </Col>
       </Row>
     </Dragger>
+    //ADD Ok button and pass onClick={onAply}
   )
 }
 

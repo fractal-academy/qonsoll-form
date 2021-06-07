@@ -7,6 +7,7 @@ import { FormSimpleForm } from '../../../../domains/Form/components'
 const FormSimpleFormWithModal = (props) => {
   const {
     formData,
+    setEdit,
     isModalVisible,
     setIsModalVisible,
     onModalSubmit,
@@ -33,7 +34,9 @@ const FormSimpleFormWithModal = (props) => {
     !isEdit && form.resetFields()
     setLoading(false)
     setIsModalVisible(false)
+    setEdit && setEdit(isEdit)
   }
+  // [COMPUTED PROPERTIES]
 
   return (
     <Modal

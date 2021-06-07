@@ -57,10 +57,10 @@ const StyledBadge = styled(Button)`
 
 function ListItem(props) {
   const { updateData, deleteData } = useFunctions()
-  const { data, selectedBackgroundImg, setSelectedBackgroundImg } = props
+  const { data, selectedBackgroundImg, setSelectedBackgroundImg,setEdit } = props
 
   // [ADDITIONAL HOOKS]
-  const { onFormItemClick } = useActionsFunctionsContext()
+  // const { onFormItemClick } = useActionsFunctionsContext()
   const { t } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
@@ -73,14 +73,16 @@ function ListItem(props) {
   const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
-  const onFormItemClickDisplay = () => {
-    onFormItemClick?.(data?.id)
-    // formRoute && history.push(formRoute)
+  const onFormItemClick = (e) => {
+    e.stopPropagation()
+    formRoute && history.push(formRoute)
   }
-  const showPopconfirm = () => {
+  const showPopconfirm = ({ domEvent }) => {
+    domEvent.stopPropagation()
     setIsPopconfirmVisible(!isPopconfirmVisible)
   }
-  const showModal = () => {
+  const showModal = ({ domEvent }) => {
+    domEvent.stopPropagation()
     setIsModalVisible(true)
   }
   const handleDelete = async () => {
@@ -102,22 +104,23 @@ function ListItem(props) {
   // [MENU TEMPLATE]
   const menu = (
     <Menu>
-      <Menu.Item onClick={showModal} key={'showModal'}>
+      <Menu.Item onClick={(e) => showModal(e)} key={'showModal'}>
         <Text>{t('Rename')}</Text>
         <FormSimpleFormWithModal
           isEdit
           formData={data}
+          setEdit={setEdit}
           isModalVisible={isModalVisible}
           setIsModalVisible={setIsModalVisible}
           onModalSubmit={onModalSubmit}
         />
       </Menu.Item>
 
-      <Menu.Item onClick={showPopconfirm} key={'showPopconfirm'}>
+      <Menu.Item onClick={(e) => showPopconfirm(e)} key={'showPopconfirm'}>
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
-          title={t('Delete this form?')}
+          title="Delete this form?"
           okButtonProps={{ loading: confirmLoading }}>
           <Text>{t('Delete')}</Text>
         </Popconfirm>
@@ -126,14 +129,15 @@ function ListItem(props) {
   )
 
   return (
-    <StyledItem isCard>
+    <StyledItem
+      isCard
+      onClick={
+        !data?.imageUrl
+          ? onFormItemClick
+          : () => setSelectedBackgroundImg(data?.imageUrl)
+      }>
       <Box display="block" width="inherit">
-        <ItemPreview
-          onClick={
-            !data?.imageUrl
-              ? onFormItemClickDisplay
-              : () => setSelectedBackgroundImg(data?.imageUrl)
-          }>
+        <ItemPreview>
           {data?.imageUrl ? (
             <>
               {selectedBackgroundImg === data?.imageUrl && (
@@ -168,8 +172,12 @@ function ListItem(props) {
                 <CloseOutlined />
               </Popconfirm>
             ) : (
-              <Dropdown overlay={menu} trigger="click" placement="bottomRight">
-                <MoreOutlined />
+              <Dropdown overlay={menu} placement="bottomRight">
+                <MoreOutlined
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
+                />
               </Dropdown>
             )}
           </Col>
