@@ -33,11 +33,11 @@ import ActionsFunctionsContext from '../../../../context/ActionsFunctions/Action
 
 function FormEdit(props) {
   const { firebase, actions = {}, id, translate, onBack, showCondition } = props
-  // [CUSTOM_HOOKS]
+
+  // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
-  // [ADDITIONAL HOOKS]
   const [form, formLoading] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
@@ -101,6 +101,7 @@ function FormEdit(props) {
         type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
         payload: questionsList?.[0] || {}
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionsListLoading])
 
   useEffect(() => {

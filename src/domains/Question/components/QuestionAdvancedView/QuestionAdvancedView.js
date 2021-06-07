@@ -36,8 +36,8 @@ function QuestionAdvancedView(props) {
         <ChoiceButton
           choices={data?.questionConfigurations}
           onClick={onClick}
-          currentSlide={currentSlide}
           hasImages
+          currentSlide={currentSlide}
         />
       )
     },
@@ -69,7 +69,7 @@ function QuestionAdvancedView(props) {
       component: <FileUploader action={onClick} />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton onClick={onClick}>{t('Next')}</SubmitButton>
+      component: <SubmitButton onClick={onClick}>>{t('Continue')}</SubmitButton>
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: <SubmitButton onClick={onClick}>{t('Start')}</SubmitButton>

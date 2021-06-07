@@ -25,8 +25,8 @@ const UploadArea = (props) => {
 
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
-
   // [COMPUTED PROPERTIES]
+
   const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
 
   // [CLEAN FUNCTIONS]
@@ -102,13 +102,13 @@ const UploadArea = (props) => {
       }
     )
   }
-  const onAply = () => {
-    const data = {
-      question,
-      answer: { value: filesList }
-    }
-    action && action(data)
-  }
+  // const onAply = () => {
+  //   const data = {
+  //     question,
+  //     answer: { value: filesList }
+  //   }
+  //   action && action(data)
+  // }
 
   return (
     <Dragger

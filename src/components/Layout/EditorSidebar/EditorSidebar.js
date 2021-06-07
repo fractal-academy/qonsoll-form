@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, message, Button, Popover } from 'antd'
+import { Typography, Button, Popover } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
@@ -63,7 +63,6 @@ function EditorSidebar(props) {
     })
     key && setshowPopover(!showPopover)
   }
-
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }

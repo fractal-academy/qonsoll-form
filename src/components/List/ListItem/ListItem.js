@@ -73,11 +73,9 @@ function ListItem(props) {
   const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
-  const onFormItemClickDisplay = (e) => {
+  const onFormItemClicked = (e) => {
     e.stopPropagation()
-
     onFormItemClick?.(data?.id)
-    // formRoute && history.push(formRoute)
   }
   const showPopconfirm = ({ domEvent }) => {
     domEvent.stopPropagation()
@@ -122,7 +120,7 @@ function ListItem(props) {
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
-          title={t('Delete this form?')}
+          title="Delete this form?"
           okButtonProps={{ loading: confirmLoading }}>
           <Text>{t('Delete')}</Text>
         </Popconfirm>
@@ -135,7 +133,7 @@ function ListItem(props) {
       isCard
       onClick={
         !data?.imageUrl
-          ? onFormItemClickDisplay
+          ? onFormItemClicked
           : () => setSelectedBackgroundImg(data?.imageUrl)
       }>
       <Box display="block" width="inherit">

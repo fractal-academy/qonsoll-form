@@ -29,8 +29,6 @@ export const SidebarBoxWrapper = styled(Box)`
   background-color: ${(props) =>
     props.transparent ? 'transparent' : theme.color.white.default};
   width: fit-content;
-  overflow-x: hidden;
-  //REMOVE OR REPLACE THIS CODE BY MORE RELATIVE
   min-width: 300px;
   border-radius: 12px;
   display: flex;
