@@ -38,7 +38,7 @@ function QuestionForm(props) {
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton>START</SubmitButton>
+      component: <SubmitButton>Start</SubmitButton>
     },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
@@ -134,10 +134,9 @@ function QuestionForm(props) {
           )}
           <Row noGutters>
             <Col>
-              {cloneElement(
-                questionTypesMap[data?.questionType].component,
-                data
-              )}
+              {cloneElement(questionTypesMap[data?.questionType].component, {
+                question: data
+              })}
             </Col>
           </Row>
         </CustomCard>
