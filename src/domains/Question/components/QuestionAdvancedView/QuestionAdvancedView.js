@@ -36,8 +36,8 @@ function QuestionAdvancedView(props) {
         <ChoiceButton
           choices={data?.questionConfigurations}
           onClick={onClick}
-          hasImages
           currentSlide={currentSlide}
+          hasImages
         />
       )
     },
@@ -66,7 +66,7 @@ function QuestionAdvancedView(props) {
       component: <DateTimeInput onDateChange={onClick} />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploader />
+      component: <FileUploader action={onClick} />
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: <SubmitButton onClick={onClick}>{t('Next')}</SubmitButton>
@@ -135,7 +135,7 @@ function QuestionAdvancedView(props) {
             </Row>
           )}
           <Row noGutters>
-            <Col>{cloneElement(component, data)}</Col>
+            <Col>{cloneElement(component, { question: data })}</Col>
           </Row>
         </StyledCard>
       </Col>

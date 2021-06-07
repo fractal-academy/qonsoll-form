@@ -17,6 +17,8 @@ const config = {
 }
 
 const UploadArea = (props) => {
+  const { action, question } = props
+
   // [ADDITIONAL_HOOKS]
   const { t } = useTranslation()
   const { getCollectionRef, setData } = useFunctions()
@@ -100,6 +102,13 @@ const UploadArea = (props) => {
       }
     )
   }
+  const onAply = () => {
+    const data = {
+      question,
+      answer: { value: filesList }
+    }
+    action && action(data)
+  }
 
   return (
     <Dragger
@@ -125,6 +134,7 @@ const UploadArea = (props) => {
         </Col>
       </Row>
     </Dragger>
+    //ADD Ok button and pass onClick={onAply}
   )
 }
 

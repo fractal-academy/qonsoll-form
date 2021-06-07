@@ -139,10 +139,9 @@ function QuestionForm(props) {
           )}
           <Row noGutters>
             <Col>
-              {cloneElement(
-                questionTypesMap[data?.questionType].component,
-                data
-              )}
+              {cloneElement(questionTypesMap[data?.questionType].component, {
+                question: data
+              })}
             </Col>
           </Row>
         </CustomCard>

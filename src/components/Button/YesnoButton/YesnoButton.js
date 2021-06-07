@@ -6,7 +6,8 @@ import { Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../../context/Translation'
 
 function YesnoButton(props) {
-  const { onClick, currentSlide, order, id } = props
+  const { onClick, currentSlide, question } = props
+  const { order } = question
 
   // [ADDITIONAL_HOOKS]
   const { t } = useTranslation()
@@ -34,10 +35,15 @@ function YesnoButton(props) {
   mappedChoices.map((item) => letters.push(item.letter))
 
   // [CLEAN FUNCTIONS]
-  const onButtonClick = (letter) => {
+  const onButtonClick = (choiceData) => {
+    const { letter, choice } = choiceData
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
-      const data = { questionId: id, answer: letter }
+      const answer = { value: choice?.name || '', letterKey: letter }
+      const data = {
+        question,
+        answer
+      }
       onClick && onClick(data)
 
       console.log(`${letter} was pressed`)

@@ -26,8 +26,8 @@ export const SidebarStateSwitcher = styled(Box)`
   border-radius: 0 0 0 ${theme.borderRadius.md};
 `
 export const SidebarBoxWrapper = styled(Box)`
-  background-color: ${theme.color.white.default};
-  //REMOVE OR REPLACE THIS CODE BY MORE RELATIVE
+  background-color: ${(props) =>
+    props.transparent ? 'transparent' : theme.color.white.default};
   width: fit-content;
   overflow-x: hidden;
   //REMOVE OR REPLACE THIS CODE BY MORE RELATIVE

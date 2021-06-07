@@ -17,7 +17,8 @@ const StyledSubmit = styled(Button)`
 `
 
 function SubmitButton(props) {
-  const { children, onClick, finish, formId } = props
+  const { children, onClick, finish, question } = props
+  const { formId } = question
 
   // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
@@ -30,7 +31,7 @@ function SubmitButton(props) {
       const updatedAnswers = { formId, answers }
       //add function from b2g and provide updatedAnswers
       onFinish?.(updatedAnswers)
-    } else onClick && onClick()
+    } else onClick?.()
   }
 
   return (

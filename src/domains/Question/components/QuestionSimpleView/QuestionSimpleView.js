@@ -25,7 +25,7 @@ function QuestionSimpleView(props) {
           <Col cw="auto">
             <Popconfirm
               title="Delete this question?"
-              onConfirm={() => action(id)}>
+              onConfirm={(e) => action(e, id)}>
               <CloseOutlined />
             </Popconfirm>
           </Col>

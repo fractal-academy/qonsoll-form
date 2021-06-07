@@ -6,8 +6,6 @@ const CurrentQuestionContextReducer = (state, action) => {
       return action.payload
     case DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION:
       return { ...state, ...action.payload }
-    case DISPATCH_EVENTS.CHANGE_CURRENT_QUESTION:
-      return action.payload
     default:
       return state
   }

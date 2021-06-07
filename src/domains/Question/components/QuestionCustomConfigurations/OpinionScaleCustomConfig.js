@@ -42,7 +42,6 @@ function OpinionScaleCustomConfig() {
       payload: { questionConfigurations: computedBtnProps }
     })
   }
-
   return (
     <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>

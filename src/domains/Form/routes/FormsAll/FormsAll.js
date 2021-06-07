@@ -14,7 +14,8 @@ import {
 import { globalStyles } from '../../../../../styles'
 import { styles } from './FormsAll.styles'
 import { Spinner, StaticList } from '../../../../components'
-import COLLECTIONS from '../../../../constants/collection'
+import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
@@ -52,12 +53,14 @@ function FormsAll(props) {
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [currentData, setCurrentData] = useState(data)
+  const [edit, setEdit] = useState(false)
   const fuse = new Fuse(data, { keys: ['title'] })
 
   // [COMPUTED PROPERTIES]
   let amountFiles = data?.length
-
   const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
+  const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+
   // [CLEAN FUNCTIONS]
   const searchData = () => {
     if (searchRef.current.input.value) {
@@ -76,13 +79,23 @@ function FormsAll(props) {
     const formData = {
       ...restData,
       id: formId,
-      title: data?.name,
-      subtitle: data?.description || '',
+      title: name,
+      subtitle: description || '',
       creationDate: getTimestamp().now()
     }
-    await setData(COLLECTIONS.FORMS, formId, formData).catch((e) =>
-      message.error(e.message)
-    )
+    await setData(COLLECTIONS.FORMS, formId, formData)
+      .then(
+        edit === false &&
+          (await setData(COLLECTIONS.QUESTIONS, questionId, {
+            formId: formId,
+            id: questionId,
+            layoutType: LAYOUT_TYPE_KEYS[0],
+            questionType: QUESTION_TYPES.WELCOME_SCREEN,
+            title: 'WS.',
+            order: 0
+          }))
+      )
+      .catch((e) => message.error(e.message))
   }
 
   const menu = (
@@ -175,7 +188,11 @@ function FormsAll(props) {
               flexWrap="wrap"
               flexDirection="row"
               className="custom-scroll">
-              <StaticList data={currentData} columnWidth={2} />
+              <StaticList
+                data={currentData}
+                columnWidth={2}
+                setEdit={setEdit}
+              />
 
               <FormSimpleFormWithModal
                 isModalVisible={isModalVisible}
