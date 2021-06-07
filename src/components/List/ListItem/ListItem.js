@@ -57,10 +57,11 @@ const StyledBadge = styled(Button)`
 
 function ListItem(props) {
   const { updateData, deleteData } = useFunctions()
-  const { data, selectedBackgroundImg, setSelectedBackgroundImg,setEdit } = props
+  const { data, selectedBackgroundImg, setSelectedBackgroundImg, setEdit } =
+    props
 
   // [ADDITIONAL HOOKS]
-  // const { onFormItemClick } = useActionsFunctionsContext()
+  const { onFormItemClick } = useActionsFunctionsContext()
   const { t } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
@@ -73,9 +74,9 @@ function ListItem(props) {
   const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
-  const onFormItemClick = (e) => {
+  const onFormItemClicked = (e) => {
     e.stopPropagation()
-    formRoute && history.push(formRoute)
+    onFormItemClick?.(data?.id)
   }
   const showPopconfirm = ({ domEvent }) => {
     domEvent.stopPropagation()
@@ -133,7 +134,7 @@ function ListItem(props) {
       isCard
       onClick={
         !data?.imageUrl
-          ? onFormItemClick
+          ? onFormItemClicked
           : () => setSelectedBackgroundImg(data?.imageUrl)
       }>
       <Box display="block" width="inherit">

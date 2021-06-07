@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect,useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import {
   PageLayout,
   EditorSidebar,
@@ -145,7 +145,7 @@ function FormEdit(props) {
               </PageLayout>
 
               <EditorSidebar
-                  transparent
+                transparent
                 questions={questions}
                 endings={endings}
                 id={id}
