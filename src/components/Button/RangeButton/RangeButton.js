@@ -1,6 +1,5 @@
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
-import theme from '../../../../styles/theme'
 import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
@@ -10,21 +9,24 @@ import useMedia from 'use-media'
 const StyledRangeButton = styled(Button)`
   width: -webkit-fill-available;
   height: 60px;
-  border-color: ${theme.color.primary.default};
+  border-color: ${({ theme }) => theme.color.primary.default};
   background-color: ${(props) =>
     props.isActive
-      ? theme.color.primary.default
-      : theme.color.primary.t.lighten5};
+      ? props.theme.color.primary.default
+      : props.theme.color.primary.t.lighten5};
   color: ${(props) =>
-    props.isActive ? theme.color.white.default : theme.color.primary.default};
+    props.isActive
+      ? props.theme.color.white.default
+      : props.theme.color.primary.default};
 
   &:hover {
-    color: ${(props) => props.isActive && theme.color.white.default};
-    border-color: ${(props) => props.isActive && theme.color.primary.default};
+    color: ${(props) => props.isActive && props.theme.color.white.default};
+    border-color: ${(props) =>
+      props.isActive && props.theme.color.primary.default};
     background-color: ${(props) =>
       props.isActive
-        ? theme.color.primary.t.lighten1
-        : theme.color.primary.t.lighten3};
+        ? props.theme.color.primary.t.lighten1
+        : props.theme.color.primary.t.lighten3};
   }
 `
 

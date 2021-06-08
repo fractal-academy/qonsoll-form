@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { TranslationContext } from '../../../../context/Translation'
-import { styles } from './FormShow.style'
 // import { globalStyles } from '../../../../../styles'
 // import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS } from '../../../../constants'
@@ -22,7 +21,7 @@ import {
 import { ContentCard, Spinner } from '../../../../components'
 
 function FormShow(props) {
-  const { firebase, actions = {}, id, translate } = props
+  const { firebase, actions = {}, id, translate, submitLoading } = props
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
@@ -109,6 +108,7 @@ function FormShow(props) {
 
               <ContentCard>
                 <FormAdvancedView
+                  submitLoading={submitLoading}
                   isAnswered={isAnswered}
                   setIsAnswered={setIsAnswered}
                   setCurrentSlide={setCurrentSlide}>
@@ -120,6 +120,7 @@ function FormShow(props) {
                         questionNumber={index + 1}
                         onClick={onClick}
                         currentSlide={currentSlide}
+                        submitLoading={submitLoading}
                       />
                     </Box>
                   ))}
@@ -135,7 +136,8 @@ function FormShow(props) {
 FormShow.propTypes = {
   firebase: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
-  actions: PropTypes.shape({ onFinish: PropTypes.func })
+  actions: PropTypes.shape({ onFinish: PropTypes.func }),
+  submitLoading: PropTypes.bool
 }
 
 export default FormShow

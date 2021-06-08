@@ -2,12 +2,11 @@ import React from 'react'
 import { Rate } from 'antd'
 import styled from 'styled-components'
 import { Container } from '@qonsoll/react-design'
-import theme from '../../../styles/theme'
 
 const StyledRate = styled(Rate)`
   &.ant-rate {
     font-size: 40px;
-    color: ${theme.color.primary.default};
+    color: ${({ theme }) => theme.color.primary.default};
   }
 `
 function CustomRating(props) {

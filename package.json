@@ -1,6 +1,6 @@
 {
   "name": "feedback-typeform",
-  "version": "0.2.27",
+  "version": "0.2.46",
   "main": "build/index.js",
   "module": "build/index.esm.js",
   "description": "Type-Form",

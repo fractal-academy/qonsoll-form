@@ -32,6 +32,13 @@ import {
   LongText,
   DateTimeInput
 } from '../../../../components'
+import styled from 'styled-components'
+
+const StyledTag = styled(Tag)`
+  background-color: ${({ theme }) => theme.color.primary.t.lighten5};
+  color: ${({ theme }) => theme.color.primary.default};
+  border-color: ${({ theme }) => theme.color.primary.t.lighten2};
+`
 
 function QuestionForm(props) {
   const { data, onQuestionTypeChange } = props
@@ -100,7 +107,7 @@ function QuestionForm(props) {
         <CustomCard bordered={false}>
           <Row noGutters v="center">
             <Col>
-              <Tag color="blue">{questionTag}</Tag>
+              <StyledTag>{questionTag}</StyledTag>
             </Col>
             <Col cw="auto">
               <QuestionConfigurationPopover

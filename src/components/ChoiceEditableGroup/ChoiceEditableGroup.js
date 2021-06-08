@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { globalStyles } from '../../../styles'
 import { ChoiceEditable } from '../../components'
 import { Box } from '@qonsoll/react-design'
 import { PlusOutlined } from '@ant-design/icons'
@@ -8,7 +9,7 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
-import { styles } from './ChoiceEditableGroup.styles'
+import { NewButton, styles } from './ChoiceEditableGroup.styles'
 
 function ChoiceEditableGroup(props) {
   const { withImage } = props
@@ -42,13 +43,14 @@ function ChoiceEditableGroup(props) {
           withImage={withImage}
         />
       ))}
-      <Box
+      <NewButton
         height={withImage ? '146px' : '38px'}
         width={withImage ? '166px' : '150px'}
-        {...styles.addNewChoiceBox}
+        style={globalStyles.cursorPointer}
+        m={1}
         onClick={onAddChoice}>
         <PlusOutlined />
-      </Box>
+      </NewButton>
     </Box>
   )
 }

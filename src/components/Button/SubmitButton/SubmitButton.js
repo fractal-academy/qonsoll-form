@@ -17,8 +17,8 @@ const StyledSubmit = styled(Button)`
 `
 
 function SubmitButton(props) {
-  const { children, onClick, finish, question } = props
-  const { formId } = question
+  const { children, onClick, finish, question, ...rest } = props
+  const formId = question?.formId
 
   // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
@@ -37,7 +37,7 @@ function SubmitButton(props) {
   return (
     <Row display="flex" v="center" noGutters>
       <Col cw="auto" mr={3}>
-        <StyledSubmit type="primary" onClick={onButtonClick}>
+        <StyledSubmit type="primary" onClick={onButtonClick} {...rest}>
           {children || (
             <Row display="flex" noGutters>
               <Col cw="auto" mr={2}>

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
-  styles,
   LetterBox,
   DeleteButton,
   ChoiceInput,
   CustomCol,
-  ChoiceOptionCol
+  ChoiceOptionCol,
+  MediaBox,
+  MediaBoxWrapper
 } from './ChoiceEditable.styles'
-import theme from '../../../styles/theme'
 import { DEFAULT_IMAGE } from '../../constants'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row } from '@qonsoll/react-design'
 import { CloseOutlined, EditOutlined } from '@ant-design/icons'
 import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
 import {
@@ -73,22 +73,17 @@ function ChoiceEditable(props) {
   }, [data])
 
   return (
-    <Box
-      bg={theme.color.primary.lighten6}
-      borderRadius={theme.borderRadius.md}
-      width={withImage ? 'auto' : '100%'}
-      m={1}
-      position="relative">
+    <MediaBoxWrapper withImage={withImage} m={1}>
       {withImage && (
-        <Box {...styles.MediaBox} backgroundImage={bgImage}>
+        <MediaBox backgroundImage={bgImage}>
           <MediaLibraryModal
             btnProps={{
               type: 'primary',
-              icon: <EditOutlined style={styles.btnStyle} />
+              icon: <EditOutlined />
             }}
             onContinue={onMediaModalContinue}
           />
-        </Box>
+        </MediaBox>
       )}
       <Row noGutters px={2}>
         <CustomCol cw="auto" v="center">
@@ -109,7 +104,7 @@ function ChoiceEditable(props) {
       <DeleteButton onClick={onDelete}>
         <CloseOutlined />
       </DeleteButton>
-    </Box>
+    </MediaBoxWrapper>
   )
 }
 

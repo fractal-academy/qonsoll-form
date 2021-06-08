@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Typography } from 'antd'
 import PropTypes from 'prop-types'
-import theme from '../../../../styles/theme'
 import styled from 'styled-components'
 import { useHover } from '@umijs/hooks'
 import { CheckOutlined } from '@ant-design/icons'
@@ -17,11 +16,13 @@ const StyledKeybox = styled(Col)`
   border-width: 1px;
   text-align: center;
   border-style: solid;
-  border-color: ${theme.color.primary.default};
-  color: ${(props) => props.isActive && theme.color.white.default};
+  border-color: ${({ theme }) => theme.color.primary.default};
+  color: ${(props) => props.isActive && props.theme.color.white.default};
   margin-left: ${(props) => props.isHovering && '-40px'};
   background-color: ${(props) =>
-    props.isActive ? theme.color.primary.default : theme.color.white.default};
+    props.isActive
+      ? props.theme.color.primary.default
+      : props.theme.color.white.default};
   width: ${(props) =>
     props.isHovering ? '65px !important' : ' 26px !important'};
 `
@@ -38,12 +39,12 @@ const StyledButton = styled(Box)`
   width: 100%;
   border-radius: 8px;
   padding: 8px;
-  color: ${theme.color.primary.default};
-  background-color: ${theme.color.primary.t.lighten5};
+  color: ${({ theme }) => theme.color.primary.default};
+  background-color: ${({ theme }) => theme.color.primary.t.lighten5};
   height: 100%;
 
   &:hover {
-    background-color: ${theme.color.primary.t.lighten3};
+    background-color: ${({ theme }) => theme.color.primary.t.lighten3};
   }
 `
 const StyledText = styled(Text)`
@@ -77,9 +78,7 @@ function KeyBox(props) {
       mb={2}
       mr={2}
       width="100%">
-      <StyledButton
-        hasImages={hasImages}
-        onClick={() => onButtonClick({ letter, item })}>
+      <StyledButton hasImages={hasImages} onClick={() => onButtonClick(item)}>
         {hasImages && <ImageContainer image={item?.choice?.image} />}
         <Row v="center" h="between" noGutters position="relative">
           <Col cw="12" v="center">

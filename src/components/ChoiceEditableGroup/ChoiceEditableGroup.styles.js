@@ -1,19 +1,18 @@
-import theme from '../../../styles/theme'
-import { globalStyles } from '../../../styles'
+import { Box } from '@qonsoll/react-design'
+import styled from 'styled-components'
 
 export const styles = {
   mainBox: {
     display: 'flex',
     flexWrap: 'wrap',
     width: '100%'
-  },
-  addNewChoiceBox: {
-    bg: theme.color.primary.lighten6,
-    m: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: theme.borderRadius.md,
-    style: globalStyles.cursorPointer
   }
 }
+
+export const NewButton = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: theme.color.primary.t.lighten6,
+  borderRadius: theme.borderRadius.md
+}))

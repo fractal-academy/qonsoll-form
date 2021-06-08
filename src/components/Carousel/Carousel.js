@@ -1,13 +1,18 @@
 import { Button } from 'antd'
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
-import { Carousel as AntdCarousel } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import { CustomCarousel } from '../../components/Carousel/Carousel.style'
+import { CustomCarousel } from './Carousel.style'
 
 function Carousel(props) {
-  const { children, isAnswered, setIsAnswered, setCurrentSlide } = props
+  const {
+    children,
+    isAnswered,
+    setIsAnswered,
+    setCurrentSlide,
+    submitLoading
+  } = props
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
@@ -45,19 +50,20 @@ function Carousel(props) {
         afterChange={onCurrentSlideChange}>
         {children}
       </CustomCarousel>
-
-      <Row h="right" m={2} noGutters>
-        <Col cw="auto" mr={2}>
-          <Button type="primary" onClick={previous}>
-            <UpOutlined />
-          </Button>
-        </Col>
-        <Col cw="auto">
-          <Button type="primary" onClick={next}>
-            <DownOutlined />
-          </Button>
-        </Col>
-      </Row>
+      {!submitLoading && (
+        <Row h="right" m={2} noGutters>
+          <Col cw="auto" mr={2}>
+            <Button type="primary" onClick={previous}>
+              <UpOutlined />
+            </Button>
+          </Col>
+          <Col cw="auto">
+            <Button type="primary" onClick={next}>
+              <DownOutlined />
+            </Button>
+          </Col>
+        </Row>
+      )}
     </Box>
   )
 }

@@ -21,7 +21,7 @@ import theme from '../../../../../styles/theme'
 const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
-  const { data, questionNumber, onClick, currentSlide } = props
+  const { data, questionNumber, onClick, currentSlide, submitLoading } = props
 
   // [ADDITIONAL_HOOKS]
   const { t } = useTranslation()
@@ -76,7 +76,7 @@ function QuestionAdvancedView(props) {
     },
     [QUESTION_TYPES.ENDING]: {
       component: (
-        <SubmitButton onClick={onClick} finish>
+        <SubmitButton onClick={onClick} finish loading={submitLoading}>
           {t('Finish')}
         </SubmitButton>
       )
@@ -109,11 +109,9 @@ function QuestionAdvancedView(props) {
         <StyledCard bordered={false} specialLayoutRule={specialLayoutRule}>
           <Row noGutters>
             <Col cw={12}>
-              <Box>
-                <Title level={4}>
-                  {questionNumber}. {data?.title}
-                </Title>
-              </Box>
+              <Title level={4}>
+                {questionNumber}. {data?.title}
+              </Title>
             </Col>
           </Row>
           <Row noGutters mb={3}>
