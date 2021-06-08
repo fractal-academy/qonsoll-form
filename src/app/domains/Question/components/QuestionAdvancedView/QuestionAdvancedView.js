@@ -62,7 +62,7 @@ function QuestionAdvancedView(props) {
       component: <DateTimeInput onDateChange={onClick} />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploader action={onClick} />
+      component: <FileUploader onContinue={onClick} />
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: <SubmitButton onClick={onClick}>Continue</SubmitButton>
@@ -130,9 +130,7 @@ function QuestionAdvancedView(props) {
               </Col>
             </Row>
           )}
-          <Row noGutters>
-            <Col>{cloneElement(component, { question: data })}</Col>
-          </Row>
+          <Box>{cloneElement(component, { question: data })}</Box>
         </StyledCard>
       </Col>
       {imageShowRule && (

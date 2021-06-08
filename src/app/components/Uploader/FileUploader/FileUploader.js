@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Upload, message } from 'antd'
 import { Text } from 'antd-styled'
 import { IconLabel, SubmitButton } from 'components'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Box } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
 import { storage } from 'app/services/Firebase'
-import { getCollectionRef, setData } from 'app/services/Firestore'
+import { getCollectionRef } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 
 const { Dragger } = Upload
@@ -16,7 +16,7 @@ const config = {
 }
 
 const UploadArea = (props) => {
-  const { action, question } = props
+  const { onContinue, question } = props
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
   // [COMPUTED PROPERTIES]
@@ -24,12 +24,12 @@ const UploadArea = (props) => {
   const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
 
   // [CLEAN FUNCTIONS]
-  const onMediaUploaded = (data) => {
-    const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
-    setData(COLLECTIONS?.ANSWERS, fileId, data).catch((e) =>
-      message.error(e.message)
-    )
-  }
+  // const onMediaUploaded = (data) => {
+  //   const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
+  //   setData(COLLECTIONS?.ANSWERS, fileId, data).catch((e) =>
+  //     message.error(e.message)
+  //   )
+  // }
 
   const onChange = (data) => {
     const { file } = data
@@ -91,44 +91,50 @@ const UploadArea = (props) => {
               ...files,
               [currentFile?.uid]: currentFile
             }))
-          onMediaUploaded(currentFile)
+          // onMediaUploaded(currentFile)
         })
       }
     )
   }
+  const onRemove = (file) => {
+    const asArray = Object.entries(filesList)
+    const filteredFiles = asArray.filter(([key, value]) => key !== file?.uid)
+    const filteredFilesToObj = Object.fromEntries(filteredFiles)
+    setFilesList(filteredFilesToObj)
+  }
+
   const onAply = () => {
     const data = {
       question,
       answer: { value: filesList }
     }
-    action && action(data)
+    onContinue && onContinue(data)
   }
 
   return (
-    <Dragger
-      {...config}
-      {...props}
-      customRequest={onChange}
-      fileList={Object.values(filesList)}>
-      <Row h="center" v="center">
-        <Col cw="auto">
+    <Box flexDirection="column">
+      <Dragger
+        {...config}
+        {...props}
+        onRemove={onRemove}
+        customRequest={onChange}
+        fileList={Object.values(filesList)}>
+        <Box display="flex" justifyContent="center">
           <IconLabel>
             <InboxOutlined />
           </IconLabel>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        </Box>
+        <Box textAlign="center">
           <Text>Click or drag file to this area to upload</Text>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        </Box>
+        <Box textAlign="center">
           <Text type="secondary">Upload files</Text>
-        </Col>
-      </Row>
-    </Dragger>
-    //ADD Ok button and pass onClick={onAply}
+        </Box>
+      </Dragger>
+      <Box mt={3}>
+        <SubmitButton onClick={onAply} />
+      </Box>
+    </Box>
   )
 }
 

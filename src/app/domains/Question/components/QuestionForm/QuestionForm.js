@@ -132,13 +132,11 @@ function QuestionForm(props) {
               </Col>
             </Row>
           )}
-          <Row noGutters>
-            <Col>
-              {cloneElement(questionTypesMap[data?.questionType].component, {
-                question: data
-              })}
-            </Col>
-          </Row>
+          <Box>
+            {cloneElement(questionTypesMap[data?.questionType].component, {
+              question: data
+            })}
+          </Box>
         </CustomCard>
       </Col>
       {imageShowRule && (
