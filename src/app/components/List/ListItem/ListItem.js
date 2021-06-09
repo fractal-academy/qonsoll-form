@@ -6,7 +6,12 @@ import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router-dom'
 import COLLECTIONS from 'app/constants/collection'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { deleteData, updateData } from 'app/services/Firestore'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import {
+  deleteData,
+  updateData,
+  getCollectionRef
+} from 'app/services/Firestore'
 import {
   Popconfirm,
   Typography,
@@ -60,6 +65,9 @@ function ListItem(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
+  const [questions] = useCollectionData(
+    getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', data?.id)
+  )
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -92,6 +100,13 @@ function ListItem(props) {
 
     setIsPopconfirmVisible(false)
     setConfirmLoading(false)
+  }
+  const deleteQuestions = () => {
+    questions.forEach((item) => {
+      deleteData(COLLECTIONS.QUESTIONS, item?.id).catch((e) =>
+        message.error(e.message)
+      )
+    })
   }
   const onModalSubmit = async (values) => {
     await updateData(COLLECTIONS.FORMS, data?.id, {

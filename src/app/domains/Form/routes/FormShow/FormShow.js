@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { styles } from './FormShow.style'
 import { Button, Typography } from 'antd'
 import { COLLECTIONS } from 'app/constants'
 import { Box } from '@qonsoll/react-design'
 // import { useKeyPress } from '@umijs/hooks'
+import { FormShowHeader } from './FormShow.style'
 import { ContentCard, Spinner } from 'components'
 import { useHistory, useParams } from 'react-router'
 import { getCollectionRef } from 'app/services/Firestore'
@@ -75,7 +75,7 @@ function FormShow(props) {
         <Spinner />
       ) : (
         <Box>
-          <Box {...styles.headerRow}>
+          <FormShowHeader display="flex" p={3} justifyContent="space-between">
             <Box display="flex">
               <Button
                 type="text"
@@ -92,7 +92,7 @@ function FormShow(props) {
               onClick={onRestart}>
               Restart
             </Button>
-          </Box>
+          </FormShowHeader>
 
           <ContentCard>
             <FormAdvancedView

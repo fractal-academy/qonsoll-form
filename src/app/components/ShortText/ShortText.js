@@ -21,7 +21,7 @@ function ShortText(props) {
 
   return (
     <Form
-      style={{ width: '70%' }}
+      style={{ width: '100%' }}
       form={form}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}>

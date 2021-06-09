@@ -116,7 +116,7 @@ function FormsAll(props) {
               size="small"
               type="text"
               style={globalStyles.resetPadding}
-              icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
+              icon={<ArrowLeftOutlined />}
               onClick={() => history.goBack()}
             />
           </Col>
@@ -138,9 +138,7 @@ function FormsAll(props) {
         {/* SecondaryTitle */}
         <Row noGutters h="between" v="center" mb={1} mt={3}>
           <Col>
-            <Title level={2} style={globalStyles.resetMargin}>
-              Forms
-            </Title>
+            <Title level={2}>Forms</Title>
           </Col>
           <Col cw="auto">
             <Button type="primary" onClick={showModal}>
