@@ -28,7 +28,7 @@ function FormContentArea(props) {
         </Col>
         <Col {...styles.contentCol}>{children}</Col>
       </Row>
-      {/* <Row noGutters {...styles.footerButtons}>
+      <Row noGutters {...styles.footerButtons}>
         <Col cw="auto" mr={3}>
           <Button type="text" onClick={onCancel}>
             Cancel
@@ -39,7 +39,7 @@ function FormContentArea(props) {
             Create form
           </Button>
         </Col>
-      </Row> */}
+      </Row>
     </>
   )
 }

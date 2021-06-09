@@ -1,9 +1,9 @@
 import theme from 'app/styles/theme'
-import { Card, Button, Image, Typography } from 'antd'
 import styled from 'styled-components'
-import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
+import { Card, Button, Image, Typography } from 'antd'
+// import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
+
 const { Text } = Typography
-// import
 
 export const styles = {
   titleStyle: {

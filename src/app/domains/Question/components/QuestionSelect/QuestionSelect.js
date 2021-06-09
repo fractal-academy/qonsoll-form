@@ -2,7 +2,6 @@ import React from 'react'
 import { Select } from 'antd'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
-import { Box } from '@qonsoll/react-design'
 import { StyledSelect } from './QuestionSelect.styles'
 
 const { Option, OptGroup } = Select

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { KeyBox } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
 
 let startLetter = 65

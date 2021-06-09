@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { ContentCard } from 'components'
-import { globalStyles } from 'app/styles'
 import { styles } from './FormShow.style'
 import { Button, Typography } from 'antd'
 import { COLLECTIONS } from 'app/constants'
 // import { useKeyPress } from '@umijs/hooks'
 import { useHistory, useParams } from 'react-router'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Box } from '@qonsoll/react-design'
 import { getCollectionRef } from 'app/services/Firestore'
 import { FormAdvancedView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -16,7 +15,7 @@ import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import ANSWERS_DISPATCH_EVENTS from 'app/context/Answers/DispatchEventsTypes'
 import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
 import {
-  useAnswersContext,
+  // useAnswersContext,
   useAnswersContextDispatch
 } from 'app/context/Answers/useAnswersContext'
 
@@ -26,7 +25,7 @@ function FormShow(props) {
   const { configurations } = props
 
   // [CUSTOM HOOKS]
-  const answers = useAnswersContext()
+  // const answers = useAnswersContext()
   const responsesDispatch = useAnswersContextDispatch()
   // [ADDITIONAL HOOKS]
   const history = useHistory()

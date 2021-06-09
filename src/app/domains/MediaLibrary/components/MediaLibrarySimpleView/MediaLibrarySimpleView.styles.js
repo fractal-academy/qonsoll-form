@@ -1,8 +1,9 @@
-import styled from 'styled-components'
-import theme from 'app/styles/theme'
 import { Typography } from 'antd'
+import theme from 'app/styles/theme'
+import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
+// import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
+
 const { Text } = Typography
 
 export const CustomText = styled(Text)`

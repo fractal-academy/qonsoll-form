@@ -1,21 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
-import {
-  PageLayout,
-  EditorSidebar,
-  FormContentArea,
-  Spinner,
-  ContentCard
-} from 'components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
-import {
-  QuestionForm,
-  QuestionLayoutSwitcher
-} from 'domains/Question/components'
+import { useState, useEffect } from 'react'
+import { QuestionForm } from 'domains/Question/components'
+import { PageLayout, EditorSidebar, Spinner } from 'components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
+import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
 import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch,
@@ -26,7 +18,6 @@ import {
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
-import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
 
 function FormEdit(props) {
   const { configurations } = props
@@ -105,7 +96,8 @@ function FormEdit(props) {
       ) : (
         <Box display="flex" height="inherit" overflowX="hidden">
           <PageLayout title={form?.title}>
-            <ContentCard
+            {/* <ContentCard
+              image={bgImage}
               onEdit
               leftSideMenu={
                 !!Object.keys(currentQuestion).length && (
@@ -114,16 +106,18 @@ function FormEdit(props) {
                     defaultActive={defaultTab}
                   />
                 )
-              }>
-              {!!Object.keys(currentQuestion).length && (
-                <QuestionForm
-                  data={currentQuestion}
-                  brightnessValue={brightnessValue}
-                  setBrightnessValue={setBrightnessValue}
-                  onQuestionTypeChange={onQuestionTypeChange}
-                />
-              )}
-            </ContentCard>
+              }> */}
+            {/* {!!Object.keys(currentQuestion).length && ( */}
+            <QuestionForm
+              data={currentQuestion}
+              defaultTab={defaultTab}
+              onChangeMenuItem={onChangeMenuItem}
+              brightnessValue={brightnessValue}
+              setBrightnessValue={setBrightnessValue}
+              onQuestionTypeChange={onQuestionTypeChange}
+            />
+            {/* )} */}
+            {/* </ContentCard> */}
           </PageLayout>
 
           <EditorSidebar transparent questions={questions} endings={endings} />
