@@ -74,9 +74,7 @@ function KeyBox(props) {
       mb={2}
       mr={2}
       width="100%">
-      <StyledButton
-        hasImages={hasImages}
-        onClick={() => onButtonClick({ letter, index })}>
+      <StyledButton hasImages={hasImages} onClick={() => onButtonClick(item)}>
         {hasImages && <ImageContainer image={item?.choice?.image} />}
         <Row v="center" h="between" noGutters position="relative">
           <Col cw="12" v="center">

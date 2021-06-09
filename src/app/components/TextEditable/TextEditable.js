@@ -1,7 +1,7 @@
 import { Input } from 'antd'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import theme from 'app/styles/theme'
+import typeformTheme from 'app/styles/theme'
 
 const { TextArea } = Input
 
@@ -10,16 +10,18 @@ const TextEditable = styled(TextArea).attrs(() => ({
   bordered: false
 }))`
   padding-left: 0;
-  ${(props) =>
-    props.isTitle &&
+  ${({ theme, isTitle }) =>
+    isTitle &&
     css`
-      font-size: ${theme.typography.fontSize.h3};
+      font-size: ${theme?.typography?.fontSize?.h3 ||
+      typeformTheme?.typography?.fontSize?.h3};
       font-weight: bold;
     `};
-  ${(props) =>
-    props.textSecondary &&
+  ${({ theme, textSecondary }) =>
+    textSecondary &&
     css`
-      color: ${theme.color.dark.t.lighten2};
+      color: ${theme?.color?.dark?.t?.lighten2 ||
+      typeformTheme?.color?.dark?.t?.lighten2};
     `};
 `
 

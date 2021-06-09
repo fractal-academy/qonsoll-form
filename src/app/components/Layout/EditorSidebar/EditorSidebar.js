@@ -16,6 +16,7 @@ import {
 import {
   CustomDivider,
   SidebarBoxWrapper,
+  DragbleCeiling,
   styles
 } from './EditorSidebar.styles'
 import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
