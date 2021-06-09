@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Upload, message } from 'antd'
 import { Text } from 'antd-styled'
-import { IconLabel } from 'components'
-import { Col, Row } from '@qonsoll/react-design'
+import { IconLabel, SubmitButton } from 'components'
+import { Box } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
 import { storage } from 'app/services/Firebase'
-import { getCollectionRef, setData } from 'app/services/Firestore'
+import { getCollectionRef } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
 
 const { Dragger } = Upload
@@ -16,6 +16,7 @@ const config = {
 }
 
 const UploadArea = (props) => {
+  const { onContinue, question } = props
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
   // [COMPUTED PROPERTIES]
@@ -23,27 +24,25 @@ const UploadArea = (props) => {
   const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
 
   // [CLEAN FUNCTIONS]
-  const onMediaUploaded = (data) => {
-    const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
-    setData(COLLECTIONS?.ANSWERS, fileId, data).catch((e) =>
-      message.error(e.message)
-    )
-  }
+  // const onMediaUploaded = (data) => {
+  //   const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
+  //   setData(COLLECTIONS?.ANSWERS, fileId, data).catch((e) =>
+  //     message.error(e.message)
+  //   )
+  // }
 
   const onChange = (data) => {
     const { file } = data
     const currentFile = {
-      name: file.name,
+      name: file?.name,
       status: 'uploading',
       percent: 0,
-      uid: file.uid
+      uid: file?.uid
     }
-    setFilesList((files) => ({ ...files, [currentFile.uid]: currentFile }))
-    // !!filesList
-    //   ? setFilesList((files) => ({ ...files, [currentFile.uid]: currentFile }))
-    //   : setFilesList({ [currentFile.uid]: currentFile })
+    currentFile?.name &&
+      setFilesList((files) => ({ ...files, [currentFile.uid]: currentFile }))
 
-    const ref = storage.ref('files').child(file.uid)
+    const ref = storage.ref('files').child(file?.uid)
     const uploadFile = ref.put(file)
     uploadFile.on(
       'state_changed',
@@ -54,72 +53,88 @@ const UploadArea = (props) => {
         ).toFixed(0)
         // Update item while it uploading
         const currentFile = {
-          name: uploadFile.name,
+          name: uploadFile?.name,
           status: 'uploading',
           percent: progress,
-          uid: uploadFile.uid
+          uid: uploadFile?.uid
         }
-        setFilesList((files) => ({
-          ...files,
-          [currentFile.uid]: currentFile
-        }))
+        currentFile?.name &&
+          setFilesList((files) => ({
+            ...files,
+            [currentFile?.uid]: currentFile
+          }))
       },
       (error) => {
         // Handle error during the upload
         message.error(error.message)
         const failedUploadFile = {
-          name: file.name,
+          name: file?.name,
           status: 'error',
-          uid: file.uid
+          uid: file?.uid
         }
-        setFilesList((files) => ({
-          ...files,
-          [failedUploadFile.uid]: failedUploadFile
-        }))
-      },
-      () => {
-        uploadFile.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          const currentFile = {
-            id: fileId,
-            name: file.name,
-            fileUrl: downloadURL,
-            uid: file.uid
-          }
+        failedUploadFile?.name &&
           setFilesList((files) => ({
             ...files,
-            [currentFile.uid]: currentFile
+            [failedUploadFile?.uid]: failedUploadFile
           }))
-
-          onMediaUploaded(currentFile)
+      },
+      () => {
+        uploadFile.snapshot.ref.getDownloadURL().then(async (downloadURL) => {
+          const currentFile = {
+            id: fileId,
+            name: file?.name,
+            fileUrl: downloadURL,
+            uid: file?.uid
+          }
+          currentFile?.name &&
+            setFilesList((files) => ({
+              ...files,
+              [currentFile?.uid]: currentFile
+            }))
+          // onMediaUploaded(currentFile)
         })
       }
     )
   }
+  const onRemove = (file) => {
+    const asArray = Object.entries(filesList)
+    const filteredFiles = asArray.filter(([key, value]) => key !== file?.uid)
+    const filteredFilesToObj = Object.fromEntries(filteredFiles)
+    setFilesList(filteredFilesToObj)
+  }
+
+  const onAply = () => {
+    const data = {
+      question,
+      answer: { value: filesList }
+    }
+    onContinue && onContinue(data)
+  }
 
   return (
-    <Dragger
-      {...config}
-      {...props}
-      customRequest={onChange}
-      fileList={Object.values(filesList)}>
-      <Row h="center" v="center">
-        <Col cw="auto">
+    <Box flexDirection="column">
+      <Dragger
+        {...config}
+        {...props}
+        onRemove={onRemove}
+        customRequest={onChange}
+        fileList={Object.values(filesList)}>
+        <Box display="flex" justifyContent="center">
           <IconLabel>
             <InboxOutlined />
           </IconLabel>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        </Box>
+        <Box textAlign="center">
           <Text>Click or drag file to this area to upload</Text>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        </Box>
+        <Box textAlign="center">
           <Text type="secondary">Upload files</Text>
-        </Col>
-      </Row>
-    </Dragger>
+        </Box>
+      </Dragger>
+      <Box mt={3}>
+        <SubmitButton onClick={onAply} />
+      </Box>
+    </Box>
   )
 }
 

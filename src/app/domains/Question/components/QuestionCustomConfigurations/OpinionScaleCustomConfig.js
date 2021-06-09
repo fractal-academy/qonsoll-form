@@ -40,7 +40,6 @@ function OpinionScaleCustomConfig() {
       payload: { questionConfigurations: computedBtnProps }
     })
   }
-  console.log(questionConfigurations)
   return (
     <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>

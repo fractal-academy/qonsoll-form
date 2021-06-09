@@ -1,17 +1,20 @@
 import { Typography } from 'antd'
-import theme from 'app/styles/theme'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
+import typeformTheme from 'app/styles/theme'
 // import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Text } = Typography
 
 export const CustomText = styled(Text)`
-  font-size: ${theme.typography.fontSize.body2};
+  font-size: ${({ theme }) =>
+    theme?.typography?.fontSize?.body2 ||
+    typeformTheme?.typography?.fontSize?.body2};
 `
 export const CustomBox = styled(Box)`
   height: 150px;
-  border-radius: ${theme.borderRadius.md};
+  border-radius: ${({ theme }) =>
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;

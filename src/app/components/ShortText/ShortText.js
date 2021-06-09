@@ -5,14 +5,14 @@ import { SubmitButton } from 'components'
 import { Row, Col, Container } from '@qonsoll/react-design'
 
 function ShortText(props) {
-  const { onSubmit, inputProps, isRequired, onClick, id } = props
+  const { inputProps, isRequired, onClick, question } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
 
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
-    const data = { questionId: id, answer }
+    const data = { question, answer: { value: answer || '' } }
     onClick && onClick(data)
   }
   const onFinishFailed = (errorInfo) => {

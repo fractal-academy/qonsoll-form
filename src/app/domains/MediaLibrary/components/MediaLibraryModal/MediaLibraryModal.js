@@ -17,6 +17,7 @@ import {
   CustomDivider,
   CustomInput,
   CustomText,
+  MediaListContainer,
   styles
 } from './MediaLibraryModal.styles'
 
@@ -200,15 +201,7 @@ function MediaLibraryModal(props) {
               </Col>
             </Row>
 
-            <Box
-              height="500px"
-              pl={2}
-              pt={2}
-              overflow="auto"
-              display="flex"
-              flexWrap="wrap"
-              flexDirection="row"
-              bg={theme.color.dark.t.lighten9}>
+            <MediaListContainer pl={2} pt={2}>
               {/* RENDER MEDIA */}
               <StaticList
                 data={imagesList}
@@ -216,7 +209,7 @@ function MediaLibraryModal(props) {
                 selectedBackgroundImg={selectedBackgroundImg}
                 setSelectedBackgroundImg={setSelectedBackgroundImg}
               />
-            </Box>
+            </MediaListContainer>
             <Row
               borderBottom="1px solid"
               borderColor={theme.color.text.dark}></Row>

@@ -7,10 +7,8 @@ import {
   QuestionConfigurationMenu
 } from 'domains/Question/components'
 import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
-import theme from 'app/styles/theme'
-import { globalStyles } from 'app/styles'
 import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
-
+import { PopoverSwitcherRow } from './QuestionConfigurationPopoverContent.styles'
 const { Title } = Typography
 
 function QuestionConfigurationPopoverContent(props) {
@@ -32,14 +30,7 @@ function QuestionConfigurationPopoverContent(props) {
   }
   return (
     <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
-      <Row
-        noGutters
-        borderRadius={`${theme.borderRadius.md} ${theme.borderRadius.md} 0 0`}
-        bg={theme.color.text.dark}
-        width="300px"
-        p={2}
-        style={globalStyles.cursorPointer}
-        onClick={changeQuestionConfigState}>
+      <PopoverSwitcherRow noGutters p={2} onClick={changeQuestionConfigState}>
         <Col v="center" cw="auto" order={isQuestionConfig ? 1 : 3}>
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>
@@ -48,7 +39,7 @@ function QuestionConfigurationPopoverContent(props) {
             {isQuestionConfig ? currentQuestion?.questionType : 'Question Type'}
           </Title>
         </Col>
-      </Row>
+      </PopoverSwitcherRow>
       <Row noGutters>
         <Col pr={0} display="block">
           {isQuestionConfig ? (

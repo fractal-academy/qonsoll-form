@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { TextEditable } from 'components'
 import React, { useState, useEffect } from 'react'
-import { Row, Col } from '@qonsoll/react-design'
+import { Box } from '@qonsoll/react-design'
 import {
   useCurrentQuestionContextDispatch,
   useCurrentQuestionContext,
@@ -55,29 +55,21 @@ function QuestionHeader(props) {
 
   return (
     <>
-      <Row noGutters>
-        <Col>
-          <TextEditable
-            isTitle
-            onBlur={onTitleBlur}
-            value={titleText}
-            onChange={onTitleChange}
-            placeholder={titlePlaceholder}
-            {...props}
-          />
-        </Col>
-      </Row>
-      <Row noGutters>
-        <Col>
-          <TextEditable
-            textSecondary
-            onBlur={onSubtitleBlur}
-            value={subtitleText}
-            onChange={onSubtitleChange}
-            placeholder={subtitlePlaceholder}
-          />
-        </Col>
-      </Row>
+      <TextEditable
+        isTitle
+        onBlur={onTitleBlur}
+        value={titleText}
+        onChange={onTitleChange}
+        placeholder={titlePlaceholder}
+        {...props}
+      />
+      <TextEditable
+        textSecondary
+        onBlur={onSubtitleBlur}
+        value={subtitleText}
+        onChange={onSubtitleChange}
+        placeholder={subtitlePlaceholder}
+      />
     </>
   )
 }
