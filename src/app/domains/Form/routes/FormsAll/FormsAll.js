@@ -12,6 +12,7 @@ import {
   Menu,
   Input
 } from 'antd'
+import useMedia from 'use-media'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
@@ -40,6 +41,10 @@ function FormsAll(props) {
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
+
+  const mobileLayout = useMedia({ minWidth: '769px' })
+  // const squareDesctopLayout = useMedia({ minWidth: '1024px' })
+
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [currentData, setCurrentData] = useState(data)
@@ -165,7 +170,11 @@ function FormsAll(props) {
           flexWrap="wrap"
           flexDirection="row"
           className="custom-scroll">
-          <StaticList columnWidth={2} data={currentData} setEdit={setEdit} />
+          <StaticList
+            columnWidth={(mobileLayout && 2) || 6}
+            data={currentData}
+            setEdit={setEdit}
+          />
 
           <FormSimpleFormWithModal
             isModalVisible={isModalVisible}

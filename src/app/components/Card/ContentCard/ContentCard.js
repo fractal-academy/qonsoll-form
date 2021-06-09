@@ -2,22 +2,33 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import theme from 'app/styles/theme'
 import styled from 'styled-components'
-import { Box } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 
-const Wrapper = styled(Box)`
+const Wrapper = styled(Col)`
   margin: 24px;
+  width: 100%;
   padding-bottom: 2px;
-  //height: -webkit-fill-available;
-  //height: 85vh;
+  height: ${(props) => props.onEdit && '100%'};
   display: flex;
   align-items: center;
   border-radius: ${theme.borderRadius.md};
   background-color: ${theme.color.white.default};
 `
 function ContentCard(props) {
-  const { children } = props
+  const { onEdit, leftSideMenu, children } = props
 
-  return <Wrapper>{children}</Wrapper>
+  return (
+    <Row width="100%" height="100%" noGutters>
+      {leftSideMenu && (
+        <Col cw="auto" mx={4}>
+          {leftSideMenu}
+        </Col>
+      )}
+      <Wrapper cw="auto" onEdit={onEdit}>
+        {children}
+      </Wrapper>
+    </Row>
+  )
 }
 
 ContentCard.propTypes = {

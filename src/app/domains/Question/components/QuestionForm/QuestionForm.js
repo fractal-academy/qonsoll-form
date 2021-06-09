@@ -30,7 +30,8 @@ import {
 } from 'components'
 
 function QuestionForm(props) {
-  const { data, onQuestionTypeChange } = props
+  const { data, onQuestionTypeChange, brightnessValue, setBrightnessValue } =
+    props
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
@@ -90,7 +91,10 @@ function QuestionForm(props) {
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
   return (
-    <CustomRow noGutters backgroundImage={bgImage}>
+    <CustomRow
+      noGutters
+      brightnessValue={brightnessValue}
+      backgroundImage={bgImage}>
       <Col {...styles.questionCardColumnStyle} cw={6}>
         <CustomCard bordered={false}>
           <Row noGutters v="center">
@@ -105,6 +109,8 @@ function QuestionForm(props) {
             {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
               <Col cw="auto" ml={2}>
                 <QuestionMediaPopover
+                  brightnessValue={brightnessValue}
+                  setBrightnessValue={setBrightnessValue}
                   MediaModalButtonBackground={computedMediaUrl}
                 />
               </Col>
@@ -126,6 +132,8 @@ function QuestionForm(props) {
                   {...styles.imageBetweenStyle}
                   backgroundImage={computedMediaUrl}>
                   <QuestionMediaPopover
+                    brightnessValue={brightnessValue}
+                    setBrightnessValue={setBrightnessValue}
                     MediaModalButtonBackground={computedMediaUrl}
                   />
                 </Box>
@@ -153,6 +161,8 @@ function QuestionForm(props) {
             <Row h="right">
               <Col cw="auto" mr={4}>
                 <QuestionMediaPopover
+                  brightnessValue={brightnessValue}
+                  setBrightnessValue={setBrightnessValue}
                   MediaModalButtonBackground={computedMediaUrl}
                 />
               </Col>

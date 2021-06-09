@@ -1,7 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
-import { PageLayout, EditorSidebar, FormContentArea, Spinner } from 'components'
+import {
+  PageLayout,
+  EditorSidebar,
+  FormContentArea,
+  Spinner,
+  ContentCard
+} from 'components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
 import {
@@ -40,6 +46,7 @@ function FormEdit(props) {
 
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
+  const [brightnessValue, setBrightnessValue] = useState(100)
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
@@ -98,7 +105,8 @@ function FormEdit(props) {
       ) : (
         <Box display="flex" height="inherit" overflowX="hidden">
           <PageLayout title={form?.title}>
-            <FormContentArea
+            <ContentCard
+              onEdit
               leftSideMenu={
                 !!Object.keys(currentQuestion).length && (
                   <QuestionLayoutSwitcher
@@ -110,10 +118,12 @@ function FormEdit(props) {
               {!!Object.keys(currentQuestion).length && (
                 <QuestionForm
                   data={currentQuestion}
+                  brightnessValue={brightnessValue}
+                  setBrightnessValue={setBrightnessValue}
                   onQuestionTypeChange={onQuestionTypeChange}
                 />
               )}
-            </FormContentArea>
+            </ContentCard>
           </PageLayout>
 
           <EditorSidebar transparent questions={questions} endings={endings} />

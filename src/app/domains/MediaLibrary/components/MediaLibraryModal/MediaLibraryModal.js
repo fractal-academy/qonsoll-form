@@ -23,7 +23,7 @@ import {
 const { Title } = Typography
 
 function MediaLibraryModal(props) {
-  const { btnProps, onClick, onContinue } = props
+  const { btnProps, onClick, onContinue, brightness } = props
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()

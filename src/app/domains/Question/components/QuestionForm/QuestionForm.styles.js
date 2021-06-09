@@ -44,7 +44,9 @@ export const CustomCard = styled(Card)`
     display: none;
   }
 `
+
 export const CustomRow = styled(Row)`
+  filter: brightness(${(props) => props.brightnessValue}%);
   background-repeat: no-repeat;
   background-size: cover;
   align-items: center;
