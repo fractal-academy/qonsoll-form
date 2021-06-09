@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { ContentCard, Spinner } from 'components'
-import { styles } from './FormShow.style'
+import { FormShowHeader, styles } from './FormShow.style'
 import { Button, Typography } from 'antd'
 import { COLLECTIONS } from 'app/constants'
 // import { useKeyPress } from '@umijs/hooks'
@@ -74,7 +74,7 @@ function FormShow(props) {
         <Spinner />
       ) : (
         <Box>
-          <Box {...styles.headerRow}>
+          <FormShowHeader display="flex" p={3} justifyContent="space-between">
             <Box display="flex">
               <Button
                 type="text"
@@ -91,7 +91,7 @@ function FormShow(props) {
               onClick={onRestart}>
               Restart
             </Button>
-          </Box>
+          </FormShowHeader>
 
           <ContentCard>
             <FormAdvancedView

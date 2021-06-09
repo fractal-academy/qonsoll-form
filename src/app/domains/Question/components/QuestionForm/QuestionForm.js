@@ -96,7 +96,7 @@ function QuestionForm(props) {
       noGutters
       brightnessValue={brightnessValue}
       backgroundImage={bgImage}>
-      <Col {...styles.questionCardColumnStyle} cw={6}>
+      <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 6]}>
         <CustomCard bordered={false}>
           <Row noGutters v="center">
             <Col>

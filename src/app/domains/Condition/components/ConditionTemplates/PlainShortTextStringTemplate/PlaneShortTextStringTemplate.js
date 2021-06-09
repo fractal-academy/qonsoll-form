@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Select } from 'antd'
-import { Col, Row } from '@qonsoll/react-design'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from 'domains/Question/components'
 import {
   CustomButton,
@@ -26,18 +26,27 @@ function PlaneShortTextStringTemplate(props) {
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
-            <StyledSelect
-              showSearch
-              allowClear
-              defaultValue={TEXT_CONDITION_RULES_VALUES[0]}>
-              {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
-                <Option key={index} value={item} onClick={() => {}}>
-                  {item}
-                </Option>
-              ))}
-            </StyledSelect>
-
-            <CustomInput />
+            <Row noGutters width="100%">
+              <Col cw={6}>
+                <Box width="100%" mr={2}>
+                  <StyledSelect
+                    showSearch
+                    allowClear
+                    defaultValue={TEXT_CONDITION_RULES_VALUES[0]}>
+                    {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
+                      <Option key={index} value={item} onClick={() => {}}>
+                        {item}
+                      </Option>
+                    ))}
+                  </StyledSelect>
+                </Box>
+              </Col>
+              <Col cw={6}>
+                <Box mr={4}>
+                  <CustomInput />
+                </Box>
+              </Col>
+            </Row>
           </Col>
 
           <Col cw={6}>

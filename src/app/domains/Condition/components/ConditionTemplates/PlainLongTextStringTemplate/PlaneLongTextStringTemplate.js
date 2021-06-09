@@ -1,15 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import theme from 'app/styles/theme'
-import Text from 'antd/lib/typography/Text'
-import { Button, Input, Select } from 'antd'
+import { Select } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import {
   CustomButton,
   CustomInput,
   CustomText,
-  StyledSelect,
-  styles
+  StyledSelect
 } from './PlainLongTextStringTemplate.style'
 import { QuestionSelect } from 'domains/Question/components'
 import { TEXT_CONDITION_RULES_VALUES } from 'app/constants/planeTextStringConditionRules'
@@ -29,18 +26,27 @@ function PlaneLongTextStringTemplate(props) {
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
-            <StyledSelect
-              showSearch
-              allowClear
-              defaultValue={TEXT_CONDITION_RULES_VALUES[0]}>
-              {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
-                <Option key={index} value={item} onClick={() => {}}>
-                  {item}
-                </Option>
-              ))}
-            </StyledSelect>
-
-            <CustomInput />
+            <Row noGutters width="100%">
+              <Col cw={6}>
+                <Box width="100%" mr={2}>
+                  <StyledSelect
+                    showSearch
+                    allowClear
+                    defaultValue={TEXT_CONDITION_RULES_VALUES[0]}>
+                    {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
+                      <Option key={index} value={item} onClick={() => {}}>
+                        {item}
+                      </Option>
+                    ))}
+                  </StyledSelect>
+                </Box>
+              </Col>
+              <Col cw={6}>
+                <Box width="100%" mr={4}>
+                  <CustomInput />
+                </Box>
+              </Col>
+            </Row>
           </Col>
 
           <Col cw={6}>
