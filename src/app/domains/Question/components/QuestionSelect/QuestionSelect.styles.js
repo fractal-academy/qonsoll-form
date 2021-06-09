@@ -1,8 +1,9 @@
 import { Select } from 'antd'
 import styled from 'styled-components'
-import theme from 'app/styles/theme'
+import typeformTheme from 'app/styles/theme'
 
 export const StyledSelect = styled(Select)`
+  ${({ theme }) => `
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,7 +12,12 @@ export const StyledSelect = styled(Select)`
     font-size: 14px;
   }
   .ant-select-selector {
-    background-color: ${theme.color.dark.t.lighten9} !important;
-    border-color: ${theme.color.dark.t.lighten5} !important;
+    background-color: ${
+      theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9
+    } !important;
+    border-color: ${
+      theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5
+    } !important;
   }
+`}
 `

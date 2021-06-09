@@ -10,7 +10,6 @@ import {
   CustomText,
   styles
 } from './MediaLibraryItemSimpleView.styles'
-import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Meta } = Card
 

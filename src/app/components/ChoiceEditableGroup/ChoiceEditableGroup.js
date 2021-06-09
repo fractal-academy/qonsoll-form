@@ -8,7 +8,7 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from 'app/context/CurrentQuestion'
-import { styles } from './ChoiceEditableGroup.styles'
+import { styles, AddNewChoiceBox } from './ChoiceEditableGroup.styles'
 
 function ChoiceEditableGroup(props) {
   const { withImage } = props
@@ -42,13 +42,13 @@ function ChoiceEditableGroup(props) {
           withImage={withImage}
         />
       ))}
-      <Box
+      <AddNewChoiceBox
+        m={1}
         height={withImage ? '146px' : '38px'}
         width={withImage ? '166px' : '150px'}
-        {...styles.addNewChoiceBox}
         onClick={onAddChoice}>
         <PlusOutlined />
-      </Box>
+      </AddNewChoiceBox>
     </Box>
   )
 }

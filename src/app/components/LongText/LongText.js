@@ -7,14 +7,14 @@ import { Col, Container, Row } from '@qonsoll/react-design'
 const { TextArea } = Input
 
 function LongText(props) {
-  const { textAreaProps, onClick, id } = props
+  const { textAreaProps, onClick, question } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
 
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
-    const data = { questionId: id, answer }
+    const data = { question, answer: { value: answer || '' } }
     onClick && onClick(data)
   }
   const onFinishFailed = (errorInfo) => {

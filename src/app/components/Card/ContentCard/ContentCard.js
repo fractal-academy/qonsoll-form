@@ -1,18 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import theme from 'app/styles/theme'
 import styled from 'styled-components'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
+import typeformTheme from 'app/styles/theme'
 
 const Wrapper = styled(Col)`
+  ${({ theme }) => `
   margin: 24px;
   width: 100%;
   padding-bottom: 2px;
   height: ${(props) => props.onEdit && '100%'};
   display: flex;
   align-items: center;
-  border-radius: ${theme.borderRadius.md};
-  background-color: ${theme.color.white.default};
+  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  background-color: ${
+    theme?.color?.white?.default || typeformTheme?.color?.white?.default
+  };
+`}
 `
 function ContentCard(props) {
   const { onEdit, leftSideMenu, children } = props
