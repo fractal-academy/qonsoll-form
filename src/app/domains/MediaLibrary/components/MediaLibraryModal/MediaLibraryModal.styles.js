@@ -14,8 +14,6 @@ export const styles = {
     height: '768px',
     padding: 0,
     zIndex: 10000
-    // display: 'flex',
-    // flexDirection: 'row'
   },
   addButton: {
     cursor: 'pointer'
