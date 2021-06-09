@@ -99,8 +99,6 @@ function QuestionForm(props) {
   const bgImage =
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
-  console.log(computedMediaUrl)
-
   return (
     <ContentCard
       onEdit
