@@ -4,7 +4,7 @@ import { Button } from 'antd'
 import PropTypes from 'prop-types'
 import { ROUTES_PATHS } from 'app/constants'
 import { useHistory } from 'react-router'
-import { styles } from './FormContentArea.styles'
+import { ContentCol, styles } from './FormContentArea.styles'
 
 function FormContentArea(props) {
   const { children, leftSideMenu } = props
@@ -26,7 +26,7 @@ function FormContentArea(props) {
         <Col cw="auto" mr={3}>
           {leftSideMenu}
         </Col>
-        <Col {...styles.contentCol}>{children}</Col>
+        <ContentCol>{children}</ContentCol>
       </Row>
       <Row noGutters {...styles.footerButtons}>
         <Col cw="auto" mr={3}>

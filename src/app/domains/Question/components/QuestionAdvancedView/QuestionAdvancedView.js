@@ -3,7 +3,12 @@ import { Typography } from 'antd'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'
+import {
+  styles,
+  StyledCard,
+  StyledCol,
+  MainRow
+} from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -15,7 +20,7 @@ import {
   DateTimeInput,
   SubmitButton
 } from 'components'
-import theme from 'app/styles/theme'
+import QuestionImageContainer from '../QuestionImageContainer'
 
 const { Title, Text } = Typography
 
@@ -120,12 +125,9 @@ function QuestionAdvancedView(props) {
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
             <Row noGutters mb={3}>
               <Col cw="auto">
-                <Box
+                <QuestionImageContainer
                   {...layoutType.imgSize}
-                  backgroundSize="cover"
-                  borderRadius={theme.borderRadius.md}
-                  backgroundRepeat="no-repeat"
-                  backgroundImage={`url(${data?.image})`}
+                  image={data?.image}
                 />
               </Col>
             </Row>
@@ -137,13 +139,7 @@ function QuestionAdvancedView(props) {
         <StyledCol
           {...styles.sideImageColumnStyle}
           order={layoutType.imageOrder}>
-          <Box
-            {...layoutType.imgSize}
-            backgroundSize="cover"
-            backgroundRepeat="no-repeat"
-            borderRadius={theme.borderRadius.md}
-            backgroundImage={`url(${data?.image})`}
-          />
+          <QuestionImageContainer {...layoutType.imgSize} image={data?.image} />
         </StyledCol>
       )}
     </Row>

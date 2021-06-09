@@ -9,13 +9,14 @@ import {
   StyledCol,
   CustomCard,
   CustomRow,
-  CustomCol
+  QuestionHeaderCol
 } from './QuestionForm.styles'
 import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 import {
   QuestionConfigurationPopover,
   QuestionHeader,
-  QuestionMediaPopover
+  QuestionMediaPopover,
+  QuestionImageContainer
 } from 'domains/Question/components'
 import {
   Rate,
@@ -75,7 +76,7 @@ function QuestionForm(props) {
     }
   }
 
-  const computedMediaUrl = `url(${currentQuestion?.image || DEFAULT_IMAGE})`
+  const computedMediaUrl = currentQuestion?.image || DEFAULT_IMAGE
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
       ? 'Ending'
@@ -111,24 +112,25 @@ function QuestionForm(props) {
             )}
           </Row>
           <Row noGutters h="between" mb={4}>
-            <CustomCol cw="12">
+            <QuestionHeaderCol>
               <QuestionHeader
                 titlePlaceholder={'Editable question title'}
                 subtitlePlaceholder={'Description(optional)'}
               />
-            </CustomCol>
+            </QuestionHeaderCol>
           </Row>
           {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
             <Row noGutters>
               <Col cw="auto">
-                <Box
+                <QuestionImageContainer
                   {...layoutType.imgSize}
-                  {...styles.imageBetweenStyle}
-                  backgroundImage={computedMediaUrl}>
+                  mb={3}
+                  image={computedMediaUrl}
+                  position="relative">
                   <QuestionMediaPopover
                     MediaModalButtonBackground={computedMediaUrl}
                   />
-                </Box>
+                </QuestionImageContainer>
               </Col>
             </Row>
           )}
@@ -143,18 +145,14 @@ function QuestionForm(props) {
         <StyledCol
           order={layoutType?.imageOrder}
           {...styles.sideImageColumnStyle}>
-          <Box
-            {...styles.sideImageBoxStyle}
+          <QuestionImageContainer
             {...layoutType?.imgSize}
-            backgroundImage={computedMediaUrl}>
-            <Row h="right">
-              <Col cw="auto" mr={4}>
-                <QuestionMediaPopover
-                  MediaModalButtonBackground={computedMediaUrl}
-                />
-              </Col>
-            </Row>
-          </Box>
+            image={computedMediaUrl}
+            position="relative">
+            <QuestionMediaPopover
+              MediaModalButtonBackground={computedMediaUrl}
+            />
+          </QuestionImageContainer>
         </StyledCol>
       )}
     </CustomRow>
