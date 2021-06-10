@@ -56,7 +56,7 @@ function LongText(props) {
         form={form}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        style={{ width: '70%' }}>
+        style={{ width: '100%' }}>
         <Form.Item
           style={{ marginBottom: '0px' }}
           name="answer"

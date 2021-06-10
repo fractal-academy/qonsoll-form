@@ -12,6 +12,7 @@ import {
   Menu,
   Input
 } from 'antd'
+import useMedia from 'use-media'
 import { useHistory } from 'react-router'
 import { globalStyles } from 'app/styles'
 import { styles } from './FormsAll.styles'
@@ -40,6 +41,10 @@ function FormsAll(props) {
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
+
+  const mobileLayout = useMedia({ minWidth: '769px' })
+  // const squareDesctopLayout = useMedia({ minWidth: '1024px' })
+
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [currentData, setCurrentData] = useState(data)
@@ -111,7 +116,7 @@ function FormsAll(props) {
               size="small"
               type="text"
               style={globalStyles.resetPadding}
-              icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
+              icon={<ArrowLeftOutlined />}
               onClick={() => history.goBack()}
             />
           </Col>
@@ -133,9 +138,7 @@ function FormsAll(props) {
         {/* SecondaryTitle */}
         <Row noGutters h="between" v="center" mb={1} mt={3}>
           <Col>
-            <Title level={2} style={globalStyles.resetMargin}>
-              Forms
-            </Title>
+            <Title level={2}>Forms</Title>
           </Col>
           <Col cw="auto">
             <Button type="primary" onClick={showModal}>
@@ -165,7 +168,11 @@ function FormsAll(props) {
           flexWrap="wrap"
           flexDirection="row"
           className="custom-scroll">
-          <StaticList columnWidth={2} data={currentData} setEdit={setEdit} />
+          <StaticList
+            columnWidth={(mobileLayout && 2) || 6}
+            data={currentData}
+            setEdit={setEdit}
+          />
 
           <FormSimpleFormWithModal
             isModalVisible={isModalVisible}

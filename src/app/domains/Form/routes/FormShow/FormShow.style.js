@@ -1,9 +1,8 @@
-import theme from 'app/styles/theme'
-export const styles = {
-  headerRow: {
-    p: 3,
-    display: 'flex',
-    bg: theme.color.white.default,
-    justifyContent: 'space-between'
-  }
-}
+import styled from 'styled-components'
+import { Box } from '@qonsoll/react-design'
+import typeformTheme from 'app/styles/theme'
+
+export const FormShowHeader = styled(Box)`
+  background-color: ${({ theme }) =>
+    theme.color.white.default || typeformTheme.color.white.default};
+`

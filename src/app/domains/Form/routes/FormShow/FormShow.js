@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { ContentCard, Spinner } from 'components'
-import { styles } from './FormShow.style'
 import { Button, Typography } from 'antd'
 import { COLLECTIONS } from 'app/constants'
-import { useHistory, useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
+import { FormShowHeader } from './FormShow.style'
+import { ContentCard, Spinner } from 'components'
+import { useHistory, useParams } from 'react-router'
 import { getCollectionRef } from 'app/services/Firestore'
 import { FormAdvancedView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -22,16 +22,13 @@ function FormShow(props) {
 
   // [CUSTOM HOOKS]
   const answersDispatch = useAnswersContextDispatch()
+
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const { id } = useParams()
   const [data, loading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
-  // return this after adding isRequired and condition rules
-  // useKeyPress('enter', (event) => {
-  //   onClick()
-  // })
 
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
@@ -69,7 +66,7 @@ function FormShow(props) {
         <Spinner />
       ) : (
         <Box>
-          <Box {...styles.headerRow}>
+          <FormShowHeader display="flex" p={3} justifyContent="space-between">
             <Box display="flex">
               <Button
                 type="text"
@@ -86,7 +83,7 @@ function FormShow(props) {
               onClick={onRestart}>
               Restart
             </Button>
-          </Box>
+          </FormShowHeader>
 
           <ContentCard>
             <FormAdvancedView

@@ -115,7 +115,7 @@ function QuestionAdvancedView(props) {
 
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage} noGutters>
-      <Col {...styles.questionCardColumnStyle} cw={6}>
+      <Col {...styles.questionCardColumnStyle} cw={[12, 12, 6, 6]}>
         <StyledCard bordered={false} specialLayoutRule={specialLayoutRule}>
           <Row noGutters>
             <Col cw={12}>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Typography } from 'antd'
 import PropTypes from 'prop-types'
-import theme from 'app/styles/theme'
 import styled from 'styled-components'
 import { useHover } from '@umijs/hooks'
 import { CheckOutlined } from '@ant-design/icons'
@@ -16,13 +15,13 @@ const StyledKeybox = styled(Col)`
   border-width: 1px;
   text-align: center;
   border-style: solid;
-  border-color: ${theme.color.primary.default};
-  color: ${(props) => props.isActive && theme.color.white.default};
-  margin-left: ${(props) => props.isHovering && '-40px'};
-  background-color: ${(props) =>
-    props.isActive ? theme.color.primary.default : theme.color.white.default};
-  width: ${(props) =>
-    props.isHovering ? '65px !important' : ' 26px !important'};
+  border-color: ${({ theme }) => theme.color.primary.default};
+  color: ${({ isActive, theme }) => isActive && theme.color.white.default};
+  margin-left: ${({ isHovering }) => isHovering && '-40px'};
+  background-color: ${({ isActive, theme }) =>
+    isActive ? theme.color.primary.default : theme.color.white.default};
+  width: ${({ isHovering }) =>
+    isHovering ? '65px !important' : ' 26px !important'};
 `
 const ImageContainer = styled(Box)`
   width: 150px;
@@ -30,19 +29,19 @@ const ImageContainer = styled(Box)`
   border-radius: 8px;
   margin-bottom: 8px;
   background-size: cover;
-  background-image: url(${(props) => props.image});
+  background-image: url(${({ image }) => image});
 `
 const StyledButton = styled(Box)`
   position: relative;
   width: 100%;
   border-radius: 8px;
   padding: 8px;
-  color: ${theme.color.primary.default};
-  background-color: ${theme.color.primary.t.lighten5};
+  color: ${({ theme }) => theme.color.primary.default};
+  background-color: ${({ theme }) => theme.color.primary.t.lighten5};
   height: 100%;
 
   &:hover {
-    background-color: ${theme.color.primary.t.lighten3};
+    background-color: ${({ theme }) => theme.color.primary.t.lighten3};
   }
 `
 const StyledText = styled(Text)`

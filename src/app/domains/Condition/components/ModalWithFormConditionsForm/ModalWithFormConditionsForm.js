@@ -1,16 +1,16 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { globalStyles } from 'app/styles'
 import { Modal, Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
-import { styles } from './ModalWithFormConditionsForm.styles'
+import typeformTheme from 'app/styles/theme'
+import { ThemeContext } from 'styled-components'
 
 const { Title, Text } = Typography
 
 function ModalWithFormConditionsForm(props) {
   const { btnProps, children } = props
-
+  const theme = useContext(ThemeContext)
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
 
@@ -40,14 +40,18 @@ function ModalWithFormConditionsForm(props) {
         onCancel={onCancel}
         closable={false}
         width="1024px"
-        bodyStyle={styles.modalBodyStyle}
+        bodyStyle={{
+          height: '700px',
+          overflow: 'auto',
+          backgroundColor:
+            theme.color.primary.t.lighten9 ||
+            typeformTheme.color.primary.t.lighten9
+        }}
         title={
           <>
             <Row mb={1} v="center">
               <Col>
-                <Title level={3} style={globalStyles.resetMargin}>
-                  Logic jumps
-                </Title>
+                <Title level={3}>Logic jumps</Title>
               </Col>
               <Col cw="auto" v="center">
                 <Button type="text" onClick={resetLogic}>
