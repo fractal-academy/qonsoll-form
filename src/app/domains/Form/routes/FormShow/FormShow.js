@@ -91,15 +91,6 @@ function FormShow(props) {
               setIsAnswered={setIsAnswered}
               setCurrentSlide={setCurrentSlide}>
               {sortedData?.map((item, index) => (
-                // fix height - important
-                // <Box key={index} height={'750px'} overflowY="auto">
-                //   <QuestionAdvancedView
-                //     data={item}
-                //     questionNumber={index + 1}
-                //     onClick={onClick}
-                //     currentSlide={currentSlide}
-                //   />
-                // </Box>
                 <Component
                   sortedData={sortedData}
                   onClick={onClick}
