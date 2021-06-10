@@ -29,6 +29,7 @@ export const CustomCard = styled(Card)`
     display: none;
   }
 `
+
 export const CustomRow = styled(Row)`
   background-repeat: no-repeat;
   background-size: cover;

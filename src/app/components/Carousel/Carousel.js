@@ -1,9 +1,8 @@
-import { Button, Carousel as AntdCarousel } from 'antd'
+import { Button, Carousel as CustomCarousel } from 'antd'
 import PropTypes from 'prop-types'
 import React, { cloneElement, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import { CustomCarousel } from 'components/Carousel/Carousel.style'
 import { useSize } from '@umijs/hooks'
 
 function Carousel(props) {
@@ -40,16 +39,17 @@ function Carousel(props) {
 
   return (
     <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
-      <AntdCarousel
+      <CustomCarousel
         dots={false}
         ref={carouselRef}
         dotPosition="right"
-        afterChange={onCurrentSlideChange}>
-        {/*{cloneElement(children, { wrapperHeight: height })}*/}
+        afterChange={onCurrentSlideChange}
+        infinite={false}
+        speed={1500}>
         {children.map((el) =>
           cloneElement(el, { wrapperHeight: height - buttonsHeight })
         )}
-      </AntdCarousel>
+      </CustomCarousel>
 
       <Box ref={buttonsRef}>
         <Row h="right" p={2} noGutters>

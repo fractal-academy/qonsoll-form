@@ -14,18 +14,26 @@ export const HiddenBox = styled(Box)`
     theme?.color?.dark?.t?.lighten1 || typeformTheme?.color?.dark?.t?.lighten1};
 `
 export const ContentBox = styled(Box)`
-  ${({ theme }) => `
+  ${({ theme, current }) => `
   position: inherit;
   z-index: 400;
   left: 4px;
   padding: 16px;
   border-radius: 16px;
   background-color: ${
-    theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9
+    (current &&
+      (theme?.color?.primary?.t?.lighten6 ||
+        typeformTheme?.color?.primary?.t?.lighten6)) ||
+    theme?.color?.dark?.t?.lighten9 ||
+    typeformTheme?.color?.dark?.t?.lighten9
   };
   &:hover {
     background-color: ${
-      theme?.color?.dark?.t?.lighten8 || typeformTheme?.color?.dark?.t?.lighten8
+      (current &&
+        (theme?.color?.primary?.t?.lighten4 ||
+          typeformTheme?.color?.primary?.t?.lighten4)) ||
+      theme?.color?.dark?.t?.lighten8 ||
+      typeformTheme?.color?.dark?.t?.lighten8
     };
     transition: background-color 1s;
   }

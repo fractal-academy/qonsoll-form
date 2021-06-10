@@ -1,15 +1,13 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
-import { PageLayout, EditorSidebar, FormContentArea, Spinner } from 'components'
 import { useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
-import {
-  QuestionForm,
-  QuestionLayoutSwitcher
-} from 'domains/Question/components'
+import { useState, useEffect } from 'react'
+import { QuestionForm } from 'domains/Question/components'
+import { PageLayout, EditorSidebar, Spinner } from 'components'
 import { getCollectionRef, setData } from 'app/services/Firestore'
 import { QUESTION_TYPES, COLLECTIONS, DEFAULT_IMAGE } from 'app/constants'
+import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
 import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch,
@@ -20,7 +18,6 @@ import {
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 import { message } from 'antd'
-import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
 
 function FormEdit(props) {
   const { configurations } = props
@@ -40,6 +37,7 @@ function FormEdit(props) {
 
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
+  const [brightnessValue, setBrightnessValue] = useState(100)
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
@@ -115,22 +113,14 @@ function FormEdit(props) {
       ) : (
         <Box display="flex" height="inherit" overflowX="hidden">
           <PageLayout title={form?.title}>
-            <FormContentArea
-              leftSideMenu={
-                !!Object.keys(currentQuestion).length && (
-                  <QuestionLayoutSwitcher
-                    onChange={onChangeMenuItem}
-                    defaultActive={defaultTab}
-                  />
-                )
-              }>
-              {!!Object.keys(currentQuestion).length && (
-                <QuestionForm
-                  data={currentQuestion}
-                  onQuestionTypeChange={onQuestionTypeChange}
-                />
-              )}
-            </FormContentArea>
+            <QuestionForm
+              data={currentQuestion}
+              defaultTab={defaultTab}
+              onChangeMenuItem={onChangeMenuItem}
+              brightnessValue={brightnessValue}
+              setBrightnessValue={setBrightnessValue}
+              onQuestionTypeChange={onQuestionTypeChange}
+            />
           </PageLayout>
 
           <EditorSidebar transparent questions={questions} endings={endings} />

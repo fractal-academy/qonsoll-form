@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { ContentCard, Spinner } from 'components'
-import { FormShowHeader, styles } from './FormShow.style'
 import { Button, Typography } from 'antd'
 import { COLLECTIONS } from 'app/constants'
-// import { useKeyPress } from '@umijs/hooks'
-import { useHistory, useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
+import { FormShowHeader } from './FormShow.style'
+import { ContentCard, Spinner } from 'components'
+import { useHistory, useParams } from 'react-router'
 import { getCollectionRef } from 'app/services/Firestore'
 import { FormAdvancedView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -14,10 +13,7 @@ import { QuestionAdvancedView } from 'domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import ANSWERS_DISPATCH_EVENTS from 'app/context/Answers/DispatchEventsTypes'
 import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
-import {
-  useAnswersContext,
-  useAnswersContextDispatch
-} from 'app/context/Answers/useAnswersContext'
+import { useAnswersContextDispatch } from 'app/context/Answers/useAnswersContext'
 
 const { Title } = Typography
 
@@ -25,18 +21,14 @@ function FormShow(props) {
   const { configurations } = props
 
   // [CUSTOM HOOKS]
-  const answers = useAnswersContext()
   const answersDispatch = useAnswersContextDispatch()
+
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const { id } = useParams()
   const [data, loading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
-  // return this after adding isRequired and condition rules
-  // useKeyPress('enter', (event) => {
-  //   onClick()
-  // })
 
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
