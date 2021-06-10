@@ -161,10 +161,9 @@ function QuestionForm(props) {
                 </Row>
               )}
               <Box>
-                {cloneElement(
-                  questionTypesMap[data?.questionType].component,
-                  data
-                )}
+                {cloneElement(questionTypesMap[data?.questionType].component, {
+                  question: data
+                })}
               </Box>
             </CustomCard>
           </Col>
