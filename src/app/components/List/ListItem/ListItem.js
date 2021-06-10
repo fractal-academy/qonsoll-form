@@ -94,9 +94,9 @@ function ListItem(props) {
   }
   const handleDelete = async () => {
     setConfirmLoading(true)
-    await deleteData(collection, data?.id).catch((e) =>
-      message.error(e.message)
-    )
+    await deleteData(collection, data?.id)
+      .then(deleteQuestions)
+      .catch((e) => message.error(e.message))
 
     setIsPopconfirmVisible(false)
     setConfirmLoading(false)
