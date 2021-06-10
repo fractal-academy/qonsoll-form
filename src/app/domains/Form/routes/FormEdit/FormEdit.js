@@ -113,18 +113,6 @@ function FormEdit(props) {
       ) : (
         <Box display="flex" height="inherit" overflowX="hidden">
           <PageLayout title={form?.title}>
-            {/* <ContentCard
-              image={bgImage}
-              onEdit
-              leftSideMenu={
-                !!Object.keys(currentQuestion).length && (
-                  <QuestionLayoutSwitcher
-                    onChange={onChangeMenuItem}
-                    defaultActive={defaultTab}
-                  />
-                )
-              }> */}
-            {/* {!!Object.keys(currentQuestion).length && ( */}
             <QuestionForm
               data={currentQuestion}
               defaultTab={defaultTab}
@@ -133,8 +121,6 @@ function FormEdit(props) {
               setBrightnessValue={setBrightnessValue}
               onQuestionTypeChange={onQuestionTypeChange}
             />
-            {/* )} */}
-            {/* </ContentCard> */}
           </PageLayout>
 
           <EditorSidebar transparent questions={questions} endings={endings} />
