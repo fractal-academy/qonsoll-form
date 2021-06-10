@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { KeyBox } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'
-import { Col, Row } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
 
 let startLetter = 65
@@ -9,6 +9,7 @@ let startLetter = 65
 function ChoiceButton(props) {
   const { choices, onClick, hasImages, currentSlide, question } = props
   const { order } = question
+
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
 
@@ -30,7 +31,9 @@ function ChoiceButton(props) {
     (event) => {
       if (event.type === 'keyup') {
         const key = `${event.key}`.toUpperCase()
-        onButtonClick(key)
+        let index = key.charCodeAt(0) - startLetter
+
+        onButtonClick({ letter: key, choice: choices[index] })
       }
     },
     {
@@ -39,8 +42,9 @@ function ChoiceButton(props) {
   )
 
   // [CLEAN FUNCTIONS]
-  const onButtonClick = (choiceData) => {
-    const { letter, choice } = choiceData
+  const onButtonClick = (props) => {
+    const { letter, choice } = props
+
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
       const answer = { value: choice?.name || '', letterKey: letter }
