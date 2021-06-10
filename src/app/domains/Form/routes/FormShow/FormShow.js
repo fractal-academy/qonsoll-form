@@ -73,7 +73,7 @@ function FormShow(props) {
       {loading ? (
         <Spinner />
       ) : (
-        <Box>
+        <Box height={'100%'}>
           <FormShowHeader display="flex" p={3} justifyContent="space-between">
             <Box display="flex">
               <Button
@@ -100,14 +100,21 @@ function FormShow(props) {
               setCurrentSlide={setCurrentSlide}>
               {sortedData?.map((item, index) => (
                 // fix height - important
-                <Box key={index} height="750px" overflowY="auto">
-                  <QuestionAdvancedView
-                    data={item}
-                    questionNumber={index + 1}
-                    onClick={onClick}
-                    currentSlide={currentSlide}
-                  />
-                </Box>
+                // <Box key={index} height={'750px'} overflowY="auto">
+                //   <QuestionAdvancedView
+                //     data={item}
+                //     questionNumber={index + 1}
+                //     onClick={onClick}
+                //     currentSlide={currentSlide}
+                //   />
+                // </Box>
+                <Component
+                  sortedData={sortedData}
+                  onClick={onClick}
+                  currentSlide={currentSlide}
+                  index={index}
+                  item={item}
+                />
               ))}
             </FormAdvancedView>
           </ContentCard>
@@ -116,6 +123,22 @@ function FormShow(props) {
     </TypeformConfigurationContext.Provider>
   )
 }
+
+const Component = ({ index, item, onClick, currentSlide, wrapperHeight }) => {
+  console.log({ wrapperHeight })
+  return (
+    <Box key={index} height={wrapperHeight} overflowY="auto">
+      <QuestionAdvancedView
+        wrapperHeight={wrapperHeight}
+        data={item}
+        questionNumber={index + 1}
+        onClick={onClick}
+        currentSlide={currentSlide}
+      />
+    </Box>
+  )
+}
+
 FormShow.propTypes = {
   configurations: PropTypes.object
 }
