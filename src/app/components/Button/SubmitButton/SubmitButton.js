@@ -21,6 +21,7 @@ function SubmitButton(props) {
 
   //[ADDITIONAL HOOKS]
   const answers = useAnswersContext()
+
   // [CLEAN FUNCTIONS]
   const onButtonClick = () => {
     if (finish) {

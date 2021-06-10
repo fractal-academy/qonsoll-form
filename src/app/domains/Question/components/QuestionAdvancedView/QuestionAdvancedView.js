@@ -3,12 +3,7 @@ import { Typography } from 'antd'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import {
-  styles,
-  StyledCard,
-  StyledCol,
-  MainRow
-} from './QuestionAdvancedView.styles'
+import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -55,29 +50,41 @@ function QuestionAdvancedView(props) {
       component: <RangeButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.RATING]: {
-      component: <Rate onClick={onClick} />
+      component: <Rate onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <ShortText onClick={onClick} />
+      component: <ShortText onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <LongText onClick={onClick} />
+      component: <LongText onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput onDateChange={onClick} />
+      component: (
+        <DateTimeInput onDateChange={onClick} currentSlide={currentSlide} />
+      )
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploader onContinue={onClick} />
+      component: (
+        <FileUploader onContinue={onClick} currentSlide={currentSlide} />
+      )
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton onClick={onClick}>Continue</SubmitButton>
+      component: (
+        <SubmitButton onClick={onClick} currentSlide={currentSlide}>
+          Continue
+        </SubmitButton>
+      )
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton onClick={onClick}>Start</SubmitButton>
+      component: (
+        <SubmitButton onClick={onClick} currentSlide={currentSlide}>
+          Start
+        </SubmitButton>
+      )
     },
     [QUESTION_TYPES.ENDING]: {
       component: (
-        <SubmitButton onClick={onClick} finish>
+        <SubmitButton onClick={onClick} currentSlide={currentSlide} finish>
           Finish
         </SubmitButton>
       )
@@ -86,10 +93,12 @@ function QuestionAdvancedView(props) {
   //component for recieved question according to question type
   const component = questionTypesMap[data?.questionType].component
   const layoutType = LAYOUT_TYPES[data?.layoutType]
+
   // defines special question layouts
   const specialLayoutRule =
     data?.questionType === QUESTION_TYPES.WELCOME_SCREEN ||
     data?.questionType === QUESTION_TYPES.ENDING
+
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
     layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&

@@ -4,7 +4,6 @@ import { ContentCard, Spinner } from 'components'
 import { styles } from './FormShow.style'
 import { Button, Typography } from 'antd'
 import { COLLECTIONS } from 'app/constants'
-// import { useKeyPress } from '@umijs/hooks'
 import { useHistory, useParams } from 'react-router'
 import { Box } from '@qonsoll/react-design'
 import { getCollectionRef } from 'app/services/Firestore'
@@ -14,10 +13,7 @@ import { QuestionAdvancedView } from 'domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import ANSWERS_DISPATCH_EVENTS from 'app/context/Answers/DispatchEventsTypes'
 import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
-import {
-  useAnswersContext,
-  useAnswersContextDispatch
-} from 'app/context/Answers/useAnswersContext'
+import { useAnswersContextDispatch } from 'app/context/Answers/useAnswersContext'
 
 const { Title } = Typography
 
@@ -25,7 +21,6 @@ function FormShow(props) {
   const { configurations } = props
 
   // [CUSTOM HOOKS]
-  const answers = useAnswersContext()
   const answersDispatch = useAnswersContextDispatch()
   // [ADDITIONAL HOOKS]
   const history = useHistory()

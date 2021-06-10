@@ -40,7 +40,9 @@ function Carousel(props) {
         dots={false}
         ref={carouselRef}
         dotPosition="right"
-        afterChange={onCurrentSlideChange}>
+        afterChange={onCurrentSlideChange}
+        infinite={false}
+        speed={1500}>
         {children}
       </CustomCarousel>
 

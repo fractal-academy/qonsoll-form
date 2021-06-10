@@ -1,11 +1,12 @@
-import { Form, Input } from 'antd'
+import { Form, Input, message } from 'antd'
 import PropTypes from 'prop-types'
 import { globalStyles } from 'app/styles'
 import { SubmitButton } from 'components'
-import { Row, Col, Container } from '@qonsoll/react-design'
+import { Container, Box } from '@qonsoll/react-design'
+import { useKeyPress } from '@umijs/hooks'
 
 function ShortText(props) {
-  const { inputProps, isRequired, onClick, question } = props
+  const { inputProps, isRequired, onClick, question, currentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
@@ -18,32 +19,45 @@ function ShortText(props) {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
+  const onPressOk = () => {
+    //get values from form to check if there is any answer data
+    //.trim() removes all useless spaces to prevent submit with only spaces
+    const value = form.getFieldsValue()?.answer?.trim()
+    //if required and empty answer - error message, else form submit and set data to context
+    question?.isRequired
+      ? value
+        ? form.submit()
+        : message.error('It`s required question, please answer')
+      : form.submit()
+  }
+  useKeyPress(
+    (e) =>
+      //if pressed enter this event on this question slide - dispatch second callback
+      e.keyCode === 13 && currentSlide === question?.order,
+    () => {
+      // console.log(ev.target.parentNode.parentNode)
+      onPressOk()
+    }
+  )
 
   return (
-    <Form
-      style={{ width: '70%' }}
-      form={form}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}>
-      <Container>
-        <Row noGutters>
-          <Col display="block">
-            <Form.Item
-              style={globalStyles.resetMarginB}
-              name="answer"
-              rules={[{ required: isRequired }]}>
-              <Input {...inputProps} placeholder="Type your answer here..." />
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Row mt={4} noGutters>
-          <Col cw="auto">
-            <SubmitButton onClick={() => form.submit()} />
-          </Col>
-        </Row>
-      </Container>
-    </Form>
+    <Container>
+      <Form
+        style={{ width: '70%' }}
+        form={form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}>
+        <Form.Item
+          style={globalStyles.resetMarginB}
+          name="answer"
+          rules={[{ required: isRequired }]}>
+          <Input {...inputProps} placeholder="Type your answer here..." />
+        </Form.Item>
+      </Form>
+      <Box mt={4}>
+        <SubmitButton onClick={onPressOk} />
+      </Box>
+    </Container>
   )
 }
 
