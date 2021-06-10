@@ -92,6 +92,14 @@ theme.color.white.t.lighten7 = 'rgba(255,255,255,0.10)'
 theme.color.white.t.lighten8 = 'rgba(255,255,255,0.08)'
 theme.color.white.t.lighten9 = 'rgba(255,255,255,0.04)'
 
+// Danger pure
+theme.color.danger = {}
+theme.color.danger.default = '#ff0000'
+
+// Danger transparent
+theme.color.danger.t = {}
+theme.color.danger.t.lighten = 'rgba(255,0,0,0.15)'
+
 // Text colors
 theme.color.text = {}
 

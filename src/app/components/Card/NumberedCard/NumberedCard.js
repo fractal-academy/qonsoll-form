@@ -4,12 +4,12 @@ import { Box } from '@qonsoll/react-design'
 
 import { HiddenBox, ContentBox, NumberBox } from './NumberedCard.styles'
 function NumberedCard(props) {
-  const { number, children } = props
+  const { number, current, children } = props
 
   return (
     <Box position="relative">
       <HiddenBox />
-      <ContentBox>{children}</ContentBox>
+      <ContentBox current={current}>{children}</ContentBox>
       <NumberBox>{number}</NumberBox>
     </Box>
   )
