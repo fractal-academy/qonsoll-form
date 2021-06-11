@@ -81,7 +81,9 @@ const questionTypeMap = [
   }
 ]
 function QuestionTypeSelect(props) {
-  const { onClick } = props
+  const { customQuestionTypes, onClick } = props
+
+  const configuredTypes = customQuestionTypes || questionTypeMap
 
   return (
     <Row
@@ -93,7 +95,7 @@ function QuestionTypeSelect(props) {
       style={{ flex: '1' }}>
       <Col display="block">
         <QuestionsTypeMenu>
-          {questionTypeMap.map((item) => (
+          {configuredTypes.map((item) => (
             <QuestionMenuItem key={item.type} onClick={onClick}>
               <Row noGutters v="center">
                 <Col v="center" cw="auto" mr={2}>

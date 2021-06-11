@@ -3,7 +3,7 @@ import { Typography } from 'antd'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'
+import { styles, StyledCol, StyledBox } from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -16,6 +16,7 @@ import {
   SubmitButton
 } from 'components'
 import QuestionImageContainer from '../QuestionImageContainer'
+import useMedia from 'use-media'
 
 const { Title, Text } = Typography
 
@@ -112,18 +113,22 @@ function QuestionAdvancedView(props) {
         }
       : {})
   }
+  const heightSmallDevices = useMedia({ maxWidth: '768px' })
+  const deviceImageHeight = (heightSmallDevices && '30%') || '100%'
+  const devicePadding = (heightSmallDevices && 1) || 4
 
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage} noGutters>
       <Col {...styles.questionCardColumnStyle} cw={[12, 12, 6, 6]}>
-        <StyledCard bordered={false} specialLayoutRule={specialLayoutRule}>
-          <Row noGutters>
+        <StyledBox
+          pl={devicePadding}
+          bordered={false}
+          specialLayoutRule={specialLayoutRule}>
+          <Row noGutters py={2}>
             <Col cw={12}>
-              <Box>
-                <Title level={4}>
-                  {questionNumber}. {data?.title}
-                </Title>
-              </Box>
+              <Title level={4}>
+                {questionNumber}. {data?.title}
+              </Title>
             </Col>
           </Row>
           <Row noGutters mb={3}>
@@ -142,12 +147,13 @@ function QuestionAdvancedView(props) {
             </Row>
           )}
           <Box>{cloneElement(component, { question: data })}</Box>
-        </StyledCard>
+        </StyledBox>
       </Col>
       {imageShowRule && (
         <StyledCol
+          height={deviceImageHeight}
           {...styles.sideImageColumnStyle}
-          order={layoutType.imageOrder}>
+          order={heightSmallDevices ? '1' : layoutType.imageOrder}>
           <QuestionImageContainer {...layoutType.imgSize} image={data?.image} />
         </StyledCol>
       )}

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import typeformTheme from 'app/styles/theme'
+import useMedia from 'use-media'
 
 const ContentRow = styled(Row)`
-  margin: 32px;
   display: flex;
   height: ${(props) => props.onEdit && '100%'};
 `
@@ -31,6 +31,7 @@ const ImageBackground = styled(Box)`
   background-image: url(${image});
   filter: brightness(${brightnessValue}%);
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  
   `}
 `
 
@@ -44,9 +45,13 @@ function ContentCard(props) {
     topOffset = '56'
   } = props
 
+  const paddingSmall = useMedia({ maxWidth: '768px' })
+  const devicePadding = (paddingSmall && 1) || 4
+
   return (
     <ContentRow
-      height={`calc(100vh - ${topOffset}px - 64px)`}
+      p={devicePadding}
+      height={`calc(100vh - ${topOffset}px)`}
       onEdit={onEdit}
       noGutters>
       {leftSideMenu && (
