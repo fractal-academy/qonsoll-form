@@ -41,8 +41,7 @@ function Carousel(props) {
         ref={carouselRef}
         dotPosition="right"
         afterChange={onCurrentSlideChange}
-        infinite={false}
-        speed={1500}>
+        infinite={false}>
         {children}
       </AntdCarousel>
 
