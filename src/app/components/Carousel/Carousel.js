@@ -40,7 +40,9 @@ function Carousel(props) {
         adaptiveHeight
         ref={carouselRef}
         dotPosition="right"
-        afterChange={onCurrentSlideChange}>
+        afterChange={onCurrentSlideChange}
+        infinite={false}
+        speed={1500}>
         {children}
       </AntdCarousel>
 
