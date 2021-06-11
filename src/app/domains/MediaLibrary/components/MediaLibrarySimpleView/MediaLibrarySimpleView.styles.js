@@ -2,7 +2,6 @@ import { Typography } from 'antd'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
 import typeformTheme from 'app/styles/theme'
-// import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Text } = Typography
 

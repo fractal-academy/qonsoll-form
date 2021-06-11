@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import typeformTheme from 'app/styles/theme'
 import { Card, Button, Image, Typography } from 'antd'
-// import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 
 const { Text } = Typography
 
