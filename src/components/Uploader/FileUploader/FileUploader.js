@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Upload, message } from 'antd'
 import { Text } from 'antd-styled'
-import { IconLabel,SubmitButton } from '../../../components'
-import { Col, Row } from '@qonsoll/react-design'
+import { IconLabel, SubmitButton } from '../../../components'
+import { Box } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../context/Translation'
 import storage from '../../../services/storage'
@@ -21,7 +21,7 @@ const UploadArea = (props) => {
 
   // [ADDITIONAL_HOOKS]
   const { t } = useTranslation()
-  const { getCollectionRef, setData } = useFunctions()
+  const { getCollectionRef } = useFunctions()
 
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})

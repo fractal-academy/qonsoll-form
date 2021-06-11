@@ -58,7 +58,7 @@ const StyledBadge = styled(Button)`
 function ListItem(props) {
   const { data, selectedBackgroundImg, setSelectedBackgroundImg, setEdit } =
     props
-  const { updateData, deleteData } = useFunctions()
+  const { updateData, deleteData, getCollectionRef } = useFunctions()
 
   // [ADDITIONAL HOOKS]
   const [questions] = useCollectionData(
@@ -144,7 +144,7 @@ function ListItem(props) {
       isCard
       onClick={
         !data?.imageUrl
-          ? onFormItemClick
+          ? onFormItemClicked
           : () => setSelectedBackgroundImg(data?.imageUrl)
       }>
       <Box display="block" width="inherit">

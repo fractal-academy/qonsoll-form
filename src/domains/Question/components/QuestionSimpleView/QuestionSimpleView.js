@@ -5,6 +5,7 @@ import { CloseOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { LAYOUT_TYPES } from '../../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
+import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { DescriptionContainer } from './QuestionSimpleView.styles'
 
 function QuestionSimpleView(props) {

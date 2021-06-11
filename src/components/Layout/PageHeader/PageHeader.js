@@ -30,8 +30,9 @@ function PageHeader(props) {
               <Button
                 size="small"
                 type="text"
+                shape="default"
                 style={globalStyles.resetPadding}
-                icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
+                icon={<ArrowLeftOutlined />}
                 onClick={onBack}
               />
             </Col>

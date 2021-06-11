@@ -26,7 +26,14 @@ import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings, id, showCondition, transparent,customQuestionTypes } = props
+  const {
+    questions,
+    endings,
+    id,
+    showCondition,
+    transparent,
+    customQuestionTypes
+  } = props
   const { getCollectionRef } = useFunctions()
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -114,12 +121,12 @@ function EditorSidebar(props) {
               </Popover>
             </Col>
             {showCondition && (
-            <Col cw="auto" v="center" px={1}>
-              <ModalWithFormConditionsForm
-                btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
-                <FormConditionsForm />
-              </ModalWithFormConditionsForm>
-            </Col>
+              <Col cw="auto" v="center" px={1}>
+                <ModalWithFormConditionsForm
+                  btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
+                  <FormConditionsForm />
+                </ModalWithFormConditionsForm>
+              </Col>
             )}
           </Row>
         </Box>

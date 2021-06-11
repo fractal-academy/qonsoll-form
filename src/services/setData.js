@@ -1,4 +1,4 @@
-import  getCollectionRef  from "./getCollectionRef"
+import getCollectionRef from './getCollectionRef'
 
 /**
  * @param {string} collection - collection name.
@@ -7,7 +7,9 @@ import  getCollectionRef  from "./getCollectionRef"
  * @returns {Promise}
  * */
 
-function setData(firebase,collection, document, data) {
-  return getCollectionRef(firebase,collection).doc(document).set(data, { merge: true })
+function setData(firebase, collection, document, data) {
+  return getCollectionRef(firebase, collection)
+    .doc(document)
+    .set(data, { merge: true })
 }
 export default setData

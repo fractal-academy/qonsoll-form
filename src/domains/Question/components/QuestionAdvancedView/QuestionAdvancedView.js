@@ -4,12 +4,7 @@ import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
-import {
-  styles,
-  StyledCard,
-  StyledCol,
-  MainRow
-} from './QuestionAdvancedView.styles'
+import { styles, StyledCol, StyledBox } from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -20,10 +15,9 @@ import {
   LongText,
   DateTimeInput,
   SubmitButton
-} from 'components'
+} from '../../../../components'
 import QuestionImageContainer from '../QuestionImageContainer'
 import useMedia from 'use-media'
-
 
 const { Title, Text } = Typography
 
@@ -95,7 +89,11 @@ function QuestionAdvancedView(props) {
     },
     [QUESTION_TYPES.ENDING]: {
       component: (
-        <SubmitButton onClick={onClick} currentSlide={currentSlide} finish>
+        <SubmitButton
+          onClick={onClick}
+          currentSlide={currentSlide}
+          finish
+          loading={submitLoading}>
           {t('Finish')}
         </SubmitButton>
       )

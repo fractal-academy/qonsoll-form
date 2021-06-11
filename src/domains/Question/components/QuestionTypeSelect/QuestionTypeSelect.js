@@ -24,13 +24,13 @@ import {
 } from '@ant-design/icons'
 
 function QuestionTypeSelect(props) {
-  const { onClick } = props
+  const { onClick, customQuestionTypes } = props
 
   // [ADDITIONAL_HOOKS]
   const { t } = useTranslation()
 
   // [COMPUTED_PROPERTIES]
-  const questionTypeMap = [
+  const questionTypeMap = customQuestionTypes || [
     {
       type: QUESTION_TYPES.WELCOME_SCREEN,
       description: t('Invite your audience in'),

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import typeformTheme from 'app/styles/theme'
-import React from 'react'
+import typeformTheme from '../../../../../../styles/theme'
 
 export const CustomUploaderBox = styled(Box)(({ theme }) => ({
   display: 'flex',

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import typeformTheme from 'app/styles/theme'
+import typeformTheme from '../../../../styles/theme'
 
 export const HiddenBox = styled(Box)`
   position: absolute;

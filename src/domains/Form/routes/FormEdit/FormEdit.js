@@ -1,17 +1,10 @@
 import PropTypes from 'prop-types'
 import useMedia from 'use-media'
 import React, { useState, useEffect, useMemo } from 'react'
-import {
-  PageLayout,
-  EditorSidebar,
-  Spinner
-} from '../../../../components'
+import { PageLayout, EditorSidebar, Spinner } from '../../../../components'
 import { Box } from '@qonsoll/react-design'
 import { TranslationContext } from '../../../../context/Translation'
-import {
-  QuestionForm,
-  QuestionLayoutSwitcher
-} from '../../../../domains/Question/components'
+import { QuestionForm } from '../../../../domains/Question/components'
 import {
   QUESTION_TYPES,
   COLLECTIONS,
@@ -28,15 +21,22 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { message, Typography } from 'antd'
+import { message } from 'antd'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
-const { Text } = Typography
-
 function FormEdit(props) {
-  const { firebase, actions = {}, id, translate, onBack, showCondition,configurations,customQuestionTypes } = props
+  const {
+    firebase,
+    actions = {},
+    id,
+    translate,
+    onBack,
+    showCondition,
+    configurations,
+    customQuestionTypes
+  } = props
 
   // [ADDITIONAL HOOKS]
   const handleSmallScreen = useMedia({ minWidth: '900px' })
@@ -128,34 +128,39 @@ function FormEdit(props) {
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={{ t: translate }}>
           <TypeformConfigurationContext.Provider value={configurations}>
-
-          {formLoading || questionsListLoading ? (
-            <Spinner />
-          ) : (
-            <Box display="flex" height="inherit" overflowX="hidden">
-              <PageLayout handleSmallScreen={handleSmallScreen} title={form?.title}>
-                <QuestionForm
-                  data={currentQuestion}
-                  defaultTab={defaultTab}
-                  brightnessValue={brightnessValue}
-                  onChangeMenuItem={onChangeMenuItem}
+            {formLoading || questionsListLoading ? (
+              <Spinner />
+            ) : (
+              <Box display="flex" height="inherit" overflowX="hidden">
+                <PageLayout
+                  id={id}
                   handleSmallScreen={handleSmallScreen}
-                  customQuestionTypes={customQuestionTypes}
-                  setBrightnessValue={setBrightnessValue}
-                  onQuestionTypeChange={onQuestionTypeChange}
-                />
-              </PageLayout>
-              {/*TODO id in EditorSidebar*/}
-              {handleSmallScreen && (
-                <EditorSidebar
-                  transparent
-                  endings={endings}
-                  questions={questions}
-                  customQuestionTypes={customQuestionTypes}
-                />
-              )}
-            </Box>
-          )}
+                  title={form?.title}
+                  onBack={onBack}>
+                  <QuestionForm
+                    data={currentQuestion}
+                    defaultTab={defaultTab}
+                    brightnessValue={brightnessValue}
+                    onChangeMenuItem={onChangeMenuItem}
+                    handleSmallScreen={handleSmallScreen}
+                    customQuestionTypes={customQuestionTypes}
+                    setBrightnessValue={setBrightnessValue}
+                    onQuestionTypeChange={onQuestionTypeChange}
+                  />
+                </PageLayout>
+                {/*TODO id in EditorSidebar*/}
+                {handleSmallScreen && (
+                  <EditorSidebar
+                    transparent
+                    id={id}
+                    endings={endings}
+                    questions={questions}
+                    showCondition={showCondition}
+                    customQuestionTypes={customQuestionTypes}
+                  />
+                )}
+              </Box>
+            )}
           </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>

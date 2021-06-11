@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import typeformTheme from 'app/styles/theme'
+import typeformTheme from '../../../styles/theme'
 
 const IconRoundContainer = styled(Box)`
   ${({ theme, danger }) => `
@@ -11,7 +11,7 @@ const IconRoundContainer = styled(Box)`
   width: 40px;
   height: 40px;
   background-color: ${
-    (danger && theme.color.danger.t.lighten) ||
+    (danger && theme.color?.danger?.t?.lighten) ||
     theme?.color?.dark?.t?.lighten6 ||
     typeformTheme?.color?.dark?.t?.lighten6
   };

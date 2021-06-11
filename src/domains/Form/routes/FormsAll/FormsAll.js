@@ -11,7 +11,9 @@ import {
   Menu,
   Input
 } from 'antd'
+import useMedia from 'use-media'
 import { globalStyles } from '../../../../../styles'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import { styles } from './FormsAll.styles'
 import { Spinner, StaticList } from '../../../../components'
 import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
@@ -39,7 +41,8 @@ function FormsAll(props) {
     childrenModal,
     disableAddButton,
     titleText,
-    firstLevelHidden
+    firstLevelHidden,
+    configurations
   } = props
 
   // [CUSTOM_HOOKS]
@@ -50,6 +53,8 @@ function FormsAll(props) {
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
+  const mobileLayout = useMedia({ minWidth: '769px' })
+  // const squareDesctopLayout = useMedia({ minWidth: '1024px' })
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [currentData, setCurrentData] = useState(data)
@@ -118,90 +123,92 @@ function FormsAll(props) {
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={{ t: translate }}>
-          <Box {...styles.mainWrapper}>
-            {/* Page Header */}
-            {!firstLevelHidden && (
-              <Row noGutters display="flex">
-                <Col cw="auto" v="center">
+          <TypeformConfigurationContext.Provider value={configurations}>
+            <Box {...styles.mainWrapper}>
+              {/* Page Header */}
+              {!firstLevelHidden && (
+                <Row noGutters display="flex">
+                  <Col cw="auto" v="center">
+                    <Button
+                      size="small"
+                      type="text"
+                      style={globalStyles.resetPadding}
+                      icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
+                      // onClick={() => history.goBack()}
+                    />
+                  </Col>
+                  <Col cw="auto" v="center">
+                    <Divider type="vertical" />
+                  </Col>
+                  <Col v="center">
+                    <Breadcrumb>
+                      <Breadcrumb.Item>
+                        <FolderOutlined />
+                        <Text>Folder</Text>
+                      </Breadcrumb.Item>
+                      <Breadcrumb.Item overlay={menu}>
+                        <Text>Forms</Text>
+                      </Breadcrumb.Item>
+                    </Breadcrumb>
+                  </Col>
+                </Row>
+              )}
+
+              {/* SecondaryTitle */}
+              <Row noGutters h="between" v="center" mb={1} mt={3}>
+                <Col>
+                  <Title level={2}>{titleText ?? translate('Forms')}</Title>
+                </Col>
+                <Col cw="auto">
                   <Button
-                    size="small"
-                    type="text"
-                    style={globalStyles.resetPadding}
-                    icon={<ArrowLeftOutlined style={globalStyles.iconSize} />}
-                    // onClick={() => history.goBack()}
-                  />
-                </Col>
-                <Col cw="auto" v="center">
-                  <Divider type="vertical" />
-                </Col>
-                <Col v="center">
-                  <Breadcrumb>
-                    <Breadcrumb.Item>
-                      <FolderOutlined />
-                      <Text>Folder</Text>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item overlay={menu}>
-                      <Text>Forms</Text>
-                    </Breadcrumb.Item>
-                  </Breadcrumb>
+                    type="primary"
+                    onClick={showModal}
+                    disabled={disableAddButton}>
+                    + {translate('Add')}
+                  </Button>
                 </Col>
               </Row>
-            )}
+              <Row noGutters mb={3}>
+                <Col>
+                  <Text>
+                    {translate('You have')} {amountFiles} {translate('files')}.
+                  </Text>
+                </Col>
+              </Row>
 
-            {/* SecondaryTitle */}
-            <Row noGutters h="between" v="center" mb={1} mt={3}>
-              <Col>
-                <Title level={2} style={globalStyles.resetMargin}>
-                  {titleText ?? translate('Forms')}
-                </Title>
-              </Col>
-              <Col cw="auto">
-                <Button
-                  type="primary"
-                  onClick={showModal}
-                  disabled={disableAddButton}>
-                  + {translate('Add')}
-                </Button>
-              </Col>
-            </Row>
-            <Row noGutters mb={3}>
-              <Col>
-                <Text>
-                  {translate('You have')} {amountFiles} {translate('files')}.
-                </Text>
-              </Col>
-            </Row>
+              <Row noGutters mb={3}>
+                <Col>
+                  <Input
+                    ref={searchRef}
+                    placeholder={`${translate(
+                      'Search folder/file by name'
+                    )}...`}
+                    onChange={(input) => searchData(input.target.value)}
+                  />
+                </Col>
+              </Row>
 
-            <Row noGutters mb={3}>
-              <Col>
-                <Input
-                  ref={searchRef}
-                  placeholder={`${translate('Search folder/file by name')}...`}
-                  onChange={(input) => searchData(input.target.value)}
+              <Box
+                mr="-10px"
+                display="flex"
+                flexWrap="wrap"
+                flexDirection="row"
+                className="custom-scroll">
+                <StaticList
+                  data={currentData}
+                  columnWidth={(mobileLayout && 2) || 6}
+                  setEdit={setEdit}
                 />
-              </Col>
-            </Row>
 
-            <Box
-              mr="-10px"
-              display="flex"
-              flexWrap="wrap"
-              flexDirection="row"
-              className="custom-scroll">
-              <StaticList
-                data={currentData}
-                columnWidth={2}
-                setEdit={setEdit}
-              />
-
-              <FormSimpleFormWithModal
-                isModalVisible={isModalVisible}
-                setIsModalVisible={setIsModalVisible}
-                onModalSubmit={onFormCreate}>
-                {childrenModal}
-              </FormSimpleFormWithModal>
+                <FormSimpleFormWithModal
+                  isModalVisible={isModalVisible}
+                  setIsModalVisible={setIsModalVisible}
+                  onModalSubmit={onFormCreate}>
+                  {childrenModal}
+                </FormSimpleFormWithModal>
+              </Box>
             </Box>
-          </Box>
+          </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>

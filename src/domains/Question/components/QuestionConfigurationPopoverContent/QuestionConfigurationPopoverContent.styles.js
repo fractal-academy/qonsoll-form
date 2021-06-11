@@ -1,6 +1,6 @@
 import { Row } from '@qonsoll/react-design'
 import styled from 'styled-components'
-import typeformTheme from 'app/styles/theme'
+import typeformTheme from '../../../../../styles/theme'
 
 export const PopoverSwitcherRow = styled(Row)`
   ${({ theme }) => `

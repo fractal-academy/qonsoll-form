@@ -18,13 +18,13 @@ function YesnoButton(props) {
   // [COMPUTED PROPERTIES]
   const mappedChoices = [
     {
-      letter: t('Y'),
+      letter: 'Y',
       choice: {
         name: t('Yes')
       }
     },
     {
-      letter: t('N'),
+      letter: 'N',
       choice: {
         name: t('No')
       }

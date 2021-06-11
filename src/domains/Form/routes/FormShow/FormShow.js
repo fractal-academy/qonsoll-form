@@ -17,11 +17,20 @@ import {
   useAnswersContextDispatch,
   ANSWERS_DISPATCH_EVENTS
 } from '../../../../context/Answers'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
+
 // const { Title } = Typography
 import { ContentCard, Spinner } from '../../../../components'
 
 function FormShow(props) {
-  const { firebase, actions = {}, id, translate, submitLoading } = props
+  const {
+    firebase,
+    actions = {},
+    id,
+    translate,
+    submitLoading,
+    configurations
+  } = props
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
@@ -71,68 +80,82 @@ function FormShow(props) {
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={{ t: translate }}>
-          {loading ? (
-            <Spinner />
-          ) : (
-            <Box>
-              {/*<Row {...styles.headerRow} noGutters>*/}
-              {/*  <Col cw="auto" v="center" p={0}>*/}
-              {/*    <Button*/}
-              {/*      type="text"*/}
-              {/*      size="small"*/}
-              {/*      // onClick={() => history.goBack()}*/}
-              {/*      icon={<ArrowLeftOutlined />}*/}
-              {/*    />*/}
-              {/*  </Col>*/}
-              {/*  <Col v="center">*/}
-              {/*    <Box textAlign="center">*/}
-              {/*      <Title level={5}>Live Preview</Title>*/}
-              {/*    </Box>*/}
-              {/*  </Col>*/}
-              {/*  <Col cw="auto" v="center">*/}
-              {/*    <Button*/}
-              {/*      type="text"*/}
-              {/*      size="small"*/}
-              {/*      icon={<ReloadOutlined />}*/}
-              {/*      onClick={onRestart}>*/}
-              {/*      Restart*/}
-              {/*    </Button>*/}
-              {/*  </Col>*/}
-              {/*</Row>*/}
+          <TypeformConfigurationContext.Provider value={configurations}>
+            {loading ? (
+              <Spinner />
+            ) : (
+              <Box>
+                {/*<Row {...styles.headerRow} noGutters>*/}
+                {/*  <Col cw="auto" v="center" p={0}>*/}
+                {/*    <Button*/}
+                {/*      type="text"*/}
+                {/*      size="small"*/}
+                {/*      // onClick={() => history.goBack()}*/}
+                {/*      icon={<ArrowLeftOutlined />}*/}
+                {/*    />*/}
+                {/*  </Col>*/}
+                {/*  <Col v="center">*/}
+                {/*    <Box textAlign="center">*/}
+                {/*      <Title level={5}>Live Preview</Title>*/}
+                {/*    </Box>*/}
+                {/*  </Col>*/}
+                {/*  <Col cw="auto" v="center">*/}
+                {/*    <Button*/}
+                {/*      type="text"*/}
+                {/*      size="small"*/}
+                {/*      icon={<ReloadOutlined />}*/}
+                {/*      onClick={onRestart}>*/}
+                {/*      Restart*/}
+                {/*    </Button>*/}
+                {/*  </Col>*/}
+                {/*</Row>*/}
 
-              {/*<Row noGutters>*/}
-              {/*  <Col>*/}
-              {/*    <Divider style={globalStyles.resetMargin} />*/}
-              {/*  </Col>*/}
-              {/*</Row>*/}
+                {/*<Row noGutters>*/}
+                {/*  <Col>*/}
+                {/*    <Divider style={globalStyles.resetMargin} />*/}
+                {/*  </Col>*/}
+                {/*</Row>*/}
 
-              <ContentCard>
-                <FormAdvancedView
-                  submitLoading={submitLoading}
-                  isAnswered={isAnswered}
-                  setIsAnswered={setIsAnswered}
-                  setCurrentSlide={setCurrentSlide}>
-                  {sortedData?.map((item, index) => (
-                    // fix height - important
-                    <Box key={index} height="750px" overflowY="auto">
-                      <QuestionAdvancedView
-                        data={item}
-                        questionNumber={index + 1}
+                <ContentCard>
+                  <FormAdvancedView
+                    submitLoading={submitLoading}
+                    isAnswered={isAnswered}
+                    setIsAnswered={setIsAnswered}
+                    setCurrentSlide={setCurrentSlide}>
+                    {sortedData?.map((item, index) => (
+                      <Component
+                        sortedData={sortedData}
                         onClick={onClick}
                         currentSlide={currentSlide}
-                        submitLoading={submitLoading}
+                        index={index}
+                        item={item}
                       />
-                    </Box>
-                  ))}
-                </FormAdvancedView>
-              </ContentCard>
-            </Box>
-          )}
+                    ))}
+                  </FormAdvancedView>
+                </ContentCard>
+              </Box>
+            )}
+          </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )
 }
+
+const Component = ({ index, item, onClick, currentSlide, wrapperHeight }) => {
+  return (
+    <Box key={index} height={wrapperHeight} overflowY="auto">
+      <QuestionAdvancedView
+        wrapperHeight={wrapperHeight}
+        data={item}
+        questionNumber={index + 1}
+        onClick={onClick}
+        currentSlide={currentSlide}
+      />
+    </Box>
+  )
+}
+
 FormShow.propTypes = {
   firebase: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,

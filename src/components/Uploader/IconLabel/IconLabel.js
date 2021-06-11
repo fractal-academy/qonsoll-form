@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import typeformTheme from 'app/styles/theme'
+import typeformTheme from '../../../../styles/theme'
 
 const AvatarWrapper = styled.label`
   ${({ theme }) => `

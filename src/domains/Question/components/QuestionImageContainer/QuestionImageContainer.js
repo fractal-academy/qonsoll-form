@@ -1,6 +1,6 @@
 import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
-import typeformTheme from 'app/styles/theme'
+import typeformTheme from '../../../../../styles/theme'
 
 const ImageContainer = styled(Box)(({ theme, image }) => ({
   backgroundSize: 'cover',

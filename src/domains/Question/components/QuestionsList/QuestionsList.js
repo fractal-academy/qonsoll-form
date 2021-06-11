@@ -12,7 +12,7 @@ import {
 } from '../../../../context/CurrentQuestion'
 
 function QuestionsList(props) {
-  const { action, data, setNewOrder, onItemClick } = props
+  const { data, setNewOrder, onItemClick } = props
 
   // [CUSTOM_HOOKS]
   const { setData, deleteData } = useFunctions()

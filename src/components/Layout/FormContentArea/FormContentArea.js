@@ -1,8 +1,7 @@
 import React from 'react'
 import { Row, Col } from '@qonsoll/react-design'
-import { Button } from 'antd'
 import PropTypes from 'prop-types'
-import { styles } from './FormContentArea.styles'
+import { ContentCol, styles } from './FormContentArea.styles'
 
 function FormContentArea(props) {
   const { children, leftSideMenu } = props
@@ -13,14 +12,14 @@ function FormContentArea(props) {
   // const history = useHistory()
 
   // [CLEAN FUNCTIONS]
-  const onCancel = () => {
-    //onFormCancel?.()
-    // history.push(routes?.ALL)
-  }
-  const onCreateForm = () => {
-    //onFormCreate?.()
-    // history.push(routes?.ALL)
-  }
+  // const onCancel = () => {
+  //   //onFormCancel?.()
+  //   // history.push(routes?.ALL)
+  // }
+  // const onCreateForm = () => {
+  //   //onFormCreate?.()
+  //   // history.push(routes?.ALL)
+  // }
 
   return (
     <>

@@ -7,9 +7,10 @@ import {
   LAYOUT_TYPES
 } from '../../../../constants'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import {
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { useTranslation } from '../../../../context/Translation'
+import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
+import {
   styles,
   StyledCol,
   CustomCard,
@@ -31,7 +32,8 @@ import {
   SubmitButton,
   FileUploader,
   LongText,
-  DateTimeInput
+  DateTimeInput,
+  ContentCard
 } from '../../../../components'
 import styled from 'styled-components'
 

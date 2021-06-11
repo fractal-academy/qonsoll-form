@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { Col, Row } from '@qonsoll/react-design'
-import { QuestionSelect } from 'domains/Question/components'
+import { QuestionSelect } from '../../../../../domains/Question/components'
 import { CustomUploaderBox } from './FileUploadTemplate.style'
 
 function FileUploadTemplate(props) {
