@@ -114,7 +114,7 @@ function QuestionAdvancedView(props) {
       : {})
   }
   const heightSmallDevices = useMedia({ maxWidth: '768px' })
-  const deviceImageHeight = (heightSmallDevices && '30%') || '100%'
+  const deviceImageHeight = (heightSmallDevices && '40%') || '100%'
   const devicePadding = (heightSmallDevices && 1) || 4
 
   return (

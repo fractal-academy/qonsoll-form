@@ -75,7 +75,7 @@ function QuestionForm(props) {
       component: <DateTimeInput disabled />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploader />
+      component: <FileUploader disabled />
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: <SubmitButton>Next</SubmitButton>

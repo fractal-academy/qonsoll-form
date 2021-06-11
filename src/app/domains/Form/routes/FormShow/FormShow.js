@@ -108,7 +108,6 @@ function FormShow(props) {
 }
 
 const Component = ({ index, item, onClick, currentSlide, wrapperHeight }) => {
-  console.log({ wrapperHeight })
   return (
     <Box key={index} height={wrapperHeight} overflowY="auto">
       <QuestionAdvancedView

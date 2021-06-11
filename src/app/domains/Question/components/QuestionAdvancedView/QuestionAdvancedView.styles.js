@@ -25,7 +25,7 @@ export const styles = {
 export const StyledBox = styled(Box)`
   ${({ specialLayoutRule }) => `
   width: 100%;
-  // padding-left: 32px;
+  // height: 100%;
   display: grid;
   background-color: transparent;
   text-align: ${specialLayoutRule && 'center'};

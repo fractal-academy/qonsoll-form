@@ -11,8 +11,6 @@ const { Text } = Typography
 
 const StyledKeybox = styled(Col)`
   position: absolute;
-  padding-right: 7px;
-  padding-left: 7px;
   bottom: 8px;
   border-width: 1px;
   text-align: center;
