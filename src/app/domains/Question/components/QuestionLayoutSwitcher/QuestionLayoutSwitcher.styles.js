@@ -16,7 +16,22 @@ export const StyledItem = styled(Menu?.Item)`
   ${({ theme }) => `
   display: flex;
   align-items: center;
-  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   padding: ${theme?.space[2] || typeformTheme?.space[2]} !important;
+  &:last-child {
+  border-bottom-left-radius:${
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+  };
+  border-bottom-right-radius:${
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+  };
+  }
+  &:first-child {
+  border-top-left-radius:${
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+  };
+  border-top-right-radius:${
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+  };
+  }
 `}
 `
