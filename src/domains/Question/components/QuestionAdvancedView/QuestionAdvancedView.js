@@ -4,7 +4,12 @@ import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
-import { styles, StyledCard, StyledCol } from './QuestionAdvancedView.styles'
+import {
+  styles,
+  StyledCard,
+  StyledCol,
+  MainRow
+} from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -16,7 +21,8 @@ import {
   DateTimeInput,
   SubmitButton
 } from '../../../../components'
-import theme from '../../../../../styles/theme'
+import QuestionImageContainer from '../QuestionImageContainer'
+
 
 const { Title, Text } = Typography
 
@@ -36,8 +42,8 @@ function QuestionAdvancedView(props) {
         <ChoiceButton
           choices={data?.questionConfigurations}
           onClick={onClick}
-          hasImages
           currentSlide={currentSlide}
+          hasImages
         />
       )
     },
@@ -66,10 +72,10 @@ function QuestionAdvancedView(props) {
       component: <DateTimeInput onDateChange={onClick} />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploader action={onClick} />
+      component: <FileUploader onContinue={onClick} />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton onClick={onClick}>>{t('Continue')}</SubmitButton>
+      component: <SubmitButton onClick={onClick}>Continue</SubmitButton>
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: <SubmitButton onClick={onClick}>{t('Start')}</SubmitButton>
@@ -122,32 +128,21 @@ function QuestionAdvancedView(props) {
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
             <Row noGutters mb={3}>
               <Col cw="auto">
-                <Box
+                <QuestionImageContainer
                   {...layoutType.imgSize}
-                  backgroundSize="cover"
-                  borderRadius={theme.borderRadius.md}
-                  backgroundRepeat="no-repeat"
-                  backgroundImage={`url(${data?.image})`}
+                  image={data?.image}
                 />
               </Col>
             </Row>
           )}
-          <Row noGutters>
-            <Col>{cloneElement(component, { question: data })}</Col>
-          </Row>
+          <Box>{cloneElement(component, { question: data })}</Box>
         </StyledCard>
       </Col>
       {imageShowRule && (
         <StyledCol
           {...styles.sideImageColumnStyle}
           order={layoutType.imageOrder}>
-          <Box
-            {...layoutType.imgSize}
-            backgroundSize="cover"
-            backgroundRepeat="no-repeat"
-            borderRadius={theme.borderRadius.md}
-            backgroundImage={`url(${data?.image})`}
-          />
+          <QuestionImageContainer {...layoutType.imgSize} image={data?.image} />
         </StyledCol>
       )}
     </Row>

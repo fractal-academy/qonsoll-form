@@ -1,7 +1,6 @@
-import { Card } from 'antd'
 import { Col, Row } from '@qonsoll/react-design'
+import { Card } from 'antd'
 import styled from 'styled-components'
-import theme from '../../../../../styles/theme'
 
 export const styles = {
   questionCardColumnStyle: {
@@ -9,23 +8,9 @@ export const styles = {
     v: 'center',
     flexDirection: 'column'
   },
-  imageBetweenStyle: {
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    position: 'relative',
-    mb: 3,
-    borderRadius: `${theme.borderRadius.md}`
-  },
   sideImageColumnStyle: {
     height: '100%',
     v: 'center'
-  },
-  sideImageBoxStyle: {
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
-    position: 'relative',
-    borderRadius: `${theme.borderRadius.md}`
   }
 }
 
@@ -53,8 +38,4 @@ export const CustomRow = styled(Row)`
   flex-grow: 1;
   display: flex;
 `
-export const CustomCol = styled(Col)`
-  order: 2;
-  justify-content: center;
-  flex-direction: column;
-`
+export const QuestionHeaderCol = styled(Col)``

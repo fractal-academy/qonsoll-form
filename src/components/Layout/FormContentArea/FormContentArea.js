@@ -3,7 +3,6 @@ import { Row, Col } from '@qonsoll/react-design'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
 import { styles } from './FormContentArea.styles'
-import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 function FormContentArea(props) {
   const { children, leftSideMenu } = props
@@ -29,7 +28,7 @@ function FormContentArea(props) {
         <Col cw="auto" mr={3}>
           {leftSideMenu}
         </Col>
-        <Col {...styles.contentCol}>{children}</Col>
+        <ContentCol>{children}</ContentCol>
       </Row>
       {/* <Row noGutters {...styles.footerButtons}>
         <Col cw="auto" mr={3}>

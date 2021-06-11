@@ -1,25 +1,23 @@
 import styled from 'styled-components'
-import theme from '../../../../../styles/theme'
 import { Card, Button, Image, Typography } from 'antd'
+import typeformTheme from '../../../../../styles/theme'
 
 const { Text } = Typography
 
 export const styles = {
-  titleStyle: {
-    color: theme.color.text.dark.primary,
-    fontSize: theme.typography.fontSize.body2,
-    fontWeight: theme.typography.fontWeight.bold,
-    maxWidth: '190px'
-  },
-
   cardBodyStye: { padding: '0 8px 8px 8px' }
   // imageStyle: { borderRadius: '8px' }
 }
+
 export const CustomCard = styled(Card)`
+  ${({ theme }) => `
   padding: 4px;
-  background-color: ${theme.color.dark.t.lighten9};
-  border-radius: ${theme.borderRadius.md};
+  background-color: ${
+    theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9
+  };
+  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   position: relative;
+`}
 `
 export const CustomButton = styled(Button)`
   position: absolute;
@@ -34,11 +32,23 @@ export const CustomButton = styled(Button)`
 export const CustomImage = styled(Image)`
   height: 136px;
   width: 208px;
-  border-radius: ${theme.borderRadius.md} !important;
+  border-radius: ${({ theme }) =>
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md} !important;
 `
 export const CustomText = styled(Text)`
-  color: ${theme.color.text.dark.primary};
-  font-size: ${theme.typography.fontSize.body2};
-  font-weight: ${theme.typography.fontWeight.bold};
+  ${({ theme }) => `
+  color: ${
+    theme?.color?.text?.dark?.primary ||
+    typeformTheme?.color?.text?.dark?.primary
+  };
+  font-size: ${
+    theme?.typography?.fontSize?.body2 ||
+    typeformTheme?.typography?.fontSize?.body2
+  };
+  font-weight: ${
+    theme?.typography?.fontWeight?.bold ||
+    typeformTheme?.typography?.fontWeight?.bold
+  };
   max-width: 190px;
+`}
 `

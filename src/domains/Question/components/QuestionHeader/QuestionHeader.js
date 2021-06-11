@@ -55,29 +55,21 @@ function QuestionHeader(props) {
 
   return (
     <>
-      <Row noGutters>
-        <Col>
-          <TextEditable
-            isTitle
-            onBlur={onTitleBlur}
-            value={titleText}
-            onChange={onTitleChange}
-            placeholder={titlePlaceholder}
-            {...props}
-          />
-        </Col>
-      </Row>
-      <Row noGutters>
-        <Col>
-          <TextEditable
-            textSecondary
-            onBlur={onSubtitleBlur}
-            value={subtitleText}
-            onChange={onSubtitleChange}
-            placeholder={subtitlePlaceholder}
-          />
-        </Col>
-      </Row>
+      <TextEditable
+        isTitle
+        onBlur={onTitleBlur}
+        value={titleText}
+        onChange={onTitleChange}
+        placeholder={titlePlaceholder}
+        {...props}
+      />
+      <TextEditable
+        textSecondary
+        onBlur={onSubtitleBlur}
+        value={subtitleText}
+        onChange={onSubtitleChange}
+        placeholder={subtitlePlaceholder}
+      />
     </>
   )
 }

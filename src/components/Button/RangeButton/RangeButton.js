@@ -5,29 +5,45 @@ import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { Row, Col } from '@qonsoll/react-design'
 import useMedia from 'use-media'
+import typeformTheme from '../../../../styles/theme'
 
 const StyledRangeButton = styled(Button)`
+  ${({ theme, isActive }) => `
   width: -webkit-fill-available;
   height: 60px;
-  border-color: ${({ theme }) => theme.color.primary.default};
-  background-color: ${(props) =>
-    props.isActive
-      ? props.theme.color.primary.default
-      : props.theme.color.primary.t.lighten5};
-  color: ${(props) =>
-    props.isActive
-      ? props.theme.color.white.default
-      : props.theme.color.primary.default};
+  border-color: ${
+    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
+  };
+  background-color: ${
+    isActive
+      ? theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
+      : theme?.color?.primary?.t?.lighten5 ||
+        typeformTheme?.color?.primary?.t?.lighten5
+  };
+  color: ${
+    isActive
+      ? theme?.color?.white?.default || typeformTheme?.color?.white?.default
+      : theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
+  };
 
   &:hover {
-    color: ${(props) => props.isActive && props.theme.color.white.default};
-    border-color: ${(props) =>
-      props.isActive && props.theme.color.primary.default};
-    background-color: ${(props) =>
-      props.isActive
-        ? props.theme.color.primary.t.lighten1
-        : props.theme.color.primary.t.lighten3};
+    color: ${
+      isActive &&
+      (theme?.color?.white?.default || typeformTheme?.color?.white?.default)
+    };
+    border-color: ${
+      isActive &&
+      (theme?.color?.primary?.default || typeformTheme?.color?.primary?.default)
+    };
+    background-color: ${
+      isActive
+        ? theme?.color?.primary?.t?.lighten1 ||
+          typeformTheme?.color?.primary?.t?.lighten1
+        : theme?.color?.primary?.t?.lighten3 ||
+          typeformTheme?.color?.primary?.t?.lighten3
+    };
   }
+`}
 `
 
 function RangeButton(props) {

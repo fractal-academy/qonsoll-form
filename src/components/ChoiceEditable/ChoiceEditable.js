@@ -7,7 +7,7 @@ import {
   CustomCol,
   ChoiceOptionCol,
   MediaBox,
-  MediaBoxWrapper
+  MainBox
 } from './ChoiceEditable.styles'
 import { DEFAULT_IMAGE } from '../../constants'
 import { Row } from '@qonsoll/react-design'
@@ -73,9 +73,9 @@ function ChoiceEditable(props) {
   }, [data])
 
   return (
-    <MediaBoxWrapper withImage={withImage} m={1}>
+    <MainBox m={1} withImage={withImage}>
       {withImage && (
-        <MediaBox backgroundImage={bgImage}>
+        <MediaBox backgroundImage={bgImage} mx={2} mt={2}>
           <MediaLibraryModal
             btnProps={{
               type: 'primary',
@@ -104,7 +104,7 @@ function ChoiceEditable(props) {
       <DeleteButton onClick={onDelete}>
         <CloseOutlined />
       </DeleteButton>
-    </MediaBoxWrapper>
+    </MainBox>
   )
 }
 

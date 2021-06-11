@@ -2,12 +2,17 @@ import React from 'react'
 import { Rate } from 'antd'
 import styled from 'styled-components'
 import { Container } from '@qonsoll/react-design'
+import typeformTheme from '../../../styles/theme'
 
 const StyledRate = styled(Rate)`
+  ${({ theme }) => `
   &.ant-rate {
     font-size: 40px;
-    color: ${({ theme }) => theme.color.primary.default};
+    color: ${
+      theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
+    };
   }
+`}
 `
 function CustomRating(props) {
   const { allowClear, tooltips, onClick, question } = props

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input } from 'antd'
 import PropTypes from 'prop-types'
+import { Box } from '@qonsoll/react-design'
 import { EditOutlined } from '@ant-design/icons'
 import RangeSlider from '../../../../components/RangeSlider'
 import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
@@ -9,7 +10,7 @@ import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
 } from '../../../../context/CurrentQuestion'
-import { Box } from '@qonsoll/react-design'
+
 function MediaLibrarySimpleView(props) {
   const { setIsImageEditVisible, bgImage } = props
 

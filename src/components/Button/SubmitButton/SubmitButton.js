@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import theme from '../../../../styles/theme'
+import typeformTheme from '../../../../styles/theme'
 import styled from 'styled-components'
 import { Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
@@ -13,7 +13,8 @@ const { Text } = Typography
 
 const StyledSubmit = styled(Button)`
   height: 56px;
-  font-size: ${theme.typography.fontSize.h4};
+  font-size: ${({ theme }) =>
+    theme?.typography?.fontSize?.h4 || typeformTheme?.typography?.fontSize?.h4};
 `
 
 function SubmitButton(props) {

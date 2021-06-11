@@ -10,3 +10,4 @@ export { default as QuestionConfigurationPopover } from './QuestionConfiguration
 export { default as QuestionConfigurationPopoverContent } from './QuestionConfigurationPopoverContent'
 export { default as QuestionMediaPopover } from './QuestionMediaPopover'
 export { default as QuestionLayoutSwitcher } from './QuestionLayoutSwitcher'
+export { default as QuestionImageContainer } from './QuestionImageContainer'
