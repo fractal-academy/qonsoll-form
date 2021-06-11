@@ -98,7 +98,7 @@ function EditorSidebar(props) {
                 trigger={'click'}
                 placement={'bottomRight'}
                 content={
-                  <Box mx={PopoverNegativeMarin.h}>
+                  <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
                     <QuestionTypeSelect
                       onClick={addQuestion}
                       customQuestionTypes={customQuestionTypes}
