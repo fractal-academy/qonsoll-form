@@ -12,6 +12,8 @@ export const QuestionMenuItem = styled(Menu.Item)`
   line-height: ${({ theme }) =>
     theme?.typography?.lineHeight?.caption1} !important;
   padding: 0 !important;
+  margin-top: 8px !important;
+  margin-left: 8px;
 `
 export const Description = styled(Text)`
   font-size: ${({ theme }) =>
