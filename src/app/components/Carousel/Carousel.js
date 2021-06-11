@@ -1,9 +1,8 @@
-import { Button } from 'antd'
+import { Button, Carousel as AntdCarousel } from 'antd'
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import { CustomCarousel } from 'components/Carousel/Carousel.style'
 
 function Carousel(props) {
   const { children, isAnswered, setIsAnswered, setCurrentSlide } = props
@@ -36,13 +35,14 @@ function Carousel(props) {
 
   return (
     <Box onWheel={handleScroll} height="100%" width="100%">
-      <CustomCarousel
+      <AntdCarousel
         dots={false}
+        adaptiveHeight
         ref={carouselRef}
         dotPosition="right"
         afterChange={onCurrentSlideChange}>
         {children}
-      </CustomCarousel>
+      </AntdCarousel>
 
       <Row h="right" m={2} noGutters>
         <Col cw="auto" mr={2}>

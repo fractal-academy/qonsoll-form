@@ -20,7 +20,7 @@ import {
 import { message } from 'antd'
 
 function FormEdit(props) {
-  const { configurations } = props
+  const { configurations, customQuestionTypes } = props
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
@@ -116,14 +116,20 @@ function FormEdit(props) {
             <QuestionForm
               data={currentQuestion}
               defaultTab={defaultTab}
-              onChangeMenuItem={onChangeMenuItem}
               brightnessValue={brightnessValue}
+              onChangeMenuItem={onChangeMenuItem}
+              customQuestionTypes={customQuestionTypes}
               setBrightnessValue={setBrightnessValue}
               onQuestionTypeChange={onQuestionTypeChange}
             />
           </PageLayout>
 
-          <EditorSidebar transparent questions={questions} endings={endings} />
+          <EditorSidebar
+            transparent
+            endings={endings}
+            questions={questions}
+            customQuestionTypes={customQuestionTypes}
+          />
         </Box>
       )}
     </TypeformConfigurationContext.Provider>

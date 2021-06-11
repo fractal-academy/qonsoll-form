@@ -16,7 +16,6 @@ import {
 import {
   CustomDivider,
   SidebarBoxWrapper,
-  DragbleCeiling,
   styles
 } from './EditorSidebar.styles'
 import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
@@ -25,7 +24,7 @@ import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings, transparent } = props
+  const { questions, endings, transparent, customQuestionTypes } = props
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
@@ -100,7 +99,10 @@ function EditorSidebar(props) {
                 placement={'bottomRight'}
                 content={
                   <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
-                    <QuestionTypeSelect onClick={addQuestion} />
+                    <QuestionTypeSelect
+                      onClick={addQuestion}
+                      customQuestionTypes={customQuestionTypes}
+                    />
                   </Box>
                 }>
                 <Button

@@ -22,7 +22,7 @@ function QuestionSimpleView(props) {
       <NumberedCard current={current} number={number}>
         <Row h="around" v="center" ml={2} noGutters>
           <Col cw="auto" mr={2}>
-            {!!title.length ? (
+            {!!title?.length ? (
               <IconRoundContainer>
                 {layoutType && cloneElement(LAYOUT_TYPES[layoutType]?.icon)}
               </IconRoundContainer>
