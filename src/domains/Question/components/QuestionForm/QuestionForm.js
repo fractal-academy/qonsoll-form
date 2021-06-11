@@ -7,9 +7,9 @@ import {
   LAYOUT_TYPES
 } from '../../../../constants'
 import { Col, Row, Box } from '@qonsoll/react-design'
+import {
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { useTranslation } from '../../../../context/Translation'
-import {
   styles,
   StyledCol,
   CustomCard,
@@ -42,7 +42,15 @@ const StyledTag = styled(Tag)`
 `
 
 function QuestionForm(props) {
-  const { data, onQuestionTypeChange } = props
+  const {
+    data,
+    defaultTab,
+    brightnessValue,
+    onChangeMenuItem,
+    setBrightnessValue,
+    customQuestionTypes,
+    onQuestionTypeChange
+  } = props
 
   // [ADDITIONAL HOOKS]
   const { t } = useTranslation()
@@ -78,7 +86,7 @@ function QuestionForm(props) {
       component: <DateTimeInput disabled />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploader />
+      component: <FileUploader disabled />
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: <SubmitButton>{t('Next')}</SubmitButton>
@@ -89,6 +97,7 @@ function QuestionForm(props) {
   }
 
   const computedMediaUrl = currentQuestion?.image || DEFAULT_IMAGE
+  const popoverImage = `url(${computedMediaUrl})`
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
       ? t('Ending')
@@ -103,71 +112,97 @@ function QuestionForm(props) {
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
 
   return (
-    <CustomRow noGutters backgroundImage={bgImage}>
-      <Col {...styles.questionCardColumnStyle} cw={6}>
-        <CustomCard bordered={false}>
-          <Row noGutters v="center">
-            <Col>
-              <StyledTag>{questionTag}</StyledTag>
-            </Col>
-            <Col cw="auto">
-              <QuestionConfigurationPopover
-                onQuestionTypeChange={onQuestionTypeChange}
-              />
-            </Col>
-            {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
-              <Col cw="auto" ml={2}>
-                <QuestionMediaPopover
-                  MediaModalButtonBackground={computedMediaUrl}
-                />
-              </Col>
-            )}
-          </Row>
-          <Row noGutters h="between" mb={4}>
-            <QuestionHeaderCol>
-              <QuestionHeader
-                titlePlaceholder={'Editable question title'}
-                subtitlePlaceholder={'Description(optional)'}
-              />
-            </QuestionHeaderCol>
-          </Row>
-          {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row noGutters>
-              <Col cw="auto">
-                <QuestionImageContainer
-                  {...layoutType.imgSize}
-                  mb={3}
-                  image={computedMediaUrl}
-                  position="relative">
-                  <QuestionMediaPopover
-                    MediaModalButtonBackground={computedMediaUrl}
+    <ContentCard
+      onEdit
+      image={bgImage}
+      brightnessValue={brightnessValue}
+      leftSideMenu={
+        !!Object.keys(currentQuestion).length && (
+          <QuestionLayoutSwitcher
+            onChange={onChangeMenuItem}
+            defaultActive={defaultTab}
+          />
+        )
+      }>
+      {!!Object.keys(currentQuestion).length && (
+        <CustomRow noGutters>
+          <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 6]}>
+            <CustomCard bordered={false}>
+              <Row noGutters v="center">
+                <Col>
+                  <StyledTag>{questionTag}</StyledTag>
+                </Col>
+                <Col cw="auto">
+                  <QuestionConfigurationPopover
+                    customQuestionTypes={customQuestionTypes}
+                    onQuestionTypeChange={onQuestionTypeChange}
                   />
-                </QuestionImageContainer>
-              </Col>
-            </Row>
+                </Col>
+                {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
+                  <Col cw="auto" ml={2}>
+                    <QuestionMediaPopover
+                      brightnessValue={brightnessValue}
+                      setBrightnessValue={setBrightnessValue}
+                      MediaModalButtonBackground={popoverImage}
+                    />
+                  </Col>
+                )}
+              </Row>
+              <Row noGutters h="between" mb={4}>
+                <QuestionHeaderCol cw="12">
+                  <QuestionHeader
+                    titlePlaceholder={'Editable question title'}
+                    subtitlePlaceholder={'Description(optional)'}
+                  />
+                </QuestionHeaderCol>
+              </Row>
+              {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
+                <Row noGutters>
+                  <Col cw="auto">
+                    <QuestionImageContainer
+                      {...layoutType.imgSize}
+                      mb={4}
+                      image={computedMediaUrl}
+                      style={{ filter: `brightness(${brightnessValue}%)` }}>
+                      <QuestionMediaPopover
+                        brightnessValue={brightnessValue}
+                        setBrightnessValue={setBrightnessValue}
+                        MediaModalButtonBackground={popoverImage}
+                      />
+                    </QuestionImageContainer>
+                  </Col>
+                </Row>
+              )}
+              <Box>
+                {cloneElement(questionTypesMap[data?.questionType].component, {
+                  question: data
+                })}
+              </Box>
+            </CustomCard>
+          </Col>
+          {imageShowRule && (
+            <StyledCol
+              order={layoutType?.imageOrder}
+              {...styles.sideImageColumnStyle}>
+              <QuestionImageContainer
+                {...layoutType?.imgSize}
+                image={computedMediaUrl}
+                style={{ filter: `brightness(${brightnessValue}%)` }}>
+                <Row h="right">
+                  <Col cw="auto" mr={4}>
+                    <QuestionMediaPopover
+                      brightnessValue={brightnessValue}
+                      setBrightnessValue={setBrightnessValue}
+                      MediaModalButtonBackground={popoverImage}
+                    />
+                  </Col>
+                </Row>
+              </QuestionImageContainer>
+            </StyledCol>
           )}
-          <Box>
-            {cloneElement(questionTypesMap[data?.questionType].component, {
-              question: data
-            })}
-          </Box>
-        </CustomCard>
-      </Col>
-      {imageShowRule && (
-        <StyledCol
-          order={layoutType?.imageOrder}
-          {...styles.sideImageColumnStyle}>
-          <QuestionImageContainer
-            {...layoutType?.imgSize}
-            image={computedMediaUrl}
-            position="relative">
-            <QuestionMediaPopover
-              MediaModalButtonBackground={computedMediaUrl}
-            />
-          </QuestionImageContainer>
-        </StyledCol>
+        </CustomRow>
       )}
-    </CustomRow>
+    </ContentCard>
   )
 }
 

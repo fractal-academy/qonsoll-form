@@ -12,7 +12,15 @@ import {
 } from '../../../../context/CurrentQuestion'
 
 function MediaLibrarySimpleView(props) {
-  const { setIsImageEditVisible, bgImage } = props
+  const {
+    setIsImageEditVisible,
+    bgImage,
+    brightnessValue,
+    setBrightnessValue
+  } = props
+
+  // [COMPONENT STATE HOOKS]
+  // const [brightnessValue, setBrightnessValue] = useState(100)
 
   // [CUSTOM HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -45,7 +53,10 @@ function MediaLibrarySimpleView(props) {
       </Box>
       <CustomText>Brightness</CustomText>
       <Box>
-        <RangeSlider />
+        <RangeSlider
+          inputValue={brightnessValue}
+          setInputValue={setBrightnessValue}
+        />
       </Box>
     </Box>
   )

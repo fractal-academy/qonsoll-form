@@ -6,12 +6,16 @@ import typeformTheme from '../../../../../styles/theme'
 export const QuestionsTypeMenu = styled(Menu)`
   height: 300px;
   overflow: auto;
-  padding: 8px 0;
+  padding-right: 8px;
 `
 export const QuestionMenuItem = styled(Menu.Item)`
   line-height: ${({ theme }) =>
     theme?.typography?.lineHeight?.caption1} !important;
   padding: 0 !important;
+  margin-top: 8px !important;
+
+  display: flex;
+  padding-left: 4px !important;
 `
 export const Description = styled(Text)`
   font-size: ${({ theme }) =>

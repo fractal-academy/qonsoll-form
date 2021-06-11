@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { StyledItem } from '../../../components'
 import { COLLECTIONS } from '../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import {
   Popconfirm,
   Typography,
@@ -60,6 +61,9 @@ function ListItem(props) {
   const { updateData, deleteData } = useFunctions()
 
   // [ADDITIONAL HOOKS]
+  const [questions] = useCollectionData(
+    getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', data?.id)
+  )
   const { onFormItemClick } = useActionsFunctionsContext()
   const { t } = useTranslation()
 
@@ -87,12 +91,19 @@ function ListItem(props) {
   }
   const handleDelete = async () => {
     setConfirmLoading(true)
-    await deleteData(collection, data?.id).catch((e) =>
-      message.error(e.message)
-    )
+    await deleteData(collection, data?.id)
+      .then(deleteQuestions)
+      .catch((e) => message.error(e.message))
 
     setIsPopconfirmVisible(false)
     setConfirmLoading(false)
+  }
+  const deleteQuestions = () => {
+    questions.forEach((item) => {
+      deleteData(COLLECTIONS.QUESTIONS, item?.id).catch((e) =>
+        message.error(e.message)
+      )
+    })
   }
   const onModalSubmit = async (values) => {
     await updateData(COLLECTIONS.FORMS, data?.id, {
@@ -133,7 +144,7 @@ function ListItem(props) {
       isCard
       onClick={
         !data?.imageUrl
-          ? onFormItemClicked
+          ? onFormItemClick
           : () => setSelectedBackgroundImg(data?.imageUrl)
       }>
       <Box display="block" width="inherit">
@@ -166,7 +177,7 @@ function ListItem(props) {
           <Col cw="auto" display="flex" v="center">
             {data?.imageUrl ? (
               <Popconfirm
-                title={t('Delete this image?')}
+                title="Delete this image?"
                 onConfirm={handleDelete}
                 okButtonProps={{ loading: confirmLoading }}>
                 <CloseOutlined />

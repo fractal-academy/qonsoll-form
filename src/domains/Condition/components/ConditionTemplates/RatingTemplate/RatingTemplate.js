@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import theme from '../../../../../../styles/theme'
 import Text from 'antd/lib/typography/Text'
-import { styles } from './RatingTemplate.styles'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import {  Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from '../../../../../domains/Question/components'
+import {
+  CustomRatingBox,
+  CustomTextBox
+} from '../../../../../domains/Condition/components/ConditionTemplates/RatingTemplate/RatingTemplate.styles'
 
 let startLetter = 65
 
@@ -16,22 +18,12 @@ function RatingTemplate(props) {
       {answers.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
-            <Box
-              display="flex"
-              alignItems="center"
-              width="100%"
-              key={index}
-              bg={theme.color.dark.t.lighten9}
-              pl={theme.space[2]}
-              mr={4}
-              border="1px solid"
-              borderColor={theme.color.dark.t.lighten5}
-              borderRadius={theme.borderRadius.md}>
-              <Box style={styles.buttonM}>
+            <CustomRatingBox mr={4} pl={2}>
+              <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter++)}</Text>
-              </Box>
+              </CustomTextBox>
               {item.name}
-            </Box>
+            </CustomRatingBox>
           </Col>
           <Col cw={6}>
             <QuestionSelect

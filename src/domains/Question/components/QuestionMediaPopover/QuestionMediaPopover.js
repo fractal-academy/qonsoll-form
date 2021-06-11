@@ -6,7 +6,8 @@ import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/compone
 import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 
 function QuestionMediaPopover(props) {
-  const { MediaModalButtonBackground } = props
+  const { MediaModalButtonBackground, brightnessValue, setBrightnessValue } =
+    props
 
   // [COMPONENT STATE HOOKS]
   const [isImageEditVisible, setIsImageEditVisible] = useState(false)
@@ -25,6 +26,8 @@ function QuestionMediaPopover(props) {
       content={
         <Box width="192px" mx={PopoverNegativeMarin.h / 2}>
           <MediaLibrarySimpleView
+            brightnessValue={brightnessValue}
+            setBrightnessValue={setBrightnessValue}
             setIsImageEditVisible={setIsImageEditVisible}
             bgImage={MediaModalButtonBackground}
           />

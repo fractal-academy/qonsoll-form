@@ -89,9 +89,9 @@ function ChoiceEditable(props) {
         <CustomCol cw="auto" v="center">
           <LetterBox>{letter}</LetterBox>
         </CustomCol>
-        <ChoiceOptionCol width={withImage ? '130px' : '100px'}>
+        <ChoiceOptionCol width={withImage ? '130px' : '100%'}>
           <ChoiceInput
-            maxlength="100"
+            maxlength="150"
             value={value}
             onBlur={onBlur}
             placeholder={`choice ${index}`}

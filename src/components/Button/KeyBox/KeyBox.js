@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { useHover } from '@umijs/hooks'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import useMedia from 'use-media'
 import { useTranslation } from '../../../context/Translation'
 
 const { Text } = Typography
@@ -12,27 +13,25 @@ const { Text } = Typography
 const StyledKeybox = styled(Col)`
   position: absolute;
   bottom: 8px;
-
   border-width: 1px;
   text-align: center;
   border-style: solid;
   border-color: ${({ theme }) => theme.color.primary.default};
-  color: ${(props) => props.isActive && props.theme.color.white.default};
-  margin-left: ${(props) => props.isHovering && '-40px'};
-  background-color: ${(props) =>
-    props.isActive
-      ? props.theme.color.primary.default
-      : props.theme.color.white.default};
-  width: ${(props) =>
-    props.isHovering ? '65px !important' : ' 26px !important'};
+  color: ${({ isActive, theme }) => isActive && theme.color.white.default};
+  margin-left: ${({ isHovering, marginSmall }) =>
+    isHovering && marginSmall ? '' : isHovering && '-40px'};
+  background-color: ${({ isActive, theme }) =>
+    isActive ? theme.color.primary.default : theme.color.white.default};
+  width: ${({ isHovering, marginSmall }) =>
+    isHovering && !marginSmall ? '65px !important' : '26px !important'};
 `
 const ImageContainer = styled(Box)`
-  width: 150px;
+  width: 100%;
   height: 100px;
   border-radius: 8px;
   margin-bottom: 8px;
   background-size: cover;
-  background-image: url(${(props) => props.image});
+  background-image: url(${({ image }) => image});
 `
 const StyledButton = styled(Box)`
   position: relative;
@@ -71,6 +70,8 @@ function KeyBox(props) {
   const [isHovering, hoverRef] = useHover()
   const { t } = useTranslation()
 
+  const marginSmall = useMedia({ maxWidth: '768px' })
+
   return (
     <Box
       ref={hoverRef}
@@ -82,8 +83,12 @@ function KeyBox(props) {
         {hasImages && <ImageContainer image={item?.choice?.image} />}
         <Row v="center" h="between" noGutters position="relative">
           <Col cw="12" v="center">
-            <StyledKeybox isHovering={isHovering} isActive={isActive} mr={1}>
-              {isHovering ? `${t('Key')} ${letter}` : letter}
+            <StyledKeybox
+              isHovering={isHovering}
+              marginSmall={marginSmall}
+              isActive={isActive}
+              mr={1}>
+              {isHovering && !marginSmall ? `${t('Key')} ${letter}` : letter}
             </StyledKeybox>
             <StyledText hasImages={hasImages}>
               {item?.choice?.name || `Choice ${index + 1}`}

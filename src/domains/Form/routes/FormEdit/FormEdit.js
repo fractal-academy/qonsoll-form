@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
+import useMedia from 'use-media'
 import React, { useState, useEffect, useMemo } from 'react'
 import {
   PageLayout,
   EditorSidebar,
-  FormContentArea,
   Spinner
 } from '../../../../components'
 import { Box } from '@qonsoll/react-design'
@@ -17,6 +17,8 @@ import {
   COLLECTIONS,
   DEFAULT_IMAGE
 } from '../../../../constants'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
+
 import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch,
@@ -26,15 +28,18 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { message } from 'antd'
+import { message, Typography } from 'antd'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
+const { Text } = Typography
+
 function FormEdit(props) {
-  const { firebase, actions = {}, id, translate, onBack, showCondition } = props
+  const { firebase, actions = {}, id, translate, onBack, showCondition,configurations,customQuestionTypes } = props
 
   // [ADDITIONAL HOOKS]
+  const handleSmallScreen = useMedia({ minWidth: '900px' })
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
@@ -47,6 +52,7 @@ function FormEdit(props) {
 
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
+  const [brightnessValue, setBrightnessValue] = useState(100)
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
@@ -121,38 +127,36 @@ function FormEdit(props) {
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={{ t: translate }}>
+          <TypeformConfigurationContext.Provider value={configurations}>
+
           {formLoading || questionsListLoading ? (
             <Spinner />
           ) : (
             <Box display="flex" height="inherit" overflowX="hidden">
-              <PageLayout title={form?.title} id={id} onBack={onBack}>
-                <FormContentArea
-                  leftSideMenu={
-                    !!Object.keys(currentQuestion).length && (
-                      <QuestionLayoutSwitcher
-                        onChange={onChangeMenuItem}
-                        defaultActive={defaultTab}
-                      />
-                    )
-                  }>
-                  {!!Object.keys(currentQuestion).length && (
-                    <QuestionForm
-                      data={currentQuestion}
-                      onQuestionTypeChange={onQuestionTypeChange}
-                    />
-                  )}
-                </FormContentArea>
+              <PageLayout handleSmallScreen={handleSmallScreen} title={form?.title}>
+                <QuestionForm
+                  data={currentQuestion}
+                  defaultTab={defaultTab}
+                  brightnessValue={brightnessValue}
+                  onChangeMenuItem={onChangeMenuItem}
+                  handleSmallScreen={handleSmallScreen}
+                  customQuestionTypes={customQuestionTypes}
+                  setBrightnessValue={setBrightnessValue}
+                  onQuestionTypeChange={onQuestionTypeChange}
+                />
               </PageLayout>
-
-              <EditorSidebar
-                transparent
-                questions={questions}
-                endings={endings}
-                id={id}
-                showCondition={showCondition}
-              />
+              {/*TODO id in EditorSidebar*/}
+              {handleSmallScreen && (
+                <EditorSidebar
+                  transparent
+                  endings={endings}
+                  questions={questions}
+                  customQuestionTypes={customQuestionTypes}
+                />
+              )}
             </Box>
           )}
+          </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
@@ -163,7 +167,8 @@ FormEdit.propTypes = {
   firebase: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   onBack: PropTypes.func,
-  showCondition: PropTypes.bool
+  showCondition: PropTypes.bool,
+  configurations: PropTypes.object
 }
 
 export default FormEdit

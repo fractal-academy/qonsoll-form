@@ -17,7 +17,6 @@ import {
 import {
   CustomDivider,
   SidebarBoxWrapper,
-  DragbleCeiling,
   styles
 } from './EditorSidebar.styles'
 import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
@@ -27,7 +26,7 @@ import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const { questions, endings, id, showCondition, transparent } = props
+  const { questions, endings, id, showCondition, transparent,customQuestionTypes } = props
   const { getCollectionRef } = useFunctions()
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -64,6 +63,7 @@ function EditorSidebar(props) {
     })
     key && setshowPopover(!showPopover)
   }
+
   const popoverShowChange = () => {
     setshowPopover(!showPopover)
   }
@@ -100,7 +100,10 @@ function EditorSidebar(props) {
                 placement={'bottomRight'}
                 content={
                   <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
-                    <QuestionTypeSelect onClick={addQuestion} />
+                    <QuestionTypeSelect
+                      onClick={addQuestion}
+                      customQuestionTypes={customQuestionTypes}
+                    />
                   </Box>
                 }>
                 <Button
@@ -111,12 +114,12 @@ function EditorSidebar(props) {
               </Popover>
             </Col>
             {showCondition && (
-              <Col cw="auto" v="center" px={1}>
-                <ModalWithFormConditionsForm
-                  btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
-                  <FormConditionsForm />
-                </ModalWithFormConditionsForm>
-              </Col>
+            <Col cw="auto" v="center" px={1}>
+              <ModalWithFormConditionsForm
+                btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
+                <FormConditionsForm />
+              </ModalWithFormConditionsForm>
+            </Col>
             )}
           </Row>
         </Box>

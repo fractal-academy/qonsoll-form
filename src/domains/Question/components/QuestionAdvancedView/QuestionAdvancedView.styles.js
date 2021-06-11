@@ -1,6 +1,7 @@
 import { Card } from 'antd'
 import styled from 'styled-components'
-import { Col } from '@qonsoll/react-design'
+import { Box, Col } from '@qonsoll/react-design'
+import useMedia from 'use-media'
 
 export const styles = {
   questionCardColumnStyle: {
@@ -10,8 +11,8 @@ export const styles = {
   },
   sideImageColumnStyle: {
     v: 'center',
-    display: 'flex',
-    height: '100%'
+    h: 'justifyContent',
+    display: 'flex'
   },
   mainRowStyle: {
     h: 'center',
@@ -21,10 +22,10 @@ export const styles = {
   }
 }
 
-export const StyledCard = styled(Card)`
+export const StyledBox = styled(Box)`
   ${({ specialLayoutRule }) => `
   width: 100%;
-  padding-left: 8px;
+  // height: 100%;
   display: grid;
   background-color: transparent;
   text-align: ${specialLayoutRule && 'center'};
@@ -36,6 +37,7 @@ export const StyledCard = styled(Card)`
   }
 `}
 `
+
 export const StyledCol = styled(Col)`
   display: flex;
   align-items: center;

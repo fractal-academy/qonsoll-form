@@ -16,7 +16,7 @@ import { PopoverSwitcherRow } from './QuestionConfigurationPopoverContent.styles
 const { Title } = Typography
 
 function QuestionConfigurationPopoverContent(props) {
-  const { onQuestionTypeChange, setShowPopover } = props
+  const { onQuestionTypeChange, setShowPopover, customQuestionTypes } = props
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
@@ -52,7 +52,10 @@ function QuestionConfigurationPopoverContent(props) {
           {isQuestionConfig ? (
             <QuestionConfigurationMenu />
           ) : (
-            <QuestionTypeSelect onClick={onQuestionTypeClick} />
+            <QuestionTypeSelect
+              onClick={onQuestionTypeClick}
+              customQuestionTypes={customQuestionTypes}
+            />
           )}
         </Col>
       </Row>

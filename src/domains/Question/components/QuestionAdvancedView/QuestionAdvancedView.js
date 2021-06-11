@@ -20,8 +20,9 @@ import {
   LongText,
   DateTimeInput,
   SubmitButton
-} from '../../../../components'
+} from 'components'
 import QuestionImageContainer from '../QuestionImageContainer'
+import useMedia from 'use-media'
 
 
 const { Title, Text } = Typography
@@ -60,29 +61,41 @@ function QuestionAdvancedView(props) {
       component: <RangeButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.RATING]: {
-      component: <Rate onClick={onClick} />
+      component: <Rate onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <ShortText onClick={onClick} />
+      component: <ShortText onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <LongText onClick={onClick} />
+      component: <LongText onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput onDateChange={onClick} />
+      component: (
+        <DateTimeInput onDateChange={onClick} currentSlide={currentSlide} />
+      )
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploader onContinue={onClick} />
+      component: (
+        <FileUploader onContinue={onClick} currentSlide={currentSlide} />
+      )
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton onClick={onClick}>Continue</SubmitButton>
+      component: (
+        <SubmitButton onClick={onClick} currentSlide={currentSlide}>
+          {t('Continue')}
+        </SubmitButton>
+      )
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton onClick={onClick}>{t('Start')}</SubmitButton>
+      component: (
+        <SubmitButton onClick={onClick} currentSlide={currentSlide}>
+          {t('Start')}
+        </SubmitButton>
+      )
     },
     [QUESTION_TYPES.ENDING]: {
       component: (
-        <SubmitButton onClick={onClick} finish loading={submitLoading}>
+        <SubmitButton onClick={onClick} currentSlide={currentSlide} finish>
           {t('Finish')}
         </SubmitButton>
       )
@@ -91,10 +104,12 @@ function QuestionAdvancedView(props) {
   //component for recieved question according to question type
   const component = questionTypesMap[data?.questionType].component
   const layoutType = LAYOUT_TYPES[data?.layoutType]
+
   // defines special question layouts
   const specialLayoutRule =
     data?.questionType === QUESTION_TYPES.WELCOME_SCREEN ||
     data?.questionType === QUESTION_TYPES.ENDING
+
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
     layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -108,12 +123,18 @@ function QuestionAdvancedView(props) {
         }
       : {})
   }
+  const heightSmallDevices = useMedia({ maxWidth: '768px' })
+  const deviceImageHeight = (heightSmallDevices && '40%') || '100%'
+  const devicePadding = (heightSmallDevices && 1) || 4
 
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage} noGutters>
-      <Col {...styles.questionCardColumnStyle} cw={6}>
-        <StyledCard bordered={false} specialLayoutRule={specialLayoutRule}>
-          <Row noGutters>
+      <Col {...styles.questionCardColumnStyle} cw={[12, 12, 6, 6]}>
+        <StyledBox
+          pl={devicePadding}
+          bordered={false}
+          specialLayoutRule={specialLayoutRule}>
+          <Row noGutters py={2}>
             <Col cw={12}>
               <Title level={4}>
                 {questionNumber}. {data?.title}
@@ -136,12 +157,13 @@ function QuestionAdvancedView(props) {
             </Row>
           )}
           <Box>{cloneElement(component, { question: data })}</Box>
-        </StyledCard>
+        </StyledBox>
       </Col>
       {imageShowRule && (
         <StyledCol
+          height={deviceImageHeight}
           {...styles.sideImageColumnStyle}
-          order={layoutType.imageOrder}>
+          order={heightSmallDevices ? '1' : layoutType.imageOrder}>
           <QuestionImageContainer {...layoutType.imgSize} image={data?.image} />
         </StyledCol>
       )}

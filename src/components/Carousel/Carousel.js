@@ -1,9 +1,9 @@
-import { Button } from 'antd'
-import React, { useRef } from 'react'
+import { Button, Carousel as AntdCarousel } from 'antd'
 import PropTypes from 'prop-types'
+import React, { cloneElement, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import { CustomCarousel } from './Carousel.style'
+import { useSize } from '@umijs/hooks'
 
 function Carousel(props) {
   const {
@@ -16,6 +16,9 @@ function Carousel(props) {
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
+
+  const [{height}, ref] = useSize()
+  const [{height: buttonsHeight}, buttonsRef] = useSize()
 
   // [CLEAN FUNCTIONS]
   const handleScroll = (e) => {
@@ -41,28 +44,34 @@ function Carousel(props) {
   isAnswered && next()
 
   return (
-    <Box onWheel={handleScroll} height="100%" width="100%">
-      <CustomCarousel
+    <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
+      <AntdCarousel
         dots={false}
+        adaptiveHeight
         ref={carouselRef}
         dotPosition="right"
-        dots={false}
-        afterChange={onCurrentSlideChange}>
-        {children}
-      </CustomCarousel>
+        afterChange={onCurrentSlideChange}
+        infinite={false}
+        speed={1500}>
+        {children.map((el) =>
+          cloneElement(el, {wrapperHeight: height - buttonsHeight})
+        )}
+      </AntdCarousel>
       {!submitLoading && (
-        <Row h="right" m={2} noGutters>
-          <Col cw="auto" mr={2}>
-            <Button type="primary" onClick={previous}>
-              <UpOutlined />
-            </Button>
-          </Col>
-          <Col cw="auto">
-            <Button type="primary" onClick={next}>
-              <DownOutlined />
-            </Button>
-          </Col>
-        </Row>
+        <Box ref={buttonsRef}>
+          <Row h="right" p={2} noGutters>
+            <Col cw="auto" mr={2}>
+              <Button type="primary" onClick={previous}>
+                <UpOutlined/>
+              </Button>
+            </Col>
+            <Col cw="auto">
+              <Button type="primary" onClick={next}>
+                <DownOutlined/>
+              </Button>
+            </Col>
+          </Row>
+        </Box>
       )}
     </Box>
   )
