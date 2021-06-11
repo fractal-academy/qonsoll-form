@@ -1,6 +1,8 @@
-import React, { useMemo } from 'react'
+import useMedia from 'use-media'
 import PropTypes from 'prop-types'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router'
+import { Typography, message } from 'antd'
 import { Box } from '@qonsoll/react-design'
 import { useState, useEffect } from 'react'
 import { QuestionForm } from 'domains/Question/components'
@@ -17,13 +19,15 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { message } from 'antd'
+
+const { Text } = Typography
 
 function FormEdit(props) {
   const { configurations, customQuestionTypes } = props
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
+  const handleSmallScreen = useMedia({ minWidth: '900px' })
   const [form, formLoading] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
@@ -112,24 +116,26 @@ function FormEdit(props) {
         <Spinner />
       ) : (
         <Box display="flex" height="inherit" overflowX="hidden">
-          <PageLayout title={form?.title}>
+          <PageLayout handleSmallScreen={handleSmallScreen} title={form?.title}>
             <QuestionForm
               data={currentQuestion}
               defaultTab={defaultTab}
               brightnessValue={brightnessValue}
               onChangeMenuItem={onChangeMenuItem}
+              handleSmallScreen={handleSmallScreen}
               customQuestionTypes={customQuestionTypes}
               setBrightnessValue={setBrightnessValue}
               onQuestionTypeChange={onQuestionTypeChange}
             />
           </PageLayout>
-
-          <EditorSidebar
-            transparent
-            endings={endings}
-            questions={questions}
-            customQuestionTypes={customQuestionTypes}
-          />
+          {handleSmallScreen && (
+            <EditorSidebar
+              transparent
+              endings={endings}
+              questions={questions}
+              customQuestionTypes={customQuestionTypes}
+            />
+          )}
         </Box>
       )}
     </TypeformConfigurationContext.Provider>
