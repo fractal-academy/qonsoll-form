@@ -38,6 +38,7 @@ function QuestionForm(props) {
     brightnessValue,
     onChangeMenuItem,
     setBrightnessValue,
+    customQuestionTypes,
     onQuestionTypeChange
   } = props
 
@@ -122,6 +123,7 @@ function QuestionForm(props) {
                 </Col>
                 <Col cw="auto">
                   <QuestionConfigurationPopover
+                    customQuestionTypes={customQuestionTypes}
                     onQuestionTypeChange={onQuestionTypeChange}
                   />
                 </Col>
