@@ -40,7 +40,7 @@ function SubmitButton(props) {
               <Col cw="auto" mr={2}>
                 OK
               </Col>
-              <Col>
+              <Col v="center">
                 <CheckOutlined />
               </Col>
             </Row>
