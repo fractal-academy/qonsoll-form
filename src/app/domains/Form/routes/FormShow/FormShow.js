@@ -37,6 +37,8 @@ function FormShow(props) {
 
   // [COMPUTED PROPERTIES]
   const sortedData = data && data.sort((a, b) => a.order - b.order)
+  const disabledUp = currentSlide === 0
+  const disabledDown = currentSlide === data?.length - 1
 
   //temporary solution for ending logic; fix after adding logic jumps
   sortedData &&
@@ -92,6 +94,8 @@ function FormShow(props) {
           <ContentCard>
             <FormAdvancedView
               isAnswered={isAnswered}
+              disabledUp={disabledUp}
+              disabledDown={disabledDown}
               setIsAnswered={setIsAnswered}
               setCurrentSlide={setCurrentSlide}>
               {sortedData?.map((item, index) => (

@@ -6,7 +6,14 @@ import { UpOutlined, DownOutlined } from '@ant-design/icons'
 import { useSize } from '@umijs/hooks'
 
 function Carousel(props) {
-  const { children, isAnswered, setIsAnswered, setCurrentSlide } = props
+  const {
+    children,
+    disabledUp,
+    disabledDown,
+    isAnswered,
+    setIsAnswered,
+    setCurrentSlide
+  } = props
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
@@ -55,12 +62,12 @@ function Carousel(props) {
       <Box ref={buttonsRef}>
         <Row h="right" p={2} noGutters>
           <Col cw="auto" mr={2}>
-            <Button type="primary" onClick={previous}>
+            <Button disabled={disabledUp} type="primary" onClick={previous}>
               <UpOutlined />
             </Button>
           </Col>
           <Col cw="auto">
-            <Button type="primary" onClick={next}>
+            <Button disabled={disabledDown} type="primary" onClick={next}>
               <DownOutlined />
             </Button>
           </Col>
