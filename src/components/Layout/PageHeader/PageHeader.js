@@ -28,7 +28,6 @@ function PageHeader(props) {
           <>
             <Col cw="auto" p={0} v="center">
               <Button
-                size="small"
                 type="text"
                 shape="default"
                 style={globalStyles.resetPadding}

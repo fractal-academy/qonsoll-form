@@ -41,8 +41,10 @@ function FormsAll(props) {
     childrenModal,
     disableAddButton,
     titleText,
+    titleProps,
     firstLevelHidden,
-    configurations
+    configurations,
+    onBack
   } = props
 
   // [CUSTOM_HOOKS]
@@ -156,8 +158,22 @@ function FormsAll(props) {
 
               {/* SecondaryTitle */}
               <Row noGutters h="between" v="center" mb={1} mt={3}>
+                <Col cw="auto" v="center">
+                  <Button
+                    type="text"
+                    style={globalStyles.resetPadding}
+                    icon={<ArrowLeftOutlined />}
+                    onClick={onBack}
+                  />
+                  <Divider
+                    type="vertical"
+                    style={{ height: '24px', marginRight: '16px' }}
+                  />
+                </Col>
                 <Col>
-                  <Title level={2}>{titleText ?? translate('Forms')}</Title>
+                  <Title level={2} {...titleProps}>
+                    {titleText ?? translate('Forms')}
+                  </Title>
                 </Col>
                 <Col cw="auto">
                   <Button
