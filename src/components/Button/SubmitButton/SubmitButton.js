@@ -2,12 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import typeformTheme from '../../../../styles/theme'
 import styled from 'styled-components'
-import { Button, Typography } from 'antd'
+import { Button, Typography, message } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
+import { useKeyPress } from '@umijs/hooks'
 
 const { Text } = Typography
 
@@ -18,13 +19,37 @@ const StyledSubmit = styled(Button)`
 `
 
 function SubmitButton(props) {
-  const { children, onClick, finish, question, ...rest } = props
+  const {
+    children,
+    onClick,
+    finish,
+    question,
+    currentSlide,
+    disablePressEnter,
+    ...rest
+  } = props
   const formId = question?.formId
 
   // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
   const { t } = useTranslation()
+  useKeyPress(
+    (e) =>
+      //if pressed enter this event on this question slide - dispatch second callback
+      !disablePressEnter &&
+      e.keyCode === 13 &&
+      currentSlide === question?.order,
+    (e) => {
+      if (e.type === 'keyup') {
+        console.log(disablePressEnter)
+        onButtonClick()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = () => {
@@ -38,7 +63,11 @@ function SubmitButton(props) {
   return (
     <Row display="flex" v="center" noGutters>
       <Col cw="auto" mr={3}>
-        <StyledSubmit type="primary" onClick={onButtonClick} {...rest}>
+        <StyledSubmit
+          type="primary"
+          onClick={onButtonClick}
+          onMouseDown={(e) => e.preventDefault()}
+          {...rest}>
           {children || (
             <Row display="flex" noGutters>
               <Col cw="auto" mr={2}>

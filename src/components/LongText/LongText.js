@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Typography, Input,message } from 'antd'
+import { Form, Typography, Input, message } from 'antd'
 import { SubmitButton } from '../../components'
-import {  Container } from '@qonsoll/react-design'
+import { Container } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
+import { globalStyles } from '../../../styles'
 
 const { TextArea } = Input
 
@@ -14,6 +15,19 @@ function LongText(props) {
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
   const { t } = useTranslation()
+  useKeyPress(
+    (e) =>
+      //if pressed enter without shift and this event on this question slide - dispatch second callback
+      e.keyCode === 13 && !e.shiftKey && currentSlide === question?.order,
+    (e) => {
+      if (e.type === 'keyup') {
+        onPressOk()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
@@ -27,22 +41,13 @@ function LongText(props) {
   // [COMPUTED_PROPERTIES]
   const explanation = t('Shift ⇧ + Enter ↵ to make a line break')
 
-  useKeyPress(
-    (e) =>
-      //if pressed enter without shift and this event on this question slide - dispatch second callback
-      e.keyCode === 13 && !e.shiftKey && currentSlide === question?.order,
-    () => {
-      // console.log(ev.target.parentNode.parentNode)
-      onPressOk()
-    }
-  )
   const onPressOk = () => {
     //get values from form to check if there is any answer data
     //.trim() removes all useless spaces to prevent submit with only spaces
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     question?.isRequired
-      ? value
+      ? !!value
         ? form.submit()
         : message.error('It`s required question, please answer')
       : form.submit()
@@ -63,7 +68,7 @@ function LongText(props) {
         onFinishFailed={onFinishFailed}
         style={{ width: '100%' }}>
         <Form.Item
-          style={{ marginBottom: '0px' }}
+          style={globalStyles.resetMarginB}
           name="answer"
           rules={[
             {
@@ -71,11 +76,12 @@ function LongText(props) {
             }
           ]}>
           <TextArea
+            {...textAreaProps}
             bordered
+            maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
             placeholder="Type your answer here..."
             onPressEnter={onFocusedKeyPress}
-            {...textAreaProps}
           />
         </Form.Item>
         <Form.Item>
@@ -84,7 +90,7 @@ function LongText(props) {
       </Form>
 
       {/* <SubmitButton /> */}
-      <SubmitButton onClick={onPressOk} />
+      <SubmitButton onClick={onPressOk} disablePressEnter />
     </Container>
   )
 }

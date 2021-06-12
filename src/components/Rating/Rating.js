@@ -1,8 +1,9 @@
 import React from 'react'
-import { Rate } from 'antd'
+import { Rate, message } from 'antd'
 import styled from 'styled-components'
 import { Container } from '@qonsoll/react-design'
 import typeformTheme from '../../../styles/theme'
+import { useKeyPress } from '@umijs/hooks'
 
 const StyledRate = styled(Rate)`
   ${({ theme }) => `
@@ -15,7 +16,7 @@ const StyledRate = styled(Rate)`
 `}
 `
 function CustomRating(props) {
-  const { allowClear, tooltips, onClick, question } = props
+  const { allowClear, tooltips, onClick, question, currentSlide } = props
   const { questionConfigurations } = question
 
   // [CLEAN FUNCTIONS]
@@ -24,6 +25,23 @@ function CustomRating(props) {
 
     onClick?.(data)
   }
+
+  // [ADDITIONAL_HOOKS]
+  useKeyPress(
+    (event) => event.keyCode === 13 && currentSlide === question?.order,
+    (event) => {
+      if (event.type === 'keyup') {
+        console.log('rate')
+        !question?.isRequired
+          ? onClick && onClick()
+          : message.error('It`s required question, please answer')
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
+
   return (
     <Container>
       <StyledRate

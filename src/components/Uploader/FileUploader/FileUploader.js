@@ -138,7 +138,7 @@ const UploadArea = (props) => {
         </Box>
       </Dragger>
       <Box mt={3}>
-        <SubmitButton onClick={onAply} />
+        <SubmitButton onClick={onAply} disablePressEnter />
       </Box>
     </Box>
   )

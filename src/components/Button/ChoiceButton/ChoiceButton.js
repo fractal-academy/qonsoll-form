@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { KeyBox } from '../../../components'
 import { useKeyPress } from '@umijs/hooks'
+import { message } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
 import useMedia from 'use-media'
@@ -28,13 +29,25 @@ function ChoiceButton(props) {
     [mappedChoices]
   )
   useKeyPress(
-    (event) => ![].includes(event.key),
+    (event) => ![].includes(event.key) && currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
-        const key = `${event.key}`.toUpperCase()
-        let index = key.charCodeAt(0) - startLetter
+        // When pressed enter and question not required it will go to next question,
+        // if question required - display message that u should enter data
+        if (event.keyCode === 13) {
+          console.log('choices')
+          if (!question?.isRequired) {
+            onClick?.()
+          } else {
+            message.error('It`s required question, please answer')
+          }
+        } else {
+          console.log('after condition')
+          const key = `${event.key}`.toUpperCase()
+          let index = key.charCodeAt(0) - startLetter
 
-        onButtonClick({ letter: key, choice: choices[index] })
+          onButtonClick({ letter: key, choice: choices[index] })
+        }
       }
     },
     {

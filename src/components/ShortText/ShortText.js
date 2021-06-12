@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input,message } from 'antd'
+import { Form, Input, message } from 'antd'
 import PropTypes from 'prop-types'
 import { globalStyles } from '../../../styles'
 import { SubmitButton } from '../../components'
@@ -8,12 +8,25 @@ import { useTranslation } from '../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
 
 function ShortText(props) {
-  const { inputProps, isRequired, onClick, question, currentSlide } = props
+  const { inputProps, onClick, question, currentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
   const { t } = useTranslation()
-
+  useKeyPress(
+    (e) =>
+      //if pressed enter this event on this question slide - dispatch second callback
+      e.keyCode === 13 && currentSlide === question?.order,
+    (e) => {
+      if (e.type === 'keyup') {
+        console.log('shrt')
+        onPressOk()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
     const data = { question, answer: { value: answer || '' } }
@@ -22,26 +35,23 @@ function ShortText(props) {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
+  const onFocusedKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      //Prevent linebrake onEnter
+      e.preventDefault()
+    }
+  }
   const onPressOk = () => {
     //get values from form to check if there is any answer data
     //.trim() removes all useless spaces to prevent submit with only spaces
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     question?.isRequired
-      ? value
+      ? !!value
         ? form.submit()
         : message.error('It`s required question, please answer')
       : form.submit()
   }
-  useKeyPress(
-    (e) =>
-      //if pressed enter this event on this question slide - dispatch second callback
-      e.keyCode === 13 && currentSlide === question?.order,
-    () => {
-      // console.log(ev.target.parentNode.parentNode)
-      onPressOk()
-    }
-  )
 
   return (
     <Container>
@@ -53,12 +63,16 @@ function ShortText(props) {
         <Form.Item
           style={globalStyles.resetMarginB}
           name="answer"
-          rules={[{ required: isRequired }]}>
-          <Input {...inputProps} placeholder="Type your answer here..." />
+          rules={[{ required: question?.isRequired }]}>
+          <Input
+            {...inputProps}
+            placeholder="Type your answer here..."
+            onPressEnter={onFocusedKeyPress}
+          />
         </Form.Item>
       </Form>
       <Box mt={4}>
-        <SubmitButton onClick={onPressOk} />
+        <SubmitButton onClick={onPressOk} disablePressEnter />
       </Box>
     </Container>
   )
