@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Button, Typography } from 'antd'
+import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS } from 'app/constants'
 import { Box } from '@qonsoll/react-design'
 import { FormShowHeader } from './FormShow.style'
@@ -59,6 +60,9 @@ function FormShow(props) {
 
     setIsAnswered(true)
   }
+  useKeyPress(9, (e) => {
+    e.preventDefault()
+  })
 
   return (
     <TypeformConfigurationContext.Provider value={configurations}>
