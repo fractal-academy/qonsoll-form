@@ -14,6 +14,7 @@ import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import ANSWERS_DISPATCH_EVENTS from 'app/context/Answers/DispatchEventsTypes'
 import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
 import { useAnswersContextDispatch } from 'app/context/Answers/useAnswersContext'
+import { useKeyPress } from '@umijs/hooks'
 
 const { Title } = Typography
 
@@ -36,7 +37,8 @@ function FormShow(props) {
 
   // [COMPUTED PROPERTIES]
   const sortedData = data && data.sort((a, b) => a.order - b.order)
-
+  const disabledUp = currentSlide === 0
+  const disabledDown = currentSlide === data?.length - 1
   //temporary solution for ending logic; fix after adding logic jumps
   sortedData &&
     sortedData.forEach(
@@ -46,6 +48,9 @@ function FormShow(props) {
     )
 
   // [CLEAN FUNCTIONS]
+  useKeyPress(9, (e) => {
+    e.preventDefault()
+  })
   const onRestart = () => {
     window.location.reload()
   }
@@ -88,6 +93,8 @@ function FormShow(props) {
           <ContentCard>
             <FormAdvancedView
               isAnswered={isAnswered}
+              disabledUp={disabledUp}
+              disabledDown={disabledDown}
               setIsAnswered={setIsAnswered}
               setCurrentSlide={setCurrentSlide}>
               {sortedData?.map((item, index) => (

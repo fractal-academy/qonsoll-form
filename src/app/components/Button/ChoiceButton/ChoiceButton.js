@@ -3,6 +3,7 @@ import { KeyBox } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'
 import { Row, Col } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
+import useMedia from 'use-media'
 
 let startLetter = 65
 
@@ -57,11 +58,12 @@ function ChoiceButton(props) {
       onClick && onClick(data)
     }
   }
+  const phoneSize = useMedia({ maxWidth: '500px' })
 
   return (
-    <Row noGutters>
+    <Row noGutters h={phoneSize && 'center'}>
       {mappedChoices?.map((item, index) => (
-        <Col cw={hasImages ? 'auto' : '12'}>
+        <Col cw={hasImages ? (phoneSize ? '10' : 'auto') : '12'}>
           <KeyBox
             key={index}
             index={index}

@@ -50,7 +50,8 @@ function YesnoButton(props) {
     (event) => {
       if (event.type === 'keyup') {
         const key = `${event.key}`.toUpperCase()
-        onButtonClick(key)
+        let currentChoice = (key === 'Y' && 'Yes') || 'No'
+        onButtonClick({ letter: key, choice: currentChoice })
       }
     },
     {
@@ -61,7 +62,7 @@ function YesnoButton(props) {
   return (
     <Box display="block">
       {mappedChoices.map((item, index) => (
-        <Box key={index} mb={2}>
+        <Box key={index} mb={2} mx={2}>
           <KeyBox
             isActive={buttonKey === item.letter}
             onButtonClick={onButtonClick}
