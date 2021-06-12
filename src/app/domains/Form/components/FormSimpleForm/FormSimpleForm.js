@@ -17,6 +17,7 @@ function FormSimpleForm(props) {
       </Form.Item>
       <Form.Item name="description">
         <TextArea
+          showCount
           autoSize={{ minRows: 3, maxRows: 5 }}
           maxLength={1000}
           allowClear

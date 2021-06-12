@@ -119,7 +119,10 @@ function QuestionAdvancedView(props) {
 
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage} noGutters>
-      <Col {...styles.questionCardColumnStyle} cw={[12, 12, 6, 6]}>
+      <Col
+        {...styles.questionCardColumnStyle}
+        v="flex=star"
+        cw={[12, 12, 6, 6]}>
         <StyledBox
           pl={devicePadding}
           bordered={false}

@@ -70,6 +70,7 @@ function LongText(props) {
           <TextArea
             {...textAreaProps}
             bordered
+            maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
             placeholder="Type your answer here..."
             onPressEnter={onFocusedKeyPress}

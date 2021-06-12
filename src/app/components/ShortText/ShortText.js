@@ -66,6 +66,7 @@ function ShortText(props) {
           rules={[{ required: question?.isRequired }]}>
           <Input
             {...inputProps}
+            maxLength={300}
             placeholder="Type your answer here..."
             onPressEnter={onFocusedKeyPress}
           />

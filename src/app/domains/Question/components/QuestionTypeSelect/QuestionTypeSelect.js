@@ -34,11 +34,6 @@ const questionTypeMap = [
     icon: <FileTextOutlined />
   },
   {
-    type: QUESTION_TYPES.SHORT_TEXT,
-    description: 'For short answers, like names',
-    icon: <SmallDashOutlined />
-  },
-  {
     type: QUESTION_TYPES.DATE,
     description: 'Collect answers in date format',
     icon: <CalendarOutlined />
@@ -66,8 +61,13 @@ const questionTypeMap = [
   },
   {
     type: QUESTION_TYPES.RATING,
-    description: 'Choose from shapes like ⭐ or 🐶',
+    description: 'Rate ',
     icon: <StarOutlined />
+  },
+  {
+    type: QUESTION_TYPES.SHORT_TEXT,
+    description: 'For short answers, like names',
+    icon: <SmallDashOutlined />
   },
   {
     type: QUESTION_TYPES.STATEMENT,
