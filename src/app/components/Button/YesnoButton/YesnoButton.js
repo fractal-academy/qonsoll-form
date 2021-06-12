@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { KeyBox } from 'app/components'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
-
+import { message } from 'antd'
 function YesnoButton(props) {
   const { onClick, currentSlide, question } = props
   const { order } = question
@@ -46,12 +46,19 @@ function YesnoButton(props) {
   }
 
   useKeyPress(
-    (event) => ![].includes(event.key),
+    (event) =>
+      (![].includes(event.key) || event.keyCode === 13) &&
+      currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
+        if (event.keyCode === 13) {
+          !question?.isRequired
+            ? onClick && onClick()
+            : message.error('It`s required question, please answer')
+        }
         const key = `${event.key}`.toUpperCase()
-        let currentChoice = (key === 'Y' && 'Yes') || 'No'
-        onButtonClick({ letter: key, choice: currentChoice })
+        const keyName = key === 'Y' ? 'Yes' : 'No'
+        onButtonClick({ letter: key, choice: { name: keyName } })
       }
     },
     {

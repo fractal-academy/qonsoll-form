@@ -91,6 +91,7 @@ const UploadArea = (props) => {
               ...files,
               [currentFile?.uid]: currentFile
             }))
+
           // onMediaUploaded(currentFile)
         })
       }
@@ -118,7 +119,8 @@ const UploadArea = (props) => {
         {...props}
         onRemove={onRemove}
         customRequest={onChange}
-        fileList={Object.values(filesList)}>
+        fileList={Object.values(filesList)}
+        onMouseDown={(e) => e.preventDefault()}>
         <Box display="flex" justifyContent="center">
           <IconLabel>
             <InboxOutlined />
@@ -132,7 +134,7 @@ const UploadArea = (props) => {
         </Box>
       </Dragger>
       <Box mt={3}>
-        <SubmitButton onClick={onAply} />
+        <SubmitButton onClick={onAply} disablePressEnter />
       </Box>
     </Box>
   )

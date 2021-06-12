@@ -4,6 +4,7 @@ import { Form, Typography, Input, message } from 'antd'
 import { SubmitButton } from 'components'
 import { Container } from '@qonsoll/react-design'
 import { useKeyPress } from '@umijs/hooks'
+import { globalStyles } from 'app/styles'
 
 const { TextArea } = Input
 
@@ -22,22 +23,13 @@ function LongText(props) {
     console.log('Failed:', errorInfo)
   }
 
-  useKeyPress(
-    (e) =>
-      //if pressed enter without shift and this event on this question slide - dispatch second callback
-      e.keyCode === 13 && !e.shiftKey && currentSlide === question?.order,
-    () => {
-      // console.log(ev.target.parentNode.parentNode)
-      onPressOk()
-    }
-  )
   const onPressOk = () => {
     //get values from form to check if there is any answer data
     //.trim() removes all useless spaces to prevent submit with only spaces
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     question?.isRequired
-      ? value
+      ? !!value
         ? form.submit()
         : message.error('It`s required question, please answer')
       : form.submit()
@@ -50,6 +42,20 @@ function LongText(props) {
     }
   }
 
+  useKeyPress(
+    (e) =>
+      //if pressed enter without shift and this event on this question slide - dispatch second callback
+      e.keyCode === 13 && !e.shiftKey && currentSlide === question?.order,
+    (e) => {
+      if (e.type === 'keyup') {
+        onPressOk()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
+
   return (
     <Container>
       <Form
@@ -58,19 +64,15 @@ function LongText(props) {
         onFinishFailed={onFinishFailed}
         style={{ width: '100%' }}>
         <Form.Item
-          style={{ marginBottom: '0px' }}
+          style={globalStyles.resetMarginB}
           name="answer"
-          rules={[
-            {
-              required: question?.isRequired
-            }
-          ]}>
+          rules={[{ required: question?.isRequired }]}>
           <TextArea
+            {...textAreaProps}
             bordered
             autoSize={{ minRows: 1, maxRows: 4 }}
             placeholder="Type your answer here..."
             onPressEnter={onFocusedKeyPress}
-            {...textAreaProps}
           />
         </Form.Item>
         <Form.Item>
@@ -79,7 +81,7 @@ function LongText(props) {
       </Form>
 
       {/* <SubmitButton /> */}
-      <SubmitButton onClick={onPressOk} />
+      <SubmitButton onClick={onPressOk} disablePressEnter />
     </Container>
   )
 }
