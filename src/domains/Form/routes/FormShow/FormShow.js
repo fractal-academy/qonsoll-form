@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { TranslationContext } from '../../../../context/Translation'
 // import { globalStyles } from '../../../../../styles'
-// import { useKeyPress } from '@umijs/hooks'
+import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS } from '../../../../constants'
 // import { Button, Divider, Typography } from 'antd'
 import { Box } from '@qonsoll/react-design'
@@ -29,7 +29,9 @@ function FormShow(props) {
     id,
     translate,
     submitLoading,
-    configurations
+    configurations,
+    wrapperHeight,
+    wrapperOffset
   } = props
 
   // [CUSTOM_HOOKS]
@@ -38,6 +40,9 @@ function FormShow(props) {
 
   // [ADDITIONAL HOOKS]
   // const history = useHistory()
+  useKeyPress(9, (e) => {
+    e.preventDefault()
+  })
   const [data, loading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
@@ -52,6 +57,8 @@ function FormShow(props) {
 
   // [COMPUTED PROPERTIES]
   const sortedData = data && data.sort((a, b) => a.order - b.order)
+  const disabledUp = currentSlide === 0
+  const disabledDown = currentSlide === data?.length - 1
 
   //temporary solution for ending logic; fix after adding logic jumps
   sortedData &&
@@ -116,12 +123,16 @@ function FormShow(props) {
                 {/*  </Col>*/}
                 {/*</Row>*/}
 
-                <ContentCard>
+                <ContentCard
+                  topOffset={wrapperOffset}
+                  wrapperHeight={wrapperHeight}>
                   <FormAdvancedView
                     submitLoading={submitLoading}
                     isAnswered={isAnswered}
                     setIsAnswered={setIsAnswered}
-                    setCurrentSlide={setCurrentSlide}>
+                    setCurrentSlide={setCurrentSlide}
+                    disabledUp={disabledUp}
+                    disabledDown={disabledDown}>
                     {sortedData?.map((item, index) => (
                       <Component
                         sortedData={sortedData}
