@@ -11,14 +11,16 @@ function Carousel(props) {
     isAnswered,
     setIsAnswered,
     setCurrentSlide,
-    submitLoading
+    submitLoading,
+    disabledDown,
+    disabledUp
   } = props
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
 
-  const [{height}, ref] = useSize()
-  const [{height: buttonsHeight}, buttonsRef] = useSize()
+  const [{ height }, ref] = useSize()
+  const [{ height: buttonsHeight }, buttonsRef] = useSize()
 
   // [CLEAN FUNCTIONS]
   const handleScroll = (e) => {
@@ -54,20 +56,20 @@ function Carousel(props) {
         infinite={false}
         speed={1500}>
         {children.map((el) =>
-          cloneElement(el, {wrapperHeight: height - buttonsHeight})
+          cloneElement(el, { wrapperHeight: height - buttonsHeight })
         )}
       </AntdCarousel>
       {!submitLoading && (
         <Box ref={buttonsRef}>
           <Row h="right" p={2} noGutters>
             <Col cw="auto" mr={2}>
-              <Button type="primary" onClick={previous}>
-                <UpOutlined/>
+              <Button disabled={disabledUp} type="primary" onClick={previous}>
+                <UpOutlined />
               </Button>
             </Col>
             <Col cw="auto">
-              <Button type="primary" onClick={next}>
-                <DownOutlined/>
+              <Button disabled={disabledDown} type="primary" onClick={next}>
+                <DownOutlined />
               </Button>
             </Col>
           </Row>

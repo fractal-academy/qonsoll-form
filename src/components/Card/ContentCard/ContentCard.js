@@ -47,7 +47,7 @@ function ContentCard(props) {
   } = props
 
   const paddingSmall = useMedia({ maxWidth: '768px' })
-  const devicePadding = (paddingSmall && 1) || 4
+  const devicePadding = (paddingSmall && 3) || 4
 
   return (
     <ContentRow

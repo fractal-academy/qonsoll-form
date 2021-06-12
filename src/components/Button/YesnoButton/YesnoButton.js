@@ -11,6 +11,19 @@ function YesnoButton(props) {
 
   // [ADDITIONAL_HOOKS]
   const { t } = useTranslation()
+  useKeyPress(
+    (event) => ![].includes(event.key),
+    (event) => {
+      if (event.type === 'keyup') {
+        const key = `${event.key}`.toUpperCase()
+        let currentChoice = (key === 'Y' && 'Yes') || 'No'
+        onButtonClick({ letter: key, choice: currentChoice })
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
@@ -66,7 +79,7 @@ function YesnoButton(props) {
   return (
     <Box display="block">
       {mappedChoices.map((item, index) => (
-        <Box key={index} mb={2}>
+        <Box key={index} mb={2} mx={2}>
           <KeyBox
             isActive={buttonKey === item.letter}
             onButtonClick={onButtonClick}

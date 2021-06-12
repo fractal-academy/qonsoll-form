@@ -27,6 +27,10 @@ function RangeSlider(props) {
         max={200}
         value={inputValue}
         onChange={onSlide}
+        style={{
+          display: 'flex',
+          alignItems: 'center'
+        }}
       />
     </Box>
   )

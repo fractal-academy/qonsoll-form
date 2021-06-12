@@ -123,7 +123,7 @@ function QuestionAdvancedView(props) {
   }
   const heightSmallDevices = useMedia({ maxWidth: '768px' })
   const deviceImageHeight = (heightSmallDevices && '40%') || '100%'
-  const devicePadding = (heightSmallDevices && 1) || 4
+  const devicePadding = (heightSmallDevices && 2) || 4
 
   return (
     <Row {...styles.mainRowStyle} backgroundImage={bgImage} noGutters>

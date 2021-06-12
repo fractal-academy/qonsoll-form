@@ -18,16 +18,17 @@ const StyledKeybox = styled(Col)`
   border-style: solid;
   border-color: ${({ theme }) => theme.color.primary.default};
   color: ${({ isActive, theme }) => isActive && theme.color.white.default};
-  margin-left: ${({ isHovering, marginSmall }) =>
-    isHovering && marginSmall ? '' : isHovering && '-40px'};
+  margin-left: ${({ isHovering, phoneSmall }) =>
+    isHovering && phoneSmall ? '' : isHovering && '-40px'};
   background-color: ${({ isActive, theme }) =>
     isActive ? theme.color.primary.default : theme.color.white.default};
-  width: ${({ isHovering, marginSmall }) =>
-    isHovering && !marginSmall ? '65px !important' : '26px !important'};
+  width: ${({ isHovering, phoneSmall }) =>
+    isHovering && !phoneSmall ? '65px !important' : '26px !important'};
 `
+
 const ImageContainer = styled(Box)`
   width: 100%;
-  height: 100px;
+  height: ${({ phoneSmall }) => (phoneSmall ? '200px' : '100px')};
   border-radius: 8px;
   margin-bottom: 8px;
   background-size: cover;
@@ -47,7 +48,8 @@ const StyledButton = styled(Box)`
   }
 `
 const StyledText = styled(Text)`
-  width: ${({ hasImages }) => (hasImages ? '15ch' : '100%')};
+  width: ${({ hasImages, phoneSmall }) =>
+    hasImages ? (phoneSmall ? '100%' : '15ch') : '100%'};
   padding-left: 30px;
 `
 
@@ -58,7 +60,7 @@ const StyledBadge = styled(Button)`
   z-index: 100;
   padding: 3px;
   width: 24px;
-  right: -4px;
+  right: 0;
   top: -4px;
 `
 
@@ -69,8 +71,7 @@ function KeyBox(props) {
   // [ADDITIONAL HOOKS]
   const [isHovering, hoverRef] = useHover()
   const { t } = useTranslation()
-
-  const marginSmall = useMedia({ maxWidth: '768px' })
+  const phoneSmall = useMedia({ maxWidth: '500px' })
 
   return (
     <Box
@@ -80,17 +81,19 @@ function KeyBox(props) {
       mr={2}
       width="100%">
       <StyledButton hasImages={hasImages} onClick={() => onButtonClick(item)}>
-        {hasImages && <ImageContainer image={item?.choice?.image} />}
+        {hasImages && (
+          <ImageContainer phoneSmall={phoneSmall} image={item?.choice?.image} />
+        )}
         <Row v="center" h="between" noGutters position="relative">
           <Col cw="12" v="center">
             <StyledKeybox
               isHovering={isHovering}
-              marginSmall={marginSmall}
+              phoneSmall={phoneSmall}
               isActive={isActive}
               mr={1}>
-              {isHovering && !marginSmall ? `${t('Key')} ${letter}` : letter}
+              {isHovering && !phoneSmall ? `Key ${letter}` : letter}
             </StyledKeybox>
-            <StyledText hasImages={hasImages}>
+            <StyledText hasImages={hasImages} phoneSmall={phoneSmall}>
               {item?.choice?.name || `Choice ${index + 1}`}
             </StyledText>
           </Col>
