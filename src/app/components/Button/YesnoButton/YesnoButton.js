@@ -50,7 +50,8 @@ function YesnoButton(props) {
     (event) => {
       if (event.type === 'keyup') {
         const key = `${event.key}`.toUpperCase()
-        onButtonClick(key)
+        let currentChoice = (key === 'Y' && 'Yes') || 'No'
+        onButtonClick({ letter: key, choice: currentChoice })
       }
     },
     {
