@@ -19,7 +19,6 @@ function ShortText(props) {
       e.keyCode === 13 && currentSlide === question?.order,
     (e) => {
       if (e.type === 'keyup') {
-        console.log('shrt')
         onPressOk()
       }
     },

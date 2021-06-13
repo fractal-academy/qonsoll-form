@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Button, Popover } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
@@ -34,7 +34,7 @@ function EditorSidebar(props) {
     transparent,
     customQuestionTypes
   } = props
-  const { getCollectionRef } = useFunctions()
+  const { getCollectionRef, setData } = useFunctions()
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -81,6 +81,16 @@ function EditorSidebar(props) {
       payload: item
     })
   }
+
+  // [USE_EFFECTS]
+  useEffect(() => {
+    endings?.map((item, index) =>
+      setData(COLLECTIONS.QUESTIONS, item?.id, {
+        ...item,
+        order: questions?.length + index + 1
+      })
+    )
+  }, [questions?.length])
 
   return (
     <Box position="relative" display="flex">

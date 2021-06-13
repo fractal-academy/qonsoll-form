@@ -35,14 +35,12 @@ function ChoiceButton(props) {
         // When pressed enter and question not required it will go to next question,
         // if question required - display message that u should enter data
         if (event.keyCode === 13) {
-          console.log('choices')
           if (!question?.isRequired) {
             onClick?.()
           } else {
             message.error('It`s required question, please answer')
           }
         } else {
-          console.log('after condition')
           const key = `${event.key}`.toUpperCase()
           let index = key.charCodeAt(0) - startLetter
 
