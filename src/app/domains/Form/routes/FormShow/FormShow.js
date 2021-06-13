@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Button, Typography } from 'antd'
+import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS } from 'app/constants'
 import { Box } from '@qonsoll/react-design'
 import { FormShowHeader } from './FormShow.style'
@@ -14,7 +15,6 @@ import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import ANSWERS_DISPATCH_EVENTS from 'app/context/Answers/DispatchEventsTypes'
 import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
 import { useAnswersContextDispatch } from 'app/context/Answers/useAnswersContext'
-import { useKeyPress } from '@umijs/hooks'
 
 const { Title } = Typography
 
@@ -39,6 +39,7 @@ function FormShow(props) {
   const sortedData = data && data.sort((a, b) => a.order - b.order)
   const disabledUp = currentSlide === 0
   const disabledDown = currentSlide === data?.length - 1
+
   //temporary solution for ending logic; fix after adding logic jumps
   sortedData &&
     sortedData.forEach(
@@ -66,6 +67,9 @@ function FormShow(props) {
 
     setIsAnswered(true)
   }
+  useKeyPress(9, (e) => {
+    e.preventDefault()
+  })
 
   return (
     <TypeformConfigurationContext.Provider value={configurations}>

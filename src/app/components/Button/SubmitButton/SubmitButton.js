@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Button, Typography, message } from 'antd'
+import { Button, Typography } from 'antd'
+import { useKeyPress } from '@umijs/hooks'
+import typeformTheme from 'app/styles/theme'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 import { useAnswersContext } from 'app/context/Answers/useAnswersContext'
-import typeformTheme from 'app/styles/theme'
-import { useKeyPress } from '@umijs/hooks'
 
 const { Text } = Typography
 

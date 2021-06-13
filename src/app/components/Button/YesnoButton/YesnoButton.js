@@ -57,8 +57,8 @@ function YesnoButton(props) {
             : message.error('It`s required question, please answer')
         }
         const key = `${event.key}`.toUpperCase()
-        const keyName = key === 'Y' ? 'Yes' : 'No'
-        onButtonClick({ letter: key, choice: { name: keyName } })
+        const currentChoice = key === 'Y' ? 'Yes' : 'No'
+        onButtonClick({ letter: key, choice: { name: currentChoice } })
       }
     },
     {
