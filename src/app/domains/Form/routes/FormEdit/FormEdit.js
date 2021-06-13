@@ -1,8 +1,8 @@
+import { message } from 'antd'
 import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router'
-import { Typography, message } from 'antd'
 import { Box } from '@qonsoll/react-design'
 import { useState, useEffect } from 'react'
 import { QuestionForm } from 'domains/Question/components'
@@ -19,8 +19,6 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-
-const { Text } = Typography
 
 function FormEdit(props) {
   const { configurations, customQuestionTypes } = props
@@ -54,6 +52,7 @@ function FormEdit(props) {
         : [],
     [questionsList]
   )
+
   const endings = useMemo(
     () =>
       questionsList

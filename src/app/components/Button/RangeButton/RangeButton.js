@@ -1,4 +1,4 @@
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import React, { useState } from 'react'
@@ -56,9 +56,16 @@ function RangeButton(props) {
 
   // [ADDITIONAL HOOKS]
   useKeyPress(
-    (event) => ![].includes(event.key),
+    (event) =>
+      (![].includes(event.key) || event.keyCode === 13) &&
+      currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
+        if (event.keyCode === 13) {
+          !question?.isRequired
+            ? onClick && onClick()
+            : message.error('It`s required question, please answer')
+        }
         onButtonClick(event.key)
       }
     },

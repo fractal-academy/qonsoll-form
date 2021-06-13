@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button, Typography } from 'antd'
+import { useKeyPress } from '@umijs/hooks'
+import typeformTheme from 'app/styles/theme'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 import { useAnswersContext } from 'app/context/Answers/useAnswersContext'
-import typeformTheme from 'app/styles/theme'
 
 const { Text } = Typography
 
@@ -16,7 +17,14 @@ const StyledSubmit = styled(Button)`
 `
 
 function SubmitButton(props) {
-  const { children, onClick, finish, question } = props
+  const {
+    children,
+    onClick,
+    finish,
+    question,
+    currentSlide,
+    disablePressEnter
+  } = props
   const formId = question?.formId
 
   //[ADDITIONAL HOOKS]
@@ -31,10 +39,29 @@ function SubmitButton(props) {
     } else onClick && onClick()
   }
 
+  useKeyPress(
+    (e) =>
+      //if pressed enter this event on this question slide - dispatch second callback
+      !disablePressEnter &&
+      e.keyCode === 13 &&
+      currentSlide === question?.order,
+    (e) => {
+      if (e.type === 'keyup') {
+        onButtonClick()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
+
   return (
     <Row display="flex" v="center" noGutters>
       <Col cw="auto" mr={3}>
-        <StyledSubmit type="primary" onClick={onButtonClick}>
+        <StyledSubmit
+          type="primary"
+          onClick={onButtonClick}
+          onMouseDown={(e) => e.preventDefault()}>
           {children || (
             <Row display="flex" noGutters>
               <Col cw="auto" mr={2}>

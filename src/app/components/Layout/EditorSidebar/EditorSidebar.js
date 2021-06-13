@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Button, Popover } from 'antd'
@@ -7,7 +7,7 @@ import { QUESTION_TYPES, COLLECTIONS } from 'app/constants'
 import { LAYOUT_TYPE_KEYS } from 'app/constants/layoutTypes'
 import { ModalWithFormConditionsForm } from 'domains/Condition/components'
 import FormConditionsForm from 'domains/Form/components/FormConditionsForm'
-import { getCollectionRef } from 'app/services/Firestore'
+import { getCollectionRef, setData } from 'app/services/Firestore'
 import { QuestionTypeSelect, QuestionsList } from 'domains/Question/components'
 import {
   useCurrentQuestionContextDispatch,
@@ -55,6 +55,7 @@ function EditorSidebar(props) {
       order: questions?.length,
       questionConfigurations: questionConfigurations
     }
+
     // set it into context as current
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
@@ -73,6 +74,15 @@ function EditorSidebar(props) {
       payload: item
     })
   }
+
+  useEffect(() => {
+    endings?.map((item, index) =>
+      setData(COLLECTIONS.QUESTIONS, item?.id, {
+        ...item,
+        order: questions?.length + index + 1
+      })
+    )
+  }, [questions?.length])
 
   return (
     <Box position="relative" display="flex">

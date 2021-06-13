@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input } from 'antd'
-import { Col, Row } from '@qonsoll/react-design'
+import { Col } from '@qonsoll/react-design'
 import TextArea from 'antd/es/input/TextArea'
 
 function FormSimpleForm(props) {
@@ -17,6 +17,7 @@ function FormSimpleForm(props) {
       </Form.Item>
       <Form.Item name="description">
         <TextArea
+          showCount
           autoSize={{ minRows: 3, maxRows: 5 }}
           maxLength={1000}
           allowClear

@@ -30,7 +30,7 @@ function Carousel(props) {
     carouselRef.current?.next()
     setIsAnswered && setIsAnswered(false)
   }
-  const previous = () => {
+  const previous = (e) => {
     carouselRef.current?.prev()
   }
   const onCurrentSlideChange = (slideIndex) => {
@@ -62,12 +62,20 @@ function Carousel(props) {
       <Box ref={buttonsRef}>
         <Row h="right" p={2} noGutters>
           <Col cw="auto" mr={2}>
-            <Button disabled={disabledUp} type="primary" onClick={previous}>
+            <Button
+              disabled={disabledUp}
+              type="primary"
+              onClick={previous}
+              onMouseDown={(e) => e.preventDefault()}>
               <UpOutlined />
             </Button>
           </Col>
           <Col cw="auto">
-            <Button disabled={disabledDown} type="primary" onClick={next}>
+            <Button
+              disabled={disabledDown}
+              type="primary"
+              onClick={next}
+              onMouseDown={(e) => e.preventDefault()}>
               <DownOutlined />
             </Button>
           </Col>

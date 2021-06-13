@@ -6,7 +6,7 @@ import { Container, Box } from '@qonsoll/react-design'
 import { useKeyPress } from '@umijs/hooks'
 
 function ShortText(props) {
-  const { inputProps, isRequired, onClick, question, currentSlide } = props
+  const { inputProps, onClick, question, currentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
@@ -25,18 +25,30 @@ function ShortText(props) {
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     question?.isRequired
-      ? value
+      ? !!value
         ? form.submit()
         : message.error('It`s required question, please answer')
       : form.submit()
   }
+
+  const onFocusedKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      //Prevent linebrake onEnter
+      e.preventDefault()
+    }
+  }
+
   useKeyPress(
     (e) =>
       //if pressed enter this event on this question slide - dispatch second callback
       e.keyCode === 13 && currentSlide === question?.order,
-    () => {
-      // console.log(ev.target.parentNode.parentNode)
-      onPressOk()
+    (e) => {
+      if (e.type === 'keyup') {
+        onPressOk()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
     }
   )
 
@@ -50,12 +62,17 @@ function ShortText(props) {
         <Form.Item
           style={globalStyles.resetMarginB}
           name="answer"
-          rules={[{ required: isRequired }]}>
-          <Input {...inputProps} placeholder="Type your answer here..." />
+          rules={[{ required: question?.isRequired }]}>
+          <Input
+            {...inputProps}
+            maxLength={300}
+            placeholder="Type your answer here..."
+            onPressEnter={onFocusedKeyPress}
+          />
         </Form.Item>
       </Form>
       <Box mt={4}>
-        <SubmitButton onClick={onPressOk} />
+        <SubmitButton onClick={onPressOk} disablePressEnter />
       </Box>
     </Container>
   )
