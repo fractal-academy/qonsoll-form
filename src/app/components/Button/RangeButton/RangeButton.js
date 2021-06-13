@@ -63,10 +63,15 @@ function RangeButton(props) {
       if (event.type === 'keyup') {
         if (event.keyCode === 13) {
           !question?.isRequired
-            ? onClick && onClick()
+            ? onClick &&
+              onClick({
+                question,
+                answer: { value: '' }
+              })
             : message.error('It`s required question, please answer')
+        } else {
+          onButtonClick(event.key)
         }
-        onButtonClick(event.key)
       }
     },
     {

@@ -14,8 +14,10 @@ const DateTimeInput = (props) => {
     (event) => event.keyCode === 13 && currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
+        const answerData = { question, answer: { value: '' } }
+
         !question?.isRequired
-          ? onDateChange && onDateChange()
+          ? onDateChange && onDateChange(answerData)
           : message.error('It`s required question, please answer')
       }
     },

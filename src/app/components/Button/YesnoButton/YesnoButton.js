@@ -52,13 +52,19 @@ function YesnoButton(props) {
     (event) => {
       if (event.type === 'keyup') {
         if (event.keyCode === 13) {
+          const answerData = {
+            question,
+            answer: { value: '', letterKey: '' }
+          }
+
           !question?.isRequired
-            ? onClick && onClick()
+            ? onClick && onClick(answerData)
             : message.error('It`s required question, please answer')
+        } else {
+          const key = `${event.key}`.toUpperCase()
+          const keyName = key === 'Y' ? 'Yes' : 'No'
+          onButtonClick({ letter: key, choice: { name: keyName } })
         }
-        const key = `${event.key}`.toUpperCase()
-        const keyName = key === 'Y' ? 'Yes' : 'No'
-        onButtonClick({ letter: key, choice: { name: keyName } })
       }
     },
     {
