@@ -33,7 +33,6 @@ function SubmitButton(props) {
   // [CLEAN FUNCTIONS]
   const onButtonClick = () => {
     if (finish) {
-      console.log(currentSlide, question?.order)
       const updatedAnswers = { formId, answers }
       //add function from b2g and provide updatedAnswers
       console.log(updatedAnswers)
@@ -48,7 +47,7 @@ function SubmitButton(props) {
       currentSlide === question?.order,
     (e) => {
       if (e.type === 'keyup') {
-        console.log(disablePressEnter)
+        console.log('subm')
         onButtonClick()
       }
     },

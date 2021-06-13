@@ -44,7 +44,6 @@ function ShortText(props) {
       e.keyCode === 13 && currentSlide === question?.order,
     (e) => {
       if (e.type === 'keyup') {
-        console.log('shrt')
         onPressOk()
       }
     },
@@ -72,7 +71,7 @@ function ShortText(props) {
         </Form.Item>
       </Form>
       <Box mt={4}>
-        <SubmitButton onClick={onPressOk} disablePressEnter={true} />
+        <SubmitButton onClick={onPressOk} disablePressEnter />
       </Box>
     </Container>
   )

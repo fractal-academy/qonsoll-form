@@ -20,8 +20,6 @@ import {
   useDocumentData
 } from 'react-firebase-hooks/firestore'
 
-const { Text } = Typography
-
 function FormEdit(props) {
   const { configurations, customQuestionTypes } = props
 
@@ -54,6 +52,7 @@ function FormEdit(props) {
         : [],
     [questionsList]
   )
+
   const endings = useMemo(
     () =>
       questionsList

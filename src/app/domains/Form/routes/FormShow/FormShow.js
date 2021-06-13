@@ -51,9 +51,11 @@ function FormShow(props) {
   useKeyPress(9, (e) => {
     e.preventDefault()
   })
+
   const onRestart = () => {
     window.location.reload()
   }
+
   const onClick = (data) => {
     !!data &&
       !!data?.answer &&
