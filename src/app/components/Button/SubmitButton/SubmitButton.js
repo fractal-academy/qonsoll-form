@@ -47,7 +47,6 @@ function SubmitButton(props) {
       currentSlide === question?.order,
     (e) => {
       if (e.type === 'keyup') {
-        console.log('subm')
         onButtonClick()
       }
     },
