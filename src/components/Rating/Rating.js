@@ -32,7 +32,7 @@ function CustomRating(props) {
     (event) => {
       if (event.type === 'keyup') {
         !question?.isRequired
-          ? onClick && onClick()
+          ? onChange && onChange('')
           : message.error('It`s required question, please answer')
       }
     },

@@ -74,7 +74,6 @@ function FormShow(props) {
   // }
   const onClick = (answerData) => {
     !!answerData &&
-      !!answerData?.answer &&
       answersDispatch({
         type: ANSWERS_DISPATCH_EVENTS.ADD_ANSWER,
         payload: answerData

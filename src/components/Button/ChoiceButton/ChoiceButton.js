@@ -36,7 +36,12 @@ function ChoiceButton(props) {
         // if question required - display message that u should enter data
         if (event.keyCode === 13) {
           if (!question?.isRequired) {
-            onClick?.()
+            const answer = { value: '', letterKey: '' }
+            const answerData = {
+              question,
+              answer: !hasImages ? answer : { ...answer, image: '' }
+            }
+            onClick?.(answerData)
           } else {
             message.error('It`s required question, please answer')
           }
@@ -64,7 +69,7 @@ function ChoiceButton(props) {
       //if picture choice add field with image link
       const data = {
         question,
-        answer: hasImages ? answer : { ...answer, image: choice?.image || '' }
+        answer: !hasImages ? answer : { ...answer, image: choice?.image || '' }
       }
 
       onClick && onClick(data)
