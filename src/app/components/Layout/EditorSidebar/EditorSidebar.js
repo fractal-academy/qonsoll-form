@@ -79,7 +79,7 @@ function EditorSidebar(props) {
     endings?.map((item, index) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
-        order: questions?.length + index + 1
+        order: questions?.length + index
       })
     )
   }, [questions?.length])

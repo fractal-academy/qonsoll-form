@@ -7,6 +7,7 @@ import { InboxOutlined } from '@ant-design/icons'
 import { storage } from 'app/services/Firebase'
 import { getCollectionRef } from 'app/services/Firestore'
 import COLLECTIONS from 'app/constants/collection'
+import { useKeyPress } from '@umijs/hooks'
 
 const { Dragger } = Upload
 
@@ -16,7 +17,7 @@ const config = {
 }
 
 const UploadArea = (props) => {
-  const { onContinue, question } = props
+  const { onContinue, question, currentSlide } = props
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
   // [COMPUTED PROPERTIES]
@@ -105,12 +106,29 @@ const UploadArea = (props) => {
   }
 
   const onAply = () => {
+    const uploaderData = !!Object.keys(filesList).length ? filesList : ''
     const data = {
       question,
-      answer: { value: filesList }
+      answer: { value: uploaderData }
     }
-    onContinue && onContinue(data)
+    question?.isRequired
+      ? uploaderData
+        ? onContinue?.(data)
+        : message.error('It`s required question, please answer')
+      : onContinue?.(data)
   }
+
+  useKeyPress(
+    (event) => event.keyCode === 13 && currentSlide === question?.order,
+    (event) => {
+      if (event.type === 'keyup') {
+        onAply()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   return (
     <Box flexDirection="column">
@@ -119,18 +137,19 @@ const UploadArea = (props) => {
         {...props}
         onRemove={onRemove}
         customRequest={onChange}
-        fileList={Object.values(filesList)}
-        onMouseDown={(e) => e.preventDefault()}>
-        <Box display="flex" justifyContent="center">
-          <IconLabel>
-            <InboxOutlined />
-          </IconLabel>
-        </Box>
-        <Box textAlign="center">
-          <Text>Click or drag file to this area to upload</Text>
-        </Box>
-        <Box textAlign="center">
-          <Text type="secondary">Upload files</Text>
+        fileList={Object.values(filesList)}>
+        <Box onMouseDown={(e) => e.preventDefault()}>
+          <Box display="flex" justifyContent="center">
+            <IconLabel>
+              <InboxOutlined />
+            </IconLabel>
+          </Box>
+          <Box textAlign="center">
+            <Text>Click or drag file to this area to upload</Text>
+          </Box>
+          <Box textAlign="center">
+            <Text type="secondary">Upload files</Text>
+          </Box>
         </Box>
       </Dragger>
       <Box mt={3}>
