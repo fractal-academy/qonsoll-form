@@ -137,10 +137,11 @@ const UploadArea = (props) => {
         {...props}
         onRemove={onRemove}
         customRequest={onChange}
-        fileList={Object.values(filesList)}>
+        fileList={Object.values(filesList)}
+        disabled={!onContinue}>
         <Box onMouseDown={(e) => e.preventDefault()}>
           <Box display="flex" justifyContent="center">
-            <IconLabel>
+            <IconLabel disabled={!onContinue}>
               <InboxOutlined />
             </IconLabel>
           </Box>

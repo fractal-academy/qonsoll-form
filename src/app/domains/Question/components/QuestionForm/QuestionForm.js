@@ -72,7 +72,7 @@ function QuestionForm(props) {
       component: <LongText />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput disabled />
+      component: <DateTimeInput />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
       component: <FileUploader disabled />
