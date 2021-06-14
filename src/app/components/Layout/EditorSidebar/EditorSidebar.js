@@ -157,7 +157,11 @@ function EditorSidebar(props) {
           </Row>
           <Box {...styles.endingsList}>
             {!!endings?.length && (
-              <QuestionsList data={endings} onItemClick={onItemClick} />
+              <QuestionsList
+                data={endings}
+                onItemClick={onItemClick}
+                disableDelete={!!endings?.length}
+              />
             )}
           </Box>
         </Box>

@@ -12,7 +12,7 @@ import {
 } from 'app/context/CurrentQuestion'
 
 function QuestionsList(props) {
-  const { data, setNewOrder, onItemClick } = props
+  const { data, setNewOrder, onItemClick, disableDelete } = props
 
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -71,6 +71,7 @@ function QuestionsList(props) {
           action={handleDelete}
           number={index + 1}
           onClick={() => onItemClick(item, index)}
+          disableDelete={disableDelete}
         />
       )}
     />
