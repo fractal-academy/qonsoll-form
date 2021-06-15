@@ -16,7 +16,8 @@ export const styles = {
     h: 'center',
     height: 'inherit',
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
+    position: 'relative'
   }
 }
 
@@ -41,4 +42,14 @@ export const StyledCol = styled(Col)`
   align-items: center;
   justify-content: center;
   flex: 1;
+`
+
+export const BackgroundImage = styled(Col)`
+  height: inherit;
+  z-index: -100;
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: ${(props) => props.image};
+  filter: brightness(${(props) => props.imageBrightness + 100}%);
 `

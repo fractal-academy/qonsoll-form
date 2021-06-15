@@ -3,7 +3,12 @@ import { Typography } from 'antd'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import { styles, StyledCol, StyledBox } from './QuestionAdvancedView.styles'
+import {
+  styles,
+  StyledCol,
+  StyledBox,
+  BackgroundImage
+} from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -22,8 +27,6 @@ const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
   const { data, questionNumber, onClick, currentSlide } = props
-
-  console.log(data?.imageBrightness, data?.image)
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -120,7 +123,14 @@ function QuestionAdvancedView(props) {
   const devicePadding = (heightSmallDevices && 2) || 4
 
   return (
-    <Row {...styles.mainRowStyle} backgroundImage={bgImage} noGutters>
+    <Row {...styles.mainRowStyle} noGutters>
+      {bgImage && (
+        <BackgroundImage
+          cw={12}
+          image={bgImage}
+          imageBrightness={data?.imageBrightness || 0}
+        />
+      )}
       <Col {...styles.questionCardColumnStyle} cw={[12, 12, 6, 6]}>
         <StyledBox
           pl={devicePadding}

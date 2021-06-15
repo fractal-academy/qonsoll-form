@@ -63,8 +63,6 @@ function ListItem(props) {
   const { data, setEdit, selectedBackgroundImg, setSelectedBackgroundImg } =
     props
 
-  console.log(data?.id)
-
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const [questions] = useCollectionData(
