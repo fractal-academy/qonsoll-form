@@ -199,7 +199,7 @@ function FormsAll(props) {
 }
 
 FormsAll.propTypes = {
-  configurations: PropTypes.object.isRequired
+  configurations: PropTypes.object
 }
 
 export default FormsAll

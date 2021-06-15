@@ -1,6 +1,6 @@
 import { Tag } from 'antd'
 import PropTypes from 'prop-types'
-import React, { cloneElement } from 'react'
+import React, { useState, cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES, DEFAULT_IMAGE } from 'app/constants'
 import {
@@ -36,8 +36,8 @@ function QuestionForm(props) {
     data,
     defaultTab,
     brightnessValue,
-    onChangeMenuItem,
     setBrightnessValue,
+    onChangeMenuItem,
     customQuestionTypes,
     onQuestionTypeChange
   } = props
@@ -107,7 +107,7 @@ function QuestionForm(props) {
     <ContentCard
       onEdit
       image={bgImage}
-      brightnessValue={brightnessValue}
+      brightnessValue={data?.brightnessValue || brightnessValue}
       leftSideMenu={
         !!Object.keys(currentQuestion).length && (
           <QuestionLayoutSwitcher
@@ -135,7 +135,7 @@ function QuestionForm(props) {
                 {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                   <Col cw="auto" ml={2}>
                     <QuestionMediaPopover
-                      brightnessValue={brightnessValue}
+                      brightnessValue={data?.brightnessValue || brightnessValue}
                       setBrightnessValue={setBrightnessValue}
                       MediaModalButtonBackground={popoverImage}
                     />
@@ -157,7 +157,11 @@ function QuestionForm(props) {
                       {...layoutType.imgSize}
                       mb={4}
                       image={computedMediaUrl}
-                      style={{ filter: `brightness(${brightnessValue}%)` }}>
+                      style={{
+                        filter: `brightness(${
+                          data?.brightnessValue + 100 || brightnessValue + 100
+                        }%)`
+                      }}>
                       <QuestionMediaPopover
                         brightnessValue={brightnessValue}
                         setBrightnessValue={setBrightnessValue}
@@ -179,9 +183,10 @@ function QuestionForm(props) {
               order={layoutType?.imageOrder}
               {...styles.sideImageColumnStyle}>
               <QuestionImageContainer
+                layoutType={layoutType?.type}
                 {...layoutType?.imgSize}
                 image={computedMediaUrl}
-                style={{ filter: `brightness(${brightnessValue}%)` }}>
+                style={{ filter: `brightness(${brightnessValue + 100}%)` }}>
                 <Row h="right">
                   <Col cw="auto" mr={4}>
                     <QuestionMediaPopover

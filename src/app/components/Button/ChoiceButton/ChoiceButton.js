@@ -74,9 +74,8 @@ function ChoiceButton(props) {
   return (
     <Row noGutters h={phoneSize && 'center'}>
       {mappedChoices?.map((item, index) => (
-        <Col cw={hasImages ? (phoneSize ? '10' : 'auto') : '12'}>
+        <Col key={index} cw={hasImages ? (phoneSize ? '10' : 'auto') : '12'}>
           <KeyBox
-            key={index}
             index={index}
             item={item}
             hasImages={hasImages}
