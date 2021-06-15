@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const TranslationContext = React.createContext({})
+const TranslationContext = React.createContext({})
 
 export default TranslationContext
