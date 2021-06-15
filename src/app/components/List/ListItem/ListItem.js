@@ -66,9 +66,9 @@ function ListItem(props) {
   // [ADDITIONAL HOOKS]
   const history = useHistory()
   const [questions] = useCollectionData(
-    getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', data?.id)
+    data?.id &&
+      getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', data?.id)
   )
-
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false)
