@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { TextEditable } from 'components'
 import React, { useState, useEffect } from 'react'
-import { Box } from '@qonsoll/react-design'
+
 import {
   useCurrentQuestionContextDispatch,
   useCurrentQuestionContext,

@@ -3,7 +3,12 @@ import { Typography } from 'antd'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from 'app/constants'
-import { styles, StyledCol, StyledBox } from './QuestionAdvancedView.styles'
+import {
+  styles,
+  StyledCol,
+  StyledBox,
+  BackgroundImage
+} from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -70,11 +75,7 @@ function QuestionAdvancedView(props) {
       )
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: (
-        <SubmitButton onClick={onClick} currentSlide={currentSlide}>
-          Continue
-        </SubmitButton>
-      )
+      component: <SubmitButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
@@ -116,9 +117,15 @@ function QuestionAdvancedView(props) {
   const heightSmallDevices = useMedia({ maxWidth: '768px' })
   const deviceImageHeight = (heightSmallDevices && '40%') || '100%'
   const devicePadding = (heightSmallDevices && 2) || 4
-
   return (
-    <Row {...styles.mainRowStyle} backgroundImage={bgImage} noGutters>
+    <Row {...styles.mainRowStyle} noGutters>
+      {bgImage && (
+        <BackgroundImage
+          cw={12}
+          image={bgImage}
+          imageBrightness={data?.imageBrightness || 0}
+        />
+      )}
       <Col {...styles.questionCardColumnStyle} cw={[12, 12, 6, 6]}>
         <StyledBox
           pl={devicePadding}
@@ -137,11 +144,14 @@ function QuestionAdvancedView(props) {
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row noGutters mb={3}>
+            <Row noGutters mb={3} h={heightSmallDevices && 'center'}>
               <Col cw="auto">
                 <QuestionImageContainer
+                  layoutType={layoutType?.type}
+                  heightSmallDevices={heightSmallDevices}
                   {...layoutType.imgSize}
                   image={data?.image}
+                  imageBrightness={data?.imageBrightness || 0}
                 />
               </Col>
             </Row>
@@ -154,7 +164,13 @@ function QuestionAdvancedView(props) {
           height={deviceImageHeight}
           {...styles.sideImageColumnStyle}
           order={heightSmallDevices ? '1' : layoutType.imageOrder}>
-          <QuestionImageContainer {...layoutType.imgSize} image={data?.image} />
+          <QuestionImageContainer
+            image={data?.image}
+            layoutType={layoutType?.type}
+            heightSmallDevices={heightSmallDevices}
+            {...layoutType.imgSize}
+            imageBrightness={data?.imageBrightness || 0}
+          />
         </StyledCol>
       )}
     </Row>

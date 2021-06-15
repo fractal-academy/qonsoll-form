@@ -11,7 +11,7 @@ import { generatePath, useHistory, useParams } from 'react-router'
 const { Title } = Typography
 
 function PageHeader(props) {
-  const { title } = props
+  const { title, questionsList } = props
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -49,6 +49,7 @@ function PageHeader(props) {
           <Button
             type="text"
             shape="circle"
+            disabled={questionsList?.length < 1}
             icon={<EyeOutlined style={globalStyles.iconSize} />}
             onClick={onFormShow}
           />

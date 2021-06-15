@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Button, Typography } from 'antd'
+import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS } from 'app/constants'
 import { Box } from '@qonsoll/react-design'
 import { FormShowHeader } from './FormShow.style'
@@ -9,12 +10,11 @@ import { useHistory, useParams } from 'react-router'
 import { getCollectionRef } from 'app/services/Firestore'
 import { FormAdvancedView } from 'domains/Form/components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { QuestionAdvancedView } from 'domains/Question/components'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import ANSWERS_DISPATCH_EVENTS from 'app/context/Answers/DispatchEventsTypes'
 import TypeformConfigurationContext from 'app/context/TypeformConfigurationContext'
 import { useAnswersContextDispatch } from 'app/context/Answers/useAnswersContext'
-import { useKeyPress } from '@umijs/hooks'
+import FormShowHeightWrapper from 'domains/Form/routes/FormShow/FormShowHeightWrapper'
 
 const { Title } = Typography
 
@@ -39,6 +39,7 @@ function FormShow(props) {
   const sortedData = data && data.sort((a, b) => a.order - b.order)
   const disabledUp = currentSlide === 0
   const disabledDown = currentSlide === data?.length - 1
+
   //temporary solution for ending logic; fix after adding logic jumps
   sortedData &&
     sortedData.forEach(
@@ -65,6 +66,9 @@ function FormShow(props) {
 
     setIsAnswered(true)
   }
+  useKeyPress(9, (e) => {
+    e.preventDefault()
+  })
 
   return (
     <TypeformConfigurationContext.Provider value={configurations}>
@@ -99,7 +103,8 @@ function FormShow(props) {
               setIsAnswered={setIsAnswered}
               setCurrentSlide={setCurrentSlide}>
               {sortedData?.map((item, index) => (
-                <Component
+                <FormShowHeightWrapper
+                  key={index}
                   sortedData={sortedData}
                   onClick={onClick}
                   currentSlide={currentSlide}
@@ -112,20 +117,6 @@ function FormShow(props) {
         </Box>
       )}
     </TypeformConfigurationContext.Provider>
-  )
-}
-
-const Component = ({ index, item, onClick, currentSlide, wrapperHeight }) => {
-  return (
-    <Box key={index} height={wrapperHeight} overflowY="auto">
-      <QuestionAdvancedView
-        wrapperHeight={wrapperHeight}
-        data={item}
-        questionNumber={index + 1}
-        onClick={onClick}
-        currentSlide={currentSlide}
-      />
-    </Box>
   )
 }
 

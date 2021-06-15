@@ -1,8 +1,8 @@
+import { message } from 'antd'
 import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import { useParams } from 'react-router'
-import { Typography, message } from 'antd'
 import { Box } from '@qonsoll/react-design'
 import { useState, useEffect } from 'react'
 import { QuestionForm } from 'domains/Question/components'
@@ -39,7 +39,7 @@ function FormEdit(props) {
 
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
-  const [brightnessValue, setBrightnessValue] = useState(100)
+  const [brightnessValue, setBrightnessValue] = useState(0)
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
@@ -115,7 +115,10 @@ function FormEdit(props) {
         <Spinner />
       ) : (
         <Box display="flex" height="inherit" overflowX="hidden">
-          <PageLayout handleSmallScreen={handleSmallScreen} title={form?.title}>
+          <PageLayout
+            handleSmallScreen={handleSmallScreen}
+            questionsList={questionsList}
+            title={form?.title}>
             <QuestionForm
               data={currentQuestion}
               defaultTab={defaultTab}

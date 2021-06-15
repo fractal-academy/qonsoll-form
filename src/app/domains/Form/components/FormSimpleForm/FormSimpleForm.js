@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input } from 'antd'
-import { Col, Row } from '@qonsoll/react-design'
+import { Col } from '@qonsoll/react-design'
 import TextArea from 'antd/es/input/TextArea'
 
 function FormSimpleForm(props) {

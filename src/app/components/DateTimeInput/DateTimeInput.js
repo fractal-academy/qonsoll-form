@@ -25,7 +25,7 @@ const DateTimeInput = (props) => {
       events: ['keydown', 'keyup']
     }
   )
-  return <DatePicker onChange={onChange} {...props} />
+  return <DatePicker onChange={onChange} disabled={!onDateChange} />
 }
 
 export default DateTimeInput

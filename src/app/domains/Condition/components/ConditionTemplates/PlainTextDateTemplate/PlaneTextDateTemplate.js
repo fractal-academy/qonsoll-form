@@ -1,8 +1,8 @@
 import React from 'react'
+import { Select } from 'antd'
 import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from 'domains/Question/components'
-import { Select, Typography } from 'antd'
 import { DATE_CONDITION_RULES_VALUES } from 'app/constants/dateConditionRules'
 import {
   CustomButton,
@@ -12,7 +12,6 @@ import {
 } from './PlainTextDateTemplate.style'
 
 const { Option } = Select
-const { Text } = Typography
 
 function PlaneTextDateTemplate(props) {
   const { answers, addCondition, questionList, addRedirectQuestion } = props

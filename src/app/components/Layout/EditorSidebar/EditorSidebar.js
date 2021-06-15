@@ -79,7 +79,7 @@ function EditorSidebar(props) {
     endings?.map((item, index) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
-        order: questions?.length + index + 1
+        order: questions?.length + index
       })
     )
   }, [questions?.length])
@@ -157,7 +157,11 @@ function EditorSidebar(props) {
           </Row>
           <Box {...styles.endingsList}>
             {!!endings?.length && (
-              <QuestionsList data={endings} onItemClick={onItemClick} />
+              <QuestionsList
+                data={endings}
+                onItemClick={onItemClick}
+                disableDelete={!!endings?.length}
+              />
             )}
           </Box>
         </Box>

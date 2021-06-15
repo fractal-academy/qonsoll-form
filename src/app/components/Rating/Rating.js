@@ -48,6 +48,7 @@ function CustomRating(props) {
         allowClear={allowClear}
         tooltips={tooltips}
         onChange={onChange}
+        disabled={!onClick}
       />
     </Container>
   )
