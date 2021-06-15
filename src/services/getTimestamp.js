@@ -1,4 +1,3 @@
-
 /**
  *
  * @returns {firebase.firestore.Timestamp}

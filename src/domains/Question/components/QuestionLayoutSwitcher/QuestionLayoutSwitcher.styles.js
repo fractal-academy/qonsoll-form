@@ -16,7 +16,7 @@ export const StyledItem = styled(Menu?.Item)`
   ${({ theme }) => `
   display: flex;
   align-items: center;
-  padding: ${theme?.space[2] || typeformTheme?.space[2]} !important;
+  padding: ${theme?.space?.[2] || typeformTheme?.space[2]} !important;
   &:last-child {
   border-bottom-left-radius:${
     theme?.borderRadius?.md || typeformTheme?.borderRadius?.md

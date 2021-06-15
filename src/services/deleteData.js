@@ -1,4 +1,4 @@
-import  getCollectionRef from "./getCollectionRef"
+import getCollectionRef from './getCollectionRef'
 
 /**
  * @param {string} collection - collection name.
@@ -6,7 +6,7 @@ import  getCollectionRef from "./getCollectionRef"
  * @returns {Promise}
  * */
 
-function deleteData(firebase,collection, document) {
-  return getCollectionRef(firebase,collection).doc(document).delete()
+function deleteData(firebase, collection, document) {
+  return getCollectionRef(firebase, collection).doc(document).delete()
 }
 export default deleteData

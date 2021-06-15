@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import theme from '../../../../../../styles/theme'
 import Text from 'antd/lib/typography/Text'
 import { Col, Row } from '@qonsoll/react-design'
-import { CustomOpinionBox, CustomTextBox  } from './OpinionScaleTemplate.styles'
+import { CustomOpinionBox, CustomTextBox } from './OpinionScaleTemplate.styles'
 import { QuestionSelect } from '../../../../../domains/Question/components'
 
 let startLetter = 65

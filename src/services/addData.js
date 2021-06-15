@@ -1,4 +1,4 @@
-import getCollectionRef from "./getCollectionRef"
+import getCollectionRef from './getCollectionRef'
 
 /**
  * @param {string} collection - collection name.
@@ -6,7 +6,7 @@ import getCollectionRef from "./getCollectionRef"
  * @returns {Promise}
  * */
 
-function addData(firebase,collection, data) {
-  return getCollectionRef(firebase,collection).add(data)
+function addData(firebase, collection, data) {
+  return getCollectionRef(firebase, collection).add(data)
 }
 export default addData

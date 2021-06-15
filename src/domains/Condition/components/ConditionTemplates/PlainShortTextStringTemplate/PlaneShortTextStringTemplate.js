@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Select } from 'antd'
-import { Box,Col, Row } from '@qonsoll/react-design'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from '../../../../../domains/Question/components'
 import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
 import {
