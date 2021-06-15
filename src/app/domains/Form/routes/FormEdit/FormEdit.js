@@ -135,6 +135,7 @@ function FormEdit(props) {
               transparent
               endings={endings}
               questions={questions}
+              setBrightnessValue={setBrightnessValue}
               customQuestionTypes={customQuestionTypes}
             />
           )}
