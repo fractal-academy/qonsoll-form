@@ -2,19 +2,41 @@ import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 import typeformTheme from 'app/styles/theme'
 import { LAYOUT_TYPES } from 'app/constants'
-import css from 'styled-components'
 
 const ImageContainer = styled(Box)`
-  ${({ theme, image, layoutType }) => `
+  ${({ theme, image, layoutType, heightSmallDevices, imageBrightness }) => `
     background-size: cover;
-    border-radius:
-${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  ${console.log(layoutType)}
-
-
+    filter: brightness(${imageBrightness + 100}%);
     background-repeat: no-repeat;
     background-image: url(${image});
     background-position: center center;
+    
+    border-radius:
+${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+    border-top-right-radius:
+${
+  layoutType === LAYOUT_TYPES.LEFT_SIDE_BIG.type && !heightSmallDevices
+    ? 0
+    : theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+};
+    border-bottom-right-radius:
+${
+  layoutType === LAYOUT_TYPES.LEFT_SIDE_BIG.type && !heightSmallDevices
+    ? 0
+    : theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+};
+    border-top-left-radius:
+${
+  layoutType === LAYOUT_TYPES.RIGHT_SIDE_BIG.type && !heightSmallDevices
+    ? 0
+    : theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+};
+    border-bottom-left-radius:
+${
+  layoutType === LAYOUT_TYPES.RIGHT_SIDE_BIG.type && !heightSmallDevices
+    ? 0
+    : theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+};
 `}
 `
 export default ImageContainer
