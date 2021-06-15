@@ -24,13 +24,7 @@ import { PopoverNegativeMarin } from 'app/styles/NegativeMargin'
 const { Title } = Typography
 
 function EditorSidebar(props) {
-  const {
-    questions,
-    endings,
-    transparent,
-    setBrightnessValue,
-    customQuestionTypes
-  } = props
+  const { questions, endings, transparent, customQuestionTypes } = props
 
   // [ADDITIONAL HOOKS]
   const { id } = useParams()
@@ -79,7 +73,6 @@ function EditorSidebar(props) {
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: item
     })
-    setBrightnessValue(item.imageBrightness)
   }
 
   useEffect(() => {

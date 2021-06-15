@@ -5,6 +5,8 @@ import { FormEdit, FormsAll, FormShow } from 'domains/Form/routes'
 import CurrentQuestionContextProvider from 'app/context/CurrentQuestion'
 import AnswersContextProvider from 'app/context/Answers/AnswersContext'
 
+const translations = {}
+
 const App = () => {
   return (
     <Switch>

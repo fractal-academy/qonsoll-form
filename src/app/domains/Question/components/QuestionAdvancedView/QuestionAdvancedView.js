@@ -75,11 +75,7 @@ function QuestionAdvancedView(props) {
       )
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: (
-        <SubmitButton onClick={onClick} currentSlide={currentSlide}>
-          Continue
-        </SubmitButton>
-      )
+      component: <SubmitButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
@@ -148,7 +144,7 @@ function QuestionAdvancedView(props) {
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row noGutters mb={3}>
+            <Row noGutters mb={3} h={heightSmallDevices && 'center'}>
               <Col cw="auto">
                 <QuestionImageContainer
                   layoutType={layoutType?.type}

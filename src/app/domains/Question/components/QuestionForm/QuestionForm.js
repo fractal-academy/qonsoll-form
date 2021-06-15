@@ -1,6 +1,6 @@
 import { Tag } from 'antd'
 import PropTypes from 'prop-types'
-import React, { useState, cloneElement } from 'react'
+import React, { useState, cloneElement, useEffect } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES, DEFAULT_IMAGE } from 'app/constants'
 import {
@@ -78,7 +78,7 @@ function QuestionForm(props) {
       component: <FileUploader disabled />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton>Next</SubmitButton>
+      component: <SubmitButton />
     },
     [QUESTION_TYPES.ENDING]: {
       component: <SubmitButton>Finish</SubmitButton>
@@ -102,6 +102,10 @@ function QuestionForm(props) {
   const isConfigurationPopoverVisible = !(
     currentQuestion.questionType === QUESTION_TYPES.ENDING
   )
+
+  useEffect(() => {
+    setBrightnessValue(currentQuestion.imageBrightness || 0)
+  }, [currentQuestion, setBrightnessValue])
 
   return (
     <ContentCard
