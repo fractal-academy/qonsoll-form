@@ -29,7 +29,7 @@ const ImageBackground = styled(Box)`
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(${image});
-  filter: brightness(${brightnessValue}%);
+  filter: brightness(${brightnessValue + 100}%);
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   
   `}

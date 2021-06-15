@@ -23,6 +23,8 @@ const { Title, Text } = Typography
 function QuestionAdvancedView(props) {
   const { data, questionNumber, onClick, currentSlide } = props
 
+  console.log(data?.imageBrightness, data?.image)
+
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.YES_NO]: {
@@ -142,6 +144,7 @@ function QuestionAdvancedView(props) {
                 <QuestionImageContainer
                   {...layoutType.imgSize}
                   image={data?.image}
+                  imageBrightness={data?.imageBrightness || 0}
                 />
               </Col>
             </Row>
@@ -154,7 +157,11 @@ function QuestionAdvancedView(props) {
           height={deviceImageHeight}
           {...styles.sideImageColumnStyle}
           order={heightSmallDevices ? '1' : layoutType.imageOrder}>
-          <QuestionImageContainer {...layoutType.imgSize} image={data?.image} />
+          <QuestionImageContainer
+            image={data?.image}
+            {...layoutType.imgSize}
+            imageBrightness={data?.imageBrightness || 0}
+          />
         </StyledCol>
       )}
     </Row>
