@@ -6,7 +6,7 @@ import { Container, Box } from '@qonsoll/react-design'
 import { useKeyPress } from '@umijs/hooks'
 
 function ShortText(props) {
-  const { inputProps, onClick, question, currentSlide } = props
+  const { onClick, question, currentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
@@ -64,10 +64,10 @@ function ShortText(props) {
           name="answer"
           rules={[{ required: question?.isRequired }]}>
           <Input
-            {...inputProps}
             maxLength={300}
             placeholder="Type your answer here..."
             onPressEnter={onFocusedKeyPress}
+            disabled={!onClick}
           />
         </Form.Item>
       </Form>
@@ -81,8 +81,7 @@ function ShortText(props) {
 ShortText.propTypes = {
   onSubmit: PropTypes.func,
   isRequired: PropTypes.bool,
-  btnProps: PropTypes.object,
-  inputProps: PropTypes.object
+  btnProps: PropTypes.object
 }
 
 export default ShortText

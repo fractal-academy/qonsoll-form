@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Box, Col } from '@qonsoll/react-design'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import typeformTheme from 'app/styles/theme'
 
 export const styles = {
   questionCardColumnStyle: {
@@ -21,7 +22,21 @@ export const styles = {
   }
 }
 
-export const StyledBox = styled(Box)`
+export const WrapperRow = styled(Row)`
+  ${({ theme }) => `
+    height: inherit;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    border-radius: 
+        ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+    }
+`}
+`
+
+export const StyledBox = styled(Col)`
   ${({ specialLayoutRule }) => `
   width: 100%;
   // height: 100%;
@@ -52,4 +67,7 @@ export const BackgroundImage = styled(Col)`
   background-repeat: no-repeat;
   background-image: ${(props) => props.image};
   filter: brightness(${(props) => props.imageBrightness + 100}%);
+  ${({ theme }) => `
+border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+`}
 `

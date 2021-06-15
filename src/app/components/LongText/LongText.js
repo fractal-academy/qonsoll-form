@@ -74,6 +74,7 @@ function LongText(props) {
             autoSize={{ minRows: 1, maxRows: 4 }}
             placeholder="Type your answer here..."
             onPressEnter={onFocusedKeyPress}
+            disabled={!onClick}
           />
         </Form.Item>
         <Form.Item>

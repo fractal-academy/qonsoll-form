@@ -121,7 +121,6 @@ function QuestionAdvancedView(props) {
   const heightSmallDevices = useMedia({ maxWidth: '768px' })
   const deviceImageHeight = (heightSmallDevices && '40%') || '100%'
   const devicePadding = (heightSmallDevices && 2) || 4
-
   return (
     <Row {...styles.mainRowStyle} noGutters>
       {bgImage && (
@@ -152,6 +151,8 @@ function QuestionAdvancedView(props) {
             <Row noGutters mb={3}>
               <Col cw="auto">
                 <QuestionImageContainer
+                  layoutType={layoutType?.type}
+                  heightSmallDevices={heightSmallDevices}
                   {...layoutType.imgSize}
                   image={data?.image}
                   imageBrightness={data?.imageBrightness || 0}
@@ -169,6 +170,8 @@ function QuestionAdvancedView(props) {
           order={heightSmallDevices ? '1' : layoutType.imageOrder}>
           <QuestionImageContainer
             image={data?.image}
+            layoutType={layoutType?.type}
+            heightSmallDevices={heightSmallDevices}
             {...layoutType.imgSize}
             imageBrightness={data?.imageBrightness || 0}
           />
