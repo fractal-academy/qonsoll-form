@@ -1,6 +1,6 @@
 import { Tag } from 'antd'
 import PropTypes from 'prop-types'
-import React, { useState, cloneElement } from 'react'
+import React, { useState, cloneElement, useEffect } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES, DEFAULT_IMAGE } from 'app/constants'
 import {
@@ -99,6 +99,10 @@ function QuestionForm(props) {
     layoutType?.type !== LAYOUT_TYPES.DEFAULT.type
   const bgImage =
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
+
+  useEffect(() => {
+    setBrightnessValue(currentQuestion.imageBrightness || 0)
+  }, [currentQuestion, setBrightnessValue])
 
   return (
     <ContentCard
