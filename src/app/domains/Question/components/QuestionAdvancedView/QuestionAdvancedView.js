@@ -142,6 +142,7 @@ function QuestionAdvancedView(props) {
                 <QuestionImageContainer
                   {...layoutType.imgSize}
                   image={data?.image}
+                  layoutType={layoutType?.type}
                 />
               </Col>
             </Row>
@@ -154,7 +155,11 @@ function QuestionAdvancedView(props) {
           height={deviceImageHeight}
           {...styles.sideImageColumnStyle}
           order={heightSmallDevices ? '1' : layoutType.imageOrder}>
-          <QuestionImageContainer {...layoutType.imgSize} image={data?.image} />
+          <QuestionImageContainer
+            {...layoutType.imgSize}
+            image={data?.image}
+            layoutType={layoutType?.type}
+          />
         </StyledCol>
       )}
     </Row>
