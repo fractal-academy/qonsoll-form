@@ -72,7 +72,7 @@ function QuestionForm(props) {
       component: <LongText />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput disabled />
+      component: <DateTimeInput />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
       component: <FileUploader disabled />
@@ -99,6 +99,9 @@ function QuestionForm(props) {
     layoutType?.type !== LAYOUT_TYPES.DEFAULT.type
   const bgImage =
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
+  const isConfigurationPopoverVisible = !(
+    currentQuestion.questionType === QUESTION_TYPES.ENDING
+  )
 
   return (
     <ContentCard
@@ -121,12 +124,14 @@ function QuestionForm(props) {
                 <Col>
                   <Tag color="blue">{questionTag}</Tag>
                 </Col>
-                <Col cw="auto">
-                  <QuestionConfigurationPopover
-                    customQuestionTypes={customQuestionTypes}
-                    onQuestionTypeChange={onQuestionTypeChange}
-                  />
-                </Col>
+                {isConfigurationPopoverVisible && (
+                  <Col cw="auto">
+                    <QuestionConfigurationPopover
+                      customQuestionTypes={customQuestionTypes}
+                      onQuestionTypeChange={onQuestionTypeChange}
+                    />
+                  </Col>
+                )}
                 {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                   <Col cw="auto" ml={2}>
                     <QuestionMediaPopover

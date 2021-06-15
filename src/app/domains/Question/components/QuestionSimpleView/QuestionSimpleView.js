@@ -1,7 +1,7 @@
-import { Popconfirm } from 'antd'
+import { Popconfirm, Button } from 'antd'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import { LAYOUT_TYPES } from 'app/constants'
+import { LAYOUT_TYPES, QUESTION_TYPES } from 'app/constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { NumberedCard, IconRoundContainer } from 'components'
 import { DescriptionContainer } from './QuestionSimpleView.styles'
@@ -9,7 +9,16 @@ import { CloseOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { useCurrentQuestionContext } from 'app/context/CurrentQuestion'
 
 function QuestionSimpleView(props) {
-  const { title, action, number, layoutType, onClick, id } = props
+  const {
+    title,
+    action,
+    number,
+    layoutType,
+    onClick,
+    id,
+    questionType,
+    disableDelete
+  } = props
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
@@ -41,8 +50,15 @@ function QuestionSimpleView(props) {
           <Col cw="auto">
             <Popconfirm
               title="Delete this question?"
-              onConfirm={(e) => action(e, id)}>
-              <CloseOutlined />
+              onConfirm={(e) => action(e, id)}
+              disabled={disableDelete}>
+              <Button
+                icon={<CloseOutlined />}
+                type="text"
+                shape="circle"
+                size="small"
+                disabled={disableDelete}
+              />
             </Popconfirm>
           </Col>
         </Row>

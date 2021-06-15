@@ -53,8 +53,6 @@ function FormsAll(props) {
 
   // [COMPUTED PROPERTIES]
   let amountFiles = data?.length
-  const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
-  const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
 
   // [CLEAN FUNCTIONS]
   const searchData = () => {
@@ -70,24 +68,39 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
-    await setData(COLLECTIONS.FORMS, formId, {
+    const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
+
+    setData(COLLECTIONS.FORMS, formId, {
       id: formId,
       title: data?.name,
       subtitle: data?.description || '',
       creationDate: getTimestamp().now()
-    })
-      .then(
-        edit === false &&
-          (await setData(COLLECTIONS.QUESTIONS, questionId, {
-            formId: formId,
-            id: questionId,
-            layoutType: LAYOUT_TYPE_KEYS[0],
-            questionType: QUESTION_TYPES.WELCOME_SCREEN,
-            title: 'WS.',
-            order: 0
-          }))
-      )
-      .catch((e) => message.error(e.message))
+    }).catch((e) => message.error(e.message))
+
+    if (!edit) {
+      //generate default question id and default ending id
+      const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+      const endingId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+
+      //add default question and ending to database
+      setData(COLLECTIONS.QUESTIONS, questionId, {
+        formId: formId,
+        id: questionId,
+        layoutType: LAYOUT_TYPE_KEYS[0],
+        questionType: QUESTION_TYPES.WELCOME_SCREEN,
+        title: 'WS.',
+        order: 0
+      }).catch((e) => message.error(e.message))
+
+      setData(COLLECTIONS.QUESTIONS, endingId, {
+        formId: formId,
+        id: endingId,
+        layoutType: LAYOUT_TYPE_KEYS[0],
+        questionType: QUESTION_TYPES.ENDING,
+        title: 'Thank you for attention!',
+        order: 1
+      }).catch((e) => message.error(e.message))
+    }
   }
 
   const menu = (
