@@ -78,7 +78,7 @@ function QuestionForm(props) {
       component: <FileUploader disabled />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton>Next</SubmitButton>
+      component: <SubmitButton />
     },
     [QUESTION_TYPES.ENDING]: {
       component: <SubmitButton>Finish</SubmitButton>
