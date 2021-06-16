@@ -11,7 +11,9 @@ const IconRoundContainer = styled(Box)`
   width: 40px;
   height: 40px;
   background-color: ${
-    (danger && theme.color?.danger?.t?.lighten) ||
+    (danger &&
+      (theme.color?.danger?.t?.lighten ||
+        typeformTheme.color?.danger?.t?.lighten)) ||
     theme?.color?.dark?.t?.lighten6 ||
     typeformTheme?.color?.dark?.t?.lighten6
   };
