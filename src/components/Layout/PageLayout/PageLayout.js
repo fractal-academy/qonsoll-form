@@ -3,12 +3,16 @@ import { Typography } from 'antd'
 import PropTypes from 'prop-types'
 import { PageHeader } from '../../../components'
 import { Box } from '@qonsoll/react-design'
+import { useTranslation } from '../../../context/Translation'
 
 const { Text } = Typography
 
 function PageLayout(props) {
+  //[CUSTOM HOOKS]
+  const { formEditTitle, smallScreenHandleWarning } = useTranslation()
+
   const {
-    title = 'New Form',
+    title = formEditTitle || 'New Form',
     children,
     id,
     onBack,
@@ -37,7 +41,10 @@ function PageLayout(props) {
           display="flex"
           alignItems="center"
           justifyContent="center">
-          <Text>This feature is not supported by this device.</Text>
+          <Text>
+            {smallScreenHandleWarning ||
+              'This feature is not supported by this device.'}
+          </Text>
         </Box>
       )}
     </Box>

@@ -18,11 +18,15 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
+import { useTranslation } from '../../context/Translation'
 
 let startLetter = 65
 
 function ChoiceEditable(props) {
   const { index, data, withImage } = props
+
+  //[CUSTOM HOOKS]
+  const { editableChoicePlaceholder } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
@@ -94,7 +98,7 @@ function ChoiceEditable(props) {
             maxlength="150"
             value={value}
             onBlur={onBlur}
-            placeholder={`choice ${index}`}
+            placeholder={`${editableChoicePlaceholder || 'choice'} ${index}`}
             autoSize={{ minRows: 1, maxRows: 12 }}
             bordered={false}
             onChange={onChange}

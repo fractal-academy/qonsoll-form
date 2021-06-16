@@ -10,8 +10,10 @@ function YesnoButton(props) {
   const { onClick, currentSlide, question } = props
   const { order } = question
 
+  //[CUSTOM HOOKS]
+  const { yes, no, answerRequiredMessageError } = useTranslation()
+
   // [ADDITIONAL_HOOKS]
-  const { t } = useTranslation()
   useKeyPress(
     (event) =>
       (![].includes(event.key) || event.keyCode === 13) &&
@@ -25,7 +27,10 @@ function YesnoButton(props) {
           }
           !question?.isRequired
             ? onClick && onClick(answerData)
-            : message.error('It`s required question, please answer')
+            : message.error(
+                answerRequiredMessageError ||
+                  'It`s required question, please answer'
+              )
         } else {
           const key = `${event.key}`.toUpperCase()
           const currentChoice = key === 'Y' ? 'Yes' : 'No'
@@ -46,13 +51,13 @@ function YesnoButton(props) {
     {
       letter: 'Y',
       choice: {
-        name: t('Yes')
+        name: yes || 'Yes'
       }
     },
     {
       letter: 'N',
       choice: {
-        name: t('No')
+        name: no || 'No'
       }
     }
   ]
@@ -71,8 +76,6 @@ function YesnoButton(props) {
         answer
       }
       onClick && onClick(data)
-
-      console.log(`${letter} was pressed`)
     }
   }
 

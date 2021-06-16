@@ -14,7 +14,12 @@ function LongText(props) {
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
-  const { t } = useTranslation()
+  const {
+    longTextEnterHint,
+    answerRequiredMessageError,
+    longTextInputPlaceholder
+  } = useTranslation()
+
   useKeyPress(
     (e) =>
       //if pressed enter without shift and this event on this question slide - dispatch second callback
@@ -39,7 +44,8 @@ function LongText(props) {
   }
 
   // [COMPUTED_PROPERTIES]
-  const explanation = t('Shift ⇧ + Enter ↵ to make a line break')
+  const explanation =
+    longTextEnterHint || 'Shift ⇧ + Enter ↵ to make a line break'
 
   const onPressOk = () => {
     //get values from form to check if there is any answer data
@@ -49,7 +55,10 @@ function LongText(props) {
     question?.isRequired
       ? !!value
         ? form.submit()
-        : message.error('It`s required question, please answer')
+        : message.error(
+            answerRequiredMessageError ||
+              'It`s required question, please answer'
+          )
       : form.submit()
   }
 
@@ -76,7 +85,7 @@ function LongText(props) {
             bordered
             maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
-            placeholder="Type your answer here..."
+            placeholder={longTextInputPlaceholder || 'Type your answer here...'}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}
           />
