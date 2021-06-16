@@ -1,24 +1,24 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
 import theme from '../../../../../styles/theme'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import COLLECTIONS from '../../../../constants/collection'
+import { Row, Col } from '@qonsoll/react-design'
+import { SearchOutlined } from '@ant-design/icons'
+import { StaticList } from '../../../../components'
+import useFunctions from '../../../../hooks/useFunctions'
 import React, { useEffect, useRef, useState } from 'react'
-import { Modal, Button, Typography, Upload, message, Divider } from 'antd'
+import COLLECTIONS from '../../../../constants/collection'
+import { useTranslation } from '../../../../context/Translation'
+import { Modal, Button, Typography, Upload, message } from 'antd'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { FilterOutlined, SearchOutlined } from '@ant-design/icons'
 import {
   CustomChangeButtonText,
+  MediaListContainer,
   CustomButton,
-  CustomDivider,
   CustomInput,
   CustomText,
-  MediaListContainer,
   styles
 } from './MediaLibraryModal.styles'
 import { MediaLibraryFilter } from '../../../../domains/MediaLibrary/components'
-import useFunctions from '../../../../hooks/useFunctions'
-import { StaticList } from '../../../../components'
 
 const { Title } = Typography
 
@@ -27,17 +27,25 @@ function MediaLibraryModal(props) {
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef, setData, storage } = useFunctions()
+
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
+  const {
+    addButton,
+    amountTitle,
+    changeButton,
+    searchPlaceholder,
+    mediaLibraryTitle
+  } = useTranslation()
 
   const searchRef = useRef()
 
   // [COMPONENT STATE HOOKS]
-  const [isModalVisible, setIsModalVisible] = useState(false)
   // const [switchState, setSwitchState] = useState(false)
+  const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const [sidebarState, setSidebarState] = useState(true)
   const [imagesList, setImagesList] = useState(media)
-  const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(false)
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
@@ -57,18 +65,12 @@ function MediaLibraryModal(props) {
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
   }
-  const onFilterButtonClick = () => {
-    setSidebarState(!sidebarState)
-  }
   const onApplyFilter = () => {
     setSidebarState(!sidebarState)
   }
   const onCancelFilter = () => {
     setSidebarState(!sidebarState)
   }
-  // const onSwitchChange = () => {
-  //   setSwitchState(!switchState)
-  // }
   const modalStateChange = () => {
     setIsModalVisible(!isModalVisible)
     onClick?.()
@@ -76,6 +78,12 @@ function MediaLibraryModal(props) {
   const onChange = (input) => {
     searchData(input.target.value)
   }
+  // const onSwitchChange = () => {
+  //   setSwitchState(!switchState)
+  // }
+  // const onFilterButtonClick = () => {
+  //   setSidebarState(!sidebarState)
+  // }
   const customRequest = (data) => {
     const { onSuccess } = data
     const ref = storage.ref('images').child(data.file.uid)
@@ -125,10 +133,13 @@ function MediaLibraryModal(props) {
       isComponentMounted = false
     }
   }, [media])
+
   return (
     <>
       <CustomButton {...btnProps} onClick={modalStateChange}>
-        <CustomChangeButtonText>Change</CustomChangeButtonText>
+        <CustomChangeButtonText>
+          {changeButton || 'Change'}
+        </CustomChangeButtonText>
       </CustomButton>
       <Modal
         visible={isModalVisible}
@@ -141,7 +152,7 @@ function MediaLibraryModal(props) {
           <Col style={{ flexDirection: 'column' }}>
             <Row mb={1} v="center" px={3}>
               <Col>
-                <Title level={3}>Media Library</Title>
+                <Title level={3}>{mediaLibraryTitle || 'Media Library'}</Title>
               </Col>
               <Col cw="auto" v="center">
                 {/* For future improvements.
@@ -170,13 +181,16 @@ function MediaLibraryModal(props) {
                   multiple
                   name="file"
                   customRequest={customRequest}>
-                  <Button type="primary">+ Add</Button>
+                  <Button type="primary">{addButton || '+ Add'}</Button>
                 </Upload>
               </Col>
             </Row>
             <Row pb={25} px={3}>
               <Col>
-                <CustomText>You have {amountFiles} files.</CustomText>
+                <CustomText>
+                  {amountTitle || 'Amount files: '}
+                  {amountFiles}
+                </CustomText>
               </Col>
             </Row>
             <Row px={3} pb={3}>
@@ -185,12 +199,14 @@ function MediaLibraryModal(props) {
                   allowClear
                   ref={searchRef}
                   prefix={<SearchOutlined />}
-                  placeholder="Search media file by name..."
+                  placeholder={
+                    searchPlaceholder || 'Search media file by name...'
+                  }
                   onSearch={searchData}
                   onChange={onChange}
                 />
               </Col>
-              <Col cw="auto" noGutters>
+              {/* <Col cw="auto" noGutters>
                 <CustomDivider type="vertical" />
               </Col>
               <Col cw="auto" v="center">
@@ -200,7 +216,7 @@ function MediaLibraryModal(props) {
                   onClick={onFilterButtonClick}>
                   Filter
                 </Button>
-              </Col>
+              </Col> */}
             </Row>
 
             <MediaListContainer pl={2} pt={2}>

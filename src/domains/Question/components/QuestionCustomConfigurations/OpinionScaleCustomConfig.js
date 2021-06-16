@@ -1,12 +1,12 @@
 import React from 'react'
 import { Typography, Select } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
+import { useTranslation } from '../../../../context/Translation'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
-import { useTranslation } from '../../../../context/Translation'
 
 const { Text } = Typography
 const { Option } = Select
@@ -15,7 +15,7 @@ const opinionScaleTo = [5, 6, 7, 8, 9, 10]
 
 function OpinionScaleCustomConfig() {
   // [ADDITIONAL_HOOKS]
-  const { t } = useTranslation()
+  const { fromSetting, toSetting } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -45,7 +45,7 @@ function OpinionScaleCustomConfig() {
   return (
     <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>
-        <Text strong>{t('From')}</Text>
+        <Text strong>{fromSetting || 'From'}</Text>
       </Col>
       <Col>
         <Select
@@ -57,7 +57,7 @@ function OpinionScaleCustomConfig() {
         </Select>
       </Col>
       <Col v="center" cw="auto" mr={3}>
-        <Text strong>{t('to')}</Text>
+        <Text strong>{toSetting || 'to'}</Text>
       </Col>
       <Col cw="auto">
         <Select

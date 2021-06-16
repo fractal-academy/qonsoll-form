@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
 import { Typography, Switch } from 'antd'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
+import { useTranslation } from '../../../../context/Translation'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
-import { useTranslation } from '../../../../context/Translation'
 import {
   OpinionScaleCustomConfig,
   RatingCustomConfig
@@ -17,7 +17,7 @@ const { Text } = Typography
 
 function QuestionConfigurationMenu() {
   // [ADDITIONAL_HOOKS]
-  const { t } = useTranslation()
+  const { requiredSwitcher } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -45,7 +45,7 @@ function QuestionConfigurationMenu() {
     <Box px={3} pt={2} h="between">
       <Row mb={3} noGutters v="center">
         <Col v="center">
-          <Text strong>{t('Required')}</Text>
+          <Text strong>{requiredSwitcher || 'Required'}</Text>
         </Col>
         <Col cw="auto" px={2}>
           <Switch

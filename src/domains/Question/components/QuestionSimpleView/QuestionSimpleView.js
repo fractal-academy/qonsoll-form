@@ -1,27 +1,21 @@
-import { Popconfirm, Button } from 'antd'
 import PropTypes from 'prop-types'
+import { Popconfirm, Button } from 'antd'
 import React, { cloneElement } from 'react'
-import { CloseOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { LAYOUT_TYPES } from '../../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { useTranslation } from '../../../../context/Translation'
+import { DescriptionContainer } from './QuestionSimpleView.styles'
+import { CloseOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
-import { DescriptionContainer } from './QuestionSimpleView.styles'
 
 function QuestionSimpleView(props) {
-  const {
-    title,
-    action,
-    number,
-    layoutType,
-    onClick,
-    id,
-    questionType,
-    disableDelete
-  } = props
+  const { title, action, number, layoutType, onClick, id, disableDelete } =
+    props
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
+  const { popconfirmTitle } = useTranslation()
 
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id
@@ -49,7 +43,7 @@ function QuestionSimpleView(props) {
           </Col>
           <Col cw="auto">
             <Popconfirm
-              title="Delete this question?"
+              title={popconfirmTitle || 'Delete this question?'}
               onConfirm={(e) => action(e, id)}
               disabled={disableDelete}>
               <Button

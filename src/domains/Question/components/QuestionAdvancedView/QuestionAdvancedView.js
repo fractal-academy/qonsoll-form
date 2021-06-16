@@ -1,9 +1,11 @@
-import PropTypes from 'prop-types'
+import useMedia from 'use-media'
 import { Typography } from 'antd'
+import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
-import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
+import QuestionImageContainer from '../QuestionImageContainer'
 import { useTranslation } from '../../../../context/Translation'
+import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
 import {
   styles,
   StyledCol,
@@ -21,8 +23,6 @@ import {
   DateTimeInput,
   SubmitButton
 } from '../../../../components'
-import QuestionImageContainer from '../QuestionImageContainer'
-import useMedia from 'use-media'
 
 const { Title, Text } = Typography
 
@@ -30,7 +30,7 @@ function QuestionAdvancedView(props) {
   const { data, questionNumber, onClick, currentSlide, submitLoading } = props
 
   // [ADDITIONAL_HOOKS]
-  const { t } = useTranslation()
+  const { finishButton, startButton } = useTranslation()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -84,7 +84,7 @@ function QuestionAdvancedView(props) {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
         <SubmitButton onClick={onClick} currentSlide={currentSlide}>
-          {t('Start')}
+          {finishButton || 'Start'}
         </SubmitButton>
       )
     },
@@ -95,7 +95,7 @@ function QuestionAdvancedView(props) {
           currentSlide={currentSlide}
           finish
           loading={submitLoading}>
-          {t('Finish')}
+          {startButton || 'Finish'}
         </SubmitButton>
       )
     }

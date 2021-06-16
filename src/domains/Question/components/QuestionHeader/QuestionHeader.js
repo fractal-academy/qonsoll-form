@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { Row, Col } from '@qonsoll/react-design'
 import React, { useState, useEffect } from 'react'
 import { TextEditable } from '../../../../components'
 import {

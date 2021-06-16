@@ -1,17 +1,15 @@
 import { Typography } from 'antd'
 import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import theme from '../../../../../styles/theme'
-import { globalStyles } from '../../../../../styles'
-import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
-import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { useTranslation } from '../../../../context/Translation'
+import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
+import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { PopoverSwitcherRow } from './QuestionConfigurationPopoverContent.styles'
 import {
   QuestionTypeSelect,
   QuestionConfigurationMenu
 } from '../../../../domains/Question/components'
-import { PopoverSwitcherRow } from './QuestionConfigurationPopoverContent.styles'
 
 const { Title } = Typography
 
@@ -20,7 +18,7 @@ function QuestionConfigurationPopoverContent(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
-  const { t } = useTranslation()
+  const { typeConfiguration } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [isQuestionConfig, setIsQuestionConfig] = useState(false)
@@ -43,7 +41,7 @@ function QuestionConfigurationPopoverContent(props) {
           <Title level={4}>
             {isQuestionConfig
               ? currentQuestion?.questionType
-              : t('Question Type')}
+              : typeConfiguration || 'Question Type'}
           </Title>
         </Col>
       </PopoverSwitcherRow>

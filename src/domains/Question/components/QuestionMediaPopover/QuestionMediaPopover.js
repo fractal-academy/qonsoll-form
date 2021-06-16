@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
 import { Popover, Button } from 'antd'
-import { EditOutlined } from '@ant-design/icons'
+import React, { useState } from 'react'
 import { Box } from '@qonsoll/react-design'
+import { EditOutlined } from '@ant-design/icons'
 import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
 import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 

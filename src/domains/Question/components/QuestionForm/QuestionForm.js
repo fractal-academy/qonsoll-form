@@ -1,15 +1,16 @@
 import { Tag } from 'antd'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import React, { cloneElement, useEffect } from 'react'
+import { Col, Row, Box } from '@qonsoll/react-design'
+import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
+import { useTranslation } from '../../../../context/Translation'
+import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import {
   DEFAULT_IMAGE,
   QUESTION_TYPES,
   LAYOUT_TYPES
 } from '../../../../constants'
-import { Col, Row, Box } from '@qonsoll/react-design'
-import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
-import { useTranslation } from '../../../../context/Translation'
-import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
 import {
   styles,
   StyledCol,
@@ -35,7 +36,6 @@ import {
   DateTimeInput,
   ContentCard
 } from '../../../../components'
-import styled from 'styled-components'
 
 const StyledTag = styled(Tag)`
   background-color: ${({ theme }) => theme.color.primary.t.lighten5};
@@ -55,13 +55,20 @@ function QuestionForm(props) {
   } = props
 
   // [ADDITIONAL HOOKS]
-  const { t } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
+  const {
+    startButton,
+    finishButton,
+    endingQuestion,
+    commonQuestion,
+    editableTitleHint,
+    editableSubtitleHint
+  } = useTranslation()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton>{t('Start')}</SubmitButton>
+      component: <SubmitButton>{startButton || 'Start'}</SubmitButton>
     },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
@@ -94,7 +101,7 @@ function QuestionForm(props) {
       component: <SubmitButton />
     },
     [QUESTION_TYPES.ENDING]: {
-      component: <SubmitButton>{t('Finish')}</SubmitButton>
+      component: <SubmitButton>{finishButton || 'Finish'}</SubmitButton>
     }
   }
 
@@ -102,8 +109,8 @@ function QuestionForm(props) {
   const popoverImage = `url(${computedMediaUrl})`
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
-      ? t('Ending')
-      : `${t('Question')} ${data?.order + 1}`
+      ? endingQuestion || 'Ending'
+      : `${commonQuestion || 'Question'} ${data?.order + 1}`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
@@ -162,8 +169,12 @@ function QuestionForm(props) {
               <Row noGutters h="between" mb={4}>
                 <QuestionHeaderCol cw="12">
                   <QuestionHeader
-                    titlePlaceholder={'Editable question title'}
-                    subtitlePlaceholder={'Description(optional)'}
+                    titlePlaceholder={
+                      editableTitleHint || 'Editable question title'
+                    }
+                    subtitlePlaceholder={
+                      editableSubtitleHint || 'Description(optional)'
+                    }
                   />
                 </QuestionHeaderCol>
               </Row>

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import { COLLECTIONS } from '../../../../constants'
 import { DragableList } from '../../../../components'
-import { QuestionSimpleView } from '../../../../domains/Question/components'
 import useFunctions from '../../../../hooks/useFunctions'
+import { QuestionSimpleView } from '../../../../domains/Question/components'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,

@@ -27,64 +27,76 @@ function QuestionTypeSelect(props) {
   const { onClick, customQuestionTypes } = props
 
   // [ADDITIONAL_HOOKS]
-  const { t } = useTranslation()
+  const {
+    welcomeScreenDesc,
+    longTextDesc,
+    shortTextDesc,
+    dateDesc,
+    fileUploadDesc,
+    opinionDesc,
+    pictureChoiceDesc,
+    choiceDesc,
+    ratingDesc,
+    statementDesc,
+    yesnoDesc
+  } = useTranslation()
 
   // [COMPUTED_PROPERTIES]
   const questionTypeMap = customQuestionTypes || [
     {
       type: QUESTION_TYPES.WELCOME_SCREEN,
-      description: t('Invite your audience in'),
+      description: welcomeScreenDesc || 'Invite your audience in',
       icon: <HomeOutlined />
     },
     {
       type: QUESTION_TYPES.LONG_TEXT,
-      description: t('Mote space to spill the beans'),
+      description: longTextDesc || 'Mote space to spill the beans',
       icon: <FileTextOutlined />
     },
     {
       type: QUESTION_TYPES.SHORT_TEXT,
-      description: t('For short answers, like names'),
+      description: shortTextDesc || 'For short answers, like names',
       icon: <SmallDashOutlined />
     },
     {
       type: QUESTION_TYPES.DATE,
-      description: t('Collect answers in date format'),
+      description: dateDesc || 'Collect answers in date format',
       icon: <CalendarOutlined />
     },
     {
       type: QUESTION_TYPES.FILE_UPLOAD,
-      description: t('Upload a file up to 10MB'),
+      description: fileUploadDesc || 'Upload a file up to 10MB',
       icon: <UploadOutlined />
     },
 
     {
       type: QUESTION_TYPES.OPINION_SCALE,
-      description: t('A customizable, numbered scale'),
+      description: opinionDesc || 'A customizable, numbered scale',
       icon: <HomeOutlined />
     },
     {
       type: QUESTION_TYPES.PICTURE_CHOICE,
-      description: t('Multiple choice but prettier'),
+      description: pictureChoiceDesc || 'Multiple choice but prettier',
       icon: <PictureOutlined />
     },
     {
       type: QUESTION_TYPES.CHOICE,
-      description: t('Multiple choice'),
+      description: choiceDesc || 'Multiple choice',
       icon: <GoldOutlined />
     },
     {
       type: QUESTION_TYPES.RATING,
-      description: t('Rate'),
+      description: ratingDesc || 'Rate',
       icon: <StarOutlined />
     },
     {
       type: QUESTION_TYPES.STATEMENT,
-      description: t('Take the mic for a moment'),
+      description: statementDesc || 'Take the mic for a moment',
       icon: <CopyrightOutlined />
     },
     {
       type: QUESTION_TYPES.YES_NO,
-      description: t('Just 2 options: Yes or No'),
+      description: yesnoDesc || 'Just 2 options: Yes or No',
       icon: <ShareAltOutlined />
     }
   ]

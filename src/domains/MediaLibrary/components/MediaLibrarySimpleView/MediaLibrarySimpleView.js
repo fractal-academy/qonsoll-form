@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Box } from '@qonsoll/react-design'
 import { EditOutlined } from '@ant-design/icons'
 import RangeSlider from '../../../../components/RangeSlider'
+import { useTranslation } from '../../../../context/Translation'
 import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
 import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
 import {
@@ -21,6 +22,7 @@ function MediaLibrarySimpleView(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+  const { imageName, imageInputPlaceholder, brightness } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onMediaModalContinue = (selectedImage) => {
@@ -51,10 +53,10 @@ function MediaLibrarySimpleView(props) {
         />
       </CustomBox>
       <Box mb={32}>
-        <CustomText>Image name</CustomText>
-        <Input placeholder="Enter name here..." />
+        <CustomText>{imageName || 'Image name'}</CustomText>
+        <Input placeholder={imageInputPlaceholder || 'Enter name here...'} />
       </Box>
-      <CustomText>Brightness</CustomText>
+      <CustomText>{brightness || 'Brightness'}</CustomText>
       <Box>
         <RangeSlider
           onBlur={onBlur}
