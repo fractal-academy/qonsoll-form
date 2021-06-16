@@ -12,7 +12,9 @@ function ShortText(props) {
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
-  const { t } = useTranslation()
+  const { answerRequiredMessageError, shortTextInputPlaceholder } =
+    useTranslation()
+
   useKeyPress(
     (e) =>
       //if pressed enter this event on this question slide - dispatch second callback
@@ -48,7 +50,10 @@ function ShortText(props) {
     question?.isRequired
       ? !!value
         ? form.submit()
-        : message.error('It`s required question, please answer')
+        : message.error(
+            answerRequiredMessageError ||
+              'It`s required question, please answer'
+          )
       : form.submit()
   }
   useKeyPress(
@@ -74,7 +79,9 @@ function ShortText(props) {
           <Input
             {...inputProps}
             maxLength={300}
-            placeholder="Type your answer here..."
+            placeholder={
+              shortTextInputPlaceholder || 'Type your answer here...'
+            }
             onPressEnter={onFocusedKeyPress}
           />
         </Form.Item>

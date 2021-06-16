@@ -1,6 +1,7 @@
 import React from 'react'
 import { DatePicker, message } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
+import { useTranslation } from '../../context/Translation'
 
 const DateTimeInput = (props) => {
   const { onDateChange, question, currentSlide } = props
@@ -10,6 +11,8 @@ const DateTimeInput = (props) => {
     const data = { question, answer: { value: dateString } }
     !!dateString && onDateChange && onDateChange(data)
   }
+  //[CUSTOM HOOKS]
+  const { answerRequiredMessageError } = useTranslation()
 
   // [ADDITIONAL_HOOKS]
   useKeyPress(
@@ -20,7 +23,10 @@ const DateTimeInput = (props) => {
 
         !question?.isRequired
           ? onDateChange && onDateChange(answerData)
-          : message.error('It`s required question, please answer')
+          : message.error(
+              answerRequiredMessageError ||
+                'It`s required question, please answer'
+            )
       }
     },
     {

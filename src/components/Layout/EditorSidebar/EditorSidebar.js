@@ -22,6 +22,7 @@ import {
 import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import useFunctions from '../../../hooks/useFunctions'
 import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
+import { useTranslation } from '../../../context/Translation'
 
 const { Title } = Typography
 
@@ -34,7 +35,12 @@ function EditorSidebar(props) {
     transparent,
     customQuestionTypes
   } = props
+
+  //[CUSTOM HOOKS]
   const { getCollectionRef, setData } = useFunctions()
+  const { editorSidebarEndingsTitle, editorSidebarQuestionsTitle } =
+    useTranslation()
+
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -43,7 +49,6 @@ function EditorSidebar(props) {
   const [showPopover, setshowPopover] = useState(false)
 
   // [CLEAN FUNCTIONS]
-
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
     const isChoices = [
@@ -104,7 +109,9 @@ function EditorSidebar(props) {
         <Box p={3}>
           <Row noGutters>
             <Col v="center">
-              <Title level={5}>Questions</Title>
+              <Title level={5}>
+                {editorSidebarQuestionsTitle || 'Questions'}
+              </Title>
             </Col>
             <Col cw="auto">
               <Popover
@@ -153,7 +160,7 @@ function EditorSidebar(props) {
           </Row>
           <Row p={3}>
             <Col v="center">
-              <Title level={5}>Endings</Title>
+              <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
             </Col>
             <Col cw="auto">
               <Button

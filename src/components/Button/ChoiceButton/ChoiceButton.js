@@ -5,6 +5,7 @@ import { Row, Col } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
 import useMedia from 'use-media'
 import { message } from 'antd'
+import { useTranslation } from '../../../context/Translation'
 
 let startLetter = 65
 
@@ -14,6 +15,9 @@ function ChoiceButton(props) {
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
+
+  //[CUSTOM HOOKS]
+  const { answerRequiredMessageError } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const mappedChoices = useMemo(
@@ -43,7 +47,10 @@ function ChoiceButton(props) {
             }
             onClick?.(answerData)
           } else {
-            message.error('It`s required question, please answer')
+            message.error(
+              answerRequiredMessageError ||
+                'It`s required question, please answer'
+            )
           }
         } else {
           const key = `${event.key}`.toUpperCase()

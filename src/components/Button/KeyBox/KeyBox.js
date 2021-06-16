@@ -6,7 +6,6 @@ import { useHover } from '@umijs/hooks'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import useMedia from 'use-media'
-import { useTranslation } from '../../../context/Translation'
 
 const { Text } = Typography
 
@@ -69,7 +68,6 @@ function KeyBox(props) {
 
   // [ADDITIONAL HOOKS]
   const [isHovering, hoverRef] = useHover()
-  const { t } = useTranslation()
   const phoneSmall = useMedia({ maxWidth: '500px' })
 
   return (

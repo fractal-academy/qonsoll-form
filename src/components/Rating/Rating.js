@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Container } from '@qonsoll/react-design'
 import typeformTheme from '../../../styles/theme'
 import { useKeyPress } from '@umijs/hooks'
+import { useTranslation } from '../../context/Translation'
 
 const StyledRate = styled(Rate)`
   ${({ theme }) => `
@@ -19,6 +20,8 @@ function CustomRating(props) {
   const { allowClear, tooltips, onClick, question, currentSlide } = props
   const { questionConfigurations } = question
 
+  //[CUSTOM HOOKS]
+  const { answerRequiredMessageError } = useTranslation()
   // [CLEAN FUNCTIONS]
   const onChange = (value) => {
     const data = { question, answer: { value } }
@@ -33,7 +36,10 @@ function CustomRating(props) {
       if (event.type === 'keyup') {
         !question?.isRequired
           ? onChange && onChange('')
-          : message.error('It`s required question, please answer')
+          : message.error(
+              answerRequiredMessageError ||
+                'It`s required question, please answer'
+            )
       }
     },
     {

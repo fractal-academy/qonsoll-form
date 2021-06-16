@@ -68,7 +68,13 @@ function ListItem(props) {
       getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', data?.id)
   )
   const { onFormItemClick } = useActionsFunctionsContext()
-  const { t } = useTranslation()
+  const {
+    listItemNoDescription,
+    rename,
+    popconfirmDeleteFormTitle,
+    popconfirmDeleteButtonText,
+    popconfirmDeleteImageTitle
+  } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -76,7 +82,8 @@ function ListItem(props) {
   const [isPopconfirmVisible, setIsPopconfirmVisible] = useState(false)
 
   // [COMPUTED PROPERTIES]
-  const description = data?.subtitle || t('No description')
+  const description =
+    data?.subtitle || listItemNoDescription || 'No description'
   const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
@@ -119,7 +126,7 @@ function ListItem(props) {
   const menu = (
     <Menu>
       <Menu.Item onClick={(e) => showModal(e)} key={'showModal'}>
-        <Text>{t('Rename')}</Text>
+        <Text>{rename || 'Rename'}</Text>
         <FormSimpleFormWithModal
           isEdit
           formData={data}
@@ -134,9 +141,9 @@ function ListItem(props) {
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
-          title="Delete this form?"
+          title={popconfirmDeleteFormTitle || 'Delete this form?'}
           okButtonProps={{ loading: confirmLoading }}>
-          <Text>{t('Delete')}</Text>
+          <Text>{popconfirmDeleteButtonText || 'Delete'}</Text>
         </Popconfirm>
       </Menu.Item>
     </Menu>
@@ -180,7 +187,7 @@ function ListItem(props) {
           <Col cw="auto" display="flex" v="center">
             {data?.imageUrl ? (
               <Popconfirm
-                title="Delete this image?"
+                title={popconfirmDeleteImageTitle || 'Delete this image?'}
                 onConfirm={handleDelete}
                 okButtonProps={{ loading: confirmLoading }}>
                 <CloseOutlined />

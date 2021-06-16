@@ -6,6 +6,7 @@ import { useKeyPress } from '@umijs/hooks'
 import { Row, Col } from '@qonsoll/react-design'
 import useMedia from 'use-media'
 import typeformTheme from '../../../../styles/theme'
+import { useTranslation } from '../../../context/Translation'
 
 const StyledRangeButton = styled(Button)`
   ${({ theme, isActive }) => `
@@ -53,6 +54,8 @@ function RangeButton(props) {
   const [buttonKey, setButtonKey] = useState()
   const cwMedium = useMedia({ minWidth: '1100px' })
   const cwSmall = useMedia({ minWidth: '500px' })
+  //[CUSTOM HOOKS]
+  const { answerRequiredMessageError } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   useKeyPress(
@@ -68,7 +71,10 @@ function RangeButton(props) {
                 question,
                 answer: { value: '' }
               })
-            : message.error('It`s required question, please answer')
+            : message.error(
+                answerRequiredMessageError ||
+                  'It`s required question, please answer'
+              )
         } else {
           onButtonClick(event.key)
         }

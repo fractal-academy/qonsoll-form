@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import typeformTheme from '../../../../styles/theme'
 import styled from 'styled-components'
-import { Button, Typography, message } from 'antd'
+import { Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
@@ -33,7 +33,8 @@ function SubmitButton(props) {
   // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
-  const { t } = useTranslation()
+  const { pressEnter } = useTranslation()
+
   useKeyPress(
     (e) =>
       //if pressed enter this event on this question slide - dispatch second callback
@@ -70,7 +71,7 @@ function SubmitButton(props) {
           {children || (
             <Row display="flex" noGutters>
               <Col cw="auto" mr={2}>
-                {t('OK')}
+                OK
               </Col>
               <Col v="center">
                 <CheckOutlined />
@@ -80,7 +81,7 @@ function SubmitButton(props) {
         </StyledSubmit>
       </Col>
       <Col cw="auto">
-        <Text>{t('Press enter')} ↵</Text>
+        <Text>{pressEnter || 'Press enter'} ↵</Text>
       </Col>
     </Row>
   )

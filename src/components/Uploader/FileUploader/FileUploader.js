@@ -21,7 +21,11 @@ const UploadArea = (props) => {
   const { onContinue, question, currentSlide } = props
 
   // [ADDITIONAL_HOOKS]
-  const { t } = useTranslation()
+  const {
+    answerRequiredMessageError,
+    fileUploaderTitle,
+    fileUploaderSubtitle
+  } = useTranslation()
   const { getCollectionRef } = useFunctions()
 
   // [COMPONENT STATE HOOKS]
@@ -119,7 +123,10 @@ const UploadArea = (props) => {
     question?.isRequired
       ? uploaderData
         ? onContinue?.(data)
-        : message.error('It`s required question, please answer')
+        : message.error(
+            answerRequiredMessageError ||
+              'It`s required question, please answer'
+          )
       : onContinue?.(data)
   }
 
@@ -151,10 +158,14 @@ const UploadArea = (props) => {
             </IconLabel>
           </Box>
           <Box textAlign="center">
-            <Text>{t('Click or drag file to this area to upload')}</Text>
+            <Text>
+              {fileUploaderTitle || 'Click or drag file to this area to upload'}
+            </Text>
           </Box>
           <Box textAlign="center">
-            <Text type="secondary">{t('Upload files')}</Text>
+            <Text type="secondary">
+              {fileUploaderSubtitle || 'Upload files'}
+            </Text>
           </Box>
         </Box>
       </Dragger>
