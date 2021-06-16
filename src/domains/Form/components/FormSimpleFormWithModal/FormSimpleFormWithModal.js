@@ -20,7 +20,12 @@ const FormSimpleFormWithModal = (props) => {
 
   // [ADDITIONAL_HOOKS]
   const [form] = Form.useForm()
-  const { t } = useTranslation()
+  const {
+    formModalTitleCreate,
+    formModalTitleEdit,
+    formModalSaveChangesButton,
+    formModalCreateButton
+  } = useTranslation()
 
   // [HELPER_FUNCTIONS]
   const handleCancel = async () => {
@@ -42,7 +47,9 @@ const FormSimpleFormWithModal = (props) => {
     <Modal
       title={
         <Title level={4}>
-          {isEdit ? t('Edit form') : t('Create new form')}
+          {isEdit
+            ? formModalTitleEdit || 'Edit form'
+            : formModalTitleCreate || 'Create new form'}
         </Title>
       }
       visible={isModalVisible}
@@ -55,7 +62,9 @@ const FormSimpleFormWithModal = (props) => {
           Cancel
         </Button>,
         <Button onClick={() => form.submit()} type="primary" loading={loading}>
-          {isEdit ? t('Save changes') : t('Create form')}
+          {isEdit
+            ? formModalSaveChangesButton || 'Save changes'
+            : formModalCreateButton || 'Create form'}
         </Button>
       ]}>
       <FormSimpleForm

@@ -8,7 +8,7 @@ function FormSimpleForm(props) {
   const { formData, children, ...rest } = props
 
   // [ADDITIONAL_HOOKS]
-  const { t } = useTranslation()
+  const { formNamePlaceholder, formDescriptionPlaceholder } = useTranslation()
 
   // [COMPUTED PROPERTIES]
   const initialValues = {
@@ -18,7 +18,10 @@ function FormSimpleForm(props) {
   return (
     <Form {...rest} initialValues={initialValues}>
       <Form.Item name="name" rules={[{ required: true }]}>
-        <Input allowClear placeholder={t('Type form name')} />
+        <Input
+          allowClear
+          placeholder={formNamePlaceholder || 'Type form name'}
+        />
       </Form.Item>
       <Form.Item name="description">
         <TextArea
@@ -26,7 +29,7 @@ function FormSimpleForm(props) {
           autoSize={{ minRows: 3, maxRows: 5 }}
           maxLength={1000}
           allowClear
-          placeholder={t('Form short description')}
+          placeholder={formDescriptionPlaceholder || 'Form short description'}
         />
       </Form.Item>
       {children && <Col cw={12}>{children}</Col>}

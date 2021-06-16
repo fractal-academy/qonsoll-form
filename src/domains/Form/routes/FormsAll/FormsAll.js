@@ -36,11 +36,10 @@ const mockRoutes = [
 function FormsAll(props) {
   const {
     firebase,
-    translate,
+    translations,
     actions = {},
     childrenModal,
     disableAddButton,
-    titleText,
     titleProps,
     firstLevelHidden,
     configurations,
@@ -113,12 +112,19 @@ function FormsAll(props) {
         id: endingId,
         layoutType: LAYOUT_TYPE_KEYS[0],
         questionType: QUESTION_TYPES.ENDING,
-        title: 'Thank you for attention!',
+        title: endingTitle || 'Thank you for attention!',
         order: 1
       }).catch((e) => message.error(e.message))
     }
   }
-
+  // [COMPUTED PROPERTIES]
+  const {
+    formsAllRouteTitle,
+    addNewFormButton,
+    formSearchPlaceholder,
+    formsCounterMeasure,
+    endingTitle
+  } = translations || {}
   const menu = (
     <Menu>
       {mockRoutes.map((item, index) => (
@@ -138,7 +144,7 @@ function FormsAll(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <TranslationContext.Provider value={{ t: translate }}>
+        <TranslationContext.Provider value={translations || {}}>
           <TypeformConfigurationContext.Provider value={configurations}>
             <Box {...styles.mainWrapper}>
               {/* Page Header */}
@@ -186,7 +192,7 @@ function FormsAll(props) {
                 </Col>
                 <Col>
                   <Title level={2} {...titleProps}>
-                    {titleText ?? translate('Forms')}
+                    {formsAllRouteTitle || 'Forms'}
                   </Title>
                 </Col>
                 <Col cw="auto">
@@ -194,14 +200,15 @@ function FormsAll(props) {
                     type="primary"
                     onClick={showModal}
                     disabled={disableAddButton}>
-                    + {translate('Add')}
+                    + {addNewFormButton || 'Add'}
                   </Button>
                 </Col>
               </Row>
               <Row noGutters mb={3}>
                 <Col>
                   <Text>
-                    {translate('You have')} {amountFiles} {translate('files')}.
+                    {amountFiles}
+                    {formsCounterMeasure || 'files'}.
                   </Text>
                 </Col>
               </Row>
@@ -210,9 +217,9 @@ function FormsAll(props) {
                 <Col>
                   <Input
                     ref={searchRef}
-                    placeholder={`${translate(
-                      'Search folder/file by name'
-                    )}...`}
+                    placeholder={`${
+                      formSearchPlaceholder || 'Search folder/file by name'
+                    }...`}
                     onChange={(input) => searchData(input.target.value)}
                   />
                 </Col>

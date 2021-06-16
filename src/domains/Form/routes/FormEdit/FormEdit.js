@@ -31,7 +31,7 @@ function FormEdit(props) {
     firebase,
     actions = {},
     id,
-    translate,
+    translations,
     onBack,
     showCondition,
     configurations,
@@ -93,7 +93,7 @@ function FormEdit(props) {
       QUESTION_TYPES.PICTURE_CHOICE
     ].includes(key)
     const questionConfigurations = isChoices
-      ? [{ name: 'default', image: '' }]
+      ? [{ name: formEditChoiceButtonDefaultTitle || 'default', image: '' }]
       : ''
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
@@ -123,10 +123,13 @@ function FormEdit(props) {
       ).catch((e) => message.error(e.message))
   }, [currentQuestion])
 
+  // [COMPUTED PROPERTIES]
+  const { formEditChoiceButtonDefaultTitle } = translations || {}
+
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <TranslationContext.Provider value={{ t: translate }}>
+        <TranslationContext.Provider value={translations || {}}>
           <TypeformConfigurationContext.Provider value={configurations}>
             {formLoading || questionsListLoading ? (
               <Spinner />
