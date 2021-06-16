@@ -4,7 +4,12 @@ import React, { cloneElement } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
-import { styles, StyledCol, StyledBox, BackgroundImage } from './QuestionAdvancedView.styles'
+import {
+  styles,
+  StyledCol,
+  StyledBox,
+  BackgroundImage
+} from './QuestionAdvancedView.styles'
 import {
   Rate,
   ShortText,
@@ -74,9 +79,7 @@ function QuestionAdvancedView(props) {
       )
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: (
-          <SubmitButton onClick={onClick} currentSlide={currentSlide} />
-      )
+      component: <SubmitButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
