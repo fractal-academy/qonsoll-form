@@ -28,8 +28,8 @@ function YesnoButton(props) {
             : message.error('It`s required question, please answer')
         } else {
           const key = `${event.key}`.toUpperCase()
-          const keyName = key === 'Y' ? 'Yes' : 'No'
-          onButtonClick({ letter: key, choice: { name: keyName } })
+          const currentChoice = key === 'Y' ? 'Yes' : 'No'
+          onButtonClick({ letter: key, choice: { name: currentChoice } })
         }
       }
     },
@@ -75,19 +75,6 @@ function YesnoButton(props) {
       console.log(`${letter} was pressed`)
     }
   }
-
-  useKeyPress(
-    (event) => ![].includes(event.key),
-    (event) => {
-      if (event.type === 'keyup') {
-        const key = `${event.key}`.toUpperCase()
-        onButtonClick(key)
-      }
-    },
-    {
-      events: ['keydown', 'keyup']
-    }
-  )
 
   return (
     <Box display="block">

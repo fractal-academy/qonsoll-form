@@ -42,6 +42,11 @@ function QuestionTypeSelect(props) {
       icon: <FileTextOutlined />
     },
     {
+      type: QUESTION_TYPES.SHORT_TEXT,
+      description: t('For short answers, like names'),
+      icon: <SmallDashOutlined />
+    },
+    {
       type: QUESTION_TYPES.DATE,
       description: t('Collect answers in date format'),
       icon: <CalendarOutlined />
@@ -76,11 +81,6 @@ function QuestionTypeSelect(props) {
       type: QUESTION_TYPES.STATEMENT,
       description: t('Take the mic for a moment'),
       icon: <CopyrightOutlined />
-    },
-    {
-      type: QUESTION_TYPES.SHORT_TEXT,
-      description: t('For short answers, like names'),
-      icon: <SmallDashOutlined />
     },
     {
       type: QUESTION_TYPES.YES_NO,

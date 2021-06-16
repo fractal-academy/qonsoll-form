@@ -24,6 +24,7 @@ import {
 } from '@ant-design/icons'
 import useFunctions from '../../../hooks/useFunctions'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import typeformTheme from '../../../../styles/theme'
 
 const { Text } = Typography
 
@@ -35,7 +36,8 @@ const ItemPreview = styled(Box)`
   border-radius: 8px;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.color.white.default};
+  background-color: ${({ theme }) =>
+    theme?.color?.white?.default || typeformTheme?.color?.white?.default};
 `
 const StyledIcon = styled(FileOutlined)`
   font-size: 40px;
@@ -62,7 +64,8 @@ function ListItem(props) {
 
   // [ADDITIONAL HOOKS]
   const [questions] = useCollectionData(
-    getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', data?.id)
+    data?.id &&
+      getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', data?.id)
   )
   const { onFormItemClick } = useActionsFunctionsContext()
   const { t } = useTranslation()

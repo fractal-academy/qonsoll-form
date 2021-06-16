@@ -70,11 +70,7 @@ function LongText(props) {
         <Form.Item
           style={globalStyles.resetMarginB}
           name="answer"
-          rules={[
-            {
-              required: question?.isRequired
-            }
-          ]}>
+          rules={[{ required: question?.isRequired }]}>
           <TextArea
             {...textAreaProps}
             bordered
@@ -82,6 +78,7 @@ function LongText(props) {
             autoSize={{ minRows: 1, maxRows: 4 }}
             placeholder="Type your answer here..."
             onPressEnter={onFocusedKeyPress}
+            disabled={!onClick}
           />
         </Form.Item>
         <Form.Item>

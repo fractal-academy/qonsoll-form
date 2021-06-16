@@ -1,17 +1,16 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import typeformTheme from '../../../../styles/theme'
 
-const AvatarWrapper = styled.label`
-  ${({ theme }) => `
+const IconLabel = styled.label`
+  ${({ theme, disabled }) => `
     width: 50px;
     height: 50px;
     font-size:${
       theme?.typography?.fontSize?.h4 || typeformTheme?.typography?.fontSize?.h4
     };
     border-radius: 50%;
-    cursor: pointer;
+    cursor: ${disabled ? 'not-allowed' : 'pointer'};
     justify-content: center;
     display: flex;
     align-items: center;
@@ -24,12 +23,6 @@ const AvatarWrapper = styled.label`
     };
   `}
 `
-
-const IconLabel = (props) => {
-  const { children } = props
-
-  return <AvatarWrapper>{children}</AvatarWrapper>
-}
 
 export default IconLabel
 

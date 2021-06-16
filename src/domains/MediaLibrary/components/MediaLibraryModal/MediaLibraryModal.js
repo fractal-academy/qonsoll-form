@@ -4,7 +4,7 @@ import theme from '../../../../../styles/theme'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import COLLECTIONS from '../../../../constants/collection'
 import React, { useEffect, useRef, useState } from 'react'
-import { Modal, Button, Typography, Upload, message } from 'antd'
+import { Modal, Button, Typography, Upload, message, Divider } from 'antd'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { FilterOutlined, SearchOutlined } from '@ant-design/icons'
 import {
@@ -125,7 +125,6 @@ function MediaLibraryModal(props) {
       isComponentMounted = false
     }
   }, [media])
-
   return (
     <>
       <CustomButton {...btnProps} onClick={modalStateChange}>
@@ -213,9 +212,6 @@ function MediaLibraryModal(props) {
                 setSelectedBackgroundImg={setSelectedBackgroundImg}
               />
             </MediaListContainer>
-            <Row
-              borderBottom="1px solid"
-              borderColor={theme.color.text.dark}></Row>
             <Row noGutters h="right" p={3} bg={theme.color.white.default}>
               <Col cw="auto">
                 <Button type="text" onClick={onModalCancel}>

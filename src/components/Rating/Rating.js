@@ -23,7 +23,7 @@ function CustomRating(props) {
   const onChange = (value) => {
     const data = { question, answer: { value } }
 
-    onClick?.(data)
+    onClick && onClick(data)
   }
 
   // [ADDITIONAL_HOOKS]
@@ -49,6 +49,7 @@ function CustomRating(props) {
         allowClear={allowClear}
         tooltips={tooltips}
         onChange={onChange}
+        disabled={!onClick}
       />
     </Container>
   )

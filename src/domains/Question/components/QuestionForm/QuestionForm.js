@@ -1,6 +1,6 @@
 import { Tag } from 'antd'
 import PropTypes from 'prop-types'
-import React, { cloneElement } from 'react'
+import React, { cloneElement, useEffect } from 'react'
 import {
   DEFAULT_IMAGE,
   QUESTION_TYPES,
@@ -85,13 +85,13 @@ function QuestionForm(props) {
       component: <LongText />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <DateTimeInput disabled />
+      component: <DateTimeInput />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploader disabled />
+      component: <FileUploader />
     },
     [QUESTION_TYPES.STATEMENT]: {
-      component: <SubmitButton>{t('Next')}</SubmitButton>
+      component: <SubmitButton />
     },
     [QUESTION_TYPES.ENDING]: {
       component: <SubmitButton>{t('Finish')}</SubmitButton>
@@ -112,12 +112,19 @@ function QuestionForm(props) {
     layoutType?.type !== LAYOUT_TYPES.DEFAULT.type
   const bgImage =
     layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && computedMediaUrl
+  const isConfigurationPopoverVisible = !(
+    currentQuestion.questionType === QUESTION_TYPES.ENDING
+  )
+
+  useEffect(() => {
+    setBrightnessValue(currentQuestion.imageBrightness || 0)
+  }, [currentQuestion, setBrightnessValue])
 
   return (
     <ContentCard
       onEdit
       image={bgImage}
-      brightnessValue={brightnessValue}
+      brightnessValue={data?.brightnessValue || brightnessValue}
       leftSideMenu={
         !!Object.keys(currentQuestion).length && (
           <QuestionLayoutSwitcher
@@ -134,16 +141,18 @@ function QuestionForm(props) {
                 <Col>
                   <StyledTag>{questionTag}</StyledTag>
                 </Col>
-                <Col cw="auto">
-                  <QuestionConfigurationPopover
-                    customQuestionTypes={customQuestionTypes}
-                    onQuestionTypeChange={onQuestionTypeChange}
-                  />
-                </Col>
+                {isConfigurationPopoverVisible && (
+                  <Col cw="auto">
+                    <QuestionConfigurationPopover
+                      customQuestionTypes={customQuestionTypes}
+                      onQuestionTypeChange={onQuestionTypeChange}
+                    />
+                  </Col>
+                )}
                 {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                   <Col cw="auto" ml={2}>
                     <QuestionMediaPopover
-                      brightnessValue={brightnessValue}
+                      brightnessValue={data?.brightnessValue || brightnessValue}
                       setBrightnessValue={setBrightnessValue}
                       MediaModalButtonBackground={popoverImage}
                     />
@@ -165,7 +174,11 @@ function QuestionForm(props) {
                       {...layoutType.imgSize}
                       mb={4}
                       image={computedMediaUrl}
-                      style={{ filter: `brightness(${brightnessValue}%)` }}>
+                      style={{
+                        filter: `brightness(${
+                          data?.brightnessValue + 100 || brightnessValue + 100
+                        }%)`
+                      }}>
                       <QuestionMediaPopover
                         brightnessValue={brightnessValue}
                         setBrightnessValue={setBrightnessValue}
@@ -187,9 +200,10 @@ function QuestionForm(props) {
               order={layoutType?.imageOrder}
               {...styles.sideImageColumnStyle}>
               <QuestionImageContainer
+                layoutType={layoutType?.type}
                 {...layoutType?.imgSize}
                 image={computedMediaUrl}
-                style={{ filter: `brightness(${brightnessValue}%)` }}>
+                style={{ filter: `brightness(${brightnessValue + 100}%)` }}>
                 <Row h="right">
                   <Col cw="auto" mr={4}>
                     <QuestionMediaPopover

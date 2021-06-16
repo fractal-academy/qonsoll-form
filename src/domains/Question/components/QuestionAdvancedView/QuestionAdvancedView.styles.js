@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Box, Col } from '@qonsoll/react-design'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import typeformTheme from '../../../../../styles/theme'
 
 export const styles = {
   questionCardColumnStyle: {
@@ -16,14 +17,28 @@ export const styles = {
     h: 'center',
     height: 'inherit',
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
+    position: 'relative'
   }
 }
 
-export const StyledBox = styled(Box)`
+export const WrapperRow = styled(Row)`
+  ${({ theme }) => `
+    height: inherit;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    border-radius: 
+        ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+    }
+`}
+`
+
+export const StyledBox = styled(Col)`
   ${({ specialLayoutRule }) => `
   width: 100%;
-  // height: 100%;
   display: grid;
   background-color: transparent;
   text-align: ${specialLayoutRule && 'center'};
@@ -41,4 +56,17 @@ export const StyledCol = styled(Col)`
   align-items: center;
   justify-content: center;
   flex: 1;
+`
+
+export const BackgroundImage = styled(Col)`
+  height: inherit;
+  z-index: -100;
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: ${({ image }) => image};
+  filter: brightness(${({ imageBrightness }) => imageBrightness + 100}%);
+  ${({ theme }) => `
+border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+`}
 `

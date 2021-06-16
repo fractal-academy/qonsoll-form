@@ -55,8 +55,11 @@ function Carousel(props) {
         afterChange={onCurrentSlideChange}
         infinite={false}
         speed={1500}>
-        {children.map((el) =>
-          cloneElement(el, { wrapperHeight: height - buttonsHeight })
+        {children.map((el, index) =>
+          cloneElement(el, {
+            wrapperHeight: height - buttonsHeight,
+            key: index
+          })
         )}
       </AntdCarousel>
       {!submitLoading && (

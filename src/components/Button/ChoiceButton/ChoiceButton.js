@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import { KeyBox } from '../../../components'
 import { useKeyPress } from '@umijs/hooks'
-import { message } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
 import useMedia from 'use-media'
+import { message } from 'antd'
 
 let startLetter = 65
 
@@ -57,7 +57,6 @@ function ChoiceButton(props) {
       events: ['keydown', 'keyup']
     }
   )
-  const phoneSize = useMedia({ maxWidth: '500px' })
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (props) => {
@@ -75,13 +74,13 @@ function ChoiceButton(props) {
       onClick && onClick(data)
     }
   }
+  const phoneSize = useMedia({ maxWidth: '500px' })
 
   return (
     <Row noGutters h={phoneSize && 'center'}>
       {mappedChoices?.map((item, index) => (
-        <Col cw={hasImages ? (phoneSize ? '10' : 'auto') : '12'}>
+        <Col key={index} cw={hasImages ? (phoneSize ? '10' : 'auto') : '12'}>
           <KeyBox
-            key={index}
             index={index}
             item={item}
             hasImages={hasImages}

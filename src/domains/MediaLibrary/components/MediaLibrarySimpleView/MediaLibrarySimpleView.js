@@ -13,16 +13,13 @@ import {
 
 function MediaLibrarySimpleView(props) {
   const {
-    setIsImageEditVisible,
     bgImage,
     brightnessValue,
-    setBrightnessValue
+    setBrightnessValue,
+    setIsImageEditVisible
   } = props
 
-  // [COMPONENT STATE HOOKS]
-  // const [brightnessValue, setBrightnessValue] = useState(100)
-
-  // [CUSTOM HOOKS]
+  // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [CLEAN FUNCTIONS]
@@ -30,6 +27,12 @@ function MediaLibrarySimpleView(props) {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { image: selectedImage }
+    })
+  }
+  const onBlur = () => {
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { imageBrightness: brightnessValue }
     })
   }
 
@@ -48,12 +51,13 @@ function MediaLibrarySimpleView(props) {
         />
       </CustomBox>
       <Box mb={32}>
-        <CustomText>Alt text</CustomText>
-        <Input placeholder="Enter alt here..." />
+        <CustomText>Image name</CustomText>
+        <Input placeholder="Enter name here..." />
       </Box>
       <CustomText>Brightness</CustomText>
       <Box>
         <RangeSlider
+          onBlur={onBlur}
           inputValue={brightnessValue}
           setInputValue={setBrightnessValue}
         />

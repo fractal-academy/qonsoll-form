@@ -25,7 +25,6 @@ const StyledKeybox = styled(Col)`
   width: ${({ isHovering, phoneSmall }) =>
     isHovering && !phoneSmall ? '65px !important' : '26px !important'};
 `
-
 const ImageContainer = styled(Box)`
   width: 100%;
   height: ${({ phoneSmall }) => (phoneSmall ? '200px' : '100px')};

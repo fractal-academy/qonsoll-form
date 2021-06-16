@@ -7,7 +7,14 @@ import { Box } from '@qonsoll/react-design'
 const { Text } = Typography
 
 function PageLayout(props) {
-  const { title = 'New Form', children, id, onBack, handleSmallScreen } = props
+  const {
+    title = 'New Form',
+    children,
+    id,
+    onBack,
+    questionsList,
+    handleSmallScreen
+  } = props
 
   return (
     <Box
@@ -15,7 +22,12 @@ function PageLayout(props) {
       display="flex"
       height={handleSmallScreen && '100%'}
       flexDirection="column">
-      <PageHeader title={title} id={id} onBack={onBack} />
+      <PageHeader
+        title={title}
+        id={id}
+        onBack={onBack}
+        questionsList={questionsList}
+      />
       {handleSmallScreen ? (
         children
       ) : (

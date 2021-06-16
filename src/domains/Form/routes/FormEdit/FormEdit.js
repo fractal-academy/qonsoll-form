@@ -52,7 +52,7 @@ function FormEdit(props) {
 
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
-  const [brightnessValue, setBrightnessValue] = useState(100)
+  const [brightnessValue, setBrightnessValue] = useState(0)
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
@@ -65,6 +65,7 @@ function FormEdit(props) {
         : [],
     [questionsList]
   )
+
   const endings = useMemo(
     () =>
       questionsList
@@ -120,7 +121,6 @@ function FormEdit(props) {
         currentQuestion?.id,
         currentQuestion
       ).catch((e) => message.error(e.message))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestion])
 
   return (
@@ -136,6 +136,7 @@ function FormEdit(props) {
                   id={id}
                   handleSmallScreen={handleSmallScreen}
                   title={form?.title}
+                  questionsList={questionsList}
                   onBack={onBack}>
                   <QuestionForm
                     data={currentQuestion}

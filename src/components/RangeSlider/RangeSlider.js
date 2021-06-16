@@ -5,26 +5,27 @@ import { Box } from '@qonsoll/react-design'
 import { CustomInputNumber } from './RangeSlider.styles'
 
 function RangeSlider(props) {
-  const { inputValue, setInputValue } = props
+  const { onBlur, inputValue, setInputValue } = props
 
   // [CLEAN FUNCTIONS]
   const onSlide = (value) => {
     setInputValue(value)
   }
-  const value = typeof inputValue === 'number' ? inputValue : 100
+  const value = typeof inputValue === 'number' ? inputValue : 0
 
   return (
     <Box display="flex" alignItems="center">
       <Slider
-        min={0}
-        max={200}
+        min={-100}
+        max={100}
+        onBlur={onBlur}
         onChange={onSlide}
         value={value}
         style={{ flexGrow: 1, marginRight: '12px' }}
       />
       <CustomInputNumber
-        min={0}
-        max={200}
+        min={-100}
+        max={100}
         value={inputValue}
         onChange={onSlide}
         style={{

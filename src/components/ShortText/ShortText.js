@@ -51,6 +51,14 @@ function ShortText(props) {
         : message.error('It`s required question, please answer')
       : form.submit()
   }
+  useKeyPress(
+    (e) =>
+      //if pressed enter this event on this question slide - dispatch second callback
+      e.keyCode === 13 && currentSlide === question?.order,
+    () => {
+      onPressOk()
+    }
+  )
 
   return (
     <Container>
@@ -65,6 +73,7 @@ function ShortText(props) {
           rules={[{ required: question?.isRequired }]}>
           <Input
             {...inputProps}
+            maxLength={300}
             placeholder="Type your answer here..."
             onPressEnter={onFocusedKeyPress}
           />
@@ -80,8 +89,7 @@ function ShortText(props) {
 ShortText.propTypes = {
   onSubmit: PropTypes.func,
   isRequired: PropTypes.bool,
-  btnProps: PropTypes.object,
-  inputProps: PropTypes.object
+  btnProps: PropTypes.object
 }
 
 export default ShortText

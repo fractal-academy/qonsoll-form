@@ -134,6 +134,7 @@ function FormShow(props) {
                     disabledDown={disabledDown}>
                     {sortedData?.map((item, index) => (
                       <Component
+                        key={index}
                         sortedData={sortedData}
                         onClick={onClick}
                         currentSlide={currentSlide}

@@ -8,6 +8,7 @@ import { useTranslation } from '../../../context/Translation'
 import storage from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
 import useFunctions from '../../../hooks/useFunctions'
+import { useKeyPress } from '@umijs/hooks'
 
 const { Dragger } = Upload
 
@@ -17,7 +18,7 @@ const config = {
 }
 
 const UploadArea = (props) => {
-  const { onContinue, question } = props
+  const { onContinue, question, currentSlide } = props
 
   // [ADDITIONAL_HOOKS]
   const { t } = useTranslation()
@@ -110,12 +111,29 @@ const UploadArea = (props) => {
   }
 
   const onAply = () => {
+    const uploaderData = !!Object.keys(filesList).length ? filesList : ''
     const data = {
       question,
-      answer: { value: filesList }
+      answer: { value: uploaderData }
     }
-    onContinue && onContinue(data)
+    question?.isRequired
+      ? uploaderData
+        ? onContinue?.(data)
+        : message.error('It`s required question, please answer')
+      : onContinue?.(data)
   }
+
+  useKeyPress(
+    (event) => event.keyCode === 13 && currentSlide === question?.order,
+    (event) => {
+      if (event.type === 'keyup') {
+        onAply()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   return (
     <Box flexDirection="column">
@@ -124,17 +142,20 @@ const UploadArea = (props) => {
         {...props}
         onRemove={onRemove}
         customRequest={onChange}
-        fileList={Object.values(filesList)}>
-        <Box display="flex" justifyContent="center">
-          <IconLabel>
-            <InboxOutlined />
-          </IconLabel>
-        </Box>
-        <Box textAlign="center">
-          <Text>{t('Click or drag file to this area to upload')}</Text>
-        </Box>
-        <Box textAlign="center">
-          <Text type="secondary">{t('Upload files')}</Text>
+        fileList={Object.values(filesList)}
+        disabled={!onContinue}>
+        <Box onMouseDown={(e) => e.preventDefault()}>
+          <Box display="flex" justifyContent="center">
+            <IconLabel disabled={!onContinue}>
+              <InboxOutlined />
+            </IconLabel>
+          </Box>
+          <Box textAlign="center">
+            <Text>{t('Click or drag file to this area to upload')}</Text>
+          </Box>
+          <Box textAlign="center">
+            <Text type="secondary">{t('Upload files')}</Text>
+          </Box>
         </Box>
       </Dragger>
       <Box mt={3}>

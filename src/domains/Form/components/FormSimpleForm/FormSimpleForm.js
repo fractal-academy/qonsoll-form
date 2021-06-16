@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Input } from 'antd'
 import { useTranslation } from '../../../../context/Translation'
+import { Col } from '@qonsoll/react-design'
 import TextArea from 'antd/es/input/TextArea'
 
 function FormSimpleForm(props) {
@@ -14,7 +15,6 @@ function FormSimpleForm(props) {
     name: formData?.title,
     description: formData?.subtitle
   }
-
   return (
     <Form {...rest} initialValues={initialValues}>
       <Form.Item name="name" rules={[{ required: true }]}>
@@ -29,7 +29,7 @@ function FormSimpleForm(props) {
           placeholder={t('Form short description')}
         />
       </Form.Item>
-      {children}
+      {children && <Col cw={12}>{children}</Col>}
     </Form>
   )
 }
