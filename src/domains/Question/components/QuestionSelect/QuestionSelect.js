@@ -26,7 +26,7 @@ function QuestionSelect(props) {
       </Option>
       <OptGroup label="JUMP TO...">
         {questionList.map((item, index) => (
-          <Option key={index} value={item.name} onClick={() => {}}>
+          <Option key={index} value={item.id} onClick={() => {}}>
             {item.name}
           </Option>
         ))}
