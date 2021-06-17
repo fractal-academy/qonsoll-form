@@ -58,7 +58,10 @@ const mockQuestion = [
     id: 6,
     name: 'Long text question example',
     questionType: QUESTION_TYPES.LONG_TEXT,
-    answerType: ANSWER_TYPES.PLAIN_TEXT_STRING,
+    //excess property
+    // answerType: ANSWER_TYPES.PLAIN_TEXT_STRING,
+
+    //question options
     answers: [{ name: '', redirectQuestion: null }]
   },
   {
@@ -78,6 +81,10 @@ const mockQuestion = [
 ]
 
 function FormConditionsForm(props) {
+  const { data } = props
+
+  console.log(data)
+
   // [CLEAN FUNCTIONS]
   const [questionsData, setQuestionsData] = useState(mockQuestion)
   const getQuestionListRedirect = (itemIndex) => {
@@ -96,12 +103,12 @@ function FormConditionsForm(props) {
 
   return (
     <>
-      {mockQuestion.map((item, mockQuestionIndex) => (
+      {data?.map((item, index) => (
         <Box mb={3}>
           <ConditionForm
-            key={mockQuestionIndex}
-            mockQuestionIndex={mockQuestionIndex}
+            key={index}
             item={item}
+            index={index}
             addCondition={addCondition}
             addRedirectQuestion={addRedirectQuestion}
             getQuestionListRedirect={getQuestionListRedirect}

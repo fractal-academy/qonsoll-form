@@ -15,53 +15,68 @@ import {
   PlaneShortTextStringTemplate
 } from '../../../../domains/Condition/components/ConditionTemplates'
 
-const questionTypesMap = {
-  [QUESTION_TYPES.YES_NO]: {
-    component: <YesNoChoiceTemplate />
-  },
-  [QUESTION_TYPES.PICTURE_CHOICE]: {
-    component: <PictureChoiceTemplate />
-  },
-  [QUESTION_TYPES.OPINION_SCALE]: {
-    component: <OpinionScaleTemplate />
-  },
-  [QUESTION_TYPES.RATING]: {
-    component: <RatingTemplate />
-  },
-  [QUESTION_TYPES.SHORT_TEXT]: {
-    component: <PlaneShortTextStringTemplate />
-  },
-  [QUESTION_TYPES.LONG_TEXT]: {
-    component: <PlaneLongTextStringTemplate />
-  },
-  [QUESTION_TYPES.DATE]: {
-    component: <PlaneTextDateTemplate />
-  },
-  [QUESTION_TYPES.FILE_UPLOAD]: {
-    component: <FileUploadTemplate isUploaded />
-  }
-}
-
 function ConditionForm(props) {
   const {
-    mockQuestionIndex,
     item,
+    index,
     addCondition,
     addRedirectQuestion,
     getQuestionListRedirect
   } = props
+
+  const questionTypesMap = {
+    [QUESTION_TYPES.WELCOME_SCREEN]: {
+      component: <>Welcome screen.</>
+    },
+    [QUESTION_TYPES.YES_NO]: {
+      component: <YesNoChoiceTemplate />
+    },
+    [QUESTION_TYPES.PICTURE_CHOICE]: {
+      component: (
+        <PictureChoiceTemplate
+          choices={item?.questionConfigurations}
+          hasImages
+        />
+      )
+    },
+    [QUESTION_TYPES.CHOICE]: {
+      component: <>To do this layout.</>
+    },
+    [QUESTION_TYPES.OPINION_SCALE]: {
+      component: <OpinionScaleTemplate />
+    },
+    [QUESTION_TYPES.RATING]: {
+      component: <RatingTemplate />
+    },
+    [QUESTION_TYPES.SHORT_TEXT]: {
+      component: <PlaneShortTextStringTemplate />
+    },
+    [QUESTION_TYPES.LONG_TEXT]: {
+      component: <PlaneLongTextStringTemplate />
+    },
+    [QUESTION_TYPES.DATE]: {
+      component: <PlaneTextDateTemplate />
+    },
+    [QUESTION_TYPES.FILE_UPLOAD]: {
+      component: <FileUploadTemplate isUploaded />
+    },
+    [QUESTION_TYPES.ENDING]: {
+      component: <>Ending.</>
+    }
+  }
+
   return (
-    <NumberedCard number={mockQuestionIndex + 2} key={mockQuestionIndex}>
+    <NumberedCard number={index + 1} key={index}>
       <Box ml={3}>
         <Title level={5} strong>
-          {item.name}
+          {item?.title}
         </Title>
-        {cloneElement(questionTypesMap[item.questionType].component, {
+        {cloneElement(questionTypesMap[item?.questionType].component, {
           ...item,
-          addCondition: (answer) => addCondition(answer, mockQuestionIndex),
+          addCondition: (answer) => addCondition(answer, index),
           addRedirectQuestion: (question, answerIndex) =>
-            addRedirectQuestion(question, answerIndex, mockQuestionIndex),
-          questionList: getQuestionListRedirect(mockQuestionIndex)
+            addRedirectQuestion(question, answerIndex, index),
+          questionList: getQuestionListRedirect(index)
         })}
       </Box>
     </NumberedCard>
