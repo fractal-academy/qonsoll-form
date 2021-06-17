@@ -140,7 +140,7 @@ function EditorSidebar(props) {
             <Col cw="auto" v="center" px={1}>
               <ModalWithFormConditionsForm
                 btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
-                <FormConditionsForm />
+                <FormConditionsForm questions={[...questions, ...endings]} />
               </ModalWithFormConditionsForm>
             </Col>
           </Row>

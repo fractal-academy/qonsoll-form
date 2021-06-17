@@ -18,7 +18,7 @@ function OpinionScaleTemplate(props) {
           <Col cw={6}>
             <CustomOpinionBox mr={4} pl={2}>
               <CustomTextBox mr={2} px={2}>
-                <Text strong>{String.fromCharCode(startLetter++)}</Text>
+                <Text strong>{String.fromCharCode(startLetter + index)}</Text>
               </CustomTextBox>
               {item.name}
             </CustomOpinionBox>

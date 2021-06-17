@@ -42,7 +42,7 @@ function ModalWithFormConditionsForm(props) {
         closable={false}
         width="1024px"
         bodyStyle={{
-          height: '700px',
+          height: '70vh',
           overflow: 'auto',
           backgroundColor:
             theme.color.primary.t.lighten9 ||

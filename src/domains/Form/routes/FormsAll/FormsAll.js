@@ -122,7 +122,7 @@ function FormsAll(props) {
     formsAllRouteTitle,
     addNewFormButton,
     formSearchPlaceholder,
-    formsCounterMeasure,
+    formsCounterDeclaration,
     endingTitle
   } = translations || {}
   const menu = (
@@ -207,8 +207,8 @@ function FormsAll(props) {
               <Row noGutters mb={3}>
                 <Col>
                   <Text>
+                    {formsCounterDeclaration || 'Amount files: '}
                     {amountFiles}
-                    {formsCounterMeasure || 'files'}.
                   </Text>
                 </Col>
               </Row>
