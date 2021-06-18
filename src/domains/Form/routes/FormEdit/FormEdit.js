@@ -112,7 +112,7 @@ function FormEdit(props) {
         ]
       : isOpinionOrRating
       ? rangeForOpinionAndRating
-      : ''
+      : []
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations, questionType: key }

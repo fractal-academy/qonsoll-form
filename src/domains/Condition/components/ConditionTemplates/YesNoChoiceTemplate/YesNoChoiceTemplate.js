@@ -7,11 +7,11 @@ import { Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from '../../../../../domains/Question/components'
 
 function YesNoChoiceTemplate(props) {
-  const { questionOptions, questionList, addRedirectQuestion } = props
+  const { questionConfigurations, questionList, addRedirectQuestion } = props
 
   return (
     <>
-      {questionOptions?.map((item, index) => (
+      {questionConfigurations?.map((item, index) => (
         <Row mb={2} key={index} noGutters>
           <Col cw={6}>
             <CustomYesNoBox mr={4} pl={2}>
@@ -24,7 +24,7 @@ function YesNoChoiceTemplate(props) {
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              questionOptions={questionOptions}
+              questionConfigurations={questionConfigurations}
               index={index}
               questionList={questionList}
             />

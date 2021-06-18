@@ -74,7 +74,7 @@ function EditorSidebar(props) {
         ]
       : isOpinionOrRating
       ? rangeForOpinionAndRating
-      : ''
+      : []
     // default data for created question
     const newQuestion = {
       questionConfigurations,
