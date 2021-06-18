@@ -6,36 +6,45 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+import { useTranslation } from '../../../../context/Translation'
 
 const { Text } = Typography
 const { Option } = Select
 
-const rattingRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const maxRange = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-function RatingCustomConfig() {
+function AmountOptionsCustomConfig() {
   // [CUSTOM HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+  const { questionConfigurationAmountOfOptions } = useTranslation()
+
   // [CLEAN FUNCTIONS]
-  const onRattingSelectChange = (starsAmount) => {
+  const onRattingSelectChange = (amountOptions) => {
+    const questionConfigurations = Array(amountOptions - 1 + 1)
+      .fill(0)
+      .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { questionConfigurations: { starsAmount } }
+      payload: { questionConfigurations }
     })
   }
+
   // [COMPUTED PROPERTIES]
   const questionConfigurations = currentQuestion?.questionConfigurations
   return (
-    <Row noGutters mb={2}>
-      <Col>
-        <Text strong>Amount of stars</Text>
+    <Row noGutters mb={2} h="between">
+      <Col v="center">
+        <Text strong>
+          {questionConfigurationAmountOfOptions || 'Amount of options '}
+        </Text>
       </Col>
-      <Col cw="auto">
+      <Col cw="auto" v="center">
         <Select
-          defaultValue={questionConfigurations?.starsAmount || rattingRange[0]}
+          defaultValue={questionConfigurations?.length || maxRange[0]}
           size="small"
           onChange={onRattingSelectChange}>
-          {rattingRange.map((item) => (
+          {maxRange.map((item) => (
             <Option key={item} value={item}>
               {item}
             </Option>
@@ -46,4 +55,4 @@ function RatingCustomConfig() {
   )
 }
 
-export default RatingCustomConfig
+export default AmountOptionsCustomConfig

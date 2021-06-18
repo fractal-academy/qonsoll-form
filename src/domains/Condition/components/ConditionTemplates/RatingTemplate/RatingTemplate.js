@@ -11,24 +11,24 @@ import {
 let startLetter = 65
 
 function RatingTemplate(props) {
-  const { answers, questionList, addRedirectQuestion } = props
+  const { questionOptions, questionList, addRedirectQuestion } = props
 
   return (
     <>
-      {answers.map((item, index) => (
+      {questionOptions?.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
             <CustomRatingBox mr={4} pl={2}>
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter + index)}</Text>
               </CustomTextBox>
-              {item.name}
+              {item.answerOption}
             </CustomRatingBox>
           </Col>
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              answers={answers}
+              questionOptions={questionOptions}
               index={index}
               questionList={questionList}
             />
@@ -40,7 +40,7 @@ function RatingTemplate(props) {
 }
 
 RatingTemplate.propTypes = {
-  answers: PropTypes.array,
+  questionOptions: PropTypes.array,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
 }

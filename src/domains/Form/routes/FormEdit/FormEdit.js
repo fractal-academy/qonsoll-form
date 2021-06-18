@@ -92,12 +92,30 @@ function FormEdit(props) {
       QUESTION_TYPES.CHOICE,
       QUESTION_TYPES.PICTURE_CHOICE
     ].includes(key)
+
+    const isOpinionOrRating = [
+      QUESTION_TYPES.OPINION_SCALE,
+      QUESTION_TYPES.RATING
+    ].includes(key)
+
+    const rangeForOpinionAndRating = Array(5 - 1 + 1)
+      .fill(0)
+      .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
+
     const questionConfigurations = isChoices
-      ? [{ name: formEditChoiceButtonDefaultTitle || 'default', image: '' }]
+      ? [
+          {
+            answerOption: 'default',
+            image: '',
+            redirectQuestion: ''
+          }
+        ]
+      : isOpinionOrRating
+      ? rangeForOpinionAndRating
       : ''
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { questionType: key, questionConfigurations }
+      payload: { questionConfigurations, questionType: key }
     })
   }
 
@@ -124,7 +142,6 @@ function FormEdit(props) {
   }, [currentQuestion])
 
   // [COMPUTED PROPERTIES]
-  const { formEditChoiceButtonDefaultTitle } = translations || {}
 
   return (
     <FirebaseContext.Provider value={firebase}>

@@ -91,7 +91,7 @@ function KeyBox(props) {
               {isHovering && !phoneSmall ? `Key ${letter}` : letter}
             </StyledKeybox>
             <StyledText hasImages={hasImages} phoneSmall={phoneSmall}>
-              {item?.choice?.name || `Choice ${index + 1}`}
+              {item?.choice?.answerOption || `Choice ${index + 1}`}
             </StyledText>
           </Col>
           <Col cw="auto">

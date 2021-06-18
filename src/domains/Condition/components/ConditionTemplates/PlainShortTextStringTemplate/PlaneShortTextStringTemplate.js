@@ -14,16 +14,17 @@ import {
 const { Option } = Select
 
 function PlaneShortTextStringTemplate(props) {
-  const { answers, addCondition, questionList, addRedirectQuestion } = props
+  const { questionOptions, addCondition, questionList, addRedirectQuestion } =
+    props
 
   // [CLEAN FUNCTIONS]
   const onClick = () => {
-    addCondition({ name: '', redirectQuestion: null })
+    addCondition({ answerOption: '', redirectQuestion: '' })
   }
 
   return (
     <>
-      {answers.map((item, index) => (
+      {questionOptions?.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
             <Row noGutters width="100%">
@@ -52,7 +53,7 @@ function PlaneShortTextStringTemplate(props) {
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              answers={answers}
+              questionOptions={questionOptions}
               index={index}
               questionList={questionList}
             />
@@ -66,7 +67,7 @@ function PlaneShortTextStringTemplate(props) {
   )
 }
 PlaneShortTextStringTemplate.propTypes = {
-  answers: PropTypes.array,
+  questionOptions: PropTypes.array,
   addCondition: PropTypes.func,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func

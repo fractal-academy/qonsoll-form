@@ -1,4 +1,4 @@
-import RatingCustomConfig from './RatingCustomConfig'
+import AmountOptionsCustomConfig from './RatingCustomConfig'
 import OpinionScaleCustomConfig from './OpinionScaleCustomConfig'
 
-export { RatingCustomConfig, OpinionScaleCustomConfig }
+export { AmountOptionsCustomConfig, OpinionScaleCustomConfig }

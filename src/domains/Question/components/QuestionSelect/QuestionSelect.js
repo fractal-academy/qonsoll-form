@@ -7,7 +7,7 @@ import { StyledSelect } from './QuestionSelect.styles'
 const { Option, OptGroup } = Select
 
 function QuestionSelect(props) {
-  const { questionList, answers, index, addRedirectQuestion } = props
+  const { questionList, questionOptions, index, addRedirectQuestion } = props
 
   // [CLEAN FUNCTIONS]
   const onChange = (question, index) => {
@@ -16,7 +16,10 @@ function QuestionSelect(props) {
 
   return (
     <StyledSelect
-      value={answers[index].redirectQuestion || 'Go to the next question'}
+      value={
+        // questionOptions[index]?.redirectQuestion ||
+        'Go to the next question'
+      }
       showSearch
       allowClear
       onChange={(name) => onChange(name, index)}
@@ -27,7 +30,7 @@ function QuestionSelect(props) {
       <OptGroup label="JUMP TO...">
         {questionList.map((item, index) => (
           <Option key={index} value={item.id} onClick={() => {}}>
-            {item.name}
+            {item.title}
           </Option>
         ))}
       </OptGroup>
@@ -37,7 +40,7 @@ function QuestionSelect(props) {
 
 QuestionSelect.propTypes = {
   questionList: PropTypes.array.isRequired,
-  answers: PropTypes.array.isRequired,
+  questionOptions: PropTypes.array.isRequired,
   index: PropTypes.number.isRequired,
   addRedirectQuestion: PropTypes.func.isRequired
 }

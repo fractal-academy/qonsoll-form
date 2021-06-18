@@ -33,7 +33,7 @@ function ChoiceEditable(props) {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
-  const [value, setValue] = useState(data?.name)
+  const [value, setValue] = useState(data?.answerOption)
 
   // [COMPUTED PROPERTIES]
   const choiceProps = currentQuestion.questionConfigurations
@@ -46,9 +46,9 @@ function ChoiceEditable(props) {
   }
   const onBlur = async () => {
     //if the value has not changed do nothing, reduce the number of queries to the database
-    if (choiceProps[index].name === value) return
+    if (choiceProps[index].answerOption === value) return
     // update the choice we need
-    choiceProps[index].name = value
+    choiceProps[index].answerOption = value
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations: choiceProps }
@@ -73,7 +73,7 @@ function ChoiceEditable(props) {
   // [USE_EFFECTS]
   useEffect(() => {
     //update text area value when delete element
-    setValue(data?.name)
+    setValue(data?.answerOption)
   }, [data])
 
   return (
