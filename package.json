@@ -106,5 +106,7 @@
     "url": "https://github.com/fractal-academy/feedback-typeform-app.git/issues"
   },
   "homepage": "https://github.com/fractal-academy/feedback-typeform-app.git#readme",
-  "dependencies": {}
+  "dependencies": {
+    "react-firebase-file-uploader": "^2.4.4"
+  }
 }
