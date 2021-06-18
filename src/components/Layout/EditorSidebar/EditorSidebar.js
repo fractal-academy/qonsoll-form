@@ -55,18 +55,35 @@ function EditorSidebar(props) {
       QUESTION_TYPES.CHOICE,
       QUESTION_TYPES.PICTURE_CHOICE
     ].includes(key)
+
+    const isOpinionOrRating = [
+      QUESTION_TYPES.OPINION_SCALE,
+      QUESTION_TYPES.RATING
+    ].includes(key)
+
+    const rangeForOpinionAndRating = Array(5 - 1 + 1)
+      .fill(0)
+      .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
+
     const questionConfigurations = isChoices
-      ? [{ name: 'default', image: '' }]
+      ? [
+          {
+            questionOptions: 'default',
+            image: ''
+          }
+        ]
+      : isOpinionOrRating
+      ? rangeForOpinionAndRating
       : ''
     // default data for created question
     const newQuestion = {
+      questionConfigurations,
       id: questionId,
       formId: id,
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
-      order: questions?.length,
-      questionConfigurations: questionConfigurations
+      order: questions?.length
     }
     // set it into context as current
     await currentQuestionDispatch({

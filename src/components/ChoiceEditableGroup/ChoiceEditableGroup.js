@@ -26,8 +26,8 @@ function ChoiceEditableGroup(props) {
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
         questionConfigurations: choiceProps
-          ? [...choiceProps, { name: '', image: '' }]
-          : [{ name: '', image: '' }]
+          ? [...choiceProps, { answerOption: '', image: '' }]
+          : [{ answerOption: '', image: '' }]
       }
     })
   }

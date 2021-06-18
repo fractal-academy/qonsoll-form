@@ -71,7 +71,7 @@ function ChoiceButton(props) {
 
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
-      const answer = { value: choice?.name || '', letterKey: letter }
+      const answer = { value: choice?.answerOption || '', letterKey: letter }
       //if picture choice add field with image link
       const data = {
         question,

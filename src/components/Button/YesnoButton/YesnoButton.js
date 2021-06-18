@@ -34,7 +34,10 @@ function YesnoButton(props) {
         } else {
           const key = `${event.key}`.toUpperCase()
           const currentChoice = key === 'Y' ? 'Yes' : 'No'
-          onButtonClick({ letter: key, choice: { name: currentChoice } })
+          onButtonClick({
+            letter: key,
+            choice: { answerOption: currentChoice }
+          })
         }
       }
     },
@@ -51,13 +54,13 @@ function YesnoButton(props) {
     {
       letter: 'Y',
       choice: {
-        name: yes || 'Yes'
+        answerOption: yes || 'Yes'
       }
     },
     {
       letter: 'N',
       choice: {
-        name: no || 'No'
+        answerOption: no || 'No'
       }
     }
   ]
@@ -70,7 +73,7 @@ function YesnoButton(props) {
     const { letter, choice } = choiceData
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
-      const answer = { value: choice?.name || '', letterKey: letter }
+      const answer = { value: choice?.answerOption || '', letterKey: letter }
       const data = {
         question,
         answer

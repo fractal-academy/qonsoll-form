@@ -8,10 +8,7 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
-import {
-  OpinionScaleCustomConfig,
-  RatingCustomConfig
-} from '../../../../domains/Question/components/QuestionCustomConfigurations'
+import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
 
 const { Text } = Typography
 
@@ -55,20 +52,9 @@ function QuestionConfigurationMenu() {
           />
         </Col>
       </Row>
-      {currentQuestion.questionType === QUESTION_TYPES.OPINION_SCALE && (
-        <Row noGutters>
-          <Col>
-            <OpinionScaleCustomConfig />
-          </Col>
-        </Row>
-      )}
-      {currentQuestion.questionType === QUESTION_TYPES.RATING && (
-        <Row noGutters>
-          <Col>
-            <RatingCustomConfig />
-          </Col>
-        </Row>
-      )}
+      {[QUESTION_TYPES.OPINION_SCALE, QUESTION_TYPES.RATING].includes(
+        currentQuestion.questionType
+      ) && <AmountOptionsCustomConfig />}
     </Box>
   )
 }

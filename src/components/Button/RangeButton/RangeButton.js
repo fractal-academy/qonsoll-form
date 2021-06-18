@@ -50,10 +50,12 @@ const StyledRangeButton = styled(Button)`
 function RangeButton(props) {
   const { onClick, currentSlide, question } = props
   const { order, questionConfigurations } = question
+
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
   const cwMedium = useMedia({ minWidth: '1100px' })
   const cwSmall = useMedia({ minWidth: '500px' })
+
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
 
@@ -86,17 +88,15 @@ function RangeButton(props) {
   )
 
   // [COMPUTED PROPERTIES]
-  const from = questionConfigurations?.from || 1
-  const to = questionConfigurations?.to || 5
+  // const from = questionConfigurations?.from || 1
+  // const to = questionConfigurations?.to || 5
 
-  const range = Array(to - from + 1)
-    .fill(0)
-    .map((el, index) => from + index)
+  const range = questionConfigurations?.map((el, index) => el.answerOption)
   const columnWidth = (cwMedium && 2) || (cwSmall && 3) || 12
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (number) => {
-    if (range.includes(Number(number)) && currentSlide === order) {
+    if (range?.includes(Number(number)) && currentSlide === order) {
       setButtonKey(number)
       const data = {
         question,

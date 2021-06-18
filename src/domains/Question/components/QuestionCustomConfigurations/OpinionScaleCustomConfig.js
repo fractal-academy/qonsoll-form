@@ -52,8 +52,8 @@ function OpinionScaleCustomConfig() {
           defaultValue={questionConfigurations?.from || 0}
           size="small"
           onChange={onSelectFromChange}>
-          <Option value="0">0</Option>
-          <Option value="1">1</Option>
+          <Option value={0}>0</Option>
+          <Option value={1}>1</Option>
         </Select>
       </Col>
       <Col v="center" cw="auto" mr={3}>

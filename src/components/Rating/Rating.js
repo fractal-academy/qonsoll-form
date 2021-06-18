@@ -51,7 +51,7 @@ function CustomRating(props) {
     <Container>
       <StyledRate
         autoFocus={false}
-        count={questionConfigurations?.starsAmount}
+        count={questionConfigurations?.length}
         allowClear={allowClear}
         tooltips={tooltips}
         onChange={onChange}

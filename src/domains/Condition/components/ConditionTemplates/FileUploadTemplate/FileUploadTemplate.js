@@ -6,11 +6,12 @@ import { QuestionSelect } from '../../../../../domains/Question/components'
 import { CustomUploaderBox } from './FileUploadTemplate.style'
 
 function FileUploadTemplate(props) {
-  const { answers, isUploaded, questionList, addRedirectQuestion } = props
+  const { questionOptions, isUploaded, questionList, addRedirectQuestion } =
+    props
 
   return (
     <>
-      {answers.map((item, index) => (
+      {questionOptions?.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
             <CustomUploaderBox pl={2} mr={4}>
@@ -24,7 +25,7 @@ function FileUploadTemplate(props) {
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              answers={answers}
+              questionOptions={questionOptions}
               index={index}
               questionList={questionList}
             />
@@ -35,7 +36,7 @@ function FileUploadTemplate(props) {
   )
 }
 FileUploadTemplate.propTypes = {
-  answers: PropTypes.array,
+  questionOptions: PropTypes.array,
   isUploaded: PropTypes.bool.isRequired,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func
