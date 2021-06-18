@@ -25,7 +25,7 @@ function OpinionScaleTemplate(props) {
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              // questionOptions={questionOptions}
+              questionConfigurations={questionConfigurations}
               index={index}
               questionList={questionList}
             />

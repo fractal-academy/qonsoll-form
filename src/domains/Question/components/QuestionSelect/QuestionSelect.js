@@ -7,29 +7,31 @@ import { StyledSelect } from './QuestionSelect.styles'
 const { Option, OptGroup } = Select
 
 function QuestionSelect(props) {
-  const { questionList, questionOptions, index, addRedirectQuestion } = props
+  const { questionList, questionConfigurations, index, addRedirectQuestion } =
+    props
 
   // [CLEAN FUNCTIONS]
   const onChange = (question, index) => {
+    console.log(question)
     addRedirectQuestion(question, index)
   }
-
+  console.log(questionConfigurations)
   return (
     <StyledSelect
       value={
-        // questionOptions[index]?.redirectQuestion ||
+        questionConfigurations?.[index]?.redirectQuestion ||
         'Go to the next question'
       }
       showSearch
       allowClear
-      onChange={(name) => onChange(name, index)}
+      onChange={(question) => onChange(question, index)}
       defaultValue="Go to the next question">
       <Option value="Submit form">
         <Text strong>Submit form</Text>
       </Option>
       <OptGroup label="JUMP TO...">
         {questionList.map((item, index) => (
-          <Option key={index} value={item.id} onClick={() => {}}>
+          <Option key={item?.id} value={item?.id}>
             {item.title}
           </Option>
         ))}

@@ -106,7 +106,7 @@ function FormConditionsForm(props) {
 
   return (
     <>
-      {data?.map((item, index) => (
+      {questionsData?.map((item, index) => (
         <Box mb={3}>
           <ConditionForm
             key={index}
