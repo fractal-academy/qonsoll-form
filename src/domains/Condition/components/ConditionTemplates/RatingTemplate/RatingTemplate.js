@@ -22,7 +22,7 @@ function RatingTemplate(props) {
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter++)}</Text>
               </CustomTextBox>
-              {item.name}
+              {item.answerOption}
             </CustomRatingBox>
           </Col>
           <Col cw={6}>

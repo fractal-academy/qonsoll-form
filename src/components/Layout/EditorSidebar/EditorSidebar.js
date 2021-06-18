@@ -68,7 +68,7 @@ function EditorSidebar(props) {
     const questionConfigurations = isChoices
       ? [
           {
-            questionOptions: 'default',
+            answerOption: 'default',
             image: ''
           }
         ]

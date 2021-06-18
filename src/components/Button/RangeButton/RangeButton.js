@@ -88,10 +88,7 @@ function RangeButton(props) {
   )
 
   // [COMPUTED PROPERTIES]
-  // const from = questionConfigurations?.from || 1
-  // const to = questionConfigurations?.to || 5
-
-  const range = questionConfigurations?.map((el, index) => el.answerOption)
+  const range = questionConfigurations?.map((el, index) => el?.answerOption)
   const columnWidth = (cwMedium && 2) || (cwSmall && 3) || 12
 
   // [CLEAN FUNCTIONS]

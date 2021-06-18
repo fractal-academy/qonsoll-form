@@ -22,7 +22,7 @@ function PictureChoiceTemplate(props) {
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter + index)}</Text>
               </CustomTextBox>
-              {item.name}
+              {item.answerOption}
             </CustomPictureChoiceBox>
           </Col>
           <Col cw={6}>

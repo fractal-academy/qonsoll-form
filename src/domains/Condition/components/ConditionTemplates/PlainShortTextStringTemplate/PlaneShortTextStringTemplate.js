@@ -19,7 +19,7 @@ function PlaneShortTextStringTemplate(props) {
 
   // [CLEAN FUNCTIONS]
   const onClick = () => {
-    addCondition({ name: '', redirectQuestion: null })
+    addCondition({ answerOption: '', redirectQuestion: '' })
   }
 
   return (

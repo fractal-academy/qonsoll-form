@@ -105,8 +105,9 @@ function FormEdit(props) {
     const questionConfigurations = isChoices
       ? [
           {
-            questionOptions: 'default',
-            image: ''
+            answerOption: 'default',
+            image: '',
+            redirectQuestion: ''
           }
         ]
       : isOpinionOrRating

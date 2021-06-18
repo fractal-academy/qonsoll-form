@@ -10,8 +10,8 @@ const mockQuestion = [
     questionType: QUESTION_TYPES.YES_NO,
     answerType: ANSWER_TYPES.CHOICE,
     questionOptions: [
-      { name: 'Yes', redirectQuestion: null },
-      { name: 'No', redirectQuestion: null }
+      { name: 'Yes', redirectQuestion: '' },
+      { name: 'No', redirectQuestion: '' }
     ]
   },
   {
@@ -20,9 +20,9 @@ const mockQuestion = [
     questionType: QUESTION_TYPES.PICTURE_CHOICE,
     answerType: ANSWER_TYPES.CHOICE,
     questionOptions: [
-      { name: 'Picture 1', redirectQuestion: null },
-      { name: 'Picture 2', redirectQuestion: null },
-      { name: 'Picture 3', redirectQuestion: null }
+      { name: 'Picture 1', redirectQuestion: '' },
+      { name: 'Picture 2', redirectQuestion: '' },
+      { name: 'Picture 3', redirectQuestion: '' }
     ]
   },
   {
@@ -31,9 +31,9 @@ const mockQuestion = [
     questionType: QUESTION_TYPES.OPINION_SCALE,
     answerType: ANSWER_TYPES.CHOICE,
     questionOptions: [
-      { name: '1', redirectQuestion: null },
-      { name: '2', redirectQuestion: null },
-      { name: '3', redirectQuestion: null }
+      { name: '1', redirectQuestion: '' },
+      { name: '2', redirectQuestion: '' },
+      { name: '3', redirectQuestion: '' }
     ]
   },
   {
@@ -42,9 +42,9 @@ const mockQuestion = [
     questionType: QUESTION_TYPES.RATING,
     answerType: ANSWER_TYPES.CHOICE,
     questionOptions: [
-      { name: '1', redirectQuestion: null },
-      { name: '2', redirectQuestion: null },
-      { name: '3', redirectQuestion: null }
+      { name: '1', redirectQuestion: '' },
+      { name: '2', redirectQuestion: '' },
+      { name: '3', redirectQuestion: '' }
     ]
   },
   {
@@ -52,7 +52,7 @@ const mockQuestion = [
     name: 'Short text question example',
     questionType: QUESTION_TYPES.SHORT_TEXT,
     answerType: ANSWER_TYPES.PLAIN_TEXT_STRING,
-    questionOptions: [{ name: '', redirectQuestion: null }]
+    questionOptions: [{ name: '', redirectQuestion: '' }]
   },
   {
     id: 6,
@@ -62,21 +62,21 @@ const mockQuestion = [
     // answerType: ANSWER_TYPES.PLAIN_TEXT_STRING,
 
     //question options
-    questionOptions: [{ name: '', redirectQuestion: null }]
+    questionOptions: [{ name: '', redirectQuestion: '' }]
   },
   {
     id: 7,
     name: 'Date question example',
     questionType: QUESTION_TYPES.DATE,
     answerType: ANSWER_TYPES.PLAIN_TEXT_DATE,
-    questionOptions: [{ name: '', redirectQuestion: null }]
+    questionOptions: [{ name: '', redirectQuestion: '' }]
   },
   {
     id: 8,
     name: 'File upload question example',
     questionType: QUESTION_TYPES.FILE_UPLOAD,
     answerType: ANSWER_TYPES.FILE,
-    questionOptions: [{ name: '111', redirectQuestion: null }]
+    questionOptions: [{ name: '111', redirectQuestion: '' }]
   }
 ]
 
@@ -91,14 +91,14 @@ function FormConditionsForm(props) {
   }
 
   const addCondition = (answer, index) => {
-    questionsData[index].questionOptions = [
-      ...questionsData[index]?.questionOptions,
+    questionsData[index].questionConfigurations = [
+      ...questionsData[index]?.questionConfigurations,
       answer
     ]
     setQuestionsData([...questionsData])
   }
   const addRedirectQuestion = (nextQuestion, answerIndex, index) => {
-    questionsData[index].questionOptions[answerIndex].redirectQuestion =
+    questionsData[index].questionConfigurations[answerIndex].redirectQuestion =
       nextQuestion
 
     setQuestionsData([...questionsData])
