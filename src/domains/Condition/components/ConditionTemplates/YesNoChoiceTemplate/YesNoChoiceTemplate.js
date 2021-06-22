@@ -18,7 +18,7 @@ function YesNoChoiceTemplate(props) {
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{item.answerOption[0].toUpperCase()}</Text>
               </CustomTextBox>
-              {item.answerOption}
+              {item?.answerOption}
             </CustomYesNoBox>
           </Col>
           <Col cw={6}>

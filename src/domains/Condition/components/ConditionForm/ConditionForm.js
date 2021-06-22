@@ -10,7 +10,7 @@ import {
   YesNoChoiceTemplate,
   OpinionScaleTemplate,
   PlaneTextDateTemplate,
-  PictureChoiceTemplate,
+  ChoiceTemplate,
   PlaneLongTextStringTemplate,
   PlaneShortTextStringTemplate
 } from '../../../../domains/Condition/components/ConditionTemplates'
@@ -25,22 +25,14 @@ function ConditionForm(props) {
   } = props
 
   const questionTypesMap = {
-    [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <>Welcome screen.</>
-    },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesNoChoiceTemplate />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
-      component: (
-        <PictureChoiceTemplate
-          choices={item?.questionConfigurations}
-          hasImages
-        />
-      )
+      component: <ChoiceTemplate choices={item?.questionConfigurations} />
     },
     [QUESTION_TYPES.CHOICE]: {
-      component: <>To do this layout.</>
+      component: <ChoiceTemplate choices={item?.questionConfigurations} />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
       component: <OpinionScaleTemplate />
