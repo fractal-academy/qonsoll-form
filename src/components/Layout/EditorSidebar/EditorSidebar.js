@@ -51,6 +51,7 @@ function EditorSidebar(props) {
   // [CLEAN FUNCTIONS]
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
+    //Bolean conditions
     const isChoices = [
       QUESTION_TYPES.CHOICE,
       QUESTION_TYPES.PICTURE_CHOICE
@@ -61,20 +62,39 @@ function EditorSidebar(props) {
       QUESTION_TYPES.RATING
     ].includes(key)
 
-    const rangeForOpinionAndRating = Array(5 - 1 + 1)
+    const isYesNo = key === QUESTION_TYPES.YES_NO
+
+    //configuration for certain types of questions
+    const choicesConfiguration = [
+      {
+        answerOption: 'default',
+        image: '',
+        redirectQuestion: ''
+      }
+    ]
+    const yesNoConfiguration = [
+      {
+        answerOption: 'Yes',
+        redirectQuestion: ''
+      },
+      {
+        answerOption: 'No',
+        redirectQuestion: ''
+      }
+    ]
+    const opinionAndRatingConfiguration = Array(5 - 1 + 1)
       .fill(0)
       .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
 
+    //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
-      ? [
-          {
-            answerOption: 'default',
-            image: ''
-          }
-        ]
+      ? choicesConfiguration
+      : isYesNo
+      ? yesNoConfiguration
       : isOpinionOrRating
-      ? rangeForOpinionAndRating
+      ? opinionAndRatingConfiguration
       : ''
+
     // default data for created question
     const newQuestion = {
       questionConfigurations,
@@ -85,6 +105,7 @@ function EditorSidebar(props) {
       title: '',
       order: questions?.length
     }
+
     // set it into context as current
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
@@ -111,6 +132,7 @@ function EditorSidebar(props) {
         order: questions?.length + index
       })
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions?.length])
 
   return (

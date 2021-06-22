@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { KeyBox } from '../../../components'
 import { useKeyPress } from '@umijs/hooks'
@@ -8,10 +8,10 @@ import { useTranslation } from '../../../context/Translation'
 
 function YesnoButton(props) {
   const { onClick, currentSlide, question } = props
-  const { order } = question
+  const { order, questionConfigurations } = question
 
   //[CUSTOM HOOKS]
-  const { yes, no, answerRequiredMessageError } = useTranslation()
+  const { answerRequiredMessageError } = useTranslation()
 
   // [ADDITIONAL_HOOKS]
   useKeyPress(
@@ -50,23 +50,19 @@ function YesnoButton(props) {
   const [buttonKey, setButtonKey] = useState()
 
   // [COMPUTED PROPERTIES]
-  const mappedChoices = [
-    {
-      letter: 'Y',
-      choice: {
-        answerOption: yes || 'Yes'
-      }
-    },
-    {
-      letter: 'N',
-      choice: {
-        answerOption: no || 'No'
-      }
-    }
-  ]
-
   const letters = []
-  mappedChoices.map((item) => letters.push(item.letter))
+  questionConfigurations?.map((item) =>
+    letters.push(item?.answerOption?.[0].toUpperCase())
+  )
+
+  const mappedChoices = useMemo(
+    () =>
+      questionConfigurations?.map(({ answerOption }, index) => ({
+        letter: answerOption?.[0].toUpperCase(),
+        choice: { answerOption }
+      })),
+    [questionConfigurations]
+  )
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (choiceData) => {
@@ -81,13 +77,12 @@ function YesnoButton(props) {
       onClick && onClick(data)
     }
   }
-
   return (
     <Box display="block">
-      {mappedChoices.map((item, index) => (
+      {mappedChoices?.map((item, index) => (
         <Box key={index} mb={2} mx={2}>
           <KeyBox
-            isActive={buttonKey === item.letter}
+            isActive={buttonKey === item?.letter}
             onButtonClick={onButtonClick}
             item={item}
             buttonKey={buttonKey}

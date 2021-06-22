@@ -87,7 +87,7 @@ function FormEdit(props) {
     })
   }
   const onQuestionTypeChange = async ({ key }) => {
-    //when we change question type on choice or picture choice - set default choice, else empty field
+    //Bolean conditions
     const isChoices = [
       QUESTION_TYPES.CHOICE,
       QUESTION_TYPES.PICTURE_CHOICE
@@ -98,21 +98,39 @@ function FormEdit(props) {
       QUESTION_TYPES.RATING
     ].includes(key)
 
-    const rangeForOpinionAndRating = Array(5 - 1 + 1)
+    const isYesNo = key === QUESTION_TYPES.YES_NO
+
+    //configuration for certain types of questions
+    const choicesConfiguration = [
+      {
+        answerOption: 'default',
+        image: '',
+        redirectQuestion: ''
+      }
+    ]
+    const yesNoConfiguration = [
+      {
+        answerOption: 'Yes',
+        redirectQuestion: ''
+      },
+      {
+        answerOption: 'No',
+        redirectQuestion: ''
+      }
+    ]
+    const opinionAndRatingConfiguration = Array(5 - 1 + 1)
       .fill(0)
       .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
 
+    //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
-      ? [
-          {
-            answerOption: 'default',
-            image: '',
-            redirectQuestion: ''
-          }
-        ]
+      ? choicesConfiguration
+      : isYesNo
+      ? yesNoConfiguration
       : isOpinionOrRating
-      ? rangeForOpinionAndRating
+      ? opinionAndRatingConfiguration
       : ''
+
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations, questionType: key }
