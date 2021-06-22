@@ -14,17 +14,20 @@ import {
 const { Option } = Select
 
 function PlaneTextDateTemplate(props) {
-  const { questionOptions, addCondition, questionList, addRedirectQuestion } =
-    props
+  const {
+    questionConfigurations,
+    addCondition,
+    questionList,
+    addRedirectQuestion
+  } = props
 
   // [CLEAN FUNCTIONS]
   const onClick = () => {
     addCondition({ answerOption: '', redirectQuestion: '' })
   }
-
   return (
     <>
-      {questionOptions?.map((item, index) => (
+      {questionConfigurations?.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
             <Row noGutters width="100%">
@@ -53,7 +56,7 @@ function PlaneTextDateTemplate(props) {
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              questionOptions={questionOptions}
+              questionConfigurations={questionConfigurations}
               index={index}
               questionList={questionList}
             />

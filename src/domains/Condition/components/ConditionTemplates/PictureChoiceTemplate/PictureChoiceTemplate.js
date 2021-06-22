@@ -11,11 +11,11 @@ import { QuestionSelect } from '../../../../../domains/Question/components'
 let startLetter = 65
 
 function PictureChoiceTemplate(props) {
-  const { questionOptions, questionList, addRedirectQuestion } = props
+  const { questionConfigurations, questionList, addRedirectQuestion } = props
 
   return (
     <>
-      {questionOptions?.map((item, index) => (
+      {questionConfigurations?.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
             <CustomPictureChoiceBox pl={2} mr={4}>
@@ -28,7 +28,7 @@ function PictureChoiceTemplate(props) {
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              questionOptions={questionOptions}
+              questionOptions={questionConfigurations}
               index={index}
               questionList={questionList}
             />

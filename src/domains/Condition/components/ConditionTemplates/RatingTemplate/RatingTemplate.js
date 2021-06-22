@@ -11,11 +11,11 @@ import {
 let startLetter = 65
 
 function RatingTemplate(props) {
-  const { questionOptions, questionList, addRedirectQuestion } = props
+  const { questionConfigurations, questionList, addRedirectQuestion } = props
 
   return (
     <>
-      {questionOptions?.map((item, index) => (
+      {questionConfigurations?.map((item, index) => (
         <Row noGutters mb={2} key={index}>
           <Col cw={6}>
             <CustomRatingBox mr={4} pl={2}>
@@ -28,7 +28,7 @@ function RatingTemplate(props) {
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              questionOptions={questionOptions}
+              questionConfigurations={questionConfigurations}
               index={index}
               questionList={questionList}
             />

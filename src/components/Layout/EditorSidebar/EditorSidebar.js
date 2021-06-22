@@ -93,8 +93,7 @@ function EditorSidebar(props) {
       ? yesNoConfiguration
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
-      : ''
-
+      : []
     // default data for created question
     const newQuestion = {
       questionConfigurations,

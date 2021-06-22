@@ -5,7 +5,7 @@ import { IconLabel, SubmitButton } from '../../../components'
 import { Box } from '@qonsoll/react-design'
 import { InboxOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../context/Translation'
-import storage from '../../../services/storage'
+// import storage from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
 import useFunctions from '../../../hooks/useFunctions'
 import { useKeyPress } from '@umijs/hooks'
@@ -26,7 +26,7 @@ const UploadArea = (props) => {
     fileUploaderTitle,
     fileUploaderSubtitle
   } = useTranslation()
-  const { getCollectionRef } = useFunctions()
+  const { getCollectionRef, storage } = useFunctions()
 
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})

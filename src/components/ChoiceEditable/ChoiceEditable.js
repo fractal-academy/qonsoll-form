@@ -36,7 +36,7 @@ function ChoiceEditable(props) {
   const [value, setValue] = useState(data?.answerOption)
 
   // [COMPUTED PROPERTIES]
-  const choiceProps = currentQuestion.questionConfigurations
+  const choiceProps = currentQuestion?.questionConfigurations
   const letter = String.fromCharCode(startLetter + index)
   const bgImage = `url(${data?.image || DEFAULT_IMAGE})`
 

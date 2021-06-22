@@ -15,7 +15,6 @@ function QuestionSelect(props) {
     console.log(question)
     addRedirectQuestion(question, index)
   }
-  console.log(questionConfigurations)
   return (
     <StyledSelect
       value={
