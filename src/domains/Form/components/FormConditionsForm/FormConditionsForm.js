@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { ConditionForm } from '../../../../domains/Condition/components'
 import { QUESTION_TYPES, ANSWER_TYPES } from '../../../../constants'
 import { Box } from '@qonsoll/react-design'
+import { Select, Tabs } from 'antd'
+import EndingsSimpleView from '../../../Condition/components/Endings/EndingsSimpleView'
+const { TabPane } = Tabs
 
 const mockQuestion = [
   {
@@ -79,9 +82,11 @@ const mockQuestion = [
     questionOptions: [{ name: '111', redirectQuestion: '' }]
   }
 ]
-
+function callback(key) {
+  console.log(key)
+}
 function FormConditionsForm(props) {
-  const { data } = props
+  const { data, endings } = props
 
   // [CLEAN FUNCTIONS]
   const [questionsData, setQuestionsData] = useState(data)
@@ -106,18 +111,47 @@ function FormConditionsForm(props) {
 
   return (
     <>
-      {questionsData?.map((item, index) => (
-        <Box mb={3}>
-          <ConditionForm
-            key={index}
-            item={item}
-            index={index}
-            addCondition={addCondition}
-            addRedirectQuestion={addRedirectQuestion}
-            getQuestionListRedirect={getQuestionListRedirect}
-          />
-        </Box>
-      ))}
+      <Tabs onChange={callback} type="card">
+        <TabPane tab="Logic jumps" key="1">
+          {questionsData?.map((item, index) => (
+            <Box mb={3}>
+              <ConditionForm
+                key={index}
+                item={item}
+                index={index}
+                addCondition={addCondition}
+                addRedirectQuestion={addRedirectQuestion}
+                getQuestionListRedirect={getQuestionListRedirect}
+              />
+            </Box>
+          ))}
+        </TabPane>
+        <TabPane tab="Endings" key="2">
+          {endings?.map((item, index) => (
+            <Box mb={3}>
+              <EndingsSimpleView
+                isEnding
+                questionsData={questionsData}
+                key={index}
+                item={item}
+                index={index}
+                addCondition={addCondition}
+                addRedirectQuestion={addRedirectQuestion}
+                getQuestionListRedirect={getQuestionListRedirect}
+              />
+              {/*<ConditionForm*/}
+              {/*isEnding questionsData={questionsData}*/}
+              {/*key={index}*/}
+              {/*item={item}*/}
+              {/*index={index}*/}
+              {/*addCondition={addCondition}*/}
+              {/*addRedirectQuestion={addRedirectQuestion}*/}
+              {/*getQuestionListRedirect={getQuestionListRedirect}*/}
+              {/*/>*/}
+            </Box>
+          ))}
+        </TabPane>
+      </Tabs>
     </>
   )
 }
