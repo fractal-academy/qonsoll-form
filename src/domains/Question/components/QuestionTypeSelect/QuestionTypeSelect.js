@@ -24,7 +24,7 @@ import {
 } from '@ant-design/icons'
 
 function QuestionTypeSelect(props) {
-  const { onClick, customQuestionTypes } = props
+  const { onClick, questions, customQuestionTypes } = props
 
   // [ADDITIONAL_HOOKS]
   const {

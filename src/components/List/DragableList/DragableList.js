@@ -27,10 +27,9 @@ function DragableList(props) {
     onUpdate(
       updatedItems.map((i, index) => ({
         ...dataSource[i],
-        order: index
+        order: index + 1
       }))
     )
-    // setNewOrder(dataSource)
   }
   // [COMPUTED PROPERTIES]
   const Container = useMemo(
