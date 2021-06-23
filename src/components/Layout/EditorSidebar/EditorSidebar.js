@@ -130,7 +130,34 @@ function EditorSidebar(props) {
   }
 
   const onResetLogic = () => {
-    console.log('reset logic')
+    console.log('reset logic: ', questions)
+    questions.forEach((item) => {
+      const newQuestionConfigs = item.questionConfigurations.map(
+        (answerConfig) => {
+          const formattedObject = Object.entries(answerConfig)
+          const resetFields = formattedObject.map((tuple) => {
+            if (
+              tuple[0] === 'answerOption' &&
+              [
+                QUESTION_TYPES.OPINION_SCALE,
+                QUESTION_TYPES.RATING,
+                QUESTION_TYPES.PICTURE_CHOICE,
+                QUESTION_TYPES.CHOICE,
+                QUESTION_TYPES.YES_NO
+              ].includes(item.questionType)
+            ) {
+              return tuple
+            } else {
+              return [tuple[0], '']
+            }
+          })
+          return Object.fromEntries(resetFields)
+        }
+      )
+      setData(COLLECTIONS.QUESTIONS, item.id, {
+        questionConfigurations: newQuestionConfigs
+      })
+    })
   }
 
   const onResetEndings = () => {
