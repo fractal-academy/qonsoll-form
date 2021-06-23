@@ -14,29 +14,20 @@ function FileUploadTemplate(props) {
   } = props
 
   return (
-    <>
-      {questionConfigurations?.map((item, index) => (
-        <Row noGutters mb={2} key={index}>
-          <Col cw={6}>
-            <CustomUploaderBox pl={2} mr={4}>
-              {isUploaded ? (
-                <Text>is uploaded</Text>
-              ) : (
-                <Text>not uploaded</Text>
-              )}
-            </CustomUploaderBox>
-          </Col>
-          <Col cw={6}>
-            <QuestionSelect
-              addRedirectQuestion={addRedirectQuestion}
-              questionConfigurations={questionConfigurations}
-              index={index}
-              questionList={questionList}
-            />
-          </Col>
-        </Row>
-      ))}
-    </>
+    <Row noGutters mb={2}>
+      <Col cw={6}>
+        <CustomUploaderBox pl={2} mr={4}>
+          {isUploaded ? <Text>is uploaded</Text> : <Text>not uploaded</Text>}
+        </CustomUploaderBox>
+      </Col>
+      <Col cw={6}>
+        <QuestionSelect
+          addRedirectQuestion={addRedirectQuestion}
+          questionConfigurations={questionConfigurations}
+          questionList={questionList}
+        />
+      </Col>
+    </Row>
   )
 }
 FileUploadTemplate.propTypes = {

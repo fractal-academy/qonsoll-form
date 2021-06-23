@@ -1,6 +1,6 @@
 export { default as FileUploadTemplate } from './FileUploadTemplate'
 export { default as OpinionScaleTemplate } from './OpinionScaleTemplate'
-export { default as PictureChoiceTemplate } from './PictureChoiceTemplate'
+export { default as ChoiceTemplate } from './ChoiceTemplate'
 export { default as PlaneLongTextStringTemplate } from './PlainLongTextStringTemplate'
 export { default as PlaneShortTextStringTemplate } from './PlainShortTextStringTemplate'
 export { default as PlaneTextDateTemplate } from './PlainTextDateTemplate'

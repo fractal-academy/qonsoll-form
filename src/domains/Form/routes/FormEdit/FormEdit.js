@@ -129,7 +129,7 @@ function FormEdit(props) {
       ? yesNoConfiguration
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
-      : []
+      : [{ answerOption: '', redirectQuestion: '' }]
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations, questionType: key }

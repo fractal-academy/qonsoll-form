@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Typography, Button, Popover } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
@@ -93,7 +93,7 @@ function EditorSidebar(props) {
       ? yesNoConfiguration
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
-      : []
+      : [{ answerOption: '', redirectQuestion: '' }]
     // default data for created question
     const newQuestion = {
       questionConfigurations,
@@ -123,7 +123,21 @@ function EditorSidebar(props) {
       payload: item
     })
   }
-
+  //[COMPUTED PROPERTIES]
+  const ConditionsQuestionsList = useMemo(
+    () =>
+      questions
+        ? questions?.filter(
+            (item) =>
+              ![
+                QUESTION_TYPES.ENDING,
+                QUESTION_TYPES.WELCOME_SCREEN,
+                QUESTION_TYPES.STATEMENT
+              ].includes(item.questionType)
+          )
+        : [],
+    [questions]
+  )
   useEffect(() => {
     endings?.map((item, index) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {
@@ -180,7 +194,10 @@ function EditorSidebar(props) {
             <Col cw="auto" v="center" px={1}>
               <ModalWithFormConditionsForm
                 btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
-                <FormConditionsForm data={questions} />
+                <FormConditionsForm
+                  data={ConditionsQuestionsList}
+                  endings={endings}
+                />
               </ModalWithFormConditionsForm>
             </Col>
           </Row>
