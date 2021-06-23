@@ -106,11 +106,12 @@ function QuestionForm(props) {
   }
 
   const computedMediaUrl = currentQuestion?.image || DEFAULT_IMAGE
+  const tagRule = data?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   const popoverImage = `url(${computedMediaUrl})`
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
       ? endingQuestion || 'Ending'
-      : `${commonQuestion || 'Question'} ${data?.order + 1}`
+      : `${commonQuestion || 'Question'} ${data?.order}`
   const layoutType = LAYOUT_TYPES[data?.layoutType]
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
@@ -145,9 +146,7 @@ function QuestionForm(props) {
           <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 6]}>
             <CustomCard bordered={false}>
               <Row noGutters v="center">
-                <Col>
-                  <StyledTag>{questionTag}</StyledTag>
-                </Col>
+                <Col>{tagRule && <StyledTag>{questionTag}</StyledTag>}</Col>
                 {isConfigurationPopoverVisible && (
                   <Col cw="auto">
                     <QuestionConfigurationPopover
