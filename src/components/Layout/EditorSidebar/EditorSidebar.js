@@ -28,12 +28,12 @@ const { Title } = Typography
 
 function EditorSidebar(props) {
   const {
-    questions,
-    endings,
     id,
-    showCondition,
+    endings,
+    questions,
     transparent,
-    customQuestionTypes
+    customQuestionTypes,
+    welcomeScreenShowRule
   } = props
 
   //[CUSTOM HOOKS]
@@ -165,6 +165,7 @@ function EditorSidebar(props) {
                       questions={questions}
                       onClick={addQuestion}
                       customQuestionTypes={customQuestionTypes}
+                      welcomeScreenShowRule={welcomeScreenShowRule}
                     />
                   </Box>
                 }>

@@ -71,7 +71,11 @@ function QuestionsList(props) {
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
             <Box mr={2} ml="20px" my={3}>
-              <QuestionSimpleView {...item} number="W"></QuestionSimpleView>
+              <QuestionSimpleView
+                {...item}
+                number="W"
+                action={handleDelete}
+                onClick={() => onItemClick(item)}></QuestionSimpleView>
             </Box>
           )
       )}
