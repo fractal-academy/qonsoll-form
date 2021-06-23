@@ -15,7 +15,7 @@ const StyledTag = styled(Tag)`
   border-color: ${({ theme }) => theme.color.primary.t.lighten2};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: ${({ theme }) => theme.typography.fontSize.body1};
-  margin-right: ${({ theme }) => theme.space[2]};
+  margin-right: 10px !important;
 `
 
 function ConditionForm(props) {
