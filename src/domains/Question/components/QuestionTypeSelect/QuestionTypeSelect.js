@@ -24,7 +24,7 @@ import {
 } from '@ant-design/icons'
 
 function QuestionTypeSelect(props) {
-  const { onClick, customQuestionTypes } = props
+  const { onClick, welcomeScreenShowRule, customQuestionTypes } = props
 
   // [ADDITIONAL_HOOKS]
   const {
@@ -101,6 +101,13 @@ function QuestionTypeSelect(props) {
     }
   ]
 
+  const updatedMap =
+    (welcomeScreenShowRule &&
+      questionTypeMap.filter(
+        (item) => item.type !== QUESTION_TYPES.WELCOME_SCREEN
+      )) ||
+    questionTypeMap
+
   return (
     <Row
       h="center"
@@ -111,7 +118,7 @@ function QuestionTypeSelect(props) {
       style={{ flex: '1' }}>
       <Col display="block">
         <QuestionsTypeMenu>
-          {questionTypeMap.map((item) => (
+          {updatedMap.map((item) => (
             <QuestionMenuItem key={item.type} onClick={onClick}>
               <Row noGutters v="center">
                 <Col v="center" cw="auto" mr={2}>

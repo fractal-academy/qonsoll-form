@@ -12,7 +12,6 @@ function QuestionSelect(props) {
 
   // [CLEAN FUNCTIONS]
   const onChange = (question, index) => {
-    console.log(question)
     addRedirectQuestion(question, index)
   }
   return (

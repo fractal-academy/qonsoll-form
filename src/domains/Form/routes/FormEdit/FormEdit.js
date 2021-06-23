@@ -159,6 +159,9 @@ function FormEdit(props) {
   }, [currentQuestion])
 
   // [COMPUTED PROPERTIES]
+  const welcomeScreenShowRule = questions?.some(
+    (question) => question['questionType'] === QUESTION_TYPES.WELCOME_SCREEN
+  )
 
   return (
     <FirebaseContext.Provider value={firebase}>
@@ -195,6 +198,7 @@ function FormEdit(props) {
                     questions={questions}
                     showCondition={showCondition}
                     customQuestionTypes={customQuestionTypes}
+                    welcomeScreenShowRule={welcomeScreenShowRule}
                   />
                 )}
               </Box>

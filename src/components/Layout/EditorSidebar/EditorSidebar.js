@@ -28,12 +28,12 @@ const { Title } = Typography
 
 function EditorSidebar(props) {
   const {
-    questions,
-    endings,
     id,
-    showCondition,
+    endings,
+    questions,
     transparent,
-    customQuestionTypes
+    customQuestionTypes,
+    welcomeScreenShowRule
   } = props
 
   //[CUSTOM HOOKS]
@@ -103,7 +103,7 @@ function EditorSidebar(props) {
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
-      order: questions?.length
+      order: key === QUESTION_TYPES.WELCOME_SCREEN ? 0 : questions?.length
     }
 
     // set it into context as current
@@ -190,8 +190,10 @@ function EditorSidebar(props) {
                 content={
                   <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
                     <QuestionTypeSelect
+                      questions={questions}
                       onClick={addQuestion}
                       customQuestionTypes={customQuestionTypes}
+                      welcomeScreenShowRule={welcomeScreenShowRule}
                     />
                   </Box>
                 }>
