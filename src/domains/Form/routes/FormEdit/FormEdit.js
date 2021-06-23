@@ -105,22 +105,29 @@ function FormEdit(props) {
       {
         answerOption: 'default',
         image: '',
-        redirectQuestion: ''
+        redirectQuestion: '',
+        redirectConditionRule: ''
       }
     ]
     const yesNoConfiguration = [
       {
         answerOption: 'Yes',
-        redirectQuestion: ''
+        redirectQuestion: '',
+        redirectConditionRule: ''
       },
       {
         answerOption: 'No',
-        redirectQuestion: ''
+        redirectQuestion: '',
+        redirectConditionRule: ''
       }
     ]
     const opinionAndRatingConfiguration = Array(5 - 1 + 1)
       .fill(0)
-      .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
+      .map((el, index) => ({
+        answerOption: 1 + index,
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      }))
 
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
@@ -129,7 +136,7 @@ function FormEdit(props) {
       ? yesNoConfiguration
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
-      : [{ answerOption: '', redirectQuestion: '' }]
+      : [{ answerOption: '', redirectQuestion: '', redirectConditionRule: '' }]
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations, questionType: key }
@@ -156,6 +163,7 @@ function FormEdit(props) {
         currentQuestion?.id,
         currentQuestion
       ).catch((e) => message.error(e.message))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestion])
 
   // [COMPUTED PROPERTIES]

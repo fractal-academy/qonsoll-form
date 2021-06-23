@@ -28,9 +28,21 @@ function ChoiceEditableGroup(props) {
         questionConfigurations: choiceProps
           ? [
               ...choiceProps,
-              { answerOption: '', image: '', redirectQuestion: '' }
+              {
+                answerOption: '',
+                image: '',
+                redirectQuestion: '',
+                redirectConditionRule: ''
+              }
             ]
-          : [{ answerOption: '', image: '', redirectQuestion: '' }]
+          : [
+              {
+                answerOption: '',
+                image: '',
+                redirectQuestion: '',
+                redirectConditionRule: ''
+              }
+            ]
       }
     })
   }

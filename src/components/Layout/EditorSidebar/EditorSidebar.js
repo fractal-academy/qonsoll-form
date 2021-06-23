@@ -69,22 +69,29 @@ function EditorSidebar(props) {
       {
         answerOption: 'default',
         image: '',
-        redirectQuestion: ''
+        redirectQuestion: '',
+        redirectConditionRule: ''
       }
     ]
     const yesNoConfiguration = [
       {
         answerOption: 'Yes',
-        redirectQuestion: ''
+        redirectQuestion: '',
+        redirectConditionRule: ''
       },
       {
         answerOption: 'No',
-        redirectQuestion: ''
+        redirectQuestion: '',
+        redirectConditionRule: ''
       }
     ]
     const opinionAndRatingConfiguration = Array(5 - 1 + 1)
       .fill(0)
-      .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
+      .map((el, index) => ({
+        answerOption: 1 + index,
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      }))
 
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
@@ -93,7 +100,7 @@ function EditorSidebar(props) {
       ? yesNoConfiguration
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
-      : [{ answerOption: '', redirectQuestion: '' }]
+      : [{ answerOption: '', redirectQuestion: '', redirectConditionRule: '' }]
     // default data for created question
     const newQuestion = {
       questionConfigurations,
@@ -127,14 +134,16 @@ function EditorSidebar(props) {
   const ConditionsQuestionsList = useMemo(
     () =>
       questions
-        ? questions?.filter(
-            (item) =>
-              ![
-                QUESTION_TYPES.ENDING,
-                QUESTION_TYPES.WELCOME_SCREEN,
-                QUESTION_TYPES.STATEMENT
-              ].includes(item.questionType)
-          )
+        ? questions
+            ?.filter(
+              (item) =>
+                ![
+                  QUESTION_TYPES.ENDING,
+                  QUESTION_TYPES.WELCOME_SCREEN,
+                  QUESTION_TYPES.STATEMENT
+                ].includes(item.questionType)
+            )
+            .sort((a, b) => a.order - b.order)
         : [],
     [questions]
   )
