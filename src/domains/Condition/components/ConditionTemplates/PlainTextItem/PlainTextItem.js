@@ -23,7 +23,7 @@ function PlaneTextItem(props) {
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState(item?.answerOption)
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.conditionRedirectRule
+    item?.redirectConditionRule
   )
 
   //[ADDITIONAL HOOKS]
@@ -40,7 +40,7 @@ function PlaneTextItem(props) {
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update conditionRule of certain question
-    updatedQuestionConfigurations[index].conditionRedirectRule = selectValue
+    updatedQuestionConfigurations[index].redirectConditionRule = selectValue
     //write new data to db
     setData(COLLECTIONS.QUESTIONS, questionId, {
       questionConfigurations: updatedQuestionConfigurations

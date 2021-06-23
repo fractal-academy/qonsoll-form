@@ -22,7 +22,7 @@ const PlaneDateItem = (props) => {
   //[COMPONENT STATE HOOKS]
   const [datePickerValue, setDatePickerValue] = useState(item?.answerOption)
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.conditionRedirectRule
+    item?.redirectConditionRule
   )
 
   //[ADDITIONAL HOOKS]
