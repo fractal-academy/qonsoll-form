@@ -21,7 +21,9 @@ function MediaLibraryFilter(props) {
   const { onApplyFilter, onCancelFilter } = props
 
   // [COMPONENT STATE HOOKS]
+  // eslint-disable-next-line
   const [audienceFilterValues, setAudienceFilterValues] = useState([])
+  // eslint-disable-next-line
   const [phaseFilterValues, setPhaseFilterValues] = useState([])
 
   // [CLEAN FUNCTIONS]

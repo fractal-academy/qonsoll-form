@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import theme from '../../../../../../styles/theme'
 import Text from 'antd/lib/typography/Text'
 import { CustomTextBox, CustomYesNoBox } from './YesNoChoiceTemplate.styles'
 import { Col, Row } from '@qonsoll/react-design'
