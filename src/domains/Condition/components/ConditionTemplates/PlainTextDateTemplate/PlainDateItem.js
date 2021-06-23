@@ -67,7 +67,7 @@ const PlaneDateItem = (props) => {
                 value={ruleSelectValue}
                 onChange={onRuleSelectValueChange}>
                 {DATE_CONDITION_RULES_VALUES.map((item, index) => (
-                  <Option key={index} value={item} onClick={() => {}}>
+                  <Option key={index} value={item}>
                     {item}
                   </Option>
                 ))}

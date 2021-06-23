@@ -5,11 +5,12 @@ import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
 import { Tabs } from 'antd'
 import EndingsSimpleView from '../../../Condition/components/Endings/EndingsSimpleView'
+import PropTypes from 'prop-types'
 
 const { TabPane } = Tabs
 
 function FormConditionsForm(props) {
-  const { data, endings } = props
+  const { data, endings, onTabChange } = props
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
@@ -39,7 +40,7 @@ function FormConditionsForm(props) {
 
   return (
     <>
-      <Tabs type="card">
+      <Tabs onChange={onTabChange} type="card">
         <TabPane tab="Logic jumps" key="1">
           {data?.map((item, index) => (
             <Box mb={3}>
@@ -75,6 +76,10 @@ function FormConditionsForm(props) {
   )
 }
 
-FormConditionsForm.propTypes = {}
+FormConditionsForm.propTypes = {
+  onTabChange: PropTypes.func,
+  data: PropTypes.array.isRequired,
+  endings: PropTypes.array
+}
 
 export default FormConditionsForm
