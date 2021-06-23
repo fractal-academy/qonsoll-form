@@ -46,12 +46,13 @@ function EditorSidebar(props) {
 
   // [COMPONENT STATE HOOKS]
   // const [open, setOpen] = useState(true)
-  const [showPopover, setshowPopover] = useState(false)
+  const [showPopover, setShowPopover] = useState(false)
+  const [tabKey, setTabKey] = useState('1')
 
   // [CLEAN FUNCTIONS]
   const addQuestion = async ({ key }) => {
     const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
-    //Bolean conditions
+    //Boolean conditions
     const isChoices = [
       QUESTION_TYPES.CHOICE,
       QUESTION_TYPES.PICTURE_CHOICE
@@ -82,7 +83,7 @@ function EditorSidebar(props) {
         redirectQuestion: ''
       }
     ]
-    const opinionAndRatingConfiguration = Array(5 - 1 + 1)
+    const opinionAndRatingConfiguration = Array(5)
       .fill(0)
       .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
 
@@ -110,11 +111,11 @@ function EditorSidebar(props) {
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
-    key && setshowPopover(!showPopover)
+    key && setShowPopover(!showPopover)
   }
 
   const popoverShowChange = () => {
-    setshowPopover(!showPopover)
+    setShowPopover(!showPopover)
   }
 
   const onItemClick = (item) => {
@@ -123,6 +124,19 @@ function EditorSidebar(props) {
       payload: item
     })
   }
+
+  const onTabChange = (key) => {
+    key !== tabKey && setTabKey(key)
+  }
+
+  const onResetLogic = () => {
+    console.log('reset logic')
+  }
+
+  const onResetEndings = () => {
+    console.log('reset endgins')
+  }
+
   //[COMPUTED PROPERTIES]
   const ConditionsQuestionsList = useMemo(
     () =>
@@ -169,7 +183,7 @@ function EditorSidebar(props) {
               <Popover
                 visible={showPopover}
                 onVisibleChange={() => {
-                  setshowPopover(!showPopover)
+                  setShowPopover(!showPopover)
                 }}
                 trigger={'click'}
                 placement={'bottomRight'}
@@ -191,8 +205,10 @@ function EditorSidebar(props) {
 
             <Col cw="auto" v="center" px={1}>
               <ModalWithFormConditionsForm
+                onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
                 btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
                 <FormConditionsForm
+                  onTabChange={onTabChange}
                   data={ConditionsQuestionsList}
                   endings={endings}
                 />
