@@ -102,7 +102,7 @@ function EditorSidebar(props) {
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
-      order: questions?.length
+      order: key === QUESTION_TYPES.WELCOME_SCREEN ? 0 : questions?.length
     }
 
     // set it into context as current
