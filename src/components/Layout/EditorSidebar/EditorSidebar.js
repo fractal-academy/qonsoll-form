@@ -130,7 +130,6 @@ function EditorSidebar(props) {
   }
 
   const onResetLogic = () => {
-    console.log('reset logic: ', questions)
     questions.forEach((item) => {
       const newQuestionConfigs = item.questionConfigurations.map(
         (answerConfig) => {
