@@ -4,6 +4,8 @@ import { QUESTION_TYPES, ANSWER_TYPES } from '../../../../constants'
 import { Box } from '@qonsoll/react-design'
 import { Select, Tabs } from 'antd'
 import EndingsSimpleView from '../../../Condition/components/Endings/EndingsSimpleView'
+import PropTypes from 'prop-types'
+
 const { TabPane } = Tabs
 
 const mockQuestion = [
@@ -82,11 +84,12 @@ const mockQuestion = [
     questionOptions: [{ name: '111', redirectQuestion: '' }]
   }
 ]
-function callback(key) {
-  console.log(key)
-}
+// function callback(key) {
+//   console.log(key)
+// }
+
 function FormConditionsForm(props) {
-  const { data, endings } = props
+  const { data, endings, onTabChange } = props
 
   // [CLEAN FUNCTIONS]
   const [questionsData, setQuestionsData] = useState(data)
@@ -131,7 +134,7 @@ function FormConditionsForm(props) {
 
   return (
     <>
-      <Tabs onChange={callback} type="card">
+      <Tabs onChange={onTabChange} type="card">
         <TabPane tab="Logic jumps" key="1">
           {questionsData?.map((item, index) => (
             <Box mb={3}>
@@ -166,6 +169,10 @@ function FormConditionsForm(props) {
   )
 }
 
-FormConditionsForm.propTypes = {}
+FormConditionsForm.propTypes = {
+  onTabChange: PropTypes.func,
+  data: PropTypes.array.isRequired,
+  endings: PropTypes.array
+}
 
 export default FormConditionsForm
