@@ -5,6 +5,7 @@ import { Modal, Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
 import { ThemeContext } from 'styled-components'
+import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
 
 const { Title, Text } = Typography
 
@@ -13,6 +14,9 @@ function ModalWithFormConditionsForm(props) {
   const theme = useContext(ThemeContext)
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
+
+  // [ADDITIONAL_HOOKS]
+  const { modalTitle, modalResetLogic, submitBtn, cancelBtn } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const resetLogic = () => {}
@@ -34,13 +38,15 @@ function ModalWithFormConditionsForm(props) {
       <Modal
         visible={isModalVisible}
         centered
-        okText="Save"
+        okText={submitBtn || 'Save'}
+        cancelText={cancelBtn || 'Cancel'}
         cancelButtonProps={{ type: 'text' }}
         onOk={onSave}
         onCancel={onCancel}
         closable={false}
         width="1024px"
         bodyStyle={{
+          paddingTop: '0',
           height: '70vh',
           overflow: 'auto',
           backgroundColor:
@@ -49,19 +55,14 @@ function ModalWithFormConditionsForm(props) {
         }}
         title={
           <>
-            <Row mb={1} v="center">
+            <Row v="center">
               <Col>
-                <Title level={3}>Logic jumps</Title>
+                <Title level={3}>{modalTitle || 'Logic'}</Title>
               </Col>
               <Col cw="auto" v="center">
                 <Button type="text" onClick={resetLogic}>
-                  Reset logic
+                  {modalResetLogic || 'Reset logic'}
                 </Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Text>Here should be description</Text>
               </Col>
             </Row>
           </>

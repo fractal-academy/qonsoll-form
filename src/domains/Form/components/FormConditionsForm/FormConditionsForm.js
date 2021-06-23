@@ -3,9 +3,13 @@ import { ConditionForm } from '../../../../domains/Condition/components'
 import { Box } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
+import { Tabs } from 'antd'
+import EndingsSimpleView from '../../../Condition/components/Endings/EndingsSimpleView'
+
+const { TabPane } = Tabs
 
 function FormConditionsForm(props) {
-  const { data } = props
+  const { data, endings } = props
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
@@ -35,18 +39,38 @@ function FormConditionsForm(props) {
 
   return (
     <>
-      {data?.map((item, index) => (
-        <Box mb={3}>
-          <ConditionForm
-            key={index}
-            item={item}
-            index={index}
-            addCondition={addCondition}
-            addRedirectQuestion={addRedirectQuestion}
-            getQuestionListRedirect={getQuestionListRedirect}
-          />
-        </Box>
-      ))}
+      <Tabs type="card">
+        <TabPane tab="Logic jumps" key="1">
+          {data?.map((item, index) => (
+            <Box mb={3}>
+              <ConditionForm
+                key={index}
+                item={item}
+                index={index}
+                addCondition={addCondition}
+                addRedirectQuestion={addRedirectQuestion}
+                getQuestionListRedirect={getQuestionListRedirect}
+              />
+            </Box>
+          ))}
+        </TabPane>
+        <TabPane tab="Endings" key="2">
+          {endings?.map((item, index) => (
+            <Box mb={3}>
+              <EndingsSimpleView
+                isEnding
+                questionsData={data}
+                key={index}
+                item={item}
+                index={index}
+                addCondition={addCondition}
+                addRedirectQuestion={addRedirectQuestion}
+                getQuestionListRedirect={getQuestionListRedirect}
+              />
+            </Box>
+          ))}
+        </TabPane>
+      </Tabs>
     </>
   )
 }
