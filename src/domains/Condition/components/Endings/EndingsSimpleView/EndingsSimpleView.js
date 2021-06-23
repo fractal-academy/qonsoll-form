@@ -14,15 +14,14 @@ const StyledTag = styled(Tag)`
   color: ${({ theme }) => theme.color.primary.default};
   border-color: ${({ theme }) => theme.color.primary.t.lighten2};
   border-radius: ${({ theme }) => theme.borderRadius.md};
-  margin-right: 10px !important;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.typography.fontSize.body1};
+  margin-right: ${({ theme }) => theme.space[2]};
 `
 
 function ConditionForm(props) {
-  const { Option } = Select
-
+  const { Option, OptGroup } = Select
   const { item, index, questionsData } = props
-  console.log(questionsData)
+  let startLetter = 65
 
   function handleChange(order, title) {
     console.log(`selected ${title}`)
@@ -32,6 +31,9 @@ function ConditionForm(props) {
       component: <>Ending.</>
     }
   }
+  const questYesNo = 'Yes/No'
+  console.log(questionsData)
+  console.log(questionsData.layoutType === questYesNo)
 
   return (
     <NumberedCard number={index + 1} key={index}>
@@ -47,27 +49,41 @@ function ConditionForm(props) {
           placeholder="Select question for current ending"
           onChange={handleChange}
           optionLabelProp="label">
-          {questionsData?.map((item, index) => (
-            <Option
+          {questionsData?.map((questionListItem, index) => (
+            <OptGroup
+              key={index}
               label={
                 <>
-                  <StyledTag>{item?.order}</StyledTag>
-                  {item?.title || item?.order}
+                  <StyledTag>{questionListItem?.order}</StyledTag>
+                  {questionListItem?.title || questionListItem?.order}
                 </>
-              }
-              key={index}>
-              <StyledTag>{item.order}</StyledTag>
-              {item?.title || item?.order}
-            </Option>
+              }>
+              {questionListItem?.questionConfigurations.map(
+                (questionAnswerItem, ind) => (
+                  <Option
+                    key={ind}
+                    value={
+                      <>
+                        <StyledTag>
+                          {questionListItem?.order}.
+                          {String.fromCharCode(startLetter + ind)}
+                        </StyledTag>
+
+                        {questionAnswerItem?.answerOption || '-'}
+                      </>
+                    }>
+                    <StyledTag>
+                      {questionsData.layoutType === questYesNo
+                        ? 'Y'
+                        : String.fromCharCode(startLetter + ind)}
+                    </StyledTag>
+                    {questionAnswerItem?.answerOption || '-'}
+                  </Option>
+                )
+              )}
+            </OptGroup>
           ))}
         </Select>
-        {/*  {cloneElement(questionTypesMap[item?.questionType].component, {*/}
-        {/*    ...item,*/}
-        {/*    addCondition: (answer) => addCondition(answer, index),*/}
-        {/*    addRedirectQuestion: (question, answerIndex) =>*/}
-        {/*      addRedirectQuestion(question, answerIndex, index),*/}
-        {/*    questionList: getQuestionListRedirect(index)*/}
-        {/*})}*/}
       </Box>
     </NumberedCard>
   )

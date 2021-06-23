@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { ConditionForm } from '../../../../domains/Condition/components'
 import { QUESTION_TYPES, ANSWER_TYPES } from '../../../../constants'
 import { Box } from '@qonsoll/react-design'
@@ -109,6 +109,26 @@ function FormConditionsForm(props) {
     setQuestionsData([...questionsData])
   }
 
+  const filteredAnswerForEndings = useMemo(
+    () =>
+      questionsData
+        ? questionsData?.filter((item) =>
+            [
+              QUESTION_TYPES.CHOICE,
+              QUESTION_TYPES.PICTURE_CHOICE,
+              QUESTION_TYPES.OPINION_SCALE,
+              QUESTION_TYPES.RATING,
+              QUESTION_TYPES.YES_NO
+            ].includes(item.questionType)
+          )
+        : [],
+    [questionsData]
+  )
+
+  const sortedFilteredAnswerForEndings = filteredAnswerForEndings.sort(
+    (a, b) => a.order - b.order
+  )
+
   return (
     <>
       <Tabs onChange={callback} type="card">
@@ -130,8 +150,7 @@ function FormConditionsForm(props) {
           {endings?.map((item, index) => (
             <Box mb={3}>
               <EndingsSimpleView
-                isEnding
-                questionsData={questionsData}
+                questionsData={sortedFilteredAnswerForEndings}
                 key={index}
                 item={item}
                 index={index}
@@ -139,15 +158,6 @@ function FormConditionsForm(props) {
                 addRedirectQuestion={addRedirectQuestion}
                 getQuestionListRedirect={getQuestionListRedirect}
               />
-              {/*<ConditionForm*/}
-              {/*isEnding questionsData={questionsData}*/}
-              {/*key={index}*/}
-              {/*item={item}*/}
-              {/*index={index}*/}
-              {/*addCondition={addCondition}*/}
-              {/*addRedirectQuestion={addRedirectQuestion}*/}
-              {/*getQuestionListRedirect={getQuestionListRedirect}*/}
-              {/*/>*/}
             </Box>
           ))}
         </TabPane>
