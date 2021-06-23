@@ -62,22 +62,9 @@ function ConditionForm(props) {
               }>
               {questionListItem?.questionConfigurations.map(
                 (questionAnswerItem, ind) => (
-                  <Option
-                    key={ind}
-                    value={
-                      <>
-                        <StyledTag>
-                          {questionListItem?.order}.
-                          {String.fromCharCode(startLetter + ind)}
-                        </StyledTag>
-
-                        {questionAnswerItem?.answerOption || '-'}
-                      </>
-                    }>
+                  <Option key={ind} value={index}>
                     <StyledTag>
-                      {questionsData.layoutType === questYesNo
-                        ? 'Y'
-                        : String.fromCharCode(startLetter + ind)}
+                      {String.fromCharCode(startLetter + ind)}
                     </StyledTag>
                     {questionAnswerItem?.answerOption || '-'}
                   </Option>

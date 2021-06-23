@@ -1,7 +1,6 @@
 import typeformTheme from '../../../../../../styles/theme'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import React from 'react'
 
 export const CustomOpinionBox = styled(Box)(({ theme }) => ({
   display: 'flex',

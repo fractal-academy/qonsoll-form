@@ -27,7 +27,7 @@ function ChoiceTemplate(props) {
           <Col cw={6}>
             <QuestionSelect
               addRedirectQuestion={addRedirectQuestion}
-              questionOptions={questionConfigurations}
+              questionConfigurations={questionConfigurations}
               index={index}
               questionList={sortedQuestionList}
             />
