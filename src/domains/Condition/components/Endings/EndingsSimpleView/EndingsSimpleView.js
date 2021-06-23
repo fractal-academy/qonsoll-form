@@ -23,6 +23,8 @@ function ConditionForm(props) {
   const { item, index, questionsData } = props
   let startLetter = 65
 
+  console.log(questionsData)
+
   function handleChange(order, title) {
     console.log(`selected ${title}`)
   }
