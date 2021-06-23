@@ -153,6 +153,7 @@ function QuestionForm(props) {
                     <QuestionConfigurationPopover
                       customQuestionTypes={customQuestionTypes}
                       onQuestionTypeChange={onQuestionTypeChange}
+                      welcomeScreenShowRule={true}
                     />
                   </Col>
                 )}

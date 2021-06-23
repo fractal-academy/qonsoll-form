@@ -1,9 +1,10 @@
 import { message } from 'antd'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
-import { COLLECTIONS } from '../../../../constants'
+import { Box } from '@qonsoll/react-design'
 import { DragableList } from '../../../../components'
 import useFunctions from '../../../../hooks/useFunctions'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { QuestionSimpleView } from '../../../../domains/Question/components'
 import {
   DISPATCH_EVENTS,
@@ -60,23 +61,40 @@ function QuestionsList(props) {
     () => (data ? data.sort((a, b) => a.order - b.order) : []),
     [data]
   )
+  const filteredDataSource = dataSource.filter(
+    (item) => item.questionType !== QUESTION_TYPES.WELCOME_SCREEN
+  )
 
   return (
-    <DragableList
-      itemLayout="horizontal"
-      dataSource={dataSource}
-      onUpdate={onUpdate}
-      setNewOrder={setNewOrder}
-      renderItem={(item, index) => (
-        <QuestionSimpleView
-          {...item}
-          action={handleDelete}
-          number={index + 1}
-          onClick={() => onItemClick(item, index)}
-          disableDelete={disableDelete}
-        />
+    <>
+      {dataSource?.map(
+        (item) =>
+          item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
+            <Box mr={2} ml="20px" my={3}>
+              <QuestionSimpleView
+                {...item}
+                number="W"
+                action={handleDelete}
+                onClick={() => onItemClick(item)}></QuestionSimpleView>
+            </Box>
+          )
       )}
-    />
+      <DragableList
+        itemLayout="horizontal"
+        dataSource={filteredDataSource}
+        onUpdate={onUpdate}
+        setNewOrder={setNewOrder}
+        renderItem={(item, index) => (
+          <QuestionSimpleView
+            {...item}
+            action={handleDelete}
+            number={index + 1}
+            onClick={() => onItemClick(item, index)}
+            disableDelete={disableDelete}
+          />
+        )}
+      />
+    </>
   )
 }
 
