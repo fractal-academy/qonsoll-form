@@ -12,16 +12,19 @@ const { Option } = Select
 
 function PlaneTextItem(props) {
   const {
-    questionConfigurations,
+    item,
+    index,
+    questionId,
     questionList,
     addRedirectQuestion,
-    index,
-    questionId
+    questionConfigurations
   } = props
 
   //[COMPONENT STATE HOOKS]
-  const [inputValue, setInputValue] = useState('')
-  const [ruleSelectValue, setRuleSelectValue] = useState('')
+  const [inputValue, setInputValue] = useState(item?.answerOption)
+  const [ruleSelectValue, setRuleSelectValue] = useState(
+    item?.conditionRedirectRule
+  )
 
   //[ADDITIONAL HOOKS]
   const { setData } = useFunctions()
@@ -45,6 +48,9 @@ function PlaneTextItem(props) {
   }
 
   const onBlur = () => {
+    //breack if value didn`t change
+    if (questionConfigurations[index].answerOption === inputValue) return
+
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update answer option of certain question

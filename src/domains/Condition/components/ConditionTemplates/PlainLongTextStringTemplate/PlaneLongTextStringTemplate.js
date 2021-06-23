@@ -27,6 +27,7 @@ function PlaneLongTextStringTemplate(props) {
       {questionConfigurations?.map((item, index) => (
         <PlaneTextItem
           index={index}
+          item={item}
           questionId={id}
           key={index}
           questionConfigurations={questionConfigurations}

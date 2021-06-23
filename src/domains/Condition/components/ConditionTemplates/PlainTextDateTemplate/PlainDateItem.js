@@ -11,16 +11,19 @@ const { Option } = Select
 
 const PlaneDateItem = (props) => {
   const {
-    questionConfigurations,
+    item,
+    index,
+    questionId,
     questionList,
     addRedirectQuestion,
-    index,
-    questionId
+    questionConfigurations
   } = props
 
   //[COMPONENT STATE HOOKS]
-  const [datePickerValue, setDatePickerValue] = useState()
-  const [ruleSelectValue, setRuleSelectValue] = useState('')
+  const [datePickerValue, setDatePickerValue] = useState(item?.answerOption)
+  const [ruleSelectValue, setRuleSelectValue] = useState(
+    item?.conditionRedirectRule
+  )
 
   //[ADDITIONAL HOOKS]
   const { setData } = useFunctions()
