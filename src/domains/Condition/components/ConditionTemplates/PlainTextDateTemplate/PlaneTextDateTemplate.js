@@ -24,12 +24,13 @@ function PlaneTextDateTemplate(props) {
     <>
       {questionConfigurations?.map((item, index) => (
         <PlaneDateItem
+          key={index}
+          item={item}
           index={index}
           questionId={id}
-          key={index}
-          questionConfigurations={questionConfigurations}
           questionList={questionList}
           addRedirectQuestion={addRedirectQuestion}
+          questionConfigurations={questionConfigurations}
         />
       ))}
       <CustomButton size="medium" onClick={onClick}>

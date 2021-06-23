@@ -6,6 +6,7 @@ import { DATE_CONDITION_RULES_VALUES } from '../../../../../constants/dateCondit
 import { StyledDatePicker, StyledSelect } from './PlainTextDateTemplate.style'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
+import moment from 'moment'
 
 const { Option } = Select
 
@@ -20,7 +21,9 @@ const PlaneDateItem = (props) => {
   } = props
 
   //[COMPONENT STATE HOOKS]
-  const [datePickerValue, setDatePickerValue] = useState(item?.answerOption)
+  const [datePickerValue, setDatePickerValue] = useState(
+    moment(item?.answerOption)
+  )
   const [ruleSelectValue, setRuleSelectValue] = useState(
     item?.redirectConditionRule
   )
@@ -42,13 +45,13 @@ const PlaneDateItem = (props) => {
     })
   }
 
-  const onDatePickerValueChange = (datePickerVal, stringDatePickerValue) => {
+  const onDatePickerValueChange = (datePickerVal, stringDateValue) => {
     setDatePickerValue(datePickerVal)
 
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update answer option of certain question
-    updatedQuestionConfigurations[index].answerOption = stringDatePickerValue
+    updatedQuestionConfigurations[index].answerOption = stringDateValue
     //write new data to db
     setData(COLLECTIONS.QUESTIONS, questionId, {
       questionConfigurations: updatedQuestionConfigurations
