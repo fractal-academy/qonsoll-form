@@ -1,3 +1,4 @@
 import longAndShortAnswerConditionComparison from './longAndShortAnswerConditionComparison'
+import dateAnswerConditionComparison from './dateAnswerConditionComparison'
 
-export { longAndShortAnswerConditionComparison }
+export { longAndShortAnswerConditionComparison, dateAnswerConditionComparison }
