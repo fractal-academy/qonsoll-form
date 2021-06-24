@@ -108,10 +108,21 @@ const UploadArea = (props) => {
     )
   }
   const onRemove = (file) => {
+    console.log('file', file)
     const asArray = Object.entries(filesList)
     const filteredFiles = asArray.filter(([key, value]) => key !== file?.uid)
     const filteredFilesToObj = Object.fromEntries(filteredFiles)
-    setFilesList(filteredFilesToObj)
+    storage
+      .ref('files')
+      .child(file?.uid)
+      .delete()
+      .then(() => {
+        setFilesList(filteredFilesToObj)
+      })
+      .catch((error) => {
+        console.log('error, ', error)
+        message.error("Couldn't delete file")
+      })
   }
 
   const onAply = () => {
