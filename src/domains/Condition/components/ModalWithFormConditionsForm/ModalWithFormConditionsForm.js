@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { globalStyles } from '../../../../../styles'
 import { Modal, Button, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
@@ -11,7 +10,7 @@ import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
 const { Title, Text } = Typography
 
 function ModalWithFormConditionsForm(props) {
-  const { btnProps, children } = props
+  const { btnProps, children, onResetClick } = props
   const theme = useContext(ThemeContext)
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -20,7 +19,6 @@ function ModalWithFormConditionsForm(props) {
   const { modalTitle, modalResetLogic, submitBtn, cancelBtn } = useTranslation()
 
   // [CLEAN FUNCTIONS]
-  const resetLogic = () => {}
   const onSave = () => {
     setIsModalVisible(!isModalVisible)
   }
@@ -61,7 +59,7 @@ function ModalWithFormConditionsForm(props) {
                 <Title level={3}>{modalTitle || 'Logic'}</Title>
               </Col>
               <Col cw="auto" v="center">
-                <Button type="text" onClick={resetLogic}>
+                <Button type="text" onClick={onResetClick}>
                   {modalResetLogic || 'Reset logic'}
                 </Button>
               </Col>

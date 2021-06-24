@@ -1,7 +1,6 @@
 import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 import { Divider } from 'antd'
-import theme from '../../../../styles/theme'
 
 export const styles = {
   endingsList: {

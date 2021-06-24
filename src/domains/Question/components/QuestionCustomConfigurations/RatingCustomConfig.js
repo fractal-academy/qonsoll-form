@@ -23,7 +23,11 @@ function AmountOptionsCustomConfig() {
   const onRattingSelectChange = (amountOptions) => {
     const questionConfigurations = Array(amountOptions - 1 + 1)
       .fill(0)
-      .map((el, index) => ({ answerOption: 1 + index, redirectQuestion: '' }))
+      .map((el, index) => ({
+        answerOption: 1 + index,
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      }))
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations }

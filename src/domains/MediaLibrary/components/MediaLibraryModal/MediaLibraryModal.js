@@ -132,6 +132,7 @@ function MediaLibraryModal(props) {
       // [FINAL CLEAN UP]
       isComponentMounted = false
     }
+    // eslint-disable-next-line
   }, [media])
 
   return (

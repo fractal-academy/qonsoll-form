@@ -27,8 +27,9 @@ function QuestionSelect(props) {
       <Option value="Submit form">
         <Text strong>Submit form</Text>
       </Option>
+
       <OptGroup label="JUMP TO...">
-        {questionList.map((item, index) => (
+        {questionList?.map((item, index) => (
           <Option key={item?.id} value={item?.id}>
             {item.title}
           </Option>
