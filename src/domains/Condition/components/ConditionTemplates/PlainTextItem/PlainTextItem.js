@@ -23,7 +23,7 @@ function PlaneTextItem(props) {
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState(item?.answerOption)
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.redirectConditionRule
+    item?.redirectConditionRule || TEXT_CONDITION_RULES_VALUES[0]
   )
 
   //[ADDITIONAL HOOKS]
@@ -70,7 +70,6 @@ function PlaneTextItem(props) {
               <StyledSelect
                 showSearch
                 allowClear
-                defaultValue={TEXT_CONDITION_RULES_VALUES[0]}
                 value={ruleSelectValue}
                 onChange={onRuleSelectValueChange}>
                 {TEXT_CONDITION_RULES_VALUES.map((item, index) => (

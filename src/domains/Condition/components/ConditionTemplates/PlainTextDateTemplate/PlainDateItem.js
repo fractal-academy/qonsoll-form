@@ -22,10 +22,10 @@ const PlaneDateItem = (props) => {
 
   //[COMPONENT STATE HOOKS]
   const [datePickerValue, setDatePickerValue] = useState(
-    moment(item?.answerOption)
+    item?.answerOption ? moment(item?.answerOption) : ''
   )
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.redirectConditionRule
+    item?.redirectConditionRule || DATE_CONDITION_RULES_VALUES[0]
   )
 
   //[ADDITIONAL HOOKS]
@@ -66,7 +66,6 @@ const PlaneDateItem = (props) => {
               <StyledSelect
                 showSearch
                 allowClear
-                defaultValue={DATE_CONDITION_RULES_VALUES[0]}
                 value={ruleSelectValue}
                 onChange={onRuleSelectValueChange}>
                 {DATE_CONDITION_RULES_VALUES.map((item, index) => (
