@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Row } from '@qonsoll/react-design'
 import { CustomButton, CustomText } from './PlainLongTextStringTemplate.style'
 import { PlaneTextItem } from '../PlainTextItem'
+import { v4 as uuid } from 'uuid'
 
 function PlaneLongTextStringTemplate(props) {
   const {
@@ -18,6 +19,7 @@ function PlaneLongTextStringTemplate(props) {
     addCondition({
       answerOption: '',
       redirectQuestion: '',
+      answerOptionId: uuid(),
       redirectConditionRule: ''
     })
   }
