@@ -125,6 +125,9 @@ function QuestionAdvancedView(props) {
   const heightSmallDevices = useMedia({ maxWidth: '768px' })
   const deviceImageHeight = (heightSmallDevices && '40%') || '100%'
   const devicePadding = (heightSmallDevices && 2) || 4
+  const questionNumberRule =
+    data?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
+
   return (
     <Row {...styles.mainRowStyle} noGutters>
       {bgImage && (
@@ -142,7 +145,7 @@ function QuestionAdvancedView(props) {
           <Row noGutters py={2}>
             <Col cw={12}>
               <Title level={4}>
-                {questionNumber}. {data?.title}
+                {questionNumberRule && `${questionNumber}.`} {data?.title}
               </Title>
             </Col>
           </Row>

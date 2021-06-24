@@ -159,7 +159,7 @@ const Component = ({ index, item, onClick, currentSlide, wrapperHeight }) => {
       <QuestionAdvancedView
         wrapperHeight={wrapperHeight}
         data={item}
-        questionNumber={index + 1}
+        questionNumber={index}
         onClick={onClick}
         currentSlide={currentSlide}
       />

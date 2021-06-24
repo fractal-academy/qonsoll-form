@@ -265,7 +265,7 @@ function EditorSidebar(props) {
               <CustomDivider type="horizontal" />
             </Col>
           </Row>
-          <Row p={3}>
+          <Row p={3} noGutters>
             <Col v="center">
               <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
             </Col>
