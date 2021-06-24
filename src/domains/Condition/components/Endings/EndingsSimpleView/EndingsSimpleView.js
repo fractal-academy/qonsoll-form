@@ -46,7 +46,7 @@ function ConditionForm(props) {
           optionLabelProp="label">
           {questionsData?.map((questionListItem, index) => (
             <OptGroup
-              key={questionListItem?.id}
+              key={index}
               label={
                 <>
                   <StyledTag>{questionListItem?.order}</StyledTag>
