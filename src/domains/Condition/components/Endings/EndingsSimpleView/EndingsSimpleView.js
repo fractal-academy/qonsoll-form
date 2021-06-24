@@ -7,6 +7,8 @@ import { Select, Tag } from 'antd'
 import styled from 'styled-components'
 import { DeleteOutlined } from '@ant-design/icons'
 import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
+import { COLLECTIONS } from '~/app/constants'
+import useFunctions from '~/modules/feedback-typeform-app/src/hooks/useFunctions'
 
 const StyledTag = styled(Tag)`
   background-color: ${({ theme }) => theme.color.primary.t.lighten5};
@@ -17,13 +19,23 @@ const StyledTag = styled(Tag)`
   margin-right: 10px !important;
 `
 
+const { Option, OptGroup } = Select
+
 function ConditionForm(props) {
-  const { Option, OptGroup } = Select
   const { item, index, questionsData } = props
   let startLetter = 65
 
-  function handleChange(order, title) {
-    console.log(title, order)
+  // [ADDITIONAL HOOKS]
+  const { setData } = useFunctions()
+
+  async function handleChange(_, title) {
+    const questionConfigurations = title.map((item) => ({
+      answerOptionId: item.key,
+      trigerQuestionId: item.value.key
+    }))
+    await setData(COLLECTIONS.QUESTIONS, item?.id, {
+      questionConfigurations
+    })
   }
   const { questionsForEndingSelectPlaceholder } = useTranslation()
 
