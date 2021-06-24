@@ -69,14 +69,15 @@ function ConditionForm(props) {
                 (questionAnswerItem, ind) => (
                   <Option
                     key={questionAnswerItem?.answerOptionId}
-                    value={
-                      <React.Fragment key={questionListItem.id}>
+                    value={`${questionListItem?.id} ${index}${ind}`}
+                    label={
+                      <>
                         <StyledTag>
                           {questionListItem?.order}.
                           {String.fromCharCode(startLetter + ind)}
                         </StyledTag>
                         {questionAnswerItem?.answerOption || '-'}
-                      </React.Fragment>
+                      </>
                     }>
                     <StyledTag>
                       {String.fromCharCode(startLetter + ind)}
