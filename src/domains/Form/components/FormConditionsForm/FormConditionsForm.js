@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { ConditionForm } from '../../../../domains/Condition/components'
+import { QUESTION_TYPES } from '../../../../constants'
 import { Box } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
@@ -25,7 +26,6 @@ function FormConditionsForm(props) {
       questionConfigurations: [...data?.[index]?.questionConfigurations, answer]
     })
   }
-
   const addRedirectQuestion = (nextQuestion, answerIndex, index) => {
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = data[index]?.questionConfigurations
@@ -37,6 +37,24 @@ function FormConditionsForm(props) {
       questionConfigurations: updatedQuestionConfigurations
     })
   }
+
+  const filteredAnswerForEndings = useMemo(
+    () =>
+      data
+        ? data
+            ?.filter((item) =>
+              [
+                QUESTION_TYPES.CHOICE,
+                QUESTION_TYPES.PICTURE_CHOICE,
+                QUESTION_TYPES.OPINION_SCALE,
+                QUESTION_TYPES.RATING,
+                QUESTION_TYPES.YES_NO
+              ].includes(item.questionType)
+            )
+            .sort((a, b) => a.order - b.order)
+        : [],
+    [data]
+  )
 
   return (
     <>
@@ -59,8 +77,7 @@ function FormConditionsForm(props) {
           {endings?.map((item, index) => (
             <Box mb={3}>
               <EndingsSimpleView
-                isEnding
-                questionsData={data}
+                questionsData={filteredAnswerForEndings}
                 key={index}
                 item={item}
                 index={index}

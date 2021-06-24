@@ -1,37 +1,31 @@
 import PropTypes from 'prop-types'
-import React, { useState, cloneElement } from 'react'
+import React from 'react'
 import { Box } from '@qonsoll/react-design'
 import { NumberedCard } from '../../../../../components'
 import Title from 'antd/lib/typography/Title'
-import { QUESTION_TYPES } from '../../../../../constants'
 import { Select, Tag } from 'antd'
 import styled from 'styled-components'
-import { DeleteOutlined, StepForwardOutlined } from '@ant-design/icons'
+import { DeleteOutlined } from '@ant-design/icons'
+import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
 
 const StyledTag = styled(Tag)`
   background-color: ${({ theme }) => theme.color.primary.t.lighten5};
-  //padding: 12px;
   color: ${({ theme }) => theme.color.primary.default};
   border-color: ${({ theme }) => theme.color.primary.t.lighten2};
   border-radius: ${({ theme }) => theme.borderRadius.md};
+  font-size: ${({ theme }) => theme.typography.fontSize.body1};
   margin-right: 10px !important;
-  font-size: 20px;
 `
 
 function ConditionForm(props) {
-  const { Option } = Select
-
+  const { Option, OptGroup } = Select
   const { item, index, questionsData } = props
-  console.log(questionsData)
+  let startLetter = 65
 
   function handleChange(order, title) {
-    console.log(`selected ${title}`)
+    console.log(title, order)
   }
-  const questionTypesMap = {
-    [QUESTION_TYPES.ENDING]: {
-      component: <>Ending.</>
-    }
-  }
+  const { questionsForEndingSelectPlaceholder } = useTranslation()
 
   return (
     <NumberedCard number={index + 1} key={index}>
@@ -44,30 +38,44 @@ function ConditionForm(props) {
           clearIcon={<DeleteOutlined />}
           style={{ width: '100%' }}
           mode="multiple"
-          placeholder="Select question for current ending"
+          placeholder={
+            questionsForEndingSelectPlaceholder ||
+            'Select questions to call current ending'
+          }
           onChange={handleChange}
           optionLabelProp="label">
-          {questionsData?.map((item, index) => (
-            <Option
+          {questionsData?.map((questionListItem, index) => (
+            <OptGroup
+              key={index}
               label={
                 <>
-                  <StyledTag>{item?.order}</StyledTag>
-                  {item?.title || item?.order}
+                  <StyledTag>{questionListItem?.order}</StyledTag>
+                  {questionListItem?.title || questionListItem?.order}
                 </>
-              }
-              key={index}>
-              <StyledTag>{item.order}</StyledTag>
-              {item?.title || item?.order}
-            </Option>
+              }>
+              {questionListItem?.questionConfigurations.map(
+                (questionAnswerItem, ind) => (
+                  <Option
+                    key={questionAnswerItem?.answerOptionId}
+                    value={
+                      <React.Fragment key={questionListItem.id}>
+                        <StyledTag>
+                          {questionListItem?.order}.
+                          {String.fromCharCode(startLetter + ind)}
+                        </StyledTag>
+                        {questionAnswerItem?.answerOption || '-'}
+                      </React.Fragment>
+                    }>
+                    <StyledTag>
+                      {String.fromCharCode(startLetter + ind)}
+                    </StyledTag>
+                    {questionAnswerItem?.answerOption || '-'}
+                  </Option>
+                )
+              )}
+            </OptGroup>
           ))}
         </Select>
-        {/*  {cloneElement(questionTypesMap[item?.questionType].component, {*/}
-        {/*    ...item,*/}
-        {/*    addCondition: (answer) => addCondition(answer, index),*/}
-        {/*    addRedirectQuestion: (question, answerIndex) =>*/}
-        {/*      addRedirectQuestion(question, answerIndex, index),*/}
-        {/*    questionList: getQuestionListRedirect(index)*/}
-        {/*})}*/}
       </Box>
     </NumberedCard>
   )
