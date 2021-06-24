@@ -23,6 +23,7 @@ import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import useFunctions from '../../../hooks/useFunctions'
 import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 import { useTranslation } from '../../../context/Translation'
+import { v4 as uuid } from 'uuid'
 
 const { Title } = Typography
 
@@ -64,10 +65,10 @@ function EditorSidebar(props) {
     ].includes(key)
 
     const isYesNo = key === QUESTION_TYPES.YES_NO
-
     //configuration for certain types of questions
     const choicesConfiguration = [
       {
+        answerOptionId: uuid(),
         answerOption: 'default',
         image: '',
         redirectQuestion: '',
@@ -76,11 +77,13 @@ function EditorSidebar(props) {
     ]
     const yesNoConfiguration = [
       {
+        answerOptionId: uuid(),
         answerOption: 'Yes',
         redirectQuestion: '',
         redirectConditionRule: ''
       },
       {
+        answerOptionId: uuid(),
         answerOption: 'No',
         redirectQuestion: '',
         redirectConditionRule: ''
@@ -89,11 +92,20 @@ function EditorSidebar(props) {
     const opinionAndRatingConfiguration = Array(5)
       .fill(0)
       .map((el, index) => ({
+        answerOptionId: uuid(),
         answerOption: 1 + index,
         redirectQuestion: '',
         redirectConditionRule: ''
       }))
 
+    const defaultConfiguration = [
+      {
+        answerOptionId: uuid(),
+        answerOption: '',
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      }
+    ]
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
       ? choicesConfiguration
@@ -101,7 +113,7 @@ function EditorSidebar(props) {
       ? yesNoConfiguration
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
-      : [{ answerOption: '', redirectQuestion: '', redirectConditionRule: '' }]
+      : defaultConfiguration
     // default data for created question
     const newQuestion = {
       questionConfigurations,
