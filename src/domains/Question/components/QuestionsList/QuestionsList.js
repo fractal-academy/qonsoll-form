@@ -23,9 +23,15 @@ function QuestionsList(props) {
   // [CLEAN FUNCTIONS]
   const onUpdate = (data) => {
     data.forEach((item) =>
-      setData(COLLECTIONS.QUESTIONS, item?.id, item).catch((e) =>
-        message.error(e.message)
-      )
+      setData(COLLECTIONS.QUESTIONS, item?.id, item)
+        .then(() => {
+          item.id === currentQuestion.id &&
+            currentQuestionDispatch({
+              type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+              payload: item
+            })
+        })
+        .catch((e) => message.error(e.message))
     )
   }
 
