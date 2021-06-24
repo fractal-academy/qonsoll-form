@@ -25,8 +25,6 @@ function ConditionForm(props) {
   function handleChange(order, title) {
     console.log(title, order)
   }
-  console.log(questionsData)
-
   const { questionsForEndingSelectPlaceholder } = useTranslation()
 
   return (
@@ -48,7 +46,7 @@ function ConditionForm(props) {
           optionLabelProp="label">
           {questionsData?.map((questionListItem, index) => (
             <OptGroup
-              key={index}
+              key={questionListItem?.id}
               label={
                 <>
                   <StyledTag>{questionListItem?.order}</StyledTag>
@@ -60,13 +58,13 @@ function ConditionForm(props) {
                   <Option
                     key={questionAnswerItem?.answerOptionId}
                     value={
-                      <>
+                      <React.Fragment key={questionListItem.id}>
                         <StyledTag>
                           {questionListItem?.order}.
                           {String.fromCharCode(startLetter + ind)}
                         </StyledTag>
                         {questionAnswerItem?.answerOption || '-'}
-                      </>
+                      </React.Fragment>
                     }>
                     <StyledTag>
                       {String.fromCharCode(startLetter + ind)}
