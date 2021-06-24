@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CustomButton, CustomText } from './PlainTextDateTemplate.style'
 import PlaneDateItem from './PlainDateItem'
+import { v4 as uuid } from 'uuid'
 
 function PlaneTextDateTemplate(props) {
   const {
@@ -17,6 +18,7 @@ function PlaneTextDateTemplate(props) {
     addCondition({
       answerOption: '',
       redirectQuestion: '',
+      answerOptionId: uuid(),
       redirectConditionRule: ''
     })
   }

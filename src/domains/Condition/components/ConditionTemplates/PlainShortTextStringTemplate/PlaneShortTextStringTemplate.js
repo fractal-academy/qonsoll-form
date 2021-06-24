@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CustomButton, CustomText } from './PlainShortTextStringTemplate.style'
 import { PlaneTextItem } from '../PlainTextItem'
+import { v4 as uuid } from 'uuid'
 
 function PlaneShortTextStringTemplate(props) {
   const {
@@ -17,6 +18,7 @@ function PlaneShortTextStringTemplate(props) {
     addCondition({
       answerOption: '',
       redirectQuestion: '',
+      answerOptionId: uuid(),
       redirectConditionRule: ''
     })
   }

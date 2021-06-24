@@ -9,6 +9,7 @@ import {
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
 import { styles, AddNewChoiceBox } from './ChoiceEditableGroup.styles'
+import { v4 as uuid } from 'uuid'
 
 function ChoiceEditableGroup(props) {
   const { withImage } = props
@@ -29,17 +30,19 @@ function ChoiceEditableGroup(props) {
           ? [
               ...choiceProps,
               {
-                answerOption: '',
                 image: '',
+                answerOption: '',
                 redirectQuestion: '',
+                answerOptionId: uuid(),
                 redirectConditionRule: ''
               }
             ]
           : [
               {
-                answerOption: '',
                 image: '',
+                answerOption: '',
                 redirectQuestion: '',
+                answerOptionId: uuid(),
                 redirectConditionRule: ''
               }
             ]

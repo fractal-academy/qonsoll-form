@@ -25,6 +25,7 @@ import { message } from 'antd'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import { v4 as uuid } from 'uuid'
 
 function FormEdit(props) {
   const {
@@ -103,9 +104,10 @@ function FormEdit(props) {
     //configuration for certain types of questions
     const choicesConfiguration = [
       {
-        answerOption: 'default',
         image: '',
         redirectQuestion: '',
+        answerOptionId: uuid(),
+        answerOption: 'default',
         redirectConditionRule: ''
       }
     ]
@@ -113,11 +115,13 @@ function FormEdit(props) {
       {
         answerOption: 'Yes',
         redirectQuestion: '',
+        answerOptionId: uuid(),
         redirectConditionRule: ''
       },
       {
         answerOption: 'No',
         redirectQuestion: '',
+        answerOptionId: uuid(),
         redirectConditionRule: ''
       }
     ]
@@ -126,9 +130,17 @@ function FormEdit(props) {
       .map((el, index) => ({
         answerOption: 1 + index,
         redirectQuestion: '',
+        answerOptionId: uuid(),
         redirectConditionRule: ''
       }))
-
+    const defaultConfig = [
+      {
+        answerOption: '',
+        redirectQuestion: '',
+        answerOptionId: uuid(),
+        redirectConditionRule: ''
+      }
+    ]
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
       ? choicesConfiguration
@@ -136,7 +148,7 @@ function FormEdit(props) {
       ? yesNoConfiguration
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
-      : [{ answerOption: '', redirectQuestion: '', redirectConditionRule: '' }]
+      : defaultConfig
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations, questionType: key }
