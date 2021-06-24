@@ -31,7 +31,7 @@ function ConditionForm(props) {
   async function handleChange(_, title) {
     const questionConfigurations = title.map((item) => ({
       answerOptionId: item.key,
-      trigerQuestionId: item.value.key
+      trigerQuestionId: item?.value?.split(' ')[0] || ''
     }))
     await setData(COLLECTIONS.QUESTIONS, item?.id, {
       questionConfigurations
