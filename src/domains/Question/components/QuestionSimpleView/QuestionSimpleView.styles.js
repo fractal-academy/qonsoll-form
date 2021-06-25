@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
+import { Popconfirm } from 'antd'
 
 export const DescriptionContainer = styled(Box)`
   ${({ theme }) => `
@@ -13,4 +14,9 @@ export const DescriptionContainer = styled(Box)`
     typeformTheme?.typography?.lineHeight?.body2
   };
 `}
+`
+export const PopconfirmOnDelete = styled(Popconfirm)`
+  .ant-popover-inner-content {
+    max-width: 310px !important;
+  }
 `

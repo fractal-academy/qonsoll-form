@@ -22,7 +22,8 @@ function QuestionSelect(props) {
 
   // [CLEAN FUNCTIONS]
   const onChange = (question, index) => {
-    addRedirectQuestion(question, index)
+    const questionCondition = question || ''
+    addRedirectQuestion(questionCondition, index)
   }
   return (
     <StyledSelect
