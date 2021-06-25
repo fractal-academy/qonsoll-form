@@ -100,7 +100,7 @@ function EditorSidebar(props) {
 
     const defaultConfiguration = [
       {
-        answerOptionId: uuid(),
+        answerOptionId: '',
         answerOption: '',
         redirectQuestion: '',
         redirectConditionRule: ''
