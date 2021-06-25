@@ -82,7 +82,7 @@ function ConditionForm(props) {
   )
 }
 ConditionForm.propTypes = {
-  mockQuestionIndex: PropTypes.number.isRequired,
+  mockQuestionIndex: PropTypes.number,
   item: PropTypes.object.isRequired,
   addCondition: PropTypes.func.isRequired,
   addRedirectQuestion: PropTypes.func.isRequired,
