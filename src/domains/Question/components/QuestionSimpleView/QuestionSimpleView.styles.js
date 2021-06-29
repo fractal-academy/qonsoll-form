@@ -15,8 +15,3 @@ export const DescriptionContainer = styled(Box)`
   };
 `}
 `
-export const PopconfirmOnDelete = styled(Popconfirm)`
-  .ant-popover-inner-content {
-    max-width: 310px !important;
-  }
-`

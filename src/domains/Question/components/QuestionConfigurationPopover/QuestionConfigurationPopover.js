@@ -4,8 +4,12 @@ import { SettingOutlined } from '@ant-design/icons'
 import { QuestionConfigurationPopoverContent } from '../../../../domains/Question/components'
 
 function QuestionConfigurationPopover(props) {
-  const { onQuestionTypeChange, customQuestionTypes, welcomeScreenShowRule } =
-    props
+  const {
+    data,
+    onQuestionTypeChange,
+    customQuestionTypes,
+    welcomeScreenShowRule
+  } = props
 
   // [COMPONENT STATE HOOKS]
   const [showPopover, setShowPopover] = useState(false)
@@ -23,6 +27,7 @@ function QuestionConfigurationPopover(props) {
       placement="bottomRight"
       content={
         <QuestionConfigurationPopoverContent
+          data={data}
           setShowPopover={setShowPopover}
           welcomeScreenShowRule={welcomeScreenShowRule}
           customQuestionTypes={customQuestionTypes}

@@ -4,10 +4,7 @@ import React, { cloneElement } from 'react'
 import { LAYOUT_TYPES } from '../../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
-import {
-  DescriptionContainer,
-  PopconfirmOnDelete
-} from './QuestionSimpleView.styles'
+import { DescriptionContainer } from './QuestionSimpleView.styles'
 import { CloseOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
@@ -52,7 +49,7 @@ function QuestionSimpleView(props) {
             <DescriptionContainer>{title}</DescriptionContainer>
           </Col>
           <Col cw="auto">
-            <PopconfirmOnDelete
+            <Popconfirm
               title={
                 hasConditions
                   ? popconfirmOnDeleteQuestionWithConditions ||
@@ -68,7 +65,7 @@ function QuestionSimpleView(props) {
                 size="small"
                 disabled={disableDelete}
               />
-            </PopconfirmOnDelete>
+            </Popconfirm>
           </Col>
         </Row>
       </NumberedCard>

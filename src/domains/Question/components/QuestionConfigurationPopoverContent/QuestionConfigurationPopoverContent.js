@@ -15,6 +15,7 @@ const { Title } = Typography
 
 function QuestionConfigurationPopoverContent(props) {
   const {
+    data,
     onQuestionTypeChange,
     setShowPopover,
     welcomeScreenShowRule,
@@ -33,6 +34,8 @@ function QuestionConfigurationPopoverContent(props) {
     setIsQuestionConfig(!isQuestionConfig)
   }
   const onQuestionTypeClick = (data) => {
+    console.log(data)
+
     onQuestionTypeChange(data)
     setShowPopover(false)
   }
@@ -56,6 +59,7 @@ function QuestionConfigurationPopoverContent(props) {
             <QuestionConfigurationMenu />
           ) : (
             <QuestionTypeSelect
+              data={data}
               onClick={onQuestionTypeClick}
               welcomeScreenShowRule={welcomeScreenShowRule}
               customQuestionTypes={customQuestionTypes}

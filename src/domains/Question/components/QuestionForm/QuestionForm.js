@@ -150,6 +150,7 @@ function QuestionForm(props) {
                 {isConfigurationPopoverVisible && (
                   <Col cw="auto">
                     <QuestionConfigurationPopover
+                      data={data}
                       customQuestionTypes={customQuestionTypes}
                       onQuestionTypeChange={onQuestionTypeChange}
                       welcomeScreenShowRule={true}
