@@ -35,12 +35,13 @@ function PlaneTextItem(props) {
   }
 
   const onRuleSelectValueChange = (selectValue) => {
-    setRuleSelectValue(selectValue)
+    setRuleSelectValue(selectValue || '')
 
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update conditionRule of certain question
-    updatedQuestionConfigurations[index].redirectConditionRule = selectValue
+    updatedQuestionConfigurations[index].redirectConditionRule =
+      selectValue || ''
     //write new data to db
     setData(COLLECTIONS.QUESTIONS, questionId, {
       questionConfigurations: updatedQuestionConfigurations
@@ -54,7 +55,7 @@ function PlaneTextItem(props) {
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update answer option of certain question
-    updatedQuestionConfigurations[index].answerOption = inputValue
+    updatedQuestionConfigurations[index].answerOption = inputValue || ''
     //write new data to db
     setData(COLLECTIONS.QUESTIONS, questionId, {
       questionConfigurations: updatedQuestionConfigurations
