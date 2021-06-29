@@ -49,8 +49,10 @@ export const CustomInput = styled(Input)`
 `
 export const CustomButton = styled(Button)`
   ${({ theme }) => `
-  width: 129px;
-  height: 40px;
+  // width: 129px;
+  // height: 40px;
+  display:flex;
+  
   position: absolute;
   top: 50%;
   left: 50%;

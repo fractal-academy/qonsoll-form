@@ -180,7 +180,7 @@ function QuestionForm(props) {
               </Row>
               {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
                 <Row noGutters>
-                  <Col cw="auto">
+                  <Col cw="auto" flexDirection="end">
                     <QuestionImageContainer
                       {...layoutType.imgSize}
                       mb={4}
@@ -190,11 +190,13 @@ function QuestionForm(props) {
                           data?.brightnessValue + 100 || brightnessValue + 100
                         }%)`
                       }}>
-                      <QuestionMediaPopover
-                        brightnessValue={brightnessValue}
-                        setBrightnessValue={setBrightnessValue}
-                        MediaModalButtonBackground={popoverImage}
-                      />
+                      <Box display="flex" justifyContent="flex-end" mr={4}>
+                        <QuestionMediaPopover
+                          brightnessValue={brightnessValue}
+                          setBrightnessValue={setBrightnessValue}
+                          MediaModalButtonBackground={popoverImage}
+                        />
+                      </Box>
                     </QuestionImageContainer>
                   </Col>
                 </Row>

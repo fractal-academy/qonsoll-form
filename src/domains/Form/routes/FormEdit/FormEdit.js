@@ -125,7 +125,7 @@ function FormEdit(props) {
         redirectConditionRule: ''
       }
     ]
-    const opinionAndRatingConfiguration = Array(5 - 1 + 1)
+    const opinionAndRatingConfiguration = Array(5)
       .fill(0)
       .map((el, index) => ({
         answerOption: 1 + index,
@@ -137,7 +137,7 @@ function FormEdit(props) {
       {
         answerOption: '',
         redirectQuestion: '',
-        answerOptionId: uuid(),
+        answerOptionId: '',
         redirectConditionRule: ''
       }
     ]
