@@ -29,8 +29,8 @@ function QuestionConfigurationPopover(props) {
       (question) =>
         question?.questionConfigurations.filter(
           (config) => config?.redirectQuestion === data?.id
-        ).length > 0
-    ).length > 0
+        )?.length > 0
+    )?.length > 0
 
   // This piece of code to do refactoring in future improvements to make it shorter
 

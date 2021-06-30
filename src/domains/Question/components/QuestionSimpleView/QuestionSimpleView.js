@@ -32,16 +32,16 @@ function QuestionSimpleView(props) {
     data.filter(
       (question) =>
         question?.questionConfigurations.filter(
-          (config) => config?.redirectQuestion === data?.id
-        ).length > 0
-    ).length > 0
+          (config) => config?.redirectQuestion === currentQuestion?.id
+        )?.length > 0
+    )?.length > 0
 
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id
   //this one check or question includes any answerOption with redirectQuestion
   const hasConditions = currentQuestion?.questionConfigurations.filter(
-    (item, index) => item?.redirectQuestion.length > 0
-  ).length
+    (item, index) => item?.redirectQuestion?.length > 0
+  )?.length
 
   return (
     <Box onClick={onClick}>
@@ -67,7 +67,7 @@ function QuestionSimpleView(props) {
           <Col cw="auto">
             <Popconfirm
               title={
-                hasConditions
+                hasConditions || hasCondtitionOnIt
                   ? popconfirmOnDeleteQuestionWithConditions ||
                     'This question has connected logic. Delete it?'
                   : popconfirmOnDeleteQuestion || 'Delete this question?'
