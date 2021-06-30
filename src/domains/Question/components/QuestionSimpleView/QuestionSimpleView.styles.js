@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
+import { Popconfirm } from 'antd'
 
 export const DescriptionContainer = styled(Box)`
   ${({ theme }) => `

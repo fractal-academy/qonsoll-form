@@ -19,18 +19,20 @@ import {
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
 import { useTranslation } from '../../context/Translation'
+import { Popconfirm } from 'antd'
 
 let startLetter = 65
 
 function ChoiceEditable(props) {
   const { index, data, withImage } = props
-
   //[CUSTOM HOOKS]
   const { editableChoicePlaceholder } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+
+  const { popconfirmOnDeleteOptionWithConditions } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [value, setValue] = useState(data?.answerOption)
@@ -39,6 +41,8 @@ function ChoiceEditable(props) {
   const choiceProps = currentQuestion?.questionConfigurations
   const letter = String.fromCharCode(startLetter + index)
   const bgImage = `url(${data?.image || DEFAULT_IMAGE})`
+
+  const hasConditions = data.redirectQuestion !== ''
 
   // [CLEAN FUNCTIONS]
   const onChange = (e) => {
@@ -54,6 +58,7 @@ function ChoiceEditable(props) {
       payload: { questionConfigurations: choiceProps }
     })
   }
+
   const onDelete = async () => {
     //remove item from array with 'index' position,
     //'1' - amount of deleted elements from index position till the end(check how splice works for details)
@@ -105,9 +110,22 @@ function ChoiceEditable(props) {
           />
         </ChoiceOptionCol>
       </Row>
-      <DeleteButton onClick={onDelete}>
-        <CloseOutlined />
-      </DeleteButton>
+      {hasConditions ? (
+        <Popconfirm
+          title={
+            popconfirmOnDeleteOptionWithConditions ||
+            'This option has connected logic. Delete it?'
+          }
+          onConfirm={onDelete}>
+          <DeleteButton /*onClick={onDelete}*/>
+            <CloseOutlined />
+          </DeleteButton>
+        </Popconfirm>
+      ) : (
+        <DeleteButton onClick={onDelete}>
+          <CloseOutlined />
+        </DeleteButton>
+      )}
     </MainBox>
   )
 }
