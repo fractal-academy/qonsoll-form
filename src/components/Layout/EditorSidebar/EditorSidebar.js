@@ -199,6 +199,7 @@ function EditorSidebar(props) {
         : [],
     [questions]
   )
+
   useEffect(() => {
     endings?.map((item, index) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {

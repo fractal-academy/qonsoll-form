@@ -24,7 +24,7 @@ import {
 } from '@ant-design/icons'
 
 function QuestionTypeSelect(props) {
-  const { onClick, welcomeScreenShowRule, customQuestionTypes } = props
+  const { data, onClick, welcomeScreenShowRule, customQuestionTypes } = props
 
   // [ADDITIONAL_HOOKS]
   const {
@@ -107,6 +107,10 @@ function QuestionTypeSelect(props) {
         (item) => item.type !== QUESTION_TYPES.WELCOME_SCREEN
       )) ||
     questionTypeMap
+
+  const hasConditions = data?.questionConfigurations.filter(
+    (item) => item?.redirectQuestion.length > 0
+  ).length
 
   return (
     <Row

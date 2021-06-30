@@ -70,9 +70,9 @@ function FormEdit(props) {
   const endings = useMemo(
     () =>
       questionsList
-        ? questionsList?.filter(
-            (item) => item.questionType === QUESTION_TYPES.ENDING
-          )
+        ? questionsList
+            ?.filter((item) => item.questionType === QUESTION_TYPES.ENDING)
+            .sort((a, b) => a.order - b.order)
         : [],
     [questionsList]
   )
@@ -182,7 +182,6 @@ function FormEdit(props) {
   const welcomeScreenShowRule = questions?.some(
     (question) => question['questionType'] === QUESTION_TYPES.WELCOME_SCREEN
   )
-
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
@@ -199,6 +198,7 @@ function FormEdit(props) {
                   questionsList={questionsList}
                   onBack={onBack}>
                   <QuestionForm
+                    questionsList={questionsList}
                     data={currentQuestion}
                     defaultTab={defaultTab}
                     brightnessValue={brightnessValue}

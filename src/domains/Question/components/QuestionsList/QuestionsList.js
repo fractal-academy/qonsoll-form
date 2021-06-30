@@ -61,6 +61,21 @@ function QuestionsList(props) {
         type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
         payload: newCurrentQuestion
       })
+
+    // remove logic jump conditions for all connected questions
+    updatedData.forEach((item) => {
+      let writeToDB = false
+      const editedQuestionConfig = item.questionConfigurations.map((config) => {
+        if (config.redirectQuestion === questionId) {
+          writeToDB = true
+          return { ...config, redirectQuestion: '' }
+        } else return config
+      })
+      writeToDB &&
+        setData(COLLECTIONS.QUESTIONS, item.id, {
+          questionConfigurations: editedQuestionConfig
+        })
+    })
   }
   // [COMPUTED PROPERTIES]
   const dataSource = useMemo(
@@ -93,6 +108,7 @@ function QuestionsList(props) {
         renderItem={(item, index) => (
           <QuestionSimpleView
             {...item}
+            data={data}
             action={handleDelete}
             number={index + 1}
             onClick={() => onItemClick(item, index)}

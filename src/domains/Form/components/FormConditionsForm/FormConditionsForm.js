@@ -37,7 +37,6 @@ function FormConditionsForm(props) {
       questionConfigurations: updatedQuestionConfigurations
     })
   }
-
   const filteredAnswerForEndings = useMemo(
     () =>
       data

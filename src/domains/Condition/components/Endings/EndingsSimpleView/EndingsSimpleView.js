@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import { Box } from '@qonsoll/react-design'
 import { NumberedCard } from '../../../../../components'
 import Title from 'antd/lib/typography/Title'
@@ -7,6 +7,8 @@ import { Select, Tag } from 'antd'
 import styled from 'styled-components'
 import { DeleteOutlined } from '@ant-design/icons'
 import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
+import { COLLECTIONS } from '../../../../../constants'
+import useFunctions from '../../../../../hooks/useFunctions'
 
 const StyledTag = styled(Tag)`
   background-color: ${({ theme }) => theme.color.primary.t.lighten5};
@@ -17,15 +19,38 @@ const StyledTag = styled(Tag)`
   margin-right: 10px !important;
 `
 
-function ConditionForm(props) {
-  const { Option, OptGroup } = Select
-  const { item, index, questionsData } = props
-  let startLetter = 65
+const { Option, OptGroup } = Select
+let startLetter = 65
 
-  function handleChange(order, title) {
-    console.log(title, order)
+function EndingSimpleView(props) {
+  const { item, index, questionsData } = props
+
+  //[COMPONENT STATE HOOKS]
+
+  // [ADDITIONAL HOOKS]
+  const { setData } = useFunctions()
+
+  async function handleChange(_, selectedItems) {
+    const questionConfigurations = selectedItems.map((item) => ({
+      answerOptionId: item.key,
+      trigerQuestionId: item?.value || ''
+    }))
+    await setData(COLLECTIONS.QUESTIONS, item?.id, {
+      questionConfigurations
+    })
   }
+
   const { questionsForEndingSelectPlaceholder } = useTranslation()
+
+  const defaultSelectValue = useMemo(
+    () =>
+      item
+        ? item?.questionConfigurations?.map(
+            (config) => config?.trigerQuestionId
+          )
+        : [],
+    [item]
+  )
 
   return (
     <NumberedCard number={index + 1} key={index}>
@@ -42,6 +67,7 @@ function ConditionForm(props) {
             questionsForEndingSelectPlaceholder ||
             'Select questions to call current ending'
           }
+          defaultValue={defaultSelectValue}
           onChange={handleChange}
           optionLabelProp="label">
           {questionsData?.map((questionListItem, index) => (
@@ -81,11 +107,11 @@ function ConditionForm(props) {
     </NumberedCard>
   )
 }
-ConditionForm.propTypes = {
+EndingSimpleView.propTypes = {
   mockQuestionIndex: PropTypes.number,
   item: PropTypes.object.isRequired,
   addCondition: PropTypes.func.isRequired,
   addRedirectQuestion: PropTypes.func.isRequired,
   getQuestionListRedirect: PropTypes.func.isRequired
 }
-export default ConditionForm
+export default EndingSimpleView

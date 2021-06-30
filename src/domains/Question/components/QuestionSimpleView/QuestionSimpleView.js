@@ -10,15 +10,38 @@ import { NumberedCard, IconRoundContainer } from '../../../../components'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 
 function QuestionSimpleView(props) {
-  const { title, action, number, layoutType, onClick, id, disableDelete } =
-    props
+  const {
+    title,
+    action,
+    number,
+    layoutType,
+    onClick,
+    id,
+    disableDelete,
+    data
+  } = props
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
-  const { popconfirmTitle } = useTranslation()
+  const {
+    popconfirmOnDeleteQuestion,
+    popconfirmOnDeleteQuestionWithConditions
+  } = useTranslation()
+
+  const hasCondtitionOnIt =
+    data.filter(
+      (question) =>
+        question?.questionConfigurations.filter(
+          (config) => config?.redirectQuestion === currentQuestion?.id
+        )?.length > 0
+    )?.length > 0
 
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id
+  //this one check or question includes any answerOption with redirectQuestion
+  const hasConditions = currentQuestion?.questionConfigurations.filter(
+    (item, index) => item?.redirectQuestion?.length > 0
+  )?.length
 
   return (
     <Box onClick={onClick}>
@@ -43,7 +66,12 @@ function QuestionSimpleView(props) {
           </Col>
           <Col cw="auto">
             <Popconfirm
-              title={popconfirmTitle || 'Delete this question?'}
+              title={
+                hasConditions || hasCondtitionOnIt
+                  ? popconfirmOnDeleteQuestionWithConditions ||
+                    'This question has connected logic. Delete it?'
+                  : popconfirmOnDeleteQuestion || 'Delete this question?'
+              }
               onConfirm={(e) => action(e, id)}
               disabled={disableDelete}>
               <Button
