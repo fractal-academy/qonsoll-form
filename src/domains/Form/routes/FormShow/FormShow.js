@@ -91,36 +91,36 @@ function FormShow(props) {
               <Spinner />
             ) : (
               <Box>
-                {/*<Row {...styles.headerRow} noGutters>*/}
-                {/*  <Col cw="auto" v="center" p={0}>*/}
-                {/*    <Button*/}
-                {/*      type="text"*/}
-                {/*      size="small"*/}
-                {/*      // onClick={() => history.goBack()}*/}
-                {/*      icon={<ArrowLeftOutlined />}*/}
-                {/*    />*/}
-                {/*  </Col>*/}
-                {/*  <Col v="center">*/}
-                {/*    <Box textAlign="center">*/}
-                {/*      <Title level={5}>Live Preview</Title>*/}
-                {/*    </Box>*/}
-                {/*  </Col>*/}
-                {/*  <Col cw="auto" v="center">*/}
-                {/*    <Button*/}
-                {/*      type="text"*/}
-                {/*      size="small"*/}
-                {/*      icon={<ReloadOutlined />}*/}
-                {/*      onClick={onRestart}>*/}
-                {/*      Restart*/}
-                {/*    </Button>*/}
-                {/*  </Col>*/}
-                {/*</Row>*/}
+                {/* <Row {...styles.headerRow} noGutters>
+                 <Col cw="auto" v="center" p={0}>
+                   <Button
+                     type="text"
+                     size="small"
+                     // onClick={() => history.goBack()}
+                     icon={<ArrowLeftOutlined />}
+                   />
+                 </Col>
+                 <Col v="center">
+                   <Box textAlign="center">
+                     <Title level={5}>Live Preview</Title>
+                   </Box>
+                 </Col>
+                 <Col cw="auto" v="center">
+                   <Button
+                     type="text"
+                     size="small"
+                     icon={<ReloadOutlined />}
+                     onClick={onRestart}>
+                     Restart
+                   </Button>
+                 </Col>
+                </Row>
 
-                {/*<Row noGutters>*/}
-                {/*  <Col>*/}
-                {/*    <Divider style={globalStyles.resetMargin} />*/}
-                {/*  </Col>*/}
-                {/*</Row>*/}
+                <Row noGutters>
+                 <Col>
+                   <Divider style={globalStyles.resetMargin} />
+                 </Col>
+                </Row> */}
 
                 <ContentCard
                   topOffset={wrapperOffset}
@@ -129,6 +129,7 @@ function FormShow(props) {
                     submitLoading={submitLoading}
                     isAnswered={isAnswered}
                     setIsAnswered={setIsAnswered}
+                    currentSlide={currentSlide}
                     setCurrentSlide={setCurrentSlide}
                     disabledUp={disabledUp}
                     disabledDown={disabledDown}>
