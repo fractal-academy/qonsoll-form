@@ -6,6 +6,7 @@ import { QuestionConfigurationPopoverContent } from '../../../../domains/Questio
 function QuestionConfigurationPopover(props) {
   const {
     data,
+    questionsList,
     onQuestionTypeChange,
     customQuestionTypes,
     welcomeScreenShowRule
@@ -23,9 +24,17 @@ function QuestionConfigurationPopover(props) {
     (item, index) => item?.redirectQuestion.length > 0
   ).length
 
+  const hasCondtitionOnIt =
+    questionsList.filter(
+      (question) =>
+        question?.questionConfigurations.filter(
+          (config) => config?.redirectQuestion === data?.id
+        ).length > 0
+    ).length > 0
+
   // This piece of code to do refactoring in future improvements to make it shorter
 
-  return hasConditions && showPopover !== true ? (
+  return (hasConditions || hasCondtitionOnIt) && showPopover !== true ? (
     <Popconfirm
       overlayInnerStyle={{
         width: '400px'

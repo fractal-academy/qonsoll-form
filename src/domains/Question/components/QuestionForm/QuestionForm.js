@@ -45,6 +45,7 @@ const StyledTag = styled(Tag)`
 
 function QuestionForm(props) {
   const {
+    questionsList,
     data,
     defaultTab,
     brightnessValue,
@@ -150,6 +151,7 @@ function QuestionForm(props) {
                 {isConfigurationPopoverVisible && (
                   <Col cw="auto">
                     <QuestionConfigurationPopover
+                      questionsList={questionsList}
                       data={data}
                       customQuestionTypes={customQuestionTypes}
                       onQuestionTypeChange={onQuestionTypeChange}

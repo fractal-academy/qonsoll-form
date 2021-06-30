@@ -10,8 +10,16 @@ import { NumberedCard, IconRoundContainer } from '../../../../components'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 
 function QuestionSimpleView(props) {
-  const { title, action, number, layoutType, onClick, id, disableDelete } =
-    props
+  const {
+    title,
+    action,
+    number,
+    layoutType,
+    onClick,
+    id,
+    disableDelete,
+    data
+  } = props
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
@@ -19,6 +27,15 @@ function QuestionSimpleView(props) {
     popconfirmOnDeleteQuestion,
     popconfirmOnDeleteQuestionWithConditions
   } = useTranslation()
+
+  const hasCondtitionOnIt =
+    data.filter(
+      (question) =>
+        question?.questionConfigurations.filter(
+          (config) => config?.redirectQuestion === data?.id
+        ).length > 0
+    ).length > 0
+  console.log(hasCondtitionOnIt)
 
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id

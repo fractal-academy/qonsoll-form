@@ -182,7 +182,6 @@ function FormEdit(props) {
   const welcomeScreenShowRule = questions?.some(
     (question) => question['questionType'] === QUESTION_TYPES.WELCOME_SCREEN
   )
-
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
@@ -199,6 +198,7 @@ function FormEdit(props) {
                   questionsList={questionsList}
                   onBack={onBack}>
                   <QuestionForm
+                    questionsList={questionsList}
                     data={currentQuestion}
                     defaultTab={defaultTab}
                     brightnessValue={brightnessValue}

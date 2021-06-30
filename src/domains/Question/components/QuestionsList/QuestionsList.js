@@ -93,6 +93,7 @@ function QuestionsList(props) {
         renderItem={(item, index) => (
           <QuestionSimpleView
             {...item}
+            data={data}
             action={handleDelete}
             number={index + 1}
             onClick={() => onItemClick(item, index)}
