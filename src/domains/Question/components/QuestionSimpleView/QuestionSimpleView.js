@@ -35,7 +35,6 @@ function QuestionSimpleView(props) {
           (config) => config?.redirectQuestion === data?.id
         ).length > 0
     ).length > 0
-  console.log(hasCondtitionOnIt)
 
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id

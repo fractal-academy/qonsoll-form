@@ -34,8 +34,6 @@ function QuestionConfigurationPopoverContent(props) {
     setIsQuestionConfig(!isQuestionConfig)
   }
   const onQuestionTypeClick = (data) => {
-    console.log(data)
-
     onQuestionTypeChange(data)
     setShowPopover(false)
   }
