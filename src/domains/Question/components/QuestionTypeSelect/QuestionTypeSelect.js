@@ -109,10 +109,8 @@ function QuestionTypeSelect(props) {
     questionTypeMap
 
   const hasConditions = data?.questionConfigurations.filter(
-    (item, index) => item?.redirectQuestion.length > 0
+    (item) => item?.redirectQuestion.length > 0
   ).length
-
-  // console.log(hasConditions)
 
   return (
     <Row
@@ -125,10 +123,7 @@ function QuestionTypeSelect(props) {
       <Col display="block">
         <QuestionsTypeMenu>
           {updatedMap.map((item) => (
-            <QuestionMenuItem
-              key={item.type}
-              // onClick={hasConditions ? (e) => console.log(e) : onClick}>
-              onClick={hasConditions ? (e) => console.log(e) : onClick}>
+            <QuestionMenuItem key={item.type} onClick={onClick}>
               <Row noGutters v="center">
                 <Col v="center" cw="auto" mr={2}>
                   <IconRoundContainer>{item.icon}</IconRoundContainer>
