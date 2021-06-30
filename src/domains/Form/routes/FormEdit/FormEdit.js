@@ -70,9 +70,9 @@ function FormEdit(props) {
   const endings = useMemo(
     () =>
       questionsList
-        ? questionsList?.filter(
-            (item) => item.questionType === QUESTION_TYPES.ENDING
-          )
+        ? questionsList
+            ?.filter((item) => item.questionType === QUESTION_TYPES.ENDING)
+            .sort((a, b) => a.order - b.order)
         : [],
     [questionsList]
   )
