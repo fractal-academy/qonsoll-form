@@ -34,3 +34,5 @@ export { default as Spinner } from './Spinner'
 export { default as Rate } from './Rating'
 
 export { default as IconRoundContainer } from './IconRoundContainer'
+
+export { default as VideoRecording } from './VideoRecording'
