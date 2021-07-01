@@ -55,11 +55,12 @@ function SubmitButton(props) {
   const onButtonClick = () => {
     if (finish) {
       const updatedAnswers = { formId, answers }
+      console.log(updatedAnswers)
+
       //add function from b2g and provide updatedAnswers
       onFinish?.(updatedAnswers)
     } else onClick?.()
   }
-
   return (
     <Row display="flex" v="center" noGutters>
       <Col cw="auto" mr={3}>
