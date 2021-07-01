@@ -1,21 +1,70 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ZiggeoRecorder } from 'react-ziggeo'
 
 const API_KEY = 'r1aabb2782dec6629e9650b5c6197c92'
 
-function VideoRecording() {
+function VideoRecording(props) {
+  const {
+    onPlaying,
+    onPaused,
+    onAttached,
+    onLoaded,
+    onEnded,
+    onSeek,
+    onError,
+    onManuallySubmitted,
+    onUploaded,
+    onUploadSelected,
+    onRecording,
+    onUploading,
+    onRerecord,
+    onCountdown,
+    onProcessing,
+    onProcessed,
+    onRecordingProgress,
+    onUploadProgress,
+    onAccessForbidden,
+    onAccessGranted,
+    onCameraUnresponsive,
+    onVerified,
+    onNoCamera,
+    onNoMicrophone
+  } = props
   const [recorder, setRecorder] = useState(null)
 
-  const handleUploaded = (embedding) => {
-    console.log('video uploaded:', embedding.video)
-  }
+  //   const handleUploaded = (embedding) => {
+  //     console.log('video uploaded:', embedding.video)
+  //   }
 
   return (
     <ZiggeoRecorder
       apiKey={API_KEY}
       height={180}
       width={320}
-      onUploaded={handleUploaded}
+      onPlaying={onPlaying}
+      onPaused={onPaused}
+      onAttached={onAttached}
+      onLoaded={onLoaded}
+      onEnded={onEnded}
+      onSeek={onSeek}
+      onError={onError}
+      onManuallySubmitted={onManuallySubmitted}
+      onUploaded={onUploaded}
+      onRecording={onRecording}
+      onUploadSelected={onUploadSelected}
+      onUploading={onUploading}
+      onRerecord={onRerecord}
+      onCountdown={onCountdown}
+      onProcessing={onProcessing}
+      onProcessed={onProcessed}
+      onRecordingProgress={onRecordingProgress}
+      onUploadProgress={onUploadProgress}
+      onAccessForbidden={onAccessForbidden}
+      onAccessGranted={onAccessGranted}
+      onCameraUnresponsive={onCameraUnresponsive}
+      onVerified={onVerified}
+      onNoCamera={onNoCamera}
+      onNoMicrophone={onNoMicrophone}
       onRef={(ref) => setRecorder(ref)}
     />
   )
