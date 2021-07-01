@@ -115,11 +115,10 @@ function ListItem(props) {
       )
     })
   }
-  const onModalSubmit = async (values) => {
-    await updateData(COLLECTIONS.FORMS, data?.id, {
-      title: values?.name,
-      subtitle: values?.description
-    }).catch((e) => message.error(e.message))
+  const onModalSubmit = async (updatedFormData) => {
+    await updateData(COLLECTIONS.FORMS, data?.id, updatedFormData).catch((e) =>
+      message.error(e.message)
+    )
   }
 
   // [MENU TEMPLATE]

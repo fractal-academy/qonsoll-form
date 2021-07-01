@@ -79,14 +79,14 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
-    const { name, description, ...restData } = data
+    const { title, subtitle, isQuiz, ...restData } = data
     const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
-
     const formData = {
       ...restData,
+      isQuiz,
+      title,
+      subtitle,
       id: formId,
-      title: name,
-      subtitle: description || '',
       creationDate: getTimestamp().now()
     }
     await setData(COLLECTIONS.FORMS, formId, formData).catch((e) =>
@@ -96,7 +96,6 @@ function FormsAll(props) {
       //generate default question id and default ending id
       const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
       const endingId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
-
       //add default question and ending to database
       setData(COLLECTIONS.QUESTIONS, questionId, {
         formId: formId,
@@ -106,13 +105,12 @@ function FormsAll(props) {
         title: 'WS.',
         order: 0
       }).catch((e) => message.error(e.message))
-
       setData(COLLECTIONS.QUESTIONS, endingId, {
         formId: formId,
         id: endingId,
         layoutType: LAYOUT_TYPE_KEYS[0],
         questionType: QUESTION_TYPES.ENDING,
-        title: endingTitle || 'Thank you for attention!',
+        title: 'Thank you for attention!',
         order: 1
       }).catch((e) => message.error(e.message))
     }
@@ -122,8 +120,7 @@ function FormsAll(props) {
     formsAllRouteTitle,
     addNewFormButton,
     formSearchPlaceholder,
-    formsCounterDeclaration,
-    endingTitle
+    formsCounterDeclaration
   } = translations || {}
   const menu = (
     <Menu>
