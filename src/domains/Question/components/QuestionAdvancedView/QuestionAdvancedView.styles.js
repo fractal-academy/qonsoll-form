@@ -43,7 +43,7 @@ export const StyledBox = styled(Col)`
   background-color: transparent;
   text-align: ${specialLayoutRule && 'center'};
   justify-content: ${specialLayoutRule && 'center'};
-  max-height: 85vh;
+  max-height: 80vh;
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;

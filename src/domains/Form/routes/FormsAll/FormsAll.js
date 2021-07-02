@@ -15,7 +15,7 @@ import useMedia from 'use-media'
 import { globalStyles } from '../../../../../styles'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import { styles } from './FormsAll.styles'
-import { Spinner, StaticList } from '../../../../components'
+import { Spinner, StaticList, VideoRecording } from '../../../../components'
 import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -233,7 +233,6 @@ function FormsAll(props) {
                   columnWidth={(mobileLayout && 2) || 6}
                   setEdit={setEdit}
                 />
-
                 <FormSimpleFormWithModal
                   isModalVisible={isModalVisible}
                   setIsModalVisible={setIsModalVisible}
