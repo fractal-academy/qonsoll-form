@@ -54,6 +54,7 @@ function FormShow(props) {
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [previousQuestionOrder, setPreviousQuestionOrder] = useState(0)
 
   // [COMPUTED PROPERTIES]
   const sortedData = data && data.sort((a, b) => a.order - b.order)
@@ -80,6 +81,7 @@ function FormShow(props) {
       })
 
     setIsAnswered(true)
+    setPreviousQuestionOrder(currentSlide)
   }
 
   return (
@@ -91,36 +93,36 @@ function FormShow(props) {
               <Spinner />
             ) : (
               <Box>
-                {/*<Row {...styles.headerRow} noGutters>*/}
-                {/*  <Col cw="auto" v="center" p={0}>*/}
-                {/*    <Button*/}
-                {/*      type="text"*/}
-                {/*      size="small"*/}
-                {/*      // onClick={() => history.goBack()}*/}
-                {/*      icon={<ArrowLeftOutlined />}*/}
-                {/*    />*/}
-                {/*  </Col>*/}
-                {/*  <Col v="center">*/}
-                {/*    <Box textAlign="center">*/}
-                {/*      <Title level={5}>Live Preview</Title>*/}
-                {/*    </Box>*/}
-                {/*  </Col>*/}
-                {/*  <Col cw="auto" v="center">*/}
-                {/*    <Button*/}
-                {/*      type="text"*/}
-                {/*      size="small"*/}
-                {/*      icon={<ReloadOutlined />}*/}
-                {/*      onClick={onRestart}>*/}
-                {/*      Restart*/}
-                {/*    </Button>*/}
-                {/*  </Col>*/}
-                {/*</Row>*/}
+                {/* <Row {...styles.headerRow} noGutters>
+                 <Col cw="auto" v="center" p={0}>
+                   <Button
+                     type="text"
+                     size="small"
+                     // onClick={() => history.goBack()}
+                     icon={<ArrowLeftOutlined />}
+                   />
+                 </Col>
+                 <Col v="center">
+                   <Box textAlign="center">
+                     <Title level={5}>Live Preview</Title>
+                   </Box>
+                 </Col>
+                 <Col cw="auto" v="center">
+                   <Button
+                     type="text"
+                     size="small"
+                     icon={<ReloadOutlined />}
+                     onClick={onRestart}>
+                     Restart
+                   </Button>
+                 </Col>
+                </Row>
 
-                {/*<Row noGutters>*/}
-                {/*  <Col>*/}
-                {/*    <Divider style={globalStyles.resetMargin} />*/}
-                {/*  </Col>*/}
-                {/*</Row>*/}
+                <Row noGutters>
+                 <Col>
+                   <Divider style={globalStyles.resetMargin} />
+                 </Col>
+                </Row> */}
 
                 <ContentCard
                   topOffset={wrapperOffset}
@@ -128,10 +130,13 @@ function FormShow(props) {
                   <FormAdvancedView
                     submitLoading={submitLoading}
                     isAnswered={isAnswered}
+                    sortedData={sortedData}
+                    disabledUp={disabledUp}
+                    currentSlide={currentSlide}
+                    disabledDown={disabledDown}
                     setIsAnswered={setIsAnswered}
                     setCurrentSlide={setCurrentSlide}
-                    disabledUp={disabledUp}
-                    disabledDown={disabledDown}>
+                    previousQuestionOrder={previousQuestionOrder}>
                     {sortedData?.map((item, index) => (
                       <Component
                         key={index}
