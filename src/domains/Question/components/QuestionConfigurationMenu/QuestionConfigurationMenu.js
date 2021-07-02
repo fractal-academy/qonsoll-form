@@ -14,6 +14,7 @@ const { Text } = Typography
 
 function QuestionConfigurationMenu() {
   // [ADDITIONAL_HOOKS]
+  const { videoQuestionSwitcher } = useTranslation()
   const { requiredSwitcher } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -21,6 +22,9 @@ function QuestionConfigurationMenu() {
   // [COMPONENT_STATE_HOOKS]
   const [requiredSwitchValue, setRequiredSwitchValue] = useState(
     currentQuestion?.isRequired
+  )
+  const [isVideoQuestion, setIsVideoQuestion] = useState(
+    currentQuestion?.isVideoQuestion
   )
 
   // [CLEAN FUNCTIONS]
@@ -31,11 +35,19 @@ function QuestionConfigurationMenu() {
       payload: { isRequired: switchValue }
     })
   }
+  const isVideoQuestionStateChange = (switchValue) => {
+    setRequiredSwitchValue(!switchValue)
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { isVideoQuestion: switchValue }
+    })
+  }
 
   // [USE_EFFECTS]
   useEffect(() => {
     //update text area value when delete element
     setRequiredSwitchValue(currentQuestion?.isRequired)
+    setIsVideoQuestion(currentQuestion?.isVideoQuestion)
   }, [currentQuestion])
 
   return (
@@ -49,6 +61,18 @@ function QuestionConfigurationMenu() {
             size="small"
             onChange={requireStateChange}
             checked={requiredSwitchValue}
+          />
+        </Col>
+      </Row>
+      <Row mb={3} noGutters v="center">
+        <Col v="center">
+          <Text strong>{videoQuestionSwitcher || 'Is video question?'}</Text>
+        </Col>
+        <Col cw="auto" px={2}>
+          <Switch
+            size="small"
+            onChange={isVideoQuestionStateChange}
+            checked={isVideoQuestion}
           />
         </Col>
       </Row>

@@ -39,8 +39,8 @@ function VideoRecording(props) {
   return (
     <ZiggeoRecorder
       apiKey={API_KEY}
-      height={180}
-      width={320}
+      height="-webkit-fill-available"
+      width="-webkit-fill-available"
       onPlaying={onPlaying}
       onPaused={onPaused}
       onAttached={onAttached}
