@@ -4,7 +4,7 @@ import { globalStyles } from '../../../../styles'
 import { styles } from './PageHeader.styles'
 import { Button, Divider, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
-import { ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons'
+import { ArrowLeftOutlined, EyeOutlined, ReadOutlined } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 const { Title } = Typography
@@ -14,10 +14,14 @@ function PageHeader(props) {
 
   // [ADDITIONAL HOOKS]
   const { onFormShow } = useActionsFunctionsContext()
-
+  const { onFormResultsShow } = useActionsFunctionsContext()
   // [CLEAN FUNCTIONS]
   const onFormShowDisplay = () => {
     onFormShow?.(id)
+    // history.push(formPath)
+  }
+  const onFormResultsDisplay = () => {
+    onFormResultsShow?.(id)
     // history.push(formPath)
   }
 
@@ -46,11 +50,21 @@ function PageHeader(props) {
             {title}
           </Title>
         </Col>
+        <Col cw="auto" v="center" mr={1}>
+          <Button
+            type="text"
+            // shape="circle"
+            icon={<ReadOutlined />}
+            onClick={onFormResultsDisplay}>
+            Results
+          </Button>
+        </Col>
+
         <Col cw="auto" v="center">
           <Button
             type="text"
-            shape="circle"
-            icon={<EyeOutlined style={globalStyles.iconSize} />}
+            // shape="circle"
+            icon={<EyeOutlined />}
             onClick={onFormShowDisplay}
           />
         </Col>
