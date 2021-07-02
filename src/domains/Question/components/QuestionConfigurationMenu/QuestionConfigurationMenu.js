@@ -12,7 +12,7 @@ import { AmountOptionsCustomConfig } from '../../../../domains/Question/componen
 
 const { Text } = Typography
 
-function QuestionConfigurationMenu() {
+function QuestionConfigurationMenu(props) {
   // [ADDITIONAL_HOOKS]
   const { videoQuestionSwitcher } = useTranslation()
   const { requiredSwitcher } = useTranslation()

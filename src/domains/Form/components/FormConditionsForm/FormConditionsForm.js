@@ -1,11 +1,14 @@
 import React, { useMemo } from 'react'
-import { ConditionForm } from '../../../../domains/Condition/components'
+import {
+  ConditionForm,
+  ScoreConditionsAdvancedView,
+  EndingsSimpleView
+} from '../../../../domains/Condition/components'
 import { QUESTION_TYPES } from '../../../../constants'
 import { Box } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
 import { Tabs } from 'antd'
-import EndingsSimpleView from '../../../Condition/components/Endings/EndingsSimpleView'
 import PropTypes from 'prop-types'
 
 const { TabPane } = Tabs
@@ -54,7 +57,6 @@ function FormConditionsForm(props) {
         : [],
     [data]
   )
-
   return (
     <>
       <Tabs onChange={onTabChange} type="card">
@@ -73,16 +75,29 @@ function FormConditionsForm(props) {
           ))}
         </TabPane>
         <TabPane tab="Endings" key="2">
-          {endings?.map((item, index) => (
+          {!!filteredAnswerForEndings?.length
+            ? endings?.map((item, index) => (
+                <Box mb={3}>
+                  <EndingsSimpleView
+                    key={index}
+                    item={item}
+                    index={index}
+                    addCondition={addCondition}
+                    questionsData={filteredAnswerForEndings}
+                    addRedirectQuestion={addRedirectQuestion}
+                    getQuestionListRedirect={getQuestionListRedirect}
+                  />
+                </Box>
+              ))
+            : 'There are no any question that allows to configure endings.'}
+        </TabPane>
+        <TabPane tab="Answers score configurations" key="3">
+          {data?.map((item, index) => (
             <Box mb={3}>
-              <EndingsSimpleView
-                questionsData={filteredAnswerForEndings}
+              <ScoreConditionsAdvancedView
                 key={index}
-                item={item}
+                questionData={item}
                 index={index}
-                addCondition={addCondition}
-                addRedirectQuestion={addRedirectQuestion}
-                getQuestionListRedirect={getQuestionListRedirect}
               />
             </Box>
           ))}

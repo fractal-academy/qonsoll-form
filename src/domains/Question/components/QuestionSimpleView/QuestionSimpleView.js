@@ -31,7 +31,7 @@ function QuestionSimpleView(props) {
   const hasCondtitionOnIt =
     data?.filter(
       (question) =>
-        question?.questionConfigurations.filter(
+        question?.questionConfigurations?.filter(
           (config) => config?.redirectQuestion === currentQuestion?.id
         )?.length > 0
     )?.length > 0

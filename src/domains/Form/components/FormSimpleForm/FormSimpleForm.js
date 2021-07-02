@@ -12,9 +12,8 @@ function FormSimpleForm(props) {
 
   // [COMPUTED PROPERTIES]
   const initialValues = useMemo(() => {
-    const { title, subtitle = '', isQuiz = false } = formData || {}
+    const { title, subtitle = '' } = formData || {}
     return {
-      isQuiz,
       title,
       subtitle
     }
@@ -38,7 +37,7 @@ function FormSimpleForm(props) {
         />
       </Form.Item>
       <Form.Item name="isQuiz" label="Enable quiz system">
-        <Switch />
+        <Switch defaultChecked={formData?.isQuiz} />
       </Form.Item>
       {children}
     </Form>
