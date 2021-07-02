@@ -50,7 +50,7 @@ function PageHeader(props) {
             {title}
           </Title>
         </Col>
-        <Col cw="auto" v="center">
+        <Col cw="auto" v="center" mr={1}>
           <Button
             type="text"
             // shape="circle"

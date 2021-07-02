@@ -6,7 +6,8 @@ import typeformTheme from '../../../styles/theme'
 const { TextArea } = Input
 
 const TextEditable = styled(TextArea).attrs(() => ({
-  autoSize: { minRows: 1, maxRows: 3 },
+  autoSize: { minRows: 1 /*, maxRows: 3 */ },
+  maxLength: 700,
   bordered: false
 }))`
   padding-left: 0;

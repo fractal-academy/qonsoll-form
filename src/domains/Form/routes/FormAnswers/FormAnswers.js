@@ -52,7 +52,6 @@ function FormAnswers(props) {
       isComponentMounted = false
     }
   }, [])
-
   return (
     // <FirebaseContext.Provider value={firebase}>
     //   <ActionsFunctionsContext.Provider value={actions}>
