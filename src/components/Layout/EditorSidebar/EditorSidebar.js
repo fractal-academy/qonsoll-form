@@ -106,6 +106,7 @@ function EditorSidebar(props) {
         redirectConditionRule: ''
       }
     ]
+
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
       ? choicesConfiguration
@@ -114,6 +115,7 @@ function EditorSidebar(props) {
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
       : defaultConfiguration
+
     // default data for created question
     const newQuestion = {
       questionConfigurations,
@@ -122,7 +124,14 @@ function EditorSidebar(props) {
       layoutType: LAYOUT_TYPE_KEYS[0],
       questionType: key || QUESTION_TYPES.ENDING,
       title: '',
-      order: key === QUESTION_TYPES.WELCOME_SCREEN ? 0 : questions?.length
+      order:
+        key === QUESTION_TYPES.WELCOME_SCREEN
+          ? 0
+          : questions.some(
+              (q) => q.questionType === QUESTION_TYPES.WELCOME_SCREEN
+            )
+          ? questions?.length
+          : questions?.length + 1
     }
 
     // set it into context as current
@@ -181,6 +190,8 @@ function EditorSidebar(props) {
   const onResetEndings = () => {
     console.log('reset endgins')
   }
+
+  console.log(questions)
 
   //[COMPUTED PROPERTIES]
   const ConditionsQuestionsList = useMemo(

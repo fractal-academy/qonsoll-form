@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { useSize } from '@umijs/hooks'
+import { QUESTION_TYPES } from '../../constants'
 import React, { cloneElement, useRef, useState, useEffect } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel } from 'antd'
@@ -15,7 +16,8 @@ function Carousel(props) {
     setCurrentSlide,
     submitLoading,
     disabledDown,
-    disabledUp
+    disabledUp,
+    sortedData
   } = props
 
   // [STATE HOOKS]
@@ -49,24 +51,36 @@ function Carousel(props) {
   }
 
   //COMPUTED PROPERTIES
-  let currentNodeSlide = children?.filter(
-    (child) => child?.props?.item?.order === currentSlide
+  const initialSlide = sortedData.some(
+    (question) => question.questionType === QUESTION_TYPES.WELCOME_SCREEN
   )
-  let slide = currentNodeSlide[0]?.props?.item
+    ? 0
+    : 1
+  const choiceSlideNextNumber = () => {
+    let currentSlideData = sortedData?.filter(
+      (item) => item.order === currentSlide
+    )
+    let questionConfig =
+      currentSlideData && currentSlideData[0]?.questionConfigurations
+    setIsAnswered && setIsAnswered(false)
+    console.log(questionConfig)
+  }
+  const textSlideNextNumber = () => {}
+  const specialSlideNextNumber = () => {}
 
-  let givenAnswerObject = Object.fromEntries(
-    Object.entries(answersContext).filter(([key, value]) => key === slide.id)
-  )
-  let answer = Object.entries(givenAnswerObject)[0]
-  let answerValue = answer && answer[1].answer.value
+  // let slide = currentNodeSlide[0]?.props?.item
+  // let givenAnswerObject = Object.fromEntries(
+  //   Object.entries(answersContext).filter(([key, value]) => key === slide?.id)
+  // )
 
-  let nextQuestionOrder = slide.questionConfigurations.filter(
-    (item) => item.answerOption === answerValue
-  )
+  // let answer = Object.entries(givenAnswerObject)[0]
 
-  // console.log('slide: ', slide.questionConfigurations)
-  // console.log('answer : ', answerValue)
-  console.log('result: ', nextQuestionOrder)
+  // let answerValue = answer && answer[1].answer.value
+
+  // let nextQuestionOrder = slide?.questionConfigurations.filter(
+  //   (item) => item.answerOption === answerValue
+  // )
+
   //default route
   isAnswered && next()
 
@@ -74,12 +88,12 @@ function Carousel(props) {
     <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
       <AntdCarousel
         dots={false}
+        initialSlide={initialSlide}
         adaptiveHeight
         ref={carouselRef}
         dotPosition="right"
         afterChange={onCurrentSlideChange}
-        infinite={false}
-        speed={1500}>
+        infinite={false}>
         {children.map((el, index) =>
           cloneElement(el, {
             wrapperHeight: height - buttonsHeight,

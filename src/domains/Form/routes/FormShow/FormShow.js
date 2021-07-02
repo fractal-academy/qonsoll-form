@@ -128,6 +128,7 @@ function FormShow(props) {
                   <FormAdvancedView
                     submitLoading={submitLoading}
                     isAnswered={isAnswered}
+                    sortedData={sortedData}
                     setIsAnswered={setIsAnswered}
                     currentSlide={currentSlide}
                     setCurrentSlide={setCurrentSlide}

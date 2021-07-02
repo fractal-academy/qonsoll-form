@@ -29,7 +29,7 @@ function QuestionSimpleView(props) {
   } = useTranslation()
 
   const hasCondtitionOnIt =
-    data.filter(
+    data?.filter(
       (question) =>
         question?.questionConfigurations.filter(
           (config) => config?.redirectQuestion === currentQuestion?.id
@@ -39,7 +39,7 @@ function QuestionSimpleView(props) {
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id
   //this one check or question includes any answerOption with redirectQuestion
-  const hasConditions = currentQuestion?.questionConfigurations.filter(
+  const hasConditions = currentQuestion?.questionConfigurations?.filter(
     (item, index) => item?.redirectQuestion?.length > 0
   )?.length
 
