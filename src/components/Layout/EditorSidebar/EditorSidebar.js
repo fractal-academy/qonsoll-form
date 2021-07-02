@@ -191,8 +191,6 @@ function EditorSidebar(props) {
     console.log('reset endgins')
   }
 
-  console.log(questions)
-
   //[COMPUTED PROPERTIES]
   const ConditionsQuestionsList = useMemo(
     () =>

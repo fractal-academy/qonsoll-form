@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import { useSize } from '@umijs/hooks'
 import { QUESTION_TYPES } from '../../constants'
-import React, { cloneElement, useRef, useState, useEffect } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel } from 'antd'
-import { UpOutlined, DownOutlined } from '@ant-design/icons'
 import { useAnswersContext } from '../../context/Answers'
+import { UpOutlined, DownOutlined } from '@ant-design/icons'
+import React, { cloneElement, useRef, useState } from 'react'
 
 function Carousel(props) {
   const {
@@ -17,11 +17,11 @@ function Carousel(props) {
     submitLoading,
     disabledDown,
     disabledUp,
-    sortedData
+    sortedData,
+    previousQuestionOrder
   } = props
 
   // [STATE HOOKS]
-  // const [previousQuestion, setPreviousQuestion] = useState(0)
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
@@ -31,23 +31,60 @@ function Carousel(props) {
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
 
   // [CLEAN FUNCTIONS]
-  const handleScroll = (e) => {
-    // return this after adding isRequired and condition rules
-    // e.deltaY > 0 ? next() : previous()
+  const onCurrentSlideChange = (slideIndex) => {
+    setCurrentSlide(slideIndex)
+  }
+
+  //[ LOGIC JUMPS ]
+  const goTo = (slideNumber) => {
+    carouselRef.current?.goTo(slideNumber)
+    setIsAnswered && setIsAnswered(false)
+  }
+  const previous = () => {
+    // carouselRef.current?.prev()
+    carouselRef.current?.goTo(previousQuestionOrder)
   }
   const next = () => {
     carouselRef.current?.next()
     setIsAnswered && setIsAnswered(false)
   }
-  const previous = () => {
-    carouselRef.current?.prev()
+  const handleScroll = (e) => {
+    // return this after adding isRequired and condition rules
+    // e.deltaY > 0 ? next() : previous()
   }
-  const onCurrentSlideChange = (slideIndex) => {
-    setCurrentSlide(slideIndex)
+
+  // [ ANSWER ]
+  let currentSlideData = sortedData?.filter(
+    (item) => item.order === currentSlide
+  )
+  let givenAnswer =
+    answersContext &&
+    Object.entries(answersContext).filter(
+      (item) => item[0] === currentSlideData[0]?.id
+    )
+  let answerValue =
+    givenAnswer && Object.entries(givenAnswer)[0]?.[1][1].answer?.value
+
+  // [ TYPE FUNCTIONS ]
+  const choiceSlideNextNumber = () => {
+    let questionConfig =
+      currentSlideData &&
+      currentSlideData[0]?.questionConfigurations.filter(
+        (item) => item.answerOption === answerValue
+      )
+    let nextOrder = questionConfig
+      ? sortedData?.filter(
+          (item) => item.id === questionConfig[0]?.redirectQuestion
+        )[0]?.order
+      : 0
+
+    ;(nextOrder && goTo(nextOrder)) || next()
   }
-  //For logic jumps
-  const goTo = (slideNumber) => {
-    carouselRef.current?.goTo(slideNumber)
+  const textSlideNextNumber = () => {
+    goTo()
+  }
+  const specialSlideNextNumber = () => {
+    goTo()
   }
 
   //COMPUTED PROPERTIES
@@ -56,33 +93,43 @@ function Carousel(props) {
   )
     ? 0
     : 1
-  const choiceSlideNextNumber = () => {
-    let currentSlideData = sortedData?.filter(
-      (item) => item.order === currentSlide
-    )
-    let questionConfig =
-      currentSlideData && currentSlideData[0]?.questionConfigurations
-    setIsAnswered && setIsAnswered(false)
-    console.log(questionConfig)
+
+  const actionRuleMap = {
+    // [ CHOICES ]
+    [QUESTION_TYPES.CHOICE]: {
+      function: () => choiceSlideNextNumber
+    },
+    [QUESTION_TYPES.YES_NO]: {
+      function: () => choiceSlideNextNumber
+    },
+    [QUESTION_TYPES.RATING]: {
+      function: () => choiceSlideNextNumber
+    },
+    [QUESTION_TYPES.OPINION_SCALE]: {
+      function: () => choiceSlideNextNumber
+    },
+    [QUESTION_TYPES.PICTURE_CHOICE]: {
+      function: () => choiceSlideNextNumber
+    },
+
+    // [ TEXT ]
+    [QUESTION_TYPES.SHORT_TEXT]: {
+      function: () => textSlideNextNumber
+    },
+    [QUESTION_TYPES.LONG_TEXT]: {
+      function: () => textSlideNextNumber
+    },
+
+    // [ SPECIAL ]
+    [QUESTION_TYPES.DATE]: {
+      function: () => specialSlideNextNumber
+    },
+    [QUESTION_TYPES.FILE_UPLOAD]: {
+      function: () => specialSlideNextNumber
+    }
   }
-  const textSlideNextNumber = () => {}
-  const specialSlideNextNumber = () => {}
 
-  // let slide = currentNodeSlide[0]?.props?.item
-  // let givenAnswerObject = Object.fromEntries(
-  //   Object.entries(answersContext).filter(([key, value]) => key === slide?.id)
-  // )
-
-  // let answer = Object.entries(givenAnswerObject)[0]
-
-  // let answerValue = answer && answer[1].answer.value
-
-  // let nextQuestionOrder = slide?.questionConfigurations.filter(
-  //   (item) => item.answerOption === answerValue
-  // )
-
-  //default route
-  isAnswered && next()
+  isAnswered && choiceSlideNextNumber()
 
   return (
     <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
