@@ -46,7 +46,8 @@ function QuestionConfigurationPopover(props) {
       style={{ width: '350px' }}
       onConfirm={popoverShowChange}
       onCancel={!popoverShowChange}
-      okText={'Continue'}>
+      okText={'Continue'}
+      okType="danger">
       <Popover
         visible={showPopover}
         trigger="click"
