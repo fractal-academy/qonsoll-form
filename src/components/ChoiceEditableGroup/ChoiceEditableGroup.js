@@ -52,7 +52,7 @@ function ChoiceEditableGroup(props) {
 
   return (
     <Box {...styles.mainBox} flexDirection={withImage ? 'row' : 'column'}>
-      {choiceProps.map((item, index) => (
+      {choiceProps?.map((item, index) => (
         <ChoiceEditable
           key={index}
           data={item}

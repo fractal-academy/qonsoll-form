@@ -91,7 +91,7 @@ function EditorSidebar(props) {
     ]
     const opinionAndRatingConfiguration = Array(5)
       .fill(0)
-      .map((el, index) => ({
+      ?.map((el, index) => ({
         answerOptionId: uuid(),
         answerOption: 1 + index,
         redirectQuestion: '',
@@ -159,10 +159,10 @@ function EditorSidebar(props) {
 
   const onResetLogic = () => {
     questions.forEach((item) => {
-      const newQuestionConfigs = item.questionConfigurations.map(
+      const newQuestionConfigs = item.questionConfigurations?.map(
         (answerConfig) => {
           const formattedObject = Object.entries(answerConfig)
-          const resetFields = formattedObject.map((tuple) => {
+          const resetFields = formattedObject?.map((tuple) => {
             if (
               tuple[0] === 'answerOption' &&
               [

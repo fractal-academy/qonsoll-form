@@ -22,7 +22,7 @@ function QuestionsList(props) {
 
   // [CLEAN FUNCTIONS]
   const onUpdate = (data) => {
-    data.forEach((item) =>
+    data?.forEach((item) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, item)
         .then(() => {
           item.id === currentQuestion.id &&
@@ -63,14 +63,16 @@ function QuestionsList(props) {
       })
 
     // remove logic jump conditions for all connected questions
-    updatedData.forEach((item) => {
+    updatedData?.forEach((item) => {
       let writeToDB = false
-      const editedQuestionConfig = item.questionConfigurations.map((config) => {
-        if (config.redirectQuestion === questionId) {
-          writeToDB = true
-          return { ...config, redirectQuestion: '' }
-        } else return config
-      })
+      const editedQuestionConfig = item.questionConfigurations?.map(
+        (config) => {
+          if (config.redirectQuestion === questionId) {
+            writeToDB = true
+            return { ...config, redirectQuestion: '' }
+          } else return config
+        }
+      )
       writeToDB &&
         setData(COLLECTIONS.QUESTIONS, item.id, {
           questionConfigurations: editedQuestionConfig
@@ -82,7 +84,7 @@ function QuestionsList(props) {
     () => (data ? data.sort((a, b) => a.order - b.order) : []),
     [data]
   )
-  const filteredDataSource = dataSource.filter(
+  const filteredDataSource = dataSource?.filter(
     (item) => item.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   )
 

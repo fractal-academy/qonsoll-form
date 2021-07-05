@@ -69,7 +69,7 @@ const PlaneDateItem = (props) => {
                 allowClear
                 value={ruleSelectValue}
                 onChange={onRuleSelectValueChange}>
-                {DATE_CONDITION_RULES_VALUES.map((item, index) => (
+                {DATE_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>
                     {item}
                   </Option>

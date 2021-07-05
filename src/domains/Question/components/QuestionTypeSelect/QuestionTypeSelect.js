@@ -103,12 +103,12 @@ function QuestionTypeSelect(props) {
 
   const updatedMap =
     (welcomeScreenShowRule &&
-      questionTypeMap.filter(
+      questionTypeMap?.filter(
         (item) => item.type !== QUESTION_TYPES.WELCOME_SCREEN
       )) ||
     questionTypeMap
 
-  const hasConditions = data?.questionConfigurations.filter(
+  const hasConditions = data?.questionConfigurations?.filter(
     (item) => item?.redirectQuestion.length > 0
   ).length
 
@@ -122,7 +122,7 @@ function QuestionTypeSelect(props) {
       style={{ flex: '1' }}>
       <Col display="block">
         <QuestionsTypeMenu>
-          {updatedMap.map((item) => (
+          {updatedMap?.map((item) => (
             <QuestionMenuItem key={item.type} onClick={onClick}>
               <Row noGutters v="center">
                 <Col v="center" cw="auto" mr={2}>
