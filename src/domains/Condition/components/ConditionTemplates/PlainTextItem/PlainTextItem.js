@@ -73,7 +73,7 @@ function PlaneTextItem(props) {
                 allowClear
                 value={ruleSelectValue}
                 onChange={onRuleSelectValueChange}>
-                {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
+                {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>
                     {item}
                   </Option>

@@ -25,7 +25,7 @@ function DragableList(props) {
     setSortableItems(updatedItems)
     if (!onUpdate) return
     onUpdate(
-      updatedItems.map((i, index) => ({
+      updatedItems?.map((i, index) => ({
         ...dataSource[i],
         order: index + 1
       }))

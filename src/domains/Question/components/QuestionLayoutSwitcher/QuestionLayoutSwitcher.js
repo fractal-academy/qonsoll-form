@@ -29,7 +29,7 @@ function QuestionLayoutSwitcher(props) {
 
   return (
     <StyledMenu selectedKeys={defaultActive}>
-      {menuMap.map((item) => (
+      {menuMap?.map((item) => (
         <StyledItem key={item.layoutType} onClick={onChange}>
           {item.icon}
         </StyledItem>

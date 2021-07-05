@@ -67,7 +67,7 @@ function MediaLibraryFilter(props) {
         />
       </Box>
       <Checkbox.Group onChange={onPhaseCheckboxChange}>
-        {phaseOptions.map((option, index) => (
+        {phaseOptions?.map((option, index) => (
           <Row key={index} py={1} noGutters>
             <Col>
               <Checkbox value={option.value}>{option.label}</Checkbox>
@@ -89,7 +89,7 @@ function MediaLibraryFilter(props) {
         />
       </Box>
       <Checkbox.Group onChange={onAudienceCheckboxChange}>
-        {audienceOptions.map((option, index) => (
+        {audienceOptions?.map((option, index) => (
           <Row noGutters key={index} py={1}>
             <Col>
               <Checkbox value={option.value}>{option.label}</Checkbox>

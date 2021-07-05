@@ -105,7 +105,7 @@ function RangeButton(props) {
 
   return (
     <Row display="flex" width="100%" noGutters>
-      {range.map((item) => (
+      {range?.map((item) => (
         <Col key={item} cw={columnWidth} mr={2} mb={2}>
           <StyledRangeButton
             key={item}

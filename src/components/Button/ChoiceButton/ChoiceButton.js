@@ -29,7 +29,7 @@ function ChoiceButton(props) {
     [choices]
   )
   const letters = useMemo(
-    () => (mappedChoices ? mappedChoices.map(({ letter }) => letter) : []),
+    () => (mappedChoices ? mappedChoices?.map(({ letter }) => letter) : []),
     [mappedChoices]
   )
   useKeyPress(

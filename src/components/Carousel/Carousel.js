@@ -59,17 +59,17 @@ function Carousel(props) {
   )
   let givenAnswer =
     answersContext &&
-    Object.entries(answersContext).filter(
+    Object.entries(answersContext)?.filter(
       (item) => item[0] === currentSlideData[0]?.id
     )
   let answerValue =
-    givenAnswer && Object.entries(givenAnswer)[0]?.[1][1].answer?.value
+    givenAnswer && Object.entries(givenAnswer)[0]?.[1][1]?.answer?.value
 
   // [ TYPE FUNCTIONS ]
   const choiceSlideNextNumber = () => {
     let questionConfig =
       currentSlideData &&
-      currentSlideData[0]?.questionConfigurations.filter(
+      currentSlideData[0]?.questionConfigurations?.filter(
         (item) => item.answerOption === answerValue
       )
     let nextOrder = questionConfig
@@ -141,7 +141,7 @@ function Carousel(props) {
         dotPosition="right"
         afterChange={onCurrentSlideChange}
         infinite={false}>
-        {children.map((el, index) =>
+        {children?.map((el, index) =>
           cloneElement(el, {
             wrapperHeight: height - buttonsHeight,
             key: index

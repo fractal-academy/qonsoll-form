@@ -64,7 +64,7 @@ function OpinionScaleCustomConfig() {
           defaultValue={questionConfigurations?.to || opinionScaleTo[0]}
           size="small"
           onChange={onSelectToChange}>
-          {opinionScaleTo.map((item) => (
+          {opinionScaleTo?.map((item) => (
             <Option key={item} value={item}>
               {item}
             </Option>

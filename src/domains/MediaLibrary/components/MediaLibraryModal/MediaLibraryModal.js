@@ -118,7 +118,7 @@ function MediaLibraryModal(props) {
   const searchData = () => {
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)
-      setImagesList(searchRes.map((item) => item.item))
+      setImagesList(searchRes?.map((item) => item.item))
     } else setImagesList(media)
   }
   // [USE_EFFECTS]

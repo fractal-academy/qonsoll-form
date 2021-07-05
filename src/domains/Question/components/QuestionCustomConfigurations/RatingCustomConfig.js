@@ -23,7 +23,7 @@ function AmountOptionsCustomConfig() {
   const onRattingSelectChange = (amountOptions) => {
     const questionConfigurations = Array(amountOptions - 1 + 1)
       .fill(0)
-      .map((el, index) => ({
+      ?.map((el, index) => ({
         answerOption: 1 + index,
         redirectQuestion: '',
         redirectConditionRule: ''
@@ -48,7 +48,7 @@ function AmountOptionsCustomConfig() {
           defaultValue={questionConfigurations?.length || maxRange[0]}
           size="small"
           onChange={onRattingSelectChange}>
-          {maxRange.map((item) => (
+          {maxRange?.map((item) => (
             <Option key={item} value={item}>
               {item}
             </Option>
