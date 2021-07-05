@@ -181,9 +181,10 @@ function EditorSidebar(props) {
           return Object.fromEntries(resetFields)
         }
       )
-      setData(COLLECTIONS.QUESTIONS, item.id, {
-        questionConfigurations: newQuestionConfigs
-      })
+      newQuestionConfigs?.[0] &&
+        setData(COLLECTIONS.QUESTIONS, item.id, {
+          questionConfigurations: [newQuestionConfigs?.[0]] || []
+        })
     })
   }
 

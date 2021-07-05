@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import { QuestionSelect } from '../../../../../domains/Question/components'
 import { Select } from 'antd'
@@ -58,6 +58,14 @@ const PlaneDateItem = (props) => {
       questionConfigurations: updatedQuestionConfigurations
     })
   }
+
+  useEffect(() => {
+    setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
+    setRuleSelectValue(
+      item?.redirectConditionRule || DATE_CONDITION_RULES_VALUES[0]
+    )
+  }, [item])
+
   return (
     <Row noGutters mb={2} key={index}>
       <Col cw={6}>
