@@ -60,7 +60,6 @@ const PlaneDateItem = (props) => {
   }
 
   useEffect(() => {
-    console.log('date')
     setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
     setRuleSelectValue(
       item?.redirectConditionRule || DATE_CONDITION_RULES_VALUES[0]
