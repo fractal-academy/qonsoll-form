@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Select } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
@@ -61,6 +61,13 @@ function PlaneTextItem(props) {
       questionConfigurations: updatedQuestionConfigurations
     })
   }
+
+  useEffect(() => {
+    setInputValue(item?.answerOption || '')
+    setRuleSelectValue(
+      item?.redirectConditionRule || TEXT_CONDITION_RULES_VALUES[0]
+    )
+  }, [item])
 
   return (
     <Row noGutters mb={2} key={index}>
