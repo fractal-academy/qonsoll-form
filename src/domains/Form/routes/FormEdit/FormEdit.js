@@ -129,7 +129,7 @@ function FormEdit(props) {
     ]
     const opinionAndRatingConfiguration = Array(5)
       .fill(0)
-      .map((el, index) => ({
+      ?.map((el, index) => ({
         ...defaultConfigurations,
         answerOption: 1 + index,
         answerOptionId: uuid()

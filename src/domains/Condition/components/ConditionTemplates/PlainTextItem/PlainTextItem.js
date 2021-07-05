@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Select } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
@@ -62,6 +62,13 @@ function PlaneTextItem(props) {
     })
   }
 
+  useEffect(() => {
+    setInputValue(item?.answerOption || '')
+    setRuleSelectValue(
+      item?.redirectConditionRule || TEXT_CONDITION_RULES_VALUES[0]
+    )
+  }, [item])
+
   return (
     <Row noGutters mb={2} key={index}>
       <Col cw={6}>
@@ -73,7 +80,7 @@ function PlaneTextItem(props) {
                 allowClear
                 value={ruleSelectValue}
                 onChange={onRuleSelectValueChange}>
-                {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
+                {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>
                     {item}
                   </Option>

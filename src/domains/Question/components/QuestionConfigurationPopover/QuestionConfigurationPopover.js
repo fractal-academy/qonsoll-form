@@ -20,14 +20,14 @@ function QuestionConfigurationPopover(props) {
     setShowPopover(!showPopover)
   }
 
-  const hasConditions = questionData?.questionConfigurations.filter(
+  const hasConditions = questionData?.questionConfigurations?.filter(
     (item) => item?.redirectQuestion.length > 0
   ).length
 
   const hasCondtitionOnIt =
-    questionsList.filter(
+    questionsList?.filter(
       (question) =>
-        question?.questionConfigurations.filter(
+        question?.questionConfigurations?.filter(
           (config) => config?.redirectQuestion === questionData?.id
         )?.length > 0
     )?.length > 0

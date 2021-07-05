@@ -69,7 +69,7 @@ function FormsAll(props) {
   const searchData = () => {
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)
-      setCurrentData(searchRes.map((item) => item.item))
+      setCurrentData(searchRes?.map((item) => item.item))
     } else setCurrentData(data)
   }
 
@@ -124,7 +124,7 @@ function FormsAll(props) {
   } = translations || {}
   const menu = (
     <Menu>
-      {mockRoutes.map((item, index) => (
+      {mockRoutes?.map((item, index) => (
         <Menu.Item key={index}>
           <Text>{item.page}</Text>
         </Menu.Item>

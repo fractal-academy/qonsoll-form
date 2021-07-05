@@ -31,7 +31,7 @@ function EndingSimpleView(props) {
   const { setData } = useFunctions()
 
   async function handleChange(_, selectedItems) {
-    const questionConfigurations = selectedItems.map((item) => ({
+    const questionConfigurations = selectedItems?.map((item) => ({
       answerOptionId: item.key,
       trigerQuestionId: item?.value || ''
     }))
@@ -79,7 +79,7 @@ function EndingSimpleView(props) {
                   {questionListItem?.title || questionListItem?.order}
                 </>
               }>
-              {questionListItem?.questionConfigurations.map(
+              {questionListItem?.questionConfigurations?.map(
                 (questionAnswerItem, ind) => (
                   <Option
                     key={questionAnswerItem?.answerOptionId}
