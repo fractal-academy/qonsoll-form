@@ -54,7 +54,7 @@ function ModalWithFormConditionsForm(props) {
         }}
         title={
           <>
-            <Row v="center">
+            <Row v="center" noGutters>
               <Col>
                 <Title level={3}>{modalTitle || 'Logic'}</Title>
               </Col>
