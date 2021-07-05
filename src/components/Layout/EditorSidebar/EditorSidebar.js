@@ -229,8 +229,8 @@ function EditorSidebar(props) {
         {open ? <RightOutlined /> : <LeftOutlined />}
       </SidebarStateSwitcher> */}
       {/* {open && ( */}
-      <SidebarBoxWrapper transparent={transparent} my={4}>
-        <Box p={3}>
+      <SidebarBoxWrapper transparent={transparent}>
+        <Box p={3} pt={4}>
           <Row noGutters>
             <Col v="center">
               <Title level={5}>
