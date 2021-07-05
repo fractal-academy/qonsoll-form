@@ -259,6 +259,7 @@ function EditorSidebar(props) {
                   type="text"
                   icon={<PlusOutlined />}
                   onClick={popoverShowChange}
+                  onMouseDown={(e) => e.preventDefault()}
                 />
               </Popover>
             </Col>

@@ -60,7 +60,11 @@ function QuestionConfigurationPopover(props) {
             onQuestionTypeChange={onQuestionTypeChange}
           />
         }>
-        <Button type="primary" icon={<SettingOutlined />} />
+        <Button
+          type="primary"
+          icon={<SettingOutlined />}
+          onMouseDown={(e) => e.preventDefault()}
+        />
       </Popover>
     </Popconfirm>
   ) : (
@@ -82,6 +86,7 @@ function QuestionConfigurationPopover(props) {
         type="primary"
         icon={<SettingOutlined />}
         onClick={popoverShowChange}
+        onMouseDown={(e) => e.preventDefault()}
       />
     </Popover>
     // This piece of code to do refactoring in future improvements to make it shorter

@@ -33,6 +33,7 @@ function ModalWithFormConditionsForm(props) {
         onClick={() => {
           setIsModalVisible(!isModalVisible)
         }}
+        onMouseDown={(e) => e.preventDefault()}
       />
       <Modal
         visible={isModalVisible}
@@ -59,7 +60,10 @@ function ModalWithFormConditionsForm(props) {
                 <Title level={3}>{modalTitle || 'Logic'}</Title>
               </Col>
               <Col cw="auto" v="center">
-                <Button type="text" onClick={onResetClick}>
+                <Button
+                  type="text"
+                  onClick={onResetClick}
+                  onMouseDown={(e) => e.preventDefault()}>
                   {modalResetLogic || 'Reset logic'}
                 </Button>
               </Col>
