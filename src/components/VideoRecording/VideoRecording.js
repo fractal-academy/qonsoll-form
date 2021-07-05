@@ -31,16 +31,17 @@ function VideoRecording(props) {
     onNoMicrophone
   } = props
   const [recorder, setRecorder] = useState(null)
-
   //   const handleUploaded = (embedding) => {
   //     console.log('video uploaded:', embedding.video)
   //   }
 
   return (
     <ZiggeoRecorder
+      locale="no"
       apiKey={API_KEY}
       height="-webkit-fill-available"
       width="-webkit-fill-available"
+      theme="minimalist"
       onPlaying={onPlaying}
       onPaused={onPaused}
       onAttached={onAttached}
