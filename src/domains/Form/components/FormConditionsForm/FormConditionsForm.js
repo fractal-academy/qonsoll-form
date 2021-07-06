@@ -27,15 +27,21 @@ function FormConditionsForm(props) {
     })
   }
   const addRedirectQuestion = (nextQuestion, answerIndex, index) => {
-    //create new array questionConfigurations of certain question
-    const updatedQuestionConfigurations = data[index]?.questionConfigurations
-    //update redirect question of certain question
-    updatedQuestionConfigurations[answerIndex].redirectQuestion = nextQuestion
+    //create new array questionConfigur ations of certain question
 
-    //write new data to db
-    setData(COLLECTIONS.QUESTIONS, data[index]?.id, {
-      questionConfigurations: updatedQuestionConfigurations
-    })
+    const updatedQuestionConfigurations = data[index]?.questionConfigurations
+    // update redirect question of certain question
+    const isDataChanged =
+      updatedQuestionConfigurations[answerIndex].redirectQuestion !==
+      nextQuestion
+    // if data changed - write to db, else - nothing
+    if (isDataChanged) {
+      updatedQuestionConfigurations[answerIndex].redirectQuestion = nextQuestion
+      //write new data to db
+      setData(COLLECTIONS.QUESTIONS, data[index]?.id, {
+        questionConfigurations: updatedQuestionConfigurations
+      })
+    }
   }
   const filteredAnswerForEndings = useMemo(
     () =>

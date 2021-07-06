@@ -40,12 +40,17 @@ function PlaneTextItem(props) {
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update conditionRule of certain question
-    updatedQuestionConfigurations[index].redirectConditionRule =
-      selectValue || ''
-    //write new data to db
-    setData(COLLECTIONS.QUESTIONS, questionId, {
-      questionConfigurations: updatedQuestionConfigurations
-    })
+    const isRuleChanged =
+      updatedQuestionConfigurations[index].redirectConditionRule !== selectValue
+
+    if (isRuleChanged) {
+      updatedQuestionConfigurations[index].redirectConditionRule =
+        selectValue || ''
+      //write new data to db
+      setData(COLLECTIONS.QUESTIONS, questionId, {
+        questionConfigurations: updatedQuestionConfigurations
+      })
+    }
   }
 
   const onBlur = () => {
