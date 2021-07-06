@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import { Form, Input, Switch } from 'antd'
 import { useTranslation } from '../../../../context/Translation'
-import { Col } from '@qonsoll/react-design'
 
 const { TextArea } = Input
 function FormSimpleForm(props) {
@@ -38,7 +37,7 @@ function FormSimpleForm(props) {
         />
       </Form.Item>
       <Form.Item name="isQuiz" label={enableQuizLabel || 'Enable quiz system'}>
-        <Switch defaultChecked={formData?.isQuiz} />
+        <Switch defaultChecked={!!formData?.isQuiz} />
       </Form.Item>
       {children}
     </Form>
