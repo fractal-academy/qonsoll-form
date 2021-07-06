@@ -45,7 +45,7 @@ function ModalWithFormConditionsForm(props) {
         closable={false}
         width="1024px"
         bodyStyle={{
-          paddingTop: '0',
+          paddingTop: '8px',
           height: '70vh',
           overflow: 'auto',
           backgroundColor:

@@ -13,6 +13,9 @@ export const CustomInput = styled(Input)`
 export const StyledSelect = styled(Select)`
   display: flex;
   align-items: center;
+  &:hover .ant-select-arrow {
+    opacity: 0;
+  }
   .ant-select-clear {
     border-radius: 50%;
     font-size: ${({ theme }) =>

@@ -11,6 +11,9 @@ export const StyledSelect = styled(Select)`
     border-radius: 50%;
     font-size: 14px;
   }
+  &:hover .ant-select-arrow {
+    opacity: 0;
+  }
   .ant-select-selector {
     background-color: ${
       theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9
