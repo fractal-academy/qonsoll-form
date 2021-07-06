@@ -15,7 +15,7 @@ import {
 } from '../../components/ConditionTemplates/ChoiceTemplate/ChoiceTemplate.styles'
 
 const { Text } = Typography
-let startLetter = 65
+const startLetter = 65
 
 const ScoreConditionsAdvancedView = (props) => {
   const { index, questionData } = props

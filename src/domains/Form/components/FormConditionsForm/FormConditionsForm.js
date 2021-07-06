@@ -8,8 +8,15 @@ import { QUESTION_TYPES } from '../../../../constants'
 import { Box } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
-import { Tabs } from 'antd'
+import { Tabs, Empty, Typography } from 'antd'
 import PropTypes from 'prop-types'
+import { useTranslation } from '../../../../context/Translation'
+import { globalStyles } from '../../../../../styles'
+import {
+  CustomTabPane,
+  EmptyState,
+  CustomTabs
+} from './FormConditionsForm.styles'
 
 const { TabPane } = Tabs
 
@@ -18,7 +25,13 @@ function FormConditionsForm(props) {
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-
+  const {
+    conditionslogicJumpsTab,
+    conditionsEndingsTab,
+    noDataToConfigureEnings,
+    conditionsAnswersScoreConfigTab,
+    promiseAddSpecialQuestionTypes
+  } = useTranslation()
   // [CLEAN FUNCTIONS]
   const getQuestionListRedirect = (itemIndex) => {
     return data?.filter((item, index) => itemIndex !== index)
@@ -59,50 +72,95 @@ function FormConditionsForm(props) {
   )
   return (
     <>
-      <Tabs onChange={onTabChange} type="card">
-        <TabPane tab="Logic jumps" key="1">
-          {data?.map((item, index) => (
-            <Box mb={3}>
-              <ConditionForm
-                key={index}
-                item={item}
-                index={index}
-                addCondition={addCondition}
-                addRedirectQuestion={addRedirectQuestion}
-                getQuestionListRedirect={getQuestionListRedirect}
-              />
-            </Box>
-          ))}
+      <CustomTabs onChange={onTabChange} type="card">
+        <TabPane
+          tab={conditionslogicJumpsTab || 'Logic jumps'}
+          key="1"
+          style={globalStyles.fullHeight}>
+          {data?.length > 0 ? (
+            data?.map((item, index) => (
+              <Box mb={3}>
+                <ConditionForm
+                  key={index}
+                  item={item}
+                  index={index}
+                  addCondition={addCondition}
+                  addRedirectQuestion={addRedirectQuestion}
+                  getQuestionListRedirect={getQuestionListRedirect}
+                />
+              </Box>
+            ))
+          ) : (
+            <EmptyState
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={
+                noDataToConfigureEnings ||
+                'There are no any question that allows to configure Logic Jumps.'
+              }>
+              {'Please, add any question to configure logic jumps'}
+            </EmptyState>
+          )}
         </TabPane>
-        <TabPane tab="Endings" key="2">
-          {!!filteredAnswerForEndings?.length
-            ? endings?.map((item, index) => (
-                <Box mb={3}>
-                  <EndingsSimpleView
-                    key={index}
-                    item={item}
-                    index={index}
-                    addCondition={addCondition}
-                    questionsData={filteredAnswerForEndings}
-                    addRedirectQuestion={addRedirectQuestion}
-                    getQuestionListRedirect={getQuestionListRedirect}
-                  />
-                </Box>
-              ))
-            : 'There are no any question that allows to configure endings.'}
+        <TabPane tab={conditionsEndingsTab || 'Endings'} key="2">
+          {!!filteredAnswerForEndings?.length > 0 && endings?.length > 0 ? (
+            endings?.map((item, index) => (
+              <Box mb={3}>
+                <EndingsSimpleView
+                  key={index}
+                  item={item}
+                  index={index}
+                  addCondition={addCondition}
+                  questionsData={filteredAnswerForEndings}
+                  addRedirectQuestion={addRedirectQuestion}
+                  getQuestionListRedirect={getQuestionListRedirect}
+                />
+              </Box>
+            ))
+          ) : (
+            <EmptyState
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={
+                noDataToConfigureEnings ||
+                'There are no any question that allows to configure endings.'
+              }
+            />
+          )}
         </TabPane>
-        <TabPane tab="Answers score configurations" key="3">
-          {data?.map((item, index) => (
-            <Box mb={3}>
-              <ScoreConditionsAdvancedView
-                key={index}
-                questionData={item}
-                index={index}
-              />
-            </Box>
-          ))}
+        <TabPane
+          tab={
+            conditionsAnswersScoreConfigTab || 'Answers score configurations'
+          }
+          key="3"
+          style={globalStyles.fullHeight}>
+          {data?.length > 0 ? (
+            data?.map((item, index) => (
+              <Box mb={3}>
+                <ScoreConditionsAdvancedView
+                  key={index}
+                  questionData={item}
+                  index={index}
+                />
+              </Box>
+            ))
+          ) : (
+            <EmptyState
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={
+                noDataToConfigureEnings ||
+                `There are no any question that allows to configure answers scores.`
+              }>
+              {promiseAddSpecialQuestionTypes ||
+                'Please, add one of the types of questions:'}
+              <br />
+              {`${QUESTION_TYPES.CHOICE},
+                ${QUESTION_TYPES.PICTURE_CHOICE},
+                ${QUESTION_TYPES.OPINION_SCALE},
+                ${QUESTION_TYPES.RATING},
+                ${QUESTION_TYPES.YES_NO}`}
+            </EmptyState>
+          )}
         </TabPane>
-      </Tabs>
+      </CustomTabs>
     </>
   )
 }

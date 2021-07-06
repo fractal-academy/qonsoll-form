@@ -109,7 +109,7 @@ function QuestionTypeSelect(props) {
       )) ||
     questionTypeMap
 
-  const hasConditions = questionData?.questionConfigurations.filter(
+  const hasConditions = questionData?.questionConfigurations?.filter(
     (item) => item?.redirectQuestion.length > 0
   ).length
 

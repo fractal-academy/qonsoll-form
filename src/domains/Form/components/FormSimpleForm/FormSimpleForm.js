@@ -8,7 +8,8 @@ function FormSimpleForm(props) {
   const { formData, children, ...rest } = props
 
   // [ADDITIONAL_HOOKS]
-  const { formNamePlaceholder, formDescriptionPlaceholder } = useTranslation()
+  const { formNamePlaceholder, formDescriptionPlaceholder, enableQuizLabel } =
+    useTranslation()
 
   // [COMPUTED PROPERTIES]
   const initialValues = useMemo(() => {
@@ -36,7 +37,7 @@ function FormSimpleForm(props) {
           placeholder={formDescriptionPlaceholder || 'Form short description'}
         />
       </Form.Item>
-      <Form.Item name="isQuiz" label="Enable quiz system">
+      <Form.Item name="isQuiz" label={enableQuizLabel || 'Enable quiz system'}>
         <Switch defaultChecked={formData?.isQuiz} />
       </Form.Item>
       {children}
