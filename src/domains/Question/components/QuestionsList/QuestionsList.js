@@ -53,7 +53,6 @@ function QuestionsList(props) {
     )
     //update order for all questions
     updatedData?.forEach((item, index) => {
-      console.log(item.questionType === QUESTION_TYPES.WELCOME_SCREEN && 0)
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
         order:
@@ -94,6 +93,7 @@ function QuestionsList(props) {
   const filteredDataSource = dataSource?.filter(
     (item) => item.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   )
+  const sortable = filteredDataSource.length > 1
 
   return (
     <>
@@ -111,6 +111,7 @@ function QuestionsList(props) {
       )}
       <DragableList
         itemLayout="horizontal"
+        sortable={sortable}
         dataSource={filteredDataSource}
         onUpdate={onUpdate}
         setNewOrder={setNewOrder}

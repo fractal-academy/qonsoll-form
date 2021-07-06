@@ -53,14 +53,6 @@ function FormShow(props) {
       0) ||
     1
 
-  console.log(firstSlideRule)
-
-  // return this after adding isRequired and condition rules
-  // useKeyPress('enter', (event) => {
-  //   onClick()
-  // })
-
-  console.log(firstSlideRule)
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(firstSlideRule)
