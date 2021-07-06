@@ -63,7 +63,7 @@ function FormsAll(props) {
   const fuse = new Fuse(data, { keys: ['title'] })
 
   // [COMPUTED PROPERTIES]
-  let amountFiles = data?.length
+  let amountFiles = currentData?.length
 
   // [CLEAN FUNCTIONS]
   const searchData = () => {
@@ -199,7 +199,8 @@ function FormsAll(props) {
                   <Button
                     type="primary"
                     onClick={showModal}
-                    disabled={disableAddButton}>
+                    disabled={disableAddButton}
+                    onMouseDown={(e) => e.preventDefault()}>
                     + {addNewFormButton || 'Add'}
                   </Button>
                 </Col>
@@ -207,7 +208,7 @@ function FormsAll(props) {
               <Row noGutters mb={3}>
                 <Col>
                   <Text>
-                    {formsCounterDeclaration || 'Amount files: '}
+                    {formsCounterDeclaration || 'Amount of shown forms: '}
                     {amountFiles}
                   </Text>
                 </Col>

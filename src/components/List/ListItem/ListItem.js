@@ -142,7 +142,9 @@ function ListItem(props) {
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
           title={popconfirmDeleteFormTitle || 'Delete this form?'}
-          okButtonProps={{ loading: confirmLoading }}>
+          okButtonProps={{ loading: confirmLoading }}
+          okType="danger"
+          okText="Delete">
           <Text>{popconfirmDeleteButtonText || 'Delete'}</Text>
         </Popconfirm>
       </Menu.Item>
@@ -189,7 +191,9 @@ function ListItem(props) {
               <Popconfirm
                 title={popconfirmDeleteImageTitle || 'Delete this image?'}
                 onConfirm={handleDelete}
-                okButtonProps={{ loading: confirmLoading }}>
+                okButtonProps={{ loading: confirmLoading }}
+                okType="danger"
+                okText="Delete">
                 <CloseOutlined />
               </Popconfirm>
             ) : (

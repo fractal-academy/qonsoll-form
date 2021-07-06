@@ -116,8 +116,10 @@ function ChoiceEditable(props) {
             popconfirmOnDeleteOptionWithConditions ||
             'This option has connected logic. Delete it?'
           }
-          onConfirm={onDelete}>
-          <DeleteButton /*onClick={onDelete}*/>
+          onConfirm={onDelete}
+          okType="danger"
+          okText="Delete">
+          <DeleteButton>
             <CloseOutlined />
           </DeleteButton>
         </Popconfirm>

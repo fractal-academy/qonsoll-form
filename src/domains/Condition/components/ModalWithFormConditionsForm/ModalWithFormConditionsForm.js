@@ -7,7 +7,7 @@ import typeformTheme from '../../../../../styles/theme'
 import { ThemeContext } from 'styled-components'
 import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 function ModalWithFormConditionsForm(props) {
   const { btnProps, children, onResetClick, popconfirmReset } = props
@@ -33,6 +33,7 @@ function ModalWithFormConditionsForm(props) {
         onClick={() => {
           setIsModalVisible(!isModalVisible)
         }}
+        onMouseDown={(e) => e.preventDefault()}
       />
       <Modal
         visible={isModalVisible}
@@ -67,7 +68,7 @@ function ModalWithFormConditionsForm(props) {
                   okText="Reset"
                   okType="danger"
                   onConfirm={onResetClick}>
-                  <Button type="text">
+                  <Button type="text" onMouseDown={(e) => e.preventDefault()}>
                     {modalResetLogic || 'Reset logic'}
                   </Button>
                 </Popconfirm>
