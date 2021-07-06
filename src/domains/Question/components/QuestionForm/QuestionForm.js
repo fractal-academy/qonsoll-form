@@ -170,7 +170,7 @@ function QuestionForm(props) {
                 )}
               </Row>
               <Row noGutters h="between" mb={4}>
-                <QuestionHeaderCol cw="12">
+                <QuestionHeaderCol cw="12" mt={2}>
                   <QuestionHeader
                     titlePlaceholder={
                       editableTitleHint || 'Editable question title'

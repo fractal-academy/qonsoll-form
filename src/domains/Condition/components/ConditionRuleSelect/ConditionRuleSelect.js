@@ -21,7 +21,7 @@ const ConditionRuleSelect = (props) => {
           style={{ width: '200px' }}
           onChange={onChange}
           defaultValue={Object.values(menu)}>
-          {Object.values(menu).map((item, index) => (
+          {Object.values(menu)?.map((item, index) => (
             <Option key={index} value={item}>
               {item}
             </Option>

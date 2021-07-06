@@ -122,7 +122,7 @@ function QuestionTypeSelect(props) {
       style={{ flex: '1' }}>
       <Col display="block">
         <QuestionsTypeMenu>
-          {updatedMap.map((item) => (
+          {updatedMap?.map((item) => (
             <QuestionMenuItem key={item.type} onClick={onClick}>
               <Row noGutters v="center">
                 <Col v="center" cw="auto" mr={2}>

@@ -28,6 +28,8 @@ function VideoPlayer(props) {
     <ZiggeoPlayer
       apiKey={API_KEY}
       video={videoKey}
+      height="-webkit-fill-available"
+      width="-webkit-fill-available"
       theme={'modern'}
       themecolor={'red'}
       skipinitial={false}

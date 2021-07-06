@@ -22,7 +22,7 @@ function QuestionsList(props) {
 
   // [CLEAN FUNCTIONS]
   const onUpdate = (data) => {
-    data.forEach((item) =>
+    data?.forEach((item) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, item)
         .then(() => {
           item.id === currentQuestion.id &&
@@ -69,7 +69,7 @@ function QuestionsList(props) {
       })
 
     // remove logic jump conditions for all connected questions
-    updatedData.forEach((item) => {
+    updatedData?.forEach((item) => {
       let writeToDB = false
       const editedQuestionConfig = item?.questionConfigurations?.map(
         (config) => {
