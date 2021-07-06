@@ -9,7 +9,8 @@ import {
   Divider,
   Button,
   Menu,
-  Input
+  Input,
+  Empty
 } from 'antd'
 import useMedia from 'use-media'
 import { globalStyles } from '../../../../../styles'
@@ -207,7 +208,7 @@ function FormsAll(props) {
               <Row noGutters mb={3}>
                 <Col>
                   <Text>
-                    {formsCounterDeclaration || 'Amount files: '}
+                    {formsCounterDeclaration || 'Amount of files: '}
                     {amountFiles}
                   </Text>
                 </Col>
@@ -231,11 +232,18 @@ function FormsAll(props) {
                 flexWrap="wrap"
                 flexDirection="row"
                 className="custom-scroll">
-                <StaticList
-                  data={currentData}
-                  columnWidth={(mobileLayout && 2) || 6}
-                  setEdit={setEdit}
-                />
+                {currentData ? (
+                  <StaticList
+                    data={currentData}
+                    columnWidth={(mobileLayout && 2) || 6}
+                    setEdit={setEdit}
+                  />
+                ) : (
+                  <Box width="100%" display="flex" justifyContent="center">
+                    <Empty />
+                  </Box>
+                )}
+
                 <FormSimpleFormWithModal
                   isModalVisible={isModalVisible}
                   setIsModalVisible={setIsModalVisible}

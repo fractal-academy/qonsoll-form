@@ -228,7 +228,7 @@ function EditorSidebar(props) {
         {open ? <RightOutlined /> : <LeftOutlined />}
       </SidebarStateSwitcher> */}
       {/* {open && ( */}
-      <SidebarBoxWrapper transparent={transparent} my={4}>
+      <SidebarBoxWrapper transparent={transparent}>
         <Box p={3}>
           <Row noGutters>
             <Col v="center">
@@ -262,7 +262,7 @@ function EditorSidebar(props) {
               </Popover>
             </Col>
 
-            <Col cw="auto" v="center" px={1}>
+            <Col cw="auto" v="center" ml={1}>
               <ModalWithFormConditionsForm
                 onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
                 btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
@@ -293,7 +293,7 @@ function EditorSidebar(props) {
             </Col>
             <Col cw="auto">
               <Button
-                disabled={endings.length >= 1}
+                // disabled={endings.length >= 1}
                 type="text"
                 icon={<PlusOutlined />}
                 onClick={addQuestion}
@@ -305,7 +305,7 @@ function EditorSidebar(props) {
               <QuestionsList
                 data={endings}
                 onItemClick={onItemClick}
-                disableDelete={!!endings?.length}
+                disableDelete={endings?.length === 1}
               />
             )}
           </Box>

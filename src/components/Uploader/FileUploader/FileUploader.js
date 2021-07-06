@@ -110,7 +110,7 @@ const UploadArea = (props) => {
   const onRemove = (file) => {
     console.log('file', file)
     const asArray = Object.entries(filesList)
-    const filteredFiles = asArray.filter(([key, value]) => key !== file?.uid)
+    const filteredFiles = asArray?.filter(([key, value]) => key !== file?.uid)
     const filteredFilesToObj = Object.fromEntries(filteredFiles)
     storage
       .ref('files')

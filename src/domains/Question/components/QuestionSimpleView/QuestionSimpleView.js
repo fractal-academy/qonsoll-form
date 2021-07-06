@@ -5,7 +5,7 @@ import { LAYOUT_TYPES } from '../../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { DescriptionContainer } from './QuestionSimpleView.styles'
-import { CloseOutlined, ExclamationOutlined } from '@ant-design/icons'
+import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 
@@ -31,7 +31,7 @@ function QuestionSimpleView(props) {
   const hasCondtitionOnIt =
     data?.filter(
       (question) =>
-        question?.questionConfigurations.filter(
+        question?.questionConfigurations?.filter(
           (config) => config?.redirectQuestion === currentQuestion?.id
         )?.length > 0
     )?.length > 0
@@ -75,12 +75,18 @@ function QuestionSimpleView(props) {
               onConfirm={(e) => action(e, id)}
               disabled={disableDelete}>
               <Button
-                icon={<CloseOutlined />}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
                 type="text"
                 shape="circle"
                 size="small"
-                disabled={disableDelete}
-              />
+                danger
+                disabled={disableDelete}>
+                <DeleteOutlined style={{ fontSize: '18px' }} />
+              </Button>
             </Popconfirm>
           </Col>
         </Row>

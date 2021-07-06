@@ -42,6 +42,9 @@ function QuestionsList(props) {
     const deletedItemIndex = data?.findIndex(
       (item) => item.id === questionId && item
     )
+
+    const deletedItemType = data[deletedItemIndex]?.questionType
+
     const newCurrentQuestion =
       data[deletedItemIndex - 1] || data[deletedItemIndex + 1] || {}
 
@@ -50,9 +53,12 @@ function QuestionsList(props) {
     )
     //update order for all questions
     updatedData?.forEach((item, index) => {
+      console.log(item.questionType === QUESTION_TYPES.WELCOME_SCREEN && 0)
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
-        order: index
+        order:
+          (deletedItemType === QUESTION_TYPES.WELCOME_SCREEN && index + 1) ||
+          index
       }).catch((e) => message.error(e.message))
     })
 
@@ -65,24 +71,27 @@ function QuestionsList(props) {
     // remove logic jump conditions for all connected questions
     updatedData.forEach((item) => {
       let writeToDB = false
-      const editedQuestionConfig = item.questionConfigurations.map((config) => {
-        if (config.redirectQuestion === questionId) {
-          writeToDB = true
-          return { ...config, redirectQuestion: '' }
-        } else return config
-      })
+      const editedQuestionConfig = item?.questionConfigurations?.map(
+        (config) => {
+          if (config.redirectQuestion === questionId) {
+            writeToDB = true
+            return { ...config, redirectQuestion: '' }
+          } else return config
+        }
+      )
       writeToDB &&
         setData(COLLECTIONS.QUESTIONS, item.id, {
           questionConfigurations: editedQuestionConfig
         })
     })
   }
+
   // [COMPUTED PROPERTIES]
   const dataSource = useMemo(
     () => (data ? data.sort((a, b) => a.order - b.order) : []),
     [data]
   )
-  const filteredDataSource = dataSource.filter(
+  const filteredDataSource = dataSource?.filter(
     (item) => item.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   )
 

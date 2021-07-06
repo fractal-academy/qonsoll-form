@@ -27,6 +27,7 @@ import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/us
 import typeformTheme from '../../../../styles/theme'
 
 const { Text } = Typography
+const { Item } = Menu
 
 const ItemPreview = styled(Box)`
   display: flex;
@@ -70,7 +71,7 @@ function ListItem(props) {
   const { onFormItemClick } = useActionsFunctionsContext()
   const {
     listItemNoDescription,
-    rename,
+    edit,
     popconfirmDeleteFormTitle,
     popconfirmDeleteButtonText,
     popconfirmDeleteImageTitle
@@ -125,8 +126,8 @@ function ListItem(props) {
   // [MENU TEMPLATE]
   const menu = (
     <Menu>
-      <Menu.Item onClick={(e) => showModal(e)} key={'showModal'}>
-        <Text>{rename || 'Rename'}</Text>
+      <Item onClick={(e) => showModal(e)} key={'showModal'}>
+        <Text>{edit || 'Edit'}</Text>
         <FormSimpleFormWithModal
           isEdit
           formData={data}
@@ -135,9 +136,9 @@ function ListItem(props) {
           setIsModalVisible={setIsModalVisible}
           onModalSubmit={onModalSubmit}
         />
-      </Menu.Item>
+      </Item>
 
-      <Menu.Item onClick={(e) => showPopconfirm(e)} key={'showPopconfirm'}>
+      <Item onClick={(e) => showPopconfirm(e)} key={'showPopconfirm'} danger>
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
@@ -145,7 +146,7 @@ function ListItem(props) {
           okButtonProps={{ loading: confirmLoading }}>
           <Text>{popconfirmDeleteButtonText || 'Delete'}</Text>
         </Popconfirm>
-      </Menu.Item>
+      </Item>
     </Menu>
   )
 

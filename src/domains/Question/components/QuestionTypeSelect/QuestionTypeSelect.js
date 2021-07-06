@@ -103,12 +103,12 @@ function QuestionTypeSelect(props) {
 
   const updatedMap =
     (welcomeScreenShowRule &&
-      questionTypeMap.filter(
+      questionTypeMap?.filter(
         (item) => item.type !== QUESTION_TYPES.WELCOME_SCREEN
       )) ||
     questionTypeMap
 
-  const hasConditions = data?.questionConfigurations.filter(
+  const hasConditions = data?.questionConfigurations?.filter(
     (item) => item?.redirectQuestion.length > 0
   ).length
 
