@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
-import { Popconfirm, Button } from 'antd'
+import { Popconfirm } from 'antd'
 import React, { cloneElement } from 'react'
 import { LAYOUT_TYPES } from '../../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
-import { DescriptionContainer } from './QuestionSimpleView.styles'
+import { DescriptionContainer, StyledButton } from './QuestionSimpleView.styles'
 import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
@@ -74,19 +74,14 @@ function QuestionSimpleView(props) {
               }
               onConfirm={(e) => action(e, id)}
               disabled={disableDelete}>
-              <Button
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
+              <StyledButton
                 type="text"
                 shape="circle"
                 size="small"
                 danger
                 disabled={disableDelete}>
                 <DeleteOutlined style={{ fontSize: '18px' }} />
-              </Button>
+              </StyledButton>
             </Popconfirm>
           </Col>
         </Row>
