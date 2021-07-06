@@ -1,6 +1,8 @@
-import { Select } from 'antd'
+import { Select, Typography } from 'antd'
 import styled from 'styled-components'
 import typeformTheme from '../../../../../styles/theme'
+
+const { Text } = Typography
 
 export const StyledSelect = styled(Select)`
   ${({ theme }) => `
@@ -24,4 +26,11 @@ export const StyledSelect = styled(Select)`
     } !important;
   }
 `}
+`
+
+export const StyledCaptionText = styled(Text)`
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0px;
 `

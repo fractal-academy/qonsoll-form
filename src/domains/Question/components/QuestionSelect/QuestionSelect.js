@@ -2,7 +2,7 @@ import React from 'react'
 import { Select, Tag } from 'antd'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
-import { StyledSelect } from './QuestionSelect.styles'
+import { StyledSelect, StyledCaptionText } from './QuestionSelect.styles'
 import styled from 'styled-components'
 
 const { Option, OptGroup } = Select
@@ -36,10 +36,10 @@ function QuestionSelect(props) {
       onChange={(question) => onChange(question, index)}
       defaultValue="Go to the next question">
       <Option value="Submit form">
-        <Text strong>Submit form</Text>
+        <Text>Submit form</Text>
       </Option>
 
-      <OptGroup label="JUMP TO...">
+      <OptGroup label={<StyledCaptionText>JUMP TO...</StyledCaptionText>}>
         {questionList?.map((item, index) => (
           <Option key={item?.id} value={item?.id}>
             <StyledTag> {item?.order}</StyledTag>
