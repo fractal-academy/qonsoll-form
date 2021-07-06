@@ -20,7 +20,8 @@ import {
   FileOutlined,
   MoreOutlined,
   CloseOutlined,
-  CheckOutlined
+  CheckOutlined,
+  DeleteOutlined
 } from '@ant-design/icons'
 import useFunctions from '../../../hooks/useFunctions'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
@@ -45,6 +46,7 @@ const StyledIcon = styled(FileOutlined)`
 `
 const StyledImage = styled(Image)`
   border-radius: 8px;
+  object-fit: cover;
 `
 const StyledBadge = styled(Button)`
   position: absolute;
@@ -190,7 +192,7 @@ function ListItem(props) {
                 title={popconfirmDeleteImageTitle || 'Delete this image?'}
                 onConfirm={handleDelete}
                 okButtonProps={{ loading: confirmLoading }}>
-                <CloseOutlined />
+                <DeleteOutlined />
               </Popconfirm>
             ) : (
               <Dropdown overlay={menu} placement="bottomRight">

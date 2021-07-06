@@ -220,7 +220,7 @@ function MediaLibraryModal(props) {
               </Col> */}
             </Row>
 
-            <MediaListContainer pl={2} pt={2}>
+            <MediaListContainer px={4} pt={2}>
               {/* RENDER MEDIA */}
               <StaticList
                 data={imagesList}
