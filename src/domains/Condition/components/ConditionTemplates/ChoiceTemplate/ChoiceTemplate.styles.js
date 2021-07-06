@@ -6,6 +6,7 @@ export const CustomChoiceBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
+  // maxWidth: '100%',
   backgroundColor:
     theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9,
   border: '1px solid',

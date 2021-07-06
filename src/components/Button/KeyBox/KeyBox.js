@@ -9,18 +9,22 @@ import useMedia from 'use-media'
 
 const { Text } = Typography
 
-const StyledKeybox = styled(Col)`
+const StyledKeybox = styled(Box)`
   position: absolute;
-  bottom: 8px;
+  top: 8px;
   border-width: 1px;
   text-align: center;
   border-style: solid;
-  border-color: ${({ theme }) => theme.color.primary.default};
-  color: ${({ isActive, theme }) => isActive && theme.color.white.default};
+  border-bottom-left-radius: ${({ isHovering, theme }) =>
+    isHovering && theme?.borderRadius?.md};
+  border-top-left-radius: ${({ theme }) => theme?.borderRadius?.md};
+  border-bottom-right-radius: ${({ theme }) => theme?.borderRadius?.md};
+  border-color: ${({ theme }) => theme?.color?.primary?.default};
+  color: ${({ isActive, theme }) => isActive && theme?.color?.white?.default};
   margin-left: ${({ isHovering, phoneSmall }) =>
     isHovering && phoneSmall ? '' : isHovering && '-40px'};
   background-color: ${({ isActive, theme }) =>
-    isActive ? theme.color.primary.default : theme.color.white.default};
+    isActive ? theme?.color?.primary?.default : theme?.color?.white?.default};
   width: ${({ isHovering, phoneSmall }) =>
     isHovering && !phoneSmall ? '65px !important' : '26px !important'};
 `
@@ -37,18 +41,19 @@ const StyledButton = styled(Box)`
   width: 100%;
   border-radius: 8px;
   padding: 8px;
-  color: ${({ theme }) => theme.color.primary.default};
-  background-color: ${({ theme }) => theme.color.primary.t.lighten5};
+  color: ${({ theme }) => theme?.color?.primary?.default};
+  background-color: ${({ theme }) => theme?.color?.primary?.t?.lighten5};
   height: 100%;
 
   &:hover {
-    background-color: ${({ theme }) => theme.color.primary.t.lighten3};
+    background-color: ${({ theme }) => theme?.color?.primary?.t?.lighten3};
   }
 `
 const StyledText = styled(Text)`
   width: ${({ hasImages, phoneSmall }) =>
     hasImages ? (phoneSmall ? '100%' : '15ch') : '100%'};
-  padding-left: 30px;
+  //padding-left: 30px;
+  word-break: break-word;
 `
 
 const StyledBadge = styled(Button)`
