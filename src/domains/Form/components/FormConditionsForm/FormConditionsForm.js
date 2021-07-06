@@ -1,12 +1,22 @@
 import React, { useMemo } from 'react'
-import { ConditionForm } from '../../../../domains/Condition/components'
+import {
+  ConditionForm,
+  ScoreConditionsAdvancedView,
+  EndingsSimpleView
+} from '../../../../domains/Condition/components'
 import { QUESTION_TYPES } from '../../../../constants'
 import { Box } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
-import { Tabs } from 'antd'
-import EndingsSimpleView from '../../../Condition/components/Endings/EndingsSimpleView'
+import { Tabs, Empty, Typography } from 'antd'
 import PropTypes from 'prop-types'
+import { useTranslation } from '../../../../context/Translation'
+import { globalStyles } from '../../../../../styles'
+import {
+  CustomTabPane,
+  EmptyState,
+  CustomTabs
+} from './FormConditionsForm.styles'
 
 const { TabPane } = Tabs
 
@@ -15,7 +25,14 @@ function FormConditionsForm(props) {
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-
+  const {
+    conditionsLogicJumpsTab,
+    noDataToConfigureLogicJumps,
+    conditionsEndingsTab,
+    noDataToConfigureEndings,
+    conditionsAnswersScoreConfigTab,
+    promiseAddSpecialQuestionTypes
+  } = useTranslation()
   // [CLEAN FUNCTIONS]
   const getQuestionListRedirect = (itemIndex) => {
     return data?.filter((item, index) => itemIndex !== index)
@@ -60,40 +77,92 @@ function FormConditionsForm(props) {
         : [],
     [data]
   )
-
   return (
     <>
-      <Tabs onChange={onTabChange}>
-        <TabPane tab="Logic jumps" key="1">
-          {data?.map((item, index) => (
-            <Box mb={3}>
-              <ConditionForm
-                key={index}
-                item={item}
-                index={index}
-                addCondition={addCondition}
-                addRedirectQuestion={addRedirectQuestion}
-                getQuestionListRedirect={getQuestionListRedirect}
-              />
-            </Box>
-          ))}
+      <CustomTabs onChange={onTabChange} type="card">
+        <TabPane tab={conditionsLogicJumpsTab || 'Logic jumps'} key="1">
+          {data?.length > 0 ? (
+            data?.map((item, index) => (
+              <Box mb={3}>
+                <ConditionForm
+                  key={index}
+                  item={item}
+                  index={index}
+                  addCondition={addCondition}
+                  addRedirectQuestion={addRedirectQuestion}
+                  getQuestionListRedirect={getQuestionListRedirect}
+                />
+              </Box>
+            ))
+          ) : (
+            <EmptyState
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={
+                noDataToConfigureLogicJumps ||
+                'There are no any question that allows to configure Logic Jumps.'
+              }
+            />
+          )}
         </TabPane>
-        <TabPane tab="Endings" key="2">
-          {endings?.map((item, index) => (
-            <Box mb={3}>
-              <EndingsSimpleView
-                questionsData={filteredAnswerForEndings}
-                key={index}
-                item={item}
-                index={index}
-                addCondition={addCondition}
-                addRedirectQuestion={addRedirectQuestion}
-                getQuestionListRedirect={getQuestionListRedirect}
-              />
-            </Box>
-          ))}
+        <TabPane tab={conditionsEndingsTab || 'Endings'} key="2">
+          {!!filteredAnswerForEndings?.length > 0 && endings?.length > 0 ? (
+            endings?.map((item, index) => (
+              <Box mb={3}>
+                <EndingsSimpleView
+                  key={index}
+                  item={item}
+                  index={index}
+                  addCondition={addCondition}
+                  questionsData={filteredAnswerForEndings}
+                  addRedirectQuestion={addRedirectQuestion}
+                  getQuestionListRedirect={getQuestionListRedirect}
+                />
+              </Box>
+            ))
+          ) : (
+            <EmptyState
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={
+                noDataToConfigureEndings ||
+                'There are no any question that allows to configure endings.'
+              }
+            />
+          )}
         </TabPane>
-      </Tabs>
+        <TabPane
+          tab={
+            conditionsAnswersScoreConfigTab || 'Answers score configurations'
+          }
+          key="3">
+          {data?.length > 0 ? (
+            data?.map((item, index) => (
+              <Box mb={3}>
+                <ScoreConditionsAdvancedView
+                  key={index}
+                  questionData={item}
+                  index={index}
+                />
+              </Box>
+            ))
+          ) : (
+            <EmptyState
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={
+                noDataToConfigureEndings ||
+                `There are no any question that allows to configure answers scores.`
+              }>
+              {promiseAddSpecialQuestionTypes ||
+                'Please, add one of the types of questions:'}
+              <br />
+              {`${QUESTION_TYPES.CHOICE},
+                ${QUESTION_TYPES.PICTURE_CHOICE},
+                ${QUESTION_TYPES.OPINION_SCALE},
+                ${QUESTION_TYPES.RATING},
+                ${QUESTION_TYPES.YES_NO}`}
+            </EmptyState>
+          )}
+        </TabPane>
+      </CustomTabs>
     </>
   )
 }
