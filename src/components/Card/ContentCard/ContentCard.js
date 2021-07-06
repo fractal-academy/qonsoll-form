@@ -41,9 +41,9 @@ function ContentCard(props) {
     onEdit,
     leftSideMenu,
     brightnessValue,
-    children,
-    topOffset = '56',
-    wrapperHeight = '100vh'
+    children
+    // topOffset = '56',
+    // wrapperHeight = '100vh'
   } = props
 
   const paddingSmall = useMedia({ maxWidth: '768px' })
@@ -52,7 +52,8 @@ function ContentCard(props) {
   return (
     <ContentRow
       p={devicePadding}
-      height={`calc(${wrapperHeight} - ${topOffset}px)`}
+      height="inherit"
+      // height={`calc(${wrapperHeight} - ${topOffset}px)`}
       onEdit={onEdit}
       noGutters>
       {leftSideMenu && (

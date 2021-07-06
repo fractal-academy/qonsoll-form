@@ -144,7 +144,7 @@ function QuestionAdvancedView(props) {
           specialLayoutRule={specialLayoutRule}>
           <Row noGutters py={2}>
             <Col cw={12}>
-              <Title level={4}>
+              <Title style={{ wordBreak: 'break-word' }} level={4}>
                 {questionNumberRule && `${questionNumber}.`} {data?.title}
               </Title>
             </Col>
