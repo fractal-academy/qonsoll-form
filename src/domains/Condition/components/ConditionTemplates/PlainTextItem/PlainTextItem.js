@@ -78,7 +78,7 @@ function PlaneTextItem(props) {
               <StyledSelect
                 showSearch
                 allowClear
-                value={ruleSelectValue}
+                value={ruleSelectValue || TEXT_CONDITION_RULES_VALUES[0]}
                 onChange={onRuleSelectValueChange}>
                 {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>
@@ -91,6 +91,7 @@ function PlaneTextItem(props) {
           <Col cw={6}>
             <Box width="100%" mr={4}>
               <CustomInput
+                placeholder="Enter value"
                 value={inputValue}
                 onChange={onInputValueChange}
                 onBlur={onBlur}
