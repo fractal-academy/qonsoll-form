@@ -11,14 +11,10 @@ const { Text } = Typography
 
 const StyledKeybox = styled(Box)`
   position: absolute;
-  top: 8px;
+  top: ${({ hasImages }) => (hasImages ? '15px' : '8px')};
   border-width: 1px;
   text-align: center;
   border-style: solid;
-  border-bottom-left-radius: ${({ isHovering, theme }) =>
-    isHovering && theme?.borderRadius?.md};
-  border-top-left-radius: ${({ theme }) => theme?.borderRadius?.md};
-  border-bottom-right-radius: ${({ theme }) => theme?.borderRadius?.md};
   border-color: ${({ theme }) => theme?.color?.primary?.default};
   color: ${({ isActive, theme }) => isActive && theme?.color?.white?.default};
   margin-left: ${({ isHovering, phoneSmall }) =>
@@ -26,7 +22,7 @@ const StyledKeybox = styled(Box)`
   background-color: ${({ isActive, theme }) =>
     isActive ? theme?.color?.primary?.default : theme?.color?.white?.default};
   width: ${({ isHovering, phoneSmall }) =>
-    isHovering && !phoneSmall ? '65px !important' : '26px !important'};
+    isHovering && !phoneSmall ? '66px !important' : '26px !important'};
 `
 const ImageContainer = styled(Box)`
   width: 100%;
@@ -52,7 +48,7 @@ const StyledButton = styled(Box)`
 const StyledText = styled(Text)`
   width: ${({ hasImages, phoneSmall }) =>
     hasImages ? (phoneSmall ? '100%' : '15ch') : '100%'};
-  //padding-left: 30px;
+  padding-left: ${({ hasImages }) => (hasImages ? '0' : '30px')};
   word-break: break-word;
 `
 
@@ -92,6 +88,7 @@ function KeyBox(props) {
               isHovering={isHovering}
               phoneSmall={phoneSmall}
               isActive={isActive}
+              hasImages={hasImages}
               mr={1}>
               {isHovering && !phoneSmall ? `Key ${letter}` : letter}
             </StyledKeybox>
