@@ -38,7 +38,10 @@ function PlaneLongTextStringTemplate(props) {
         />
       ))}
       <Row>
-        <CustomButton size="medium" onClick={onClick}>
+        <CustomButton
+          size="medium"
+          onClick={onClick}
+          onMouseDown={(e) => e.preventDefault()}>
           <CustomText strong>+ Add condition</CustomText>
         </CustomButton>
       </Row>

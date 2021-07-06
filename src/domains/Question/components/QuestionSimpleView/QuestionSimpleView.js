@@ -73,7 +73,9 @@ function QuestionSimpleView(props) {
                   : popconfirmOnDeleteQuestion || 'Delete this question?'
               }
               onConfirm={(e) => action(e, id)}
-              disabled={disableDelete}>
+              disabled={disableDelete}
+              okType="danger"
+              okText="Delete">
               <Button
                 icon={<CloseOutlined />}
                 type="text"

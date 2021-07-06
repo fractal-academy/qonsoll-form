@@ -15,7 +15,7 @@ import useMedia from 'use-media'
 import { globalStyles } from '../../../../../styles'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import { styles } from './FormsAll.styles'
-import { Spinner, StaticList, VideoRecording } from '../../../../components'
+import { Spinner, StaticList } from '../../../../components'
 import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -63,7 +63,7 @@ function FormsAll(props) {
   const fuse = new Fuse(data, { keys: ['title'] })
 
   // [COMPUTED PROPERTIES]
-  let amountFiles = data?.length
+  let amountFiles = currentData?.length
 
   // [CLEAN FUNCTIONS]
   const searchData = () => {
@@ -196,7 +196,8 @@ function FormsAll(props) {
                   <Button
                     type="primary"
                     onClick={showModal}
-                    disabled={disableAddButton}>
+                    disabled={disableAddButton}
+                    onMouseDown={(e) => e.preventDefault()}>
                     + {addNewFormButton || 'Add'}
                   </Button>
                 </Col>
@@ -204,7 +205,7 @@ function FormsAll(props) {
               <Row noGutters mb={3}>
                 <Col>
                   <Text>
-                    {formsCounterDeclaration || 'Amount files: '}
+                    {formsCounterDeclaration || 'Amount of shown forms: '}
                     {amountFiles}
                   </Text>
                 </Col>

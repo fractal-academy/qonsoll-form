@@ -26,9 +26,10 @@ function FormConditionsForm(props) {
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
   const {
-    conditionslogicJumpsTab,
+    conditionsLogicJumpsTab,
+    noDataToConfigureLogicJumps,
     conditionsEndingsTab,
-    noDataToConfigureEnings,
+    noDataToConfigureEndings,
     conditionsAnswersScoreConfigTab,
     promiseAddSpecialQuestionTypes
   } = useTranslation()
@@ -73,10 +74,7 @@ function FormConditionsForm(props) {
   return (
     <>
       <CustomTabs onChange={onTabChange} type="card">
-        <TabPane
-          tab={conditionslogicJumpsTab || 'Logic jumps'}
-          key="1"
-          style={globalStyles.fullHeight}>
+        <TabPane tab={conditionsLogicJumpsTab || 'Logic jumps'} key="1">
           {data?.length > 0 ? (
             data?.map((item, index) => (
               <Box mb={3}>
@@ -94,11 +92,10 @@ function FormConditionsForm(props) {
             <EmptyState
               image={Empty.PRESENTED_IMAGE_SIMPLE}
               description={
-                noDataToConfigureEnings ||
+                noDataToConfigureLogicJumps ||
                 'There are no any question that allows to configure Logic Jumps.'
-              }>
-              {'Please, add any question to configure logic jumps'}
-            </EmptyState>
+              }
+            />
           )}
         </TabPane>
         <TabPane tab={conditionsEndingsTab || 'Endings'} key="2">
@@ -120,7 +117,7 @@ function FormConditionsForm(props) {
             <EmptyState
               image={Empty.PRESENTED_IMAGE_SIMPLE}
               description={
-                noDataToConfigureEnings ||
+                noDataToConfigureEndings ||
                 'There are no any question that allows to configure endings.'
               }
             />
@@ -130,8 +127,7 @@ function FormConditionsForm(props) {
           tab={
             conditionsAnswersScoreConfigTab || 'Answers score configurations'
           }
-          key="3"
-          style={globalStyles.fullHeight}>
+          key="3">
           {data?.length > 0 ? (
             data?.map((item, index) => (
               <Box mb={3}>
@@ -146,7 +142,7 @@ function FormConditionsForm(props) {
             <EmptyState
               image={Empty.PRESENTED_IMAGE_SIMPLE}
               description={
-                noDataToConfigureEnings ||
+                noDataToConfigureEndings ||
                 `There are no any question that allows to configure answers scores.`
               }>
               {promiseAddSpecialQuestionTypes ||
