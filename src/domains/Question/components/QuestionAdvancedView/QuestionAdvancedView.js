@@ -21,7 +21,8 @@ import {
   FileUploader,
   LongText,
   DateTimeInput,
-  SubmitButton
+  SubmitButton,
+  VideoPlayer
 } from '../../../../components'
 
 const { Title, Text } = Typography
@@ -144,9 +145,13 @@ function QuestionAdvancedView(props) {
           specialLayoutRule={specialLayoutRule}>
           <Row noGutters py={2}>
             <Col cw={12}>
-              <Title level={4}>
-                {questionNumberRule && `${questionNumber}.`} {data?.title}
-              </Title>
+              {data?.videoApiKey ? (
+                <VideoPlayer videoKey={data?.videoApiKey} />
+              ) : (
+                <Title level={4}>
+                  {questionNumberRule && `${questionNumber}.`} {data?.title}
+                </Title>
+              )}
             </Col>
           </Row>
           <Row noGutters mb={3}>
