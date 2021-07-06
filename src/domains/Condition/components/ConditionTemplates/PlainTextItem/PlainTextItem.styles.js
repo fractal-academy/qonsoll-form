@@ -23,6 +23,7 @@ export const StyledSelect = styled(Select)`
       typeformTheme?.typography?.fontSize?.body1};
   }
   .ant-select-selector {
+    cursor: pointer !important;
     background-color: ${({ theme }) =>
       theme?.color?.dark?.t?.lighten9 ||
       typeformTheme?.color?.dark?.t?.lighten9} !important;

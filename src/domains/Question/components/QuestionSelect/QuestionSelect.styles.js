@@ -15,6 +15,7 @@ export const StyledSelect = styled(Select)`
     opacity: 0;
   }
   .ant-select-selector {
+    cursor: pointer !important;
     background-color: ${
       theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9
     } !important;
