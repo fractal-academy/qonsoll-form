@@ -57,7 +57,7 @@ function FormConditionsForm(props) {
 
   return (
     <>
-      <Tabs onChange={onTabChange} type="card">
+      <Tabs onChange={onTabChange}>
         <TabPane tab="Logic jumps" key="1">
           {data?.map((item, index) => (
             <Box mb={3}>

@@ -75,7 +75,7 @@ const PlaneDateItem = (props) => {
               <StyledSelect
                 showSearch
                 allowClear
-                value={ruleSelectValue}
+                value={ruleSelectValue || DATE_CONDITION_RULES_VALUES[0]}
                 onChange={onRuleSelectValueChange}>
                 {DATE_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>
