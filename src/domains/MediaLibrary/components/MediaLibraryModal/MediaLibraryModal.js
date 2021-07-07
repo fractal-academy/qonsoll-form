@@ -229,7 +229,13 @@ function MediaLibraryModal(props) {
                 setSelectedBackgroundImg={setSelectedBackgroundImg}
               />
             </MediaListContainer>
-            <Row noGutters h="right" p={3} bg={theme.color.white.default}>
+            <Row
+              noGutters
+              borderBottomLeftRadius={theme?.borderRadius?.md}
+              borderBottomRightRadius={theme?.borderRadius?.md}
+              h="right"
+              p={3}
+              bg={theme.color.white.default}>
               <Col cw="auto">
                 <Button type="text" onClick={onModalCancel}>
                   Cancel

@@ -2,11 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { Col, Row } from '@qonsoll/react-design'
-import {
-  CustomChoiceBox,
-  CustomCol,
-  CustomTextBox
-} from './ChoiceTemplate.styles'
+import { CustomChoiceBox, CustomTextBox } from './ChoiceTemplate.styles'
 import { QuestionSelect } from '../../../../Question/components'
 
 let startLetter = 65

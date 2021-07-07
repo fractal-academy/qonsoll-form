@@ -55,8 +55,8 @@ const StyledBadge = styled(Button)`
   z-index: 100;
   padding: 3px;
   width: 24px;
-  right: -4px;
-  top: -4px;
+  right: -14px;
+  top: -14px;
 `
 
 function ListItem(props) {
