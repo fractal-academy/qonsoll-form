@@ -84,10 +84,10 @@ function FormsAll(props) {
     const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
     const formData = {
       ...restData,
-      isQuiz,
       title,
       subtitle,
       id: formId,
+      isQuiz: !!isQuiz,
       creationDate: getTimestamp().now()
     }
     await setData(COLLECTIONS.FORMS, formId, formData).catch((e) =>
