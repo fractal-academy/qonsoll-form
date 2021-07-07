@@ -18,6 +18,7 @@ export const ContentBox = styled(Box)`
   position: inherit;
   z-index: 400;
   left: 4px;
+  cursor: pointer;
   padding: 16px;
   border-radius: 16px;
   background-color: ${
@@ -35,7 +36,7 @@ export const ContentBox = styled(Box)`
       theme?.color?.dark?.t?.lighten8 ||
       typeformTheme?.color?.dark?.t?.lighten8
     };
-    transition: background-color 1s;
+    transition: background-color 0.3s;
   }
 `}
 `

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Select } from 'antd'
 import { Box, Col, Row } from '@qonsoll/react-design'
@@ -40,12 +40,17 @@ function PlaneTextItem(props) {
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update conditionRule of certain question
-    updatedQuestionConfigurations[index].redirectConditionRule =
-      selectValue || ''
-    //write new data to db
-    setData(COLLECTIONS.QUESTIONS, questionId, {
-      questionConfigurations: updatedQuestionConfigurations
-    })
+    const isRuleChanged =
+      updatedQuestionConfigurations[index].redirectConditionRule !== selectValue
+
+    if (isRuleChanged) {
+      updatedQuestionConfigurations[index].redirectConditionRule =
+        selectValue || ''
+      //write new data to db
+      setData(COLLECTIONS.QUESTIONS, questionId, {
+        questionConfigurations: updatedQuestionConfigurations
+      })
+    }
   }
 
   const onBlur = () => {
@@ -62,6 +67,13 @@ function PlaneTextItem(props) {
     })
   }
 
+  useEffect(() => {
+    setInputValue(item?.answerOption || '')
+    setRuleSelectValue(
+      item?.redirectConditionRule || TEXT_CONDITION_RULES_VALUES[0]
+    )
+  }, [item])
+
   return (
     <Row noGutters mb={2} key={index}>
       <Col cw={6}>
@@ -71,7 +83,7 @@ function PlaneTextItem(props) {
               <StyledSelect
                 showSearch
                 allowClear
-                value={ruleSelectValue}
+                value={ruleSelectValue || TEXT_CONDITION_RULES_VALUES[0]}
                 onChange={onRuleSelectValueChange}>
                 {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>
@@ -84,6 +96,7 @@ function PlaneTextItem(props) {
           <Col cw={6}>
             <Box width="100%" mr={4}>
               <CustomInput
+                placeholder="Enter value"
                 value={inputValue}
                 onChange={onInputValueChange}
                 onBlur={onBlur}

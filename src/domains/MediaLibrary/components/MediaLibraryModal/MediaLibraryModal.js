@@ -49,7 +49,7 @@ function MediaLibraryModal(props) {
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
-  const fuse = new Fuse(media, { keys: ['name'] })
+  const fuse = new Fuse(media, { keys: ['title'] })
 
   // [CLEAN FUNCTIONS]
   const onMediaUploaded = (data) => {
@@ -182,14 +182,18 @@ function MediaLibraryModal(props) {
                   multiple
                   name="file"
                   customRequest={customRequest}>
-                  <Button type="primary">{addButton || '+ Add'}</Button>
+                  <Button
+                    type="primary"
+                    onMouseDown={(e) => e.preventDefault()}>
+                    {addButton || '+ Add'}
+                  </Button>
                 </Upload>
               </Col>
             </Row>
             <Row pb={25} px={3}>
               <Col>
                 <CustomText>
-                  {amountTitle || 'Amount files: '}
+                  {amountTitle || 'Amount of shown files: '}
                   {amountFiles}
                 </CustomText>
               </Col>

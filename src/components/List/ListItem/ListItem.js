@@ -20,14 +20,14 @@ import {
   FileOutlined,
   MoreOutlined,
   CloseOutlined,
-  CheckOutlined,
-  DeleteOutlined
+  CheckOutlined
 } from '@ant-design/icons'
 import useFunctions from '../../../hooks/useFunctions'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import typeformTheme from '../../../../styles/theme'
 
 const { Text } = Typography
+const { Item } = Menu
 
 const ItemPreview = styled(Box)`
   display: flex;
@@ -46,7 +46,6 @@ const StyledIcon = styled(FileOutlined)`
 `
 const StyledImage = styled(Image)`
   border-radius: 8px;
-  object-fit: cover;
 `
 const StyledBadge = styled(Button)`
   position: absolute;
@@ -72,7 +71,7 @@ function ListItem(props) {
   const { onFormItemClick } = useActionsFunctionsContext()
   const {
     listItemNoDescription,
-    rename,
+    edit,
     popconfirmDeleteFormTitle,
     popconfirmDeleteButtonText,
     popconfirmDeleteImageTitle
@@ -117,18 +116,17 @@ function ListItem(props) {
       )
     })
   }
-  const onModalSubmit = async (values) => {
-    await updateData(COLLECTIONS.FORMS, data?.id, {
-      title: values?.name,
-      subtitle: values?.description
-    }).catch((e) => message.error(e.message))
+  const onModalSubmit = async (updatedFormData) => {
+    await updateData(COLLECTIONS.FORMS, data?.id, updatedFormData).catch((e) =>
+      message.error(e.message)
+    )
   }
 
   // [MENU TEMPLATE]
   const menu = (
     <Menu>
-      <Menu.Item onClick={(e) => showModal(e)} key={'showModal'}>
-        <Text>{rename || 'Rename'}</Text>
+      <Item onClick={(e) => showModal(e)} key={'showModal'}>
+        <Text>{edit || 'Edit'}</Text>
         <FormSimpleFormWithModal
           isEdit
           formData={data}
@@ -137,17 +135,19 @@ function ListItem(props) {
           setIsModalVisible={setIsModalVisible}
           onModalSubmit={onModalSubmit}
         />
-      </Menu.Item>
+      </Item>
 
-      <Menu.Item onClick={(e) => showPopconfirm(e)} key={'showPopconfirm'}>
+      <Item onClick={(e) => showPopconfirm(e)} key={'showPopconfirm'} danger>
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
           title={popconfirmDeleteFormTitle || 'Delete this form?'}
-          okButtonProps={{ loading: confirmLoading }}>
+          okButtonProps={{ loading: confirmLoading }}
+          okType="danger"
+          okText="Delete">
           <Text>{popconfirmDeleteButtonText || 'Delete'}</Text>
         </Popconfirm>
-      </Menu.Item>
+      </Item>
     </Menu>
   )
 
@@ -191,8 +191,10 @@ function ListItem(props) {
               <Popconfirm
                 title={popconfirmDeleteImageTitle || 'Delete this image?'}
                 onConfirm={handleDelete}
-                okButtonProps={{ loading: confirmLoading }}>
-                <DeleteOutlined />
+                okButtonProps={{ loading: confirmLoading }}
+                okType="danger"
+                okText="Delete">
+                <CloseOutlined />
               </Popconfirm>
             ) : (
               <Dropdown overlay={menu} placement="bottomRight">

@@ -45,9 +45,9 @@ const StyledTag = styled(Tag)`
 
 function QuestionForm(props) {
   const {
-    questionsList,
-    data,
     defaultTab,
+    questionData,
+    questionsList,
     brightnessValue,
     onChangeMenuItem,
     setBrightnessValue,
@@ -65,7 +65,6 @@ function QuestionForm(props) {
     editableTitleHint,
     editableSubtitleHint
   } = useTranslation()
-
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
@@ -107,13 +106,13 @@ function QuestionForm(props) {
   }
 
   const computedMediaUrl = currentQuestion?.image || DEFAULT_IMAGE
-  const tagRule = data?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
+  const tagRule = questionData?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   const popoverImage = `url(${computedMediaUrl})`
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
       ? endingQuestion || 'Ending'
-      : `${commonQuestion || 'Question'} ${data?.order}`
-  const layoutType = LAYOUT_TYPES[data?.layoutType]
+      : `${commonQuestion || 'Question'} ${questionData?.order}`
+  const layoutType = LAYOUT_TYPES[questionData?.layoutType]
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
     layoutType?.type !== LAYOUT_TYPES.BETWEEN.type &&
@@ -133,7 +132,7 @@ function QuestionForm(props) {
     <ContentCard
       onEdit
       image={bgImage}
-      brightnessValue={data?.brightnessValue || brightnessValue}
+      brightnessValue={questionData?.brightnessValue || brightnessValue}
       leftSideMenu={
         !!Object.keys(currentQuestion).length && (
           <QuestionLayoutSwitcher
@@ -151,18 +150,20 @@ function QuestionForm(props) {
                 {isConfigurationPopoverVisible && (
                   <Col cw="auto">
                     <QuestionConfigurationPopover
+                      questionData={questionData}
+                      welcomeScreenShowRule={true}
                       questionsList={questionsList}
-                      data={data}
                       customQuestionTypes={customQuestionTypes}
                       onQuestionTypeChange={onQuestionTypeChange}
-                      welcomeScreenShowRule={true}
                     />
                   </Col>
                 )}
                 {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                   <Col cw="auto" ml={2}>
                     <QuestionMediaPopover
-                      brightnessValue={data?.brightnessValue || brightnessValue}
+                      brightnessValue={
+                        questionData?.brightnessValue || brightnessValue
+                      }
                       setBrightnessValue={setBrightnessValue}
                       MediaModalButtonBackground={popoverImage}
                     />
@@ -190,7 +191,8 @@ function QuestionForm(props) {
                       image={computedMediaUrl}
                       style={{
                         filter: `brightness(${
-                          data?.brightnessValue + 100 || brightnessValue + 100
+                          questionData?.brightnessValue + 100 ||
+                          brightnessValue + 100
                         }%)`
                       }}>
                       <Box display="flex" justifyContent="flex-end" mr={4}>
@@ -205,9 +207,12 @@ function QuestionForm(props) {
                 </Row>
               )}
               <Box>
-                {cloneElement(questionTypesMap[data?.questionType].component, {
-                  question: data
-                })}
+                {cloneElement(
+                  questionTypesMap[questionData?.questionType].component,
+                  {
+                    question: questionData
+                  }
+                )}
               </Box>
             </CustomCard>
           </Col>
@@ -239,7 +244,7 @@ function QuestionForm(props) {
 }
 
 QuestionForm.propTypes = {
-  data: PropTypes.object,
+  questionData: PropTypes.object,
   onQuestionTypeChange: PropTypes.func,
   setShowPopover: PropTypes.func,
   showPopover: PropTypes.bool,

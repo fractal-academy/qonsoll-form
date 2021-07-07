@@ -159,20 +159,18 @@ function EditorSidebar(props) {
 
   const onResetLogic = () => {
     questions.forEach((item) => {
+      const condition = [
+        QUESTION_TYPES.OPINION_SCALE,
+        QUESTION_TYPES.RATING,
+        QUESTION_TYPES.PICTURE_CHOICE,
+        QUESTION_TYPES.CHOICE,
+        QUESTION_TYPES.YES_NO
+      ].includes(item.questionType)
       const newQuestionConfigs = item.questionConfigurations?.map(
         (answerConfig) => {
           const formattedObject = Object.entries(answerConfig)
           const resetFields = formattedObject?.map((tuple) => {
-            if (
-              tuple[0] === 'answerOption' &&
-              [
-                QUESTION_TYPES.OPINION_SCALE,
-                QUESTION_TYPES.RATING,
-                QUESTION_TYPES.PICTURE_CHOICE,
-                QUESTION_TYPES.CHOICE,
-                QUESTION_TYPES.YES_NO
-              ].includes(item.questionType)
-            ) {
+            if (tuple[0] === 'answerOption' && condition) {
               return tuple
             } else {
               return [tuple[0], '']
@@ -181,9 +179,16 @@ function EditorSidebar(props) {
           return Object.fromEntries(resetFields)
         }
       )
-      setData(COLLECTIONS.QUESTIONS, item.id, {
-        questionConfigurations: newQuestionConfigs
-      })
+      if (condition) {
+        setData(COLLECTIONS.QUESTIONS, item.id, {
+          questionConfigurations: newQuestionConfigs || []
+        })
+      } else {
+        newQuestionConfigs?.[0] &&
+          setData(COLLECTIONS.QUESTIONS, item.id, {
+            questionConfigurations: [newQuestionConfigs?.[0]] || []
+          })
+      }
     })
   }
 
@@ -228,7 +233,7 @@ function EditorSidebar(props) {
         {open ? <RightOutlined /> : <LeftOutlined />}
       </SidebarStateSwitcher> */}
       {/* {open && ( */}
-      <SidebarBoxWrapper transparent={transparent} my={4}>
+      <SidebarBoxWrapper transparent={transparent}>
         <Box p={3}>
           <Row noGutters>
             <Col v="center">
@@ -258,11 +263,12 @@ function EditorSidebar(props) {
                   type="text"
                   icon={<PlusOutlined />}
                   onClick={popoverShowChange}
+                  onMouseDown={(e) => e.preventDefault()}
                 />
               </Popover>
             </Col>
 
-            <Col cw="auto" v="center" px={1}>
+            <Col cw="auto" v="center" ml={1}>
               <ModalWithFormConditionsForm
                 onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
                 btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
@@ -293,7 +299,7 @@ function EditorSidebar(props) {
             </Col>
             <Col cw="auto">
               <Button
-                disabled={endings.length >= 1}
+                // disabled={endings.length >= 1}
                 type="text"
                 icon={<PlusOutlined />}
                 onClick={addQuestion}
@@ -305,7 +311,7 @@ function EditorSidebar(props) {
               <QuestionsList
                 data={endings}
                 onItemClick={onItemClick}
-                disableDelete={!!endings?.length}
+                disableDelete={endings?.length === 1}
               />
             )}
           </Box>
