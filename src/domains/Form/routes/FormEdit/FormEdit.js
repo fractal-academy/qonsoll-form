@@ -100,47 +100,41 @@ function FormEdit(props) {
     ].includes(key)
 
     const isYesNo = key === QUESTION_TYPES.YES_NO
-
     //configuration for certain types of questions
+    const defaultConfigurations = {
+      answerOption: '',
+      redirectQuestion: '',
+      answerOptionId: '',
+      redirectConditionRule: ''
+    }
     const choicesConfiguration = [
       {
+        ...defaultConfigurations,
         image: '',
-        redirectQuestion: '',
         answerOptionId: uuid(),
-        answerOption: 'default',
-        redirectConditionRule: ''
+        answerOption: 'default'
       }
     ]
     const yesNoConfiguration = [
       {
+        ...defaultConfigurations,
         answerOption: 'Yes',
-        redirectQuestion: '',
-        answerOptionId: uuid(),
-        redirectConditionRule: ''
+        answerOptionId: uuid()
       },
       {
+        ...defaultConfigurations,
         answerOption: 'No',
-        redirectQuestion: '',
-        answerOptionId: uuid(),
-        redirectConditionRule: ''
+        answerOptionId: uuid()
       }
     ]
     const opinionAndRatingConfiguration = Array(5)
       .fill(0)
       ?.map((el, index) => ({
+        ...defaultConfigurations,
         answerOption: 1 + index,
-        redirectQuestion: '',
-        answerOptionId: uuid(),
-        redirectConditionRule: ''
+        answerOptionId: uuid()
       }))
-    const defaultConfig = [
-      {
-        answerOption: '',
-        redirectQuestion: '',
-        answerOptionId: '',
-        redirectConditionRule: ''
-      }
-    ]
+
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
       ? choicesConfiguration
@@ -148,7 +142,7 @@ function FormEdit(props) {
       ? yesNoConfiguration
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
-      : defaultConfig
+      : [defaultConfigurations]
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations, questionType: key }
@@ -198,14 +192,14 @@ function FormEdit(props) {
                   questionsList={questionsList}
                   onBack={onBack}>
                   <QuestionForm
-                    questionsList={questionsList}
-                    data={currentQuestion}
                     defaultTab={defaultTab}
+                    questionsList={questionsList}
+                    questionData={currentQuestion}
                     brightnessValue={brightnessValue}
                     onChangeMenuItem={onChangeMenuItem}
                     handleSmallScreen={handleSmallScreen}
-                    customQuestionTypes={customQuestionTypes}
                     setBrightnessValue={setBrightnessValue}
+                    customQuestionTypes={customQuestionTypes}
                     onQuestionTypeChange={onQuestionTypeChange}
                   />
                 </PageLayout>

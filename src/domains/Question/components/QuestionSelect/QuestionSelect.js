@@ -17,12 +17,17 @@ const StyledTag = styled(Tag)`
 `
 
 function QuestionSelect(props) {
-  const { questionList, questionConfigurations, index, addRedirectQuestion } =
-    props
+  const {
+    questionList,
+    questionConfigurations,
+    index = 0,
+    addRedirectQuestion
+  } = props
 
   // [CLEAN FUNCTIONS]
   const onChange = (question, index) => {
     const questionCondition = question || ''
+
     addRedirectQuestion(questionCondition, index)
   }
   return (

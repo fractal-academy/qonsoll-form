@@ -5,10 +5,10 @@ import { QuestionConfigurationPopoverContent } from '../../../../domains/Questio
 
 function QuestionConfigurationPopover(props) {
   const {
-    data,
+    questionData,
     questionsList,
-    onQuestionTypeChange,
     customQuestionTypes,
+    onQuestionTypeChange,
     welcomeScreenShowRule
   } = props
 
@@ -20,15 +20,15 @@ function QuestionConfigurationPopover(props) {
     setShowPopover(!showPopover)
   }
 
-  const hasConditions = data?.questionConfigurations?.filter(
-    (item, index) => item?.redirectQuestion.length > 0
+  const hasConditions = questionData?.questionConfigurations?.filter(
+    (item) => item?.redirectQuestion.length > 0
   ).length
 
   const hasCondtitionOnIt =
     questionsList?.filter(
       (question) =>
         question?.questionConfigurations?.filter(
-          (config) => config?.redirectQuestion === data?.id
+          (config) => config?.redirectQuestion === questionData?.id
         )?.length > 0
     )?.length > 0
 
@@ -46,21 +46,26 @@ function QuestionConfigurationPopover(props) {
       style={{ width: '350px' }}
       onConfirm={popoverShowChange}
       onCancel={!popoverShowChange}
-      okText={'Continue'}>
+      okText={'Continue'}
+      okType="danger">
       <Popover
         visible={showPopover}
         trigger="click"
         placement="bottomRight"
         content={
           <QuestionConfigurationPopoverContent
-            data={data}
+            questionData={questionData}
             setShowPopover={setShowPopover}
-            welcomeScreenShowRule={welcomeScreenShowRule}
             customQuestionTypes={customQuestionTypes}
             onQuestionTypeChange={onQuestionTypeChange}
+            welcomeScreenShowRule={welcomeScreenShowRule}
           />
         }>
-        <Button type="primary" icon={<SettingOutlined />} />
+        <Button
+          type="primary"
+          icon={<SettingOutlined />}
+          onMouseDown={(e) => e.preventDefault()}
+        />
       </Popover>
     </Popconfirm>
   ) : (
@@ -71,17 +76,18 @@ function QuestionConfigurationPopover(props) {
       placement="bottomRight"
       content={
         <QuestionConfigurationPopoverContent
-          data={data}
+          questionData={questionData}
           setShowPopover={setShowPopover}
-          welcomeScreenShowRule={welcomeScreenShowRule}
           customQuestionTypes={customQuestionTypes}
           onQuestionTypeChange={onQuestionTypeChange}
+          welcomeScreenShowRule={welcomeScreenShowRule}
         />
       }>
       <Button
         type="primary"
         icon={<SettingOutlined />}
         onClick={popoverShowChange}
+        onMouseDown={(e) => e.preventDefault()}
       />
     </Popover>
     // This piece of code to do refactoring in future improvements to make it shorter

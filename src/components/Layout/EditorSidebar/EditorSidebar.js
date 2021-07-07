@@ -159,20 +159,18 @@ function EditorSidebar(props) {
 
   const onResetLogic = () => {
     questions.forEach((item) => {
+      const condition = [
+        QUESTION_TYPES.OPINION_SCALE,
+        QUESTION_TYPES.RATING,
+        QUESTION_TYPES.PICTURE_CHOICE,
+        QUESTION_TYPES.CHOICE,
+        QUESTION_TYPES.YES_NO
+      ].includes(item.questionType)
       const newQuestionConfigs = item.questionConfigurations?.map(
         (answerConfig) => {
           const formattedObject = Object.entries(answerConfig)
           const resetFields = formattedObject?.map((tuple) => {
-            if (
-              tuple[0] === 'answerOption' &&
-              [
-                QUESTION_TYPES.OPINION_SCALE,
-                QUESTION_TYPES.RATING,
-                QUESTION_TYPES.PICTURE_CHOICE,
-                QUESTION_TYPES.CHOICE,
-                QUESTION_TYPES.YES_NO
-              ].includes(item.questionType)
-            ) {
+            if (tuple[0] === 'answerOption' && condition) {
               return tuple
             } else {
               return [tuple[0], '']
@@ -181,10 +179,16 @@ function EditorSidebar(props) {
           return Object.fromEntries(resetFields)
         }
       )
-      newQuestionConfigs?.[0] &&
+      if (condition) {
         setData(COLLECTIONS.QUESTIONS, item.id, {
-          questionConfigurations: [newQuestionConfigs?.[0]] || []
+          questionConfigurations: newQuestionConfigs || []
         })
+      } else {
+        newQuestionConfigs?.[0] &&
+          setData(COLLECTIONS.QUESTIONS, item.id, {
+            questionConfigurations: [newQuestionConfigs?.[0]] || []
+          })
+      }
     })
   }
 
@@ -259,6 +263,7 @@ function EditorSidebar(props) {
                   type="text"
                   icon={<PlusOutlined />}
                   onClick={popoverShowChange}
+                  onMouseDown={(e) => e.preventDefault()}
                 />
               </Popover>
             </Col>

@@ -32,31 +32,40 @@ const PlaneDateItem = (props) => {
   const { setData } = useFunctions()
 
   //[CLEAN FUNCTIONS]
-  const onRuleSelectValueChange = (selectValue) => {
-    setRuleSelectValue(selectValue || '')
+  const onRuleSelectValueChange = (selectValue = '') => {
+    setRuleSelectValue(selectValue)
 
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update conditionRule of certain question
-    updatedQuestionConfigurations[index].redirectConditionRule =
-      selectValue || ''
-    //write new data to db
-    setData(COLLECTIONS.QUESTIONS, questionId, {
-      questionConfigurations: updatedQuestionConfigurations
-    })
+    const isRuleChanged =
+      updatedQuestionConfigurations[index].redirectConditionRule !== selectValue
+
+    if (isRuleChanged) {
+      updatedQuestionConfigurations[index].redirectConditionRule = selectValue
+      //write new data to db
+      setData(COLLECTIONS.QUESTIONS, questionId, {
+        questionConfigurations: updatedQuestionConfigurations
+      })
+    }
   }
 
-  const onDatePickerValueChange = (datePickerVal, stringDateValue) => {
+  const onDatePickerValueChange = (datePickerVal, stringDateValue = '') => {
     setDatePickerValue(datePickerVal || '')
 
     //create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update answer option of certain question
-    updatedQuestionConfigurations[index].answerOption = stringDateValue || ''
-    //write new data to db
-    setData(COLLECTIONS.QUESTIONS, questionId, {
-      questionConfigurations: updatedQuestionConfigurations
-    })
+    const isDateChanged =
+      updatedQuestionConfigurations[index].answerOption !== stringDateValue
+
+    if (isDateChanged) {
+      updatedQuestionConfigurations[index].answerOption = stringDateValue
+      //write new data to db
+      setData(COLLECTIONS.QUESTIONS, questionId, {
+        questionConfigurations: updatedQuestionConfigurations
+      })
+    }
   }
 
   useEffect(() => {
@@ -75,7 +84,7 @@ const PlaneDateItem = (props) => {
               <StyledSelect
                 showSearch
                 allowClear
-                value={ruleSelectValue}
+                value={ruleSelectValue || DATE_CONDITION_RULES_VALUES[0]}
                 onChange={onRuleSelectValueChange}>
                 {DATE_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>

@@ -4,10 +4,10 @@ import React, { cloneElement } from 'react'
 import { LAYOUT_TYPES } from '../../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
-import { DescriptionContainer, StyledButton } from './QuestionSimpleView.styles'
 import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { DescriptionContainer, StyledButton } from './QuestionSimpleView.styles'
 
 function QuestionSimpleView(props) {
   const {
@@ -73,7 +73,9 @@ function QuestionSimpleView(props) {
                   : popconfirmOnDeleteQuestion || 'Delete this question?'
               }
               onConfirm={(e) => action(e, id)}
-              disabled={disableDelete}>
+              disabled={disableDelete}
+              okType="danger"
+              okText="Delete">
               <StyledButton
                 type="text"
                 shape="circle"

@@ -1,16 +1,16 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { Modal, Button, Typography } from 'antd'
+import { Modal, Button, Typography, Popconfirm } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
 import { ThemeContext } from 'styled-components'
 import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 function ModalWithFormConditionsForm(props) {
-  const { btnProps, children, onResetClick } = props
+  const { btnProps, children, onResetClick, popconfirmReset } = props
   const theme = useContext(ThemeContext)
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -33,6 +33,7 @@ function ModalWithFormConditionsForm(props) {
         onClick={() => {
           setIsModalVisible(!isModalVisible)
         }}
+        onMouseDown={(e) => e.preventDefault()}
       />
       <Modal
         visible={isModalVisible}
@@ -54,14 +55,23 @@ function ModalWithFormConditionsForm(props) {
         }}
         title={
           <>
-            <Row v="center">
+            <Row v="center" noGutters>
               <Col>
                 <Title level={3}>{modalTitle || 'Logic'}</Title>
               </Col>
               <Col cw="auto" v="center">
-                <Button type="text" onClick={onResetClick}>
-                  {modalResetLogic || 'Reset logic'}
-                </Button>
+                <Popconfirm
+                  title={
+                    popconfirmReset ||
+                    'Are you sure, you want to reset logic jumps?'
+                  }
+                  okText="Reset"
+                  okType="danger"
+                  onConfirm={onResetClick}>
+                  <Button type="text" onMouseDown={(e) => e.preventDefault()}>
+                    {modalResetLogic || 'Reset logic'}
+                  </Button>
+                </Popconfirm>
               </Col>
             </Row>
           </>

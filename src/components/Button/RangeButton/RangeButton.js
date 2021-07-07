@@ -110,6 +110,7 @@ function RangeButton(props) {
           <StyledRangeButton
             key={item}
             onClick={() => onButtonClick(item)}
+            onMouseDown={(e) => e.preventDefault()}
             isActive={Number(buttonKey) === item}>
             {item}
           </StyledRangeButton>

@@ -37,6 +37,7 @@ function QuestionMediaPopover(props) {
         type="primary"
         icon={<EditOutlined />}
         onClick={changeImageEditVisibleState}
+        onMouseDown={(e) => e.preventDefault()}
       />
     </Popover>
   )

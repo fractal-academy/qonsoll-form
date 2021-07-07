@@ -16,7 +16,7 @@ import useMedia from 'use-media'
 import { globalStyles } from '../../../../../styles'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import { styles } from './FormsAll.styles'
-import { Spinner, StaticList, VideoRecording } from '../../../../components'
+import { Spinner, StaticList } from '../../../../components'
 import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -64,7 +64,7 @@ function FormsAll(props) {
   const fuse = new Fuse(data, { keys: ['title'] })
 
   // [COMPUTED PROPERTIES]
-  let amountFiles = data?.length
+  let amountFiles = currentData?.length
 
   // [CLEAN FUNCTIONS]
   const searchData = () => {
@@ -80,14 +80,14 @@ function FormsAll(props) {
   }, [data])
 
   const onFormCreate = async (data) => {
-    const { name, description, ...restData } = data
+    const { title, subtitle, isQuiz, ...restData } = data
     const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
-
     const formData = {
       ...restData,
+      isQuiz,
+      title,
+      subtitle,
       id: formId,
-      title: name,
-      subtitle: description || '',
       creationDate: getTimestamp().now()
     }
     await setData(COLLECTIONS.FORMS, formId, formData).catch((e) =>
@@ -97,7 +97,6 @@ function FormsAll(props) {
       //generate default question id and default ending id
       const questionId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
       const endingId = getCollectionRef(COLLECTIONS.QUESTIONS).doc().id
-
       //add default question and ending to database
       setData(COLLECTIONS.QUESTIONS, questionId, {
         formId: formId,
@@ -107,13 +106,12 @@ function FormsAll(props) {
         title: 'WS.',
         order: 0
       }).catch((e) => message.error(e.message))
-
       setData(COLLECTIONS.QUESTIONS, endingId, {
         formId: formId,
         id: endingId,
         layoutType: LAYOUT_TYPE_KEYS[0],
         questionType: QUESTION_TYPES.ENDING,
-        title: endingTitle || 'Thank you for attention!',
+        title: 'Thank you for attention!',
         order: 1
       }).catch((e) => message.error(e.message))
     }
@@ -123,8 +121,7 @@ function FormsAll(props) {
     formsAllRouteTitle,
     addNewFormButton,
     formSearchPlaceholder,
-    formsCounterDeclaration,
-    endingTitle
+    formsCounterDeclaration
   } = translations || {}
   const menu = (
     <Menu>
@@ -200,7 +197,8 @@ function FormsAll(props) {
                   <Button
                     type="primary"
                     onClick={showModal}
-                    disabled={disableAddButton}>
+                    disabled={disableAddButton}
+                    onMouseDown={(e) => e.preventDefault()}>
                     + {addNewFormButton || 'Add'}
                   </Button>
                 </Col>
@@ -208,7 +206,7 @@ function FormsAll(props) {
               <Row noGutters mb={3}>
                 <Col>
                   <Text>
-                    {formsCounterDeclaration || 'Amount of files: '}
+                    {formsCounterDeclaration || 'Amount of shown forms: '}
                     {amountFiles}
                   </Text>
                 </Col>
