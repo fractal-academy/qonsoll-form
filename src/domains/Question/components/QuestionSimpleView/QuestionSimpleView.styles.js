@@ -1,7 +1,7 @@
+import { Button } from 'antd'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
-import { Popconfirm } from 'antd'
 
 export const DescriptionContainer = styled(Box)`
   ${({ theme }) => `
@@ -14,4 +14,9 @@ export const DescriptionContainer = styled(Box)`
     typeformTheme?.typography?.lineHeight?.body2
   };
 `}
+`
+export const StyledButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

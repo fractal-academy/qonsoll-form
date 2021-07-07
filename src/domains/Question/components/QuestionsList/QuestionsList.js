@@ -42,6 +42,9 @@ function QuestionsList(props) {
     const deletedItemIndex = data?.findIndex(
       (item) => item.id === questionId && item
     )
+
+    const deletedItemType = data[deletedItemIndex]?.questionType
+
     const newCurrentQuestion =
       data[deletedItemIndex - 1] || data[deletedItemIndex + 1] || {}
 
@@ -52,7 +55,9 @@ function QuestionsList(props) {
     updatedData?.forEach((item, index) => {
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
-        order: index
+        order:
+          (deletedItemType === QUESTION_TYPES.WELCOME_SCREEN && index + 1) ||
+          index
       }).catch((e) => message.error(e.message))
     })
 
@@ -65,7 +70,7 @@ function QuestionsList(props) {
     // remove logic jump conditions for all connected questions
     updatedData?.forEach((item) => {
       let writeToDB = false
-      const editedQuestionConfig = item.questionConfigurations?.map(
+      const editedQuestionConfig = item?.questionConfigurations?.map(
         (config) => {
           if (config.redirectQuestion === questionId) {
             writeToDB = true
@@ -79,6 +84,7 @@ function QuestionsList(props) {
         })
     })
   }
+
   // [COMPUTED PROPERTIES]
   const dataSource = useMemo(
     () => (data ? data.sort((a, b) => a.order - b.order) : []),
@@ -87,6 +93,7 @@ function QuestionsList(props) {
   const filteredDataSource = dataSource?.filter(
     (item) => item.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   )
+  const sortable = filteredDataSource.length > 1
 
   return (
     <>
@@ -104,6 +111,7 @@ function QuestionsList(props) {
       )}
       <DragableList
         itemLayout="horizontal"
+        sortable={sortable}
         dataSource={filteredDataSource}
         onUpdate={onUpdate}
         setNewOrder={setNewOrder}
