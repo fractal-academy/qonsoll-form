@@ -13,4 +13,9 @@ export const CustomButton = styled(Button)`
   background-color: ${({ theme }) =>
     theme?.color?.primary?.t?.lighten7 ||
     typeformTheme?.color?.primary?.t?.lighten7};
+  &:hover {
+    background-color: ${({ theme }) =>
+      theme?.color?.primary?.t?.lighten3 ||
+      typeformTheme?.color?.primary?.t?.lighten3};
+  }
 `

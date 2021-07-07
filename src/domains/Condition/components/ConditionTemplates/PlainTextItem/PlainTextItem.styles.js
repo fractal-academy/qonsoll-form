@@ -13,6 +13,9 @@ export const CustomInput = styled(Input)`
 export const StyledSelect = styled(Select)`
   display: flex;
   align-items: center;
+  &:hover .ant-select-arrow {
+    opacity: 0;
+  }
   .ant-select-clear {
     border-radius: 50%;
     font-size: ${({ theme }) =>
@@ -20,6 +23,7 @@ export const StyledSelect = styled(Select)`
       typeformTheme?.typography?.fontSize?.body1};
   }
   .ant-select-selector {
+    cursor: pointer !important;
     background-color: ${({ theme }) =>
       theme?.color?.dark?.t?.lighten9 ||
       typeformTheme?.color?.dark?.t?.lighten9} !important;
