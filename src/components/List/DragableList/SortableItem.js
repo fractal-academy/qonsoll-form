@@ -12,7 +12,7 @@ const StyledColumn = styled(Col)`
 
 const SortableItem = sortableElement(({ children }) => (
   <Row noGutters v="center" mb={3}>
-    <Col cw="auto" mr={1}>
+    <Col cw="auto" mx={1}>
       <DragHandle />
     </Col>
     <StyledColumn>{children}</StyledColumn>
