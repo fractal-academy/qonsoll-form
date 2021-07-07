@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { TranslationContext } from '../../../../context/Translation'
 // import { globalStyles } from '../../../../../styles'
 import { useKeyPress } from '@umijs/hooks'
-import { COLLECTIONS } from '../../../../constants'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 // import { Button, Divider, Typography } from 'antd'
 import { Box } from '@qonsoll/react-design'
 import { FormAdvancedView } from '../../../../domains/Form/components'
@@ -46,15 +46,18 @@ function FormShow(props) {
   const [data, loading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
   )
-  // return this after adding isRequired and condition rules
-  // useKeyPress('enter', (event) => {
-  //   onClick()
-  // })
+  const firstSlideRule =
+    (data?.some(
+      (item) => item.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    ) &&
+      0) ||
+    1
 
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [previousQuestionOrder, setPreviousQuestionOrder] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(firstSlideRule)
+  const [previousQuestionOrder, setPreviousQuestionOrder] =
+    useState(firstSlideRule)
 
   // [COMPUTED PROPERTIES]
   const sortedData = data && data.sort((a, b) => a.order - b.order)

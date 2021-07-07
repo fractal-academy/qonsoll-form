@@ -43,7 +43,7 @@ function PageLayout(props) {
           justifyContent="center">
           <Text>
             {smallScreenHandleWarning ||
-              'This feature is not supported by this device.'}
+              'This feature is available only on desktop.'}
           </Text>
         </Box>
       )}
