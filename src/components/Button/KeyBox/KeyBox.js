@@ -72,6 +72,7 @@ function KeyBox(props) {
 
   return (
     <Box
+      style={{ cursor: 'pointer' }}
       ref={hoverRef}
       display={hasImages && 'inline-block'}
       mb={2}
