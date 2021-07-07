@@ -24,13 +24,16 @@ const StyledRangeButton = styled(Button)`
   color: ${
     isActive
       ? theme?.color?.white?.default || typeformTheme?.color?.white?.default
-      : theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
+      : theme?.color?.primary?.t?.lighten1 ||
+        typeformTheme?.color?.primary?.t?.lighten1
   };
 
   &:hover {
     color: ${
-      isActive &&
-      (theme?.color?.white?.default || typeformTheme?.color?.white?.default)
+      isActive
+        ? theme?.color?.white?.default || typeformTheme?.color?.white?.default
+        : theme?.color?.primary?.t?.lighten1 ||
+          typeformTheme?.color?.primary?.t?.lighten1
     };
     border-color: ${
       isActive &&

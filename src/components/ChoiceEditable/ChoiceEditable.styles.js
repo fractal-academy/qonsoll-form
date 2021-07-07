@@ -5,13 +5,25 @@ import typeformTheme from '../../../styles/theme'
 
 const { TextArea } = Input
 
-export const MainBox = styled(Box)(({ theme, withImage }) => ({
-  background:
-    theme?.color?.primary?.lighten6 || typeformTheme?.color?.primary?.lighten6,
-  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md,
-  width: withImage ? 'auto' : '100%',
-  position: 'relative'
-}))
+export const MainBox = styled(Box)`
+  ${({ theme, withImage }) => `
+  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  width: ${withImage ? 'auto' : '100%'};
+  position: relative;
+  background-color:
+    ${
+      theme?.color?.primary?.t?.lighten6 ||
+      typeformTheme?.color?.primary?.t?.lighten6
+    };
+  &:hover{
+     background-color:
+    ${
+      theme?.color?.primary?.t?.lighten3 ||
+      typeformTheme?.color?.primary?.t?.lighten3
+    };
+  }
+`}
+`
 
 export const MediaBox = styled(Box)(({ theme }) => ({
   height: '100px',
@@ -69,9 +81,9 @@ export const DeleteButton = styled(Box)`
 `}
 `
 export const ChoiceInput = styled(TextArea)`
-  cursor: pointer;
   color: ${({ theme }) =>
-    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
+    theme?.color?.text?.dark?.primary ||
+    typeformTheme?.color?.text?.dark?.primary};
 `
 export const CustomCol = styled(Col)`
   position: absolute;

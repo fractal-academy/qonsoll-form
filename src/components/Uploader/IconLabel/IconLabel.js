@@ -3,12 +3,9 @@ import styled from 'styled-components'
 import typeformTheme from '../../../../styles/theme'
 
 const IconLabel = styled.label`
-  ${({ theme, disabled }) => `
+  ${({ theme, disabled, isHovering }) => `
     width: 50px;
     height: 50px;
-    font-size:${
-      theme?.typography?.fontSize?.h4 || typeformTheme?.typography?.fontSize?.h4
-    };
     border-radius: 50%;
     cursor: ${disabled ? 'not-allowed' : 'pointer'};
     justify-content: center;
@@ -19,8 +16,14 @@ const IconLabel = styled.label`
       theme?.color?.white?.default || typeformTheme?.color?.white?.default
     };
     background-color: ${
-      theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
+      isHovering
+        ? theme?.color?.primary?.default ||
+          typeformTheme?.color?.primary?.default
+        : theme?.color?.primary?.t?.lighten1 ||
+          typeformTheme?.color?.primary?.t?.lighten1
     };
+   
+  }
   `}
 `
 

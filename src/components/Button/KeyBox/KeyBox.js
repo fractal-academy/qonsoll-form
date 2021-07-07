@@ -6,6 +6,7 @@ import { useHover } from '@umijs/hooks'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import useMedia from 'use-media'
+import { DEFAULT_IMAGE } from '../../../constants'
 
 const { Text } = Typography
 
@@ -79,7 +80,10 @@ function KeyBox(props) {
       width="100%">
       <StyledButton hasImages={hasImages} onClick={() => onButtonClick(item)}>
         {hasImages && (
-          <ImageContainer phoneSmall={phoneSmall} image={item?.choice?.image} />
+          <ImageContainer
+            phoneSmall={phoneSmall}
+            image={item?.choice?.image || DEFAULT_IMAGE}
+          />
         )}
         <Row v="center" h="between" noGutters position="relative">
           <Col cw="12" v="center">

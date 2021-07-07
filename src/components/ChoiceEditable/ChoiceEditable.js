@@ -20,6 +20,7 @@ import {
 } from '../../context/CurrentQuestion'
 import { useTranslation } from '../../context/Translation'
 import { Popconfirm } from 'antd'
+import { useHover } from '@umijs/hooks'
 
 let startLetter = 65
 
@@ -33,6 +34,7 @@ function ChoiceEditable(props) {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   const { popconfirmOnDeleteOptionWithConditions } = useTranslation()
+  const [isHovering, hoverRef] = useHover()
 
   // [COMPONENT STATE HOOKS]
   const [value, setValue] = useState(data?.answerOption)
@@ -82,16 +84,18 @@ function ChoiceEditable(props) {
   }, [data])
 
   return (
-    <MainBox m={1} withImage={withImage}>
+    <MainBox m={1} withImage={withImage} ref={hoverRef}>
       {withImage && (
         <MediaBox backgroundImage={bgImage} mx={2} mt={2}>
-          <MediaLibraryModal
-            btnProps={{
-              type: 'primary',
-              icon: <EditOutlined />
-            }}
-            onContinue={onMediaModalContinue}
-          />
+          {isHovering && (
+            <MediaLibraryModal
+              btnProps={{
+                type: 'primary',
+                icon: <EditOutlined />
+              }}
+              onContinue={onMediaModalContinue}
+            />
+          )}
         </MediaBox>
       )}
       <Row noGutters px={2}>
@@ -110,24 +114,25 @@ function ChoiceEditable(props) {
           />
         </ChoiceOptionCol>
       </Row>
-      {hasConditions ? (
-        <Popconfirm
-          title={
-            popconfirmOnDeleteOptionWithConditions ||
-            'This option has connected logic. Delete it?'
-          }
-          onConfirm={onDelete}
-          okType="danger"
-          okText="Delete">
-          <DeleteButton>
+      {isHovering &&
+        (hasConditions ? (
+          <Popconfirm
+            title={
+              popconfirmOnDeleteOptionWithConditions ||
+              'This option has connected logic. Delete it?'
+            }
+            onConfirm={onDelete}
+            okType="danger"
+            okText="Delete">
+            <DeleteButton>
+              <CloseOutlined />
+            </DeleteButton>
+          </Popconfirm>
+        ) : (
+          <DeleteButton onClick={onDelete}>
             <CloseOutlined />
           </DeleteButton>
-        </Popconfirm>
-      ) : (
-        <DeleteButton onClick={onDelete}>
-          <CloseOutlined />
-        </DeleteButton>
-      )}
+        ))}
     </MainBox>
   )
 }

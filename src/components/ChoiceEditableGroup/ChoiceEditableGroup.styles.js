@@ -1,7 +1,6 @@
 import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 import typeformTheme from '../../../styles/theme'
-import { globalStyles } from '../../../styles'
 
 export const styles = {
   mainBox: {
@@ -11,12 +10,24 @@ export const styles = {
   }
 }
 
-export const AddNewChoiceBox = styled(Box)(({ theme }) => ({
-  background:
-    theme?.color?.primary?.lighten6 || typeformTheme?.color?.primary?.lighten6,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md,
-  cursor: globalStyles?.cursorPointer
-}))
+export const AddNewChoiceBox = styled(Box)`
+  ${({ theme }) => `
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  cursor: pointer;
+  background-color:
+    ${
+      theme?.color?.primary?.t?.lighten6 ||
+      typeformTheme?.color?.primary?.t?.lighten6
+    };
+  &:hover {
+     background-color:
+    ${
+      theme?.color?.primary?.t?.lighten3 ||
+      typeformTheme?.color?.primary?.t?.lighten3
+    };
+  }
+`}
+`
