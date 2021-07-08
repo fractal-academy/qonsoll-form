@@ -66,6 +66,7 @@ function QuestionSimpleView(props) {
           </Col>
           <Col cw="auto">
             <Popconfirm
+              placement="topRight"
               title={
                 hasConditions || hasCondtitionOnIt
                   ? popconfirmOnDeleteQuestionWithConditions ||
