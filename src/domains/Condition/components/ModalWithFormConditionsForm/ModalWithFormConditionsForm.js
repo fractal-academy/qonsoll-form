@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { Modal, Button, Typography, Popconfirm } from 'antd'
+import { Modal, Button, Typography, Popconfirm, Tooltip } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
 import { ThemeContext } from 'styled-components'
@@ -16,7 +16,13 @@ function ModalWithFormConditionsForm(props) {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   // [ADDITIONAL_HOOKS]
-  const { modalTitle, modalResetLogic, submitBtn, cancelBtn } = useTranslation()
+  const {
+    modalTitle,
+    modalResetLogic,
+    submitBtn,
+    cancelBtn,
+    conditionsFormTooltip
+  } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onSave = () => {
@@ -28,13 +34,17 @@ function ModalWithFormConditionsForm(props) {
 
   return (
     <>
-      <Button
-        {...btnProps}
-        onClick={() => {
-          setIsModalVisible(!isModalVisible)
-        }}
-        onMouseDown={(e) => e.preventDefault()}
-      />
+      <Tooltip
+        placement="bottomRight"
+        title={conditionsFormTooltip || 'Configure logic jumps'}>
+        <Button
+          {...btnProps}
+          onClick={() => {
+            setIsModalVisible(!isModalVisible)
+          }}
+          onMouseDown={(e) => e.preventDefault()}
+        />
+      </Tooltip>
       <Modal
         visible={isModalVisible}
         centered

@@ -21,7 +21,9 @@ function FormSimpleForm(props) {
 
   return (
     <Form {...rest} initialValues={initialValues}>
-      <Form.Item name="title" rules={[{ required: true }]}>
+      <Form.Item
+        name="title"
+        rules={[{ required: true, message: 'Please, enter form name.' }]}>
         <Input
           allowClear
           placeholder={formNamePlaceholder || 'Type form name'}

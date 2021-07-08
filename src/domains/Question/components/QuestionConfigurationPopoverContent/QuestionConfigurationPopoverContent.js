@@ -1,11 +1,14 @@
-import { Typography } from 'antd'
+import { Typography, Divider } from 'antd'
 import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../../context/Translation'
 import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
-import { PopoverSwitcherRow } from './QuestionConfigurationPopoverContent.styles'
+import {
+  PopoverSwitcherRow,
+  CustomDivider
+} from './QuestionConfigurationPopoverContent.styles'
 import {
   QuestionTypeSelect,
   QuestionConfigurationMenu
@@ -51,6 +54,7 @@ function QuestionConfigurationPopoverContent(props) {
           </Title>
         </Col>
       </PopoverSwitcherRow>
+      <CustomDivider />
       <Row noGutters>
         <Col pr={0} display="block">
           {isQuestionConfig ? (
