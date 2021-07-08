@@ -9,6 +9,7 @@ import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/us
 import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
+import useMedia from 'use-media'
 
 const { Text } = Typography
 
@@ -34,6 +35,7 @@ function SubmitButton(props) {
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
   const { pressEnter } = useTranslation()
+  const IsntDesktop = useMedia({ minWidth: '1024px' })
 
   useKeyPress(
     (e) =>
@@ -65,7 +67,7 @@ function SubmitButton(props) {
     } else onClick?.()
   }
   return (
-    <Row display="flex" v="center" noGutters>
+    <Row display="flex" v="center" mt={!IsntDesktop && 3} noGutters>
       <Col cw="auto" mr={3}>
         <StyledSubmit
           type="primary"
@@ -84,9 +86,11 @@ function SubmitButton(props) {
           )}
         </StyledSubmit>
       </Col>
-      <Col cw="auto">
-        <Text>{pressEnter || 'Press enter'} ↵</Text>
-      </Col>
+      {IsntDesktop && (
+        <Col cw="auto">
+          <Text>{(pressEnter || 'Press enter') + ' ↵'} </Text>
+        </Col>
+      )}
     </Row>
   )
 }
