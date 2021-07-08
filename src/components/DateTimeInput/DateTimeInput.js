@@ -2,7 +2,18 @@ import React from 'react'
 import { DatePicker, message } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
 import { useTranslation } from '../../context/Translation'
+import typeformTheme from '../../../styles/theme'
+import styled from 'styled-components'
 
+const StyledDatePicker = styled(DatePicker)`
+  background-color: ${({ theme }) =>
+    theme?.color?.dark?.t?.lighten7 || typeformTheme?.color?.dark?.t?.lighten7};
+
+  .ant-picker-clear {
+    border-radius: 50%;
+    font-size: 18px;
+  }
+`
 const DateTimeInput = (props) => {
   const { onDateChange, question, currentSlide } = props
 
@@ -34,7 +45,9 @@ const DateTimeInput = (props) => {
     }
   )
 
-  return <DatePicker onChange={onChange} disabled={!onDateChange} {...props} />
+  return (
+    <StyledDatePicker onChange={onChange} disabled={!onDateChange} {...props} />
+  )
 }
 
 export default DateTimeInput
