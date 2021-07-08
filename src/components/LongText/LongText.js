@@ -6,6 +6,7 @@ import { Container } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
 import { globalStyles } from '../../../styles'
+import useMedia from 'use-media'
 
 const { TextArea } = Input
 
@@ -19,6 +20,7 @@ function LongText(props) {
     answerRequiredMessageError,
     longTextInputPlaceholder
   } = useTranslation()
+  const IsntDesktop = useMedia({ minWidth: '1024px' })
 
   useKeyPress(
     (e) =>
@@ -91,7 +93,7 @@ function LongText(props) {
           />
         </Form.Item>
         <Form.Item>
-          <Typography>{explanation}</Typography>
+          <Typography>{IsntDesktop && explanation}</Typography>
         </Form.Item>
       </Form>
 
