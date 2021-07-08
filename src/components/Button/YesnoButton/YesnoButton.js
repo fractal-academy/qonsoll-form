@@ -74,7 +74,7 @@ function YesnoButton(props) {
         question,
         answer
       }
-      onClick && onClick(data)
+      onClick && setTimeout(onClick, 700, data)
     }
   }
   return (

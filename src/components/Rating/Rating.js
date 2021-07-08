@@ -7,14 +7,11 @@ import { useKeyPress } from '@umijs/hooks'
 import { useTranslation } from '../../context/Translation'
 
 const StyledRate = styled(Rate)`
-  ${({ theme }) => `
   &.ant-rate {
     font-size: 40px;
-    color: ${
-      theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
-    };
+    color: ${({ theme }) =>
+      theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
   }
-`}
 `
 function CustomRating(props) {
   const { allowClear, tooltips, onClick, question, currentSlide } = props
@@ -22,11 +19,19 @@ function CustomRating(props) {
 
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
+
+  //[COMPONENT STATE HOOKS]
+
   // [CLEAN FUNCTIONS]
   const onChange = (value) => {
     const data = { question, answer: { value } }
 
-    onClick && onClick(data)
+    // if the data is sent we delay and animate the selected value, else - just go to next question
+    if (!!value) {
+      onClick && setTimeout(onClick, 700, data)
+    } else {
+      onClick?.(data)
+    }
   }
 
   // [ADDITIONAL_HOOKS]
@@ -35,7 +40,7 @@ function CustomRating(props) {
     (event) => {
       if (event.type === 'keyup') {
         !question?.isRequired
-          ? onChange && onChange('')
+          ? onChange?.('')
           : message.error(
               answerRequiredMessageError ||
                 'It`s required question, please answer'
