@@ -10,7 +10,8 @@ import {
   Button,
   Menu,
   Input,
-  Empty
+  Empty,
+  Tooltip
 } from 'antd'
 import useMedia from 'use-media'
 import { globalStyles } from '../../../../../styles'
@@ -121,7 +122,8 @@ function FormsAll(props) {
     formsAllRouteTitle,
     addNewFormButton,
     formSearchPlaceholder,
-    formsCounterDeclaration
+    formsCounterDeclaration,
+    createNewFormTooltip
   } = translations || {}
   const menu = (
     <Menu>
@@ -194,13 +196,17 @@ function FormsAll(props) {
                   </Title>
                 </Col>
                 <Col cw="auto">
-                  <Button
-                    type="primary"
-                    onClick={showModal}
-                    disabled={disableAddButton}
-                    onMouseDown={(e) => e.preventDefault()}>
-                    + {addNewFormButton || 'Add'}
-                  </Button>
+                  <Tooltip
+                    placement="top"
+                    title={createNewFormTooltip || 'Create new form'}>
+                    <Button
+                      type="primary"
+                      onClick={showModal}
+                      disabled={disableAddButton}
+                      onMouseDown={(e) => e.preventDefault()}>
+                      + {addNewFormButton || 'Add'}
+                    </Button>
+                  </Tooltip>
                 </Col>
               </Row>
               <Row noGutters mb={3}>

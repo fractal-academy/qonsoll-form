@@ -92,9 +92,11 @@ function LongText(props) {
             disabled={!onClick}
           />
         </Form.Item>
-        <Form.Item>
-          <Typography>{IsntDesktop && explanation}</Typography>
-        </Form.Item>
+        {IsntDesktop && (
+          <Form.Item style={globalStyles.resetMarginB}>
+            <Typography>{explanation}</Typography>
+          </Form.Item>
+        )}
       </Form>
 
       {/* <SubmitButton /> */}

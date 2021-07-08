@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { globalStyles } from '../../../../styles'
 import { styles } from './PageHeader.styles'
-import { Button, Divider, Typography } from 'antd'
+import { Button, Divider, Tooltip, Typography } from 'antd'
 import { Row, Col, Container } from '@qonsoll/react-design'
 import { ArrowLeftOutlined, EyeOutlined, ReadOutlined } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import { useTranslation } from '../../../context/Translation'
 
 const { Title } = Typography
 
@@ -15,6 +16,8 @@ function PageHeader(props) {
   // [ADDITIONAL HOOKS]
   const { onFormShow } = useActionsFunctionsContext()
   const { onFormResultsShow } = useActionsFunctionsContext()
+  const { formPreviewTooltip } = useTranslation()
+
   // [CLEAN FUNCTIONS]
   const onFormShowDisplay = () => {
     onFormShow?.(id)
@@ -61,12 +64,16 @@ function PageHeader(props) {
         </Col>
 
         <Col cw="auto" v="center">
-          <Button
-            type="text"
-            // shape="circle"
-            icon={<EyeOutlined />}
-            onClick={onFormShowDisplay}
-          />
+          <Tooltip
+            placement="bottom"
+            title={formPreviewTooltip || 'Form preview'}>
+            <Button
+              type="text"
+              // shape="circle"
+              icon={<EyeOutlined />}
+              onClick={onFormShowDisplay}
+            />
+          </Tooltip>
         </Col>
       </Row>
     </Container>

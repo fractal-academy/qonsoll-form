@@ -1,7 +1,8 @@
-import { Popover, Button, Popconfirm } from 'antd'
+import { Popover, Button, Popconfirm, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import { SettingOutlined } from '@ant-design/icons'
 import { QuestionConfigurationPopoverContent } from '../../../../domains/Question/components'
+import { useTranslation } from '../../../../context/Translation'
 
 function QuestionConfigurationPopover(props) {
   const {
@@ -14,6 +15,9 @@ function QuestionConfigurationPopover(props) {
 
   // [COMPONENT STATE HOOKS]
   const [showPopover, setShowPopover] = useState(false)
+
+  // [ADDITIONAL_HOOKS]
+  const { questionConfigurationTooltip } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
@@ -61,11 +65,13 @@ function QuestionConfigurationPopover(props) {
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
         }>
-        <Button
-          type="primary"
-          icon={<SettingOutlined />}
-          onMouseDown={(e) => e.preventDefault()}
-        />
+        <Tooltip title={questionConfigurationTooltip || 'Configure question'}>
+          <Button
+            type="primary"
+            icon={<SettingOutlined />}
+            onMouseDown={(e) => e.preventDefault()}
+          />
+        </Tooltip>
       </Popover>
     </Popconfirm>
   ) : (
@@ -83,12 +89,14 @@ function QuestionConfigurationPopover(props) {
           welcomeScreenShowRule={welcomeScreenShowRule}
         />
       }>
-      <Button
-        type="primary"
-        icon={<SettingOutlined />}
-        onClick={popoverShowChange}
-        onMouseDown={(e) => e.preventDefault()}
-      />
+      <Tooltip title={questionConfigurationTooltip || 'Configure question'}>
+        <Button
+          type="primary"
+          icon={<SettingOutlined />}
+          onClick={popoverShowChange}
+          onMouseDown={(e) => e.preventDefault()}
+        />
+      </Tooltip>
     </Popover>
     // This piece of code to do refactoring in future improvements to make it shorter
   )

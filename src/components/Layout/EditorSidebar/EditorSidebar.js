@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useState, useMemo } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Typography, Button, Popover } from 'antd'
+import { Typography, Button, Popover, Tooltip } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
@@ -39,8 +39,12 @@ function EditorSidebar(props) {
 
   //[CUSTOM HOOKS]
   const { getCollectionRef, setData } = useFunctions()
-  const { editorSidebarEndingsTitle, editorSidebarQuestionsTitle } =
-    useTranslation()
+  const {
+    editorSidebarEndingsTitle,
+    editorSidebarQuestionsTitle,
+    createNewQuestionTooltip,
+    endingCreateTooltip
+  } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -259,12 +263,16 @@ function EditorSidebar(props) {
                     />
                   </Box>
                 }>
-                <Button
-                  type="text"
-                  icon={<PlusOutlined />}
-                  onClick={popoverShowChange}
-                  onMouseDown={(e) => e.preventDefault()}
-                />
+                <Tooltip
+                  placement="bottom"
+                  title={createNewQuestionTooltip || 'Create new question'}>
+                  <Button
+                    type="text"
+                    icon={<PlusOutlined />}
+                    onClick={popoverShowChange}
+                    onMouseDown={(e) => e.preventDefault()}
+                  />
+                </Tooltip>
               </Popover>
             </Col>
 
@@ -298,12 +306,16 @@ function EditorSidebar(props) {
               <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
             </Col>
             <Col cw="auto">
-              <Button
-                // disabled={endings.length >= 1}
-                type="text"
-                icon={<PlusOutlined />}
-                onClick={addQuestion}
-              />
+              <Tooltip
+                placement="topRight"
+                title={endingCreateTooltip || 'Create new ending'}>
+                <Button
+                  // disabled={endings.length >= 1}
+                  type="text"
+                  icon={<PlusOutlined />}
+                  onClick={addQuestion}
+                />
+              </Tooltip>
             </Col>
           </Row>
           <Box {...styles.endingsList}>

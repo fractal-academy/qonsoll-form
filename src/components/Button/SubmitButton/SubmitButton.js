@@ -67,7 +67,7 @@ function SubmitButton(props) {
     } else onClick?.()
   }
   return (
-    <Row display="flex" v="center" noGutters>
+    <Row display="flex" v="center" mt={!IsntDesktop && 3} noGutters>
       <Col cw="auto" mr={3}>
         <StyledSubmit
           type="primary"
@@ -86,9 +86,11 @@ function SubmitButton(props) {
           )}
         </StyledSubmit>
       </Col>
-      <Col cw="auto">
-        <Text>{IsntDesktop && (pressEnter || 'Press enter') + ' ↵'} </Text>
-      </Col>
+      {IsntDesktop && (
+        <Col cw="auto">
+          <Text>{(pressEnter || 'Press enter') + ' ↵'} </Text>
+        </Col>
+      )}
     </Row>
   )
 }
