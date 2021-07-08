@@ -1,14 +1,17 @@
 import React from 'react'
 import { Rate, message } from 'antd'
 import styled from 'styled-components'
-import { Container } from '@qonsoll/react-design'
+import { Container, Col, Row } from '@qonsoll/react-design'
 import typeformTheme from '../../../styles/theme'
 import { useKeyPress } from '@umijs/hooks'
 import { useTranslation } from '../../context/Translation'
+import { StarFilled } from '@ant-design/icons'
+import useMedia from 'use-media'
 
 const StyledRate = styled(Rate)`
   &.ant-rate {
-    font-size: 40px;
+    font-size: ${({ phoneSize, tabletSize }) =>
+      phoneSize ? '24px' : tabletSize ? '45px' : '60px'};
     color: ${({ theme }) =>
       theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
   }
@@ -19,6 +22,8 @@ function CustomRating(props) {
 
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
+  const phoneSize = useMedia({ maxWidth: '430px' })
+  const tabletSize = useMedia({ minWidth: '450px', maxWidth: '1050px' })
 
   //[COMPONENT STATE HOOKS]
 
@@ -61,6 +66,8 @@ function CustomRating(props) {
         tooltips={tooltips}
         onChange={onChange}
         disabled={!onClick}
+        phoneSize={phoneSize}
+        tabletSize={tabletSize}
       />
     </Container>
   )
