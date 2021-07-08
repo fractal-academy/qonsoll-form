@@ -16,12 +16,14 @@ function ChoiceTemplate(props) {
     <>
       {questionConfigurations?.map((item, index) => (
         <Row noGutters mb={2} key={index}>
-          <Col cw={6}>
-            <CustomChoiceBox pl={2} mr={4}>
+          <Col cw={6} style={{ paddingRight: '32px' }}>
+            <CustomChoiceBox px={2}>
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter + index)}</Text>
               </CustomTextBox>
-              {item?.answerOption}
+              <Text ellipsis style={{ textOverflow: 'ellipsis' }}>
+                {item?.answerOption}
+              </Text>
             </CustomChoiceBox>
           </Col>
           <Col cw={6}>

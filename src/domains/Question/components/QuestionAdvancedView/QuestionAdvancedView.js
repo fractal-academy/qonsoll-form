@@ -148,7 +148,7 @@ function QuestionAdvancedView(props) {
               {data?.videoApiKey ? (
                 <VideoPlayer videoKey={data?.videoApiKey} />
               ) : (
-                <Title level={4}>
+                <Title style={{ wordBreak: 'break-word' }} level={4}>
                   {questionNumberRule && `${questionNumber}.`} {data?.title}
                 </Title>
               )}
