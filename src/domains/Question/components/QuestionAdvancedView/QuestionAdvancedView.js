@@ -146,7 +146,15 @@ function QuestionAdvancedView(props) {
           <Row noGutters py={2}>
             <Col cw={12}>
               {data?.videoApiKey ? (
-                <VideoPlayer videoKey={data?.videoApiKey} />
+                <Box
+                  display={'flex'}
+                  flexDirection={'column'}
+                  justifyContent={'center'}>
+                  <Title style={{ wordBreak: 'break-word' }} level={4}>
+                    {questionNumberRule && `${questionNumber}. `}Video question
+                  </Title>
+                  <VideoPlayer videoKey={data?.videoApiKey} />
+                </Box>
               ) : (
                 <Title style={{ wordBreak: 'break-word' }} level={4}>
                   {questionNumberRule && `${questionNumber}.`} {data?.title}

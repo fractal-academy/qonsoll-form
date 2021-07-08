@@ -95,11 +95,14 @@ function ChoiceEditable(props) {
         </MediaBox>
       )}
       <Row noGutters px={2}>
-        <CustomCol cw="auto" v="center">
-          <LetterBox>{letter}</LetterBox>
-        </CustomCol>
-        <ChoiceOptionCol width={withImage ? '130px' : '100%'}>
+        {/*<CustomCol cw="auto" v="center">*/}
+        <LetterBox>{letter}</LetterBox>
+        {/*</CustomCol>*/}
+        <ChoiceOptionCol
+          width={withImage ? '150px' : '100%'}
+          withImage={withImage}>
           <ChoiceInput
+            withImage={withImage}
             maxlength="150"
             value={value}
             onBlur={onBlur}

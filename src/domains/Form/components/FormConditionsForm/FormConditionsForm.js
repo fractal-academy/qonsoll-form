@@ -8,15 +8,10 @@ import { QUESTION_TYPES } from '../../../../constants'
 import { Box } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
-import { Tabs, Empty, Typography } from 'antd'
+import { Tabs, Empty } from 'antd'
 import PropTypes from 'prop-types'
 import { useTranslation } from '../../../../context/Translation'
-import { globalStyles } from '../../../../../styles'
-import {
-  CustomTabPane,
-  EmptyState,
-  CustomTabs
-} from './FormConditionsForm.styles'
+import { EmptyState, CustomTabs } from './FormConditionsForm.styles'
 
 const { TabPane } = Tabs
 
@@ -80,7 +75,10 @@ function FormConditionsForm(props) {
   return (
     <>
       <CustomTabs onChange={onTabChange} type="card">
-        <TabPane tab={conditionsLogicJumpsTab || 'Logic jumps'} key="1">
+        <TabPane
+          tab={conditionsLogicJumpsTab || 'Logic jumps'}
+          key="1"
+          style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
           {data?.length > 0 ? (
             data?.map((item, index) => (
               <Box mb={3}>
@@ -130,6 +128,7 @@ function FormConditionsForm(props) {
           )}
         </TabPane>
         <TabPane
+          style={{ overflowY: 'scroll', overflowX: 'hidden' }}
           tab={
             conditionsAnswersScoreConfigTab || 'Answers score configurations'
           }

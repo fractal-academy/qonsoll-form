@@ -24,6 +24,8 @@ export const MediaBox = styled(Box)(({ theme }) => ({
 
 export const LetterBox = styled(Box)`
   ${({ theme }) => `
+    position: absolute;
+  top: 13px;
   width: 20px;
   border: 1px solid ${
     theme?.color?.primary?.t?.lighten2 ||
@@ -69,7 +71,9 @@ export const DeleteButton = styled(Box)`
 `}
 `
 export const ChoiceInput = styled(TextArea)`
-  cursor: pointer;
+  padding-right: 0px;
+  padding-left: ${({ withImage }) => (withImage ? '8px' : '15px')};
+  cursor: initial;
   color: ${({ theme }) =>
     theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
 `
@@ -78,5 +82,5 @@ export const CustomCol = styled(Col)`
   bottom: 8px;
 `
 export const ChoiceOptionCol = styled(Col)`
-  padding-left: 15px;
+  padding-left: ${({ withImage }) => (withImage ? '0' : '15px')};
 `

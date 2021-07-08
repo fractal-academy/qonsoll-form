@@ -45,6 +45,7 @@ const StyledIcon = styled(FileOutlined)`
   opacity: 0.5;
 `
 const StyledImage = styled(Image)`
+  object-fit: cover;
   border-radius: 8px;
 `
 const StyledBadge = styled(Button)`

@@ -203,7 +203,7 @@ function MediaLibraryModal(props) {
                 <CustomInput
                   allowClear
                   ref={searchRef}
-                  prefix={<SearchOutlined />}
+                  prefix={<SearchOutlined style={{ paddingRight: '10px' }} />}
                   placeholder={
                     searchPlaceholder || 'Search media file by name...'
                   }
