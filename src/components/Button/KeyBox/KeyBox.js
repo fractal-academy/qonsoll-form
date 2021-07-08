@@ -19,7 +19,7 @@ const StyledKeybox = styled(Col)`
   text-align: center;
   border-style: solid;
   border-color: ${({ theme }) =>
-    theme?.color?.primary?.default || typeformTheme};
+    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
   color: ${({ isActive, theme }) =>
     isActive &&
     (theme?.color?.white?.default || typeformTheme?.color?.white?.default)};
