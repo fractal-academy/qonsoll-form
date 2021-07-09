@@ -52,7 +52,7 @@ function FormShow(props) {
     ) &&
       0) ||
     1
-
+  console.log(data)
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(firstSlideRule)
@@ -95,7 +95,7 @@ function FormShow(props) {
             {loading ? (
               <Spinner />
             ) : (
-              <Box>
+              <Box height="inherit">
                 {/* <Row {...styles.headerRow} noGutters>
                  <Col cw="auto" v="center" p={0}>
                    <Button

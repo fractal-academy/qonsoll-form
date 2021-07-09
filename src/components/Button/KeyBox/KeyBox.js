@@ -12,9 +12,9 @@ import { blinkBackground } from '../../../animation'
 
 const { Text } = Typography
 
-const StyledKeybox = styled(Col)`
+const StyledKeybox = styled(Box)`
   position: absolute;
-  bottom: 8px;
+  top: ${({ hasImages }) => (hasImages ? '15px' : '8px')};
   border-width: 1px;
   text-align: center;
   border-style: solid;
@@ -30,7 +30,7 @@ const StyledKeybox = styled(Col)`
       ? theme?.color?.primary?.default || typeformTheme?.color?.white?.default
       : theme?.color?.white?.default || typeformTheme?.color?.white?.default};
   width: ${({ isHovering, phoneSmall }) =>
-    isHovering && !phoneSmall ? '65px !important' : '26px !important'};
+    isHovering && !phoneSmall ? '66px !important' : '26px !important'};
 `
 const ImageContainer = styled(Box)`
   width: 100%;
@@ -69,7 +69,8 @@ const StyledButton = styled(Box)`
 const StyledText = styled(Text)`
   width: ${({ hasImages, phoneSmall }) =>
     hasImages ? (phoneSmall ? '100%' : '15ch') : '100%'};
-  padding-left: 30px;
+  padding-left: ${({ hasImages }) => (hasImages ? '0' : '30px')};
+  word-break: break-word;
 `
 
 // const StyledBadge = styled(Button)`
@@ -114,6 +115,7 @@ function KeyBox(props) {
               isHovering={isHovering}
               phoneSmall={phoneSmall}
               isActive={isActive}
+              hasImages={hasImages}
               mr={1}>
               {isHovering && !phoneSmall ? `Key ${letter}` : letter}
             </StyledKeybox>

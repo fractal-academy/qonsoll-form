@@ -1,6 +1,8 @@
-import { Select } from 'antd'
+import { Select, Typography } from 'antd'
 import styled from 'styled-components'
 import typeformTheme from '../../../../../styles/theme'
+
+const { Text } = Typography
 
 export const StyledSelect = styled(Select)`
   ${({ theme }) => `
@@ -11,7 +13,11 @@ export const StyledSelect = styled(Select)`
     border-radius: 50%;
     font-size: 14px;
   }
+  &:hover .ant-select-arrow {
+    opacity: 0;
+  }
   .ant-select-selector {
+    cursor: pointer !important;
     background-color: ${
       theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9
     } !important;
@@ -20,4 +26,11 @@ export const StyledSelect = styled(Select)`
     } !important;
   }
 `}
+`
+
+export const StyledCaptionText = styled(Text)`
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0px;
 `

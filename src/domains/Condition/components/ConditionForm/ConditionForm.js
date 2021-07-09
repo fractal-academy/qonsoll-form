@@ -14,6 +14,7 @@ import {
   PlaneLongTextStringTemplate,
   PlaneShortTextStringTemplate
 } from '../../../../domains/Condition/components/ConditionTemplates'
+import Text from 'antd/es/typography/Text'
 
 function ConditionForm(props) {
   const {
@@ -60,9 +61,7 @@ function ConditionForm(props) {
   return (
     <NumberedCard number={index + 1} key={index}>
       <Box ml={3}>
-        <Title level={5} strong>
-          {item?.title}
-        </Title>
+        <Text level={5}>{item?.title}</Text>
         {cloneElement(questionTypesMap[item?.questionType].component, {
           ...item,
           addCondition: (answer) => addCondition(answer, index),
