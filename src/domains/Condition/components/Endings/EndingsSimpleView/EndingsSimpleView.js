@@ -19,6 +19,12 @@ const StyledTag = styled(Tag)`
   font-size: ${({ theme }) => theme.typography.fontSize.body1};
   margin-right: 10px !important;
 `
+const StyledSelect = styled(Select)`
+  .ant-select-clear {
+    border-radius: 50%;
+    font-size: 14px;
+  }
+`
 
 const { Option, OptGroup } = Select
 let startLetter = 65
@@ -59,10 +65,9 @@ function EndingSimpleView(props) {
         <Title style={{ overflow: 'ellipsis' }} level={5}>
           {item?.title}
         </Title>
-        <Select
-          listHeight="350px"
+        <StyledSelect
+          listHeight="300px"
           allowClear
-          clearIcon={<DeleteOutlined />}
           style={{ width: '100%' }}
           mode="multiple"
           placeholder={
@@ -108,7 +113,7 @@ function EndingSimpleView(props) {
               )}
             </OptGroup>
           ))}
-        </Select>
+        </StyledSelect>
       </Box>
     </NumberedCard>
   )
