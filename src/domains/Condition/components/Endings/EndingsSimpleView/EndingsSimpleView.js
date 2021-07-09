@@ -9,6 +9,7 @@ import { DeleteOutlined } from '@ant-design/icons'
 import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
+import Text from 'antd/es/typography/Text'
 
 const StyledTag = styled(Tag)`
   background-color: ${({ theme }) => theme.color.primary.t.lighten5};
@@ -17,6 +18,12 @@ const StyledTag = styled(Tag)`
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: ${({ theme }) => theme.typography.fontSize.body1};
   margin-right: 10px !important;
+`
+const StyledSelect = styled(Select)`
+  .ant-select-clear {
+    border-radius: 50%;
+    font-size: 14px;
+  }
 `
 
 const { Option, OptGroup } = Select
@@ -55,12 +62,12 @@ function EndingSimpleView(props) {
   return (
     <NumberedCard number={index + 1} key={index}>
       <Box ml={3}>
-        <Title level={5} strong>
+        <Title style={{ overflow: 'ellipsis' }} level={5}>
           {item?.title}
         </Title>
-        <Select
+        <StyledSelect
+          listHeight="300px"
           allowClear
-          clearIcon={<DeleteOutlined />}
           style={{ width: '100%' }}
           mode="multiple"
           placeholder={
@@ -75,8 +82,12 @@ function EndingSimpleView(props) {
               key={index}
               label={
                 <>
-                  <StyledTag>{questionListItem?.order}</StyledTag>
-                  {questionListItem?.title || questionListItem?.order}
+                  <StyledTag style={{ marginLeft: '-10px' }}>
+                    {questionListItem?.order}
+                  </StyledTag>
+                  <Text type="secondary">
+                    {questionListItem?.title || questionListItem?.order}
+                  </Text>
                 </>
               }>
               {questionListItem?.questionConfigurations?.map(
@@ -93,7 +104,7 @@ function EndingSimpleView(props) {
                         {questionAnswerItem?.answerOption || '-'}
                       </>
                     }>
-                    <StyledTag>
+                    <StyledTag style={{ fontSize: '12px', marginLeft: '10px' }}>
                       {String.fromCharCode(startLetter + ind)}
                     </StyledTag>
                     {questionAnswerItem?.answerOption || '-'}
@@ -102,7 +113,7 @@ function EndingSimpleView(props) {
               )}
             </OptGroup>
           ))}
-        </Select>
+        </StyledSelect>
       </Box>
     </NumberedCard>
   )

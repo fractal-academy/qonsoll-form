@@ -27,6 +27,7 @@ import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import { TranslationContext } from '../../../../context/Translation'
 import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import { StyledBox } from './FormsAll.styles'
 
 const { Title, Text } = Typography
 
@@ -146,7 +147,7 @@ function FormsAll(props) {
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={translations || {}}>
           <TypeformConfigurationContext.Provider value={configurations}>
-            <Box {...styles.mainWrapper}>
+            <StyledBox mobileLayout={mobileLayout}>
               {/* Page Header */}
               {!firstLevelHidden && (
                 <Row noGutters display="flex">
@@ -255,7 +256,7 @@ function FormsAll(props) {
                   {childrenModal}
                 </FormSimpleFormWithModal>
               </Box>
-            </Box>
+            </StyledBox>
           </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>

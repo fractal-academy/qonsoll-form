@@ -61,7 +61,9 @@ function ConditionForm(props) {
   return (
     <NumberedCard number={index + 1} key={index}>
       <Box ml={3}>
-        <Text level={5}>{item?.title}</Text>
+        <Box mb={2}>
+          <Title level={5}>{item?.title}</Title>
+        </Box>
         {cloneElement(questionTypesMap[item?.questionType].component, {
           ...item,
           addCondition: (answer) => addCondition(answer, index),

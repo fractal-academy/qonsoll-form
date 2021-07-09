@@ -21,9 +21,7 @@ function ChoiceTemplate(props) {
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter + index)}</Text>
               </CustomTextBox>
-              <Text ellipsis style={{ textOverflow: 'ellipsis' }}>
-                {item?.answerOption}
-              </Text>
+              <Text ellipsis>{item?.answerOption}</Text>
             </CustomChoiceBox>
           </Col>
           <Col cw={6}>

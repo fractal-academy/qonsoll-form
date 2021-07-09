@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../../styles/theme'
+import Text from 'antd/lib/typography/Text'
+import React from 'react'
 
 export const CustomChoiceBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -15,6 +17,7 @@ export const CustomChoiceBox = styled(Box)(({ theme }) => ({
 }))
 
 export const CustomTextBox = styled(Box)(({ theme }) => ({
+  maxWidth: '100%',
   minWidth: '30px',
   display: 'flex',
   justifyContent: 'center',

@@ -36,6 +36,8 @@ export const MediaBox = styled(Box)(({ theme }) => ({
 
 export const LetterBox = styled(Box)`
   ${({ theme }) => `
+    position: absolute;
+  top: 13px;
   width: 20px;
   border: 1px solid ${
     theme?.color?.primary?.t?.lighten2 ||
@@ -90,5 +92,5 @@ export const CustomCol = styled(Col)`
   bottom: 8px;
 `
 export const ChoiceOptionCol = styled(Col)`
-  padding-left: 15px;
+  padding-left: ${({ withImage }) => (withImage ? '0' : '15px')};
 `
