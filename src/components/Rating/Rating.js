@@ -1,20 +1,20 @@
 import React from 'react'
 import { Rate, message } from 'antd'
 import styled from 'styled-components'
-import { Container } from '@qonsoll/react-design'
+import { Container, Col, Row } from '@qonsoll/react-design'
 import typeformTheme from '../../../styles/theme'
 import { useKeyPress } from '@umijs/hooks'
 import { useTranslation } from '../../context/Translation'
+import { StarFilled } from '@ant-design/icons'
+import useMedia from 'use-media'
 
 const StyledRate = styled(Rate)`
-  ${({ theme }) => `
   &.ant-rate {
-    font-size: 40px;
-    color: ${
-      theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
-    };
+    font-size: ${({ phoneSize, tabletSize }) =>
+      phoneSize ? '24px' : tabletSize ? '45px' : '60px'};
+    color: ${({ theme }) =>
+      theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
   }
-`}
 `
 function CustomRating(props) {
   const { allowClear, tooltips, onClick, question, currentSlide } = props
@@ -22,11 +22,21 @@ function CustomRating(props) {
 
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
+  const phoneSize = useMedia({ maxWidth: '430px' })
+  const tabletSize = useMedia({ minWidth: '450px', maxWidth: '1050px' })
+
+  //[COMPONENT STATE HOOKS]
+
   // [CLEAN FUNCTIONS]
   const onChange = (value) => {
     const data = { question, answer: { value } }
 
-    onClick && onClick(data)
+    // if the data is sent we delay and animate the selected value, else - just go to next question
+    if (!!value) {
+      onClick && setTimeout(onClick, 700, data)
+    } else {
+      onClick?.(data)
+    }
   }
 
   // [ADDITIONAL_HOOKS]
@@ -35,7 +45,7 @@ function CustomRating(props) {
     (event) => {
       if (event.type === 'keyup') {
         !question?.isRequired
-          ? onChange && onChange('')
+          ? onChange?.('')
           : message.error(
               answerRequiredMessageError ||
                 'It`s required question, please answer'
@@ -56,6 +66,8 @@ function CustomRating(props) {
         tooltips={tooltips}
         onChange={onChange}
         disabled={!onClick}
+        phoneSize={phoneSize}
+        tabletSize={tabletSize}
       />
     </Container>
   )
