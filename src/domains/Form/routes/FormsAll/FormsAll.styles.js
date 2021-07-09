@@ -13,12 +13,6 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  mainWrapper: {
-    // flexDirection: 'column',
-    // px: 45,
-    // py: 4,
-    // minHeight: '100%'
   }
 }
 export const StyledBox = styled(Box)`
@@ -28,7 +22,4 @@ export const StyledBox = styled(Box)`
   padding-right: ${({ mobileLayout }) => (mobileLayout ? '45px' : '20px')};
   padding-top: 4px;
   padding-bottom: 4px;
-  //width: ${({ phoneSmall }) => (phoneSmall ? '100%' : '15ch')};
-  //padding-left: ${({ hasImages }) => (hasImages ? '0' : '30px')};
-  //word-break: break-word;
 `
