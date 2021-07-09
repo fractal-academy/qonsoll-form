@@ -78,7 +78,7 @@ function ChoiceButton(props) {
         answer: !hasImages ? answer : { ...answer, image: choice?.image || '' }
       }
 
-      onClick && onClick(data)
+      onClick && setTimeout(onClick, 700, data)
     }
   }
   const phoneSize = useMedia({ maxWidth: '500px' })

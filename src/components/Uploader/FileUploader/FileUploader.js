@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
-import { Upload, message } from 'antd'
-import { Text } from 'antd-styled'
+import { Upload, message, Progress, Button, Popconfirm, Typography } from 'antd'
 import { IconLabel, SubmitButton } from '../../../components'
-import { Box } from '@qonsoll/react-design'
-import { InboxOutlined } from '@ant-design/icons'
+import { Box, Row, Col } from '@qonsoll/react-design'
+import { DeleteOutlined, InboxOutlined, FileOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../context/Translation'
 // import storage from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
 import useFunctions from '../../../hooks/useFunctions'
-import { useKeyPress } from '@umijs/hooks'
+import { useKeyPress, useHover } from '@umijs/hooks'
+import { UploadItem } from './FileUploader.styles'
 
 const { Dragger } = Upload
+const { Text } = Typography
 
 const config = {
   name: 'file',
@@ -24,15 +25,16 @@ const UploadArea = (props) => {
   const {
     answerRequiredMessageError,
     fileUploaderTitle,
-    fileUploaderSubtitle
+    fileUploaderSubtitle,
+    deleteUploadedItemTitle
   } = useTranslation()
   const { getCollectionRef, storage } = useFunctions()
+  const [isHovering, hoverRef] = useHover()
 
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
-  // [COMPUTED PROPERTIES]
 
-  const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
+  // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   // const onMediaUploaded = (data) => {
@@ -44,17 +46,22 @@ const UploadArea = (props) => {
 
   const onChange = (data) => {
     const { file } = data
+
+    const fileId = getCollectionRef(COLLECTIONS.ANSWERS).doc().id
+
     const currentFile = {
       name: file?.name,
       status: 'uploading',
       percent: 0,
       uid: file?.uid
     }
+
     currentFile?.name &&
       setFilesList((files) => ({ ...files, [currentFile.uid]: currentFile }))
 
     const ref = storage.ref('files').child(file?.uid)
     const uploadFile = ref.put(file)
+
     uploadFile.on(
       'state_changed',
       (snapshot) => {
@@ -62,18 +69,19 @@ const UploadArea = (props) => {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         ).toFixed(0)
+
         // Update item while it uploading
-        const currentFile = {
-          name: uploadFile?.name,
+        const updatedCurrentFile = {
+          name: file?.name,
           status: 'uploading',
-          percent: progress,
-          uid: uploadFile?.uid
+          uid: file?.uid,
+          percent: progress
         }
-        currentFile?.name &&
-          setFilesList((files) => ({
-            ...files,
-            [currentFile?.uid]: currentFile
-          }))
+
+        setFilesList((files) => ({
+          ...files,
+          [updatedCurrentFile?.uid]: updatedCurrentFile
+        }))
       },
       (error) => {
         // Handle error during the upload
@@ -124,7 +132,7 @@ const UploadArea = (props) => {
       })
   }
 
-  const onAply = () => {
+  const onApply = () => {
     const uploaderData = !!Object.keys(filesList).length ? filesList : ''
     const data = {
       question,
@@ -144,7 +152,7 @@ const UploadArea = (props) => {
     (event) => event.keyCode === 13 && currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
-        onAply()
+        onApply()
       }
     },
     {
@@ -153,34 +161,62 @@ const UploadArea = (props) => {
   )
 
   return (
-    <Box flexDirection="column">
+    <Box flexDirection="column" p={2}>
       <Dragger
         {...config}
         {...props}
-        onRemove={onRemove}
         customRequest={onChange}
-        fileList={Object.values(filesList)}
+        fileList={[]}
         disabled={!onContinue}>
-        <Box onMouseDown={(e) => e.preventDefault()}>
+        <Box onMouseDown={(e) => e.preventDefault()} ref={hoverRef}>
           <Box display="flex" justifyContent="center">
-            <IconLabel disabled={!onContinue}>
-              <InboxOutlined />
+            <IconLabel disabled={!onContinue} isHovering={isHovering}>
+              <InboxOutlined style={{ fontSize: '24px' }} />
             </IconLabel>
           </Box>
-          <Box textAlign="center">
+          <Box textAlign="center" mt={2}>
             <Text>
               {fileUploaderTitle || 'Click or drag file to this area to upload'}
-            </Text>
-          </Box>
-          <Box textAlign="center">
-            <Text type="secondary">
-              {fileUploaderSubtitle || 'Upload files'}
             </Text>
           </Box>
         </Box>
       </Dragger>
       <Box mt={3}>
-        <SubmitButton onClick={onAply} disablePressEnter />
+        {Object.values(filesList)?.map((file) => (
+          <UploadItem my={1} py={2} px={3}>
+            <Row noGutters>
+              <Col cw="auto" v="center" mr={2}>
+                <FileOutlined />
+              </Col>
+              <Col v="center">
+                <Text style={{ wordBreak: 'break-all' }}>{file?.name}</Text>
+              </Col>
+              <Col cw="auto" v="center">
+                {file?.percent ? (
+                  <Progress type="circle" percent={file?.percent} width={24} />
+                ) : (
+                  <Popconfirm
+                    onConfirm={() => onRemove(file)}
+                    title={deleteUploadedItemTitle || 'Delete this item?'}
+                    okType="danger"
+                    okText="Delete">
+                    <Button
+                      shape="circle"
+                      type="text"
+                      color="red"
+                      size="small"
+                      danger>
+                      <DeleteOutlined />
+                    </Button>
+                  </Popconfirm>
+                )}
+              </Col>
+            </Row>
+          </UploadItem>
+        ))}
+      </Box>
+      <Box mt={3}>
+        <SubmitButton onClick={onApply} disablePressEnter />
       </Box>
     </Box>
   )

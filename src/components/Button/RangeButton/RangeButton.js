@@ -1,12 +1,13 @@
 import { Button, message } from 'antd'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { Row, Col } from '@qonsoll/react-design'
 import useMedia from 'use-media'
 import typeformTheme from '../../../../styles/theme'
 import { useTranslation } from '../../../context/Translation'
+import { blinkBackground } from '../../../animation'
 
 const StyledRangeButton = styled(Button)`
   ${({ theme, isActive }) => `
@@ -24,13 +25,16 @@ const StyledRangeButton = styled(Button)`
   color: ${
     isActive
       ? theme?.color?.white?.default || typeformTheme?.color?.white?.default
-      : theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
+      : theme?.color?.primary?.t?.lighten1 ||
+        typeformTheme?.color?.primary?.t?.lighten1
   };
 
   &:hover {
     color: ${
-      isActive &&
-      (theme?.color?.white?.default || typeformTheme?.color?.white?.default)
+      isActive
+        ? theme?.color?.white?.default || typeformTheme?.color?.white?.default
+        : theme?.color?.primary?.t?.lighten1 ||
+          typeformTheme?.color?.primary?.t?.lighten1
     };
     border-color: ${
       isActive &&
@@ -38,11 +42,18 @@ const StyledRangeButton = styled(Button)`
     };
     background-color: ${
       isActive
-        ? theme?.color?.primary?.t?.lighten1 ||
-          typeformTheme?.color?.primary?.t?.lighten1
+        ? theme?.color?.primary?.t?.lighten2 ||
+          typeformTheme?.color?.primary?.t?.lighten2
         : theme?.color?.primary?.t?.lighten3 ||
           typeformTheme?.color?.primary?.t?.lighten3
     };
+  }
+  ${blinkBackground}
+  ${
+    isActive &&
+    css`
+      animation: blinkBackground 0.5s ease;
+    `
   }
 `}
 `
@@ -99,7 +110,7 @@ function RangeButton(props) {
         question,
         answer: { value: number }
       }
-      onClick && onClick(data)
+      onClick && setTimeout(onClick, 700, data)
     }
   }
 
