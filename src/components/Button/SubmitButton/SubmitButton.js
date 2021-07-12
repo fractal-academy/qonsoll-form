@@ -57,8 +57,8 @@ function SubmitButton(props) {
   const onButtonClick = () => {
     if (finish) {
       const updatedAnswers = { formId, answers }
-      // console.log(updatedAnswers)
       console.log(Object.values(answers))
+
       //This part for future improvements - add answer for answer layout
       // Object.values(answers)?.map((questionWithAnswer, index) => {})
 

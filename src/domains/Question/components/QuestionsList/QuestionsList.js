@@ -93,7 +93,7 @@ function QuestionsList(props) {
   const filteredDataSource = dataSource?.filter(
     (item) => item.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   )
-  const sortable = filteredDataSource.length > 1
+  const sortable = filteredDataSource?.length > 1
 
   return (
     <>
@@ -105,6 +105,7 @@ function QuestionsList(props) {
                 {...item}
                 number="W"
                 action={handleDelete}
+                disableDelete={disableDelete}
                 onClick={() => onItemClick(item)}></QuestionSimpleView>
             </Box>
           )

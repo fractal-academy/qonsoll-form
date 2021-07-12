@@ -1,4 +1,4 @@
-import { List } from 'antd'
+import { List, Empty } from 'antd'
 import arrayMove from 'array-move'
 import styled from 'styled-components'
 import SortableItem from './SortableItem'
@@ -57,6 +57,7 @@ function DragableList(props) {
       <List
         {...args}
         dataSource={sortableItems}
+        locale={{ emptyText: ' ' }}
         renderItem={(item, index) => (
           <SortableWrapper key={`item-${index}`} index={index}>
             {renderItem ? renderItem(dataSource[item], index) : item}

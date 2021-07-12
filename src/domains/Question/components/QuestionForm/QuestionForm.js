@@ -141,6 +141,15 @@ function QuestionForm(props) {
           />
         )
       }>
+      {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
+        <Box position="absolute" right="48px">
+          <QuestionMediaPopover
+            brightnessValue={questionData?.brightnessValue || brightnessValue}
+            setBrightnessValue={setBrightnessValue}
+            MediaModalButtonBackground={popoverImage}
+          />
+        </Box>
+      )}
       {!!Object.keys(currentQuestion).length && (
         <CustomRow noGutters>
           <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 8]}>
@@ -158,7 +167,7 @@ function QuestionForm(props) {
                     />
                   </Col>
                 )}
-                {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
+                {/* {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
                   <Col cw="auto" ml={2}>
                     <QuestionMediaPopover
                       brightnessValue={
@@ -168,7 +177,7 @@ function QuestionForm(props) {
                       MediaModalButtonBackground={popoverImage}
                     />
                   </Col>
-                )}
+                )} */}
               </Row>
               <Row noGutters h="between" mb={4}>
                 <QuestionHeaderCol cw="12" mt={2}>

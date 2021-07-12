@@ -83,6 +83,7 @@ function ShortText(props) {
               shortTextInputPlaceholder || 'Type your answer here...'
             }
             onPressEnter={onFocusedKeyPress}
+            disabled={!onClick}
           />
         </Form.Item>
       </Form>

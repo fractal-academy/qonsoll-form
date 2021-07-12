@@ -1,14 +1,13 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { Col, Row } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
-import { IconRoundContainer } from '../../../../components'
 import { useTranslation } from '../../../../context/Translation'
 import {
   QuestionsTypeMenu,
-  QuestionMenuItem,
-  Description
+  QuestionMenuItem
 } from './QuestionTypeSelect.styles'
 import {
   CalendarOutlined,
@@ -22,6 +21,10 @@ import {
   StarOutlined,
   UploadOutlined
 } from '@ant-design/icons'
+
+const StyledText = styled(Text)`
+  cursor: pointer !important;
+`
 
 function QuestionTypeSelect(props) {
   const { questionData, onClick, welcomeScreenShowRule, customQuestionTypes } =
@@ -114,34 +117,18 @@ function QuestionTypeSelect(props) {
   ).length
 
   return (
-    <Row
-      h="center"
-      v="center"
-      pl={2}
-      noGutters
-      display="flex"
-      style={{ flex: '1' }}>
+    <Row noGutters pl={1}>
       <Col display="block">
         <QuestionsTypeMenu>
           {updatedMap?.map((item) => (
             <QuestionMenuItem key={item.type} onClick={onClick}>
-              <Row noGutters v="center">
-                <Col v="center" cw="auto" mr={2}>
-                  <IconRoundContainer>{item.icon}</IconRoundContainer>
+              <Row h="center" v="center" noGutters>
+                <Col cw="auto" ml={2} mr={3}>
+                  {item.icon}
                 </Col>
-                <Col display="block">
-                  <Row noGutters>
-                    <Col v="center">
-                      <Text strong>{item.type}</Text>
-                    </Col>
-                  </Row>
-                  <Row noGutters>
-                    <Col>
-                      <Description type="secondary">
-                        {item.description}
-                      </Description>
-                    </Col>
-                  </Row>
+                <Col display="grid">
+                  {item.type}
+                  <StyledText disabled> {item.description}</StyledText>
                 </Col>
               </Row>
             </QuestionMenuItem>

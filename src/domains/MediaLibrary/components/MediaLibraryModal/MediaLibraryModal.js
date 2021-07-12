@@ -1,8 +1,8 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
 import theme from '../../../../../styles/theme'
-import { Row, Col } from '@qonsoll/react-design'
-import { SearchOutlined } from '@ant-design/icons'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import { SearchOutlined, EditOutlined } from '@ant-design/icons'
 import { StaticList } from '../../../../components'
 import useFunctions from '../../../../hooks/useFunctions'
 import React, { useEffect, useRef, useState } from 'react'
@@ -138,9 +138,12 @@ function MediaLibraryModal(props) {
   return (
     <>
       <CustomButton {...btnProps} onClick={modalStateChange}>
-        <CustomChangeButtonText>
+        <Box display="flex">
+          <Box mr={2}>
+            <EditOutlined />
+          </Box>
           {changeButton || 'Change'}
-        </CustomChangeButtonText>
+        </Box>
       </CustomButton>
       <Modal
         visible={isModalVisible}

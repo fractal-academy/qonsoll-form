@@ -42,15 +42,19 @@ function QuestionConfigurationPopoverContent(props) {
   }
   return (
     <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
-      <PopoverSwitcherRow noGutters p={2} onClick={changeQuestionConfigState}>
+      <PopoverSwitcherRow
+        noGutters
+        py={2}
+        h="between"
+        onClick={changeQuestionConfigState}>
         <Col v="center" cw="auto" order={isQuestionConfig ? 1 : 3}>
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>
-        <Col order={2} ml={2}>
+        <Col cw="auto" order={2}>
           <Title level={4}>
             {isQuestionConfig
-              ? currentQuestion?.questionType
-              : typeConfiguration || 'Question Type'}
+              ? `${currentQuestion?.questionType} settings`
+              : typeConfiguration || 'Question types'}
           </Title>
         </Col>
       </PopoverSwitcherRow>

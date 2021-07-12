@@ -47,15 +47,14 @@ function MediaLibrarySimpleView(props) {
           }}
           onContinue={onMediaModalContinue}
           btnProps={{
-            type: 'primary',
-            icon: <EditOutlined />
+            type: 'primary'
           }}
         />
       </CustomBox>
-      <Box mb={32}>
+      {/* <Box mb={32}>
         <CustomText>{imageName || 'Image name'}</CustomText>
         <Input placeholder={imageInputPlaceholder || 'Enter name here...'} />
-      </Box>
+      </Box> */}
       <CustomText>{brightness || 'Brightness'}</CustomText>
       <Box>
         <RangeSlider

@@ -43,20 +43,18 @@ export const ContentBox = styled(Box)`
 export const NumberBox = styled(Box)`
   ${({ theme }) => `
   position: absolute;
-  padding-right: 4px;
   top: 25px;
-  left: 4px;
-  width: 20px;
+  width: 24px;
   height: 22px;
   z-index: 600;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   text-align: center;
   color: ${
-    theme?.color?.white?.t?.lighten1 || typeformTheme?.color?.white?.t?.lighten1
+    theme?.color?.white?.lighten1 || typeformTheme?.color?.white?.t?.lighten1
   };
   background-color: ${
-    theme?.color?.dark?.t?.lighten1 || typeformTheme?.color?.dark?.t?.lighten1
+    theme?.color?.dark?.lighten1 || typeformTheme?.color?.dark?.t?.lighten1
   };
 `}
 `

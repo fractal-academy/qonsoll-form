@@ -1,11 +1,35 @@
+import useMedia from 'use-media'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { useSize } from '@umijs/hooks'
 import { QUESTION_TYPES } from '../../constants'
+import typeformTheme from '../../../styles/theme'
+import React, { cloneElement, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel } from 'antd'
 import { useAnswersContext } from '../../context/Answers'
-import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import React, { cloneElement, useRef, useState } from 'react'
+import {
+  UpOutlined,
+  DownOutlined,
+  DoubleRightOutlined
+} from '@ant-design/icons'
+
+const SecondIcon = styled(DoubleRightOutlined)`
+  margin-left: -5px;
+`
+
+const PromptBox = styled(Box)`
+  // right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  padding: 4px;
+  position: absolute;
+  background-color: ${({ theme }) =>
+    theme?.color?.white?.t?.lighten2 ||
+    typeformTheme?.color?.white?.t?.lighten2};
+`
 
 function Carousel(props) {
   const {
@@ -29,6 +53,7 @@ function Carousel(props) {
 
   const [{ height }, ref] = useSize()
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
+  const handleSmallScreen = useMedia({ minWidth: '900px' })
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
@@ -148,30 +173,37 @@ function Carousel(props) {
           })
         )}
       </AntdCarousel>
-      {!submitLoading && (
-        <Box ref={buttonsRef}>
-          <Row h="right" p={2} noGutters>
-            <Col cw="auto" mr={2}>
-              <Button
-                disabled={disabledUp}
-                type="primary"
-                onClick={previous}
-                onMouseDown={(e) => e.preventDefault()}>
-                <UpOutlined />
-              </Button>
-            </Col>
-            <Col cw="auto">
-              <Button
-                disabled={disabledDown}
-                type="primary"
-                onClick={next}
-                onMouseDown={(e) => e.preventDefault()}>
-                <DownOutlined />
-              </Button>
-            </Col>
-          </Row>
-        </Box>
-      )}
+      <Box ref={buttonsRef}>
+        {handleSmallScreen ? (
+          !submitLoading && (
+            <Row h="right" p={2} noGutters>
+              <Col cw="auto" mr={2}>
+                <Button
+                  disabled={disabledUp}
+                  type="primary"
+                  onClick={previous}
+                  onMouseDown={(e) => e.preventDefault()}>
+                  <UpOutlined />
+                </Button>
+              </Col>
+              <Col cw="auto">
+                <Button
+                  disabled={disabledDown}
+                  type="primary"
+                  onClick={next}
+                  onMouseDown={(e) => e.preventDefault()}>
+                  <DownOutlined />
+                </Button>
+              </Col>
+            </Row>
+          )
+        ) : (
+          <PromptBox mb={3}>
+            <DoubleRightOutlined />
+            <SecondIcon />
+          </PromptBox>
+        )}
+      </Box>
     </Box>
   )
 }
