@@ -32,11 +32,11 @@ function Carousel(props) {
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
-    const isContainWelcomeScreen = sortedData?.some(
+    const containWelcomeScreen = sortedData?.some(
       (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
     )
 
-    setCurrentSlide(isContainWelcomeScreen ? slideIndex : slideIndex + 1)
+    setCurrentSlide(containWelcomeScreen ? slideIndex : slideIndex + 1)
   }
 
   //[ LOGIC JUMPS ]
@@ -91,13 +91,6 @@ function Carousel(props) {
     goTo()
   }
 
-  //COMPUTED PROPERTIES
-  // const initialSlide = sortedData.some(
-  //   (question) => question.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  // )
-  //   ? 0
-  //   : 1
-
   const actionRuleMap = {
     // [ CHOICES ]
     [QUESTION_TYPES.CHOICE]: {
@@ -139,7 +132,6 @@ function Carousel(props) {
     <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
       <AntdCarousel
         dots={false}
-        // initialSlide={initialSlide}
         adaptiveHeight
         ref={carouselRef}
         dotPosition="right"

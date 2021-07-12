@@ -217,7 +217,7 @@ function EditorSidebar(props) {
         : [],
     [questions]
   )
-  const isContainWelcomeScreen = useMemo(
+  const containWelcomeScreen = useMemo(
     () =>
       !!questions?.filter(
         (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
@@ -230,7 +230,7 @@ function EditorSidebar(props) {
     endings?.map((item, index) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
-        order: isContainWelcomeScreen
+        order: containWelcomeScreen
           ? questions?.length + index
           : questions?.length + index + 1
       })
