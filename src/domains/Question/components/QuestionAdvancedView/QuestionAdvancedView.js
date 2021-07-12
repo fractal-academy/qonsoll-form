@@ -123,9 +123,16 @@ function QuestionAdvancedView(props) {
         }
       : {})
   }
-  const heightSmallDevices = useMedia({ maxWidth: '768px' })
-  const deviceImageHeight = (heightSmallDevices && '40%') || '100%'
-  const devicePadding = (heightSmallDevices && 2) || 4
+  const widthTablet = useMedia({ maxWidth: '832px' })
+  const deviceImageHeight = (widthTablet && '40%') || '100%'
+  const devicePadding = (widthTablet && 2) || 4
+
+  const tabletImageCheck = widthTablet
+    ? imageShowRule
+      ? 'start'
+      : 'center'
+    : 'center'
+
   const questionNumberRule =
     data?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
 
@@ -138,7 +145,10 @@ function QuestionAdvancedView(props) {
           imageBrightness={data?.imageBrightness || 0}
         />
       )}
-      <Col {...styles.questionCardColumnStyle} cw={[12, 12, 6, 6]}>
+      <Col
+        {...styles.questionCardColumnStyle}
+        cw={[12, 12, 6, 6]}
+        alignSelf={tabletImageCheck}>
         <StyledBox
           pl={devicePadding}
           bordered={false}
@@ -168,11 +178,11 @@ function QuestionAdvancedView(props) {
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row noGutters mb={3} h={heightSmallDevices && 'center'}>
+            <Row noGutters mb={3} h={widthTablet && 'center'}>
               <Col cw="auto">
                 <QuestionImageContainer
                   layoutType={layoutType?.type}
-                  heightSmallDevices={heightSmallDevices}
+                  widthTablet={widthTablet}
                   {...layoutType.imgSize}
                   image={data?.image}
                   imageBrightness={data?.imageBrightness || 0}
@@ -187,11 +197,11 @@ function QuestionAdvancedView(props) {
         <StyledCol
           height={deviceImageHeight}
           {...styles.sideImageColumnStyle}
-          order={heightSmallDevices ? '1' : layoutType.imageOrder}>
+          order={widthTablet ? '1' : layoutType.imageOrder}>
           <QuestionImageContainer
             image={data?.image}
             layoutType={layoutType?.type}
-            heightSmallDevices={heightSmallDevices}
+            widthTablet={widthTablet}
             {...layoutType.imgSize}
             imageBrightness={data?.imageBrightness || 0}
           />

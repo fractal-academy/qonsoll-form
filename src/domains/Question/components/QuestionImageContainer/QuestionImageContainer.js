@@ -4,7 +4,7 @@ import { LAYOUT_TYPES } from '../../../../constants'
 import typeformTheme from '../../../../../styles/theme'
 
 const ImageContainer = styled(Box)`
-  ${({ theme, image, layoutType, heightSmallDevices, imageBrightness }) => `
+  ${({ theme, image, layoutType, widthTablet, imageBrightness }) => `
     background-size: cover;
     filter: brightness(${imageBrightness + 100}%);
     background-repeat: no-repeat;
@@ -16,28 +16,28 @@ ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
     
     border-top-right-radius:
 ${
-  layoutType === LAYOUT_TYPES.LEFT_SIDE_BIG.type && !heightSmallDevices
+  layoutType === LAYOUT_TYPES.LEFT_SIDE_BIG.type && !widthTablet
     ? 0
     : theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
 };
     
     border-bottom-right-radius:
 ${
-  layoutType === LAYOUT_TYPES.LEFT_SIDE_BIG.type && !heightSmallDevices
+  layoutType === LAYOUT_TYPES.LEFT_SIDE_BIG.type && !widthTablet
     ? 0
     : theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
 };
     
     border-top-left-radius:
 ${
-  layoutType === LAYOUT_TYPES.RIGHT_SIDE_BIG.type && !heightSmallDevices
+  layoutType === LAYOUT_TYPES.RIGHT_SIDE_BIG.type && !widthTablet
     ? 0
     : theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
 };
     
     border-bottom-left-radius:
 ${
-  layoutType === LAYOUT_TYPES.RIGHT_SIDE_BIG.type && !heightSmallDevices
+  layoutType === LAYOUT_TYPES.RIGHT_SIDE_BIG.type && !widthTablet
     ? 0
     : theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
 };

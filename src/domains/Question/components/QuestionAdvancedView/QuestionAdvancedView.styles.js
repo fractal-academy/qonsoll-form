@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Col, Row } from '@qonsoll/react-design'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
 
 export const styles = {
@@ -36,7 +36,7 @@ export const WrapperRow = styled(Row)`
 `}
 `
 
-export const StyledBox = styled(Col)`
+export const StyledBox = styled(Box)`
   ${({ specialLayoutRule }) => `
   width: 100%;
   display: grid;

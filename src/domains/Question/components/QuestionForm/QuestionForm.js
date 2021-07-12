@@ -146,7 +146,7 @@ function QuestionForm(props) {
           <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 8]}>
             <CustomCard bordered={false}>
               <Row noGutters v="center">
-                <Col>{tagRule && <StyledTag>{questionTag}</StyledTag>}</Col>
+                <Col> {tagRule && <StyledTag>{questionTag}</StyledTag>}</Col>
                 {isConfigurationPopoverVisible && (
                   <Col cw="auto">
                     <QuestionConfigurationPopover
