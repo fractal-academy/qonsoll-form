@@ -217,12 +217,22 @@ function EditorSidebar(props) {
         : [],
     [questions]
   )
+  const containWelcomeScreen = useMemo(
+    () =>
+      !!questions?.filter(
+        (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+      )?.length,
+    [questions]
+  )
 
   useEffect(() => {
+    //when add/delete question - update endings order
     endings?.map((item, index) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
-        order: questions?.length + index
+        order: containWelcomeScreen
+          ? questions?.length + index
+          : questions?.length + index + 1
       })
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps

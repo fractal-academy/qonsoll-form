@@ -5,7 +5,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel } from 'antd'
 import { useAnswersContext } from '../../context/Answers'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import React, { cloneElement, useRef, useState } from 'react'
+import React, { cloneElement, useRef } from 'react'
 
 function Carousel(props) {
   const {
@@ -32,7 +32,11 @@ function Carousel(props) {
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
-    setCurrentSlide(slideIndex)
+    const containWelcomeScreen = sortedData?.some(
+      (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    )
+
+    setCurrentSlide(containWelcomeScreen ? slideIndex : slideIndex + 1)
   }
 
   //[ LOGIC JUMPS ]
@@ -87,13 +91,6 @@ function Carousel(props) {
     goTo()
   }
 
-  //COMPUTED PROPERTIES
-  const initialSlide = sortedData.some(
-    (question) => question.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  )
-    ? 0
-    : 1
-
   const actionRuleMap = {
     // [ CHOICES ]
     [QUESTION_TYPES.CHOICE]: {
@@ -135,7 +132,6 @@ function Carousel(props) {
     <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
       <AntdCarousel
         dots={false}
-        initialSlide={initialSlide}
         adaptiveHeight
         ref={carouselRef}
         dotPosition="right"
