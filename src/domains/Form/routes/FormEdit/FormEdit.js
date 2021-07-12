@@ -48,7 +48,9 @@ function FormEdit(props) {
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
   const [questionsList, questionsListLoading] = useCollectionData(
-    getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
+    getCollectionRef(COLLECTIONS.QUESTIONS)
+      .where('formId', '==', id)
+      .orderBy('order')
   )
 
   //[COMPONENT STATE HOOKS]
@@ -70,9 +72,9 @@ function FormEdit(props) {
   const endings = useMemo(
     () =>
       questionsList
-        ? questionsList
-            ?.filter((item) => item.questionType === QUESTION_TYPES.ENDING)
-            .sort((a, b) => a.order - b.order)
+        ? questionsList?.filter(
+            (item) => item.questionType === QUESTION_TYPES.ENDING
+          )
         : [],
     [questionsList]
   )
@@ -87,6 +89,7 @@ function FormEdit(props) {
       }
     })
   }
+
   const onQuestionTypeChange = async ({ key }) => {
     //Bolean conditions
     const isChoices = [
@@ -156,12 +159,14 @@ function FormEdit(props) {
         type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
         payload: questionsList?.[0] || {}
       })
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionsListLoading])
 
   useEffect(() => {
     //set default active tab for questionLayout switcher every time when we change current question
     setDefaultTab(currentQuestion?.layoutType)
+
     //save data of current question to database, when it change
     !!Object.keys(currentQuestion).length &&
       setData(
@@ -169,6 +174,7 @@ function FormEdit(props) {
         currentQuestion?.id,
         currentQuestion
       ).catch((e) => message.error(e.message))
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestion])
 

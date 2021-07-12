@@ -21,8 +21,8 @@ function QuestionsList(props) {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [CLEAN FUNCTIONS]
-  const onUpdate = (data) => {
-    data?.forEach((item) =>
+  const onUpdate = (updatedQuestions) => {
+    updatedQuestions?.forEach((item) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, item)
         .then(() => {
           item.id === currentQuestion.id &&
@@ -42,25 +42,27 @@ function QuestionsList(props) {
     const deletedItemIndex = data?.findIndex(
       (item) => item.id === questionId && item
     )
-
+    //get type of deleted item
     const deletedItemType = data[deletedItemIndex]?.questionType
 
+    //define new current question if delete current question
     const newCurrentQuestion =
       data[deletedItemIndex - 1] || data[deletedItemIndex + 1] || {}
 
     deleteData(COLLECTIONS.QUESTIONS, questionId).catch((e) =>
       message.error(e.message)
     )
+
     //update order for all questions
     updatedData?.forEach((item, index) => {
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
         order:
-          (deletedItemType === QUESTION_TYPES.WELCOME_SCREEN && index + 1) ||
-          index
+          deletedItemType === QUESTION_TYPES.WELCOME_SCREEN ? index + 1 : index
       }).catch((e) => message.error(e.message))
     })
 
+    //if deleted item was current question change current question
     currentQuestion.id === questionId &&
       currentQuestionDispatch({
         type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
@@ -72,7 +74,7 @@ function QuestionsList(props) {
       let writeToDB = false
       const editedQuestionConfig = item?.questionConfigurations?.map(
         (config) => {
-          if (config.redirectQuestion === questionId) {
+          if (config?.redirectQuestion === questionId) {
             writeToDB = true
             return { ...config, redirectQuestion: '' }
           } else return config

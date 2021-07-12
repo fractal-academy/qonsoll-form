@@ -5,7 +5,7 @@ import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel } from 'antd'
 import { useAnswersContext } from '../../context/Answers'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import React, { cloneElement, useRef, useState } from 'react'
+import React, { cloneElement, useRef } from 'react'
 
 function Carousel(props) {
   const {
@@ -32,7 +32,11 @@ function Carousel(props) {
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
-    setCurrentSlide(slideIndex)
+    const isContainWelcomeScreen = sortedData?.some(
+      (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    )
+
+    setCurrentSlide(isContainWelcomeScreen ? slideIndex : slideIndex + 1)
   }
 
   //[ LOGIC JUMPS ]
@@ -88,11 +92,11 @@ function Carousel(props) {
   }
 
   //COMPUTED PROPERTIES
-  const initialSlide = sortedData.some(
-    (question) => question.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  )
-    ? 0
-    : 1
+  // const initialSlide = sortedData.some(
+  //   (question) => question.questionType === QUESTION_TYPES.WELCOME_SCREEN
+  // )
+  //   ? 0
+  //   : 1
 
   const actionRuleMap = {
     // [ CHOICES ]
@@ -135,7 +139,7 @@ function Carousel(props) {
     <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
       <AntdCarousel
         dots={false}
-        initialSlide={initialSlide}
+        // initialSlide={initialSlide}
         adaptiveHeight
         ref={carouselRef}
         dotPosition="right"
