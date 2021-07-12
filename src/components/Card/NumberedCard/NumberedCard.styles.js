@@ -51,10 +51,10 @@ export const NumberBox = styled(Box)`
   border-bottom-right-radius: 5px;
   text-align: center;
   color: ${
-    theme?.color?.white?.lighten1 || typeformTheme?.color?.white?.t?.lighten1
+    theme?.color?.white?.t?.lighten1 || typeformTheme?.color?.white?.t?.lighten1
   };
   background-color: ${
-    theme?.color?.dark?.lighten1 || typeformTheme?.color?.dark?.t?.lighten1
+    theme?.color?.dark?.lighten1 || typeformTheme?.color?.dark?.lighten1
   };
 `}
 `

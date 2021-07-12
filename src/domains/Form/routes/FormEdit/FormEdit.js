@@ -201,6 +201,7 @@ function FormEdit(props) {
                     setBrightnessValue={setBrightnessValue}
                     customQuestionTypes={customQuestionTypes}
                     onQuestionTypeChange={onQuestionTypeChange}
+                    welcomeScreenShowRule={welcomeScreenShowRule}
                   />
                 </PageLayout>
                 {/*TODO id in EditorSidebar*/}

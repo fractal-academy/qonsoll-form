@@ -1,7 +1,8 @@
 import React from 'react'
+import { Empty } from 'antd'
 import PropTypes from 'prop-types'
 import { ListItem } from '../../../components'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 
 function StaticList(props) {
   const {
@@ -13,18 +14,26 @@ function StaticList(props) {
   } = props
 
   return (
-    <Row display="flex" width="100%" noGutters>
-      {data?.map((item) => (
-        <Col key={item.id} cw={columnWidth}>
-          <ListItem
-            data={item}
-            setEdit={setEdit}
-            selectedBackgroundImg={selectedBackgroundImg}
-            setSelectedBackgroundImg={setSelectedBackgroundImg}
-          />
-        </Col>
-      ))}
-    </Row>
+    <>
+      {data ? (
+        <Row display="flex" width="100%" noGutters>
+          {data?.map((item) => (
+            <Col key={item.id} cw={columnWidth}>
+              <ListItem
+                data={item}
+                setEdit={setEdit}
+                selectedBackgroundImg={selectedBackgroundImg}
+                setSelectedBackgroundImg={setSelectedBackgroundImg}
+              />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <Box width="100%" display="flex" justifyContent="center">
+          <Empty />
+        </Box>
+      )}
+    </>
   )
 }
 

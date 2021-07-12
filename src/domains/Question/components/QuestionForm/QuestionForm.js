@@ -52,7 +52,8 @@ function QuestionForm(props) {
     onChangeMenuItem,
     setBrightnessValue,
     customQuestionTypes,
-    onQuestionTypeChange
+    onQuestionTypeChange,
+    welcomeScreenShowRule
   } = props
 
   // [ADDITIONAL HOOKS]
@@ -160,7 +161,7 @@ function QuestionForm(props) {
                   <Col cw="auto">
                     <QuestionConfigurationPopover
                       questionData={questionData}
-                      welcomeScreenShowRule={true}
+                      welcomeScreenShowRule={welcomeScreenShowRule}
                       questionsList={questionsList}
                       customQuestionTypes={customQuestionTypes}
                       onQuestionTypeChange={onQuestionTypeChange}
