@@ -10,7 +10,7 @@ import {
 } from './ChoiceEditable.styles'
 import { DEFAULT_IMAGE } from '../../constants'
 import { Row } from '@qonsoll/react-design'
-import { CloseOutlined, EditOutlined } from '@ant-design/icons'
+import { CloseOutlined } from '@ant-design/icons'
 import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
 import {
   DISPATCH_EVENTS,
@@ -36,6 +36,7 @@ function ChoiceEditable(props) {
   const [isHovering, hoverRef] = useHover()
 
   // [COMPONENT STATE HOOKS]
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const [value, setValue] = useState(data?.answerOption)
 
   // [COMPUTED PROPERTIES]
@@ -86,15 +87,13 @@ function ChoiceEditable(props) {
     <MainBox m={1} withImage={withImage} ref={hoverRef}>
       {withImage && (
         <MediaBox backgroundImage={bgImage} mx={2} mt={2}>
-          {isHovering && (
-            <MediaLibraryModal
-              btnProps={{
-                type: 'primary',
-                icon: <EditOutlined />
-              }}
-              onContinue={onMediaModalContinue}
-            />
-          )}
+          <MediaLibraryModal
+            btnProps={{
+              type: 'primary'
+            }}
+            isHovering={isHovering}
+            onContinue={onMediaModalContinue}
+          />
         </MediaBox>
       )}
       <Row noGutters px={2}>

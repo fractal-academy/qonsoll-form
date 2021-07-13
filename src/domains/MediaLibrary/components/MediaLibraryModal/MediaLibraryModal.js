@@ -22,7 +22,7 @@ import { MediaLibraryFilter } from '../../../../domains/MediaLibrary/components'
 const { Title } = Typography
 
 function MediaLibraryModal(props) {
-  const { btnProps, onClick, onContinue } = props
+  const { btnProps, onClick, onContinue, isHovering } = props
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef, setData, storage } = useFunctions()
@@ -136,14 +136,16 @@ function MediaLibraryModal(props) {
 
   return (
     <>
-      <CustomButton {...btnProps} onClick={modalStateChange}>
-        <Box display="flex">
-          <Box mr={2}>
-            <EditOutlined />
+      {isHovering && (
+        <CustomButton {...btnProps} onClick={modalStateChange}>
+          <Box display="flex">
+            <Box mr={2}>
+              <EditOutlined />
+            </Box>
+            {changeButton || 'Change'}
           </Box>
-          {changeButton || 'Change'}
-        </Box>
-      </CustomButton>
+        </CustomButton>
+      )}
       <Modal
         visible={isModalVisible}
         footer={null}
