@@ -27,6 +27,48 @@ import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 
 const { Title } = Typography
 
+//configuration for certain types of questions
+const choicesConfiguration = [
+  {
+    answerOptionId: uuid(),
+    answerOption: 'default',
+    image: '',
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  }
+]
+const yesNoConfiguration = [
+  {
+    answerOptionId: uuid(),
+    answerOption: 'Yes',
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  },
+  {
+    answerOptionId: uuid(),
+    answerOption: 'No',
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  }
+]
+const opinionAndRatingConfiguration = Array(5)
+  .fill(0)
+  ?.map((el, index) => ({
+    answerOptionId: uuid(),
+    answerOption: 1 + index,
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  }))
+
+const defaultConfiguration = [
+  {
+    answerOptionId: '',
+    answerOption: '',
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  }
+]
+
 function EditorSidebar(props) {
   const {
     id,
@@ -69,47 +111,6 @@ function EditorSidebar(props) {
     ].includes(key)
 
     const isYesNo = key === QUESTION_TYPES.YES_NO
-    //configuration for certain types of questions
-    const choicesConfiguration = [
-      {
-        answerOptionId: uuid(),
-        answerOption: 'default',
-        image: '',
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }
-    ]
-    const yesNoConfiguration = [
-      {
-        answerOptionId: uuid(),
-        answerOption: 'Yes',
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      },
-      {
-        answerOptionId: uuid(),
-        answerOption: 'No',
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }
-    ]
-    const opinionAndRatingConfiguration = Array(5)
-      .fill(0)
-      ?.map((el, index) => ({
-        answerOptionId: uuid(),
-        answerOption: 1 + index,
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }))
-
-    const defaultConfiguration = [
-      {
-        answerOptionId: '',
-        answerOption: '',
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }
-    ]
 
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
@@ -119,6 +120,11 @@ function EditorSidebar(props) {
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
       : defaultConfiguration
+
+    const containWelcomeScreen = questions.some(
+      (q) => q.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    )
+    const isEnding = !key
 
     // default data for created question
     const newQuestion = {
@@ -131,10 +137,12 @@ function EditorSidebar(props) {
       order:
         key === QUESTION_TYPES.WELCOME_SCREEN
           ? 0
-          : questions.some(
-              (q) => q.questionType === QUESTION_TYPES.WELCOME_SCREEN
-            )
-          ? questions?.length
+          : containWelcomeScreen
+          ? isEnding
+            ? questions?.length + endings?.length
+            : questions?.length
+          : isEnding
+          ? questions?.length + endings?.length + 1
           : questions?.length + 1
     }
 
@@ -204,16 +212,14 @@ function EditorSidebar(props) {
   const ConditionsQuestionsList = useMemo(
     () =>
       questions
-        ? questions
-            ?.filter(
-              (item) =>
-                ![
-                  QUESTION_TYPES.ENDING,
-                  QUESTION_TYPES.WELCOME_SCREEN,
-                  QUESTION_TYPES.STATEMENT
-                ].includes(item.questionType)
-            )
-            .sort((a, b) => a.order - b.order)
+        ? questions?.filter(
+            (item) =>
+              ![
+                QUESTION_TYPES.ENDING,
+                QUESTION_TYPES.WELCOME_SCREEN,
+                QUESTION_TYPES.STATEMENT
+              ].includes(item.questionType)
+          )
         : [],
     [questions]
   )
@@ -336,6 +342,7 @@ function EditorSidebar(props) {
             {!!endings?.length && (
               <QuestionsList
                 data={endings}
+                questionsData={questions}
                 onItemClick={onItemClick}
                 disableDelete={endings?.length === 1}
               />
