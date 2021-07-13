@@ -34,20 +34,20 @@ const PlaneDateItem = (props) => {
   //[CLEAN FUNCTIONS]
   const onRuleSelectValueChange = (selectValue = '') => {
     setRuleSelectValue(selectValue)
-
+    console.log(selectValue)
     //create new array questionConfigurations of certain question
-    const updatedQuestionConfigurations = questionConfigurations
-    //update conditionRule of certain question
-    const isRuleChanged =
-      updatedQuestionConfigurations[index].redirectConditionRule !== selectValue
+    // const updatedQuestionConfigurations = questionConfigurations
+    // //update conditionRule of certain question
+    // const isRuleChanged =
+    //   updatedQuestionConfigurations[index].redirectConditionRule !== selectValue
 
-    if (isRuleChanged) {
-      updatedQuestionConfigurations[index].redirectConditionRule = selectValue
-      //write new data to db
-      setData(COLLECTIONS.QUESTIONS, questionId, {
-        questionConfigurations: updatedQuestionConfigurations
-      })
-    }
+    // if (isRuleChanged) {
+    //   updatedQuestionConfigurations[index].redirectConditionRule = selectValue
+    //   //write new data to db
+    //   setData(COLLECTIONS.QUESTIONS, questionId, {
+    //     questionConfigurations: updatedQuestionConfigurations
+    //   })
+    // }
   }
 
   const onDatePickerValueChange = (datePickerVal, stringDateValue = '') => {

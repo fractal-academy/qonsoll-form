@@ -144,7 +144,7 @@ function FormConditionsForm(props) {
                   key={index}
                   questionData={item}
                   index={index}
-                  questionScoresData={findAnswerScoreByQuestionId(item.id)}
+                  questionScoresData={findAnswerScoreByQuestionId(item?.id)}
                 />
               </Box>
             ))
