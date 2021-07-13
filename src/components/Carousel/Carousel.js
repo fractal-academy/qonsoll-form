@@ -122,7 +122,28 @@ function Carousel(props) {
     answerValue ? getNextSlide(questionConfig) : next()
   }
 
-  isAnswered && uploadSlideNextNumber()
+  const actionRuleMap = {
+    // [ CHOICES ]
+    [QUESTION_TYPES.CHOICE]: choiceSlideNextNumber,
+    [QUESTION_TYPES.YES_NO]: choiceSlideNextNumber,
+    [QUESTION_TYPES.RATING]: choiceSlideNextNumber,
+    [QUESTION_TYPES.OPINION_SCALE]: choiceSlideNextNumber,
+    [QUESTION_TYPES.PICTURE_CHOICE]: choiceSlideNextNumber,
+
+    // [ TEXT ]
+    [QUESTION_TYPES.SHORT_TEXT]: textSlideNextNumber,
+    [QUESTION_TYPES.LONG_TEXT]: textSlideNextNumber,
+
+    // [ SPECIAL ]
+    [QUESTION_TYPES.DATE]: dateSlideNextNumber,
+    [QUESTION_TYPES.FILE_UPLOAD]: uploadSlideNextNumber
+  }
+
+  const typeAction =
+    (currentSlideData && actionRuleMap[currentSlideData[0]?.questionType]) ||
+    next
+
+  isAnswered && typeAction()
 
   return (
     <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
