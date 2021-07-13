@@ -168,17 +168,6 @@ function QuestionForm(props) {
                     />
                   </Col>
                 )}
-                {/* {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
-                  <Col cw="auto" ml={2}>
-                    <QuestionMediaPopover
-                      brightnessValue={
-                        questionData?.brightnessValue || brightnessValue
-                      }
-                      setBrightnessValue={setBrightnessValue}
-                      MediaModalButtonBackground={popoverImage}
-                    />
-                  </Col>
-                )} */}
               </Row>
               <Row noGutters h="between" mb={4}>
                 <QuestionHeaderCol cw="12" mt={2}>

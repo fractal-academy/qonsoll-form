@@ -27,7 +27,7 @@ function QuestionConfigurationPopoverContent(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
-  const { typeConfiguration } = useTranslation()
+  const { typeConfiguration, configurationSetting } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [isQuestionConfig, setIsQuestionConfig] = useState(false)
@@ -40,6 +40,13 @@ function QuestionConfigurationPopoverContent(props) {
     onQuestionTypeChange(questionType)
     setShowPopover(false)
   }
+
+  //[COMPUTED PROPERTIES]
+  const configurationTitle =
+    (configurationSetting &&
+      `${currentQuestion?.questionType} ${configurationSetting}`) ||
+    `${currentQuestion?.questionType} settings`
+
   return (
     <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
       <PopoverSwitcherRow
@@ -53,7 +60,7 @@ function QuestionConfigurationPopoverContent(props) {
         <Col cw="auto" order={2}>
           <Title level={4}>
             {isQuestionConfig
-              ? `${currentQuestion?.questionType} settings`
+              ? configurationTitle
               : typeConfiguration || 'Question types'}
           </Title>
         </Col>

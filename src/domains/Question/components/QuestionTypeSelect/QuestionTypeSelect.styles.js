@@ -14,7 +14,8 @@ export const QuestionMenuItem = styled(Menu.Item)`
   margin-top: 4px !important;
   margin-bottom: 4px !important;
   line-height: ${({ theme }) =>
-    theme?.typography?.lineHeight?.caption1} !important;
+    theme?.typography?.lineHeight?.caption1 ||
+    typeformTheme?.typography?.lineHeight?.caption1} !important;
 
   &:hover {
     border-radius: 8px;

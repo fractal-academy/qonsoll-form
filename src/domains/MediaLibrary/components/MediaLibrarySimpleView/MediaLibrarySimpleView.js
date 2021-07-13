@@ -20,10 +20,7 @@ function MediaLibrarySimpleView(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const {
-    // imageName, imageInputPlaceholder,
-    brightness
-  } = useTranslation()
+  const { brightness } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onMediaModalContinue = (selectedImage) => {
@@ -52,10 +49,6 @@ function MediaLibrarySimpleView(props) {
           }}
         />
       </CustomBox>
-      {/* <Box mb={32}>
-        <CustomText>{imageName || 'Image name'}</CustomText>
-        <Input placeholder={imageInputPlaceholder || 'Enter name here...'} />
-      </Box> */}
       <CustomText>{brightness || 'Brightness'}</CustomText>
       <Box>
         <RangeSlider

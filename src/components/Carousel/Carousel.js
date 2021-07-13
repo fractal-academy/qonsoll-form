@@ -19,7 +19,6 @@ const SecondIcon = styled(DoubleRightOutlined)`
 `
 
 const PromptBox = styled(Box)`
-  // right: 0;
   width: 100%;
   display: flex;
   justify-content: center;
