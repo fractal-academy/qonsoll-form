@@ -34,7 +34,8 @@ function EditorSidebar(props) {
     questions,
     transparent,
     customQuestionTypes,
-    welcomeScreenShowRule
+    welcomeScreenShowRule,
+    answerScoresData
   } = props
 
   //[CUSTOM HOOKS]
@@ -294,6 +295,7 @@ function EditorSidebar(props) {
                   onTabChange={onTabChange}
                   data={ConditionsQuestionsList}
                   endings={endings}
+                  answerScores={answerScoresData}
                 />
               </ModalWithFormConditionsForm>
             </Col>

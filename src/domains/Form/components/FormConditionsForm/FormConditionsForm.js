@@ -16,7 +16,7 @@ import { EmptyState, CustomTabs } from './FormConditionsForm.styles'
 const { TabPane } = Tabs
 
 function FormConditionsForm(props) {
-  const { data, endings, onTabChange } = props
+  const { data, endings, onTabChange, answerScores } = props
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
@@ -38,6 +38,7 @@ function FormConditionsForm(props) {
       questionConfigurations: [...data?.[index]?.questionConfigurations, answer]
     })
   }
+
   const addRedirectQuestion = (nextQuestion, answerIndex, index) => {
     //create new array questionConfigur ations of certain question
 
@@ -55,6 +56,7 @@ function FormConditionsForm(props) {
       })
     }
   }
+
   const filteredAnswerForEndings = useMemo(
     () =>
       data
@@ -72,9 +74,13 @@ function FormConditionsForm(props) {
         : [],
     [data]
   )
+
+  const findAnswerScoreByQuestionId = (questionId) =>
+    answerScores?.find((item) => item?.questionId === questionId)
+
   return (
     <>
-      <CustomTabs onChange={onTabChange} type="card">
+      <CustomTabs onChange={onTabChange}>
         <TabPane
           tab={conditionsLogicJumpsTab || 'Logic jumps'}
           key="1"
@@ -140,6 +146,7 @@ function FormConditionsForm(props) {
                   key={index}
                   questionData={item}
                   index={index}
+                  questionScoresData={findAnswerScoreByQuestionId(item.id)}
                 />
               </Box>
             ))

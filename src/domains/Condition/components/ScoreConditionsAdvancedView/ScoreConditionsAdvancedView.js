@@ -2,42 +2,57 @@ import React from 'react'
 import { Box, Row, Col } from '@qonsoll/react-design'
 import { NumberedCard } from '../../../../components'
 import Title from 'antd/lib/typography/Title'
-import { Typography, InputNumber } from 'antd'
-import styled from 'styled-components'
-import { CustomTextBox } from '../../components/ConditionTemplates/ChoiceTemplate/ChoiceTemplate.styles'
-import typeformTheme from 'feedback-typeform-app/styles/theme'
+import { Typography } from 'antd'
+import useFunctions from '../../../../hooks/useFunctions'
+import { COLLECTIONS } from '../../../../constants'
+import { useTranslation } from '~/modules/feedback-typeform-app/src/context/Translation'
+import {
+  OptionBox,
+  StyledInputNumber,
+  CustomTextBox
+} from './ScoreConditionsAdvancedView.style'
 
 const { Text } = Typography
 const startLetter = 65
 
 const ScoreConditionsAdvancedView = (props) => {
-  const { index, questionData } = props
+  const { index, questionData, questionScoresData = {} } = props
 
-  const OptionBox = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-    backgroundColor:
-      theme?.color?.dark?.t?.lighten9 ||
-      typeformTheme?.color?.dark?.t?.lighten9,
-    border: '1px solid',
-    borderColor:
-      theme?.color?.dark?.t?.lighten5 || theme?.color?.dark?.t?.lighten5,
-    borderRadius: theme?.borderRadius?.md
-  }))
+  // [ADDITIONAL HOOKS]
+  const { setData, getCollectionRef } = useFunctions()
+  const { scoreWeightTranslation } = useTranslation()
 
-  const CustomTextBox = styled(Box)(({ theme }) => ({
-    maxWidth: '100%',
-    minWidth: '30px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: '1px solid',
-    borderColor:
-      theme?.color?.dark?.t?.lighten4 ||
-      typeformTheme?.color?.dark?.t?.lighten4,
-    borderRadius: theme?.borderRadius?.sm || typeformTheme?.borderRadius?.sm
-  }))
+  // [CLEAN FUNCTIONS]
+  const onMarkChange = async (
+    questionId,
+    formId,
+    questionScoreValue,
+    answerOptionId
+  ) => {
+    if (!/^\d+$/.test(questionScoreValue) || questionScoreValue < 0) return
+    const answerScoresId =
+      questionScoresData?.id ||
+      getCollectionRef(COLLECTIONS.ANSWERS_SCORES_CONDITIONS).doc().id
+    const questionScores = questionScoresData.questionScores?.length
+      ? [
+          ...questionScoresData?.questionScores.filter(
+            (item) => item.answerOptionId !== answerOptionId
+          ),
+          { answerOptionId, score: questionScoreValue }
+        ]
+      : [{ answerOptionId, score: questionScoreValue }]
+    await setData(COLLECTIONS.ANSWERS_SCORES_CONDITIONS, answerScoresId, {
+      questionId,
+      formId: formId,
+      questionScores,
+      id: answerScoresId
+    })
+  }
+
+  const getScoreByAnswerOptionId = (answerOptionId) =>
+    questionScoresData?.questionScores?.find(
+      (item) => item?.answerOptionId === answerOptionId
+    )?.score
 
   return (
     <NumberedCard number={index + 1} key={index}>
@@ -47,7 +62,7 @@ const ScoreConditionsAdvancedView = (props) => {
         </Title>
         {questionData?.questionConfigurations?.map((item, index) => (
           <Row noGutters mb={2} key={index}>
-            <Col cw={11} style={{ paddingRight: '32px' }}>
+            <Col cw={8} style={{ paddingRight: '32px' }}>
               <OptionBox px={2}>
                 <CustomTextBox mr={2} px={2}>
                   <Text strong>{String.fromCharCode(startLetter + index)}</Text>
@@ -55,8 +70,22 @@ const ScoreConditionsAdvancedView = (props) => {
                 <Text ellipsis>{item?.answerOption}</Text>
               </OptionBox>
             </Col>
-            <Col cw={1}>
-              <InputNumber />
+            <Col cw={4}>
+              <StyledInputNumber
+                min={0}
+                placeholder={
+                  scoreWeightTranslation || 'Enter score weight of answer'
+                }
+                value={getScoreByAnswerOptionId(item?.answerOptionId)}
+                onBlur={(event) =>
+                  onMarkChange(
+                    questionData?.id,
+                    questionData?.formId,
+                    event.target.value,
+                    item?.answerOptionId
+                  )
+                }
+              />
             </Col>
           </Row>
         ))}
