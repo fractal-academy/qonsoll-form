@@ -52,6 +52,13 @@ function FormEdit(props) {
       .where('formId', '==', id)
       .orderBy('order')
   )
+  const [answerScoresList, answerScoresListLoading] = useCollectionData(
+    getCollectionRef(COLLECTIONS.ANSWERS_SCORES_CONDITIONS).where(
+      'formId',
+      '==',
+      id
+    )
+  )
 
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
@@ -187,7 +194,7 @@ function FormEdit(props) {
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={translations || {}}>
           <TypeformConfigurationContext.Provider value={configurations}>
-            {formLoading || questionsListLoading ? (
+            {formLoading || questionsListLoading || answerScoresListLoading ? (
               <Spinner />
             ) : (
               <Box display="flex" height="inherit" overflowX="hidden">
@@ -219,6 +226,7 @@ function FormEdit(props) {
                     questions={questions}
                     showCondition={showCondition}
                     customQuestionTypes={customQuestionTypes}
+                    answerScoresData={answerScoresList}
                     welcomeScreenShowRule={welcomeScreenShowRule}
                   />
                 )}
