@@ -5,7 +5,7 @@ import { Modal, Button, Typography, Popconfirm, Tooltip } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
 import { ThemeContext } from 'styled-components'
-import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
+import { useTranslation } from '../../../../context/Translation'
 
 const { Title } = Typography
 

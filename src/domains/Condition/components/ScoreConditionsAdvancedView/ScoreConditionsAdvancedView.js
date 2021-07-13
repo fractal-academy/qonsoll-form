@@ -5,7 +5,7 @@ import Title from 'antd/lib/typography/Title'
 import { Typography, InputNumber } from 'antd'
 import styled from 'styled-components'
 import { CustomTextBox } from '../../components/ConditionTemplates/ChoiceTemplate/ChoiceTemplate.styles'
-import typeformTheme from 'feedback-typeform-app/styles/theme'
+import typeformTheme from '../../../../../styles/theme'
 
 const { Text } = Typography
 const startLetter = 65
