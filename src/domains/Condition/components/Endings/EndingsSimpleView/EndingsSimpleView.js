@@ -8,7 +8,7 @@ import Title from 'antd/lib/typography/Title'
 import { COLLECTIONS } from '../../../../../constants'
 import { NumberedCard } from '../../../../../components'
 import useFunctions from '../../../../../hooks/useFunctions'
-import { useTranslation } from 'feedback-typeform-app/src/context/Translation'
+import { useTranslation } from '../../../../../context/Translation'
 
 const StyledTag = styled(Tag)`
   background-color: ${({ theme }) => theme.color.primary.t.lighten5};

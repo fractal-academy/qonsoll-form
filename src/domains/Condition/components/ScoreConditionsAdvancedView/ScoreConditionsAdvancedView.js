@@ -4,7 +4,7 @@ import Title from 'antd/lib/typography/Title'
 import { Typography, InputNumber } from 'antd'
 import { Box, Row, Col } from '@qonsoll/react-design'
 import { NumberedCard } from '../../../../components'
-import typeformTheme from 'feedback-typeform-app/styles/theme'
+import typeformTheme from '../../../../../styles/theme'
 
 const { Text } = Typography
 const startLetter = 65
