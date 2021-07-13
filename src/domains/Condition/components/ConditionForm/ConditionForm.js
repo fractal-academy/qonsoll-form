@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
 import { Box } from '@qonsoll/react-design'
-import { NumberedCard } from '../../../../components'
 import Title from 'antd/lib/typography/Title'
+import { NumberedCard } from '../../../../components'
 import { QUESTION_TYPES } from '../../../../constants'
 import {
   RatingTemplate,
@@ -14,7 +14,6 @@ import {
   PlaneLongTextStringTemplate,
   PlaneShortTextStringTemplate
 } from '../../../../domains/Condition/components/ConditionTemplates'
-import Text from 'antd/es/typography/Text'
 
 function ConditionForm(props) {
   const {

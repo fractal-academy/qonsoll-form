@@ -1,9 +1,15 @@
+import styled from 'styled-components'
 import { Popover, Button } from 'antd'
 import React, { useState } from 'react'
 import { Box } from '@qonsoll/react-design'
-import { EditOutlined } from '@ant-design/icons'
-import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
+import { PictureOutlined } from '@ant-design/icons'
 import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
+import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
+
+const StyledBookmarkButton = styled(Button)`
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+`
 
 function QuestionMediaPopover(props) {
   const { MediaModalButtonBackground, brightnessValue, setBrightnessValue } =
@@ -24,7 +30,7 @@ function QuestionMediaPopover(props) {
       trigger="click"
       placement="rightTop"
       content={
-        <Box width="192px" mx={PopoverNegativeMarin.h / 2}>
+        <Box width="190px" mx={PopoverNegativeMarin.h / 2}>
           <MediaLibrarySimpleView
             brightnessValue={brightnessValue}
             setBrightnessValue={setBrightnessValue}
@@ -33,9 +39,9 @@ function QuestionMediaPopover(props) {
           />
         </Box>
       }>
-      <Button
+      <StyledBookmarkButton
         type="primary"
-        icon={<EditOutlined />}
+        icon={<PictureOutlined />}
         onClick={changeImageEditVisibleState}
         onMouseDown={(e) => e.preventDefault()}
       />

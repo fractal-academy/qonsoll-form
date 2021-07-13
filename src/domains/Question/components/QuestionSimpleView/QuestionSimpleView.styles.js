@@ -6,6 +6,7 @@ import typeformTheme from '../../../../../styles/theme'
 export const DescriptionContainer = styled(Box)`
   ${({ theme }) => `
   overflow: hidden;
+  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

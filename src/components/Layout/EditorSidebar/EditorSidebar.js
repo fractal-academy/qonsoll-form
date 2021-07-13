@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import React, { useEffect, useState, useMemo } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import React, { useEffect, useState, useMemo } from 'react'
 import { Typography, Button, Popover, Tooltip } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
@@ -19,11 +19,11 @@ import {
   SidebarBoxWrapper,
   styles
 } from './EditorSidebar.styles'
-import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
-import useFunctions from '../../../hooks/useFunctions'
-import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
-import { useTranslation } from '../../../context/Translation'
 import { v4 as uuid } from 'uuid'
+import useFunctions from '../../../hooks/useFunctions'
+import { useTranslation } from '../../../context/Translation'
+import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
+import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 
 const { Title } = Typography
 
@@ -302,7 +302,11 @@ function EditorSidebar(props) {
         {/* Question List*/}
         <Box overflow="auto" pr={2}>
           {!!questions?.length && (
-            <QuestionsList data={questions} onItemClick={onItemClick} />
+            <QuestionsList
+              data={questions}
+              onItemClick={onItemClick}
+              disableDelete={questions?.length === 1}
+            />
           )}
         </Box>
         <Box mt="auto">

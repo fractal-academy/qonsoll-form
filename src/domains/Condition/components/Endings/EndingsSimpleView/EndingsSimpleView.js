@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types'
-import React, { useState, useMemo } from 'react'
-import { Box } from '@qonsoll/react-design'
-import { NumberedCard } from '../../../../../components'
-import Title from 'antd/lib/typography/Title'
 import { Select, Tag } from 'antd'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { DeleteOutlined } from '@ant-design/icons'
-import { useTranslation } from '../../../../../context/Translation'
-import { COLLECTIONS } from '../../../../../constants'
-import useFunctions from '../../../../../hooks/useFunctions'
 import Text from 'antd/es/typography/Text'
+import { Box } from '@qonsoll/react-design'
+import Title from 'antd/lib/typography/Title'
+import { COLLECTIONS } from '../../../../../constants'
+import { NumberedCard } from '../../../../../components'
+import useFunctions from '../../../../../hooks/useFunctions'
+import { useTranslation } from '../../../../../context/Translation'
 
 const StyledTag = styled(Tag)`
   background-color: ${({ theme }) => theme.color.primary.t.lighten5};
@@ -32,11 +31,11 @@ let startLetter = 65
 function EndingSimpleView(props) {
   const { item, index, questionsData } = props
 
-  //[COMPONENT STATE HOOKS]
-
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
+  const { questionsForEndingSelectPlaceholder } = useTranslation()
 
+  // [CLEAN FUNCTIONS]
   async function handleChange(_, selectedItems) {
     const questionConfigurations = selectedItems?.map((item) => ({
       answerOptionId: item.key,
@@ -46,9 +45,6 @@ function EndingSimpleView(props) {
       questionConfigurations
     })
   }
-
-  const { questionsForEndingSelectPlaceholder } = useTranslation()
-
   const defaultSelectValue = useMemo(
     () =>
       item

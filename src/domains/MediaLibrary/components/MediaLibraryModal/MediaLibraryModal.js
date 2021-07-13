@@ -1,8 +1,8 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
 import theme from '../../../../../styles/theme'
-import { Row, Col } from '@qonsoll/react-design'
-import { SearchOutlined } from '@ant-design/icons'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import { SearchOutlined, EditOutlined } from '@ant-design/icons'
 import { StaticList } from '../../../../components'
 import useFunctions from '../../../../hooks/useFunctions'
 import React, { useEffect, useRef, useState } from 'react'
@@ -11,7 +11,6 @@ import { useTranslation } from '../../../../context/Translation'
 import { Modal, Button, Typography, Upload, message } from 'antd'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import {
-  CustomChangeButtonText,
   MediaListContainer,
   CustomButton,
   CustomInput,
@@ -23,7 +22,7 @@ import { MediaLibraryFilter } from '../../../../domains/MediaLibrary/components'
 const { Title } = Typography
 
 function MediaLibraryModal(props) {
-  const { btnProps, onClick, onContinue } = props
+  const { btnProps, onClick, onContinue, isHovering } = props
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef, setData, storage } = useFunctions()
@@ -137,11 +136,16 @@ function MediaLibraryModal(props) {
 
   return (
     <>
-      <CustomButton {...btnProps} onClick={modalStateChange}>
-        <CustomChangeButtonText>
-          {changeButton || 'Change'}
-        </CustomChangeButtonText>
-      </CustomButton>
+      {isHovering && (
+        <CustomButton {...btnProps} onClick={modalStateChange}>
+          <Box display="flex">
+            <Box mr={2}>
+              <EditOutlined />
+            </Box>
+            {changeButton || 'Change'}
+          </Box>
+        </CustomButton>
+      )}
       <Modal
         visible={isModalVisible}
         footer={null}
