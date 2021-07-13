@@ -52,13 +52,14 @@ function FormShow(props) {
     (questionsData?.some(
       (item) => item.questionType === QUESTION_TYPES.WELCOME_SCREEN
     ) &&
-      0) ||
-    1
+      1) ||
+    0
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(firstSlideRule)
-  const [previousQuestionOrder, setPreviousQuestionOrder] =
-    useState(firstSlideRule)
+  const [previousQuestionOrder, setPreviousQuestionOrder] = useState([
+    firstSlideRule
+  ])
 
   // [COMPUTED PROPERTIES]
   // const sortedData = data && data.sort((a, b) => a.order - b.order)
@@ -85,7 +86,10 @@ function FormShow(props) {
       })
 
     setIsAnswered(true)
-    setPreviousQuestionOrder(currentSlide)
+    setPreviousQuestionOrder((prevState) => [
+      ...(prevState || []),
+      currentSlide
+    ])
   }
 
   return (
