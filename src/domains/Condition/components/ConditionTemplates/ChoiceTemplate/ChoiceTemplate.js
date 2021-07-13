@@ -10,7 +10,7 @@ let startLetter = 65
 function ChoiceTemplate(props) {
   const { questionConfigurations, questionList, addRedirectQuestion } = props
 
-  const sortedQuestionList = questionList.sort((a, b) => a.order - b.order)
+  const sortedQuestionList = questionList
 
   return (
     <>

@@ -40,7 +40,7 @@ function Carousel(props) {
     submitLoading,
     disabledDown,
     disabledUp,
-    sortedData,
+    questionsData,
     previousQuestionOrder
   } = props
 
@@ -56,7 +56,7 @@ function Carousel(props) {
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
-    const containWelcomeScreen = sortedData?.some(
+    const containWelcomeScreen = questionsData?.some(
       (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
     )
 
@@ -82,7 +82,7 @@ function Carousel(props) {
   }
 
   // [ ANSWER ]
-  let currentSlideData = sortedData?.filter(
+  let currentSlideData = questionsData?.filter(
     (item) => item.order === currentSlide
   )
   let givenAnswer =
@@ -101,7 +101,7 @@ function Carousel(props) {
         (item) => item.answerOption === answerValue
       )
     let nextOrder = questionConfig
-      ? sortedData?.filter(
+      ? questionsData?.filter(
           (item) => item.id === questionConfig[0]?.redirectQuestion
         )[0]?.order
       : 0

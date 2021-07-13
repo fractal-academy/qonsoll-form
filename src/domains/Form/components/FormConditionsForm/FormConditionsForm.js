@@ -58,17 +58,15 @@ function FormConditionsForm(props) {
   const filteredAnswerForEndings = useMemo(
     () =>
       data
-        ? data
-            ?.filter((item) =>
-              [
-                QUESTION_TYPES.CHOICE,
-                QUESTION_TYPES.PICTURE_CHOICE,
-                QUESTION_TYPES.OPINION_SCALE,
-                QUESTION_TYPES.RATING,
-                QUESTION_TYPES.YES_NO
-              ].includes(item.questionType)
-            )
-            .sort((a, b) => a.order - b.order)
+        ? data?.filter((item) =>
+            [
+              QUESTION_TYPES.CHOICE,
+              QUESTION_TYPES.PICTURE_CHOICE,
+              QUESTION_TYPES.OPINION_SCALE,
+              QUESTION_TYPES.RATING,
+              QUESTION_TYPES.YES_NO
+            ].includes(item.questionType)
+          )
         : [],
     [data]
   )
