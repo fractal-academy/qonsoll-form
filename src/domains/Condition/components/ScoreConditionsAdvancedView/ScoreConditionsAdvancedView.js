@@ -1,10 +1,9 @@
 import React from 'react'
-import { Box, Row, Col } from '@qonsoll/react-design'
-import { NumberedCard } from '../../../../components'
+import styled from 'styled-components'
 import Title from 'antd/lib/typography/Title'
 import { Typography, InputNumber } from 'antd'
-import styled from 'styled-components'
-import { CustomTextBox } from '../../components/ConditionTemplates/ChoiceTemplate/ChoiceTemplate.styles'
+import { Box, Row, Col } from '@qonsoll/react-design'
+import { NumberedCard } from '../../../../components'
 import typeformTheme from 'feedback-typeform-app/styles/theme'
 
 const { Text } = Typography

@@ -4,7 +4,6 @@ import {
   LetterBox,
   DeleteButton,
   ChoiceInput,
-  CustomCol,
   ChoiceOptionCol,
   MediaBox,
   MainBox

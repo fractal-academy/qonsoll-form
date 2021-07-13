@@ -57,7 +57,11 @@ function Carousel(props) {
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
-    setCurrentSlide(slideIndex)
+    const containWelcomeScreen = sortedData?.some(
+      (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    )
+
+    setCurrentSlide(containWelcomeScreen ? slideIndex : slideIndex + 1)
   }
 
   //[ LOGIC JUMPS ]
@@ -105,54 +109,12 @@ function Carousel(props) {
 
     ;(nextOrder && goTo(nextOrder)) || next()
   }
-  const textSlideNextNumber = () => {
-    goTo()
-  }
-  const specialSlideNextNumber = () => {
-    goTo()
-  }
-
-  //COMPUTED PROPERTIES
-  const initialSlide = sortedData.some(
-    (question) => question.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  )
-    ? 0
-    : 1
-
-  const actionRuleMap = {
-    // [ CHOICES ]
-    [QUESTION_TYPES.CHOICE]: {
-      function: () => choiceSlideNextNumber
-    },
-    [QUESTION_TYPES.YES_NO]: {
-      function: () => choiceSlideNextNumber
-    },
-    [QUESTION_TYPES.RATING]: {
-      function: () => choiceSlideNextNumber
-    },
-    [QUESTION_TYPES.OPINION_SCALE]: {
-      function: () => choiceSlideNextNumber
-    },
-    [QUESTION_TYPES.PICTURE_CHOICE]: {
-      function: () => choiceSlideNextNumber
-    },
-
-    // [ TEXT ]
-    [QUESTION_TYPES.SHORT_TEXT]: {
-      function: () => textSlideNextNumber
-    },
-    [QUESTION_TYPES.LONG_TEXT]: {
-      function: () => textSlideNextNumber
-    },
-
-    // [ SPECIAL ]
-    [QUESTION_TYPES.DATE]: {
-      function: () => specialSlideNextNumber
-    },
-    [QUESTION_TYPES.FILE_UPLOAD]: {
-      function: () => specialSlideNextNumber
-    }
-  }
+  // const textSlideNextNumber = () => {
+  //   goTo()
+  // }
+  // const specialSlideNextNumber = () => {
+  //   goTo()
+  // }
 
   isAnswered && choiceSlideNextNumber()
 
@@ -160,7 +122,6 @@ function Carousel(props) {
     <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
       <AntdCarousel
         dots={false}
-        initialSlide={initialSlide}
         adaptiveHeight
         ref={carouselRef}
         dotPosition="right"

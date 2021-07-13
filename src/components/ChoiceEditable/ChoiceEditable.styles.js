@@ -1,6 +1,6 @@
-import { Box, Col } from '@qonsoll/react-design'
 import { Input } from 'antd'
 import styled from 'styled-components'
+import { Box, Col } from '@qonsoll/react-design'
 import typeformTheme from '../../../styles/theme'
 
 const { TextArea } = Input

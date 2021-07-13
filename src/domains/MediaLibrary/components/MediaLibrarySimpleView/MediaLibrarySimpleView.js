@@ -1,12 +1,10 @@
 import React from 'react'
-import { Input } from 'antd'
 import PropTypes from 'prop-types'
 import { Box } from '@qonsoll/react-design'
-import { EditOutlined } from '@ant-design/icons'
 import RangeSlider from '../../../../components/RangeSlider'
 import { useTranslation } from '../../../../context/Translation'
-import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
 import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
+import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
 import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
@@ -22,7 +20,10 @@ function MediaLibrarySimpleView(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const { imageName, imageInputPlaceholder, brightness } = useTranslation()
+  const {
+    // imageName, imageInputPlaceholder,
+    brightness
+  } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onMediaModalContinue = (selectedImage) => {

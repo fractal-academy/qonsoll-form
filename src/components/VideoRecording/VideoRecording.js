@@ -30,6 +30,7 @@ function VideoRecording(props) {
     onNoCamera,
     onNoMicrophone
   } = props
+
   const [recorder, setRecorder] = useState(null)
   //   const handleUploaded = (embedding) => {
   //     console.log('video uploaded:', embedding.video)

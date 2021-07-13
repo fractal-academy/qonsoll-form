@@ -11,7 +11,6 @@ import { useTranslation } from '../../../../context/Translation'
 import { Modal, Button, Typography, Upload, message } from 'antd'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import {
-  CustomChangeButtonText,
   MediaListContainer,
   CustomButton,
   CustomInput,

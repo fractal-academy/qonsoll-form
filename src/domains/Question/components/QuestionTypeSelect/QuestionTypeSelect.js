@@ -27,8 +27,12 @@ const StyledText = styled(Text)`
 `
 
 function QuestionTypeSelect(props) {
-  const { questionData, onClick, welcomeScreenShowRule, customQuestionTypes } =
-    props
+  const {
+    //  questionData,
+    onClick,
+    welcomeScreenShowRule,
+    customQuestionTypes
+  } = props
 
   // [ADDITIONAL_HOOKS]
   const {
@@ -112,9 +116,9 @@ function QuestionTypeSelect(props) {
       )) ||
     questionTypeMap
 
-  const hasConditions = questionData?.questionConfigurations?.filter(
-    (item) => item?.redirectQuestion.length > 0
-  ).length
+  // const hasConditions = questionData?.questionConfigurations?.filter(
+  //   (item) => item?.redirectQuestion.length > 0
+  // ).length
 
   return (
     <Row noGutters pl={1}>

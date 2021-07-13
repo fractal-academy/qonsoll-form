@@ -4,11 +4,11 @@ import { IconLabel, SubmitButton } from '../../../components'
 import { Box, Row, Col } from '@qonsoll/react-design'
 import { DeleteOutlined, InboxOutlined, FileOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../context/Translation'
-// import storage from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
 import useFunctions from '../../../hooks/useFunctions'
 import { useKeyPress, useHover } from '@umijs/hooks'
 import { UploadItem } from './FileUploader.styles'
+// import storage from '../../../services/storage'
 
 const { Dragger } = Upload
 const { Text } = Typography
@@ -25,8 +25,8 @@ const UploadArea = (props) => {
   const {
     answerRequiredMessageError,
     fileUploaderTitle,
-    fileUploaderSubtitle,
     deleteUploadedItemTitle
+    // fileUploaderSubtitle
   } = useTranslation()
   const { getCollectionRef, storage } = useFunctions()
   const [isHovering, hoverRef] = useHover()

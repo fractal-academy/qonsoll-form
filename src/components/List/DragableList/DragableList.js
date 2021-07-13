@@ -1,4 +1,4 @@
-import { List, Empty } from 'antd'
+import { List } from 'antd'
 import arrayMove from 'array-move'
 import styled from 'styled-components'
 import SortableItem from './SortableItem'
