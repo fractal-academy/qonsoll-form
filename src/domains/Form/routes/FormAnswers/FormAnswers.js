@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import ActionsFunctionsContext from 'feedback-typeform-app/src/context/ActionsFunctions/ActionsFunctionsContext'
-import { TranslationContext } from 'feedback-typeform-app/src/context/Translation'
-import TypeformConfigurationContext from 'feedback-typeform-app/src/context/TypeformConfigurationContext'
-import FirebaseContext from 'feedback-typeform-app/src/context/Firebase/FirebaseContext'
-import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
-import { useAnswersContextDispatch } from 'feedback-typeform-app/src/context/Answers'
+// import ActionsFunctionsContext from 'feedback-typeform-app/src/context/ActionsFunctions/ActionsFunctionsContext'
+// import { TranslationContext } from 'feedback-typeform-app/src/context/Translation'
+// import TypeformConfigurationContext from 'feedback-typeform-app/src/context/TypeformConfigurationContext'
+// import FirebaseContext from 'feedback-typeform-app/src/context/Firebase/FirebaseContext'
+// import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
+// import { useAnswersContextDispatch } from 'feedback-typeform-app/src/context/Answers'
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -22,8 +22,8 @@ function FormAnswers(props) {
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [CUSTOM HOOKS]
-  const { getCollectionRef } = useFunctions(firebase)
-  const answersDispatch = useAnswersContextDispatch()
+  // const { getCollectionRef } = useFunctions(firebase)
+  // const answersDispatch = useAnswersContextDispatch()
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t

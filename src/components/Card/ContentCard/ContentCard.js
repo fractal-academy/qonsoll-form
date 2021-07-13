@@ -36,13 +36,25 @@ const ImageBackground = styled(Box)`
 `
 
 function ContentCard(props) {
-  const { image, onEdit, leftSideMenu, brightnessValue, children } = props
+  const {
+    image,
+    onEdit,
+    leftSideMenu,
+    brightnessValue,
+    children,
+    topOffset = '56',
+    wrapperHeight = '100vh'
+  } = props
 
   const paddingSmall = useMedia({ maxWidth: '768px' })
   const devicePadding = (paddingSmall && 3) || 4
 
   return (
-    <ContentRow p={devicePadding} height="inherit" onEdit={onEdit} noGutters>
+    <ContentRow
+      p={devicePadding}
+      height={`calc(${wrapperHeight} - ${topOffset}px)`}
+      onEdit={onEdit}
+      noGutters>
       {leftSideMenu && (
         <Col mr={3} cw="auto">
           {leftSideMenu}
