@@ -13,7 +13,7 @@ import {
 } from '../../../../context/CurrentQuestion'
 
 function QuestionsList(props) {
-  const { data, setNewOrder, onItemClick, disableDelete } = props
+  const { data, setNewOrder, onItemClick, disableDelete, questionsData } = props
 
   // [CUSTOM_HOOKS]
   const { setData, deleteData } = useFunctions()
@@ -22,13 +22,31 @@ function QuestionsList(props) {
 
   // [CLEAN FUNCTIONS]
   const onUpdate = (updatedQuestions) => {
-    updatedQuestions?.forEach((item) =>
-      setData(COLLECTIONS.QUESTIONS, item?.id, item)
+    const containWelcomeScreen = questionsData?.some(
+      (q) => q?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    )
+
+    updatedQuestions?.forEach((item, index) =>
+      setData(COLLECTIONS.QUESTIONS, item?.id, {
+        ...item,
+        order: !!questionsData
+          ? containWelcomeScreen
+            ? questionsData?.length + index
+            : questionsData?.length + item?.order
+          : item?.order
+      })
         .then(() => {
           item.id === currentQuestion.id &&
             currentQuestionDispatch({
               type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-              payload: item
+              payload: {
+                ...item,
+                order: !!questionsData
+                  ? containWelcomeScreen
+                    ? questionsData?.length + index
+                    : questionsData?.length + item?.order
+                  : item?.order
+              }
             })
         })
         .catch((e) => message.error(e.message))
@@ -43,7 +61,12 @@ function QuestionsList(props) {
       (item) => item.id === questionId && item
     )
     //get type of deleted item
-    const deletedItemType = data[deletedItemIndex]?.questionType
+    // const deletedItemType = data[deletedItemIndex]?.questionType
+
+    const containWelcomeScreen = (questionsData || updatedData).some(
+      (q) => q.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    )
+    const questionsLength = questionsData?.length
 
     //define new current question if delete current question
     const newCurrentQuestion =
@@ -52,13 +75,19 @@ function QuestionsList(props) {
     deleteData(COLLECTIONS.QUESTIONS, questionId).catch((e) =>
       message.error(e.message)
     )
-
-    //update order for all questions
+    //update order for all questions/endings
     updatedData?.forEach((item, index) => {
+      const updatedOrder = containWelcomeScreen
+        ? !!questionsLength
+          ? questionsLength + index
+          : index
+        : !!questionsLength
+        ? questionsLength + index + 1
+        : index + 1
+
       setData(COLLECTIONS.QUESTIONS, item?.id, {
         ...item,
-        order:
-          deletedItemType === QUESTION_TYPES.WELCOME_SCREEN ? index + 1 : index
+        order: updatedOrder
       }).catch((e) => message.error(e.message))
     })
 
@@ -95,7 +124,7 @@ function QuestionsList(props) {
   const filteredDataSource = dataSource?.filter(
     (item) => item.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   )
-  const sortable = filteredDataSource.length > 1
+  const sortable = filteredDataSource?.length > 1
 
   return (
     <>
@@ -107,6 +136,7 @@ function QuestionsList(props) {
                 {...item}
                 number="W"
                 action={handleDelete}
+                disableDelete={disableDelete}
                 onClick={() => onItemClick(item)}></QuestionSimpleView>
             </Box>
           )

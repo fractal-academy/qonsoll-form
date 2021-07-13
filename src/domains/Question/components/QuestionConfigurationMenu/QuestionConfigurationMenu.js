@@ -51,10 +51,10 @@ function QuestionConfigurationMenu() {
   }, [currentQuestion])
 
   return (
-    <Box px={3} pt={2} h="between">
+    <Box px={3} pt={3} h="between">
       <Row mb={3} noGutters v="center">
         <Col v="center">
-          <Text strong>{requiredSwitcher || 'Required'}</Text>
+          <Text>{requiredSwitcher || 'Required'}</Text>
         </Col>
         <Col cw="auto" px={2}>
           <Switch
@@ -66,7 +66,7 @@ function QuestionConfigurationMenu() {
       </Row>
       <Row mb={3} noGutters v="center">
         <Col v="center">
-          <Text strong>{videoQuestionSwitcher || 'Is video question?'}</Text>
+          <Text>{videoQuestionSwitcher || 'Video question'}</Text>
         </Col>
         <Col cw="auto" px={2}>
           <Switch

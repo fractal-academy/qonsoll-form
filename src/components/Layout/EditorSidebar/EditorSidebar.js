@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import React, { useEffect, useState, useMemo } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import React, { useEffect, useState, useMemo } from 'react'
 import { Typography, Button, Popover, Tooltip } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
@@ -19,13 +19,55 @@ import {
   SidebarBoxWrapper,
   styles
 } from './EditorSidebar.styles'
-import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
-import useFunctions from '../../../hooks/useFunctions'
-import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
-import { useTranslation } from '../../../context/Translation'
 import { v4 as uuid } from 'uuid'
+import useFunctions from '../../../hooks/useFunctions'
+import { useTranslation } from '../../../context/Translation'
+import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
+import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 
 const { Title } = Typography
+
+//configuration for certain types of questions
+const choicesConfiguration = [
+  {
+    answerOptionId: uuid(),
+    answerOption: 'default',
+    image: '',
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  }
+]
+const yesNoConfiguration = [
+  {
+    answerOptionId: uuid(),
+    answerOption: 'Yes',
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  },
+  {
+    answerOptionId: uuid(),
+    answerOption: 'No',
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  }
+]
+const opinionAndRatingConfiguration = Array(5)
+  .fill(0)
+  ?.map((el, index) => ({
+    answerOptionId: uuid(),
+    answerOption: 1 + index,
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  }))
+
+const defaultConfiguration = [
+  {
+    answerOptionId: '',
+    answerOption: '',
+    redirectQuestion: '',
+    redirectConditionRule: ''
+  }
+]
 
 function EditorSidebar(props) {
   const {
@@ -70,47 +112,6 @@ function EditorSidebar(props) {
     ].includes(key)
 
     const isYesNo = key === QUESTION_TYPES.YES_NO
-    //configuration for certain types of questions
-    const choicesConfiguration = [
-      {
-        answerOptionId: uuid(),
-        answerOption: 'default',
-        image: '',
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }
-    ]
-    const yesNoConfiguration = [
-      {
-        answerOptionId: uuid(),
-        answerOption: 'Yes',
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      },
-      {
-        answerOptionId: uuid(),
-        answerOption: 'No',
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }
-    ]
-    const opinionAndRatingConfiguration = Array(5)
-      .fill(0)
-      ?.map((el, index) => ({
-        answerOptionId: uuid(),
-        answerOption: 1 + index,
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }))
-
-    const defaultConfiguration = [
-      {
-        answerOptionId: '',
-        answerOption: '',
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }
-    ]
 
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
@@ -120,6 +121,11 @@ function EditorSidebar(props) {
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
       : defaultConfiguration
+
+    const containWelcomeScreen = questions.some(
+      (q) => q.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    )
+    const isEnding = !key
 
     // default data for created question
     const newQuestion = {
@@ -132,10 +138,12 @@ function EditorSidebar(props) {
       order:
         key === QUESTION_TYPES.WELCOME_SCREEN
           ? 0
-          : questions.some(
-              (q) => q.questionType === QUESTION_TYPES.WELCOME_SCREEN
-            )
-          ? questions?.length
+          : containWelcomeScreen
+          ? isEnding
+            ? questions?.length + endings?.length
+            : questions?.length
+          : isEnding
+          ? questions?.length + endings?.length + 1
           : questions?.length + 1
     }
 
@@ -205,16 +213,14 @@ function EditorSidebar(props) {
   const ConditionsQuestionsList = useMemo(
     () =>
       questions
-        ? questions
-            ?.filter(
-              (item) =>
-                ![
-                  QUESTION_TYPES.ENDING,
-                  QUESTION_TYPES.WELCOME_SCREEN,
-                  QUESTION_TYPES.STATEMENT
-                ].includes(item.questionType)
-            )
-            .sort((a, b) => a.order - b.order)
+        ? questions?.filter(
+            (item) =>
+              ![
+                QUESTION_TYPES.ENDING,
+                QUESTION_TYPES.WELCOME_SCREEN,
+                QUESTION_TYPES.STATEMENT
+              ].includes(item.questionType)
+          )
         : [],
     [questions]
   )
@@ -304,7 +310,11 @@ function EditorSidebar(props) {
         {/* Question List*/}
         <Box overflow="auto" pr={2}>
           {!!questions?.length && (
-            <QuestionsList data={questions} onItemClick={onItemClick} />
+            <QuestionsList
+              data={questions}
+              onItemClick={onItemClick}
+              disableDelete={questions?.length === 1}
+            />
           )}
         </Box>
         <Box mt="auto">
@@ -334,6 +344,7 @@ function EditorSidebar(props) {
             {!!endings?.length && (
               <QuestionsList
                 data={endings}
+                questionsData={questions}
                 onItemClick={onItemClick}
                 disableDelete={endings?.length === 1}
               />

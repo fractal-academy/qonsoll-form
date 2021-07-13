@@ -10,12 +10,15 @@ const FirstIcon = styled(MoreOutlined)`
 const SecondIcon = styled(MoreOutlined)`
   margin-right: -5px;
 `
+const HandlerBox = styled(Box)`
+  cursor: grab;
+`
 
 const DragHandler = sortableHandle(() => (
-  <Box>
+  <HandlerBox>
     <FirstIcon />
     <SecondIcon />
-  </Box>
+  </HandlerBox>
 ))
 
 export default DragHandler

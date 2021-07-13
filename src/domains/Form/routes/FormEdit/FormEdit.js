@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import useMedia from 'use-media'
+import PropTypes from 'prop-types'
 import React, { useState, useEffect, useMemo } from 'react'
 import { PageLayout, EditorSidebar, Spinner } from '../../../../components'
 import { Box } from '@qonsoll/react-design'
@@ -214,12 +214,13 @@ function FormEdit(props) {
                     setBrightnessValue={setBrightnessValue}
                     customQuestionTypes={customQuestionTypes}
                     onQuestionTypeChange={onQuestionTypeChange}
+                    welcomeScreenShowRule={welcomeScreenShowRule}
                   />
                 </PageLayout>
                 {/*TODO id in EditorSidebar*/}
                 {handleSmallScreen && (
                   <EditorSidebar
-                    // transparent
+                    transparent
                     id={id}
                     endings={endings}
                     questions={questions}
