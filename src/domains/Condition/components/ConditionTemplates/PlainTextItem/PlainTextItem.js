@@ -7,6 +7,7 @@ import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextS
 import { CustomInput, StyledSelect } from './PlainTextItem.styles'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
+import { useTranslation } from '~/modules/feedback-typeform-app/src/context/Translation'
 
 const { Option } = Select
 
@@ -20,14 +21,15 @@ function PlaneTextItem(props) {
     questionConfigurations
   } = props
 
+  //[ADDITIONAL HOOKS]
+  const { setData } = useFunctions()
+  const { rulePlaceholder } = useTranslation()
+
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState(item?.answerOption)
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.redirectConditionRule || TEXT_CONDITION_RULES_VALUES[0]
+    item?.redirectConditionRule || rulePlaceholder || 'Select redirect rule'
   )
-
-  //[ADDITIONAL HOOKS]
-  const { setData } = useFunctions()
 
   //[CLEAR FUNCTIONS]
   const onInputValueChange = ({ target }) => {
@@ -70,9 +72,9 @@ function PlaneTextItem(props) {
   useEffect(() => {
     setInputValue(item?.answerOption || '')
     setRuleSelectValue(
-      item?.redirectConditionRule || TEXT_CONDITION_RULES_VALUES[0]
+      item?.redirectConditionRule || rulePlaceholder || 'Select redirect rule'
     )
-  }, [item])
+  }, [item, rulePlaceholder])
 
   return (
     <Row noGutters mb={2} key={index}>
@@ -83,7 +85,9 @@ function PlaneTextItem(props) {
               <StyledSelect
                 showSearch
                 allowClear
-                value={ruleSelectValue || TEXT_CONDITION_RULES_VALUES[0]}
+                value={
+                  ruleSelectValue || rulePlaceholder || 'Select redirect rule'
+                }
                 onChange={onRuleSelectValueChange}>
                 {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>
