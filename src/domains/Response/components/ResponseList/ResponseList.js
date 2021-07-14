@@ -6,6 +6,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Box, Col } from '@qonsoll/react-design'
 import moment from 'moment'
 import { NumberedCard } from 'feedback-typeform-app/src/components'
+import { EmptyState } from 'feedback-typeform-app/src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
 
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
@@ -64,16 +65,20 @@ function ResponseList(props) {
 
   return (
     <>
-      {userAnswerGroup?.map((item, index) => (
-        <Col cw={5} key={index} my={2}>
-          <NumberedCard number={index + 1}>
-            <Box ml={3} my={2}>
-              {item.date}, {item.user}'s response
-            </Box>
-            {/*{moment(item.date).format('MMMM Do YYYY, h:mm:ss a')}*/}
-          </NumberedCard>
-        </Col>
-      ))}
+      {userAnswerGroup?.length > 0 ? (
+        userAnswerGroup?.map((item, index) => (
+          <Col cw={5} key={index} my={2}>
+            <NumberedCard number={index + 1}>
+              <Box ml={3} my={2}>
+                {item.date}, {item.user}'s response
+              </Box>
+              {/*{moment(item.date).format('MMMM Do YYYY, h:mm:ss a')}*/}
+            </NumberedCard>
+          </Col>
+        ))
+      ) : (
+        <EmptyState />
+      )}
     </>
   )
 }
