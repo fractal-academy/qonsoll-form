@@ -36,7 +36,16 @@ const ImageBackground = styled(Box)`
 `
 
 function ContentCard(props) {
-  const { image, onEdit, leftSideMenu, brightnessValue, children } = props
+  const {
+    image,
+    onEdit,
+    leftSideMenu,
+    brightnessValue,
+    children
+    // FOR FUTURE FIX
+    // topOffset = '56px',
+    // wrapperHeight = '100vh'
+  } = props
 
   const paddingSmall = useMedia({ maxWidth: '768px' })
   const devicePadding = (paddingSmall && 3) || 4

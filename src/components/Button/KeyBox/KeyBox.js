@@ -1,14 +1,13 @@
 import React from 'react'
-import { Button, Typography } from 'antd'
-import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
-import { useHover } from '@umijs/hooks'
-import { CheckOutlined } from '@ant-design/icons'
-import { Row, Col, Box } from '@qonsoll/react-design'
 import useMedia from 'use-media'
+import { Typography } from 'antd'
+import PropTypes from 'prop-types'
+import { useHover } from '@umijs/hooks'
+import styled, { css } from 'styled-components'
 import { DEFAULT_IMAGE } from '../../../constants'
 import typeformTheme from '../../../../styles/theme'
 import { blinkBackground } from '../../../animation'
+import { Row, Col, Box } from '@qonsoll/react-design'
 
 const { Text } = Typography
 

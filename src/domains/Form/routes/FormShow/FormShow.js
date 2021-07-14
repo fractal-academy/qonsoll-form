@@ -43,33 +43,34 @@ function FormShow(props) {
   useKeyPress(9, (e) => {
     e.preventDefault()
   })
-  const [data, loading] = useCollectionData(
-    getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', id)
+  const [questionsData, loading] = useCollectionData(
+    getCollectionRef(COLLECTIONS.QUESTIONS)
+      .where('formId', '==', id)
+      .orderBy('order')
   )
   const firstSlideRule =
-    (data?.some(
+    (questionsData?.some(
       (item) => item.questionType === QUESTION_TYPES.WELCOME_SCREEN
     ) &&
-      0) ||
-    1
+      1) ||
+    0
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(firstSlideRule)
-  const [previousQuestionOrder, setPreviousQuestionOrder] =
-    useState(firstSlideRule)
+  const [previousQuestionOrder, setPreviousQuestionOrder] = useState([])
 
   // [COMPUTED PROPERTIES]
-  const sortedData = data && data.sort((a, b) => a.order - b.order)
+  // const sortedData = data && data.sort((a, b) => a.order - b.order)
   const disabledUp = currentSlide === 0
-  const disabledDown = currentSlide === data?.length - 1
+  const disabledDown = currentSlide === questionsData?.length - 1
 
   //temporary solution for ending logic; fix after adding logic jumps
-  sortedData &&
-    sortedData.forEach(
-      (item) =>
-        item.questionType === 'Ending' &&
-        sortedData.push(sortedData.splice(sortedData.indexOf(item), 1)[0])
-    )
+  // sortedData &&
+  //   sortedData.forEach(
+  //     (item) =>
+  //       item.questionType === 'Ending' &&
+  //       sortedData.push(sortedData.splice(sortedData.indexOf(item), 1)[0])
+  //   )
 
   // [CLEAN FUNCTIONS]
   // const onRestart = () => {
@@ -83,7 +84,10 @@ function FormShow(props) {
       })
 
     setIsAnswered(true)
-    setPreviousQuestionOrder(currentSlide)
+    setPreviousQuestionOrder((prevState) => [
+      ...(prevState || []),
+      currentSlide
+    ])
   }
 
   return (
@@ -132,17 +136,17 @@ function FormShow(props) {
                   <FormAdvancedView
                     submitLoading={submitLoading}
                     isAnswered={isAnswered}
-                    sortedData={sortedData}
+                    questionsData={questionsData}
                     disabledUp={disabledUp}
                     currentSlide={currentSlide}
                     disabledDown={disabledDown}
                     setIsAnswered={setIsAnswered}
                     setCurrentSlide={setCurrentSlide}
-                    previousQuestionOrder={previousQuestionOrder}>
-                    {sortedData?.map((item, index) => (
+                    previousQuestionOrder={previousQuestionOrder}
+                    setPreviousQuestionOrder={setPreviousQuestionOrder}>
+                    {questionsData?.map((item, index) => (
                       <Component
                         key={index}
-                        sortedData={sortedData}
                         onClick={onClick}
                         currentSlide={currentSlide}
                         index={index}

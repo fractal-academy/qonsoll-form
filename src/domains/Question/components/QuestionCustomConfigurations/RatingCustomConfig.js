@@ -40,8 +40,8 @@ function AmountOptionsCustomConfig() {
 
   return (
     <Row noGutters mb={2} h="between">
-      <Col v="center">
-        <Text strong>
+      <Col v="center" mb={2}>
+        <Text>
           {questionConfigurationAmountOfOptions || 'Amount of options '}
         </Text>
       </Col>

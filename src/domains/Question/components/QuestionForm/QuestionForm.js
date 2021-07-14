@@ -52,7 +52,8 @@ function QuestionForm(props) {
     onChangeMenuItem,
     setBrightnessValue,
     customQuestionTypes,
-    onQuestionTypeChange
+    onQuestionTypeChange,
+    welcomeScreenShowRule
   } = props
 
   // [ADDITIONAL HOOKS]
@@ -141,6 +142,15 @@ function QuestionForm(props) {
           />
         )
       }>
+      {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
+        <Box position="absolute" right="48px">
+          <QuestionMediaPopover
+            brightnessValue={questionData?.brightnessValue || brightnessValue}
+            setBrightnessValue={setBrightnessValue}
+            MediaModalButtonBackground={popoverImage}
+          />
+        </Box>
+      )}
       {!!Object.keys(currentQuestion).length && (
         <CustomRow noGutters>
           <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 8]}>
@@ -151,21 +161,10 @@ function QuestionForm(props) {
                   <Col cw="auto">
                     <QuestionConfigurationPopover
                       questionData={questionData}
-                      welcomeScreenShowRule={true}
+                      welcomeScreenShowRule={welcomeScreenShowRule}
                       questionsList={questionsList}
                       customQuestionTypes={customQuestionTypes}
                       onQuestionTypeChange={onQuestionTypeChange}
-                    />
-                  </Col>
-                )}
-                {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
-                  <Col cw="auto" ml={2}>
-                    <QuestionMediaPopover
-                      brightnessValue={
-                        questionData?.brightnessValue || brightnessValue
-                      }
-                      setBrightnessValue={setBrightnessValue}
-                      MediaModalButtonBackground={popoverImage}
                     />
                   </Col>
                 )}

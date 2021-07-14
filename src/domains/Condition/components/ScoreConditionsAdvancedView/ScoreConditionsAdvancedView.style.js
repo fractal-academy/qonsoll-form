@@ -1,8 +1,9 @@
-import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import typeformTheme from '../../../../../../styles/theme'
+import { InputNumber } from 'antd'
+import styled from 'styled-components'
+import typeformTheme from 'feedback-typeform-app/styles/theme'
 
-export const CustomChoiceBox = styled(Box)(({ theme }) => ({
+export const OptionBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
@@ -10,9 +11,14 @@ export const CustomChoiceBox = styled(Box)(({ theme }) => ({
     theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9,
   border: '1px solid',
   borderColor:
-    theme?.color?.dark?.t?.lighten5 || theme?.color?.dark?.t?.lighten5,
-  borderRadius: theme?.borderRadius?.md
+    theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5,
+  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
 }))
+
+export const StyledInputNumber = styled(InputNumber)`
+  flex: 1;
+  text-align: center;
+`
 
 export const CustomTextBox = styled(Box)(({ theme }) => ({
   maxWidth: '100%',

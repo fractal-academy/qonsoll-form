@@ -1,19 +1,15 @@
 import PropTypes from 'prop-types'
 import { useSize } from '@umijs/hooks'
 import { QUESTION_TYPES } from '../../constants'
+import React, { cloneElement, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel } from 'antd'
 import { useAnswersContext } from '../../context/Answers'
+import { UpOutlined, DownOutlined } from '@ant-design/icons'
 import {
-  UpOutlined,
-  DownOutlined,
-  DoubleLeftOutlined,
-  DoubleRightOutlined
-} from '@ant-design/icons'
-import React, { cloneElement, useRef, useState } from 'react'
-import Text from 'antd/es/typography/Text'
-import typeformTheme from '../../../../../styles/theme'
-import { StyledText } from 'feedback-typeform-app/src/components/Carousel/Carousel.style'
+  longAndShortAnswerConditionComparison,
+  dateAnswerConditionComparison
+} from '../../domains/Form/helpers'
 
 function Carousel(props) {
   const {
@@ -25,11 +21,10 @@ function Carousel(props) {
     submitLoading,
     disabledDown,
     disabledUp,
-    sortedData,
-    previousQuestionOrder
+    questionsData,
+    previousQuestionOrder,
+    setPreviousQuestionOrder
   } = props
-
-  // [STATE HOOKS]
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
@@ -40,31 +35,43 @@ function Carousel(props) {
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
-    setCurrentSlide(slideIndex)
+    const containWelcomeScreen = questionsData?.some(
+      (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    )
+
+    setCurrentSlide(containWelcomeScreen ? slideIndex : slideIndex + 1)
   }
+
+  const welcomeScreenRule = questionsData?.some(
+    (item) => item.questionType === QUESTION_TYPES.WELCOME_SCREEN
+  )
 
   //[ LOGIC JUMPS ]
   const goTo = (slideNumber) => {
     carouselRef.current?.goTo(slideNumber)
     setIsAnswered && setIsAnswered(false)
   }
-  const previous = () => {
-    // carouselRef.current?.prev()
-    carouselRef.current?.goTo(previousQuestionOrder)
-  }
   const next = () => {
     carouselRef.current?.next()
     setIsAnswered && setIsAnswered(false)
   }
-  const handleScroll = (e) => {
-    // return this after adding isRequired and condition rules
-    // e.deltaY > 0 ? next() : previous()
+  const previous = () => {
+    carouselRef.current?.goTo(
+      previousQuestionOrder[previousQuestionOrder.length - 1]
+    )
+
+    let temp = previousQuestionOrder.filter(
+      (item, index) => index < previousQuestionOrder.length - 1
+    )
+    setPreviousQuestionOrder(temp)
   }
 
   // [ ANSWER ]
-  let currentSlideData = sortedData?.filter(
+  let currentSlideData = questionsData?.filter(
     (item) => item.order === currentSlide
   )
+  let questionConfig =
+    currentSlideData && currentSlideData[0]?.questionConfigurations
   let givenAnswer =
     answersContext &&
     Object.entries(answersContext)?.filter(
@@ -73,77 +80,79 @@ function Carousel(props) {
   let answerValue =
     givenAnswer && Object.entries(givenAnswer)[0]?.[1][1]?.answer?.value
 
-  // [ TYPE FUNCTIONS ]
-  const choiceSlideNextNumber = () => {
-    let questionConfig =
-      currentSlideData &&
-      currentSlideData[0]?.questionConfigurations?.filter(
-        (item) => item.answerOption === answerValue
-      )
-    let nextOrder = questionConfig
-      ? sortedData?.filter(
-          (item) => item.id === questionConfig[0]?.redirectQuestion
+  const getNextSlide = (config) => {
+    let nextOrder = config
+      ? questionsData?.filter(
+          (item) => item.id === config[0]?.redirectQuestion
         )[0]?.order
       : 0
 
-    ;(nextOrder && goTo(nextOrder)) || next()
-  }
-  const textSlideNextNumber = () => {
-    goTo()
-  }
-  const specialSlideNextNumber = () => {
-    goTo()
+    const ruledOrder = welcomeScreenRule ? nextOrder : nextOrder - 1
+
+    ;(ruledOrder && goTo(ruledOrder)) || next()
   }
 
-  //COMPUTED PROPERTIES
-  const initialSlide = sortedData.some(
-    (question) => question.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  )
-    ? 0
-    : 1
+  // [ TYPE FUNCTIONS ]
+  const choiceSlideNextNumber = () => {
+    let filteredConfig = questionConfig?.filter(
+      (item) => item.answerOption === answerValue
+    )
+
+    getNextSlide(filteredConfig)
+  }
+  const textSlideNextNumber = () => {
+    let filteredConfig = questionConfig?.filter((item) =>
+      longAndShortAnswerConditionComparison(
+        item?.redirectConditionRule,
+        answerValue,
+        item?.answerOption
+      )
+    )
+    getNextSlide(filteredConfig)
+  }
+
+  const dateSlideNextNumber = () => {
+    let filteredConfig = questionConfig?.filter((item) =>
+      dateAnswerConditionComparison(
+        item?.redirectConditionRule,
+        item?.answerOption,
+        answerValue
+      )
+    )
+    getNextSlide(filteredConfig)
+  }
+  const uploadSlideNextNumber = () => {
+    answerValue ? getNextSlide(questionConfig) : next()
+  }
 
   const actionRuleMap = {
     // [ CHOICES ]
-    [QUESTION_TYPES.CHOICE]: {
-      function: () => choiceSlideNextNumber
-    },
-    [QUESTION_TYPES.YES_NO]: {
-      function: () => choiceSlideNextNumber
-    },
-    [QUESTION_TYPES.RATING]: {
-      function: () => choiceSlideNextNumber
-    },
-    [QUESTION_TYPES.OPINION_SCALE]: {
-      function: () => choiceSlideNextNumber
-    },
-    [QUESTION_TYPES.PICTURE_CHOICE]: {
-      function: () => choiceSlideNextNumber
-    },
+    [QUESTION_TYPES.CHOICE]: choiceSlideNextNumber,
+    [QUESTION_TYPES.YES_NO]: choiceSlideNextNumber,
+    [QUESTION_TYPES.RATING]: choiceSlideNextNumber,
+    [QUESTION_TYPES.OPINION_SCALE]: choiceSlideNextNumber,
+    [QUESTION_TYPES.PICTURE_CHOICE]: choiceSlideNextNumber,
 
     // [ TEXT ]
-    [QUESTION_TYPES.SHORT_TEXT]: {
-      function: () => textSlideNextNumber
-    },
-    [QUESTION_TYPES.LONG_TEXT]: {
-      function: () => textSlideNextNumber
-    },
+    [QUESTION_TYPES.SHORT_TEXT]: textSlideNextNumber,
+    [QUESTION_TYPES.LONG_TEXT]: textSlideNextNumber,
 
     // [ SPECIAL ]
-    [QUESTION_TYPES.DATE]: {
-      function: () => specialSlideNextNumber
-    },
-    [QUESTION_TYPES.FILE_UPLOAD]: {
-      function: () => specialSlideNextNumber
-    }
+    [QUESTION_TYPES.DATE]: dateSlideNextNumber,
+    [QUESTION_TYPES.FILE_UPLOAD]: uploadSlideNextNumber
   }
 
-  isAnswered && choiceSlideNextNumber()
+  const typeAction =
+    (currentSlideData && actionRuleMap[currentSlideData[0]?.questionType]) ||
+    next
+
+  isAnswered && typeAction()
 
   return (
-    <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
+    <Box height="100%" ref={ref} width="100%">
       <AntdCarousel
         dots={false}
-        initialSlide={initialSlide}
+        swipe={false}
         adaptiveHeight
         ref={carouselRef}
         dotPosition="right"
@@ -156,9 +165,9 @@ function Carousel(props) {
           })
         )}
       </AntdCarousel>
-      {!submitLoading && (
-        <Box ref={buttonsRef}>
-          <Row h="right" p={2} noGutters justifyContent="space-between">
+      <Box ref={buttonsRef}>
+        {!submitLoading && (
+          <Row h="right" p={2} noGutters>
             <Col cw="auto" mr={2}>
               <Button
                 disabled={disabledUp}
@@ -178,8 +187,8 @@ function Carousel(props) {
               </Button>
             </Col>
           </Row>
-        </Box>
-      )}
+        )}
+      </Box>
     </Box>
   )
 }

@@ -1,12 +1,11 @@
 import React from 'react'
+import useMedia from 'use-media'
 import { Rate, message } from 'antd'
 import styled from 'styled-components'
-import { Container, Col, Row } from '@qonsoll/react-design'
-import typeformTheme from '../../../styles/theme'
 import { useKeyPress } from '@umijs/hooks'
+import { Container } from '@qonsoll/react-design'
+import typeformTheme from '../../../styles/theme'
 import { useTranslation } from '../../context/Translation'
-import { StarFilled } from '@ant-design/icons'
-import useMedia from 'use-media'
 
 const StyledRate = styled(Rate)`
   &.ant-rate {

@@ -10,13 +10,11 @@ import {
   Button,
   Menu,
   Input,
-  Empty,
   Tooltip
 } from 'antd'
 import useMedia from 'use-media'
 import { globalStyles } from '../../../../../styles'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
-import { styles } from './FormsAll.styles'
 import { Spinner, StaticList } from '../../../../components'
 import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
@@ -237,17 +235,11 @@ function FormsAll(props) {
                 flexWrap="wrap"
                 flexDirection="row"
                 className="custom-scroll">
-                {currentData ? (
-                  <StaticList
-                    data={currentData}
-                    columnWidth={(mobileLayout && 2) || 6}
-                    setEdit={setEdit}
-                  />
-                ) : (
-                  <Box width="100%" display="flex" justifyContent="center">
-                    <Empty />
-                  </Box>
-                )}
+                <StaticList
+                  data={currentData}
+                  columnWidth={(mobileLayout && 2) || 6}
+                  setEdit={setEdit}
+                />
 
                 <FormSimpleFormWithModal
                   isModalVisible={isModalVisible}

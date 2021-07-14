@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { Upload, message, Progress, Button, Popconfirm, Typography } from 'antd'
-import { IconLabel, SubmitButton } from '../../../components'
-import { Box, Row, Col } from '@qonsoll/react-design'
 import { DeleteOutlined, InboxOutlined, FileOutlined } from '@ant-design/icons'
+import { IconLabel, SubmitButton } from '../../../components'
 import { useTranslation } from '../../../context/Translation'
-// import storage from '../../../services/storage'
 import COLLECTIONS from '../../../constants/collection'
 import useFunctions from '../../../hooks/useFunctions'
+import { Box, Row, Col } from '@qonsoll/react-design'
 import { useKeyPress, useHover } from '@umijs/hooks'
 import { UploadItem } from './FileUploader.styles'
 
@@ -25,7 +24,6 @@ const UploadArea = (props) => {
   const {
     answerRequiredMessageError,
     fileUploaderTitle,
-    fileUploaderSubtitle,
     deleteUploadedItemTitle
   } = useTranslation()
   const { getCollectionRef, storage } = useFunctions()
@@ -33,8 +31,6 @@ const UploadArea = (props) => {
 
   // [COMPONENT STATE HOOKS]
   const [filesList, setFilesList] = useState({})
-
-  // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
   // const onMediaUploaded = (data) => {

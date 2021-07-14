@@ -57,6 +57,7 @@ function DragableList(props) {
       <List
         {...args}
         dataSource={sortableItems}
+        locale={{ emptyText: ' ' }}
         renderItem={(item, index) => (
           <SortableWrapper key={`item-${index}`} index={index}>
             {renderItem ? renderItem(dataSource[item], index) : item}
