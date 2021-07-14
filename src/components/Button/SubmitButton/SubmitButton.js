@@ -12,7 +12,6 @@ import { useKeyPress } from '@umijs/hooks'
 import useMedia from 'use-media'
 import COLLECTIONS from '../../../constants/collection'
 import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
-import moment from 'moment'
 
 const { Text } = Typography
 
@@ -43,7 +42,7 @@ function SubmitButton(props) {
   const { pressEnter } = useTranslation()
   const IsntDesktop = useMedia({ minWidth: '1024px' })
 
-  const mockUser = { name: 'Barack Obama' }
+  const mockUser = { name: 'John Doe' }
 
   useKeyPress(
     (e) =>
@@ -65,9 +64,7 @@ function SubmitButton(props) {
   const onButtonClick = () => {
     if (finish) {
       const updatedAnswers = { formId, answers }
-      // console.log(updatedAnswers)
       console.log(Object.values(answers))
-      // const sendAnswersTimestemp = moment().format('MMMM Do YYYY, h:mm:ss a')
       const sendAnswersTimestemp = getTimestamp().fromDate(new Date())
       Object.values(answers).map((item, index) => {
         const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
