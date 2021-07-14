@@ -35,7 +35,7 @@ function SubmitButton(props) {
   const formId = question?.formId
 
   // [CUSTOM_HOOKS]
-  const { getCollectionRef, setData } = useFunctions()
+  const { getCollectionRef, setData, getTimestamp } = useFunctions()
 
   // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
@@ -67,7 +67,8 @@ function SubmitButton(props) {
       const updatedAnswers = { formId, answers }
       // console.log(updatedAnswers)
       console.log(Object.values(answers))
-      const sendAnswersTimestemp = moment().format('MMMM Do YYYY, h:mm:ss a')
+      // const sendAnswersTimestemp = moment().format('MMMM Do YYYY, h:mm:ss a')
+      const sendAnswersTimestemp = getTimestamp().fromDate(new Date())
       Object.values(answers).map((item, index) => {
         const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
         setData(COLLECTIONS?.ANSWERS, answerId, {

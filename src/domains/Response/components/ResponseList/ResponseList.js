@@ -70,7 +70,8 @@ function ResponseList(props) {
           <Col cw={5} key={index} my={2}>
             <NumberedCard number={index + 1}>
               <Box ml={3} my={2}>
-                {item.date}, {item.user}'s response
+                {moment(item.date.toDate()).format('MMMM Do YYYY, h:mm:ss a')},{' '}
+                {item.user}'s response
               </Box>
             </NumberedCard>
           </Col>
