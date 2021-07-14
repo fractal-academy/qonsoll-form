@@ -30,8 +30,6 @@ function Carousel(props) {
   const carouselRef = useRef()
   const answersContext = useAnswersContext()
 
-  console.log(previousQuestionOrder)
-
   const [{ height }, ref] = useSize()
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
 
