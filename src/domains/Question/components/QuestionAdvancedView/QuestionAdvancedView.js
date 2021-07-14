@@ -85,7 +85,7 @@ function QuestionAdvancedView(props) {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
         <SubmitButton onClick={onClick} currentSlide={currentSlide}>
-          {finishButton || 'Start'}
+          {startButton || 'Start'}
         </SubmitButton>
       )
     },
@@ -96,7 +96,7 @@ function QuestionAdvancedView(props) {
           currentSlide={currentSlide}
           finish
           loading={submitLoading}>
-          {startButton || 'Finish'}
+          {finishButton || 'Finish'}
         </SubmitButton>
       )
     }

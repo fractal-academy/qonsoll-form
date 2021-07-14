@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useAnswersContextDispatch } from 'feedback-typeform-app/src/context/Answers'
+import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
+import { COLLECTIONS } from 'feedback-typeform-app/src/constants'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { Box, Col } from '@qonsoll/react-design'
+import moment from 'moment'
+import { NumberedCard } from 'feedback-typeform-app/src/components'
+
 // import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
 
@@ -9,12 +17,16 @@ import React, { useEffect, useState } from 'react'
 */
 
 function ResponseList(props) {
-  // const { WRITE_PROPS_HERE } = props
+  const { formId } = props
   // const { ADDITIONAL_DESTRUCTURING_HERE } = user
 
   // [ADDITIONAL HOOKS]
   // const { t } = useTranslation('translation')
   // const { currentLanguage } = t
+
+  // [CUSTOM HOOKS]
+  const { getCollectionRef } = useFunctions()
+  const answersDispatch = useAnswersContextDispatch()
 
   // [COMPONENT STATE HOOKS]
   // const [state, setState] = useState({})
@@ -22,6 +34,13 @@ function ResponseList(props) {
   // [COMPUTED PROPERTIES]
 
   // [CLEAN FUNCTIONS]
+  const [userAnswerGroup, loadingUserAnswerGroup] = useCollectionData(
+    getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where(
+      'formId',
+      '==',
+      formId
+    )
+  )
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -41,7 +60,22 @@ function ResponseList(props) {
     }
   }, [])
 
-  return <>ResponseList</>
+  console.log(userAnswerGroup)
+
+  return (
+    <>
+      {userAnswerGroup?.map((item, index) => (
+        <Col cw={5} key={index} my={2}>
+          <NumberedCard number={index + 1}>
+            <Box ml={3} my={2}>
+              {item.date}, {item.user}'s response
+            </Box>
+            {/*{moment(item.date).format('MMMM Do YYYY, h:mm:ss a')}*/}
+          </NumberedCard>
+        </Col>
+      ))}
+    </>
+  )
 }
 
 ResponseList.propTypes = {}

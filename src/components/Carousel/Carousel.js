@@ -4,8 +4,16 @@ import { QUESTION_TYPES } from '../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel } from 'antd'
 import { useAnswersContext } from '../../context/Answers'
-import { UpOutlined, DownOutlined } from '@ant-design/icons'
+import {
+  UpOutlined,
+  DownOutlined,
+  DoubleLeftOutlined,
+  DoubleRightOutlined
+} from '@ant-design/icons'
 import React, { cloneElement, useRef, useState } from 'react'
+import Text from 'antd/es/typography/Text'
+import typeformTheme from '../../../../../styles/theme'
+import { StyledText } from 'feedback-typeform-app/src/components/Carousel/Carousel.style'
 
 function Carousel(props) {
   const {
@@ -150,7 +158,7 @@ function Carousel(props) {
       </AntdCarousel>
       {!submitLoading && (
         <Box ref={buttonsRef}>
-          <Row h="right" p={2} noGutters>
+          <Row h="right" p={2} noGutters justifyContent="space-between">
             <Col cw="auto" mr={2}>
               <Button
                 disabled={disabledUp}

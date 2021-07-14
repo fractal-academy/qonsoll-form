@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import typeformTheme from '../../../../styles/theme'
 import styled from 'styled-components'
-import { Button, Typography } from 'antd'
+import { Button, message, Typography } from 'antd'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
@@ -10,6 +10,9 @@ import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
 import useMedia from 'use-media'
+import COLLECTIONS from '../../../constants/collection'
+import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
+import moment from 'moment'
 
 const { Text } = Typography
 
@@ -31,11 +34,16 @@ function SubmitButton(props) {
   } = props
   const formId = question?.formId
 
+  // [CUSTOM_HOOKS]
+  const { getCollectionRef, setData } = useFunctions()
+
   // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
   const { pressEnter } = useTranslation()
   const IsntDesktop = useMedia({ minWidth: '1024px' })
+
+  const mockUser = { name: 'Barack Obama' }
 
   useKeyPress(
     (e) =>
@@ -59,6 +67,30 @@ function SubmitButton(props) {
       const updatedAnswers = { formId, answers }
       // console.log(updatedAnswers)
       console.log(Object.values(answers))
+      const sendAnswersTimestemp = moment().format('MMMM Do YYYY, h:mm:ss a')
+      Object.values(answers).map((item, index) => {
+        const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
+        setData(COLLECTIONS?.ANSWERS, answerId, {
+          id: answerId,
+          formId: formId,
+          questionId: item?.question?.id,
+          answer: item?.answer?.value,
+          questionType: item?.question?.questionType,
+          questionTitle: item?.question?.title,
+          user: mockUser?.name,
+          date: sendAnswersTimestemp,
+          order: item?.question?.order
+        })
+      })
+      const userAnswersGroupId = getCollectionRef(
+        COLLECTIONS.USER_ANSWERS_GROUP
+      ).doc().id
+      setData(COLLECTIONS?.USER_ANSWERS_GROUP, userAnswersGroupId, {
+        id: userAnswersGroupId,
+        formId: formId,
+        date: sendAnswersTimestemp,
+        user: mockUser?.name
+      })
       //This part for future improvements - add answer for answer layout
       // Object.values(answers)?.map((questionWithAnswer, index) => {})
 
