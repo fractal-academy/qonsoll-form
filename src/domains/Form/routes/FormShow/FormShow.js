@@ -77,6 +77,7 @@ function FormShow(props) {
   //   window.location.reload()
   // }
   const onClick = (answerData) => {
+    // console.log(answerData)
     !!answerData &&
       answersDispatch({
         type: ANSWERS_DISPATCH_EVENTS.ADD_ANSWER,
@@ -151,6 +152,7 @@ function FormShow(props) {
                         currentSlide={currentSlide}
                         index={index}
                         item={item}
+                        questionsData={questionsData}
                       />
                     ))}
                   </FormAdvancedView>
@@ -164,13 +166,24 @@ function FormShow(props) {
   )
 }
 
-const Component = ({ index, item, onClick, currentSlide, wrapperHeight }) => {
+const Component = ({
+  index,
+  item,
+  questionsData,
+  onClick,
+  currentSlide,
+  wrapperHeight
+}) => {
+  const containWelcomeScreen = questionsData?.some(
+    (q) => q?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+  )
+  const questionNumber = containWelcomeScreen ? index : index + 1
   return (
     <Box key={index} height={wrapperHeight} overflowY="auto">
       <QuestionAdvancedView
         wrapperHeight={wrapperHeight}
         data={item}
-        questionNumber={index}
+        questionNumber={questionNumber}
         onClick={onClick}
         currentSlide={currentSlide}
       />
