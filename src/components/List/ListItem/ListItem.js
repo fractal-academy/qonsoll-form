@@ -183,9 +183,11 @@ function ListItem(props) {
         <Row noGutters h="between" mt={2}>
           <Col display="grid">
             <Text ellipsis>{data?.title}</Text>
-            <Text ellipsis type="secondary">
-              {description}
-            </Text>
+            {!data?.imageUrl && (
+              <Text ellipsis type="secondary">
+                {description}
+              </Text>
+            )}
           </Col>
           <Col cw="auto" display="flex" v="center">
             {data?.imageUrl ? (
