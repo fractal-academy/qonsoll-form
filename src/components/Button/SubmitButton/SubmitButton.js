@@ -10,6 +10,8 @@ import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
 import useMedia from 'use-media'
+import COLLECTIONS from '../../../constants/collection'
+import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
 
 const { Text } = Typography
 
@@ -31,11 +33,16 @@ function SubmitButton(props) {
   } = props
   const formId = question?.formId
 
+  // [CUSTOM_HOOKS]
+  const { getCollectionRef, setData, getTimestamp } = useFunctions()
+
   // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
   const { pressEnter } = useTranslation()
   const IsntDesktop = useMedia({ minWidth: '1024px' })
+
+  const mockUser = { name: 'John Doe' }
 
   useKeyPress(
     (e) =>
@@ -58,7 +65,30 @@ function SubmitButton(props) {
     if (finish) {
       const updatedAnswers = { formId, answers }
       console.log(Object.values(answers))
-
+      const sendAnswersTimestemp = getTimestamp().fromDate(new Date())
+      Object.values(answers).map((item, index) => {
+        const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
+        setData(COLLECTIONS?.ANSWERS, answerId, {
+          id: answerId,
+          formId: formId,
+          questionId: item?.question?.id,
+          answer: item?.answer?.value,
+          questionType: item?.question?.questionType,
+          questionTitle: item?.question?.title,
+          user: mockUser?.name,
+          date: sendAnswersTimestemp,
+          order: item?.question?.order
+        })
+      })
+      const userAnswersGroupId = getCollectionRef(
+        COLLECTIONS.USER_ANSWERS_GROUP
+      ).doc().id
+      setData(COLLECTIONS?.USER_ANSWERS_GROUP, userAnswersGroupId, {
+        id: userAnswersGroupId,
+        formId: formId,
+        date: sendAnswersTimestemp,
+        user: mockUser?.name
+      })
       //This part for future improvements - add answer for answer layout
       // Object.values(answers)?.map((questionWithAnswer, index) => {})
 

@@ -1,71 +1,23 @@
-import React, { useEffect, useState } from 'react'
-// import ActionsFunctionsContext from 'feedback-typeform-app/src/context/ActionsFunctions/ActionsFunctionsContext'
-// import { TranslationContext } from 'feedback-typeform-app/src/context/Translation'
-// import TypeformConfigurationContext from 'feedback-typeform-app/src/context/TypeformConfigurationContext'
-// import FirebaseContext from 'feedback-typeform-app/src/context/Firebase/FirebaseContext'
-// import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
-// import { useAnswersContextDispatch } from 'feedback-typeform-app/src/context/Answers'
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+import React from 'react'
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import { TranslationContext } from '../../../../context/Translation'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import ResponseList from '../../../../domains/Response/components/ResponseList'
 
 function FormAnswers(props) {
-  const {
-    firebase,
-    actions = {},
-    id,
-    translate,
-    submitLoading,
-    configurations,
-    wrapperHeight,
-    wrapperOffset
-  } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
+  const { actions = {}, id, translate, firebase, configurations } = props
 
-  // [CUSTOM HOOKS]
-  // const { getCollectionRef } = useFunctions(firebase)
-  // const answersDispatch = useAnswersContextDispatch()
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
-
-  // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
-
-  // [COMPUTED PROPERTIES]
-
-  // [CLEAN FUNCTIONS]
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
-  }, [])
   return (
-    // <FirebaseContext.Provider value={firebase}>
-    //   <ActionsFunctionsContext.Provider value={actions}>
-    //     <TranslationContext.Provider value={{ t: translate }}>
-    //       <TypeformConfigurationContext.Provider value={configurations}>
-    <>FormAnswers TEXT</>
-
-    /*      </TypeformConfigurationContext.Provider>*/
-
-    /*    </TranslationContext.Provider>*/
-
-    /*  </ActionsFunctionsContext.Provider>*/
-
-    /*</FirebaseContext.Provider>*/
+    <FirebaseContext.Provider value={firebase}>
+      <ActionsFunctionsContext.Provider value={actions}>
+        <TranslationContext.Provider value={{ t: translate }}>
+          <TypeformConfigurationContext.Provider value={configurations}>
+            <ResponseList formId={id} />
+          </TypeformConfigurationContext.Provider>
+        </TranslationContext.Provider>
+      </ActionsFunctionsContext.Provider>
+    </FirebaseContext.Provider>
   )
 }
 
