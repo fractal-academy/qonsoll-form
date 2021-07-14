@@ -77,7 +77,6 @@ function FormShow(props) {
   //   window.location.reload()
   // }
   const onClick = (answerData) => {
-    // console.log(answerData)
     !!answerData &&
       answersDispatch({
         type: ANSWERS_DISPATCH_EVENTS.ADD_ANSWER,
