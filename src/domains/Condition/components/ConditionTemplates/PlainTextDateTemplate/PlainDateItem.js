@@ -7,6 +7,7 @@ import { StyledDatePicker, StyledSelect } from './PlainTextDateTemplate.style'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
 import moment from 'moment'
+import { useTranslation } from '../../../../../context/Translation'
 
 const { Option } = Select
 
@@ -20,16 +21,17 @@ const PlaneDateItem = (props) => {
     questionConfigurations
   } = props
 
+  //[ADDITIONAL HOOKS]
+  const { setData } = useFunctions()
+  const { rulePlaceholder } = useTranslation()
+
   //[COMPONENT STATE HOOKS]
   const [datePickerValue, setDatePickerValue] = useState(
     item?.answerOption ? moment(item?.answerOption) : ''
   )
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.redirectConditionRule || DATE_CONDITION_RULES_VALUES[0]
+    item?.redirectConditionRule || rulePlaceholder || 'Select redirect rule'
   )
-
-  //[ADDITIONAL HOOKS]
-  const { setData } = useFunctions()
 
   //[CLEAN FUNCTIONS]
   const onRuleSelectValueChange = (selectValue = '') => {
@@ -71,9 +73,9 @@ const PlaneDateItem = (props) => {
   useEffect(() => {
     setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
     setRuleSelectValue(
-      item?.redirectConditionRule || DATE_CONDITION_RULES_VALUES[0]
+      item?.redirectConditionRule || rulePlaceholder || 'Select redirect rule'
     )
-  }, [item])
+  }, [item, rulePlaceholder])
 
   return (
     <Row noGutters mb={2} key={index}>
@@ -84,7 +86,9 @@ const PlaneDateItem = (props) => {
               <StyledSelect
                 showSearch
                 allowClear
-                value={ruleSelectValue || DATE_CONDITION_RULES_VALUES[0]}
+                value={
+                  ruleSelectValue || rulePlaceholder || 'Select redirect rule'
+                }
                 onChange={onRuleSelectValueChange}>
                 {DATE_CONDITION_RULES_VALUES?.map((item, index) => (
                   <Option key={index} value={item}>
