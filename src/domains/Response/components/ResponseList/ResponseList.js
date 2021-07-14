@@ -72,7 +72,6 @@ function ResponseList(props) {
               <Box ml={3} my={2}>
                 {item.date}, {item.user}'s response
               </Box>
-              {/*{moment(item.date).format('MMMM Do YYYY, h:mm:ss a')}*/}
             </NumberedCard>
           </Col>
         ))
