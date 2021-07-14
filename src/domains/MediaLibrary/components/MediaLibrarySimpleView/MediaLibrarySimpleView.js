@@ -9,6 +9,7 @@ import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
 } from '../../../../context/CurrentQuestion'
+import { useHover } from '@umijs/hooks'
 
 function MediaLibrarySimpleView(props) {
   const {
@@ -20,6 +21,7 @@ function MediaLibrarySimpleView(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+  const [isHovering, hoverRef] = useHover()
   const { brightness } = useTranslation()
 
   // [CLEAN FUNCTIONS]
@@ -38,12 +40,13 @@ function MediaLibrarySimpleView(props) {
 
   return (
     <Box>
-      <CustomBox backgroundImage={bgImage}>
+      <CustomBox backgroundImage={bgImage} ref={hoverRef}>
         <MediaLibraryModal
           onClick={() => {
             setIsImageEditVisible(false)
           }}
           onContinue={onMediaModalContinue}
+          isHovering={isHovering}
           btnProps={{
             type: 'primary'
           }}
