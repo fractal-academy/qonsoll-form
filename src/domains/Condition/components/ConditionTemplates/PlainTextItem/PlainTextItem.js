@@ -7,7 +7,7 @@ import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextS
 import { CustomInput, StyledSelect } from './PlainTextItem.styles'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
-import { useTranslation } from '~/modules/feedback-typeform-app/src/context/Translation'
+import { useTranslation } from '../../../../../context/Translation'
 
 const { Option } = Select
 

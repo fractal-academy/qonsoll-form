@@ -7,7 +7,7 @@ import { StyledDatePicker, StyledSelect } from './PlainTextDateTemplate.style'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
 import moment from 'moment'
-import { useTranslation } from '~/modules/feedback-typeform-app/src/context/Translation'
+import { useTranslation } from '../../../../../context/Translation'
 
 const { Option } = Select
 
