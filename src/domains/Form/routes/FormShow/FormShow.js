@@ -57,9 +57,7 @@ function FormShow(props) {
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(firstSlideRule)
-  const [previousQuestionOrder, setPreviousQuestionOrder] = useState([
-    firstSlideRule
-  ])
+  const [previousQuestionOrder, setPreviousQuestionOrder] = useState([])
 
   // [COMPUTED PROPERTIES]
   // const sortedData = data && data.sort((a, b) => a.order - b.order)
@@ -144,7 +142,8 @@ function FormShow(props) {
                     disabledDown={disabledDown}
                     setIsAnswered={setIsAnswered}
                     setCurrentSlide={setCurrentSlide}
-                    previousQuestionOrder={previousQuestionOrder}>
+                    previousQuestionOrder={previousQuestionOrder}
+                    setPreviousQuestionOrder={setPreviousQuestionOrder}>
                     {questionsData?.map((item, index) => (
                       <Component
                         key={index}

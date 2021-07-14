@@ -22,12 +22,15 @@ function Carousel(props) {
     disabledDown,
     disabledUp,
     questionsData,
-    previousQuestionOrder
+    previousQuestionOrder,
+    setPreviousQuestionOrder
   } = props
 
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
   const answersContext = useAnswersContext()
+
+  console.log(previousQuestionOrder)
 
   const [{ height }, ref] = useSize()
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
@@ -50,17 +53,19 @@ function Carousel(props) {
     carouselRef.current?.goTo(slideNumber)
     setIsAnswered && setIsAnswered(false)
   }
-  const previous = () => {
-    // carouselRef.current?.prev()
-    carouselRef.current?.goTo(previousQuestionOrder)
-  }
   const next = () => {
     carouselRef.current?.next()
     setIsAnswered && setIsAnswered(false)
   }
-  const handleScroll = (e) => {
-    // return this after adding isRequired and condition rules
-    // e.deltaY > 0 ? next() : previous()
+  const previous = () => {
+    carouselRef.current?.goTo(
+      previousQuestionOrder[previousQuestionOrder.length - 1]
+    )
+
+    let temp = previousQuestionOrder.filter(
+      (item, index) => index < previousQuestionOrder.length - 1
+    )
+    setPreviousQuestionOrder(temp)
   }
 
   // [ ANSWER ]
@@ -146,7 +151,7 @@ function Carousel(props) {
   isAnswered && typeAction()
 
   return (
-    <Box onWheel={handleScroll} height="100%" ref={ref} width="100%">
+    <Box height="100%" ref={ref} width="100%">
       <AntdCarousel
         dots={false}
         swipe={false}
