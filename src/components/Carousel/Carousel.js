@@ -3,13 +3,18 @@ import { useSize } from '@umijs/hooks'
 import { QUESTION_TYPES } from '../../constants'
 import React, { cloneElement, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
-import { Button, Carousel as AntdCarousel } from 'antd'
-import { useAnswersContext } from '../../context/Answers'
+import { Button, Carousel as AntdCarousel, message } from 'antd'
+import {
+  ANSWERS_DISPATCH_EVENTS,
+  useAnswersContext,
+  useAnswersContextDispatch
+} from '../../context/Answers'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
 import {
   longAndShortAnswerConditionComparison,
   dateAnswerConditionComparison
 } from '../../domains/Form/helpers'
+import { useTranslation } from '../../context/Translation'
 
 function Carousel(props) {
   const {
@@ -29,6 +34,8 @@ function Carousel(props) {
   // [ADDITIONAL HOOKS]
   const carouselRef = useRef()
   const answersContext = useAnswersContext()
+  const answersContextDispatch = useAnswersContextDispatch()
+  const { answerRequiredMessageError } = useTranslation()
 
   const [{ height }, ref] = useSize()
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
@@ -51,37 +58,56 @@ function Carousel(props) {
     carouselRef.current?.goTo(slideNumber)
     setIsAnswered && setIsAnswered(false)
   }
-  const next = () => {
-    carouselRef.current?.next()
-    setIsAnswered && setIsAnswered(false)
+
+  const next = (skipButtonEvent) => {
+    if (currentSlideData?.isRequired) {
+      message.error(
+        answerRequiredMessageError || 'It`s required question, please answer'
+      )
+    } else {
+      //check if carousel navigation button was pressed, to avoid repetition in answers context
+      if (skipButtonEvent) {
+        //form the answer according to the answers context structure
+        const answerData = {
+          question: currentSlideData,
+          answer: { value: '' }
+        }
+        //set empty answer to answers
+        answersContextDispatch({
+          type: ANSWERS_DISPATCH_EVENTS.ADD_ANSWER,
+          payload: answerData
+        })
+      }
+      carouselRef.current?.next()
+      setIsAnswered && setIsAnswered(false)
+    }
   }
   const previous = () => {
     carouselRef.current?.goTo(
       previousQuestionOrder[previousQuestionOrder.length - 1]
     )
 
-    let temp = previousQuestionOrder.filter(
-      (item, index) => index < previousQuestionOrder.length - 1
+    const temp = previousQuestionOrder.filter(
+      (_, index) => index < previousQuestionOrder.length - 1
     )
     setPreviousQuestionOrder(temp)
   }
 
   // [ ANSWER ]
-  let currentSlideData = questionsData?.filter(
+  const currentSlideData = questionsData?.filter(
     (item) => item.order === currentSlide
-  )
-  let questionConfig =
-    currentSlideData && currentSlideData[0]?.questionConfigurations
-  let givenAnswer =
+  )?.[0]
+  const questionConfig = currentSlideData?.questionConfigurations
+  const givenAnswer =
     answersContext &&
     Object.entries(answersContext)?.filter(
-      (item) => item[0] === currentSlideData[0]?.id
+      (item) => item[0] === currentSlideData?.id
     )
-  let answerValue =
+  const answerValue =
     givenAnswer && Object.entries(givenAnswer)[0]?.[1][1]?.answer?.value
 
   const getNextSlide = (config) => {
-    let nextOrder = config
+    const nextOrder = config
       ? questionsData?.filter(
           (item) => item.id === config[0]?.redirectQuestion
         )[0]?.order
@@ -89,19 +115,19 @@ function Carousel(props) {
 
     const ruledOrder = welcomeScreenRule ? nextOrder : nextOrder - 1
 
-    ;(ruledOrder && goTo(ruledOrder)) || next()
+    ruledOrder ? goTo(ruledOrder) : next()
   }
 
   // [ TYPE FUNCTIONS ]
   const choiceSlideNextNumber = () => {
-    let filteredConfig = questionConfig?.filter(
+    const filteredConfig = questionConfig?.filter(
       (item) => item.answerOption === answerValue
     )
 
     getNextSlide(filteredConfig)
   }
   const textSlideNextNumber = () => {
-    let filteredConfig = questionConfig?.filter((item) =>
+    const filteredConfig = questionConfig?.filter((item) =>
       longAndShortAnswerConditionComparison(
         item?.redirectConditionRule,
         answerValue,
@@ -112,7 +138,7 @@ function Carousel(props) {
   }
 
   const dateSlideNextNumber = () => {
-    let filteredConfig = questionConfig?.filter((item) =>
+    const filteredConfig = questionConfig?.filter((item) =>
       dateAnswerConditionComparison(
         item?.redirectConditionRule,
         item?.answerOption,
@@ -142,9 +168,7 @@ function Carousel(props) {
     [QUESTION_TYPES.FILE_UPLOAD]: uploadSlideNextNumber
   }
 
-  const typeAction =
-    (currentSlideData && actionRuleMap[currentSlideData[0]?.questionType]) ||
-    next
+  const typeAction = actionRuleMap[currentSlideData?.questionType] || next
 
   isAnswered && typeAction()
 
