@@ -3,12 +3,11 @@ import ActionsFunctionsContext from '../../../../context/ActionsFunctions/Action
 import { TranslationContext } from '../../../../context/Translation'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import ResponseList from '../../../../domains/Response/components/ResponseList'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Row, Col } from '@qonsoll/react-design'
-import { ResponseTable } from '../../../Response/components'
+import { ResponseTable, ResponseList } from '../../../Response/components'
 import { message } from 'antd'
 
 function FormAnswers(props) {
@@ -34,10 +33,10 @@ function FormAnswers(props) {
         .where('date', '==', date)
         .where('formId', '==', id)
         .get()
-      const answersData = answers.docs.map((item, index) => ({
+      const answersData = answers?.docs?.map((item, index) => ({
         key: index,
-        questionTitle: item.data().questionTitle,
-        answer: item.data().answer
+        questionTitle: item?.data()?.questionTitle,
+        answer: item?.data()?.answer
       }))
       setUserAnswers(answersData)
     } catch (e) {
