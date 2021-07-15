@@ -7,7 +7,6 @@ import { sortableElement } from 'react-sortable-hoc'
 const StyledColumn = styled(Col)`
   pointer-ivents: none;
   flex: auto;
-
   position: relative;
 `
 
