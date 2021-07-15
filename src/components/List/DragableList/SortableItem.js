@@ -5,8 +5,9 @@ import { Col, Row } from '@qonsoll/react-design'
 import { sortableElement } from 'react-sortable-hoc'
 
 const StyledColumn = styled(Col)`
-  cursor: pointer;
   pointer-ivents: none;
+  flex: auto;
+
   position: relative;
 `
 
