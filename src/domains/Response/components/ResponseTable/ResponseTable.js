@@ -1,6 +1,8 @@
 import React from 'react'
-import { Table } from 'antd'
+import { Spin, Table } from 'antd'
+import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import PropTypes from 'prop-types'
+import { Box } from '@qonsoll/react-design'
 
 const columns = [
   {
@@ -16,13 +18,28 @@ const columns = [
 ]
 
 function ResponseTable(props) {
-  const { data } = props
+  const { data, loading } = props
 
-  return <Table columns={columns} dataSource={data} />
+  return (
+    <Box display="flex" flex={1} justifyContent="center">
+      {loading ? (
+        <Spin size="large" />
+      ) : (
+        <>
+          {data?.length > 0 ? (
+            <Table columns={columns} dataSource={data} />
+          ) : (
+            <EmptyState />
+          )}
+        </>
+      )}
+    </Box>
+  )
 }
 
 ResponseTable.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  loading: PropTypes.bool
 }
 
 export default ResponseTable
