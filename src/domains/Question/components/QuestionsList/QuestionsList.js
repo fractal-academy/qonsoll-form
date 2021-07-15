@@ -22,13 +22,14 @@ function QuestionsList(props) {
 
   // [CLEAN FUNCTIONS]
   const onUpdate = (updatedQuestions) => {
+    //check if questions contain Welcome screen
     const containWelcomeScreen = questionsData?.some(
       (q) => q?.questionType === QUESTION_TYPES.WELCOME_SCREEN
     )
 
+    //update current questions order after drag and drop
     updatedQuestions?.forEach((item, index) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {
-        ...item,
         order: !!questionsData
           ? containWelcomeScreen
             ? questionsData?.length + index
@@ -53,53 +54,49 @@ function QuestionsList(props) {
     )
   }
 
-  const handleDelete = (e, questionId) => {
+  const handleDelete = async (e, questionId) => {
     e.stopPropagation()
+
     //filter all questions without deleted question
-    const updatedData = data?.filter((item) => item.id !== questionId)
+    let updatedData = data?.filter((item) => item.id !== questionId)
+
+    //search deleted item index
     const deletedItemIndex = data?.findIndex(
       (item) => item.id === questionId && item
     )
-    //get type of deleted item
-    // const deletedItemType = data[deletedItemIndex]?.questionType
 
+    //check if questions contain Welcome screen
     const containWelcomeScreen = (questionsData || updatedData).some(
       (q) => q.questionType === QUESTION_TYPES.WELCOME_SCREEN
     )
+
+    //define questions length if this list used for endings to define endings correct order
     const questionsLength = questionsData?.length
 
-    //define new current question if delete current question
-    const newCurrentQuestion =
-      data[deletedItemIndex - 1] || data[deletedItemIndex + 1] || {}
-
-    deleteData(COLLECTIONS.QUESTIONS, questionId).catch((e) =>
-      message.error(e.message)
-    )
     //update order for all questions/endings
-    updatedData?.forEach((item, index) => {
-      const updatedOrder = containWelcomeScreen
-        ? !!questionsLength
-          ? questionsLength + index
-          : index
-        : !!questionsLength
-        ? questionsLength + index + 1
-        : index + 1
+    updatedData = updatedData?.map((item, index) => {
+      //define updated order for questions/endings
+      let updatedOrder = !!questionsLength ? questionsLength + index : index
+      if (!containWelcomeScreen) {
+        updatedOrder++
+      }
 
-      setData(COLLECTIONS.QUESTIONS, item?.id, {
-        ...item,
-        order: updatedOrder
-      }).catch((e) => message.error(e.message))
+      //update var that contain questions/endings excluding
+      item.order = updatedOrder
+      setData(COLLECTIONS.QUESTIONS, item?.id, item).catch((e) =>
+        message.error(e.message)
+      )
+      //return item with updated order
+      return item
     })
 
-    //if deleted item was current question change current question
-    currentQuestion.id === questionId &&
-      currentQuestionDispatch({
-        type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
-        payload: newCurrentQuestion
-      })
+    //delete question/ending
+    await deleteData(COLLECTIONS.QUESTIONS, questionId).catch((e) =>
+      message.error(e.message)
+    )
 
     // remove logic jump conditions for all connected questions
-    updatedData?.forEach((item) => {
+    await updatedData?.forEach((item) => {
       let writeToDB = false
       const editedQuestionConfig = item?.questionConfigurations?.map(
         (config) => {
@@ -112,8 +109,18 @@ function QuestionsList(props) {
       writeToDB &&
         setData(COLLECTIONS.QUESTIONS, item.id, {
           questionConfigurations: editedQuestionConfig
-        })
+        }).catch((e) => message.error(e.message))
     })
+
+    //change current question
+    currentQuestion.id === questionId &&
+      currentQuestionDispatch({
+        type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
+        payload:
+          updatedData?.[deletedItemIndex] ||
+          updatedData?.[deletedItemIndex - 1] ||
+          {}
+      })
   }
 
   // [COMPUTED PROPERTIES]

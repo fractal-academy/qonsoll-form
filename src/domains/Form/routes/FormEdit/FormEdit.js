@@ -27,6 +27,41 @@ import useFunctions from '../../../../hooks/useFunctions'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import { v4 as uuid } from 'uuid'
 
+//configuration for certain types of questions
+const defaultConfigurations = {
+  answerOption: '',
+  redirectQuestion: '',
+  answerOptionId: '',
+  redirectConditionRule: ''
+}
+const choicesConfiguration = [
+  {
+    ...defaultConfigurations,
+    image: '',
+    answerOptionId: uuid(),
+    answerOption: 'default'
+  }
+]
+const yesNoConfiguration = [
+  {
+    ...defaultConfigurations,
+    answerOption: 'Yes',
+    answerOptionId: uuid()
+  },
+  {
+    ...defaultConfigurations,
+    answerOption: 'No',
+    answerOptionId: uuid()
+  }
+]
+const opinionAndRatingConfiguration = Array(5)
+  .fill(0)
+  ?.map((_, index) => ({
+    ...defaultConfigurations,
+    answerOption: 1 + index,
+    answerOptionId: uuid()
+  }))
+
 function FormEdit(props) {
   const {
     firebase,
@@ -63,6 +98,7 @@ function FormEdit(props) {
   //[COMPONENT STATE HOOKS]
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
   const [brightnessValue, setBrightnessValue] = useState(0)
+  const [currentQuestionId, setCurrentQuestionId] = useState()
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
@@ -87,7 +123,7 @@ function FormEdit(props) {
   )
 
   // [CLEAN FUNCTIONS]
-  const onChangeMenuItem = ({ key }) => {
+  const onQuestionLayoutChange = ({ key }) => {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: {
@@ -98,7 +134,12 @@ function FormEdit(props) {
   }
 
   const onQuestionTypeChange = async ({ key }) => {
-    //Bolean conditions
+    //conditions to check if current question type changes to/from Welcome screen type
+    const isChangeFromWelcomeScreen =
+      currentQuestion?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+    const isChangeToWelcomeScreen = key === QUESTION_TYPES.WELCOME_SCREEN
+
+    //Boolean conditions to find out on what type of question changes current question
     const isChoices = [
       QUESTION_TYPES.CHOICE,
       QUESTION_TYPES.PICTURE_CHOICE
@@ -110,42 +151,8 @@ function FormEdit(props) {
     ].includes(key)
 
     const isYesNo = key === QUESTION_TYPES.YES_NO
-    //configuration for certain types of questions
-    const defaultConfigurations = {
-      answerOption: '',
-      redirectQuestion: '',
-      answerOptionId: '',
-      redirectConditionRule: ''
-    }
-    const choicesConfiguration = [
-      {
-        ...defaultConfigurations,
-        image: '',
-        answerOptionId: uuid(),
-        answerOption: 'default'
-      }
-    ]
-    const yesNoConfiguration = [
-      {
-        ...defaultConfigurations,
-        answerOption: 'Yes',
-        answerOptionId: uuid()
-      },
-      {
-        ...defaultConfigurations,
-        answerOption: 'No',
-        answerOptionId: uuid()
-      }
-    ]
-    const opinionAndRatingConfiguration = Array(5)
-      .fill(0)
-      ?.map((el, index) => ({
-        ...defaultConfigurations,
-        answerOption: 1 + index,
-        answerOptionId: uuid()
-      }))
 
-    //pass data to question configurations depending on question type
+    //define question configurations depending on question type
     const questionConfigurations = isChoices
       ? choicesConfiguration
       : isYesNo
@@ -153,18 +160,66 @@ function FormEdit(props) {
       : isOpinionOrRating
       ? opinionAndRatingConfiguration
       : [defaultConfigurations]
+
+    //define new order for options when the type of question changes to/from Welocome screen
+    //By default updatedOrder equal 0, for condition when question type changes to welcome screen
+    let updatedOrder = 0
+    //in other way, when question type changes from Welcome screen - updated order will be 1
+    if (isChangeFromWelcomeScreen) updatedOrder++
+
+    /* updated data for current question, 
+       if question type changes on/from welcome screen - set updated order, 
+       in other ways we don`t change it*/
+    const updatedCurrentQuestionData = {
+      questionConfigurations,
+      questionType: key,
+      order:
+        isChangeFromWelcomeScreen || isChangeToWelcomeScreen
+          ? updatedOrder
+          : currentQuestion?.order
+    }
+    //update current question data
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { questionConfigurations, questionType: key }
+      payload: updatedCurrentQuestionData
     })
+
+    if (isChangeFromWelcomeScreen || isChangeToWelcomeScreen) {
+      //if question type changed to/from welcome screen
+      //define questions array without current question, as its data has already been updated
+      const filteredQuestions = questionsList?.filter(
+        (item) => item?.id !== currentQuestion?.id
+      )
+
+      //update other question order for correct behaviour of questions
+      filteredQuestions?.forEach((question, index) => {
+        setData(COLLECTIONS.QUESTIONS, question?.id, {
+          order: isChangeToWelcomeScreen ? index + 1 : index + 2
+        })
+      })
+    }
   }
 
   // [USE_EFFECTS]
   useEffect(() => {
+    /*Determine default current question, when questions upload
+      set current question from local storage 
+      to prevent reset to another current question after page reload,
+      if there is no current question in local storage set first from list*/
+    const questionIdFromStorage = JSON.parse(
+      localStorage.getItem('currentQuestion')
+    )
+    setCurrentQuestionId(questionIdFromStorage)
+    //search question from storage by id
+    const defaultCurrentQuestion = questionsList?.filter(
+      (item) => item?.id === questionIdFromStorage
+    )?.[0]
+
+    //set default current question
     !questionsListLoading &&
       currentQuestionDispatch({
         type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
-        payload: questionsList?.[0] || {}
+        payload: defaultCurrentQuestion || questionsList?.[0] || {}
       })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -174,14 +229,30 @@ function FormEdit(props) {
     //set default active tab for questionLayout switcher every time when we change current question
     setDefaultTab(currentQuestion?.layoutType)
 
-    //save data of current question to database, when it change
+    //check if question was changed to another or only its data
+    const isAnotherQuestion =
+      currentQuestion?.id !==
+      (currentQuestionId || JSON.parse(localStorage.getItem('currentQuestion')))
+
+    //save data of current question to database, when its data was changed
     !!Object.keys(currentQuestion).length &&
+      !isAnotherQuestion &&
       setData(
         COLLECTIONS.QUESTIONS,
         currentQuestion?.id,
         currentQuestion
       ).catch((e) => message.error(e.message))
 
+    //save actual current question data to storage
+    if (!!Object.keys(currentQuestion).length) {
+      localStorage.setItem(
+        'currentQuestion',
+        JSON.stringify(currentQuestion?.id)
+      )
+
+      //set question id in state
+      setCurrentQuestionId(currentQuestion?.id)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQuestion])
 
@@ -189,6 +260,7 @@ function FormEdit(props) {
   const welcomeScreenShowRule = questions?.some(
     (question) => question['questionType'] === QUESTION_TYPES.WELCOME_SCREEN
   )
+
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
@@ -209,12 +281,12 @@ function FormEdit(props) {
                     questionsList={questionsList}
                     questionData={currentQuestion}
                     brightnessValue={brightnessValue}
-                    onChangeMenuItem={onChangeMenuItem}
                     handleSmallScreen={handleSmallScreen}
                     setBrightnessValue={setBrightnessValue}
                     customQuestionTypes={customQuestionTypes}
                     onQuestionTypeChange={onQuestionTypeChange}
                     welcomeScreenShowRule={welcomeScreenShowRule}
+                    onQuestionLayoutChange={onQuestionLayoutChange}
                   />
                 </PageLayout>
                 {/*TODO id in EditorSidebar*/}
