@@ -9,7 +9,6 @@ export const PopoverSwitcherRow = styled(Row)`
     border-radius: ${
       theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
     } ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md} 0 0;
-    width: 300px;
     cursor: pointer;
 `}
 `

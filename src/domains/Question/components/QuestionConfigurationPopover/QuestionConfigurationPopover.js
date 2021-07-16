@@ -56,6 +56,7 @@ function QuestionConfigurationPopover(props) {
         visible={showPopover}
         trigger="click"
         placement="bottomRight"
+        overlayStyle={{ width: '320px' }}
         content={
           <QuestionConfigurationPopoverContent
             questionData={questionData}
@@ -80,6 +81,7 @@ function QuestionConfigurationPopover(props) {
       onVisibleChange={popoverShowChange}
       trigger="click"
       placement="bottomRight"
+      overlayStyle={{ width: '320px' }}
       content={
         <QuestionConfigurationPopoverContent
           questionData={questionData}

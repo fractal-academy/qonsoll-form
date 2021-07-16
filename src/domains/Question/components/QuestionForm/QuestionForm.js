@@ -49,7 +49,7 @@ function QuestionForm(props) {
     questionData,
     questionsList,
     brightnessValue,
-    onChangeMenuItem,
+    onQuestionLayoutChange,
     setBrightnessValue,
     customQuestionTypes,
     onQuestionTypeChange,
@@ -137,7 +137,7 @@ function QuestionForm(props) {
       leftSideMenu={
         !!Object.keys(currentQuestion).length && (
           <QuestionLayoutSwitcher
-            onChange={onChangeMenuItem}
+            onChange={onQuestionLayoutChange}
             defaultActive={defaultTab}
           />
         )
