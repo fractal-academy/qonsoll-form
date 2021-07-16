@@ -161,12 +161,9 @@ function FormEdit(props) {
       ? opinionAndRatingConfiguration
       : [defaultConfigurations]
 
-    //define new order for options when the type of question changes to/from Welocome screen
-    //By default updatedOrder equal 0, for condition when question type changes to welcome screen
-    let updatedOrder = 0
-    //in other way, when question type changes from Welcome screen - updated order will be 1
-    if (isChangeFromWelcomeScreen) updatedOrder++
-
+    /*define new order for options when the type of question changes to/from Welocome screen
+      if changes from Welcome screen type order will be 1, else if changes to welcome screen order will be - 0*/
+    const updatedOrder = isChangeFromWelcomeScreen ? 1 : 0
     /* updated data for current question, 
        if question type changes on/from welcome screen - set updated order, 
        in other ways we don`t change it*/
