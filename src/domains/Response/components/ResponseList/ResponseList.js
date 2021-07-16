@@ -1,76 +1,56 @@
-import React, { useState } from 'react'
-import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
-import { TranslationContext } from '../../../../context/Translation'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
-import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import useFunctions from '../../../../hooks/useFunctions'
-import { COLLECTIONS } from '../../../../constants'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Row, Col } from '@qonsoll/react-design'
-import { ResponseTable, ResponseList } from '../../../Response/components'
-import { message } from 'antd'
+import { Box } from '@qonsoll/react-design'
+import { Spin } from 'antd'
+import React from 'react'
+import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
+import ResponseListItem from './ResponseListItem'
+import { useTranslation } from '../../../../context/Translation'
+import PropTypes from 'prop-types'
+import moment from 'moment'
 
-function FormAnswers(props) {
-  const { actions = {}, id, translate, firebase, configurations } = props
+function ResponseList(props) {
+  const { userAnswerGroup, loading, onListItemClick } = props
+  const { emptyStateDescription } = useTranslation()
 
-  // [COMPONENT STATE HOOKS]
-  const [userAnswers, setUserAnswers] = useState([])
-  const [userAnswersLoading, setUserAnswersLoading] = useState(false)
-  // [CUSTOM HOOKS]
-  const { getCollectionRef } = useFunctions(firebase)
-
-  // [ADDITIONAL HOOKS]
-  const [userAnswerGroup, userAnswerGroupLoading] = useCollectionData(
-    getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where('formId', '==', id)
+  const sortedUserAnswerGroup = userAnswerGroup?.sort(
+    (a, b) =>
+      moment(a.date.toDate()).format('x') - moment(b.date.toDate()).format('x')
   )
-
-  // [CLEAN FUNCTIONS]
-  const onListItemClick = async (user, date) => {
-    try {
-      setUserAnswersLoading(true)
-      const answers = await getCollectionRef(COLLECTIONS.ANSWERS)
-        .where('user', '==', user)
-        .where('date', '==', date)
-        .where('formId', '==', id)
-        .get()
-      const answersData = answers?.docs?.map((item, index) => ({
-        key: index,
-        questionTitle: item?.data()?.questionTitle,
-        answer: item?.data()?.answer
-      }))
-      setUserAnswers(answersData)
-    } catch (e) {
-      console.log(e)
-      message.error('Error occurred during user answers loading')
-    }
-    setUserAnswersLoading(false)
-  }
-
   return (
-    <FirebaseContext.Provider value={firebase}>
-      <ActionsFunctionsContext.Provider value={actions}>
-        <TranslationContext.Provider value={{ t: translate }}>
-          <TypeformConfigurationContext.Provider value={configurations}>
-            <Row noGutters height="inherit">
-              <Col height="inherit">
-                <ResponseList
-                  userAnswerGroup={userAnswerGroup}
-                  loading={userAnswerGroupLoading}
-                  onListItemClick={onListItemClick}
-                />
-              </Col>
-              <Col height="inherit">
-                <ResponseTable
-                  data={userAnswers}
-                  loading={userAnswersLoading}
-                />
-              </Col>
-            </Row>
-          </TypeformConfigurationContext.Provider>
-        </TranslationContext.Provider>
-      </ActionsFunctionsContext.Provider>
-    </FirebaseContext.Provider>
+    <Box display="flex" flex={1} flexDirection="column" alignItems="center">
+      {loading ? (
+        <Box display="flex" flex={1} alignItems="center">
+          <Spin size="large" />
+        </Box>
+      ) : (
+        <>
+          {sortedUserAnswerGroup?.length > 0 ? (
+            sortedUserAnswerGroup?.map((item, index) => (
+              <ResponseListItem
+                key={index}
+                index={index}
+                user={item.user}
+                date={item.date}
+                onClick={onListItemClick}
+              />
+            ))
+          ) : (
+            <EmptyState
+              description={
+                emptyStateDescription ||
+                "This form doesn't have any responses yet"
+              }
+            />
+          )}
+        </>
+      )}
+    </Box>
   )
 }
-FormAnswers.propTypes = {}
-export default FormAnswers
+
+ResponseList.propTypes = {
+  userAnswerGroup: PropTypes.array,
+  loading: PropTypes.bool,
+  onListItemClick: PropTypes.func
+}
+
+export default ResponseList
