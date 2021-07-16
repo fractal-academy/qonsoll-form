@@ -7,6 +7,11 @@ import { useTranslation } from '../../../../context/Translation'
 
 const columns = [
   {
+    render: (text, record) => (
+      <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+        {text}
+      </div>
+    ),
     title: '#',
     dataIndex: 'order',
     key: 'order',
@@ -14,12 +19,27 @@ const columns = [
     width: '60px'
   },
   {
+    render: (text, record) => (
+      <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+        {text}
+      </div>
+    ),
     width: 500,
     title: 'Question',
     dataIndex: 'questionTitle',
     key: 'questionTitle'
   },
-  { width: 500, title: 'Answer', dataIndex: 'answer', key: 'answer' }
+  {
+    render: (text, record) => (
+      <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+        {text}
+      </div>
+    ),
+    width: 500,
+    title: 'Answer',
+    dataIndex: 'answer',
+    key: 'answer'
+  }
 ]
 
 function ResponseTable(props) {
