@@ -64,7 +64,7 @@ function ResponseTable(props) {
             ) : (
               <EmptyState
                 description={
-                  emptyStateAnswersDescription || 'No answers to display'
+                  emptyStateAnswersDescription || 'Choose answers to display'
                 }
               />
             )}
