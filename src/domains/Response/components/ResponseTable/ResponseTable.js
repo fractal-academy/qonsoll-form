@@ -1,9 +1,10 @@
 import React from 'react'
-import { Spin, Table } from 'antd'
+import { Table } from 'antd'
 import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
+import { Spinner } from '../../../../../src/components'
 
 const columns = [
   {
@@ -49,7 +50,7 @@ function ResponseTable(props) {
   return (
     <Box display="flex" flex={1} justifyContent="center">
       {loading ? (
-        <Spin size="large" />
+        <Spinner size="large" />
       ) : (
         <Row>
           <Col>
@@ -63,7 +64,7 @@ function ResponseTable(props) {
             ) : (
               <EmptyState
                 description={
-                  emptyStateAnswersDescription || 'No answers to display'
+                  emptyStateAnswersDescription || 'Choose answers to display'
                 }
               />
             )}
