@@ -1,7 +1,7 @@
 import { Box } from '@qonsoll/react-design'
 import { InputNumber } from 'antd'
 import styled from 'styled-components'
-import typeformTheme from 'feedback-typeform-app/styles/theme'
+import typeformTheme from '../../../../../styles/theme'
 
 export const OptionBox = styled(Box)(({ theme }) => ({
   display: 'flex',
