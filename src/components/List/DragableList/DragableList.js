@@ -6,10 +6,6 @@ import { Box } from '@qonsoll/react-design'
 import SortableContainer from './SortableContainer'
 import React, { useEffect, useMemo, useState } from 'react'
 
-const StyledBox = styled(Box)`
-  margin-left: 24px;
-`
-
 function DragableList(props) {
   const { dataSource, setNewOrder, onUpdate, renderItem, sortable, ...args } =
     props
@@ -32,7 +28,7 @@ function DragableList(props) {
   }
   // [COMPUTED PROPERTIES]
   const Container = useMemo(
-    () => (sortable ? SortableContainer : StyledBox),
+    () => (sortable ? SortableContainer : Box),
     [sortable]
   )
   const SortableWrapper = useMemo(
@@ -52,7 +48,7 @@ function DragableList(props) {
   }, [dataSource])
 
   return (
-    <Container onSortEnd={onSortEnd} useDragHandle>
+    <Container onSortEnd={onSortEnd} useDragHandle ml={24}>
       <List
         {...args}
         dataSource={sortableItems}

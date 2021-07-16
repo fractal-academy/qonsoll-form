@@ -3,6 +3,7 @@ import { Spin, Table } from 'antd'
 import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
+import { useTranslation } from '../../../../context/Translation'
 
 const columns = [
   {
@@ -17,13 +18,13 @@ const columns = [
     title: 'Question',
     dataIndex: 'questionTitle',
     key: 'questionTitle'
-    // ellipsis: true
   },
   { width: 500, title: 'Answer', dataIndex: 'answer', key: 'answer' }
 ]
 
 function ResponseTable(props) {
   const { data, loading } = props
+  const { emptyStateAnswersDescription } = useTranslation()
 
   return (
     <Box display="flex" flex={1} justifyContent="center">
@@ -40,7 +41,11 @@ function ResponseTable(props) {
                 pagination={{ pageSize: 50 }}
               />
             ) : (
-              <EmptyState description={'No answers to display'} />
+              <EmptyState
+                description={
+                  emptyStateAnswersDescription || 'No answers to display'
+                }
+              />
             )}
           </Col>
         </Row>
