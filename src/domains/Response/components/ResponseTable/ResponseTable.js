@@ -4,7 +4,7 @@ import { EmptyState } from '../../../Form/components/FormConditionsForm/FormCond
 import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
-import { Spinner } from 'feedback-typeform-app/src/components'
+import { Spinner } from '../../../../../src/components'
 
 const columns = [
   {

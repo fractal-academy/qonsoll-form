@@ -12,7 +12,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Row, Col } from '@qonsoll/react-design'
 import { ResponseTable, ResponseList } from '../../../Response/components'
 import { message } from 'antd'
-import { EmptyState } from 'feedback-typeform-app/src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
+import { EmptyState } from '../../../../../src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
 
 function FormAnswers(props) {
   const { actions = {}, id, translate, firebase, configurations } = props
