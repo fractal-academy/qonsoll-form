@@ -11,7 +11,7 @@ import { useTranslation } from '../../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
 import useMedia from 'use-media'
 import COLLECTIONS from '../../../constants/collection'
-import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
+import useFunctions from '../../../../src/hooks/useFunctions'
 
 const { Text } = Typography
 
@@ -31,6 +31,7 @@ function SubmitButton(props) {
     disablePressEnter,
     ...rest
   } = props
+
   const formId = question?.formId
 
   // [CUSTOM_HOOKS]

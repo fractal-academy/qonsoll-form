@@ -36,9 +36,10 @@ function FormAnswers(props) {
       const answersData = answers?.docs?.map((item, index) => ({
         key: index,
         questionTitle: item?.data()?.questionTitle,
-        answer: item?.data()?.answer
+        answer: item?.data()?.answer,
+        order: item?.data()?.order
       }))
-      setUserAnswers(answersData)
+      setUserAnswers(answersData.sort((a, b) => a.order - b.order))
     } catch (e) {
       console.log(e)
       message.error('Error occurred during user answers loading')
@@ -51,15 +52,15 @@ function FormAnswers(props) {
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={{ t: translate }}>
           <TypeformConfigurationContext.Provider value={configurations}>
-            <Row noGutters height="inherit">
-              <Col height="inherit">
+            <Row noGutters height="inherit" my={3}>
+              <Col height="inherit" cw="auto" ml={3}>
                 <ResponseList
                   userAnswerGroup={userAnswerGroup}
                   loading={userAnswerGroupLoading}
                   onListItemClick={onListItemClick}
                 />
               </Col>
-              <Col height="inherit">
+              <Col height="inherit" cw={8} overflowY="scroll">
                 <ResponseTable
                   data={userAnswers}
                   loading={userAnswersLoading}

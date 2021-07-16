@@ -3,11 +3,18 @@ import { Spin } from 'antd'
 import React from 'react'
 import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import ResponseListItem from './ResponseListItem'
+import { useTranslation } from '../../../../context/Translation'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 function ResponseList(props) {
   const { userAnswerGroup, loading, onListItemClick } = props
+  const { emptyStateDescription } = useTranslation()
 
+  const sortedUserAnswerGroup = userAnswerGroup?.sort(
+    (a, b) =>
+      moment(a.date.toDate()).format('x') - moment(b.date.toDate()).format('x')
+  )
   return (
     <Box display="flex" flex={1} flexDirection="column" alignItems="center">
       {loading ? (
@@ -16,8 +23,8 @@ function ResponseList(props) {
         </Box>
       ) : (
         <>
-          {userAnswerGroup?.length > 0 ? (
-            userAnswerGroup?.map((item, index) => (
+          {sortedUserAnswerGroup?.length > 0 ? (
+            sortedUserAnswerGroup?.map((item, index) => (
               <ResponseListItem
                 key={index}
                 index={index}
@@ -27,7 +34,12 @@ function ResponseList(props) {
               />
             ))
           ) : (
-            <EmptyState />
+            <EmptyState
+              description={
+                emptyStateDescription ||
+                "This form doesn't have any responses yet"
+              }
+            />
           )}
         </>
       )}

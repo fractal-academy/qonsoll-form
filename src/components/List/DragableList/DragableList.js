@@ -1,5 +1,6 @@
 import { List } from 'antd'
 import arrayMove from 'array-move'
+import styled from 'styled-components'
 import SortableItem from './SortableItem'
 import { Box } from '@qonsoll/react-design'
 import SortableContainer from './SortableContainer'
@@ -47,7 +48,7 @@ function DragableList(props) {
   }, [dataSource])
 
   return (
-    <Container onSortEnd={onSortEnd} useDragHandle>
+    <Container onSortEnd={onSortEnd} useDragHandle ml={24}>
       <List
         {...args}
         dataSource={sortableItems}
