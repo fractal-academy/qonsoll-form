@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Typography, Input, message } from 'antd'
 import { SubmitButton } from '../../components'
-import { Container } from '@qonsoll/react-design'
+import { Container, Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
 import { globalStyles } from '../../../styles'
@@ -21,6 +21,7 @@ function LongText(props) {
     longTextInputPlaceholder
   } = useTranslation()
   const IsntDesktop = useMedia({ minWidth: '1024px' })
+  const inputRef = useRef()
 
   useKeyPress(
     (e) =>
@@ -36,10 +37,14 @@ function LongText(props) {
     }
   )
 
+  //when question was skipped by navigation buttons and input was focused - reset focus
+  currentSlide > question?.order && inputRef.current.blur()
+
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
     const data = { question, answer: { value: answer || '' } }
     onClick && onClick(data)
+    inputRef.current.blur()
   }
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
@@ -85,6 +90,7 @@ function LongText(props) {
           <TextArea
             {...textAreaProps}
             bordered
+            ref={inputRef}
             maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
             placeholder={longTextInputPlaceholder || 'Type your answer here...'}
