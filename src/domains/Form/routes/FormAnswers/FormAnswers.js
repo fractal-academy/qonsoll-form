@@ -67,7 +67,7 @@ function FormAnswers(props) {
                     onListItemClick={onListItemClick}
                   />
                 </Col>
-                <Col height="inherit" cw={8} overflowY="scroll">
+                <Col height="inherit" overflowY="scroll">
                   <ResponseTable
                     data={userAnswers}
                     loading={userAnswersLoading}
