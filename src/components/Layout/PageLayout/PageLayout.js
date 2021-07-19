@@ -27,6 +27,7 @@ function PageLayout(props) {
       height={handleSmallScreen && '100%'}
       flexDirection="column">
       <PageHeader
+        handleSmallScreen={handleSmallScreen}
         title={title}
         id={id}
         onBack={onBack}

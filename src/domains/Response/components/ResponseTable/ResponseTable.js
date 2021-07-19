@@ -12,8 +12,8 @@ const columns = [
       <div
         style={{
           wordWrap: 'break-word',
-          wordBreak: 'break-word'
-          // maxWidth: '50px'
+          wordBreak: 'break-word',
+          width: '50px'
         }}>
         {text}
       </div>
@@ -21,7 +21,8 @@ const columns = [
     title: '#',
     dataIndex: 'order',
     key: 'order',
-    sortOrder: 'descend'
+    sortOrder: 'descend',
+    width: '50px'
   },
   {
     render: (text, record) => (
@@ -34,7 +35,6 @@ const columns = [
         {text}
       </div>
     ),
-    // width: 500,
     title: 'Question',
     dataIndex: 'questionTitle',
     key: 'questionTitle'
@@ -50,7 +50,6 @@ const columns = [
         {text}
       </div>
     ),
-    // width: 500,
     title: 'Answer',
     dataIndex: 'answer',
     key: 'answer'

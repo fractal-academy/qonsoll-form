@@ -11,7 +11,7 @@ import { useTranslation } from '../../../context/Translation'
 const { Title } = Typography
 
 function PageHeader(props) {
-  const { title, id, onBack } = props
+  const { title, id, onBack, handleSmallScreen } = props
 
   // [ADDITIONAL HOOKS]
   const { onFormShow } = useActionsFunctionsContext()
@@ -54,13 +54,14 @@ function PageHeader(props) {
           </Title>
         </Col>
         <Col cw="auto" v="center" mr={1}>
-          <Button
-            type="text"
-            // shape="circle"
-            icon={<ReadOutlined />}
-            onClick={onFormResultsDisplay}>
-            Results
-          </Button>
+          {handleSmallScreen && (
+            <Button
+              type="text"
+              icon={<ReadOutlined />}
+              onClick={onFormResultsDisplay}>
+              Results
+            </Button>
+          )}
         </Col>
 
         <Col cw="auto" v="center">
@@ -69,7 +70,6 @@ function PageHeader(props) {
             title={formPreviewTooltip || 'Form preview'}>
             <Button
               type="text"
-              // shape="circle"
               icon={<EyeOutlined />}
               onClick={onFormShowDisplay}
             />

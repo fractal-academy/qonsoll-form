@@ -9,10 +9,12 @@ import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import { ResponseTable, ResponseList } from '../../../Response/components'
 import { message } from 'antd'
 import { EmptyState } from '../../../../../src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
+import useMedia from 'use-media'
+import Text from 'antd/es/typography/Text'
 
 function FormAnswers(props) {
   const { actions = {}, id, translate, firebase, configurations } = props
@@ -28,6 +30,8 @@ function FormAnswers(props) {
   const [userAnswerGroup, userAnswerGroupLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where('formId', '==', id)
   )
+  const handleSmallScreen = useMedia({ minWidth: '900px' })
+  const { smallScreenHandleWarning } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onListItemClick = async (user, date) => {
@@ -58,29 +62,43 @@ function FormAnswers(props) {
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={{ t: translate }}>
           <TypeformConfigurationContext.Provider value={configurations}>
-            {checkUserAswerGroup ? (
-              <Row noGutters height="inherit" my={3}>
-                <Col height="inherit" cw="auto" ml={3}>
-                  <ResponseList
-                    userAnswerGroup={userAnswerGroup}
-                    loading={userAnswerGroupLoading}
-                    onListItemClick={onListItemClick}
-                  />
-                </Col>
-                <Col height="inherit" overflowY="scroll">
-                  <ResponseTable
-                    data={userAnswers}
-                    loading={userAnswersLoading}
-                  />
-                </Col>
-              </Row>
+            {handleSmallScreen ? (
+              checkUserAswerGroup ? (
+                <Row noGutters height="inherit" my={3}>
+                  <Col height="inherit" cw="auto" ml={3}>
+                    <ResponseList
+                      userAnswerGroup={userAnswerGroup}
+                      loading={userAnswerGroupLoading}
+                      onListItemClick={onListItemClick}
+                    />
+                  </Col>
+                  <Col height="inherit" overflowY="scroll">
+                    <ResponseTable
+                      data={userAnswers}
+                      loading={userAnswersLoading}
+                    />
+                  </Col>
+                </Row>
+              ) : (
+                <EmptyState
+                  description={
+                    emptyStateDescription ||
+                    "This form doesn't have any responses yet"
+                  }
+                />
+              )
             ) : (
-              <EmptyState
-                description={
-                  emptyStateDescription ||
-                  "This form doesn't have any responses yet"
-                }
-              />
+              <Box
+                width="100%"
+                height="100%"
+                display="flex"
+                alignItems="center"
+                justifyContent="center">
+                <Text>
+                  {smallScreenHandleWarning ||
+                    'This feature is available only on desktop.'}
+                </Text>
+              </Box>
             )}
           </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
