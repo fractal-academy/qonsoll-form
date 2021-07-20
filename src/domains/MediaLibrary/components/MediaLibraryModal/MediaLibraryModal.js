@@ -114,12 +114,21 @@ function MediaLibraryModal(props) {
       }
     )
   }
+
   const searchData = () => {
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)
       setImagesList(searchRes?.map((item) => item.item))
     } else setImagesList(media)
   }
+
+  const beforeUpload = (file) => {
+    if (!file?.type?.includes('image')) {
+      message.error(`${file.name} is not a picture`)
+    }
+    return file?.type?.includes('image') ? true : Upload.LIST_IGNORE
+  }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -147,11 +156,11 @@ function MediaLibraryModal(props) {
         </CustomButton>
       )}
       <Modal
-        visible={isModalVisible}
-        footer={null}
-        closable={false}
-        width="1024px"
         centered
+        footer={null}
+        width="1024px"
+        closable={false}
+        visible={isModalVisible}
         bodyStyle={styles.modalBodyStyle}>
         <Row noGutters pt={4}>
           <Col style={{ flexDirection: 'column' }}>
@@ -185,7 +194,8 @@ function MediaLibraryModal(props) {
                   showUploadList={false}
                   multiple
                   name="file"
-                  customRequest={customRequest}>
+                  customRequest={customRequest}
+                  beforeUpload={beforeUpload}>
                   <Button
                     type="primary"
                     onMouseDown={(e) => e.preventDefault()}>

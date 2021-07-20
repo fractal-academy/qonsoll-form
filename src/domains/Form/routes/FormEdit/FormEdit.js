@@ -170,6 +170,7 @@ function FormEdit(props) {
     const updatedCurrentQuestionData = {
       questionConfigurations,
       questionType: key,
+      isRequired: false,
       order:
         isChangeFromWelcomeScreen || isChangeToWelcomeScreen
           ? updatedOrder
