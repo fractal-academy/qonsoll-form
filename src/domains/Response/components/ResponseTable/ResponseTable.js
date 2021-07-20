@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { Spinner } from '../../../../../src/components'
+import { StyledTable } from 'feedback-typeform-app/src/domains/Response/components/ResponseTable/ResponseTable.style'
 
 const columns = [
   {
@@ -68,8 +69,7 @@ function ResponseTable(props) {
         <Row width="100%">
           <Col>
             {data?.length > 0 ? (
-              <Table
-                style={{ width: '100%' }}
+              <StyledTable
                 sortOrder
                 columns={columns}
                 dataSource={data}
@@ -77,7 +77,6 @@ function ResponseTable(props) {
               />
             ) : (
               <EmptyState
-                style={{ width: '100%' }}
                 description={
                   emptyStateAnswersDescription || 'Choose answers to display'
                 }
