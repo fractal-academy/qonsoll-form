@@ -60,6 +60,7 @@ function Carousel(props) {
   }
 
   const next = (skipButtonEvent) => {
+    console.log(skipButtonEvent, currentSlideData?.isRequired)
     if (currentSlideData?.isRequired && skipButtonEvent) {
       message.error(
         answerRequiredMessageError || 'It`s required question, please answer'
@@ -96,13 +97,13 @@ function Carousel(props) {
     setPreviousQuestionOrder(temp)
   }
 
-  const handleNextClick = () => {
+  const handleNextClick = (e) => {
     setPreviousQuestionOrder((prevState) =>
       prevState?.[prevState?.length - 1] !== currentSlide
         ? [...(prevState || []), currentSlide]
         : prevState || []
     )
-    next()
+    next(e)
   }
 
   useKeyPress(38, (e) => {
