@@ -60,7 +60,6 @@ function Carousel(props) {
   }
 
   const next = (skipButtonEvent) => {
-    console.log(skipButtonEvent, currentSlideData?.isRequired)
     if (currentSlideData?.isRequired && skipButtonEvent) {
       message.error(
         answerRequiredMessageError || 'It`s required question, please answer'
