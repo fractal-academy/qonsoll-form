@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import { useSize } from '@umijs/hooks'
 import { QUESTION_TYPES } from '../../constants'
+import { useSize, useKeyPress } from '@umijs/hooks'
 import React, { cloneElement, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel, message } from 'antd'
@@ -87,11 +87,30 @@ function Carousel(props) {
       previousQuestionOrder[previousQuestionOrder.length - 1]
     )
 
-    const temp = previousQuestionOrder.filter(
-      (_, index) => index < previousQuestionOrder.length - 1
-    )
+    const temp =
+      previousQuestionOrder?.[previousQuestionOrder.length - 1] === currentSlide
+        ? previousQuestionOrder?.filter(
+            (_, index) => index < previousQuestionOrder.length - 1
+          )
+        : previousQuestionOrder
     setPreviousQuestionOrder(temp)
   }
+
+  const handleNextClick = () => {
+    setPreviousQuestionOrder((prevState) =>
+      prevState?.[prevState?.length - 1] !== currentSlide
+        ? [...(prevState || []), currentSlide]
+        : prevState || []
+    )
+    next()
+  }
+
+  useKeyPress(38, (e) => {
+    previous()
+  })
+  useKeyPress(40, (e) => {
+    handleNextClick()
+  })
 
   // [ ANSWER ]
   const currentSlideData = questionsData?.filter(
@@ -205,7 +224,7 @@ function Carousel(props) {
               <Button
                 disabled={disabledDown}
                 type="primary"
-                onClick={next}
+                onClick={handleNextClick}
                 onMouseDown={(e) => e.preventDefault()}>
                 <DownOutlined />
               </Button>
