@@ -15,7 +15,7 @@ function StaticList(props) {
 
   return (
     <>
-      {data ? (
+      {data?.length ? (
         <Row display="flex" width="100%" noGutters>
           {data?.map((item) => (
             <Col key={item.id} cw={columnWidth}>
@@ -29,7 +29,7 @@ function StaticList(props) {
           ))}
         </Row>
       ) : (
-        <Box width="100%" display="flex" justifyContent="center">
+        <Box mt={4} width="100%" display="flex" justifyContent="center">
           <Empty />
         </Box>
       )}
