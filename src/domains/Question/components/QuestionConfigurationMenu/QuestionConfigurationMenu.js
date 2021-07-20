@@ -43,6 +43,12 @@ function QuestionConfigurationMenu() {
     })
   }
 
+  //condition to prevent configure required state for welcome screen and statement
+  const isNotWelcomeScreenOrStatement = ![
+    QUESTION_TYPES.WELCOME_SCREEN,
+    QUESTION_TYPES.STATEMENT
+  ].includes(currentQuestion?.questionType)
+
   // [USE_EFFECTS]
   useEffect(() => {
     //update text area value when delete element
@@ -52,18 +58,20 @@ function QuestionConfigurationMenu() {
 
   return (
     <Box px={3} pt={3} h="between">
-      <Row mb={3} noGutters v="center">
-        <Col v="center">
-          <Text>{requiredSwitcher || 'Required'}</Text>
-        </Col>
-        <Col cw="auto" px={2}>
-          <Switch
-            size="small"
-            onChange={requireStateChange}
-            checked={requiredSwitchValue}
-          />
-        </Col>
-      </Row>
+      {isNotWelcomeScreenOrStatement && (
+        <Row mb={3} noGutters v="center">
+          <Col v="center">
+            <Text>{requiredSwitcher || 'Required'}</Text>
+          </Col>
+          <Col cw="auto" px={2}>
+            <Switch
+              size="small"
+              onChange={requireStateChange}
+              checked={requiredSwitchValue}
+            />
+          </Col>
+        </Row>
+      )}
       <Row mb={3} noGutters v="center">
         <Col v="center">
           <Text>{videoQuestionSwitcher || 'Video question'}</Text>

@@ -69,6 +69,19 @@ function ListItem(props) {
     data?.id &&
       getCollectionRef(COLLECTIONS.QUESTIONS).where('formId', '==', data?.id)
   )
+  const [userAnswersGroup] = useCollectionData(
+    data?.id &&
+      getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where(
+        'formId',
+        '==',
+        data?.id
+      )
+  )
+
+  const [answers] = useCollectionData(
+    data?.id &&
+      getCollectionRef(COLLECTIONS.ANSWERS).where('formId', '==', data?.id)
+  )
   const { onFormItemClick } = useActionsFunctionsContext()
   const {
     listItemNoDescription,
@@ -105,6 +118,8 @@ function ListItem(props) {
     setConfirmLoading(true)
     await deleteData(collection, data?.id)
       .then(deleteQuestions)
+      .then(deleteAnswers)
+      .then(deleteUserAnswersGroup)
       .catch((e) => message.error(e.message))
 
     setIsPopconfirmVisible(false)
@@ -113,6 +128,20 @@ function ListItem(props) {
   const deleteQuestions = () => {
     questions.forEach((item) => {
       deleteData(COLLECTIONS.QUESTIONS, item?.id).catch((e) =>
+        message.error(e.message)
+      )
+    })
+  }
+  const deleteUserAnswersGroup = () => {
+    userAnswersGroup.forEach((item) => {
+      deleteData(COLLECTIONS.USER_ANSWERS_GROUP, item?.id).catch((e) =>
+        message.error(e.message)
+      )
+    })
+  }
+  const deleteAnswers = () => {
+    answers.forEach((item) => {
+      deleteData(COLLECTIONS.ANSWERS, item?.id).catch((e) =>
         message.error(e.message)
       )
     })
@@ -183,9 +212,11 @@ function ListItem(props) {
         <Row noGutters h="between" mt={2}>
           <Col display="grid">
             <Text ellipsis>{data?.title}</Text>
-            <Text ellipsis type="secondary">
-              {description}
-            </Text>
+            {!data?.imageUrl && (
+              <Text ellipsis type="secondary">
+                {description}
+              </Text>
+            )}
           </Col>
           <Col cw="auto" display="flex" v="center">
             {data?.imageUrl ? (

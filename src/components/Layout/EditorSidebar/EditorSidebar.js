@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import React, { useEffect, useState, useMemo } from 'react'
-import { Typography, Button, Popover, Tooltip } from 'antd'
+import { Typography, Button, Popover, Tooltip, message } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
@@ -53,7 +53,7 @@ const yesNoConfiguration = [
 ]
 const opinionAndRatingConfiguration = Array(5)
   .fill(0)
-  ?.map((el, index) => ({
+  ?.map((_, index) => ({
     answerOptionId: uuid(),
     answerOption: 1 + index,
     redirectQuestion: '',
@@ -147,11 +147,15 @@ function EditorSidebar(props) {
           : questions?.length + 1
     }
 
+    await setData(COLLECTIONS?.QUESTIONS, newQuestion?.id, newQuestion).catch(
+      (e) => message.error(e)
+    )
     // set it into context as current
     await currentQuestionDispatch({
       type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
       payload: newQuestion
     })
+
     key && setShowPopover(!showPopover)
   }
 

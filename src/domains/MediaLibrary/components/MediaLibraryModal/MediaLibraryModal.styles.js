@@ -6,11 +6,6 @@ import { Input, Typography, Button, Divider } from 'antd'
 const { Text } = Typography
 
 export const styles = {
-  modalBodyStyle: {
-    height: '768px',
-    padding: 0,
-    zIndex: 10000
-  },
   addButton: {
     cursor: 'pointer'
   }
@@ -94,7 +89,7 @@ export const CustomChangeButtonText = styled(Text)`
 `}
 `
 export const MediaListContainer = styled(Box)(({ theme }) => ({
-  height: '500px',
+  height: '450px',
   overflow: 'auto',
   display: 'flex',
   flexWrap: 'wrap',

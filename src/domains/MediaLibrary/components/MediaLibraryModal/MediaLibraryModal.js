@@ -120,6 +120,14 @@ function MediaLibraryModal(props) {
       setImagesList(searchRes?.map((item) => item.item))
     } else setImagesList(media)
   }
+
+  const beforeUpload = (file) => {
+    if (!file?.type?.includes('image')) {
+      message.error(`${file.name} is not a picture`)
+    }
+    return file?.type?.includes('image') ? true : Upload.LIST_IGNORE
+  }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -152,10 +160,15 @@ function MediaLibraryModal(props) {
         closable={false}
         width="1024px"
         centered
-        bodyStyle={styles.modalBodyStyle}>
-        <Row noGutters pt={4}>
+        bodyStyle={{
+          // gonna use this height when filter is on
+          // height: '768px',
+          padding: 0,
+          zIndex: 10000
+        }}>
+        <Row noGutters pt={3}>
           <Col style={{ flexDirection: 'column' }}>
-            <Row mb={1} v="center" px={3}>
+            <Row v="center" px={3}>
               <Col>
                 <Title level={3}>{mediaLibraryTitle || 'Media Library'}</Title>
               </Col>
@@ -185,7 +198,8 @@ function MediaLibraryModal(props) {
                   showUploadList={false}
                   multiple
                   name="file"
-                  customRequest={customRequest}>
+                  customRequest={customRequest}
+                  beforeUpload={beforeUpload}>
                   <Button
                     type="primary"
                     onMouseDown={(e) => e.preventDefault()}>
@@ -194,7 +208,7 @@ function MediaLibraryModal(props) {
                 </Upload>
               </Col>
             </Row>
-            <Row pb={25} px={3}>
+            <Row pb={2} px={3}>
               <Col>
                 <CustomText>
                   {amountTitle || 'Amount of shown files: '}

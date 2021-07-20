@@ -36,7 +36,6 @@ function ChoiceEditable(props) {
   const [isHovering, hoverRef] = useHover()
 
   // [COMPONENT STATE HOOKS]
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [value, setValue] = useState(data?.answerOption)
 
   // [COMPUTED PROPERTIES]

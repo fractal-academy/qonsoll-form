@@ -1,71 +1,117 @@
-import React, { useEffect, useState } from 'react'
-// import ActionsFunctionsContext from 'feedback-typeform-app/src/context/ActionsFunctions/ActionsFunctionsContext'
-// import { TranslationContext } from 'feedback-typeform-app/src/context/Translation'
-// import TypeformConfigurationContext from 'feedback-typeform-app/src/context/TypeformConfigurationContext'
-// import FirebaseContext from 'feedback-typeform-app/src/context/Firebase/FirebaseContext'
-// import useFunctions from 'feedback-typeform-app/src/hooks/useFunctions'
-// import { useAnswersContextDispatch } from 'feedback-typeform-app/src/context/Answers'
-// import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+import React, { useState } from 'react'
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import {
+  TranslationContext,
+  useTranslation
+} from '../../../../context/Translation'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import useFunctions from '../../../../hooks/useFunctions'
+import { COLLECTIONS } from '../../../../constants'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { Row, Col, Box } from '@qonsoll/react-design'
+import { ResponseTable, ResponseList } from '../../../Response/components'
+import { message } from 'antd'
+import { EmptyState } from '../../../../../src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
+import useMedia from 'use-media'
+import Text from 'antd/es/typography/Text'
 
 function FormAnswers(props) {
-  const {
-    firebase,
-    actions = {},
-    id,
-    translate,
-    submitLoading,
-    configurations,
-    wrapperHeight,
-    wrapperOffset
-  } = props
-  // const { ADDITIONAL_DESTRUCTURING_HERE } = user
-
-  // [CUSTOM HOOKS]
-  // const { getCollectionRef } = useFunctions(firebase)
-  // const answersDispatch = useAnswersContextDispatch()
-  // [ADDITIONAL HOOKS]
-  // const { t } = useTranslation('translation')
-  // const { currentLanguage } = t
+  const { actions = {}, id, translate, firebase, configurations } = props
+  const { emptyStateDescription } = useTranslation()
 
   // [COMPONENT STATE HOOKS]
-  // const [state, setState] = useState({})
+  const [userAnswers, setUserAnswers] = useState([])
+  const [userAnswersLoading, setUserAnswersLoading] = useState(false)
+  // [CUSTOM HOOKS]
+  const { getCollectionRef } = useFunctions(firebase)
 
-  // [COMPUTED PROPERTIES]
+  // [ADDITIONAL HOOKS]
+  const [userAnswerGroup, userAnswerGroupLoading] = useCollectionData(
+    getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where('formId', '==', id)
+  )
+  const handleSmallScreen = useMedia({ minWidth: '900px' })
+  const { smallScreenHandleWarning } = useTranslation()
 
   // [CLEAN FUNCTIONS]
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    let isComponentMounted = true
-
-    // [EFFECT LOGIC]
-    // write code here...
-    // code sample: isComponentMounted && setState(<your data for state updation>)
-
-    // [CLEAN UP FUNCTION]
-    return () => {
-      // [OTHER CLEAN UP-S (UNSUBSCRIPTIONS)]
-      // write code here...
-
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
+  const onListItemClick = async (user, date) => {
+    try {
+      setUserAnswersLoading(true)
+      const answers = await getCollectionRef(COLLECTIONS.ANSWERS)
+        .where('user', '==', user)
+        .where('date', '==', date)
+        .where('formId', '==', id)
+        .get()
+      const answersData = answers?.docs?.map((item, index) => {
+        const answerCheck =
+          item?.data()?.questionType === 'File upload'
+            ? Object.values(item?.data()?.answer)
+                .map((uploadItem) => uploadItem.name)
+                .toString()
+            : item?.data()?.answer
+        return {
+          key: index,
+          questionTitle: item?.data()?.questionTitle,
+          answer: answerCheck,
+          order: item?.data()?.order
+        }
+      })
+      setUserAnswers(answersData.sort((a, b) => a.order - b.order))
+    } catch (e) {
+      console.log(e)
+      message.error('Error occurred during user answers loading')
     }
-  }, [])
+    setUserAnswersLoading(false)
+  }
+  const checkUserAswerGroup = userAnswerGroup?.length > 0
+
   return (
-    // <FirebaseContext.Provider value={firebase}>
-    //   <ActionsFunctionsContext.Provider value={actions}>
-    //     <TranslationContext.Provider value={{ t: translate }}>
-    //       <TypeformConfigurationContext.Provider value={configurations}>
-    <>FormAnswers TEXT</>
-
-    /*      </TypeformConfigurationContext.Provider>*/
-
-    /*    </TranslationContext.Provider>*/
-
-    /*  </ActionsFunctionsContext.Provider>*/
-
-    /*</FirebaseContext.Provider>*/
+    <FirebaseContext.Provider value={firebase}>
+      <ActionsFunctionsContext.Provider value={actions}>
+        <TranslationContext.Provider value={{ t: translate }}>
+          <TypeformConfigurationContext.Provider value={configurations}>
+            {handleSmallScreen ? (
+              checkUserAswerGroup ? (
+                <Row noGutters height="inherit" my={3}>
+                  <Col height="inherit" cw="auto" ml={3}>
+                    <ResponseList
+                      userAnswerGroup={userAnswerGroup}
+                      loading={userAnswerGroupLoading}
+                      onListItemClick={onListItemClick}
+                    />
+                  </Col>
+                  <Col height="inherit" overflowY="scroll">
+                    <ResponseTable
+                      data={userAnswers}
+                      loading={userAnswersLoading}
+                    />
+                  </Col>
+                </Row>
+              ) : (
+                <EmptyState
+                  description={
+                    emptyStateDescription ||
+                    "This form doesn't have any responses yet"
+                  }
+                />
+              )
+            ) : (
+              <Box
+                width="100%"
+                height="100%"
+                display="flex"
+                alignItems="center"
+                justifyContent="center">
+                <Text>
+                  {smallScreenHandleWarning ||
+                    'This feature is available only on desktop.'}
+                </Text>
+              </Box>
+            )}
+          </TypeformConfigurationContext.Provider>
+        </TranslationContext.Provider>
+      </ActionsFunctionsContext.Provider>
+    </FirebaseContext.Provider>
   )
 }
 
