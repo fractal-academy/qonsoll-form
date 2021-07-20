@@ -84,10 +84,11 @@ function FormShow(props) {
       })
 
     setIsAnswered(true)
-    setPreviousQuestionOrder((prevState) => [
-      ...(prevState || []),
-      currentSlide
-    ])
+    setPreviousQuestionOrder((prevState) =>
+      prevState?.[prevState?.length - 1] !== currentSlide
+        ? [...(prevState || []), currentSlide]
+        : prevState || []
+    )
   }
 
   return (
