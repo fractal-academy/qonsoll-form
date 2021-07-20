@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { TranslationContext } from '../../../../context/Translation'
 // import { globalStyles } from '../../../../../styles'
-import { useKeyPress } from '@umijs/hooks'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 // import { Button, Divider, Typography } from 'antd'
 import { Box } from '@qonsoll/react-design'
-import { FormAdvancedView } from '../../../../domains/Form/components'
+import { useKeyPress } from '@umijs/hooks'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { FormAdvancedView } from '../../../../domains/Form/components'
 import { QuestionAdvancedView } from '../../../../domains/Question/components'
 // import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
 import useFunctions from '../../../../hooks/useFunctions'
+import { TranslationContext } from '../../../../context/Translation'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
@@ -24,14 +24,14 @@ import { ContentCard, Spinner } from '../../../../components'
 
 function FormShow(props) {
   const {
-    firebase,
-    actions = {},
     id,
+    firebase,
     translate,
     submitLoading,
-    configurations,
     wrapperHeight,
-    wrapperOffset
+    wrapperOffset,
+    configurations,
+    actions = {}
   } = props
 
   // [CUSTOM_HOOKS]
@@ -39,38 +39,26 @@ function FormShow(props) {
   const answersDispatch = useAnswersContextDispatch()
 
   // [ADDITIONAL HOOKS]
-  // const history = useHistory()
   useKeyPress(9, (e) => {
     e.preventDefault()
   })
+
   const [questionsData, loading] = useCollectionData(
     getCollectionRef(COLLECTIONS.QUESTIONS)
       .where('formId', '==', id)
       .orderBy('order')
   )
-  const firstSlideRule =
-    (questionsData?.some(
-      (item) => item.questionType === QUESTION_TYPES.WELCOME_SCREEN
-    ) &&
-      1) ||
-    0
+
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
-  const [currentSlide, setCurrentSlide] = useState(firstSlideRule)
+  const [currentSlide, setCurrentSlide] = useState()
   const [previousQuestionOrder, setPreviousQuestionOrder] = useState([])
 
   // [COMPUTED PROPERTIES]
-  // const sortedData = data && data.sort((a, b) => a.order - b.order)
-  const disabledUp = currentSlide === 0
+  const containWelcomeScreen =
+    questionsData?.[0]?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+  const disabledUp = currentSlide === (containWelcomeScreen ? 0 : 1)
   const disabledDown = currentSlide === questionsData?.length - 1
-
-  //temporary solution for ending logic; fix after adding logic jumps
-  // sortedData &&
-  //   sortedData.forEach(
-  //     (item) =>
-  //       item.questionType === 'Ending' &&
-  //       sortedData.push(sortedData.splice(sortedData.indexOf(item), 1)[0])
-  //   )
 
   // [CLEAN FUNCTIONS]
   // const onRestart = () => {
@@ -90,6 +78,16 @@ function FormShow(props) {
         : prevState || []
     )
   }
+
+  useEffect(() => {
+    if (!loading && questionsData) {
+      //when data loaded from db, set default currentSlide value according to questions data
+      const firstSlideRule = containWelcomeScreen ? 0 : 1
+      setCurrentSlide(firstSlideRule)
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, questionsData])
 
   return (
     <FirebaseContext.Provider value={firebase}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Form, Input, message } from 'antd'
 import PropTypes from 'prop-types'
 import { globalStyles } from '../../../styles'
@@ -14,34 +14,27 @@ function ShortText(props) {
   const [form] = Form.useForm()
   const { answerRequiredMessageError, shortTextInputPlaceholder } =
     useTranslation()
+  const inputRef = useRef()
 
-  useKeyPress(
-    (e) =>
-      //if pressed enter this event on this question slide - dispatch second callback
-      e.keyCode === 13 && currentSlide === question?.order,
-    (e) => {
-      if (e.type === 'keyup') {
-        onPressOk()
-      }
-    },
-    {
-      events: ['keydown', 'keyup']
-    }
-  )
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
     const data = { question, answer: { value: answer || '' } }
     onClick && onClick(data)
+    inputRef.current.blur()
   }
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
+
   const onFocusedKeyPress = (e) => {
     if (e.keyCode === 13) {
       //Prevent linebrake onEnter
+
       e.preventDefault()
     }
   }
+
   const onPressOk = () => {
     //get values from form to check if there is any answer data
     //.trim() removes all useless spaces to prevent submit with only spaces
@@ -56,14 +49,23 @@ function ShortText(props) {
           )
       : form.submit()
   }
+
   useKeyPress(
     (e) =>
       //if pressed enter this event on this question slide - dispatch second callback
       e.keyCode === 13 && currentSlide === question?.order,
-    () => {
-      onPressOk()
+    (e) => {
+      if (e.type === 'keyup') {
+        onPressOk()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
     }
   )
+
+  //when question was skipped by navigation buttons and input was focused - reset focus
+  currentSlide > question?.order && inputRef.current.blur()
 
   return (
     <Container>
@@ -78,6 +80,7 @@ function ShortText(props) {
           rules={[{ required: question?.isRequired }]}>
           <Input
             {...inputProps}
+            ref={inputRef}
             maxLength={300}
             placeholder={
               shortTextInputPlaceholder || 'Type your answer here...'
