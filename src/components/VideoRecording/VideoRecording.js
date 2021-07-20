@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ZiggeoRecorder } from 'react-ziggeo'
 
 const API_KEY = 'r1aabb2782dec6629e9650b5c6197c92'
@@ -31,7 +31,7 @@ function VideoRecording(props) {
     onNoMicrophone
   } = props
 
-  const [recorder, setRecorder] = useState(null)
+  // const [recorder, setRecorder] = useState(null)
   //   const handleUploaded = (embedding) => {
   //     console.log('video uploaded:', embedding.video)
   //   }
@@ -67,7 +67,7 @@ function VideoRecording(props) {
       onVerified={onVerified}
       onNoCamera={onNoCamera}
       onNoMicrophone={onNoMicrophone}
-      onRef={(ref) => setRecorder(ref)}
+      // onRef={(ref) => setRecorder(ref)}
     />
   )
 }
