@@ -49,11 +49,11 @@ function QuestionForm(props) {
     questionData,
     questionsList,
     brightnessValue,
-    onQuestionLayoutChange,
     setBrightnessValue,
     customQuestionTypes,
     onQuestionTypeChange,
-    welcomeScreenShowRule
+    welcomeScreenShowRule,
+    onQuestionLayoutChange
   } = props
 
   // [ADDITIONAL HOOKS]

@@ -120,6 +120,14 @@ function MediaLibraryModal(props) {
       setImagesList(searchRes?.map((item) => item.item))
     } else setImagesList(media)
   }
+
+  const beforeUpload = (file) => {
+    if (!file?.type?.includes('image')) {
+      message.error(`${file.name} is not a picture`)
+    }
+    return file?.type?.includes('image') ? true : Upload.LIST_IGNORE
+  }
+
   // [USE_EFFECTS]
   useEffect(() => {
     let isComponentMounted = true
@@ -190,7 +198,8 @@ function MediaLibraryModal(props) {
                   showUploadList={false}
                   multiple
                   name="file"
-                  customRequest={customRequest}>
+                  customRequest={customRequest}
+                  beforeUpload={beforeUpload}>
                   <Button
                     type="primary"
                     onMouseDown={(e) => e.preventDefault()}>
