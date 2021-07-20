@@ -1,11 +1,10 @@
 import React from 'react'
-import { Table } from 'antd'
 import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { Spinner } from '../../../../../src/components'
-import { StyledTable } from 'feedback-typeform-app/src/domains/Response/components/ResponseTable/ResponseTable.style'
+import { StyledTable } from '../../../../domains/Response/components/ResponseTable/ResponseTable.style'
 
 const columns = [
   {
