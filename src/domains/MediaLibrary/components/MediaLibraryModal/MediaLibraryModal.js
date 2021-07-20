@@ -114,7 +114,6 @@ function MediaLibraryModal(props) {
       }
     )
   }
-
   const searchData = () => {
     if (searchRef.current.input.value) {
       const searchRes = fuse.search(searchRef.current.input.value)
@@ -156,15 +155,20 @@ function MediaLibraryModal(props) {
         </CustomButton>
       )}
       <Modal
-        centered
-        footer={null}
-        width="1024px"
-        closable={false}
         visible={isModalVisible}
-        bodyStyle={styles.modalBodyStyle}>
-        <Row noGutters pt={4}>
+        footer={null}
+        closable={false}
+        width="1024px"
+        centered
+        bodyStyle={{
+          // gonna use this height when filter is on
+          // height: '768px',
+          padding: 0,
+          zIndex: 10000
+        }}>
+        <Row noGutters pt={3}>
           <Col style={{ flexDirection: 'column' }}>
-            <Row mb={1} v="center" px={3}>
+            <Row v="center" px={3}>
               <Col>
                 <Title level={3}>{mediaLibraryTitle || 'Media Library'}</Title>
               </Col>
@@ -204,7 +208,7 @@ function MediaLibraryModal(props) {
                 </Upload>
               </Col>
             </Row>
-            <Row pb={25} px={3}>
+            <Row pb={2} px={3}>
               <Col>
                 <CustomText>
                   {amountTitle || 'Amount of shown files: '}

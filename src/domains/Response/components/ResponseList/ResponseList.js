@@ -8,7 +8,12 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 function ResponseList(props) {
-  const { userAnswerGroup, loading, onListItemClick } = props
+  const {
+    userAnswerGroup,
+    loading,
+    onListItemClick,
+    setCurrentUserAnswerGroup
+  } = props
   const { emptyStateDescription } = useTranslation()
 
   const sortedUserAnswerGroup = userAnswerGroup?.sort(
@@ -22,10 +27,11 @@ function ResponseList(props) {
           <Spin size="large" />
         </Box>
       ) : (
-        <>
+        <Box overflowY="scroll" overflowX="hidden" pr={3}>
           {sortedUserAnswerGroup?.length > 0 ? (
             sortedUserAnswerGroup?.map((item, index) => (
               <ResponseListItem
+                setCurrentUserAnswerGroup={setCurrentUserAnswerGroup}
                 key={index}
                 index={index}
                 user={item.user}
@@ -41,7 +47,7 @@ function ResponseList(props) {
               }
             />
           )}
-        </>
+        </Box>
       )}
     </Box>
   )
