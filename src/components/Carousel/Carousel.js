@@ -49,8 +49,6 @@ function Carousel(props) {
     setCurrentSlide(containWelcomeScreen ? slideIndex : slideIndex + 1)
   }
 
-  console.log(currentSlide, previousQuestionOrder)
-
   const welcomeScreenRule = questionsData?.some(
     (item) => item.questionType === QUESTION_TYPES.WELCOME_SCREEN
   )
