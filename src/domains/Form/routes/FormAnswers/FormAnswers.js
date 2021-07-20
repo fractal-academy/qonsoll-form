@@ -43,20 +43,18 @@ function FormAnswers(props) {
         .where('formId', '==', id)
         .get()
       const answersData = answers?.docs?.map((item, index) => {
-        if (item?.data()?.questionType === 'File upload')
-          return {
-            key: index,
-            questionTitle: item?.data()?.questionTitle,
-            answer: 'file is uploaded',
-            order: item?.data()?.order
-          }
-        else
-          return {
-            key: index,
-            questionTitle: item?.data()?.questionTitle,
-            answer: item?.data()?.answer,
-            order: item?.data()?.order
-          }
+        const answerCheck =
+          item?.data()?.questionType === 'File upload'
+            ? Object.values(item?.data()?.answer)
+                .map((uploadItem) => uploadItem.name)
+                .toString()
+            : item?.data()?.answer
+        return {
+          key: index,
+          questionTitle: item?.data()?.questionTitle,
+          answer: answerCheck,
+          order: item?.data()?.order
+        }
       })
       setUserAnswers(answersData.sort((a, b) => a.order - b.order))
     } catch (e) {
