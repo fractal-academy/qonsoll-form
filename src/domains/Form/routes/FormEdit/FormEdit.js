@@ -79,6 +79,7 @@ function FormEdit(props) {
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
+
   const [form, formLoading] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
@@ -292,6 +293,7 @@ function FormEdit(props) {
                   <EditorSidebar
                     transparent
                     id={id}
+                    formData={form}
                     endings={endings}
                     questions={questions}
                     showCondition={showCondition}

@@ -16,21 +16,22 @@ import { EmptyState, CustomTabs } from './FormConditionsForm.styles'
 const { TabPane } = Tabs
 
 function FormConditionsForm(props) {
-  const { data, endings, onTabChange, answerScores } = props
+  const { data, endings, formData, onTabChange, answerScores } = props
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
   const {
-    conditionsLogicJumpsTab,
-    noDataToConfigureLogicJumps,
     conditionsEndingsTab,
+    conditionsLogicJumpsTab,
     noDataToConfigureEndings,
-    conditionsAnswersScoreConfigTab,
-    promiseAddSpecialQuestionTypes
+    noDataToConfigureLogicJumps,
+    promiseAddSpecialQuestionTypes,
+    conditionsAnswersScoreConfigTab
   } = useTranslation()
+
   // [CLEAN FUNCTIONS]
   const getQuestionListRedirect = (itemIndex) => {
-    return data?.filter((item, index) => itemIndex !== index)
+    return data?.filter((_, index) => itemIndex !== index)
   }
 
   const addCondition = (answer, index) => {
@@ -57,6 +58,10 @@ function FormConditionsForm(props) {
     }
   }
 
+  const findAnswerScoreByQuestionId = (questionId) =>
+    answerScores?.find((item) => item?.questionId === questionId)
+
+  //[COMPUTED PROPERTIES]
   const filteredAnswerForEndings = useMemo(
     () =>
       data
@@ -72,9 +77,6 @@ function FormConditionsForm(props) {
         : [],
     [data]
   )
-
-  const findAnswerScoreByQuestionId = (questionId) =>
-    answerScores?.find((item) => item?.questionId === questionId)
 
   return (
     <>
@@ -134,41 +136,43 @@ function FormConditionsForm(props) {
             />
           )}
         </TabPane>
-        <TabPane
-          style={{ overflowY: 'scroll', overflowX: 'hidden' }}
-          tab={
-            conditionsAnswersScoreConfigTab || 'Answers score configurations'
-          }
-          key="3">
-          {filteredAnswerForEndings?.length > 0 ? (
-            filteredAnswerForEndings?.map((item, index) => (
-              <Box mb={3}>
-                <ScoreConditionsAdvancedView
-                  key={index}
-                  questionData={item}
-                  index={index}
-                  questionScoresData={findAnswerScoreByQuestionId(item?.id)}
-                />
-              </Box>
-            ))
-          ) : (
-            <EmptyState
-              image={Empty.PRESENTED_IMAGE_SIMPLE}
-              description={
-                noDataToConfigureEndings ||
-                `There are no any question that allows to configure answers scores.`
-              }>
-              {promiseAddSpecialQuestionTypes ||
-                'Please, add one of the types of questions:'}
-              <br />
-              {`${QUESTION_TYPES.CHOICE},
+        {formData?.isQuiz && (
+          <TabPane
+            style={{ overflowY: 'scroll', overflowX: 'hidden' }}
+            tab={
+              conditionsAnswersScoreConfigTab || 'Answers score configurations'
+            }
+            key="3">
+            {filteredAnswerForEndings?.length > 0 ? (
+              filteredAnswerForEndings?.map((item, index) => (
+                <Box mb={3}>
+                  <ScoreConditionsAdvancedView
+                    key={index}
+                    questionData={item}
+                    index={index}
+                    questionScoresData={findAnswerScoreByQuestionId(item?.id)}
+                  />
+                </Box>
+              ))
+            ) : (
+              <EmptyState
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description={
+                  noDataToConfigureEndings ||
+                  `There are no any question that allows to configure answers scores.`
+                }>
+                {promiseAddSpecialQuestionTypes ||
+                  'Please, add one of the types of questions:'}
+                <br />
+                {`${QUESTION_TYPES.CHOICE},
                 ${QUESTION_TYPES.PICTURE_CHOICE},
                 ${QUESTION_TYPES.OPINION_SCALE},
                 ${QUESTION_TYPES.RATING},
                 ${QUESTION_TYPES.YES_NO}`}
-            </EmptyState>
-          )}
-        </TabPane>
+              </EmptyState>
+            )}
+          </TabPane>
+        )}
       </CustomTabs>
     </>
   )

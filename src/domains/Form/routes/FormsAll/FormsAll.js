@@ -217,17 +217,19 @@ function FormsAll(props) {
                 </Col>
               </Row>
 
-              <Row noGutters mb={3}>
-                <Col>
-                  <Input
-                    ref={searchRef}
-                    placeholder={`${
-                      formSearchPlaceholder || 'Search folder/file by name'
-                    }...`}
-                    onChange={(input) => searchData(input.target.value)}
-                  />
-                </Col>
-              </Row>
+              {data?.length > 4 && (
+                <Row noGutters mb={3}>
+                  <Col>
+                    <Input
+                      ref={searchRef}
+                      placeholder={`${
+                        formSearchPlaceholder || 'Search form by name'
+                      }...`}
+                      onChange={(input) => searchData(input.target.value)}
+                    />
+                  </Col>
+                </Row>
+              )}
 
               <Box
                 mr="-10px"
