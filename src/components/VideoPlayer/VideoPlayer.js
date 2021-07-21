@@ -26,7 +26,7 @@ function VideoPlayer(props) {
 
   return (
     <ZiggeoPlayer
-      locale="no"
+      locale="en"
       apiKey={API_KEY}
       video={videoKey}
       height="-webkit-fill-available"
