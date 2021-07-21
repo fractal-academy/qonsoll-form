@@ -96,13 +96,13 @@ function Carousel(props) {
     setPreviousQuestionOrder(temp)
   }
 
-  const handleNextClick = () => {
+  const handleNextClick = (e) => {
     setPreviousQuestionOrder((prevState) =>
       prevState?.[prevState?.length - 1] !== currentSlide
         ? [...(prevState || []), currentSlide]
         : prevState || []
     )
-    next()
+    next(e)
   }
 
   useKeyPress(38, (e) => {

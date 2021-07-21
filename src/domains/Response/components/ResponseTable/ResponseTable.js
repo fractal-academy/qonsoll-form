@@ -1,15 +1,20 @@
 import React from 'react'
-import { Table } from 'antd'
 import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { Spinner } from '../../../../../src/components'
+import { StyledTable } from '../../../../domains/Response/components/ResponseTable/ResponseTable.style'
 
 const columns = [
   {
     render: (text, record) => (
-      <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+      <div
+        style={{
+          wordWrap: 'break-word',
+          wordBreak: 'break-word',
+          width: '50px'
+        }}>
         {text}
       </div>
     ),
@@ -17,26 +22,34 @@ const columns = [
     dataIndex: 'order',
     key: 'order',
     sortOrder: 'descend',
-    width: '60px'
+    width: '50px'
   },
   {
     render: (text, record) => (
-      <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+      <div
+        style={{
+          wordWrap: 'break-word',
+          wordBreak: 'break-word',
+          width: '100%'
+        }}>
         {text}
       </div>
     ),
-    width: 500,
     title: 'Question',
     dataIndex: 'questionTitle',
     key: 'questionTitle'
   },
   {
     render: (text, record) => (
-      <div style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}>
+      <div
+        style={{
+          wordWrap: 'break-word',
+          wordBreak: 'break-word',
+          width: '100%'
+        }}>
         {text}
       </div>
     ),
-    width: 500,
     title: 'Answer',
     dataIndex: 'answer',
     key: 'answer'
@@ -46,16 +59,17 @@ const columns = [
 function ResponseTable(props) {
   const { data, loading } = props
   const { emptyStateAnswersDescription } = useTranslation()
+  const checkedData = data
 
   return (
-    <Box display="flex" flex={1} justifyContent="center">
+    <Box display="flex" flex={1} justifyContent="center" overflowX="hidden">
       {loading ? (
-        <Spinner size="large" />
+        <Spinner width="100%" size="large" />
       ) : (
-        <Row>
+        <Row width="100%">
           <Col>
             {data?.length > 0 ? (
-              <Table
+              <StyledTable
                 sortOrder
                 columns={columns}
                 dataSource={data}
