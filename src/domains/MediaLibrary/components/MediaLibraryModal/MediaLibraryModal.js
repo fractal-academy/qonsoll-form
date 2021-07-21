@@ -14,8 +14,7 @@ import {
   MediaListContainer,
   CustomButton,
   CustomInput,
-  CustomText,
-  styles
+  CustomText
 } from './MediaLibraryModal.styles'
 import { MediaLibraryFilter } from '../../../../domains/MediaLibrary/components'
 
