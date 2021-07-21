@@ -16,6 +16,20 @@ function ShortText(props) {
     useTranslation()
   const inputRef = useRef()
 
+  useKeyPress(
+    (e) =>
+      //if pressed enter this event on this question slide - dispatch second callback
+      e.keyCode === 13 && currentSlide === question?.order,
+    (e) => {
+      if (e.type === 'keyup') {
+        onPressOk()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
+
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
     const data = { question, answer: { value: answer || '' } }
@@ -40,32 +54,19 @@ function ShortText(props) {
     //.trim() removes all useless spaces to prevent submit with only spaces
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
-    question?.isRequired
-      ? !!value
-        ? form.submit()
-        : message.error(
-            answerRequiredMessageError ||
-              'It`s required question, please answer'
-          )
-      : form.submit()
+    if (question?.isRequired && !value) {
+      message.error(
+        answerRequiredMessageError || 'It`s required question, please answer'
+      )
+    } else {
+      form.submit()
+    }
   }
 
-  useKeyPress(
-    (e) =>
-      //if pressed enter this event on this question slide - dispatch second callback
-      e.keyCode === 13 && currentSlide === question?.order,
-    (e) => {
-      if (e.type === 'keyup') {
-        onPressOk()
-      }
-    },
-    {
-      events: ['keydown', 'keyup']
-    }
-  )
-
   //when question was skipped by navigation buttons and input was focused - reset focus
-  currentSlide > question?.order && inputRef.current.blur()
+  inputRef?.current && currentSlide === question?.order
+    ? inputRef?.current?.focus?.()
+    : inputRef?.current?.blur?.()
 
   return (
     <Container>
