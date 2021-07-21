@@ -33,13 +33,13 @@ const FormSimpleFormWithModal = (props) => {
     await setIsModalVisible(false)
     form.resetFields()
   }
-  const onFormEdit = async (data) => {
+  const onFormEdit = (data) => {
     setLoading(true)
     onModalSubmit(data)
     !isEdit && form.resetFields()
     setLoading(false)
     setIsModalVisible(false)
-    setEdit && setEdit(isEdit)
+    setEdit?.(isEdit)
   }
   // [COMPUTED PROPERTIES]
 
