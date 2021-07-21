@@ -140,8 +140,8 @@ function FormConditionsForm(props) {
             conditionsAnswersScoreConfigTab || 'Answers score configurations'
           }
           key="3">
-          {data?.length > 0 ? (
-            data?.map((item, index) => (
+          {filteredAnswerForEndings?.length > 0 ? (
+            filteredAnswerForEndings?.map((item, index) => (
               <Box mb={3}>
                 <ScoreConditionsAdvancedView
                   key={index}
