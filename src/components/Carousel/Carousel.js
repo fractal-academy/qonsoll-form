@@ -19,14 +19,14 @@ import { useTranslation } from '../../context/Translation'
 function Carousel(props) {
   const {
     children,
-    isAnswered,
-    setIsAnswered,
-    currentSlide,
-    setCurrentSlide,
-    submitLoading,
-    disabledDown,
     disabledUp,
+    isAnswered,
+    disabledDown,
+    currentSlide,
+    setIsAnswered,
+    submitLoading,
     questionsData,
+    setCurrentSlide,
     previousQuestionOrder,
     setPreviousQuestionOrder
   } = props
@@ -105,12 +105,28 @@ function Carousel(props) {
     next(e)
   }
 
-  useKeyPress(38, (e) => {
-    previous()
-  })
-  useKeyPress(40, (e) => {
-    handleNextClick()
-  })
+  useKeyPress(
+    38,
+    (event) => {
+      if (event.type === 'keyup') {
+        previous()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
+  useKeyPress(
+    40,
+    (event) => {
+      if (event.type === 'keyup') {
+        handleNextClick(event)
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   // [ ANSWER ]
   const currentSlideData = questionsData?.filter(

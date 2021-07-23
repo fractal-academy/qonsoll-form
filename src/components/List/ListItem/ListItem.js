@@ -1,63 +1,24 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { StyledItem } from '../../../components'
 import { COLLECTIONS } from '../../../constants'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import {
-  Popconfirm,
-  Typography,
-  Dropdown,
-  Menu,
-  Image,
-  Button,
-  message
-} from 'antd'
+import { Popconfirm, Typography, Dropdown, Menu, message } from 'antd'
 import { useTranslation } from '../../../context/Translation'
 import { FormSimpleFormWithModal } from '../../../domains/Form/components'
-import {
-  FileOutlined,
-  MoreOutlined,
-  CloseOutlined,
-  CheckOutlined
-} from '@ant-design/icons'
+import { MoreOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import useFunctions from '../../../hooks/useFunctions'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
-import typeformTheme from '../../../../styles/theme'
+import {
+  ItemPreview,
+  StyledIcon,
+  StyledImage,
+  StyledBadge
+} from './ListItem.styles'
 
 const { Text } = Typography
 const { Item } = Menu
-
-const ItemPreview = styled(Box)`
-  display: flex;
-  position: relative;
-  width: -webkit-fill-available;
-  height: 140px;
-  border-radius: 8px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ theme }) =>
-    theme?.color?.white?.default || typeformTheme?.color?.white?.default};
-`
-const StyledIcon = styled(FileOutlined)`
-  font-size: 40px;
-  opacity: 0.5;
-`
-const StyledImage = styled(Image)`
-  object-fit: cover;
-  border-radius: 8px;
-`
-const StyledBadge = styled(Button)`
-  position: absolute;
-  border-radius: 50%;
-  height: 24px;
-  z-index: 100;
-  padding: 3px;
-  width: 24px;
-  right: -14px;
-  top: -14px;
-`
 
 function ListItem(props) {
   const { data, selectedBackgroundImg, setSelectedBackgroundImg, setEdit } =

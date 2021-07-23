@@ -5,6 +5,8 @@ import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 import { message } from 'antd'
 import { useTranslation } from '../../../context/Translation'
+import { getQuestionAnswerFromContext } from '../../../helpers'
+import { useAnswersContext } from '../../../context/Answers'
 
 function YesnoButton(props) {
   const { onClick, currentSlide, question } = props
@@ -12,7 +14,7 @@ function YesnoButton(props) {
 
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
-
+  const answersContext = useAnswersContext()
   // [ADDITIONAL_HOOKS]
   useKeyPress(
     (event) =>
@@ -21,16 +23,22 @@ function YesnoButton(props) {
     (event) => {
       if (event.type === 'keyup') {
         if (event.keyCode === 13) {
-          const answerData = {
-            question,
-            answer: { value: '', letterKey: '' }
-          }
-          !question?.isRequired
-            ? onClick && onClick(answerData)
-            : message.error(
+          const questionAnswer = getQuestionAnswerFromContext(
+            answersContext,
+            question
+          )
+          const answerData = !!questionAnswer
+            ? questionAnswer
+            : {
+                question,
+                answer: { value: '', letterKey: '' }
+              }
+          question?.isRequired && !questionAnswer
+            ? message.error(
                 answerRequiredMessageError ||
                   'It`s required question, please answer'
               )
+            : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()
           const currentChoice = key === 'Y' ? 'Yes' : 'No'

@@ -1,5 +1,4 @@
-export { default as FileUploader } from './Uploader/FileUploader'
-export { default as IconLabel } from './Uploader/IconLabel'
+export { default as FileUploader } from './FileUploader'
 
 export { default as LongText } from './LongText'
 export { default as TextEditable } from './TextEditable'

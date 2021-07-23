@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Upload, message, Progress, Button, Popconfirm, Typography } from 'antd'
 import { DeleteOutlined, InboxOutlined, FileOutlined } from '@ant-design/icons'
-import { IconLabel, SubmitButton } from '../../../components'
-import { useTranslation } from '../../../context/Translation'
-import COLLECTIONS from '../../../constants/collection'
-import useFunctions from '../../../hooks/useFunctions'
+import { SubmitButton } from '..'
+import { useTranslation } from '../../context/Translation'
+import COLLECTIONS from '../../constants/collection'
+import useFunctions from '../../hooks/useFunctions'
 import { Box, Row, Col } from '@qonsoll/react-design'
 import { useKeyPress, useHover } from '@umijs/hooks'
-import { UploadItem } from './FileUploader.styles'
+import { UploadItem, IconLabel } from './FileUploader.styles'
 
 const { Dragger } = Upload
 const { Text } = Typography

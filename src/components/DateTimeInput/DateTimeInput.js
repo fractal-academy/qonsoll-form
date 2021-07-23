@@ -15,6 +15,7 @@ const StyledDatePicker = styled(DatePicker)`
     font-size: 18px;
   }
 `
+
 const DateTimeInput = (props) => {
   const { onDateChange, question, currentSlide } = props
 
