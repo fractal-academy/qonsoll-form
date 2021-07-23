@@ -64,14 +64,3 @@ export const StyledText = styled(Text)`
   padding-left: ${({ hasImages }) => (hasImages ? '0' : '30px')};
   word-break: break-word;
 `
-
-// const StyledBadge = styled(Button)`
-//   position: absolute;
-//   border-radius: 50%;
-//   height: 24px;
-//   z-index: 100;
-//   padding: 3px;
-//   width: 24px;
-//   right: 0;
-//   top: -4px;
-// `

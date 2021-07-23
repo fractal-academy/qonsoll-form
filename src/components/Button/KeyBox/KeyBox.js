@@ -50,15 +50,6 @@ function KeyBox(props) {
               {item?.choice?.answerOption || `Choice ${index + 1}`}
             </StyledText>
           </Col>
-          {/* <Col cw="auto">
-            <Box position="absolute" top="0" right="0">
-              {isActive && (
-                // <StyledBadge size="small" type="primary">
-                //   <CheckOutlined />
-                // </StyledBadge>
-              )}
-            </Box>
-          </Col> */}
         </Row>
       </StyledButton>
     </Box>
