@@ -151,8 +151,8 @@ function ListItem(props) {
       )
     })
   }
-  const onModalSubmit = async (updatedFormData) => {
-    await updateData(COLLECTIONS.FORMS, data?.id, updatedFormData).catch((e) =>
+  const onModalSubmit = (updatedFormData) => {
+    updateData(COLLECTIONS.FORMS, data?.id, updatedFormData).catch((e) =>
       message.error(e.message)
     )
   }

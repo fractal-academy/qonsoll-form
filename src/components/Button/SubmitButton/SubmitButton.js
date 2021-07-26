@@ -66,7 +66,7 @@ function SubmitButton(props) {
     if (finish) {
       const updatedAnswers = { formId, answers }
       const sendAnswersTimestemp = getTimestamp().fromDate(new Date())
-      Object.values(answers).map((item, index) => {
+      Object.values(answers).forEach((item) => {
         const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
         setData(COLLECTIONS?.ANSWERS, answerId, {
           id: answerId,
