@@ -136,9 +136,7 @@ function FormConditionsForm(props) {
         </TabPane>
         <TabPane
           style={{ overflowY: 'scroll', overflowX: 'hidden' }}
-          tab={
-            conditionsAnswersScoreConfigTab || 'Answers score configurations'
-          }
+          tab={conditionsAnswersScoreConfigTab || 'Answer score configurations'}
           key="3">
           {data?.length > 0 ? (
             data?.map((item, index) => (
