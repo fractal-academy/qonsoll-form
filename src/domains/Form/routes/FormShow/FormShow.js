@@ -63,6 +63,13 @@ function FormShow(props) {
       ),
     [questionsData]
   )
+  const questionsWithEndingLength = useMemo(
+    () =>
+      questionsData?.filter(
+        (item) => item?.questionType !== QUESTION_TYPES.ENDING
+      )?.length + 1,
+    [questionsData]
+  )
   const endings = useMemo(
     () =>
       questionsData?.filter(
@@ -86,11 +93,10 @@ function FormShow(props) {
   const disabledDown =
     currentSlide ===
     (containWelcomeScreen
-      ? filteredQuestionsList?.length - 1
-      : filteredQuestionsList?.length)
+      ? questionsWithEndingLength - 1
+      : questionsWithEndingLength)
   const disabledUp =
     currentSlide === (containWelcomeScreen ? 0 : 1) || disabledDown
-
   const isLastQuestionWithoutEndings =
     currentSlide ===
     (containWelcomeScreen

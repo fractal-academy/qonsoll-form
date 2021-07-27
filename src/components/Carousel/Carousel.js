@@ -102,7 +102,7 @@ function Carousel(props) {
   useKeyPress(
     38,
     (event) => {
-      if (event.type === 'keyup') {
+      if (event.type === 'keyup' && !disabledUp) {
         previous()
       }
     },
@@ -113,7 +113,7 @@ function Carousel(props) {
   useKeyPress(
     40,
     (event) => {
-      if (event.type === 'keyup') {
+      if (event.type === 'keyup' && !disabledDown) {
         handleNextClick(event)
       }
     },
