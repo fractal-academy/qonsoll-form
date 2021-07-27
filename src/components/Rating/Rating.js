@@ -1,37 +1,37 @@
 import React from 'react'
 import useMedia from 'use-media'
-import { Rate, message } from 'antd'
-import styled from 'styled-components'
+import { message } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
 import { Container } from '@qonsoll/react-design'
-import typeformTheme from '../../../styles/theme'
 import { useTranslation } from '../../context/Translation'
+import { StyledRate } from './Rating.styles'
+import { StarFilled } from '@ant-design/icons'
+import { getQuestionAnswerFromContext } from '../../helpers'
+import { useAnswersContext } from '../../context/Answers'
 
-const StyledRate = styled(Rate)`
-  &.ant-rate {
-    font-size: ${({ phoneSize, tabletSize }) =>
-      phoneSize ? '24px' : tabletSize ? '45px' : '60px'};
-    color: ${({ theme }) =>
-      theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
-  }
-`
 function CustomRating(props) {
   const { allowClear, tooltips, onClick, question, currentSlide } = props
   const { questionConfigurations } = question
 
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
+  const answersContext = useAnswersContext()
+
+  //[ADDITIONAL HOOKS]
   const phoneSize = useMedia({ maxWidth: '430px' })
   const tabletSize = useMedia({ minWidth: '450px', maxWidth: '1050px' })
 
-  //[COMPONENT STATE HOOKS]
-
   // [CLEAN FUNCTIONS]
-  const onChange = (value) => {
-    const data = { question, answer: { value } }
+  const onChange = (selectedStarsNumber) => {
+    const data = {
+      question,
+      answer: { value: selectedStarsNumber },
+      answerId:
+        questionConfigurations?.[selectedStarsNumber - 1]?.answerOptionId || ''
+    }
 
     // if the data is sent we delay and animate the selected value, else - just go to next question
-    if (!!value) {
+    if (!!selectedStarsNumber) {
       onClick && setTimeout(onClick, 700, data)
     } else {
       onClick?.(data)
@@ -43,12 +43,21 @@ function CustomRating(props) {
     (event) => event.keyCode === 13 && currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
-        !question?.isRequired
-          ? onChange?.('')
-          : message.error(
+        const questionAnswer = getQuestionAnswerFromContext(
+          answersContext,
+          question
+        )
+        const answerData = questionAnswer || {
+          question,
+          answer: { value: '' }
+        }
+
+        question?.isRequired && !questionAnswer
+          ? message.error(
               answerRequiredMessageError ||
                 'It`s required question, please answer'
             )
+          : onClick?.(answerData)
       }
     },
     {
@@ -60,13 +69,14 @@ function CustomRating(props) {
     <Container>
       <StyledRate
         autoFocus={false}
-        count={questionConfigurations?.length}
-        allowClear={allowClear}
         tooltips={tooltips}
         onChange={onChange}
         disabled={!onClick}
         phoneSize={phoneSize}
+        allowClear={allowClear}
         tabletSize={tabletSize}
+        count={questionConfigurations?.length}
+        character={<StarFilled onMouseDown={(e) => e.preventDefault()} />}
       />
     </Container>
   )

@@ -6,6 +6,8 @@ import React, { useMemo, useState } from 'react'
 import useMedia from 'use-media'
 import { message } from 'antd'
 import { useTranslation } from '../../../context/Translation'
+import { useAnswersContext } from '../../../context/Answers'
+import { getQuestionAnswerFromContext } from '../../../helpers'
 
 let startLetter = 65
 
@@ -18,7 +20,7 @@ function ChoiceButton(props) {
 
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
-
+  const answersContext = useAnswersContext()
   // [ADDITIONAL HOOKS]
   const mappedChoices = useMemo(
     () =>
@@ -32,6 +34,8 @@ function ChoiceButton(props) {
     () => (mappedChoices ? mappedChoices?.map(({ letter }) => letter) : []),
     [mappedChoices]
   )
+  const phoneSize = useMedia({ maxWidth: '500px' })
+
   useKeyPress(
     (event) => ![].includes(event.key) && currentSlide === question?.order,
     (event) => {
@@ -39,19 +43,24 @@ function ChoiceButton(props) {
         // When pressed enter and question not required it will go to next question,
         // if question required - display message that u should enter data
         if (event.keyCode === 13) {
-          if (!question?.isRequired) {
-            const answer = { value: '', letterKey: '' }
-            const answerData = {
-              question,
-              answer: !hasImages ? answer : { ...answer, image: '' }
-            }
-            onClick?.(answerData)
-          } else {
-            message.error(
-              answerRequiredMessageError ||
-                'It`s required question, please answer'
-            )
+          //try to get current slide question value from context
+          const questionAnswer = getQuestionAnswerFromContext(
+            answersContext,
+            question
+          )
+
+          const answer = { value: '', letterKey: '' }
+          const answerData = questionAnswer || {
+            question,
+            answer: !hasImages ? answer : { ...answer, image: '' }
           }
+
+          question?.isRequired && !questionAnswer
+            ? message.error(
+                answerRequiredMessageError ||
+                  'It`s required question, please answer'
+              )
+            : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()
           let index = key.charCodeAt(0) - startLetter
@@ -75,13 +84,13 @@ function ChoiceButton(props) {
       //if picture choice add field with image link
       const data = {
         question,
-        answer: !hasImages ? answer : { ...answer, image: choice?.image || '' }
+        answer: !hasImages ? answer : { ...answer, image: choice?.image || '' },
+        answerId: choice?.answerOptionId || ''
       }
 
       onClick && setTimeout(onClick, 700, data)
     }
   }
-  const phoneSize = useMedia({ maxWidth: '500px' })
 
   return (
     <Row noGutters h={phoneSize && 'center'}>

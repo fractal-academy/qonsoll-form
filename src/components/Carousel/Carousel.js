@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { QUESTION_TYPES } from '../../constants'
 import { useSize, useKeyPress } from '@umijs/hooks'
-import React, { cloneElement, useRef } from 'react'
+import React, { cloneElement, useRef, useMemo } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { Button, Carousel as AntdCarousel, message } from 'antd'
 import {
@@ -19,14 +19,15 @@ import { useTranslation } from '../../context/Translation'
 function Carousel(props) {
   const {
     children,
-    isAnswered,
-    setIsAnswered,
-    currentSlide,
-    setCurrentSlide,
-    submitLoading,
-    disabledDown,
     disabledUp,
+    isAnswered,
+    disabledDown,
+    currentSlide,
+    setIsAnswered,
+    submitLoading,
     questionsData,
+    setCurrentSlide,
+    containWelcomeScreen,
     previousQuestionOrder,
     setPreviousQuestionOrder
   } = props
@@ -40,13 +41,9 @@ function Carousel(props) {
   const [{ height }, ref] = useSize()
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
 
-  const welcomeScreenRule = questionsData?.some(
-    (item) => item?.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  )
-
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
-    setCurrentSlide(welcomeScreenRule ? slideIndex : slideIndex + 1)
+    setCurrentSlide(containWelcomeScreen ? slideIndex : slideIndex + 1)
   }
 
   //[ LOGIC JUMPS ]
@@ -78,6 +75,7 @@ function Carousel(props) {
       setIsAnswered && setIsAnswered(false)
     }
   }
+
   const previous = () => {
     carouselRef.current?.goTo(
       previousQuestionOrder[previousQuestionOrder.length - 1]
@@ -101,12 +99,28 @@ function Carousel(props) {
     next(e)
   }
 
-  useKeyPress(38, (e) => {
-    previous()
-  })
-  useKeyPress(40, (e) => {
-    handleNextClick()
-  })
+  useKeyPress(
+    38,
+    (event) => {
+      if (event.type === 'keyup') {
+        previous()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
+  useKeyPress(
+    40,
+    (event) => {
+      if (event.type === 'keyup') {
+        handleNextClick(event)
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   // [ ANSWER ]
   const currentSlideData = questionsData?.filter(
@@ -128,7 +142,7 @@ function Carousel(props) {
         )[0]?.order
       : 0
 
-    const ruledOrder = welcomeScreenRule ? nextOrder : nextOrder - 1
+    const ruledOrder = containWelcomeScreen ? nextOrder : nextOrder - 1
 
     ruledOrder ? goTo(ruledOrder) : next()
   }

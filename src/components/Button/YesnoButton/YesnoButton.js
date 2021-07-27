@@ -5,6 +5,8 @@ import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 import { message } from 'antd'
 import { useTranslation } from '../../../context/Translation'
+import { getQuestionAnswerFromContext } from '../../../helpers'
+import { useAnswersContext } from '../../../context/Answers'
 
 function YesnoButton(props) {
   const { onClick, currentSlide, question } = props
@@ -12,7 +14,7 @@ function YesnoButton(props) {
 
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
-
+  const answersContext = useAnswersContext()
   // [ADDITIONAL_HOOKS]
   useKeyPress(
     (event) =>
@@ -21,22 +23,26 @@ function YesnoButton(props) {
     (event) => {
       if (event.type === 'keyup') {
         if (event.keyCode === 13) {
-          const answerData = {
+          const questionAnswer = getQuestionAnswerFromContext(
+            answersContext,
+            question
+          )
+          const answerData = questionAnswer || {
             question,
             answer: { value: '', letterKey: '' }
           }
-          !question?.isRequired
-            ? onClick && onClick(answerData)
-            : message.error(
+          question?.isRequired && !questionAnswer
+            ? message.error(
                 answerRequiredMessageError ||
                   'It`s required question, please answer'
               )
+            : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()
-          const currentChoice = key === 'Y' ? 'Yes' : 'No'
+          const currentChoice = questionConfigurations?.[key === 'Y' ? 0 : 1]
           onButtonClick({
             letter: key,
-            choice: { answerOption: currentChoice }
+            choice: currentChoice
           })
         }
       }
@@ -57,9 +63,9 @@ function YesnoButton(props) {
 
   const mappedChoices = useMemo(
     () =>
-      questionConfigurations?.map(({ answerOption }, index) => ({
-        letter: answerOption?.[0].toUpperCase(),
-        choice: { answerOption }
+      questionConfigurations?.map((choiceData) => ({
+        letter: choiceData?.answerOption?.[0].toUpperCase(),
+        choice: choiceData
       })),
     [questionConfigurations]
   )
@@ -72,7 +78,8 @@ function YesnoButton(props) {
       const answer = { value: choice?.answerOption || '', letterKey: letter }
       const data = {
         question,
-        answer
+        answer,
+        answerId: choice?.answerOptionId || ''
       }
       onClick && setTimeout(onClick, 700, data)
     }

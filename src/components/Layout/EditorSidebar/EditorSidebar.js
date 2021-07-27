@@ -68,6 +68,12 @@ const defaultConfiguration = [
     redirectConditionRule: ''
   }
 ]
+const endingConfigurations = [
+  {
+    answerOptionId: '',
+    triggerQuestionId: ''
+  }
+]
 
 function EditorSidebar(props) {
   const {
@@ -130,7 +136,9 @@ function EditorSidebar(props) {
 
     // default data for created question
     const newQuestion = {
-      questionConfigurations,
+      questionConfigurations: isEnding
+        ? endingConfigurations
+        : questionConfigurations,
       id: questionId,
       formId: id,
       layoutType: LAYOUT_TYPE_KEYS[0],
