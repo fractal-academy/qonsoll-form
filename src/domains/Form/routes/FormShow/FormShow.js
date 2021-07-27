@@ -57,13 +57,13 @@ function FormShow(props) {
   // [COMPUTED PROPERTIES]
   const containWelcomeScreen =
     questionsData?.[0]?.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  const disabledUp = currentSlide === (containWelcomeScreen ? 0 : 1)
-  const disabledDown = currentSlide === questionsData?.length - 1
+  const disabledDown = containWelcomeScreen
+    ? currentSlide === questionsData?.length - 1
+    : currentSlide === questionsData?.length
+  const disabledUp =
+    currentSlide === (containWelcomeScreen ? 0 : 1) || disabledDown
 
   // [CLEAN FUNCTIONS]
-  // const onRestart = () => {
-  //   window.location.reload()
-  // }
   const onClick = (answerData) => {
     !!answerData &&
       answersDispatch({
@@ -73,6 +73,7 @@ function FormShow(props) {
 
     setIsAnswered(true)
     setPreviousQuestionOrder((prevState) =>
+      // index: containWelcomeScreen ? questionsData?.length - 1 : questionsData?.length
       prevState?.[prevState?.length - 1] !== currentSlide
         ? [...(prevState || []), currentSlide]
         : prevState || []
