@@ -65,8 +65,6 @@ function CustomRating(props) {
     }
   )
 
-  //disable focus after change slide
-
   return (
     <Container>
       <StyledRate
@@ -75,10 +73,10 @@ function CustomRating(props) {
         onChange={onChange}
         disabled={!onClick}
         phoneSize={phoneSize}
-        character={<StarFilled onMouseDown={(e) => e.preventDefault()} />}
         allowClear={allowClear}
         tabletSize={tabletSize}
         count={questionConfigurations?.length}
+        character={<StarFilled onMouseDown={(e) => e.preventDefault()} />}
       />
     </Container>
   )
