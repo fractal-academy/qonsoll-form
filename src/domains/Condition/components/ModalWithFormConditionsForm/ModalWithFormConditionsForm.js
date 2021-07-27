@@ -16,19 +16,11 @@ function ModalWithFormConditionsForm(props) {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   // [ADDITIONAL_HOOKS]
-  const {
-    modalTitle,
-    modalResetLogic,
-    submitBtn,
-    cancelBtn,
-    conditionsFormTooltip
-  } = useTranslation()
+  const { modalTitle, modalResetLogic, submitBtn, conditionsFormTooltip } =
+    useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onSave = () => {
-    setIsModalVisible(!isModalVisible)
-  }
-  const onCancel = () => {
     setIsModalVisible(!isModalVisible)
   }
 
