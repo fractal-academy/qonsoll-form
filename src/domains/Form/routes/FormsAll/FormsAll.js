@@ -9,8 +9,7 @@ import {
   Divider,
   Button,
   Menu,
-  Input,
-  Tooltip
+  Input
 } from 'antd'
 import useMedia from 'use-media'
 import { globalStyles } from '../../../../../styles'
