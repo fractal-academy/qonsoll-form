@@ -34,12 +34,10 @@ function RangeButton(props) {
             question
           )
 
-          const answerData = !!questionAnswer
-            ? questionAnswer
-            : {
-                question,
-                answer: { value: '' }
-              }
+          const answerData = questionAnswer || {
+            question,
+            answer: { value: '' }
+          }
 
           question?.isRequired && !questionAnswer
             ? message.error(
