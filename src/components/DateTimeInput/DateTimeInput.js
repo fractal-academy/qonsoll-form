@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { DatePicker, message } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
 import { useTranslation } from '../../context/Translation'
 import typeformTheme from '../../../styles/theme'
 import styled from 'styled-components'
-import moment from 'moment'
+import { getQuestionAnswerFromContext } from '../../helpers'
+import { useAnswersContext } from '../../context/Answers'
 
 const StyledDatePicker = styled(DatePicker)`
   background-color: ${({ theme }) =>
@@ -19,17 +20,15 @@ const StyledDatePicker = styled(DatePicker)`
 const DateTimeInput = (props) => {
   const { onDateChange, question, currentSlide } = props
 
-  const [datePickerValue, setDatePickerValue] = useState()
-
   // [CLEAN FUNCTIONS]
-  const onChange = (date, dateString) => {
-    setDatePickerValue(date)
+  const onChange = (_, dateString) => {
     const data = { question, answer: { value: dateString } }
     !!dateString && onDateChange && onDateChange(data)
     datePickerRef.current.blur()
   }
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
+  const answersContext = useAnswersContext()
 
   // [ADDITIONAL_HOOKS]
   const datePickerRef = useRef()
@@ -38,22 +37,21 @@ const DateTimeInput = (props) => {
     (event) => event.keyCode === 13 && currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
-        const dateFromPicker = datePickerValue
-          ? moment(datePickerValue).format('YYYY-MM-DD')
-          : ''
-        const answerData = {
+        const questionAnswer = getQuestionAnswerFromContext(
+          answersContext,
+          question
+        )
+        const answerData = questionAnswer || {
           question,
-          answer: { value: dateFromPicker }
+          answer: { value: '' }
         }
 
-        if (question?.isRequired && !dateFromPicker) {
-          message.error(
-            answerRequiredMessageError ||
-              'It`s required question, please answer'
-          )
-        } else {
-          onDateChange?.(answerData)
-        }
+        question?.isRequired && !questionAnswer
+          ? message.error(
+              answerRequiredMessageError ||
+                'It`s required question, please answer'
+            )
+          : onDateChange?.(answerData)
       }
     },
     {
@@ -63,7 +61,6 @@ const DateTimeInput = (props) => {
 
   return (
     <StyledDatePicker
-      value={datePickerValue}
       ref={datePickerRef}
       onChange={onChange}
       disabled={!onDateChange}

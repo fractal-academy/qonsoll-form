@@ -27,12 +27,10 @@ function YesnoButton(props) {
             answersContext,
             question
           )
-          const answerData = !!questionAnswer
-            ? questionAnswer
-            : {
-                question,
-                answer: { value: '', letterKey: '' }
-              }
+          const answerData = questionAnswer || {
+            question,
+            answer: { value: '', letterKey: '' }
+          }
           question?.isRequired && !questionAnswer
             ? message.error(
                 answerRequiredMessageError ||
@@ -41,10 +39,10 @@ function YesnoButton(props) {
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()
-          const currentChoice = key === 'Y' ? 'Yes' : 'No'
+          const currentChoice = questionConfigurations?.[key === 'Y' ? 0 : 1]
           onButtonClick({
             letter: key,
-            choice: { answerOption: currentChoice }
+            choice: currentChoice
           })
         }
       }
@@ -65,9 +63,9 @@ function YesnoButton(props) {
 
   const mappedChoices = useMemo(
     () =>
-      questionConfigurations?.map(({ answerOption }, index) => ({
-        letter: answerOption?.[0].toUpperCase(),
-        choice: { answerOption }
+      questionConfigurations?.map((choiceData) => ({
+        letter: choiceData?.answerOption?.[0].toUpperCase(),
+        choice: choiceData
       })),
     [questionConfigurations]
   )
@@ -80,7 +78,8 @@ function YesnoButton(props) {
       const answer = { value: choice?.answerOption || '', letterKey: letter }
       const data = {
         question,
-        answer
+        answer,
+        answerId: choice?.answerOptionId || ''
       }
       onClick && setTimeout(onClick, 700, data)
     }

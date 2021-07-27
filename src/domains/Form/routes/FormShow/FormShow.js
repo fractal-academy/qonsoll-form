@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 // import { globalStyles } from '../../../../../styles'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
@@ -15,7 +15,8 @@ import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
   useAnswersContextDispatch,
-  ANSWERS_DISPATCH_EVENTS
+  ANSWERS_DISPATCH_EVENTS,
+  useAnswersContext
 } from '../../../../context/Answers'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 
@@ -37,7 +38,7 @@ function FormShow(props) {
   // [CUSTOM_HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
   const answersDispatch = useAnswersContextDispatch()
-
+  const answersContext = useAnswersContext()
   // [ADDITIONAL HOOKS]
   useKeyPress(9, (e) => {
     e.preventDefault()
@@ -55,15 +56,76 @@ function FormShow(props) {
   const [previousQuestionOrder, setPreviousQuestionOrder] = useState([])
 
   // [COMPUTED PROPERTIES]
-  const containWelcomeScreen =
-    questionsData?.[0]?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+  const filteredQuestionsList = useMemo(
+    () =>
+      questionsData?.filter(
+        (item) => item?.questionType !== QUESTION_TYPES.ENDING
+      ),
+    [questionsData]
+  )
+  const endings = useMemo(
+    () =>
+      questionsData?.filter(
+        (item) => item?.questionType === QUESTION_TYPES.ENDING
+      ),
+    [questionsData]
+  )
+  const answersId = useMemo(
+    () =>
+      !!Object.values(answersContext).length
+        ? Object.values(answersContext).map((item) => {
+            if (item?.answerId) return item?.answerId
+          })
+        : [],
+    [answersContext]
+  )
+  const containWelcomeScreen = useMemo(
+    () => questionsData?.[0]?.questionType === QUESTION_TYPES.WELCOME_SCREEN,
+    [questionsData]
+  )
   const disabledUp = currentSlide === (containWelcomeScreen ? 0 : 1)
-  const disabledDown = currentSlide === questionsData?.length - 1
+  const disabledDown = currentSlide === filteredQuestionsList?.length - 1
+
+  const isLastQuestionWithoutEndings =
+    currentSlide ===
+    (containWelcomeScreen
+      ? filteredQuestionsList?.length - 1
+      : filteredQuestionsList?.length)
 
   // [CLEAN FUNCTIONS]
-  // const onRestart = () => {
-  //   window.location.reload()
-  // }
+  //function that calculat what ending will be displayed
+  const determineEnding = () => {
+    let maxMatches = 0
+    let tempMatches = 0
+    //by default first ending will be displayed
+    let computedEnding = endings?.[0]
+
+    //pass through all the endings
+    endings?.forEach((ending) => {
+      const { questionConfigurations } = ending
+      //map all configurations for all endings
+      questionConfigurations?.forEach((endingConfiguration) => {
+        //if ending configuration contain answer options id
+        //check if the context holds answer what was selected for ending
+        if (answersId.includes(endingConfiguration?.answerOptionId)) {
+          //increment matches of ending configurations with answers
+          tempMatches++
+        }
+      })
+      //if there are more matches for current(mapped) ending than for previous ending
+      if (tempMatches > maxMatches) {
+        //define new ending
+        computedEnding = ending
+        //update max matches value
+        maxMatches = tempMatches
+        //reset temporary matches
+        tempMatches = 0
+      }
+    })
+    //add computed ending to other questions
+    filteredQuestionsList.push(computedEnding)
+  }
+
   const onClick = (answerData) => {
     !!answerData &&
       answersDispatch({
@@ -88,6 +150,16 @@ function FormShow(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, questionsData])
+
+  useEffect(() => {
+    // when questions was uploaded, its last one question without ending
+    // and we got answer for this question
+    if (!loading && isLastQuestionWithoutEndings && isAnswered) {
+      //calculate ending
+      determineEnding()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLastQuestionWithoutEndings, isAnswered])
 
   return (
     <FirebaseContext.Provider value={firebase}>
@@ -133,24 +205,25 @@ function FormShow(props) {
                   topOffset={wrapperOffset}
                   wrapperHeight={wrapperHeight}>
                   <FormAdvancedView
-                    submitLoading={submitLoading}
                     isAnswered={isAnswered}
-                    questionsData={questionsData}
                     disabledUp={disabledUp}
                     currentSlide={currentSlide}
                     disabledDown={disabledDown}
+                    submitLoading={submitLoading}
                     setIsAnswered={setIsAnswered}
+                    questionsData={questionsData}
                     setCurrentSlide={setCurrentSlide}
+                    containWelcomeScreen={containWelcomeScreen}
                     previousQuestionOrder={previousQuestionOrder}
                     setPreviousQuestionOrder={setPreviousQuestionOrder}>
-                    {questionsData?.map((item, index) => (
+                    {filteredQuestionsList?.map((item, index) => (
                       <Component
                         key={index}
+                        item={item}
+                        index={index}
                         onClick={onClick}
                         currentSlide={currentSlide}
-                        index={index}
-                        item={item}
-                        questionsData={questionsData}
+                        containWelcomeScreen={containWelcomeScreen}
                       />
                     ))}
                   </FormAdvancedView>
@@ -167,15 +240,14 @@ function FormShow(props) {
 const Component = ({
   index,
   item,
-  questionsData,
   onClick,
   currentSlide,
-  wrapperHeight
+  wrapperHeight,
+  containWelcomeScreen
 }) => {
-  const containWelcomeScreen = questionsData?.some(
-    (q) => q?.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  )
+  //[COMPUTED PROPERTIES]
   const questionNumber = containWelcomeScreen ? index : index + 1
+
   return (
     <Box key={index} height={wrapperHeight} overflowY="auto">
       <QuestionAdvancedView

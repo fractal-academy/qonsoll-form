@@ -63,11 +63,13 @@ function RangeButton(props) {
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (number) => {
-    if (range?.includes(Number(number)) && currentSlide === order) {
-      setButtonKey(number)
+    const IntValue = Number(number)
+    if (range?.includes(IntValue) && currentSlide === order) {
+      setButtonKey(IntValue)
       const data = {
         question,
-        answer: { value: number }
+        answer: { value: IntValue },
+        answerId: questionConfigurations?.[IntValue - 1]?.answerOptionId || ''
       }
       onClick && setTimeout(onClick, 700, data)
     }

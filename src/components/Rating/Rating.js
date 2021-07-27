@@ -22,11 +22,16 @@ function CustomRating(props) {
   const tabletSize = useMedia({ minWidth: '450px', maxWidth: '1050px' })
 
   // [CLEAN FUNCTIONS]
-  const onChange = (value) => {
-    const data = { question, answer: { value } }
+  const onChange = (selectedStarsNumber) => {
+    const data = {
+      question,
+      answer: { value: selectedStarsNumber },
+      answerId:
+        questionConfigurations?.[selectedStarsNumber - 1]?.answerOptionId || ''
+    }
 
     // if the data is sent we delay and animate the selected value, else - just go to next question
-    if (!!value) {
+    if (!!selectedStarsNumber) {
       onClick && setTimeout(onClick, 700, data)
     } else {
       onClick?.(data)
@@ -38,15 +43,23 @@ function CustomRating(props) {
     (event) => event.keyCode === 13 && currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
-        const questionAnswer =
-          getQuestionAnswerFromContext(answersContext, question) || ''
+        const questionAnswer = getQuestionAnswerFromContext(
+          answersContext,
+          question
+        )
+        const answerData = !!questionAnswer
+          ? questionAnswer
+          : {
+              question,
+              answer: { value: '' }
+            }
 
         question?.isRequired && !questionAnswer
           ? message.error(
               answerRequiredMessageError ||
                 'It`s required question, please answer'
             )
-          : onChange?.(questionAnswer)
+          : onClick?.(answerData)
       }
     },
     {

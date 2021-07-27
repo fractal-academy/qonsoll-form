@@ -49,21 +49,18 @@ function ChoiceButton(props) {
             question
           )
 
-          if (question?.isRequired && !questionAnswer) {
-            message.error(
-              answerRequiredMessageError ||
-                'It`s required question, please answer'
-            )
-          } else {
-            const answer = { value: '', letterKey: '' }
-            const answerData = !!questionAnswer
-              ? questionAnswer
-              : {
-                  question,
-                  answer: !hasImages ? answer : { ...answer, image: '' }
-                }
-            onClick?.(answerData)
+          const answer = { value: '', letterKey: '' }
+          const answerData = questionAnswer || {
+            question,
+            answer: !hasImages ? answer : { ...answer, image: '' }
           }
+
+          question?.isRequired && !questionAnswer
+            ? message.error(
+                answerRequiredMessageError ||
+                  'It`s required question, please answer'
+              )
+            : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()
           let index = key.charCodeAt(0) - startLetter
@@ -87,7 +84,8 @@ function ChoiceButton(props) {
       //if picture choice add field with image link
       const data = {
         question,
-        answer: !hasImages ? answer : { ...answer, image: choice?.image || '' }
+        answer: !hasImages ? answer : { ...answer, image: choice?.image || '' },
+        answerId: choice?.answerOptionId || ''
       }
 
       onClick && setTimeout(onClick, 700, data)

@@ -65,7 +65,8 @@ function SubmitButton(props) {
   const onButtonClick = () => {
     if (finish) {
       const updatedAnswers = { formId, answers }
-      const sendAnswersTimestemp = getTimestamp().fromDate(new Date())
+      const sendAnswersTimestamp = getTimestamp().fromDate(new Date())
+
       Object.values(answers).forEach((item) => {
         const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
         setData(COLLECTIONS?.ANSWERS, answerId, {
@@ -76,7 +77,7 @@ function SubmitButton(props) {
           questionType: item?.question?.questionType,
           questionTitle: item?.question?.title,
           user: mockUser?.name,
-          date: sendAnswersTimestemp,
+          date: sendAnswersTimestamp,
           order: item?.question?.order
         })
       })
@@ -86,7 +87,7 @@ function SubmitButton(props) {
       setData(COLLECTIONS?.USER_ANSWERS_GROUP, userAnswersGroupId, {
         id: userAnswersGroupId,
         formId: formId,
-        date: sendAnswersTimestemp,
+        date: sendAnswersTimestamp,
         user: mockUser?.name
       })
       //This part for future improvements - add answer for answer layout
