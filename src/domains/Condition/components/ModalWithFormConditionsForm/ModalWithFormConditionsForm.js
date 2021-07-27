@@ -46,14 +46,10 @@ function ModalWithFormConditionsForm(props) {
         />
       </Tooltip>
       <Modal
-        visible={isModalVisible}
         centered
-        okText={submitBtn || 'Save'}
-        cancelText={cancelBtn || 'Cancel'}
-        cancelButtonProps={{ type: 'text' }}
         onOk={onSave}
-        onCancel={onCancel}
         closable={false}
+        visible={isModalVisible}
         width="1024px"
         bodyStyle={{
           paddingTop: '8px',
@@ -63,6 +59,11 @@ function ModalWithFormConditionsForm(props) {
             theme.color.primary.t.lighten9 ||
             typeformTheme.color.primary.t.lighten9
         }}
+        footer={
+          <Button type="primary" onClick={onSave}>
+            {submitBtn || 'Continue'}
+          </Button>
+        }
         title={
           <>
             <Row v="center" noGutters>

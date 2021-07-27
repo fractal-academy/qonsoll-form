@@ -40,7 +40,6 @@ function FormsAll(props) {
     translations,
     actions = {},
     childrenModal,
-    disableAddButton,
     titleProps,
     firstLevelHidden,
     configurations,
@@ -117,13 +116,8 @@ function FormsAll(props) {
     }
   }
   // [COMPUTED PROPERTIES]
-  const {
-    formsAllRouteTitle,
-    addNewFormButton,
-    formSearchPlaceholder,
-    formsCounterDeclaration,
-    createNewFormTooltip
-  } = translations || {}
+  const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
+    translations || {}
   const menu = (
     <Menu>
       {mockRoutes?.map((item, index) => (
@@ -194,7 +188,7 @@ function FormsAll(props) {
                     {formsAllRouteTitle || 'Forms'}
                   </Title>
                 </Col>
-                <Col cw="auto">
+                {/* <Col cw="auto">
                   <Tooltip
                     placement="top"
                     title={createNewFormTooltip || 'Create new form'}>
@@ -206,7 +200,7 @@ function FormsAll(props) {
                       + {addNewFormButton || 'Add'}
                     </Button>
                   </Tooltip>
-                </Col>
+                </Col> */}
               </Row>
               <Row noGutters mb={3}>
                 <Col>
@@ -238,9 +232,10 @@ function FormsAll(props) {
                 flexDirection="row"
                 className="custom-scroll">
                 <StaticList
-                  data={currentData}
-                  columnWidth={(mobileLayout && 2) || 6}
                   setEdit={setEdit}
+                  data={currentData}
+                  onClick={showModal}
+                  columnWidth={(mobileLayout && 2) || 6}
                 />
 
                 <FormSimpleFormWithModal

@@ -40,18 +40,14 @@ function Carousel(props) {
   const [{ height }, ref] = useSize()
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
 
+  const welcomeScreenRule = questionsData?.some(
+    (item) => item?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+  )
+
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
-    const containWelcomeScreen = questionsData?.some(
-      (question) => question?.questionType === QUESTION_TYPES.WELCOME_SCREEN
-    )
-
-    setCurrentSlide(containWelcomeScreen ? slideIndex : slideIndex + 1)
+    setCurrentSlide(welcomeScreenRule ? slideIndex : slideIndex + 1)
   }
-
-  const welcomeScreenRule = questionsData?.some(
-    (item) => item.questionType === QUESTION_TYPES.WELCOME_SCREEN
-  )
 
   //[ LOGIC JUMPS ]
   const goTo = (slideNumber) => {
