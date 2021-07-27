@@ -83,8 +83,13 @@ function FormShow(props) {
     () => questionsData?.[0]?.questionType === QUESTION_TYPES.WELCOME_SCREEN,
     [questionsData]
   )
-  const disabledUp = currentSlide === (containWelcomeScreen ? 0 : 1)
-  const disabledDown = currentSlide === filteredQuestionsList?.length - 1
+  const disabledDown =
+    currentSlide ===
+    (containWelcomeScreen
+      ? filteredQuestionsList?.length - 1
+      : filteredQuestionsList?.length)
+  const disabledUp =
+    currentSlide === (containWelcomeScreen ? 0 : 1) || disabledDown
 
   const isLastQuestionWithoutEndings =
     currentSlide ===
@@ -93,7 +98,7 @@ function FormShow(props) {
       : filteredQuestionsList?.length)
 
   // [CLEAN FUNCTIONS]
-  //function that calculat what ending will be displayed
+  //function that calculate what ending will be displayed
   const determineEnding = () => {
     let maxMatches = 0
     let tempMatches = 0
@@ -135,6 +140,7 @@ function FormShow(props) {
 
     setIsAnswered(true)
     setPreviousQuestionOrder((prevState) =>
+      // index: containWelcomeScreen ? questionsData?.length - 1 : questionsData?.length
       prevState?.[prevState?.length - 1] !== currentSlide
         ? [...(prevState || []), currentSlide]
         : prevState || []

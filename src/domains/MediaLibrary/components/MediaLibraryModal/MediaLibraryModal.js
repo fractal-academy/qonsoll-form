@@ -28,13 +28,8 @@ function MediaLibraryModal(props) {
 
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
-  const {
-    addButton,
-    amountTitle,
-    changeButton,
-    searchPlaceholder,
-    mediaLibraryTitle
-  } = useTranslation()
+  const { amountTitle, changeButton, searchPlaceholder, mediaLibraryTitle } =
+    useTranslation()
 
   const searchRef = useRef()
 
@@ -171,8 +166,8 @@ function MediaLibraryModal(props) {
               <Col>
                 <Title level={3}>{mediaLibraryTitle || 'Media Library'}</Title>
               </Col>
-              <Col cw="auto" v="center">
-                {/* For future improvements.
+              {/* <Col cw="auto" v="center">
+                For future improvements.
                 <Box
                   bg={theme.color.dark.t.lighten7}
                   p={1}
@@ -192,7 +187,8 @@ function MediaLibraryModal(props) {
                     onClick={onSwitchChange}>
                     Video
                   </CustomBox>
-                </Box> */}
+                </Box>
+                
                 <Upload
                   showUploadList={false}
                   multiple
@@ -205,7 +201,7 @@ function MediaLibraryModal(props) {
                     {addButton || '+ Add'}
                   </Button>
                 </Upload>
-              </Col>
+              </Col> */}
             </Row>
             <Row pb={2} px={3}>
               <Col>
@@ -244,7 +240,10 @@ function MediaLibraryModal(props) {
             <MediaListContainer px={4} pt={2}>
               {/* RENDER MEDIA */}
               <StaticList
+                hasMedia
                 data={imagesList}
+                beforeUpload={beforeUpload}
+                customRequest={customRequest}
                 columnWidth={(sidebarState && 3) || 4}
                 selectedBackgroundImg={selectedBackgroundImg}
                 setSelectedBackgroundImg={setSelectedBackgroundImg}
@@ -257,7 +256,7 @@ function MediaLibraryModal(props) {
               h="right"
               p={3}
               bg={theme.color.white.default}>
-              <Col cw="auto">
+              <Col cw="auto" mr={2}>
                 <Button type="text" onClick={onModalCancel}>
                   Cancel
                 </Button>

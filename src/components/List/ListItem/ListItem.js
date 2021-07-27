@@ -21,8 +21,13 @@ const { Text } = Typography
 const { Item } = Menu
 
 function ListItem(props) {
-  const { data, selectedBackgroundImg, setSelectedBackgroundImg, setEdit } =
-    props
+  const {
+    data,
+    setEdit,
+    reference,
+    selectedBackgroundImg,
+    setSelectedBackgroundImg
+  } = props
   const { updateData, deleteData, getCollectionRef } = useFunctions()
 
   // [ADDITIONAL HOOKS]
@@ -145,6 +150,7 @@ function ListItem(props) {
   return (
     <StyledItem
       isCard
+      ref={reference}
       onClick={
         !data?.imageUrl
           ? onFormItemClicked
