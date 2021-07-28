@@ -28,7 +28,15 @@ import {
 const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
-  const { data, questionNumber, onClick, currentSlide, submitLoading } = props
+  const {
+    data,
+    onClick,
+    isFormQuiz,
+    currentSlide,
+    submitLoading,
+    questionNumber,
+    answersScoreData
+  } = props
 
   // [ADDITIONAL_HOOKS]
   const { finishButton, startButton } = useTranslation()
@@ -190,7 +198,13 @@ function QuestionAdvancedView(props) {
               </Col>
             </Row>
           )}
-          <Box>{cloneElement(component, { question: data })}</Box>
+          <Box>
+            {cloneElement(component, {
+              question: data,
+              answersScoreData,
+              isFormQuiz
+            })}
+          </Box>
         </StyledBox>
       </Col>
       {imageShowRule && (

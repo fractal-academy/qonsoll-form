@@ -10,7 +10,8 @@ import { useAnswersContext } from '../../../context/Answers'
 import { getQuestionAnswerFromContext } from '../../../helpers'
 
 function RangeButton(props) {
-  const { onClick, currentSlide, question } = props
+  const { onClick, question, isFormQuiz, currentSlide, answersScoreData } =
+    props
   const { order, questionConfigurations } = question
 
   // [COMPONENT STATE HOOKS]
@@ -21,6 +22,7 @@ function RangeButton(props) {
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
   const answersContext = useAnswersContext()
+
   // [ADDITIONAL HOOKS]
   useKeyPress(
     (event) =>
@@ -62,13 +64,22 @@ function RangeButton(props) {
   // [CLEAN FUNCTIONS]
   const onButtonClick = (number) => {
     const IntValue = Number(number)
+    //get data of answered option from question configurations data
+    const optionData = questionConfigurations?.[IntValue - 1]
+    //answer score if configured
+    const score =
+      answersScoreData?.find(
+        (item) => item?.answerOptionId === optionData?.answerOptionId
+      )?.score || ''
     if (range?.includes(IntValue) && currentSlide === order) {
       setButtonKey(IntValue)
       const data = {
         question,
         answer: { value: IntValue },
-        answerId: questionConfigurations?.[IntValue - 1]?.answerOptionId || ''
+        answerId: optionData?.answerOptionId || '',
+        answerScore: isFormQuiz ? score : ''
       }
+
       onClick && setTimeout(onClick, 700, data)
     }
   }
