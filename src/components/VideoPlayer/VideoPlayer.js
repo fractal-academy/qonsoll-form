@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ZiggeoPlayer } from 'react-ziggeo'
 
 const API_KEY = 'r1aabb2782dec6629e9650b5c6197c92'
@@ -15,7 +15,7 @@ function VideoPlayer(props) {
     onSeek
   } = props
 
-  const [player, setPlayer] = useState(null)
+  // const [player, setPlayer] = useState(null)
 
   //   useEffect(() => {
   //     if (player) {
@@ -26,7 +26,7 @@ function VideoPlayer(props) {
 
   return (
     <ZiggeoPlayer
-      locale="no"
+      locale="en"
       apiKey={API_KEY}
       video={videoKey}
       height="-webkit-fill-available"
@@ -42,7 +42,7 @@ function VideoPlayer(props) {
       onEnded={onEnded}
       onError={onError}
       onSeek={onSeek}
-      onRef={(ref) => setPlayer(ref)}
+      // onRef={(ref) => setPlayer(ref)}
     />
   )
 }

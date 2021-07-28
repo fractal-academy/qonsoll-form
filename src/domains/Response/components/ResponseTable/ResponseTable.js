@@ -59,7 +59,6 @@ const columns = [
 function ResponseTable(props) {
   const { data, loading } = props
   const { emptyStateAnswersDescription } = useTranslation()
-  const checkedData = data
 
   return (
     <Box display="flex" flex={1} justifyContent="center" overflowX="hidden">

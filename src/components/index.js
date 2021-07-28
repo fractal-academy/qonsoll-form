@@ -1,5 +1,4 @@
-export { default as FileUploader } from './Uploader/FileUploader'
-export { default as IconLabel } from './Uploader/IconLabel'
+export { default as FileUploader } from './FileUploader'
 
 export { default as LongText } from './LongText'
 export { default as TextEditable } from './TextEditable'
@@ -18,6 +17,7 @@ export { default as NumberedCard } from './Card/NumberedCard'
 export { default as ContentCard } from './Card/ContentCard'
 
 export { default as DragableList } from './List/DragableList'
+export { default as NewListItem } from './List/NewListItem'
 export { default as StyledItem } from './List/StyledItem'
 export { default as StaticList } from './List/StaticList'
 export { default as ListItem } from './List/ListItem'

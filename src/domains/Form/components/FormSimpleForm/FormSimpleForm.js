@@ -12,10 +12,11 @@ function FormSimpleForm(props) {
 
   // [COMPUTED PROPERTIES]
   const initialValues = useMemo(() => {
-    const { title, subtitle = '' } = formData || {}
+    const { title, subtitle = '', isQuiz = false } = formData || {}
     return {
       title,
-      subtitle
+      subtitle,
+      isQuiz
     }
   }, [formData])
 

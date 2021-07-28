@@ -68,16 +68,23 @@ const defaultConfiguration = [
     redirectConditionRule: ''
   }
 ]
+const endingConfigurations = [
+  {
+    answerOptionId: '',
+    triggerQuestionId: ''
+  }
+]
 
 function EditorSidebar(props) {
   const {
     id,
     endings,
+    formData,
     questions,
     transparent,
+    answerScoresData,
     customQuestionTypes,
-    welcomeScreenShowRule,
-    answerScoresData
+    welcomeScreenShowRule
   } = props
 
   //[CUSTOM HOOKS]
@@ -129,7 +136,9 @@ function EditorSidebar(props) {
 
     // default data for created question
     const newQuestion = {
-      questionConfigurations,
+      questionConfigurations: isEnding
+        ? endingConfigurations
+        : questionConfigurations,
       id: questionId,
       formId: id,
       layoutType: LAYOUT_TYPE_KEYS[0],
@@ -268,12 +277,12 @@ function EditorSidebar(props) {
             </Col>
             <Col cw="auto">
               <Popover
+                trigger="click"
+                placement="bottomRight"
                 visible={showPopover}
                 onVisibleChange={() => {
                   setShowPopover(!showPopover)
                 }}
-                trigger={'click'}
-                placement={'bottomRight'}
                 content={
                   <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
                     <QuestionTypeSelect
@@ -302,9 +311,10 @@ function EditorSidebar(props) {
                 onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
                 btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
                 <FormConditionsForm
+                  endings={endings}
+                  formData={formData}
                   onTabChange={onTabChange}
                   data={ConditionsQuestionsList}
-                  endings={endings}
                   answerScores={answerScoresData}
                 />
               </ModalWithFormConditionsForm>

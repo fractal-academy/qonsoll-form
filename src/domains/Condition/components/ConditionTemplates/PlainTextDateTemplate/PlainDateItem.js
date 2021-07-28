@@ -36,7 +36,7 @@ const PlaneDateItem = (props) => {
   //[CLEAN FUNCTIONS]
   const onRuleSelectValueChange = (selectValue = '') => {
     setRuleSelectValue(selectValue)
-    // console.log(selectValue)
+
     // create new array questionConfigurations of certain question
     const updatedQuestionConfigurations = questionConfigurations
     //update conditionRule of certain question

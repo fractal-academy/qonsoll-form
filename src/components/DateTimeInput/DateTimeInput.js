@@ -4,6 +4,8 @@ import { useKeyPress } from '@umijs/hooks'
 import { useTranslation } from '../../context/Translation'
 import typeformTheme from '../../../styles/theme'
 import styled from 'styled-components'
+import { getQuestionAnswerFromContext } from '../../helpers'
+import { useAnswersContext } from '../../context/Answers'
 
 const StyledDatePicker = styled(DatePicker)`
   background-color: ${({ theme }) =>
@@ -14,6 +16,7 @@ const StyledDatePicker = styled(DatePicker)`
     font-size: 18px;
   }
 `
+
 const DateTimeInput = (props) => {
   const { onDateChange, question, currentSlide } = props
 
@@ -25,6 +28,7 @@ const DateTimeInput = (props) => {
   }
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
+  const answersContext = useAnswersContext()
 
   // [ADDITIONAL_HOOKS]
   const datePickerRef = useRef()
@@ -33,14 +37,21 @@ const DateTimeInput = (props) => {
     (event) => event.keyCode === 13 && currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
-        const answerData = { question, answer: { value: '' } }
+        const questionAnswer = getQuestionAnswerFromContext(
+          answersContext,
+          question
+        )
+        const answerData = questionAnswer || {
+          question,
+          answer: { value: '' }
+        }
 
-        !question?.isRequired
-          ? onDateChange && onDateChange(answerData)
-          : message.error(
+        question?.isRequired && !questionAnswer
+          ? message.error(
               answerRequiredMessageError ||
                 'It`s required question, please answer'
             )
+          : onDateChange?.(answerData)
       }
     },
     {

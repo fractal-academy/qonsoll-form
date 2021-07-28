@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Typography, Input, message } from 'antd'
 import { SubmitButton } from '../../components'
-import { Container, Box } from '@qonsoll/react-design'
+import { Container } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 import { useKeyPress } from '@umijs/hooks'
 import { globalStyles } from '../../../styles'
@@ -21,7 +21,7 @@ function LongText(props) {
     longTextInputPlaceholder
   } = useTranslation()
   const IsntDesktop = useMedia({ minWidth: '1024px' })
-  const inputRef = useRef()
+  const textAreaRef = useRef()
 
   useKeyPress(
     (e) =>
@@ -38,13 +38,15 @@ function LongText(props) {
   )
 
   //when question was skipped by navigation buttons and input was focused - reset focus
-  currentSlide > question?.order && inputRef.current.blur()
+  currentSlide === question?.order && textAreaRef?.current
+    ? textAreaRef?.current?.focus?.()
+    : textAreaRef?.current?.blur?.()
 
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
     const data = { question, answer: { value: answer || '' } }
     onClick && onClick(data)
-    inputRef.current.blur()
+    textAreaRef.current.blur()
   }
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
@@ -59,19 +61,18 @@ function LongText(props) {
     //.trim() removes all useless spaces to prevent submit with only spaces
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
-    question?.isRequired
-      ? !!value
-        ? form.submit()
-        : message.error(
-            answerRequiredMessageError ||
-              'It`s required question, please answer'
-          )
-      : form.submit()
+    if (question?.isRequired && !value) {
+      message.error(
+        answerRequiredMessageError || 'It`s required question, please answer'
+      )
+    } else {
+      form.submit()
+    }
   }
 
   const onFocusedKeyPress = (e) => {
     if (e.keyCode === 13 && !e.shiftKey) {
-      //Prevent linebrake onEnter
+      //Prevent line brake onEnter
       e.preventDefault()
     }
   }
@@ -90,7 +91,7 @@ function LongText(props) {
           <TextArea
             {...textAreaProps}
             bordered
-            ref={inputRef}
+            ref={textAreaRef}
             maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
             placeholder={longTextInputPlaceholder || 'Type your answer here...'}

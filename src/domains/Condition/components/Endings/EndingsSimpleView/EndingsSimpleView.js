@@ -39,7 +39,7 @@ function EndingSimpleView(props) {
   async function handleChange(_, selectedItems) {
     const questionConfigurations = selectedItems?.map((item) => ({
       answerOptionId: item.key,
-      trigerQuestionId: item?.value || ''
+      triggerQuestionId: item?.value || ''
     }))
     await setData(COLLECTIONS.QUESTIONS, item?.id, {
       questionConfigurations
@@ -47,9 +47,9 @@ function EndingSimpleView(props) {
   }
   const defaultSelectValue = useMemo(
     () =>
-      item
+      item?.questionConfigurations?.[0]?.triggerQuestionId
         ? item?.questionConfigurations?.map(
-            (config) => config?.trigerQuestionId
+            (config) => config?.triggerQuestionId
           )
         : [],
     [item]

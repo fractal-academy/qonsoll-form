@@ -2,7 +2,7 @@ import moment from 'moment'
 import { DATE_CONDITION_RULES } from '../../../constants'
 
 const dateAnswerConditionComparison = (condition, date, fieldValue) => {
-  //formating date to timestemp
+  //formating date to timestamp
   const formatedDate = moment(date).format('x')
   const formatedFieldValue = moment(fieldValue).format('x')
 
