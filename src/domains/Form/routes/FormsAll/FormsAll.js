@@ -42,7 +42,8 @@ function FormsAll(props) {
     titleProps,
     firstLevelHidden,
     configurations,
-    onBack
+    onBack,
+    disableAddButton
   } = props
 
   // [CUSTOM_HOOKS]
@@ -231,6 +232,7 @@ function FormsAll(props) {
                 flexDirection="row"
                 className="custom-scroll">
                 <StaticList
+                  disableAddButton={!disableAddButton}
                   setEdit={setEdit}
                   data={currentData}
                   onClick={showModal}
