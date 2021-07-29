@@ -21,43 +21,55 @@ function CustomRating(props) {
   const phoneSize = useMedia({ maxWidth: '430px' })
   const tabletSize = useMedia({ minWidth: '450px', maxWidth: '1050px' })
 
+  // [COMPUTED PROPERTIES]
+  const range = questionConfigurations?.map((el) => el?.answerOption)
+
   // [CLEAN FUNCTIONS]
   const onChange = (selectedStarsNumber) => {
-    const data = {
-      question,
-      answer: { value: selectedStarsNumber },
-      answerId:
-        questionConfigurations?.[selectedStarsNumber - 1]?.answerOptionId || ''
-    }
+    if (range.includes(selectedStarsNumber)) {
+      const data = {
+        question,
+        answer: { value: selectedStarsNumber },
+        answerId:
+          questionConfigurations?.[selectedStarsNumber - 1]?.answerOptionId ||
+          ''
+      }
 
-    // if the data is sent we delay and animate the selected value, else - just go to next question
-    if (!!selectedStarsNumber) {
-      onClick && setTimeout(onClick, 700, data)
-    } else {
-      onClick?.(data)
+      // if the data is sent we delay and animate the selected value, else - just go to next question
+      if (!!selectedStarsNumber) {
+        onClick && setTimeout(onClick, 700, data)
+      } else {
+        onClick?.(data)
+      }
     }
   }
 
   // [ADDITIONAL_HOOKS]
   useKeyPress(
-    (event) => event.keyCode === 13 && currentSlide === question?.order,
+    (event) =>
+      (![].includes(event.key) || event.keyCode === 13) &&
+      currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
-        const questionAnswer = getQuestionAnswerFromContext(
-          answersContext,
-          question
-        )
-        const answerData = questionAnswer || {
-          question,
-          answer: { value: '' }
-        }
+        if (event.keyCode === 13) {
+          const questionAnswer = getQuestionAnswerFromContext(
+            answersContext,
+            question
+          )
+          const answerData = questionAnswer || {
+            question,
+            answer: { value: '' }
+          }
 
-        question?.isRequired && !questionAnswer
-          ? message.error(
-              answerRequiredMessageError ||
-                'It`s required question, please answer'
-            )
-          : onClick?.(answerData)
+          question?.isRequired && !questionAnswer
+            ? message.error(
+                answerRequiredMessageError ||
+                  'It`s required question, please answer'
+              )
+            : onClick?.(answerData)
+        } else {
+          onChange(Number(event.key))
+        }
       }
     },
     {
