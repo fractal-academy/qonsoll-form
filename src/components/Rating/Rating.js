@@ -10,7 +10,15 @@ import { getQuestionAnswerFromContext } from '../../helpers'
 import { useAnswersContext } from '../../context/Answers'
 
 function CustomRating(props) {
-  const { allowClear, tooltips, onClick, question, currentSlide } = props
+  const {
+    onClick,
+    tooltips,
+    question,
+    isFormQuiz,
+    allowClear,
+    currentSlide,
+    answersScoreData
+  } = props
   const { questionConfigurations } = question
 
   //[CUSTOM HOOKS]
@@ -23,11 +31,18 @@ function CustomRating(props) {
 
   // [CLEAN FUNCTIONS]
   const onChange = (selectedStarsNumber) => {
+    const selectedStarData = questionConfigurations?.[selectedStarsNumber - 1]
+    //answer score if configured
+    const score =
+      answersScoreData?.find(
+        (item) => item?.answerOptionId === selectedStarData?.answerOptionId
+      )?.score || ''
+
     const data = {
       question,
       answer: { value: selectedStarsNumber },
-      answerId:
-        questionConfigurations?.[selectedStarsNumber - 1]?.answerOptionId || ''
+      answerId: selectedStarData?.answerOptionId || '',
+      answerScore: isFormQuiz ? score : ''
     }
 
     // if the data is sent we delay and animate the selected value, else - just go to next question
