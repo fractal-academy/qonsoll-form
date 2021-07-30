@@ -9,7 +9,8 @@ import { getQuestionAnswerFromContext } from '../../../helpers'
 import { useAnswersContext } from '../../../context/Answers'
 
 function YesnoButton(props) {
-  const { onClick, currentSlide, question } = props
+  const { onClick, question, isFormQuiz, currentSlide, answersScoreData } =
+    props
   const { order, questionConfigurations } = question
 
   //[CUSTOM HOOKS]
@@ -73,14 +74,22 @@ function YesnoButton(props) {
   // [CLEAN FUNCTIONS]
   const onButtonClick = (choiceData) => {
     const { letter, choice } = choiceData
+
+    //answer score if configured
+    const score =
+      answersScoreData?.find(
+        (item) => item?.answerOptionId === choice?.answerOptionId
+      )?.score || ''
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
       const answer = { value: choice?.answerOption || '', letterKey: letter }
       const data = {
         question,
         answer,
-        answerId: choice?.answerOptionId || ''
+        answerId: choice?.answerOptionId || '',
+        answerScore: isFormQuiz ? score : ''
       }
+
       onClick && setTimeout(onClick, 700, data)
     }
   }

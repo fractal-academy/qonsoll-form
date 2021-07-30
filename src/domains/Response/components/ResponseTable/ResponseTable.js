@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import PropTypes from 'prop-types'
 import { Box, Col, Row } from '@qonsoll/react-design'
@@ -57,8 +57,27 @@ const columns = [
 ]
 
 function ResponseTable(props) {
-  const { data, loading } = props
+  const { data, loading, isFormQuiz } = props
   const { emptyStateAnswersDescription } = useTranslation()
+
+  useEffect(() => {
+    if (isFormQuiz)
+      columns?.push({
+        render: (text, record) => (
+          <div
+            style={{
+              wordWrap: 'break-word',
+              wordBreak: 'break-word',
+              width: '100%'
+            }}>
+            {text}
+          </div>
+        ),
+        title: 'Answer Scores',
+        dataIndex: 'answerScore',
+        key: 'answerScore'
+      })
+  }, [])
 
   return (
     <Box display="flex" flex={1} justifyContent="center" overflowX="hidden">

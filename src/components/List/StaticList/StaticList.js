@@ -15,6 +15,7 @@ function StaticList(props) {
     columnWidth,
     beforeUpload,
     customRequest,
+    disableAddButton = true,
     selectedBackgroundImg,
     setSelectedBackgroundImg
   } = props
@@ -29,15 +30,17 @@ function StaticList(props) {
     <>
       {data?.length ? (
         <Row display="flex" width="100%" noGutters>
-          <Col cw={columnWidth}>
-            <NewListItem
-              onClick={onClick}
-              hasMedia={hasMedia}
-              itemHeight={itemHeight}
-              beforeUpload={beforeUpload}
-              customRequest={customRequest}
-            />
-          </Col>
+          {disableAddButton && (
+            <Col cw={columnWidth}>
+              <NewListItem
+                onClick={onClick}
+                hasMedia={hasMedia}
+                itemHeight={itemHeight}
+                beforeUpload={beforeUpload}
+                customRequest={customRequest}
+              />
+            </Col>
+          )}
           {data?.map((item) => (
             <Col key={item.id} cw={columnWidth}>
               <ListItem

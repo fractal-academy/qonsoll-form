@@ -12,7 +12,15 @@ import { getQuestionAnswerFromContext } from '../../../helpers'
 let startLetter = 65
 
 function ChoiceButton(props) {
-  const { choices, onClick, hasImages, currentSlide, question } = props
+  const {
+    choices,
+    onClick,
+    question,
+    hasImages,
+    isFormQuiz,
+    currentSlide,
+    answersScoreData
+  } = props
   const { order } = question
 
   // [COMPONENT STATE HOOKS]
@@ -77,15 +85,21 @@ function ChoiceButton(props) {
   // [CLEAN FUNCTIONS]
   const onButtonClick = (props) => {
     const { letter, choice } = props
-
+    //answer score if configured
+    const score =
+      answersScoreData?.find(
+        (item) => item?.answerOptionId === choice?.answerOptionId
+      )?.score || ''
     if (letters.includes(letter) && currentSlide === order) {
       setButtonKey(letter)
       const answer = { value: choice?.answerOption || '', letterKey: letter }
+
       //if picture choice add field with image link
       const data = {
         question,
         answer: !hasImages ? answer : { ...answer, image: choice?.image || '' },
-        answerId: choice?.answerOptionId || ''
+        answerId: choice?.answerOptionId || '',
+        answerScore: isFormQuiz ? score : ''
       }
 
       onClick && setTimeout(onClick, 700, data)
