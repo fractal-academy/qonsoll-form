@@ -6,18 +6,12 @@ import { Col, Row, Box } from '@qonsoll/react-design'
 import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
 import { useTranslation } from '../../../../context/Translation'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { styles, StyledCol, CustomCard, CustomRow } from './QuestionForm.styles'
 import {
   DEFAULT_IMAGE,
   QUESTION_TYPES,
   LAYOUT_TYPES
 } from '../../../../constants'
-import {
-  styles,
-  StyledCol,
-  CustomCard,
-  CustomRow,
-  QuestionHeaderCol
-} from './QuestionForm.styles'
 import {
   QuestionConfigurationPopover,
   QuestionHeader,
@@ -170,7 +164,7 @@ function QuestionForm(props) {
                 )}
               </Row>
               <Row noGutters h="between" mb={4}>
-                <QuestionHeaderCol cw="12" mt={2}>
+                <Col cw="12" mt={2}>
                   <QuestionHeader
                     titlePlaceholder={
                       editableTitleHint || 'Editable question title'
@@ -179,7 +173,7 @@ function QuestionForm(props) {
                       editableSubtitleHint || 'Description(optional)'
                     }
                   />
-                </QuestionHeaderCol>
+                </Col>
               </Row>
               {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
                 <Row noGutters>

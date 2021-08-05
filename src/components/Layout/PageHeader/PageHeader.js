@@ -11,7 +11,7 @@ import { useTranslation } from '../../../context/Translation'
 const { Title } = Typography
 
 function PageHeader(props) {
-  const { title, id, onBack, handleSmallScreen } = props
+  const { id, title, titleProps, onBack, handleSmallScreen } = props
 
   // [ADDITIONAL HOOKS]
   const { onFormShow } = useActionsFunctionsContext()
@@ -30,7 +30,47 @@ function PageHeader(props) {
 
   return (
     <Container>
-      <Row pt={4} px={45} noGutters>
+      <Row noGutters v="center" mb={1}>
+        {onBack && (
+          <Col cw="auto" h="center" flexDirection="row">
+            <Button
+              type="text"
+              style={globalStyles.resetPadding}
+              icon={<ArrowLeftOutlined />}
+              onClick={onBack}
+            />
+            <Divider type="vertical" style={styles.dividerHeight} />
+          </Col>
+        )}
+        <Col>
+          <Title level={2} {...titleProps}>
+            {title}
+          </Title>
+        </Col>
+        <Col cw="auto" v="center" mr={1}>
+          {handleSmallScreen && (
+            <Button
+              type="text"
+              icon={<ReadOutlined />}
+              onClick={onFormResultsDisplay}>
+              Results
+            </Button>
+          )}
+        </Col>
+
+        <Col cw="auto" v="center">
+          <Tooltip
+            placement="bottom"
+            title={formPreviewTooltip || 'Form preview'}>
+            <Button
+              type="text"
+              icon={<EyeOutlined />}
+              onClick={onFormShowDisplay}
+            />
+          </Tooltip>
+        </Col>
+      </Row>
+      {/* <Row pt={4} px={45} noGutters>
         {onBack && (
           <>
             <Col cw="auto" p={0} v="center">
@@ -75,7 +115,7 @@ function PageHeader(props) {
             />
           </Tooltip>
         </Col>
-      </Row>
+      </Row> */}
     </Container>
   )
 }

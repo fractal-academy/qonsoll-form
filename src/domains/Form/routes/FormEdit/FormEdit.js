@@ -291,7 +291,7 @@ function FormEdit(props) {
                 {/*TODO id in EditorSidebar*/}
                 {handleSmallScreen && (
                   <EditorSidebar
-                    transparent
+                    // transparent
                     id={id}
                     formData={form}
                     endings={endings}

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import typeformTheme from '../../../../styles/theme'
 
 export const ContentRow = styled(Row)`
-  display: flex;
   height: ${(props) => props.onEdit && '100%'};
 `
 

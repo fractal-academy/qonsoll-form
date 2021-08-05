@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { StyledItem } from '../../../components'
 import { COLLECTIONS } from '../../../constants'
@@ -20,14 +20,9 @@ import {
 const { Text } = Typography
 const { Item } = Menu
 
-function ListItem(props) {
-  const {
-    data,
-    setEdit,
-    reference,
-    selectedBackgroundImg,
-    setSelectedBackgroundImg
-  } = props
+const ListItem = forwardRef((props, ref) => {
+  const { data, setEdit, selectedBackgroundImg, setSelectedBackgroundImg } =
+    props
   const { updateData, deleteData, getCollectionRef } = useFunctions()
 
   // [ADDITIONAL HOOKS]
@@ -150,7 +145,7 @@ function ListItem(props) {
   return (
     <StyledItem
       isCard
-      ref={reference}
+      ref={ref}
       onClick={
         !data?.imageUrl
           ? onFormItemClicked
@@ -209,7 +204,7 @@ function ListItem(props) {
       </Box>
     </StyledItem>
   )
-}
+})
 
 ListItem.propTypes = {
   data: PropTypes.object,

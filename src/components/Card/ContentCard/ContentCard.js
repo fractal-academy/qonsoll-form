@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Col } from '@qonsoll/react-design'
+import { Col, Row } from '@qonsoll/react-design'
 import useMedia from 'use-media'
 import {
   ContentRow,
@@ -24,7 +24,12 @@ function ContentCard(props) {
   const devicePadding = (paddingSmall && 3) || 4
 
   return (
-    <ContentRow p={devicePadding} height="inherit" onEdit={onEdit} noGutters>
+    <ContentRow
+      negativeBlockMargin
+      p={devicePadding}
+      height="inherit"
+      onEdit={onEdit}
+      noGutters>
       {leftSideMenu && (
         <Col mr={3} cw="auto">
           {leftSideMenu}

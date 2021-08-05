@@ -8,7 +8,6 @@ export { default as ChoiceEditable } from './ChoiceEditable'
 export { default as ChoiceEditableGroup } from './ChoiceEditableGroup'
 export { default as ShortText } from './ShortText'
 
-export { default as FormContentArea } from './Layout/FormContentArea'
 export { default as EditorSidebar } from './Layout/EditorSidebar'
 export { default as PageHeader } from './Layout/PageHeader'
 export { default as PageLayout } from './Layout/PageLayout'

@@ -39,4 +39,3 @@ export const CustomRow = styled(Row)`
   flex-grow: 1;
   display: flex;
 `
-export const QuestionHeaderCol = styled(Col)``

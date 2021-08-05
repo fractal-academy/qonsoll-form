@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types'
 import { QUESTION_TYPES } from '../../constants'
 import { useSize, useKeyPress } from '@umijs/hooks'
-import React, { cloneElement, useRef, useMemo } from 'react'
+import React, { cloneElement, useRef } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import { useTranslation } from '../../context/Translation'
+import { UpOutlined, DownOutlined } from '@ant-design/icons'
 import { Button, Carousel as AntdCarousel, message } from 'antd'
 import {
   ANSWERS_DISPATCH_EVENTS,
   useAnswersContext,
   useAnswersContextDispatch
 } from '../../context/Answers'
-import { UpOutlined, DownOutlined } from '@ant-design/icons'
 import {
   longAndShortAnswerConditionComparison,
   dateAnswerConditionComparison
 } from '../../domains/Form/helpers'
-import { useTranslation } from '../../context/Translation'
 
 function Carousel(props) {
   const {
@@ -46,9 +46,11 @@ function Carousel(props) {
     setCurrentSlide(containWelcomeScreen ? slideIndex : slideIndex + 1)
   }
 
-  //[ LOGIC JUMPS ]
+  // Native react slick function.
   const goTo = (slideNumber) => {
     carouselRef.current?.goTo(slideNumber)
+
+    // Influences on selected answer button style.
     setIsAnswered && setIsAnswered(false)
   }
 
@@ -91,6 +93,8 @@ function Carousel(props) {
   }
 
   const handleNextClick = (e) => {
+    // Check if function 'next' can be called
+    // Prevents skiping
     setPreviousQuestionOrder((prevState) =>
       prevState?.[prevState?.length - 1] !== currentSlide
         ? [...(prevState || []), currentSlide]

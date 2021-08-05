@@ -13,22 +13,18 @@ const StyledDragger = styled(Upload.Dragger)`
 `
 
 function NewListItem(props) {
-  const { size, onClick, hasMedia, itemHeight, customRequest, beforeUpload } =
-    props
+  const { size, onClick, hasMedia, customRequest, beforeUpload } = props
 
   return (
     <>
       {hasMedia ? (
-        <StyledItem
-          size={size}
-          itemHeight={itemHeight}
-          onMouseDown={(e) => e.preventDefault()}>
+        <StyledItem size={size} onMouseDown={(e) => e.preventDefault()}>
           <StyledDragger
             multiple
             name="file"
             showUploadList={false}
-            customRequest={customRequest}
-            beforeUpload={beforeUpload}>
+            beforeUpload={beforeUpload}
+            customRequest={customRequest}>
             <Box
               height="120px"
               width="200px"
@@ -43,7 +39,6 @@ function NewListItem(props) {
         <StyledItem
           size={size}
           onClick={onClick}
-          itemHeight={itemHeight}
           onMouseDown={(e) => e.preventDefault()}>
           <PlusOutlined />
         </StyledItem>
