@@ -106,36 +106,48 @@ git submodule update --recursive --remote
 
 ### How to configure workflow
 
-First of all you need to install modules:
+In block steps first you need to install all dependencies.
 
 ```sh
-npm install
+- run: npm install
 ```
 
 Get the latest changes of module. Go to the modules directory:
 
 ```sh
-cd src/modules
+- run: cd src/modules
 ```
 
 By following commands update modules:
 
 ```sh
-git submodule update --init --recursive
+- run: git submodule update --init --recursive
 ```
 
 ```sh
-git submodule update --recursive --remote
+- run: git submodule update --recursive --remote
 ```
 
 Go back to your project directory and install node modules:
 
 ```sh
-cd ../../ && npm install
+  run: cd ../../ && npm install
 ```
 
-If you project does'n run after following steps, that means that there's not enough memory in docker. Run following command:
+Next step - you need to build your application:
 
 ```sh
-CI=false NODE_OPTIONS=--max-old-space-size=8192 npm run build:dev
+npm run build:dev
+```
+
+If you project does'n run after following steps, that means that there's console warnings in you project. To fix that you need to add flag to you run command.
+
+```sh
+- run: CI=false npm run build:dev
+```
+
+After that, if there's exception that you have not enough memory in docker, you can run following command (it increases volume of memory to 8Gb):
+
+```sh
+- run: CI=false NODE_OPTIONS=--max-old-space-size=8192 npm run build:dev
 ```
