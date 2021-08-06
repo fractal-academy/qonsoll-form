@@ -1,17 +1,25 @@
 import useMedia from 'use-media'
+import { v4 as uuid } from 'uuid'
 import PropTypes from 'prop-types'
+import { Typography, message } from 'antd'
+import { useHistory } from 'react-router-dom'
+import { Box, Container } from '@qonsoll/react-design'
+import useFunctions from '../../../../hooks/useFunctions'
 import React, { useState, useEffect, useMemo } from 'react'
-import { PageLayout, EditorSidebar, Spinner } from '../../../../components'
-import { Box } from '@qonsoll/react-design'
-import { TranslationContext } from '../../../../context/Translation'
 import { QuestionForm } from '../../../../domains/Question/components'
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import { EditorSidebar, Spinner, PageHeader } from '../../../../components'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import {
+  useTranslation,
+  TranslationContext
+} from '../../../../context/Translation'
 import {
   QUESTION_TYPES,
   COLLECTIONS,
   DEFAULT_IMAGE
 } from '../../../../constants'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
-
 import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch,
@@ -21,11 +29,6 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { message } from 'antd'
-import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import useFunctions from '../../../../hooks/useFunctions'
-import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
-import { v4 as uuid } from 'uuid'
 
 //configuration for certain types of questions
 const defaultConfigurations = {
@@ -64,19 +67,23 @@ const opinionAndRatingConfiguration = Array(5)
 
 function FormEdit(props) {
   const {
+    id,
     firebase,
     actions = {},
-    id,
-    translations,
     onBack,
+    translations,
     showCondition,
     configurations,
     customQuestionTypes
   } = props
 
+  //[CUSTOM HOOKS]
+  const { screenSizeWarning } = useTranslation()
+
   // [ADDITIONAL HOOKS]
-  const handleSmallScreen = useMedia({ minWidth: '900px' })
+  const smallScreen = useMedia({ minWidth: '769px' })
   const currentQuestion = useCurrentQuestionContext()
+  const history = useHistory()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
 
@@ -256,6 +263,7 @@ function FormEdit(props) {
   }, [currentQuestion])
 
   // [COMPUTED PROPERTIES]
+  const containerPadding = smallScreen ? 4 : 2
   const welcomeScreenShowRule = questions?.some(
     (question) => question['questionType'] === QUESTION_TYPES.WELCOME_SCREEN
   )
@@ -268,8 +276,55 @@ function FormEdit(props) {
             {formLoading || questionsListLoading || answerScoresListLoading ? (
               <Spinner />
             ) : (
-              <Box display="flex" height="inherit" overflowX="hidden">
-                <PageLayout
+              <Container display="flex" height="inherit" overflowX="hidden">
+                <Box flex={1} p={containerPadding}>
+                  <PageHeader
+                    id={id}
+                    handlesPreview
+                    title={form?.title}
+                    smallScreen={smallScreen}
+                    onBack={onBack || history.goBack}
+                  />
+                  {smallScreen ? (
+                    <QuestionForm
+                      defaultTab={defaultTab}
+                      questionsList={questionsList}
+                      questionData={currentQuestion}
+                      brightnessValue={brightnessValue}
+                      setBrightnessValue={setBrightnessValue}
+                      customQuestionTypes={customQuestionTypes}
+                      onQuestionTypeChange={onQuestionTypeChange}
+                      welcomeScreenShowRule={welcomeScreenShowRule}
+                      onQuestionLayoutChange={onQuestionLayoutChange}
+                    />
+                  ) : (
+                    <Box
+                      height="100%"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center">
+                      <Typography>
+                        {screenSizeWarning ||
+                          'This feature is available only on desktop.'}
+                      </Typography>
+                    </Box>
+                  )}
+                </Box>
+                {smallScreen && (
+                  <EditorSidebar
+                    // transparent
+                    id={id}
+                    formData={form}
+                    endings={endings}
+                    questions={questions}
+                    showCondition={showCondition}
+                    answerScoresData={answerScoresList}
+                    customQuestionTypes={customQuestionTypes}
+                    welcomeScreenShowRule={welcomeScreenShowRule}
+                  />
+                )}
+
+                {/* <PageLayout
                   id={id}
                   handleSmallScreen={handleSmallScreen}
                   title={form?.title}
@@ -287,9 +342,9 @@ function FormEdit(props) {
                     welcomeScreenShowRule={welcomeScreenShowRule}
                     onQuestionLayoutChange={onQuestionLayoutChange}
                   />
-                </PageLayout>
+                </PageLayout> */}
                 {/*TODO id in EditorSidebar*/}
-                {handleSmallScreen && (
+                {/* {handleSmallScreen && (
                   <EditorSidebar
                     // transparent
                     id={id}
@@ -301,8 +356,8 @@ function FormEdit(props) {
                     answerScoresData={answerScoresList}
                     welcomeScreenShowRule={welcomeScreenShowRule}
                   />
-                )}
-              </Box>
+                )} */}
+              </Container>
             )}
           </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>

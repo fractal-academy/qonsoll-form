@@ -37,7 +37,7 @@ function FormsAll(props) {
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
-  const mobileLayout = useMedia({ minWidth: '769px' })
+  const smallScreen = useMedia({ minWidth: '769px' })
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -49,7 +49,7 @@ function FormsAll(props) {
   let amountFiles = currentData?.length
   const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
     translations || {}
-  const containerPadding = mobileLayout ? 4 : 2
+  const containerPadding = smallScreen ? 4 : 2
 
   // [USE_EFFECTS]
   useEffect(() => {
@@ -100,7 +100,6 @@ function FormsAll(props) {
       }).catch((e) => message.error(e.message))
     }
   }
-
   const showModal = () => {
     setIsModalVisible(true)
   }
@@ -167,11 +166,12 @@ function FormsAll(props) {
 
 FormsAll.propTypes = {
   firebase: PropTypes.object.isRequired,
-  translate: PropTypes.func.isRequired,
+  translations: PropTypes.func.isRequired,
+  onBack: PropTypes.func,
+  titleProps: PropTypes.object,
   childrenModal: PropTypes.node,
+  configurations: PropTypes.object,
   disableAddButton: PropTypes.bool,
-  firstLevelHidden: PropTypes.bool,
-  titleText: PropTypes.string,
   actions: PropTypes.shape({
     onFormShow: PropTypes.func,
     onFormItemClick: PropTypes.func

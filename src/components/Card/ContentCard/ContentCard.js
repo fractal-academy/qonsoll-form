@@ -11,7 +11,7 @@ import {
 function ContentCard(props) {
   const {
     image,
-    onEdit,
+    // onEdit,
     leftSideMenu,
     brightnessValue,
     children
@@ -20,28 +20,23 @@ function ContentCard(props) {
     // wrapperHeight = '100vh'
   } = props
 
-  const paddingSmall = useMedia({ maxWidth: '768px' })
-  const devicePadding = (paddingSmall && 3) || 4
+  // const paddingSmall = useMedia({ maxWidth: '768px' })
+  // const devicePadding = (paddingSmall && 3) || 4
 
   return (
-    <ContentRow
-      negativeBlockMargin
-      p={devicePadding}
-      height="inherit"
-      onEdit={onEdit}
-      noGutters>
+    <Row mt={2} height="100%" bg="white" noGutters>
       {leftSideMenu && (
         <Col mr={3} cw="auto">
           {leftSideMenu}
         </Col>
       )}
-      <ContentColumn image={image}>
+      <Col flex={1} image={image}>
         {image && (
           <ImageBackground image={image} brightnessValue={brightnessValue} />
         )}
         {children}
-      </ContentColumn>
-    </ContentRow>
+      </Col>
+    </Row>
   )
 }
 

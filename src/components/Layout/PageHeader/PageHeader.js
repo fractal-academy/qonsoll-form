@@ -1,22 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { globalStyles } from '../../../../styles'
 import { styles } from './PageHeader.styles'
+import { globalStyles } from '../../../../styles'
+import { Row, Col } from '@qonsoll/react-design'
 import { Button, Divider, Tooltip, Typography } from 'antd'
-import { Row, Col, Container } from '@qonsoll/react-design'
+import { useTranslation } from '../../../context/Translation'
 import { ArrowLeftOutlined, EyeOutlined, ReadOutlined } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
-import { useTranslation } from '../../../context/Translation'
 
 const { Title } = Typography
 
 function PageHeader(props) {
-  const { id, title, titleProps, onBack, handleSmallScreen } = props
+  const { id, title, titleProps, onBack, smallScreen, handlesPreview } = props
 
   // [ADDITIONAL HOOKS]
   const { onFormShow } = useActionsFunctionsContext()
   const { onFormResultsShow } = useActionsFunctionsContext()
-  const { formPreviewTooltip } = useTranslation()
+  const { formPreviewTooltip, resultButton } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onFormShowDisplay = () => {
@@ -29,101 +29,60 @@ function PageHeader(props) {
   }
 
   return (
-    <Container>
-      <Row noGutters v="center" mb={1}>
-        {onBack && (
-          <Col cw="auto" h="center" flexDirection="row">
-            <Button
-              type="text"
-              style={globalStyles.resetPadding}
-              icon={<ArrowLeftOutlined />}
-              onClick={onBack}
-            />
-            <Divider type="vertical" style={styles.dividerHeight} />
-          </Col>
-        )}
-        <Col>
-          <Title level={2} {...titleProps}>
-            {title}
-          </Title>
+    <Row noGutters v="center">
+      {onBack && (
+        <Col cw="auto" h="center" flexDirection="row">
+          <Button
+            type="text"
+            onClick={onBack}
+            icon={<ArrowLeftOutlined />}
+            style={globalStyles.resetPadding}
+          />
+          <Divider type="vertical" style={styles.dividerHeight} />
         </Col>
-        <Col cw="auto" v="center" mr={1}>
-          {handleSmallScreen && (
-            <Button
-              type="text"
-              icon={<ReadOutlined />}
-              onClick={onFormResultsDisplay}>
-              Results
-            </Button>
-          )}
-        </Col>
-
-        <Col cw="auto" v="center">
-          <Tooltip
-            placement="bottom"
-            title={formPreviewTooltip || 'Form preview'}>
-            <Button
-              type="text"
-              icon={<EyeOutlined />}
-              onClick={onFormShowDisplay}
-            />
-          </Tooltip>
-        </Col>
-      </Row>
-      {/* <Row pt={4} px={45} noGutters>
-        {onBack && (
-          <>
-            <Col cw="auto" p={0} v="center">
+      )}
+      <Col>
+        <Title level={2} {...titleProps}>
+          {title}
+        </Title>
+      </Col>
+      {handlesPreview && (
+        <>
+          <Col cw="auto" v="center" mr={1}>
+            {smallScreen && (
               <Button
                 type="text"
-                shape="default"
-                style={globalStyles.resetPadding}
-                icon={<ArrowLeftOutlined />}
-                onClick={onBack}
+                icon={<ReadOutlined />}
+                onClick={onFormResultsDisplay}>
+                {resultButton || 'Results'}
+              </Button>
+            )}
+          </Col>
+
+          <Col cw="auto" v="center">
+            <Tooltip
+              placement="bottom"
+              title={formPreviewTooltip || 'Form preview'}>
+              <Button
+                type="text"
+                icon={<EyeOutlined />}
+                onClick={onFormShowDisplay}
               />
-            </Col>
-            <Col cw="auto" p={0} v="center">
-              <Divider type="vertical" style={styles.dividerHeight} />
-            </Col>
-          </>
-        )}
-
-        <Col p={0} v="center">
-          <Title style={globalStyles.resetMargin} level={3}>
-            {title}
-          </Title>
-        </Col>
-        <Col cw="auto" v="center" mr={1}>
-          {handleSmallScreen && (
-            <Button
-              type="text"
-              icon={<ReadOutlined />}
-              onClick={onFormResultsDisplay}>
-              Results
-            </Button>
-          )}
-        </Col>
-
-        <Col cw="auto" v="center">
-          <Tooltip
-            placement="bottom"
-            title={formPreviewTooltip || 'Form preview'}>
-            <Button
-              type="text"
-              icon={<EyeOutlined />}
-              onClick={onFormShowDisplay}
-            />
-          </Tooltip>
-        </Col>
-      </Row> */}
-    </Container>
+            </Tooltip>
+          </Col>
+        </>
+      )}
+    </Row>
   )
 }
 
 PageHeader.propTypes = {
-  title: PropTypes.string.isRequired,
   id: PropTypes.string,
-  onBack: PropTypes.func
+  onBack: PropTypes.func,
+  smallScreen: PropTypes.bool,
+  titleProps: PropTypes.object,
+  handlesPreview: PropTypes.bool,
+  title: PropTypes.string.isRequired
 }
 
 export default PageHeader
