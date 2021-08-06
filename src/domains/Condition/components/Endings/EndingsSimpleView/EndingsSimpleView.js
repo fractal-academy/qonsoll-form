@@ -115,10 +115,8 @@ function EndingSimpleView(props) {
   )
 }
 EndingSimpleView.propTypes = {
-  mockQuestionIndex: PropTypes.number,
   item: PropTypes.object.isRequired,
-  addCondition: PropTypes.func.isRequired,
-  addRedirectQuestion: PropTypes.func.isRequired,
-  getQuestionListRedirect: PropTypes.func.isRequired
+  index: PropTypes.number.isRequired,
+  questionsData: PropTypes.array.isRequired
 }
 export default EndingSimpleView

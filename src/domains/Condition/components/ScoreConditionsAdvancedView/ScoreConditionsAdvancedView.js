@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography } from 'antd'
+import PropTypes from 'prop-types'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
 import { useTranslation } from '~/modules/feedback-typeform-app/src/context/Translation'
@@ -92,6 +93,12 @@ const ScoreConditionsAdvancedView = (props) => {
       </Box>
     </NumberedCard>
   )
+}
+
+ScoreConditionsAdvancedView.propTypes = {
+  index: PropTypes.number.isRequired,
+  questionData: PropTypes.array.isRequired,
+  questionScoresData: PropTypes.array.isRequired
 }
 
 export default ScoreConditionsAdvancedView

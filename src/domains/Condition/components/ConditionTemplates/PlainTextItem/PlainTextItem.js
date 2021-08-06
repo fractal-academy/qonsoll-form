@@ -118,9 +118,12 @@ function PlaneTextItem(props) {
   )
 }
 PlaneTextItem.propTypes = {
-  questionOptions: PropTypes.array,
-  addCondition: PropTypes.func,
-  questionList: PropTypes.array,
-  addRedirectQuestion: PropTypes.func
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  questionId: PropTypes.string.isRequired,
+  addCondition: PropTypes.func.isRequired,
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired,
+  questionConfigurations: PropTypes.array.isRequired
 }
 export default PlaneTextItem

@@ -35,9 +35,9 @@ function YesNoChoiceTemplate(props) {
 }
 
 YesNoChoiceTemplate.propTypes = {
-  questionOptions: PropTypes.array,
-  questionList: PropTypes.array,
-  addRedirectQuestion: PropTypes.func
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired,
+  questionConfigurations: PropTypes.array.isRequired
 }
 
 export default YesNoChoiceTemplate

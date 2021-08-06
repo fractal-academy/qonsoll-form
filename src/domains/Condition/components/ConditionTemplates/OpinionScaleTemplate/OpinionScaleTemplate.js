@@ -37,9 +37,9 @@ function OpinionScaleTemplate(props) {
 }
 
 OpinionScaleTemplate.propTypes = {
-  questionOptions: PropTypes.array,
-  questionList: PropTypes.array,
-  addRedirectQuestion: PropTypes.func
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired,
+  questionConfigurations: PropTypes.array.isRequired
 }
 
 export default OpinionScaleTemplate

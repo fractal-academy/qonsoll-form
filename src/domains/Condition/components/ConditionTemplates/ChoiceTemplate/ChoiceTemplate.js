@@ -36,8 +36,8 @@ function ChoiceTemplate(props) {
   )
 }
 ChoiceTemplate.propTypes = {
-  questionOptions: PropTypes.array,
-  questionList: PropTypes.array,
-  addRedirectQuestion: PropTypes.func
+  questionConfigurations: PropTypes.array.isRequired,
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired
 }
 export default ChoiceTemplate

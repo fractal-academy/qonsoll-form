@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
-import { Col, Row, Box } from '@qonsoll/react-design'
+import { Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from '../../../../../domains/Question/components'
 import { Select } from 'antd'
 import { DATE_CONDITION_RULES_VALUES } from '../../../../../constants/dateConditionRules'
@@ -116,5 +117,12 @@ const PlaneDateItem = (props) => {
     </Row>
   )
 }
-
+PlaneDateItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  questionId: PropTypes.string.isRequired,
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired,
+  questionConfigurations: PropTypes.array.isRequired
+}
 export default PlaneDateItem
