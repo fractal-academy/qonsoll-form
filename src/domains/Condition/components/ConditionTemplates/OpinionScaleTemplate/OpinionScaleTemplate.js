@@ -13,9 +13,9 @@ function OpinionScaleTemplate(props) {
   return (
     <>
       {questionConfigurations?.map((item, index) => (
-        <Row noGutters mb={2} key={index}>
-          <Col cw={6}>
-            <CustomOpinionBox mr={4} pl={2}>
+        <Row mb={2} key={index}>
+          <Col cw={6} pl={0} pr={2}>
+            <CustomOpinionBox px={3} py="10px">
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter + index)}</Text>
               </CustomTextBox>

@@ -60,9 +60,9 @@ const ScoreConditionsAdvancedView = (props) => {
           {questionData?.title}
         </Title>
         {questionData?.questionConfigurations?.map((item, index) => (
-          <Row noGutters mb={2} key={index}>
-            <Col cw={8} style={{ paddingRight: '32px' }}>
-              <OptionBox px={2}>
+          <Row mb={2} key={index}>
+            <Col cw={8} pl={0} pr={2}>
+              <OptionBox px={3} py="10px">
                 <CustomTextBox mr={2} px={2}>
                   <Text strong>{String.fromCharCode(startLetter + index)}</Text>
                 </CustomTextBox>
@@ -72,6 +72,7 @@ const ScoreConditionsAdvancedView = (props) => {
             <Col cw={4}>
               <StyledInputNumber
                 min={0}
+                style={{ width: '100%' }}
                 placeholder={
                   scoreWeightTranslation || 'Enter score weight of answer'
                 }

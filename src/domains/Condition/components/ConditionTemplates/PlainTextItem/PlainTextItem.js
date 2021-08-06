@@ -77,40 +77,36 @@ function PlaneTextItem(props) {
   }, [item, rulePlaceholder])
 
   return (
-    <Row noGutters mb={2} key={index}>
-      <Col cw={6}>
-        <Row noGutters width="100%">
-          <Col cw={6}>
-            <Box width="100%" mr={2}>
-              <StyledSelect
-                showSearch
-                allowClear
-                value={
-                  ruleSelectValue || rulePlaceholder || 'Select redirect rule'
-                }
-                onChange={onRuleSelectValueChange}>
-                {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
-                  <Option key={index} value={item}>
-                    {item}
-                  </Option>
-                ))}
-              </StyledSelect>
-            </Box>
+    <Row mb={2} key={index}>
+      <Col cw={6} px={0}>
+        <Row>
+          <Col cw={6} px={0}>
+            <StyledSelect
+              showSearch
+              allowClear
+              value={
+                ruleSelectValue || rulePlaceholder || 'Select redirect rule'
+              }
+              onChange={onRuleSelectValueChange}>
+              {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
+                <Option key={index} value={item}>
+                  {item}
+                </Option>
+              ))}
+            </StyledSelect>
           </Col>
-          <Col cw={6}>
-            <Box width="100%" mr={4}>
-              <CustomInput
-                placeholder="Enter value"
-                value={inputValue}
-                onChange={onInputValueChange}
-                onBlur={onBlur}
-              />
-            </Box>
+          <Col cw={6} pl={1} pr={2}>
+            <CustomInput
+              placeholder="Enter value"
+              value={inputValue}
+              onChange={onInputValueChange}
+              onBlur={onBlur}
+            />
           </Col>
         </Row>
       </Col>
 
-      <Col cw={6}>
+      <Col cw={6} pr={0}>
         <QuestionSelect
           addRedirectQuestion={addRedirectQuestion}
           questionConfigurations={questionConfigurations}

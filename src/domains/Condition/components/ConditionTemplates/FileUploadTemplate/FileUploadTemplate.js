@@ -14,9 +14,9 @@ function FileUploadTemplate(props) {
   } = props
 
   return (
-    <Row noGutters mb={2}>
-      <Col cw={6} style={{ paddingRight: '32px' }}>
-        <CustomUploaderBox pl={2}>
+    <Row mb={2}>
+      <Col cw={6} pl={0} pr={2}>
+        <CustomUploaderBox px={3} py="11px">
           {isUploaded ? <Text>is uploaded</Text> : <Text>not uploaded</Text>}
         </CustomUploaderBox>
       </Col>
