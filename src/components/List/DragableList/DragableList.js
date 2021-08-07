@@ -47,7 +47,7 @@ function DragableList(props) {
   }, [dataSource])
 
   return (
-    <Container onSortEnd={onSortEnd} useDragHandle ml={24}>
+    <Container onSortEnd={onSortEnd} useDragHandle>
       <List
         {...args}
         dataSource={sortableItems}

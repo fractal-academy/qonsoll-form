@@ -1,10 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import Text from 'antd/lib/typography/Text'
-import { Col, Row } from '@qonsoll/react-design'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
+import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 import {
   QuestionsTypeMenu,
   QuestionMenuItem
@@ -58,7 +59,7 @@ function QuestionTypeSelect(props) {
     },
     {
       type: QUESTION_TYPES.LONG_TEXT,
-      description: longTextDesc || 'Mote space to spill the beans',
+      description: longTextDesc || 'More space to spill the beans',
       icon: <FileTextOutlined />
     },
     {
@@ -121,25 +122,27 @@ function QuestionTypeSelect(props) {
   // ).length
 
   return (
-    <Row noGutters pl={1}>
-      <Col display="block">
-        <QuestionsTypeMenu>
-          {updatedMap?.map((item) => (
-            <QuestionMenuItem key={item.type} onClick={onClick}>
-              <Row h="center" v="center" noGutters>
-                <Col cw="auto" ml={2} mr={3}>
-                  {item.icon}
-                </Col>
-                <Col display="grid">
-                  {item.type}
-                  <StyledText disabled> {item.description}</StyledText>
-                </Col>
-              </Row>
-            </QuestionMenuItem>
-          ))}
-        </QuestionsTypeMenu>
-      </Col>
-    </Row>
+    <Box
+      pl={1}
+      display="block"
+      my={PopoverNegativeMarin.v}
+      mx={PopoverNegativeMarin.h}>
+      <QuestionsTypeMenu>
+        {updatedMap?.map((item) => (
+          <QuestionMenuItem key={item.type} onClick={onClick}>
+            <Row h="center" v="center" noGutters>
+              <Col cw="auto" ml={2} mr={3}>
+                {item.icon}
+              </Col>
+              <Col display="grid">
+                {item.type}
+                <StyledText disabled> {item.description}</StyledText>
+              </Col>
+            </Row>
+          </QuestionMenuItem>
+        ))}
+      </QuestionsTypeMenu>
+    </Box>
   )
 }
 

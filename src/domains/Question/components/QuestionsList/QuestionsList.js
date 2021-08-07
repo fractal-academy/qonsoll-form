@@ -134,11 +134,11 @@ function QuestionsList(props) {
   const sortable = filteredDataSource?.length > 1
 
   return (
-    <Box mr={2}>
+    <Box>
       {dataSource?.map(
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
-            <Box ml="24px" mb={3}>
+            <Box>
               <QuestionSimpleView
                 {...item}
                 number="W"

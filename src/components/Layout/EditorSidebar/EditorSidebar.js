@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import React, { useEffect, useState, useMemo } from 'react'
-import { Typography, Button, Popover, Tooltip, message } from 'antd'
+import { Typography, Button, Divider, Tooltip, message } from 'antd'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
@@ -20,6 +20,7 @@ import {
   styles
 } from './EditorSidebar.styles'
 import { v4 as uuid } from 'uuid'
+import TypePopover from './TypePopover'
 import useFunctions from '../../../hooks/useFunctions'
 import { useTranslation } from '../../../context/Translation'
 import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
@@ -259,115 +260,178 @@ function EditorSidebar(props) {
   }, [questions?.length])
 
   return (
-    <Box position="relative" display="flex">
-      {/* <SidebarStateSwitcher
-        onClick={() => {
-          setOpen(!open)
-        }}>
-        {open ? <RightOutlined /> : <LeftOutlined />}
-      </SidebarStateSwitcher> */}
-      {/* {open && ( */}
-      <SidebarBoxWrapper transparent={transparent}>
-        <Box p={3}>
-          <Row noGutters>
-            <Col v="center">
-              <Title level={5}>
-                {editorSidebarQuestionsTitle || 'Questions'}
-              </Title>
-            </Col>
-            <Col cw="auto">
-              <Popover
-                trigger="click"
-                placement="bottomRight"
-                visible={showPopover}
-                onVisibleChange={() => {
-                  setShowPopover(!showPopover)
-                }}
-                content={
-                  <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
-                    <QuestionTypeSelect
-                      questions={questions}
-                      onClick={addQuestion}
-                      customQuestionTypes={customQuestionTypes}
-                      welcomeScreenShowRule={welcomeScreenShowRule}
-                    />
-                  </Box>
-                }>
-                <Tooltip
-                  placement="bottom"
-                  title={createNewQuestionTooltip || 'Create new question'}>
-                  <Button
-                    type="text"
-                    icon={<PlusOutlined />}
-                    onClick={popoverShowChange}
-                    onMouseDown={(e) => e.preventDefault()}
-                  />
-                </Tooltip>
-              </Popover>
-            </Col>
-
-            <Col cw="auto" v="center" ml={1}>
-              <ModalWithFormConditionsForm
-                onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
-                btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
-                <FormConditionsForm
-                  endings={endings}
-                  formData={formData}
-                  onTabChange={onTabChange}
-                  data={ConditionsQuestionsList}
-                  answerScores={answerScoresData}
-                />
-              </ModalWithFormConditionsForm>
-            </Col>
-          </Row>
-        </Box>
-        {/* Question List*/}
-        <Box overflow="auto" pr={2}>
-          {!!questions?.length && (
-            <QuestionsList
-              data={questions}
-              onItemClick={onItemClick}
-              disableDelete={questions?.length === 1}
+    <SidebarBoxWrapper transparent={transparent}>
+      <Box>
+        <Row mb={2} v="center" h="between">
+          <Col cw="auto">
+            <Title level={5}>
+              {editorSidebarQuestionsTitle || 'Questions'}
+            </Title>
+          </Col>
+          <Col display="block" cw="auto">
+            <TypePopover
+              questions={questions}
+              onClick={addQuestion}
+              customQuestionTypes={customQuestionTypes}
+              welcomeScreenShowRule={welcomeScreenShowRule}
             />
-          )}
+
+            <ModalWithFormConditionsForm
+              onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
+              btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
+              <FormConditionsForm
+                endings={endings}
+                formData={formData}
+                onTabChange={onTabChange}
+                data={ConditionsQuestionsList}
+                answerScores={answerScoresData}
+              />
+            </ModalWithFormConditionsForm>
+          </Col>
+        </Row>
+        <Box overflow="auto">
+          <QuestionsList
+            data={questions}
+            onItemClick={onItemClick}
+            disableDelete={questions?.length === 1}
+          />
         </Box>
-        <Box mt="auto">
-          <Row>
-            <Col>
-              <CustomDivider type="horizontal" />
-            </Col>
-          </Row>
-          <Row p={3} noGutters>
-            <Col v="center">
-              <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
-            </Col>
-            <Col cw="auto">
-              <Tooltip
-                placement="topRight"
-                title={endingCreateTooltip || 'Create new ending'}>
-                <Button
-                  // disabled={endings.length >= 1}
-                  type="text"
-                  icon={<PlusOutlined />}
-                  onClick={addQuestion}
-                />
-              </Tooltip>
-            </Col>
-          </Row>
-          <Box {...styles.endingsList}>
-            {!!endings?.length && (
+      </Box>
+      <Box mt="auto">
+        <Divider type="horizontal" />
+        <Row mb={2} v="center" h="between">
+          <Col cw="auto">
+            <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
+          </Col>
+          <Col display="block" cw="auto">
+            <Tooltip
+              placement="topRight"
+              title={endingCreateTooltip || 'Create new ending'}>
+              <Button
+                type="text"
+                onClick={addQuestion}
+                icon={<PlusOutlined />}
+              />
+            </Tooltip>
+          </Col>
+        </Row>
+        <Box {...styles.endingsList}>
+          <QuestionsList
+            data={endings}
+            questionsData={questions}
+            onItemClick={onItemClick}
+            disableDelete={endings?.length === 1}
+          />
+        </Box>
+      </Box>
+    </SidebarBoxWrapper>
+    // <Box position="relative" display="flex" bg="white">
+    /* 
+          <Box p={3}>
+            <Row noGutters>
+              <Col v="center">
+                <Title level={5}>
+                  {editorSidebarQuestionsTitle || 'Questions'}
+                </Title>
+              </Col>
+              <Col cw="auto">
+                <Popover
+                  trigger="click"
+                  placement="bottomRight"
+                  visible={showPopover}
+                  onVisibleChange={() => {
+                    setShowPopover(!showPopover)
+                  }}
+                  content={
+                    <Box
+                      my={PopoverNegativeMarin.v}
+                      mx={PopoverNegativeMarin.h}>
+                      <QuestionTypeSelect
+                        questions={questions}
+                        onClick={addQuestion}
+                        customQuestionTypes={customQuestionTypes}
+                        welcomeScreenShowRule={welcomeScreenShowRule}
+                      />
+                    </Box>
+                  }>
+                  <Tooltip
+                    placement="bottom"
+                    title={createNewQuestionTooltip || 'Create new question'}>
+                    <Button
+                      type="text"
+                      icon={<PlusOutlined />}
+                      onClick={popoverShowChange}
+                      onMouseDown={(e) => e.preventDefault()}
+                    />
+                  </Tooltip>
+                </Popover>
+              </Col>
+
+              <Col cw="auto" v="center" ml={1}>
+                <ModalWithFormConditionsForm
+                  onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
+                  btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
+                  <FormConditionsForm
+                    endings={endings}
+                    formData={formData}
+                    onTabChange={onTabChange}
+                    data={ConditionsQuestionsList}
+                    answerScores={answerScoresData}
+                  />
+                </ModalWithFormConditionsForm>
+              </Col>
+            </Row>
+          </Box>
+
+          <Box overflow="auto" pr={2}>
+            {!!questions?.length && (
               <QuestionsList
-                data={endings}
-                questionsData={questions}
+                data={questions}
                 onItemClick={onItemClick}
-                disableDelete={endings?.length === 1}
+                disableDelete={questions?.length === 1}
               />
             )}
           </Box>
-        </Box>
-      </SidebarBoxWrapper>
-      {/* )} */}
-    </Box>
+          <Box mt="auto">
+            <Row>
+              <Col>
+                <CustomDivider type="horizontal" />
+              </Col>
+            </Row>
+            <Row p={3} noGutters>
+              <Col v="center">
+                <Title level={5}>
+                  {editorSidebarEndingsTitle || 'Endings'}
+                </Title>
+              </Col>
+              <Col cw="auto">
+                <Tooltip
+                  placement="topRight"
+                  title={endingCreateTooltip || 'Create new ending'}>
+                  <Button
+                    // disabled={endings.length >= 1}
+                    type="text"
+                    icon={<PlusOutlined />}
+                    onClick={addQuestion}
+                  />
+                </Tooltip>
+              </Col>
+            </Row>
+            <Box {...styles.endingsList}>
+              {!!endings?.length && (
+                <QuestionsList
+                  data={endings}
+                  questionsData={questions}
+                  onItemClick={onItemClick}
+                  disableDelete={endings?.length === 1}
+                />
+              )}
+            </Box>
+          </Box>
+        </SidebarBoxWrapper>
+      )} */
+
+    // </Box>
   )
 }
 
