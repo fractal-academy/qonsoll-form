@@ -107,6 +107,7 @@
   },
   "homepage": "https://github.com/fractal-academy/feedback-typeform-app.git#readme",
   "dependencies": {
+    "@qonsoll/react-design": "^2.0.90",
     "react-firebase-file-uploader": "^2.4.4"
   }
 }

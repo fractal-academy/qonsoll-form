@@ -289,7 +289,6 @@ const Component = ({
         onClick={onClick}
         isFormQuiz={isFormQuiz}
         currentSlide={currentSlide}
-        wrapperHeight={wrapperHeight}
         questionNumber={questionNumber}
         answersScoreData={answersScoreData}
       />

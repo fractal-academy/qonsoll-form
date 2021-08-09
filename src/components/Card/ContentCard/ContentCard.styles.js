@@ -19,6 +19,7 @@ export const ContentColumn = styled(Col)`
 `
 export const ImageBackground = styled(Box)`
   ${({ theme, image, brightnessValue }) => `
+  padding:0;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -27,6 +28,11 @@ export const ImageBackground = styled(Box)`
   background-image: url(${image});
   filter: brightness(${brightnessValue + 100}%);
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  
   `}
+`
+export const RoundedRow = styled(Row)`
+  ${({ theme }) => `
+  border-radius: ${
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+  };`}
 `
