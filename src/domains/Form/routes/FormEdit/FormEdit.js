@@ -29,6 +29,7 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
+import { useSize } from '@umijs/hooks'
 
 //configuration for certain types of questions
 const defaultConfigurations = {
@@ -81,6 +82,10 @@ function FormEdit(props) {
   const { screenSizeWarning } = useTranslation()
 
   // [ADDITIONAL HOOKS]
+
+  const [{ height }, ref] = useSize()
+  const [{ height: headerHeight }, headerRef] = useSize()
+
   const smallScreen = useMedia({ minWidth: '769px' })
   const currentQuestion = useCurrentQuestionContext()
   const history = useHistory()
@@ -172,8 +177,8 @@ function FormEdit(props) {
     /*define new order for options when the type of question changes to/from Welocome screen
       if changes from Welcome screen type order will be 1, else if changes to welcome screen order will be - 0*/
     const updatedOrder = isChangeFromWelcomeScreen ? 1 : 0
-    /* updated data for current question, 
-       if question type changes on/from welcome screen - set updated order, 
+    /* updated data for current question,
+       if question type changes on/from welcome screen - set updated order,
        in other ways we don`t change it*/
     const updatedCurrentQuestionData = {
       questionConfigurations,
@@ -209,7 +214,7 @@ function FormEdit(props) {
   // [USE_EFFECTS]
   useEffect(() => {
     /*Determine default current question, when questions upload
-      set current question from local storage 
+      set current question from local storage
       to prevent reset to another current question after page reload,
       if there is no current question in local storage set first from list*/
     const questionIdFromStorage = JSON.parse(
@@ -277,7 +282,12 @@ function FormEdit(props) {
               <Spinner />
             ) : (
               <Container display="flex" height="inherit" overflowX="hidden">
-                <Box flex={1} p={containerPadding}>
+                <Box
+                  flex={1}
+                  p={containerPadding}
+                  ref={ref}
+                  display="flex"
+                  flexDirection="column">
                   <PageHeader
                     id={id}
                     handlesPreview
