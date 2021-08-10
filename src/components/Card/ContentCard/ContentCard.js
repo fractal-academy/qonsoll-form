@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Col, Row } from '@qonsoll/react-design'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import { ImageBackground, RoundedCol, RoundedRow } from './ContentCard.styles'
 
 function ContentCard(props) {
@@ -19,7 +19,7 @@ function ContentCard(props) {
   // const devicePadding = (paddingSmall && 3) || 4
 
   return (
-    <Row height="100%" noGutters>
+    <Row height="100%" noGutters overflowX="hidden" overflowY="hidden">
       {leftSideMenu && (
         <Col mr={3} cw="auto" px="0">
           {leftSideMenu}
