@@ -159,6 +159,7 @@ function QuestionAdvancedView(props) {
         alignSelf={tabletImageCheck}>
         <StyledBox
           pl={devicePadding}
+          pr={devicePadding}
           bordered={false}
           specialLayoutRule={specialLayoutRule}>
           <Row noGutters py={2}>
