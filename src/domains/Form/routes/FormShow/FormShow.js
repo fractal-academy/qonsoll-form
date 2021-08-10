@@ -5,7 +5,10 @@ import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 // import { Button, Divider, Typography } from 'antd'
 import { Box } from '@qonsoll/react-design'
 import { useKeyPress } from '@umijs/hooks'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import {
+  useCollectionData,
+  useDocumentData
+} from 'react-firebase-hooks/firestore'
 import { FormAdvancedView } from '../../../../domains/Form/components'
 import { QuestionAdvancedView } from '../../../../domains/Question/components'
 // import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
@@ -39,6 +42,7 @@ function FormShow(props) {
   const { getCollectionRef } = useFunctions(firebase)
   const answersDispatch = useAnswersContextDispatch()
   const answersContext = useAnswersContext()
+
   // [ADDITIONAL HOOKS]
   useKeyPress(9, (e) => {
     e.preventDefault()
@@ -49,7 +53,17 @@ function FormShow(props) {
       .where('formId', '==', id)
       .orderBy('order')
   )
+  const [answersScoreData] = useCollectionData(
+    getCollectionRef(COLLECTIONS.ANSWERS_SCORES_CONDITIONS).where(
+      'formId',
+      '==',
+      id
+    )
+  )
 
+  const [formData] = useDocumentData(
+    getCollectionRef(COLLECTIONS.FORMS).doc(id)
+  )
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
   const [currentSlide, setCurrentSlide] = useState()
@@ -61,6 +75,13 @@ function FormShow(props) {
       questionsData?.filter(
         (item) => item?.questionType !== QUESTION_TYPES.ENDING
       ),
+    [questionsData]
+  )
+  const questionsWithEndingLength = useMemo(
+    () =>
+      questionsData?.filter(
+        (item) => item?.questionType !== QUESTION_TYPES.ENDING
+      )?.length + 1,
     [questionsData]
   )
   const endings = useMemo(
@@ -86,11 +107,10 @@ function FormShow(props) {
   const disabledDown =
     currentSlide ===
     (containWelcomeScreen
-      ? filteredQuestionsList?.length - 1
-      : filteredQuestionsList?.length)
+      ? questionsWithEndingLength - 1
+      : questionsWithEndingLength)
   const disabledUp =
     currentSlide === (containWelcomeScreen ? 0 : 1) || disabledDown
-
   const isLastQuestionWithoutEndings =
     currentSlide ===
     (containWelcomeScreen
@@ -222,14 +242,21 @@ function FormShow(props) {
                     containWelcomeScreen={containWelcomeScreen}
                     previousQuestionOrder={previousQuestionOrder}
                     setPreviousQuestionOrder={setPreviousQuestionOrder}>
-                    {filteredQuestionsList?.map((item, index) => (
+                    {filteredQuestionsList?.map((question, index) => (
                       <Component
                         key={index}
-                        item={item}
                         index={index}
                         onClick={onClick}
+                        question={question}
+                        isFormQuiz={formData?.isQuiz}
                         currentSlide={currentSlide}
                         containWelcomeScreen={containWelcomeScreen}
+                        answersScoreData={
+                          answersScoreData?.find(
+                            (scoreItem) =>
+                              scoreItem?.questionId === question?.id
+                          )?.questionScores
+                        }
                       />
                     ))}
                   </FormAdvancedView>
@@ -245,23 +272,26 @@ function FormShow(props) {
 
 const Component = ({
   index,
-  item,
   onClick,
+  question,
+  isFormQuiz,
   currentSlide,
   wrapperHeight,
+  answersScoreData,
   containWelcomeScreen
 }) => {
   //[COMPUTED PROPERTIES]
   const questionNumber = containWelcomeScreen ? index : index + 1
-
   return (
     <Box key={index} height={wrapperHeight} overflowY="auto">
       <QuestionAdvancedView
-        wrapperHeight={wrapperHeight}
-        data={item}
-        questionNumber={questionNumber}
+        data={question}
         onClick={onClick}
+        isFormQuiz={isFormQuiz}
         currentSlide={currentSlide}
+        wrapperHeight={wrapperHeight}
+        questionNumber={questionNumber}
+        answersScoreData={answersScoreData}
       />
     </Box>
   )

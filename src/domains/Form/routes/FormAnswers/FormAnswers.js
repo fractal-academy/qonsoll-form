@@ -8,13 +8,17 @@ import TypeformConfigurationContext from '../../../../context/TypeformConfigurat
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import {
+  useCollectionData,
+  useDocumentData
+} from 'react-firebase-hooks/firestore'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { ResponseTable, ResponseList } from '../../../Response/components'
 import { message } from 'antd'
 import { EmptyState } from '../../../../../src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
 import useMedia from 'use-media'
 import Text from 'antd/es/typography/Text'
+import { doc } from 'prettier'
 
 function FormAnswers(props) {
   const { actions = {}, id, translate, firebase, configurations } = props
@@ -29,6 +33,9 @@ function FormAnswers(props) {
   // [ADDITIONAL HOOKS]
   const [userAnswerGroup, userAnswerGroupLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where('formId', '==', id)
+  )
+  const [formData] = useDocumentData(
+    getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
   const handleSmallScreen = useMedia({ minWidth: '900px' })
   const { smallScreenHandleWarning } = useTranslation()
@@ -49,10 +56,12 @@ function FormAnswers(props) {
                 .map((uploadItem) => uploadItem.name)
                 .toString()
             : item?.data()?.answer
+
         return {
           key: index,
           questionTitle: item?.data()?.questionTitle,
           answer: answerCheck,
+          answerScore: item?.data()?.answerScore,
           order: item?.data()?.order
         }
       })
@@ -82,6 +91,7 @@ function FormAnswers(props) {
                   </Col>
                   <Col height="inherit" overflowY="scroll">
                     <ResponseTable
+                      isFormQuiz={formData?.isQuiz}
                       data={userAnswers}
                       loading={userAnswersLoading}
                     />

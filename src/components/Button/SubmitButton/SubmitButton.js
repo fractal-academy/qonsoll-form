@@ -74,6 +74,7 @@ function SubmitButton(props) {
           formId: formId,
           questionId: item?.question?.id,
           answer: item?.answer?.value,
+          answerScore: item?.answerScore || '',
           questionType: item?.question?.questionType,
           questionTitle: item?.question?.title,
           user: mockUser?.name,
