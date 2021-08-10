@@ -1,6 +1,7 @@
 import { Box, Col, Row } from '@qonsoll/react-design'
 import styled from 'styled-components'
 import typeformTheme from '../../../../styles/theme'
+import theme from '../../../../styles/theme'
 
 export const ContentRow = styled(Row)`
   height: ${(props) => props.onEdit && '100%'};
@@ -30,9 +31,11 @@ export const ImageBackground = styled(Box)`
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   `}
 `
-export const RoundedRow = styled(Row)`
+export const RoundedCol = styled(Col)`
   ${({ theme }) => `
-  border-radius: ${
-    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
-  };`}
+  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  background-color: ${
+    theme?.color?.white?.default || typeformTheme?.color?.white?.default
+  }
+  `}
 `
