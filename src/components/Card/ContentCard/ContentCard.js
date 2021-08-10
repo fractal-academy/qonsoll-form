@@ -19,7 +19,7 @@ function ContentCard(props) {
   // const devicePadding = (paddingSmall && 3) || 4
 
   return (
-    <Row mt={2} height="100%" noGutters>
+    <Row height="100%" noGutters>
       {leftSideMenu && (
         <Col mr={3} cw="auto" px="0">
           {leftSideMenu}
