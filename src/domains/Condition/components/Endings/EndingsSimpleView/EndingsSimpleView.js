@@ -23,8 +23,8 @@ const StyledTag = styled(Tag)`
   border-radius: ${({ theme }) =>
     theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   font-size: ${({ theme }) =>
-    theme?.typography?.fontSize?.caption1 ||
-    typeformTheme?.typography?.fontSize?.caption1};
+    theme?.typography?.fontSize?.body1 ||
+    typeformTheme?.typography?.fontSize?.body1};
   margin-right: 10px !important;
   margin-left: 10px !important;
 `
@@ -110,7 +110,7 @@ function EndingSimpleView(props) {
                         {questionAnswerItem?.answerOption || '-'}
                       </>
                     }>
-                    <StyledTag>
+                    <StyledTag style={{ fontSize: '12px', marginLeft: '10px' }}>
                       {String.fromCharCode(startLetter + ind)}
                     </StyledTag>
                     {questionAnswerItem?.answerOption || '-'}
