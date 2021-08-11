@@ -15,7 +15,7 @@ function ChoiceTemplate(props) {
       {questionConfigurations?.map((item, index) => (
         <Row mb={2} key={index}>
           <Col cw={6} pl={0} pr={2}>
-            <CustomChoiceBox px={3} py="10px">
+            <CustomChoiceBox px={3}>
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter + index)}</Text>
               </CustomTextBox>

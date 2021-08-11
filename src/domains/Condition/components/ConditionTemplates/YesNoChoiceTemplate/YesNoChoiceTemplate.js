@@ -13,7 +13,7 @@ function YesNoChoiceTemplate(props) {
       {questionConfigurations?.map((item, index) => (
         <Row mb={2} key={index}>
           <Col cw={6} pl={0} pr={2}>
-            <CustomYesNoBox px={3} py="10px">
+            <CustomYesNoBox px={3}>
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{item.answerOption[0].toUpperCase()}</Text>
               </CustomTextBox>
