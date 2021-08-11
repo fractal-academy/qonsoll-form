@@ -103,9 +103,6 @@ function CustomRating(props) {
         phoneSize={phoneSize}
         allowClear={allowClear}
         tabletSize={tabletSize}
-        onFocus={(data) => {
-          console.log(data)
-        }}
         count={questionConfigurations?.length}
         character={<StarFilled onMouseDown={(e) => e.preventDefault()} />}
       />
