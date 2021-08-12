@@ -83,9 +83,6 @@ function FormEdit(props) {
 
   // [ADDITIONAL HOOKS]
 
-  const [{ height }, ref] = useSize()
-  const [{ height: headerHeight }, headerRef] = useSize()
-
   const smallScreen = useMedia({ minWidth: '769px' })
   const currentQuestion = useCurrentQuestionContext()
   const history = useHistory()
@@ -285,7 +282,6 @@ function FormEdit(props) {
                 <Box
                   flex={1}
                   p={containerPadding}
-                  ref={ref}
                   display="flex"
                   flexDirection="column">
                   <PageHeader

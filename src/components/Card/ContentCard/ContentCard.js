@@ -1,12 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Col, Row } from '@qonsoll/react-design'
-import useMedia from 'use-media'
-import {
-  ContentRow,
-  ContentColumn,
-  ImageBackground
-} from './ContentCard.styles'
+import { Box, Col, Row } from '@qonsoll/react-design'
+import { ImageBackground, RoundedCol, RoundedRow } from './ContentCard.styles'
 
 function ContentCard(props) {
   const {
@@ -24,18 +19,18 @@ function ContentCard(props) {
   // const devicePadding = (paddingSmall && 3) || 4
 
   return (
-    <Row mt={2} height="100%" bg="white" noGutters>
+    <Row height="100%" noGutters overflowX="hidden" overflowY="hidden">
       {leftSideMenu && (
-        <Col mr={3} cw="auto">
+        <Col mr={3} cw="auto" px="0">
           {leftSideMenu}
         </Col>
       )}
-      <Col flex={1} image={image}>
+      <RoundedCol flex={1} image={image} px="0" position="relative">
         {image && (
           <ImageBackground image={image} brightnessValue={brightnessValue} />
         )}
         {children}
-      </Col>
+      </RoundedCol>
     </Row>
   )
 }

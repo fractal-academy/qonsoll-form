@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useMedia from 'use-media'
 import { message } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
@@ -24,65 +24,78 @@ function CustomRating(props) {
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
   const answersContext = useAnswersContext()
+  const [selectedValue, setSelectedValue] = useState(0)
 
   //[ADDITIONAL HOOKS]
   const phoneSize = useMedia({ maxWidth: '430px' })
   const tabletSize = useMedia({ minWidth: '450px', maxWidth: '1050px' })
 
+  // [COMPUTED PROPERTIES]
+  const range = questionConfigurations?.map((el) => el?.answerOption)
+
   // [CLEAN FUNCTIONS]
   const onChange = (selectedStarsNumber) => {
-    const selectedStarData = questionConfigurations?.[selectedStarsNumber - 1]
-    //answer score if configured
-    const score =
-      answersScoreData?.find(
-        (item) => item?.answerOptionId === selectedStarData?.answerOptionId
-      )?.score || ''
+    if (range.includes(selectedStarsNumber)) {
+      const selectedStarData = questionConfigurations?.[selectedStarsNumber - 1]
+      setSelectedValue(selectedStarsNumber)
+      //answer score if configured
+      const score =
+        answersScoreData?.find(
+          (item) => item?.answerOptionId === selectedStarData?.answerOptionId
+        )?.score || ''
 
-    const data = {
-      question,
-      answer: { value: selectedStarsNumber },
-      answerId: selectedStarData?.answerOptionId || '',
-      answerScore: isFormQuiz ? score : ''
-    }
+      const data = {
+        question,
+        answer: { value: selectedStarsNumber },
+        answerId: selectedStarData?.answerOptionId || '',
+        answerScore: isFormQuiz ? score : ''
+      }
 
-    // if the data is sent we delay and animate the selected value, else - just go to next question
-    if (!!selectedStarsNumber) {
-      onClick && setTimeout(onClick, 700, data)
-    } else {
-      onClick?.(data)
+      // if the data is sent we delay and animate the selected value, else - just go to next question
+      if (!!selectedStarsNumber) {
+        onClick && setTimeout(onClick, 700, data)
+      } else {
+        onClick?.(data)
+      }
     }
   }
 
   // [ADDITIONAL_HOOKS]
   useKeyPress(
-    (event) => event.keyCode === 13 && currentSlide === question?.order,
+    (event) =>
+      (![].includes(event.key) || event.keyCode === 13) &&
+      currentSlide === question?.order,
     (event) => {
       if (event.type === 'keyup') {
-        const questionAnswer = getQuestionAnswerFromContext(
-          answersContext,
-          question
-        )
-        const answerData = questionAnswer || {
-          question,
-          answer: { value: '' }
-        }
+        if (event.keyCode === 13) {
+          const questionAnswer = getQuestionAnswerFromContext(
+            answersContext,
+            question
+          )
+          const answerData = questionAnswer || {
+            question,
+            answer: { value: '' }
+          }
 
-        question?.isRequired && !questionAnswer
-          ? message.error(
-              answerRequiredMessageError ||
-                'It`s required question, please answer'
-            )
-          : onClick?.(answerData)
+          question?.isRequired && !questionAnswer
+            ? message.error(
+                answerRequiredMessageError ||
+                  'It`s required question, please answer'
+              )
+            : onClick?.(answerData)
+        } else {
+          onChange(Number(event.key))
+        }
       }
     },
     {
       events: ['keydown', 'keyup']
     }
   )
-
   return (
     <Container>
       <StyledRate
+        value={selectedValue}
         autoFocus={false}
         tooltips={tooltips}
         onChange={onChange}

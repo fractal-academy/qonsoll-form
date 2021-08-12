@@ -66,7 +66,9 @@ function QuestionAdvancedView(props) {
       )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton onClick={onClick} currentSlide={currentSlide} />
+      component: (
+        <RangeButton onKeyDown onClick={onClick} currentSlide={currentSlide} />
+      )
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate onClick={onClick} currentSlide={currentSlide} />
@@ -159,6 +161,7 @@ function QuestionAdvancedView(props) {
         alignSelf={tabletImageCheck}>
         <StyledBox
           pl={devicePadding}
+          pr={devicePadding}
           bordered={false}
           specialLayoutRule={specialLayoutRule}>
           <Row noGutters py={2}>
