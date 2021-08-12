@@ -220,7 +220,7 @@ function EditorSidebar(props) {
   }
 
   const onResetEndings = () => {
-    console.log('reset endgins')
+    console.log('reset endings')
   }
 
   //[COMPUTED PROPERTIES]

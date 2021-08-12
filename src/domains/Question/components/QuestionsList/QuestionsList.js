@@ -134,17 +134,18 @@ function QuestionsList(props) {
   const sortable = filteredDataSource?.length > 1
 
   return (
-    <Box>
+    <Box p={2}>
       {dataSource?.map(
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
-            <Box>
+            <Box pl="20px">
               <QuestionSimpleView
                 {...item}
                 number="W"
                 action={handleDelete}
                 disableDelete={disableDelete}
-                onClick={() => onItemClick(item)}></QuestionSimpleView>
+                onClick={() => onItemClick(item)}
+              />
             </Box>
           )
       )}

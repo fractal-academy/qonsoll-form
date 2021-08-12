@@ -1,20 +1,16 @@
 import React from 'react'
 import DragHandle from './DragHandle'
-import styled from 'styled-components'
-import { Col, Row } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
 import { sortableElement } from 'react-sortable-hoc'
 
-const StyledColumn = styled(Col)`
-  flex: auto;
-  position: relative;
-`
-
 const SortableItem = sortableElement(({ children }) => (
-  <Row noGutters v="center" mb={3}>
-    <Col cw="auto" mx={1}>
+  <Row noGutters v="center">
+    <Col cw="auto" mr={1} mb={3}>
       <DragHandle />
     </Col>
-    <StyledColumn>{children}</StyledColumn>
+    <Col flex="auto" position="relative">
+      {children}
+    </Col>
   </Row>
 ))
 

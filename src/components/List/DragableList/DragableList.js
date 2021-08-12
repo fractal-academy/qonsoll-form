@@ -1,9 +1,14 @@
 import { List } from 'antd'
 import arrayMove from 'array-move'
+import styled from 'styled-components'
 import SortableItem from './SortableItem'
 import { Box } from '@qonsoll/react-design'
 import SortableContainer from './SortableContainer'
 import React, { useEffect, useMemo, useState } from 'react'
+
+const UnsortableItem = styled(Box)`
+  padding-left: 20px;
+`
 
 function DragableList(props) {
   const { dataSource, setNewOrder, onUpdate, renderItem, sortable, ...args } =
@@ -31,7 +36,7 @@ function DragableList(props) {
     [sortable]
   )
   const SortableWrapper = useMemo(
-    () => (sortable ? SortableItem : Box),
+    () => (sortable ? SortableItem : UnsortableItem),
     [sortable]
   )
 

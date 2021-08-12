@@ -24,9 +24,9 @@ function StaticList(props) {
   return (
     <>
       {data?.length ? (
-        <Row display="flex" width="100%" noGutters>
+        <Row display="flex" width="100%" height="fit-content" noGutters>
           {disableAddButton && (
-            <Col cw={[6, 4, 4, 2]}>
+            <Col cw={data?.[0].imageUrl ? 3 : [6, 4, 4, 2]}>
               <NewListItem
                 onClick={onClick}
                 hasMedia={hasMedia}
@@ -36,7 +36,7 @@ function StaticList(props) {
             </Col>
           )}
           {data?.map((item) => (
-            <Col key={item.id} cw={[6, 4, 4, 2]}>
+            <Col key={item.id} cw={data?.[0].imageUrl ? 3 : [6, 4, 4, 2]}>
               <ListItem
                 data={item}
                 setEdit={setEdit}
