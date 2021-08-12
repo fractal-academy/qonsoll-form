@@ -15,6 +15,7 @@ export const styles = {
 }
 
 export const StyledCol = styled(Col)`
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;

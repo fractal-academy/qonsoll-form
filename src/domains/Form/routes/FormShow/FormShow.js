@@ -283,13 +283,12 @@ const Component = ({
   //[COMPUTED PROPERTIES]
   const questionNumber = containWelcomeScreen ? index : index + 1
   return (
-    <Box key={index} height={wrapperHeight} overflowY="auto">
+    <Box key={index} height={wrapperHeight} overflowY="auto" overflowX="hidden">
       <QuestionAdvancedView
         data={question}
         onClick={onClick}
         isFormQuiz={isFormQuiz}
         currentSlide={currentSlide}
-        wrapperHeight={wrapperHeight}
         questionNumber={questionNumber}
         answersScoreData={answersScoreData}
       />
