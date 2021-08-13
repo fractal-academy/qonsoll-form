@@ -52,7 +52,7 @@ function QuestionLayoutSwitcher(props) {
     <StyledMenu selectedKeys={defaultActive}>
       {menuMap?.map((item) => (
         <StyledItem key={item.layoutType} onClick={onChange}>
-          {cloneElement(item.icon, { style: { marginRight: 0 } })}
+          {cloneElement(item.icon, { style: { margin: 0 } })}
         </StyledItem>
       ))}
     </StyledMenu>

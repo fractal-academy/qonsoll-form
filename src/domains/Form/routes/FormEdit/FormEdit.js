@@ -29,7 +29,6 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { useSize } from '@umijs/hooks'
 
 //configuration for certain types of questions
 const defaultConfigurations = {
