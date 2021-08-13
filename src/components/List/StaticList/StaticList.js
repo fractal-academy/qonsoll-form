@@ -21,12 +21,15 @@ function StaticList(props) {
   // [ADDITIONAL HOOKS]
   const { emptyDescription, uploadImage, addForm } = useTranslation()
 
+  // [COMPUTED PROPERTIES]
+  const columnWidth = data?.[0]?.imageUrl ? 3 : [6, 4, 4, 2]
+
   return (
     <>
       {data?.length ? (
         <Row display="flex" width="100%" height="fit-content" noGutters>
           {disableAddButton && (
-            <Col cw={data?.[0].imageUrl ? 3 : [6, 4, 4, 2]}>
+            <Col cw={columnWidth}>
               <NewListItem
                 onClick={onClick}
                 hasMedia={hasMedia}
@@ -36,7 +39,7 @@ function StaticList(props) {
             </Col>
           )}
           {data?.map((item) => (
-            <Col key={item.id} cw={data?.[0].imageUrl ? 3 : [6, 4, 4, 2]}>
+            <Col key={item.id} cw={columnWidth}>
               <ListItem
                 data={item}
                 setEdit={setEdit}

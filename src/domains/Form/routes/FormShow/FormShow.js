@@ -1,34 +1,33 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-// import { globalStyles } from '../../../../../styles'
-import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
-// import { Button, Divider, Typography } from 'antd'
-import { Box } from '@qonsoll/react-design'
 import { useKeyPress } from '@umijs/hooks'
-import {
-  useCollectionData,
-  useDocumentData
-} from 'react-firebase-hooks/firestore'
-import { FormAdvancedView } from '../../../../domains/Form/components'
-import { QuestionAdvancedView } from '../../../../domains/Question/components'
-// import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
+import { useHistory } from 'react-router-dom'
+import { Box, Container } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
+import React, { useState, useEffect, useMemo } from 'react'
+import FormShowHeightWrapper from './FormShowHeightWrapper'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { TranslationContext } from '../../../../context/Translation'
+import { FormAdvancedView } from '../../../../domains/Form/components'
+import { ContentCard, Spinner, PageHeader } from '../../../../components'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import { QuestionAdvancedView } from '../../../../domains/Question/components'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
   useAnswersContextDispatch,
   ANSWERS_DISPATCH_EVENTS,
   useAnswersContext
 } from '../../../../context/Answers'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
-
-// const { Title } = Typography
-import { ContentCard, Spinner } from '../../../../components'
+import {
+  useCollectionData,
+  useDocumentData
+} from 'react-firebase-hooks/firestore'
 
 function FormShow(props) {
   const {
     id,
+    onBack,
     firebase,
     translate,
     submitLoading,
@@ -44,6 +43,8 @@ function FormShow(props) {
   const answersContext = useAnswersContext()
 
   // [ADDITIONAL HOOKS]
+  const history = useHistory()
+  const smallScreen = useMedia({ minWidth: '769px' })
   useKeyPress(9, (e) => {
     e.preventDefault()
   })
@@ -64,12 +65,14 @@ function FormShow(props) {
   const [formData] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
+
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
   const [currentSlide, setCurrentSlide] = useState()
   const [previousQuestionOrder, setPreviousQuestionOrder] = useState([])
 
   // [COMPUTED PROPERTIES]
+  const containerPadding = smallScreen ? 4 : 2
   const filteredQuestionsList = useMemo(
     () =>
       questionsData?.filter(
@@ -124,7 +127,6 @@ function FormShow(props) {
     let tempMatches = 0
     //by default first ending will be displayed
     let computedEnding = endings?.[0]
-
     //pass through all the endings
     endings?.forEach((ending) => {
       const { questionConfigurations } = ending
@@ -195,38 +197,13 @@ function FormShow(props) {
             {loading ? (
               <Spinner />
             ) : (
-              <Box height="inherit">
-                {/* <Row {...styles.headerRow} noGutters>
-                 <Col cw="auto" v="center" p={0}>
-                   <Button
-                     type="text"
-                     size="small"
-                     // onClick={() => history.goBack()}
-                     icon={<ArrowLeftOutlined />}
-                   />
-                 </Col>
-                 <Col v="center">
-                   <Box textAlign="center">
-                     <Title level={5}>Live Preview</Title>
-                   </Box>
-                 </Col>
-                 <Col cw="auto" v="center">
-                   <Button
-                     type="text"
-                     size="small"
-                     icon={<ReloadOutlined />}
-                     onClick={onRestart}>
-                     Restart
-                   </Button>
-                 </Col>
-                </Row>
-
-                <Row noGutters>
-                 <Col>
-                   <Divider style={globalStyles.resetMargin} />
-                 </Col>
-                </Row> */}
-
+              <Container height="inherit" p={containerPadding}>
+                <PageHeader
+                  id={id}
+                  handlesPreview
+                  smallScreen={smallScreen}
+                  onBack={onBack || history.goBack}
+                />
                 <ContentCard
                   topOffset={wrapperOffset}
                   wrapperHeight={wrapperHeight}>
@@ -243,7 +220,7 @@ function FormShow(props) {
                     previousQuestionOrder={previousQuestionOrder}
                     setPreviousQuestionOrder={setPreviousQuestionOrder}>
                     {filteredQuestionsList?.map((question, index) => (
-                      <Component
+                      <FormShowHeightWrapper
                         key={index}
                         index={index}
                         onClick={onClick}
@@ -261,38 +238,12 @@ function FormShow(props) {
                     ))}
                   </FormAdvancedView>
                 </ContentCard>
-              </Box>
+              </Container>
             )}
           </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
-  )
-}
-
-const Component = ({
-  index,
-  onClick,
-  question,
-  isFormQuiz,
-  currentSlide,
-  wrapperHeight,
-  answersScoreData,
-  containWelcomeScreen
-}) => {
-  //[COMPUTED PROPERTIES]
-  const questionNumber = containWelcomeScreen ? index : index + 1
-  return (
-    <Box key={index} height={wrapperHeight} overflowY="auto" overflowX="hidden">
-      <QuestionAdvancedView
-        data={question}
-        onClick={onClick}
-        isFormQuiz={isFormQuiz}
-        currentSlide={currentSlide}
-        questionNumber={questionNumber}
-        answersScoreData={answersScoreData}
-      />
-    </Box>
   )
 }
 

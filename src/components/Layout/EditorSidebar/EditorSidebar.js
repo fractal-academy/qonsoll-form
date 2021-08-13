@@ -1,30 +1,23 @@
+import { v4 as uuid } from 'uuid'
 import PropTypes from 'prop-types'
+import TypePopover from './TypePopover'
+import { globalStyles } from '../../../../styles'
 import { Row, Col, Box } from '@qonsoll/react-design'
+import useFunctions from '../../../hooks/useFunctions'
+import { SidebarBoxWrapper } from './EditorSidebar.styles'
 import React, { useEffect, useState, useMemo } from 'react'
-import { Typography, Button, Divider, Tooltip, message } from 'antd'
+import { useTranslation } from '../../../context/Translation'
 import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
+import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
+import { QuestionsList } from '../../../domains/Question/components'
+import { Typography, Button, Divider, Tooltip, message } from 'antd'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
 import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
-import {
-  QuestionTypeSelect,
-  QuestionsList
-} from '../../../domains/Question/components'
 import {
   useCurrentQuestionContextDispatch,
   DISPATCH_EVENTS
 } from '../../../context/CurrentQuestion'
-import {
-  CustomDivider,
-  SidebarBoxWrapper,
-  styles
-} from './EditorSidebar.styles'
-import { v4 as uuid } from 'uuid'
-import TypePopover from './TypePopover'
-import useFunctions from '../../../hooks/useFunctions'
-import { useTranslation } from '../../../context/Translation'
-import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
-import { PopoverNegativeMarin } from '../../../../styles/NegativeMargin'
 
 const { Title } = Typography
 
@@ -91,10 +84,9 @@ function EditorSidebar(props) {
   //[CUSTOM HOOKS]
   const { getCollectionRef, setData } = useFunctions()
   const {
+    endingCreateTooltip,
     editorSidebarEndingsTitle,
-    editorSidebarQuestionsTitle,
-    createNewQuestionTooltip,
-    endingCreateTooltip
+    editorSidebarQuestionsTitle
   } = useTranslation()
 
   // [ADDITIONAL HOOKS]
@@ -261,177 +253,66 @@ function EditorSidebar(props) {
 
   return (
     <SidebarBoxWrapper transparent={transparent}>
-      <Box>
-        <Row mb={2} v="center" h="between">
-          <Col cw="auto">
-            <Title level={5}>
-              {editorSidebarQuestionsTitle || 'Questions'}
-            </Title>
-          </Col>
-          <Col display="block" cw="auto">
-            <TypePopover
-              questions={questions}
-              onClick={addQuestion}
-              customQuestionTypes={customQuestionTypes}
-              welcomeScreenShowRule={welcomeScreenShowRule}
-            />
+      <Row mb={2} v="center" h="between">
+        <Col cw="auto">
+          <Title level={5}>{editorSidebarQuestionsTitle || 'Questions'}</Title>
+        </Col>
+        <Col display="block" cw="auto">
+          <TypePopover
+            questions={questions}
+            onClick={addQuestion}
+            customQuestionTypes={customQuestionTypes}
+            welcomeScreenShowRule={welcomeScreenShowRule}
+          />
 
-            <ModalWithFormConditionsForm
-              onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
-              btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
-              <FormConditionsForm
-                endings={endings}
-                formData={formData}
-                onTabChange={onTabChange}
-                data={ConditionsQuestionsList}
-                answerScores={answerScoresData}
-              />
-            </ModalWithFormConditionsForm>
-          </Col>
-        </Row>
-        <Box overflow="auto">
+          <ModalWithFormConditionsForm
+            onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
+            btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
+            <FormConditionsForm
+              endings={endings}
+              formData={formData}
+              onTabChange={onTabChange}
+              data={ConditionsQuestionsList}
+              answerScores={answerScoresData}
+            />
+          </ModalWithFormConditionsForm>
+        </Col>
+      </Row>
+      <Box overflow="auto">
+        {!!questions?.length && (
           <QuestionsList
             data={questions}
             onItemClick={onItemClick}
             disableDelete={questions?.length === 1}
           />
-        </Box>
+        )}
       </Box>
-      <Box mt="auto">
-        <Divider type="horizontal" />
-        <Row mb={2} v="center" h="between">
-          <Col cw="auto">
-            <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
-          </Col>
-          <Col display="block" cw="auto">
-            <Tooltip
-              placement="topRight"
-              title={endingCreateTooltip || 'Create new ending'}>
-              <Button
-                type="text"
-                onClick={addQuestion}
-                icon={<PlusOutlined />}
-              />
-            </Tooltip>
-          </Col>
-        </Row>
-        <Box {...styles.endingsList}>
+
+      <Divider type="horizontal" style={globalStyles.resetMargin} />
+
+      <Row mb={2} v="center" h="between">
+        <Col cw="auto">
+          <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
+        </Col>
+        <Col display="block" cw="auto">
+          <Tooltip
+            placement="topRight"
+            title={endingCreateTooltip || 'Create new ending'}>
+            <Button type="text" onClick={addQuestion} icon={<PlusOutlined />} />
+          </Tooltip>
+        </Col>
+      </Row>
+      <Box mt="auto" overflow="auto" maxHeight="350px">
+        {!!endings?.length && (
           <QuestionsList
             data={endings}
             questionsData={questions}
             onItemClick={onItemClick}
             disableDelete={endings?.length === 1}
           />
-        </Box>
+        )}
       </Box>
     </SidebarBoxWrapper>
-    // <Box position="relative" display="flex" bg="white">
-    /* 
-          <Box p={3}>
-            <Row noGutters>
-              <Col v="center">
-                <Title level={5}>
-                  {editorSidebarQuestionsTitle || 'Questions'}
-                </Title>
-              </Col>
-              <Col cw="auto">
-                <Popover
-                  trigger="click"
-                  placement="bottomRight"
-                  visible={showPopover}
-                  onVisibleChange={() => {
-                    setShowPopover(!showPopover)
-                  }}
-                  content={
-                    <Box
-                      my={PopoverNegativeMarin.v}
-                      mx={PopoverNegativeMarin.h}>
-                      <QuestionTypeSelect
-                        questions={questions}
-                        onClick={addQuestion}
-                        customQuestionTypes={customQuestionTypes}
-                        welcomeScreenShowRule={welcomeScreenShowRule}
-                      />
-                    </Box>
-                  }>
-                  <Tooltip
-                    placement="bottom"
-                    title={createNewQuestionTooltip || 'Create new question'}>
-                    <Button
-                      type="text"
-                      icon={<PlusOutlined />}
-                      onClick={popoverShowChange}
-                      onMouseDown={(e) => e.preventDefault()}
-                    />
-                  </Tooltip>
-                </Popover>
-              </Col>
-
-              <Col cw="auto" v="center" ml={1}>
-                <ModalWithFormConditionsForm
-                  onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
-                  btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
-                  <FormConditionsForm
-                    endings={endings}
-                    formData={formData}
-                    onTabChange={onTabChange}
-                    data={ConditionsQuestionsList}
-                    answerScores={answerScoresData}
-                  />
-                </ModalWithFormConditionsForm>
-              </Col>
-            </Row>
-          </Box>
-
-          <Box overflow="auto" pr={2}>
-            {!!questions?.length && (
-              <QuestionsList
-                data={questions}
-                onItemClick={onItemClick}
-                disableDelete={questions?.length === 1}
-              />
-            )}
-          </Box>
-          <Box mt="auto">
-            <Row>
-              <Col>
-                <CustomDivider type="horizontal" />
-              </Col>
-            </Row>
-            <Row p={3} noGutters>
-              <Col v="center">
-                <Title level={5}>
-                  {editorSidebarEndingsTitle || 'Endings'}
-                </Title>
-              </Col>
-              <Col cw="auto">
-                <Tooltip
-                  placement="topRight"
-                  title={endingCreateTooltip || 'Create new ending'}>
-                  <Button
-                    // disabled={endings.length >= 1}
-                    type="text"
-                    icon={<PlusOutlined />}
-                    onClick={addQuestion}
-                  />
-                </Tooltip>
-              </Col>
-            </Row>
-            <Box {...styles.endingsList}>
-              {!!endings?.length && (
-                <QuestionsList
-                  data={endings}
-                  questionsData={questions}
-                  onItemClick={onItemClick}
-                  disableDelete={endings?.length === 1}
-                />
-              )}
-            </Box>
-          </Box>
-        </SidebarBoxWrapper>
-      )} */
-
-    // </Box>
   )
 }
 

@@ -5,7 +5,12 @@ import { globalStyles } from '../../../../styles'
 import { Row, Col } from '@qonsoll/react-design'
 import { Button, Divider, Tooltip, Typography } from 'antd'
 import { useTranslation } from '../../../context/Translation'
-import { ArrowLeftOutlined, EyeOutlined, ReadOutlined } from '@ant-design/icons'
+import {
+  ArrowLeftOutlined,
+  EyeOutlined,
+  ReadOutlined,
+  ReloadOutlined
+} from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 const { Title } = Typography
@@ -27,9 +32,12 @@ function PageHeader(props) {
     onFormResultsShow?.(id)
     // history.push(formPath)
   }
+  const onRestart = () => {
+    window.location.reload()
+  }
 
   return (
-    <Row noGutters v="center">
+    <Row noGutters v="center" mb={1}>
       {onBack && (
         <Col cw="auto" h="center" flexDirection="row">
           <Button
@@ -38,7 +46,7 @@ function PageHeader(props) {
             icon={<ArrowLeftOutlined />}
             style={globalStyles.resetPadding}
           />
-          <Divider type="vertical" style={styles.dividerHeight} />
+          {title && <Divider type="vertical" style={styles.dividerHeight} />}
         </Col>
       )}
       <Col>
@@ -46,7 +54,7 @@ function PageHeader(props) {
           {title}
         </Title>
       </Col>
-      {handlesPreview && (
+      {handlesPreview && title && (
         <>
           <Col cw="auto" v="center" mr={1}>
             {smallScreen && (
@@ -71,6 +79,11 @@ function PageHeader(props) {
             </Tooltip>
           </Col>
         </>
+      )}
+      {!title && (
+        <Button type="text" icon={<ReloadOutlined />} onClick={onRestart}>
+          Restart
+        </Button>
       )}
     </Row>
   )

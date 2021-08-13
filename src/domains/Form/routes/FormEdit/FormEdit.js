@@ -29,7 +29,6 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { useSize } from '@umijs/hooks'
 
 //configuration for certain types of questions
 const defaultConfigurations = {
@@ -82,7 +81,6 @@ function FormEdit(props) {
   const { screenSizeWarning } = useTranslation()
 
   // [ADDITIONAL HOOKS]
-
   const smallScreen = useMedia({ minWidth: '769px' })
   const currentQuestion = useCurrentQuestionContext()
   const history = useHistory()

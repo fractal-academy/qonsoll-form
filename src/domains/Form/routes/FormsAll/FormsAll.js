@@ -128,7 +128,7 @@ function FormsAll(props) {
                 </Col>
               </Row>
               {data?.length > 4 && (
-                // Search will be wisible only when there's will be more than 4 forms
+                // Search will be visible only when there's will be more than 4 forms
                 <Row noGutters mb={3}>
                   <Col>
                     <Input
