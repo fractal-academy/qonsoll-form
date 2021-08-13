@@ -1,3 +1,4 @@
+import '../../../styles/vars.css'
 const theme = {}
 
 //// SPACE
@@ -22,7 +23,7 @@ theme.color = {}
 
 // Primary pure
 theme.color.primary = {}
-theme.color.primary.default = '#1d6fdc'
+theme.color.primary.default = 'var(--primary-color)'
 // theme.color.primary.lighten1 = '#1d6fdc'
 // theme.color.primary.lighten2 = '#1d6fdc'
 // theme.color.primary.lighten3 = '#1d6fdc'
@@ -134,49 +135,49 @@ theme.transition.default = 'all 0.3s'
 
 //// BORDER RADIUS
 theme.borderRadius = {}
-theme.borderRadius.md = '8px'
-theme.borderRadius.sm = '4px'
+theme.borderRadius.md = 'var(--border-radius-base)'
+theme.borderRadius.sm = 'var(--border-radius-xs)'
 
 //// TYPOGRAPHY
 theme.typography = {}
 
-theme.typography.fontFamily = 'Poppins'
+theme.typography.fontFamily = 'var(--font-family)'
 
 // Font sizes
 theme.typography.fontSize = {}
-theme.typography.fontSize.h1 = '40px'
-theme.typography.fontSize.h2 = '32px'
-theme.typography.fontSize.h3 = '24px'
-theme.typography.fontSize.h4 = '20px'
-theme.typography.fontSize.h5 = '16px'
-theme.typography.fontSize.h6 = '14px'
+theme.typography.fontSize.h1 = 'var(--font-size-h1)'
+theme.typography.fontSize.h2 = 'var(--font-size-h2)'
+theme.typography.fontSize.h3 = 'var(--font-size-h3)'
+theme.typography.fontSize.h4 = 'var(--font-size-h4)'
+theme.typography.fontSize.h5 = 'var(--font-size-h5)'
+theme.typography.fontSize.h6 = 'var(--font-size-h6)'
 theme.typography.fontSize.overline = '12px'
-theme.typography.fontSize.body1 = '16px'
-theme.typography.fontSize.body2 = '14px'
-theme.typography.fontSize.caption1 = '12px'
-theme.typography.fontSize.caption2 = '10px'
+theme.typography.fontSize.body1 = 'var(--font-size-body1)'
+theme.typography.fontSize.body2 = 'var(--font-size-body2)'
+theme.typography.fontSize.caption1 = 'var(--font-size-caption1)'
+theme.typography.fontSize.caption2 = 'var(--font-size-caption2)'
 
 // Line heights
 theme.typography.lineHeight = {}
-theme.typography.lineHeight.h1 = '48px'
-theme.typography.lineHeight.h2 = '40px'
-theme.typography.lineHeight.h3 = '32px'
-theme.typography.lineHeight.h4 = '28px'
-theme.typography.lineHeight.h5 = '24px'
-theme.typography.lineHeight.h6 = '20px'
-theme.typography.lineHeight.overline = '16px'
-theme.typography.lineHeight.body1 = '24px'
-theme.typography.lineHeight.body2 = '20px'
-theme.typography.lineHeight.caption1 = '16px'
-theme.typography.lineHeight.caption2 = '12px'
+theme.typography.lineHeight.h1 = 'var(--line-height-h1)'
+theme.typography.lineHeight.h2 = 'var(--line-height-h2)'
+theme.typography.lineHeight.h3 = 'var(--line-height-h3)'
+theme.typography.lineHeight.h4 = 'var(--line-height-h4)'
+theme.typography.lineHeight.h5 = 'var(--line-height-h5)'
+theme.typography.lineHeight.h6 = 'var(--line-height-h6)'
+theme.typography.lineHeight.overline = 'var(--line-height-overline)'
+theme.typography.lineHeight.body1 = 'var(--line-height-body1)'
+theme.typography.lineHeight.body2 = 'var(--line-height-body1)'
+theme.typography.lineHeight.caption1 = 'var(--line-height-caption1)'
+theme.typography.lineHeight.caption2 = 'var(--line-height-caption1)'
 
 // Font weights
 theme.typography.fontWeight = {}
-theme.typography.fontWeight.bold = 700
-theme.typography.fontWeight.semibold = 600
-theme.typography.fontWeight.medium = 500
-theme.typography.fontWeight.regular = 400
-theme.typography.fontWeight.light = 300
+theme.typography.fontWeight.bold = 'var(--font-weight-bold)'
+theme.typography.fontWeight.semibold = 'var(--font-weight-semibold)'
+theme.typography.fontWeight.medium = 'var(--font-weight-medium)'
+theme.typography.fontWeight.regular = 'var(--font-weight-regular)'
+theme.typography.fontWeight.light = 'var(--font-weight-light)'
 
 // Letter spacing
 theme.typography.letterSpacing = {}

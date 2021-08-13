@@ -30,6 +30,7 @@ import {
   DateTimeInput,
   ContentCard
 } from '../../../../components'
+import '../../../../../../../../src/styles/vars.css'
 
 const StyledTag = styled(Tag)`
   background-color: ${({ theme }) => theme.color.primary.t.lighten5};
