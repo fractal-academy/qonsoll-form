@@ -14,6 +14,7 @@ export const Item = styled(Box)`
   width: -webkit-fill-available;
   height: ${(props) => (props.itemHeight ? props.itemHeight : 'fit-content')};
   display: flex;
+  flex:1;
   border-radius: 8px;
   align-items: center;
   justify-content: center;
