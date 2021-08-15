@@ -39,7 +39,6 @@ export const WrapperRow = styled(Row)`
 export const StyledBox = styled(Box)`
   ${({ specialLayoutRule }) => `
   width: 100%;
-  display: grid;
   background-color: transparent;
   text-align: ${specialLayoutRule && 'center'};
   justify-content: ${specialLayoutRule && 'center'};

@@ -213,7 +213,7 @@ function Carousel(props) {
         infinite={false}>
         {children?.map((el, index) =>
           cloneElement(el, {
-            wrapperHeight: height - buttonsHeight,
+            wrapperHeight: height - 60,
             key: index
           })
         )}
