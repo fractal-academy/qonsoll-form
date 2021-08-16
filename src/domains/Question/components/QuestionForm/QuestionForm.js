@@ -32,9 +32,9 @@ import {
 } from '../../../../components'
 
 const StyledTag = styled(Tag)`
-  background-color: ${({ theme }) => theme.color.primary.t.lighten5};
-  color: ${({ theme }) => theme.color.primary.default};
-  border-color: ${({ theme }) => theme.color.primary.t.lighten2};
+  background-color: ${({ theme }) => theme?.color?.primary?.t?.lighten5};
+  color: ${({ theme }) => theme?.color?.primary?.default};
+  border-color: ${({ theme }) => theme?.color?.primary?.t?.lighten2};
 `
 
 function QuestionForm(props) {
