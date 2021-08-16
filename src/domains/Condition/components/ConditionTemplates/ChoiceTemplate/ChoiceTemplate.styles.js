@@ -11,7 +11,8 @@ export const CustomChoiceBox = styled(Box)(({ theme }) => ({
   border: '1px solid',
   borderColor:
     theme?.color?.dark?.t?.lighten5 || theme?.color?.dark?.t?.lighten5,
-  borderRadius: theme?.borderRadius?.md
+  borderRadius: theme?.borderRadius?.md,
+  height: '100%'
 }))
 
 export const CustomTextBox = styled(Box)(({ theme }) => ({

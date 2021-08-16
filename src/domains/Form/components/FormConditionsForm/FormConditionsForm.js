@@ -111,7 +111,7 @@ function FormConditionsForm(props) {
         <TabPane
           tab={conditionsEndingsTab || 'Endings'}
           key="2"
-          style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+          style={{ overflowY: 'scroll', overflowX: 'hidden', color: 'red' }}>
           {!!filteredAnswerForEndings?.length > 0 && endings?.length > 0 ? (
             endings?.map((item, index) => (
               <Box mb={3}>

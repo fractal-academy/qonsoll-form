@@ -11,7 +11,8 @@ export const CustomYesNoBox = styled(Box)(({ theme }) => ({
   border: '1px solid',
   borderColor:
     theme?.color?.dark?.t?.lighten5 || typeformTheme?.borderRadius?.md,
-  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md,
+  height: '100%'
 }))
 
 export const CustomTextBox = styled(Box)(({ theme }) => ({

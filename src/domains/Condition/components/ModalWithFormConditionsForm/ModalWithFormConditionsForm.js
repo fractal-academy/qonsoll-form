@@ -86,8 +86,10 @@ function ModalWithFormConditionsForm(props) {
 }
 
 ModalWithFormConditionsForm.propTypes = {
-  btnProps: PropTypes.object.isRequired,
-  children: PropTypes.node
+  children: PropTypes.node,
+  btnProps: PropTypes.object,
+  onResetClick: PropTypes.func,
+  popconfirmReset: PropTypes.bool
 }
 
 export default ModalWithFormConditionsForm

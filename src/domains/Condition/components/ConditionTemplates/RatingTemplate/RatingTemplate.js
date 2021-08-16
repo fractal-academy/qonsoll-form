@@ -16,9 +16,9 @@ function RatingTemplate(props) {
   return (
     <>
       {questionConfigurations?.map((item, index) => (
-        <Row noGutters mb={2} key={index}>
-          <Col cw={6}>
-            <CustomRatingBox mr={4} pl={2}>
+        <Row mb={2} key={index}>
+          <Col cw={6} pl={0} pr={2}>
+            <CustomRatingBox px={3}>
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{String.fromCharCode(startLetter + index)}</Text>
               </CustomTextBox>
@@ -40,9 +40,9 @@ function RatingTemplate(props) {
 }
 
 RatingTemplate.propTypes = {
-  questionOptions: PropTypes.array,
-  questionList: PropTypes.array,
-  addRedirectQuestion: PropTypes.func
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired,
+  questionConfigurations: PropTypes.array.isRequired
 }
 
 export default RatingTemplate
