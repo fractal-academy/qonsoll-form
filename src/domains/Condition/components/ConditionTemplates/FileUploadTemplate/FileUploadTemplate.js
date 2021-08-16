@@ -7,16 +7,16 @@ import { CustomUploaderBox } from './FileUploadTemplate.style'
 
 function FileUploadTemplate(props) {
   const {
-    questionConfigurations,
     isUploaded,
     questionList,
-    addRedirectQuestion
+    addRedirectQuestion,
+    questionConfigurations
   } = props
 
   return (
-    <Row noGutters mb={2}>
-      <Col cw={6} style={{ paddingRight: '32px' }}>
-        <CustomUploaderBox pl={2}>
+    <Row mb={2}>
+      <Col cw={6} pl={0} pr={2}>
+        <CustomUploaderBox px={3}>
           {isUploaded ? <Text>is uploaded</Text> : <Text>not uploaded</Text>}
         </CustomUploaderBox>
       </Col>
@@ -31,9 +31,9 @@ function FileUploadTemplate(props) {
   )
 }
 FileUploadTemplate.propTypes = {
-  questionOptions: PropTypes.array,
   isUploaded: PropTypes.bool.isRequired,
-  questionList: PropTypes.array,
-  addRedirectQuestion: PropTypes.func
+  questionList: PropTypes.array.isRequired,
+  questionOptions: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired
 }
 export default FileUploadTemplate

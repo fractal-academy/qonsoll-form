@@ -12,7 +12,8 @@ export const OptionBox = styled(Box)(({ theme }) => ({
   border: '1px solid',
   borderColor:
     theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5,
-  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md,
+  height: '100%'
 }))
 
 export const StyledInputNumber = styled(InputNumber)`
