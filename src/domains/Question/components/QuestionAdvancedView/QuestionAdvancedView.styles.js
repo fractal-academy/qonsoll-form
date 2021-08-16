@@ -38,10 +38,15 @@ export const WrapperRow = styled(Row)`
 
 export const StyledBox = styled(Box)`
   ${({ specialLayoutRule }) => `
+  // display:grid;
+  display:flex;
+  flex-direction:column;
+  
   width: 100%;
   background-color: transparent;
   text-align: ${specialLayoutRule && 'center'};
   justify-content: ${specialLayoutRule && 'center'};
+  align-items: ${specialLayoutRule && 'center'};
   max-height: 80vh;
   overflow-y: auto;
   ::-webkit-scrollbar {
