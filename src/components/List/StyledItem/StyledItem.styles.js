@@ -12,6 +12,7 @@ export const Item = styled(Box)`
     theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9};
   width: -webkit-fill-available;
   display: flex;
+  flex: 1;
   border-radius: 8px;
   align-items: center;
   justify-content: center;

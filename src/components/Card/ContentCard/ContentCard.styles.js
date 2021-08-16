@@ -1,7 +1,6 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
 import styled from 'styled-components'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import typeformTheme from '../../../../styles/theme'
-import theme from '../../../../styles/theme'
 
 export const ContentRow = styled(Row)`
   height: ${(props) => props.onEdit && '100%'};

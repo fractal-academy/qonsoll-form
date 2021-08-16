@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { Popconfirm } from 'antd'
 import React, { cloneElement } from 'react'
+import { Row, Col } from '@qonsoll/react-design'
 import { LAYOUT_TYPES } from '../../../../constants'
-import { Row, Col, Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
@@ -44,61 +44,59 @@ function QuestionSimpleView(props) {
   )?.length
 
   return (
-    <Box onClick={onClick}>
-      <NumberedCard current={current} number={number}>
-        <Row h="around" v="center" ml={2} noGutters>
-          <Col cw="auto" mr={2}>
-            {!!title?.length ? (
-              <IconRoundContainer>
-                {layoutType && cloneElement(LAYOUT_TYPES[layoutType]?.icon)}
-              </IconRoundContainer>
-            ) : (
-              <IconRoundContainer danger>
-                {layoutType &&
-                  cloneElement(
-                    <ExclamationOutlined style={{ color: 'red' }} />
-                  )}
-              </IconRoundContainer>
-            )}
-          </Col>
-          <Col width="150px">
-            <DescriptionContainer>{title}</DescriptionContainer>
-          </Col>
-          <Col cw="auto">
-            <Popconfirm
-              placement="topRight"
-              title={
-                hasConditions || hasCondtitionOnIt
-                  ? popconfirmOnDeleteQuestionWithConditions ||
-                    'This question has connected logic. Delete it?'
-                  : popconfirmOnDeleteQuestion || 'Delete this question?'
-              }
-              onConfirm={(e) => action(e, id)}
-              disabled={disableDelete}
-              okType="danger"
-              okText="Delete">
-              <StyledButton
-                type="text"
-                shape="circle"
-                size="small"
-                danger
-                disabled={disableDelete}>
-                <DeleteOutlined style={{ fontSize: '18px' }} />
-              </StyledButton>
-            </Popconfirm>
-          </Col>
-        </Row>
-      </NumberedCard>
-    </Box>
+    <NumberedCard current={current} onClick={onClick} number={number}>
+      <Row v="center" ml={2} noGutters>
+        <Col cw="auto" mr={2}>
+          {!!title?.length ? (
+            <IconRoundContainer>
+              {layoutType && cloneElement(LAYOUT_TYPES[layoutType]?.icon)}
+            </IconRoundContainer>
+          ) : (
+            <IconRoundContainer danger>
+              {layoutType &&
+                cloneElement(<ExclamationOutlined style={{ color: 'red' }} />)}
+            </IconRoundContainer>
+          )}
+        </Col>
+        <Col width="150px">
+          <DescriptionContainer>{title}</DescriptionContainer>
+        </Col>
+        <Col cw="auto">
+          <Popconfirm
+            placement="topRight"
+            title={
+              hasConditions || hasCondtitionOnIt
+                ? popconfirmOnDeleteQuestionWithConditions ||
+                  'This question has connected logic. Delete it?'
+                : popconfirmOnDeleteQuestion || 'Delete this question?'
+            }
+            onConfirm={(e) => action(e, id)}
+            disabled={disableDelete}
+            okType="danger"
+            okText="Delete">
+            <StyledButton
+              type="text"
+              shape="circle"
+              size="small"
+              danger
+              disabled={disableDelete}>
+              <DeleteOutlined style={{ fontSize: '18px' }} />
+            </StyledButton>
+          </Popconfirm>
+        </Col>
+      </Row>
+    </NumberedCard>
   )
 }
 
 QuestionSimpleView.propTypes = {
   id: PropTypes.string,
+  data: PropTypes.array,
   action: PropTypes.func,
   title: PropTypes.string,
   onClick: PropTypes.func,
   layoutType: PropTypes.string,
+  disableDelete: PropTypes.bool,
   number: PropTypes.number.isRequired
 }
 
