@@ -5,7 +5,6 @@ import Text from 'antd/lib/typography/Text'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
-import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 import {
   QuestionsTypeMenu,
   QuestionMenuItem
@@ -22,6 +21,7 @@ import {
   StarOutlined,
   UploadOutlined
 } from '@ant-design/icons'
+import '../../../../../styles/vars.css'
 
 const StyledText = styled(Text)`
   cursor: pointer !important;
@@ -125,8 +125,10 @@ function QuestionTypeSelect(props) {
     <Box
       pl={1}
       display="block"
-      my={PopoverNegativeMarin.v}
-      mx={PopoverNegativeMarin.h}>
+      // TODO Keep this place for future improvements - make box receive negative margins based on vars instead of strict value
+      // my={PopoverNegativeMarin.v}
+      // mx={PopoverNegativeMarin.h}
+    >
       <QuestionsTypeMenu>
         {updatedMap?.map((item) => (
           <QuestionMenuItem key={item.type} onClick={onClick}>

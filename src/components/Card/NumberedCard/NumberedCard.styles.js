@@ -11,7 +11,7 @@ export const HiddenBox = styled(Box)`
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   background-color: ${({ theme }) =>
-    theme?.color?.dark?.t?.lighten1 || typeformTheme?.color?.dark?.t?.lighten1};
+    theme?.color?.dark?.lighten1 || typeformTheme?.color?.dark?.lighten1};
 `
 export const ContentBox = styled(Box)`
   ${({ theme, current }) => `

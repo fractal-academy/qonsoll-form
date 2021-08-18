@@ -96,7 +96,7 @@ function ChoiceEditable(props) {
         </MediaBox>
       )}
       <Row noGutters px={2}>
-        <LetterBox>{letter}</LetterBox>
+        <LetterBox withImage={withImage}>{letter}</LetterBox>
         <ChoiceOptionCol
           width={withImage ? '150px' : '100%'}
           withImage={withImage}>

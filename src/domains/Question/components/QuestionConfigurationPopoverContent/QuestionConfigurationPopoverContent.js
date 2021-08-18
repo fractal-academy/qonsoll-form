@@ -13,6 +13,7 @@ import {
   QuestionTypeSelect,
   QuestionConfigurationMenu
 } from '../../../../domains/Question/components'
+import '../../../../../styles/vars.css'
 
 const { Title } = Typography
 
@@ -48,7 +49,9 @@ function QuestionConfigurationPopoverContent(props) {
     `${currentQuestion?.questionType} settings`
 
   return (
-    <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
+    // TODO Keep this place for future improvements - make box receive negative margins based on vars instead of strict value
+    // <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
+    <Box px={0} py={0}>
       <PopoverSwitcherRow
         noGutters
         py={2}

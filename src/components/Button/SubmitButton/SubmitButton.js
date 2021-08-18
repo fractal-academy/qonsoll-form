@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import typeformTheme from '../../../../styles/theme'
 import styled from 'styled-components'
@@ -61,8 +61,10 @@ function SubmitButton(props) {
     }
   )
 
+  const [loading, setLoading] = useState(false)
+
   // [CLEAN FUNCTIONS]
-  const onButtonClick = () => {
+  const onButtonClick = async () => {
     if (finish) {
       const updatedAnswers = { formId, answers }
       const sendAnswersTimestamp = getTimestamp().fromDate(new Date())
@@ -93,9 +95,11 @@ function SubmitButton(props) {
       })
       //This part for future improvements - add answer for answer layout
       // Object.values(answers)?.map((questionWithAnswer, index) => {})
+      setLoading(true)
 
       //add function from b2g and provide updatedAnswers
-      onFinish?.(updatedAnswers)
+      await onFinish?.(updatedAnswers)
+      setLoading(false)
     } else onClick?.()
   }
   return (
@@ -105,7 +109,8 @@ function SubmitButton(props) {
           type="primary"
           onClick={onButtonClick}
           onMouseDown={(e) => e.preventDefault()}
-          {...rest}>
+          {...rest}
+          loading={loading}>
           {children || (
             <Row display="flex" noGutters>
               <Col cw="auto" mr={2}>

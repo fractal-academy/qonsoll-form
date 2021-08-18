@@ -48,8 +48,8 @@ function ModalWithFormConditionsForm(props) {
           height: '70vh',
           overflow: 'auto',
           backgroundColor:
-            theme.color.primary.t.lighten9 ||
-            typeformTheme.color.primary.t.lighten9
+            theme?.color?.primary?.t?.lighten9 ||
+            typeformTheme?.color?.primary?.t?.lighten9
         }}
         footer={
           <Button type="primary" onClick={onSave}>
