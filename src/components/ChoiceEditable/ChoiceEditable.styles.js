@@ -37,7 +37,7 @@ export const MediaBox = styled(Box)(({ theme }) => ({
 export const LetterBox = styled(Box)`
   ${({ theme, withImage }) => `
     position: absolute;
-  top: ${withImage ? '13px' : '6px'};
+  top: ${withImage ? '12px' : '6px'};
   width: 20px;
   border: 1px solid ${
     theme?.color?.primary?.t?.lighten2 ||

@@ -34,7 +34,7 @@ export const ContentBox = styled(Box)`
         (theme?.color?.primary?.t?.lighten4 ||
           typeformTheme?.color?.primary?.t?.lighten4)) ||
       theme?.color?.dark?.t?.lighten8 ||
-      typeformTheme?.color?.primary?.t?.lighten8
+      typeformTheme?.color?.dark?.t?.lighten8
     };
     transition: background-color 0.3s;
   }
