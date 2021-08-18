@@ -10,12 +10,14 @@ export const StyledMenu = styled(Menu)`
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   height: fit-content;
   border: none;
+
 `}
 `
 export const StyledItem = styled(Menu?.Item)`
   ${({ theme }) => `
   display: flex;
   align-items: center;
+  margin: 0 !important;
   padding: ${theme?.space?.[2] || typeformTheme?.space[2]} !important;
   &:last-child {
   border-bottom-left-radius:${

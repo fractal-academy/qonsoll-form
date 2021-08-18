@@ -34,7 +34,8 @@ function FormShow(props) {
     wrapperHeight,
     wrapperOffset,
     configurations,
-    actions = {}
+    actions = {},
+    loadingSubmitButton
   } = props
 
   // [CUSTOM_HOOKS]

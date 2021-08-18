@@ -19,7 +19,7 @@ export const StyledKeybox = styled(Box)`
     isHovering && phoneSmall ? '' : isHovering && '-40px'};
   background-color: ${({ isActive, theme }) =>
     isActive
-      ? theme?.color?.primary?.default || typeformTheme?.color?.white?.default
+      ? theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
       : theme?.color?.white?.default || typeformTheme?.color?.white?.default};
   width: ${({ isHovering, phoneSmall }) =>
     isHovering && !phoneSmall ? '66px !important' : '26px !important'};

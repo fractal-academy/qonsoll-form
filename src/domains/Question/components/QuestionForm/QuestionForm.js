@@ -31,11 +31,17 @@ import {
   ContentCard
 } from '../../../../components'
 import '../../../../../../../../src/styles/vars.css'
+import typeformTheme from '../../../../../styles/theme'
 
 const StyledTag = styled(Tag)`
-  background-color: ${({ theme }) => theme?.color?.primary?.t?.lighten5};
-  color: ${({ theme }) => theme?.color?.primary?.default};
-  border-color: ${({ theme }) => theme?.color?.primary?.t?.lighten2};
+  background-color: ${({ theme }) =>
+    theme?.color?.primary?.t?.lighten5 ||
+    typeformTheme?.color?.primary?.t?.lighten5};
+  color: ${({ theme }) =>
+    theme?.color?.primary?.default || theme?.color?.primary?.default};
+  border-color: ${({ theme }) =>
+    theme?.color?.primary?.t?.lighten2 ||
+    typeformTheme?.color?.primary?.t?.lighten2};
 `
 
 function QuestionForm(props) {

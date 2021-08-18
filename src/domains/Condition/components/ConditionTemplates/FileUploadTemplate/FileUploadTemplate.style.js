@@ -10,7 +10,7 @@ export const CustomUploaderBox = styled(Box)(({ theme }) => ({
     theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9,
   border: '1px solid',
   borderColor:
-    theme?.color?.dark?.t?.lighten5 || theme?.color?.dark?.t?.lighten5,
-  borderRadius: theme?.borderRadius?.md,
+    theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5,
+  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md,
   height: '100%'
 }))

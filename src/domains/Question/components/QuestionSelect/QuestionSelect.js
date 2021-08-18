@@ -4,14 +4,21 @@ import PropTypes from 'prop-types'
 import Text from 'antd/lib/typography/Text'
 import { StyledSelect, StyledCaptionText } from './QuestionSelect.styles'
 import styled from 'styled-components'
+import typeformTheme from '../../../../../styles/theme'
 
 const { Option, OptGroup } = Select
 
 const StyledTag = styled(Tag)`
-  background-color: ${({ theme }) => theme.color.primary.t.lighten5};
-  color: ${({ theme }) => theme.color.primary.default};
-  border-color: ${({ theme }) => theme.color.primary.t.lighten2};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
+  background-color: ${({ theme }) =>
+    theme?.color?.primary?.t?.lighten5 ||
+    typeformTheme?.color?.primary?.t?.lighten5};
+  color: ${({ theme }) =>
+    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
+  border-color: ${({ theme }) =>
+    theme?.color?.primary?.t?.lighten2 ||
+    typeformTheme?.color?.primary?.t?.lighten2};
+  border-radius: ${({ theme }) =>
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   margin-right: 10px !important;
   font-size: 15px;
 `

@@ -25,6 +25,10 @@ export const StyledSelect = styled(Select)`
       theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5
     } !important;
   }
+  .ant-select-selection-search{
+  display:flex;
+  align-items: center;
+  }
 `}
 `
 
