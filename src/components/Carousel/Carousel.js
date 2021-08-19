@@ -218,7 +218,9 @@ function Carousel(props) {
         infinite={false}>
         {children?.map((el, index) =>
           cloneElement(el, {
-            wrapperHeight: height - 60,
+            /*HOTFIX - improve this part with calc because of error on b2g. Work fine with "height -60" on b2g
+            but got height recalculation on phones on pure typeform*/
+            wrapperHeight: height - buttonsHeight,
             key: index
           })
         )}

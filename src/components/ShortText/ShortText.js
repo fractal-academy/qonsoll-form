@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Form, Input, message } from 'antd'
 import PropTypes from 'prop-types'
 import { globalStyles } from '../../../styles'
@@ -63,11 +63,14 @@ function ShortText(props) {
     }
   }
 
-  //when question was skipped by navigation buttons and input was focused - reset focus
-  inputRef?.current && currentSlide === question?.order
-    ? inputRef?.current?.focus?.()
-    : inputRef?.current?.blur?.()
-
+  useEffect(
+    () =>
+      //when question was skipped by navigation buttons and input was focused - reset focus
+      currentSlide === question?.order && inputRef?.current
+        ? inputRef?.current?.focus?.()
+        : inputRef?.current?.blur?.(),
+    [currentSlide]
+  )
   return (
     <Container>
       <Form

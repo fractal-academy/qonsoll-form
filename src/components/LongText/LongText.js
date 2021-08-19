@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Typography, Input, message } from 'antd'
 import { SubmitButton } from '../../components'
@@ -37,11 +37,6 @@ function LongText(props) {
     }
   )
 
-  //when question was skipped by navigation buttons and input was focused - reset focus
-  currentSlide === question?.order && textAreaRef?.current
-    ? textAreaRef?.current?.focus?.()
-    : textAreaRef?.current?.blur?.()
-
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
     const data = { question, answer: { value: answer || '' } }
@@ -77,6 +72,14 @@ function LongText(props) {
     }
   }
 
+  useEffect(
+    () =>
+      //when question was skipped by navigation buttons and input was focused - reset focus
+      currentSlide === question?.order && textAreaRef?.current
+        ? textAreaRef?.current?.focus?.()
+        : textAreaRef?.current?.blur?.(),
+    [currentSlide]
+  )
   return (
     <Container>
       <Form
