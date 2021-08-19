@@ -4,10 +4,14 @@ import { Col, Row } from '@qonsoll/react-design'
 import { ImageBackground, RoundedCol } from './ContentCard.styles'
 
 function ContentCard(props) {
-  const { image, leftSideMenu, brightnessValue, children } = props
+  const { image, leftSideMenu, brightnessValue, headerHeight, children } = props
 
   return (
-    <Row height="100%" noGutters overflowX="hidden" overflowY="hidden">
+    <Row
+      height={headerHeight ? `calc(100% - ${headerHeight}px)` : '100%'}
+      noGutters
+      overflowX="hidden"
+      overflowY="hidden">
       {leftSideMenu && (
         <Col mr={3} cw="auto" px="0">
           {leftSideMenu}

@@ -39,7 +39,6 @@ function Carousel(props) {
   const { answerRequiredMessageError } = useTranslation()
 
   const [{ height }, ref] = useSize()
-  const [{ height: buttonsHeight }, buttonsRef] = useSize()
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
@@ -206,7 +205,7 @@ function Carousel(props) {
   isAnswered && typeAction()
 
   return (
-    <Box height="100%" ref={ref} width="100%">
+    <Box ref={ref} height="100%" width="100%">
       <AntdCarousel
         dots={false}
         swipe={false}
@@ -217,12 +216,12 @@ function Carousel(props) {
         infinite={false}>
         {children?.map((el, index) =>
           cloneElement(el, {
-            wrapperHeight: height - 60,
+            wrapperHeight: height - 64,
             key: index
           })
         )}
       </AntdCarousel>
-      <Box ref={buttonsRef}>
+      <Box>
         {!submitLoading && (
           <Row h="right" p={2} noGutters>
             <Col cw="auto" mr={2}>

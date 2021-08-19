@@ -1,6 +1,6 @@
 import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-import { useKeyPress } from '@umijs/hooks'
+import { useSize, useKeyPress } from '@umijs/hooks'
 import { useHistory } from 'react-router-dom'
 import { Box, Container } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
@@ -11,7 +11,6 @@ import { TranslationContext } from '../../../../context/Translation'
 import { FormAdvancedView } from '../../../../domains/Form/components'
 import { ContentCard, Spinner, PageHeader } from '../../../../components'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
@@ -34,8 +33,7 @@ function FormShow(props) {
     wrapperHeight,
     wrapperOffset,
     configurations,
-    actions = {},
-    loadingSubmitButton
+    actions = {}
   } = props
 
   // [CUSTOM_HOOKS]
@@ -45,6 +43,7 @@ function FormShow(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
+  const [{ height: headerHeight }, headerRef] = useSize()
   const smallScreen = useMedia({ minWidth: '769px' })
   useKeyPress(9, (e) => {
     e.preventDefault()
@@ -62,7 +61,6 @@ function FormShow(props) {
       id
     )
   )
-
   const [formData] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
@@ -170,6 +168,7 @@ function FormShow(props) {
     )
   }
 
+  // [USE EFFECTS]
   useEffect(() => {
     if (!loading && questionsData) {
       //when data loaded from db, set default currentSlide value according to questions data
@@ -179,7 +178,6 @@ function FormShow(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, questionsData])
-
   useEffect(() => {
     // when questions was uploaded, its last one question without ending
     // and we got answer for this question
@@ -202,11 +200,13 @@ function FormShow(props) {
                 <PageHeader
                   id={id}
                   handlesPreview
+                  ref={headerRef}
                   smallScreen={smallScreen}
                   onBack={onBack || history.goBack}
                 />
                 <ContentCard
                   topOffset={wrapperOffset}
+                  headerHeight={headerHeight}
                   wrapperHeight={wrapperHeight}>
                   <FormAdvancedView
                     isAnswered={isAnswered}
@@ -249,10 +249,15 @@ function FormShow(props) {
 }
 
 FormShow.propTypes = {
-  firebase: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
-  actions: PropTypes.shape({ onFinish: PropTypes.func }),
-  submitLoading: PropTypes.bool
+  onBack: PropTypes.func,
+  firebase: PropTypes.object.isRequired,
+  translate: PropTypes.object,
+  submitLoading: PropTypes.bool,
+  wrapperHeight: PropTypes.number,
+  wrapperOffset: PropTypes.number,
+  configurations: PropTypes.object,
+  actions: PropTypes.shape({ onFinish: PropTypes.func })
 }
 
 export default FormShow
