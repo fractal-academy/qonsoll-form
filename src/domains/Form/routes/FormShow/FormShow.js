@@ -189,7 +189,6 @@ function FormShow(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLastQuestionWithoutEndings, isAnswered])
-
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
