@@ -83,15 +83,15 @@ theme.color.white.default = 'var(--white)'
 
 // White transparent
 theme.color.white.t = {}
-theme.color.white.t.lighten1 = 'rgba(255,255,255,0.75)'
-theme.color.white.t.lighten2 = 'rgba(255,255,255,0.5)'
-theme.color.white.t.lighten3 = 'rgba(255,255,255,0.25)'
-theme.color.white.t.lighten4 = 'rgba(255,255,255,0.20)'
-theme.color.white.t.lighten5 = 'rgba(255,255,255,0.15)'
-theme.color.white.t.lighten6 = 'rgba(255,255,255,0.12)'
-theme.color.white.t.lighten7 = 'rgba(255,255,255,0.10)'
-theme.color.white.t.lighten8 = 'rgba(255,255,255,0.08)'
-theme.color.white.t.lighten9 = 'rgba(255,255,255,0.04)'
+theme.color.white.t.lighten1 = 'var(--white-t-lighten1)'
+theme.color.white.t.lighten2 = 'var(--white-t-lighten2)'
+theme.color.white.t.lighten3 = 'var(--white-t-lighten3)'
+theme.color.white.t.lighten4 = 'var(--white-t-lighten4)'
+theme.color.white.t.lighten5 = 'var(--white-t-lighten5)'
+theme.color.white.t.lighten6 = 'var(--white-t-lighten6)'
+theme.color.white.t.lighten7 = 'var(--white-t-lighten7)'
+theme.color.white.t.lighten8 = 'var(--white-t-lighten8)'
+theme.color.white.t.lighten9 = 'var(--white-t-lighten9)'
 
 // Danger pure
 theme.color.danger = {}
@@ -107,14 +107,14 @@ theme.color.text = {}
 // Text dark
 theme.color.text.dark = {}
 theme.color.text.dark.primary = theme.color.dark.t.lighten1
-theme.color.text.dark.secondary = 'rgba(3,11,23,0.45)'
+theme.color.text.dark.secondary = '--var(--text-dark-secondary)'
 theme.color.text.dark.disabled = theme.color.dark.t.lighten4
 
 // Text light
 theme.color.text.light = {}
-theme.color.text.light.primary = 'rgba(255,255,255,0.85)'
-theme.color.text.light.secondary = 'rgba(255,255,255,0.65)'
-theme.color.text.light.disabled = 'rgba(255,255,255,0.35)'
+theme.color.text.light.primary = '--text-light-primary'
+theme.color.text.light.secondary = '--text-light-secondary'
+theme.color.text.light.disabled = '--text-light-disabled'
 
 //// GRADIENTS
 theme.primaryGradient = 'linear-gradient(-45deg, #0D42B1, #247EE5)'
