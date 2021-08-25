@@ -13,7 +13,14 @@ import {
 } from '../../../../context/CurrentQuestion'
 
 function QuestionsList(props) {
-  const { data, setNewOrder, onItemClick, disableDelete, questionsData } = props
+  const {
+    data,
+    setNewOrder,
+    onItemClick,
+    disableDelete,
+    questionsData,
+    endings
+  } = props
 
   // [CUSTOM_HOOKS]
   const { setData, deleteData } = useFunctions()
@@ -140,6 +147,7 @@ function QuestionsList(props) {
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
             <Box pl="20px">
               <QuestionSimpleView
+                endings={endings}
                 {...item}
                 number="W"
                 action={handleDelete}

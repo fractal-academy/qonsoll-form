@@ -18,9 +18,9 @@ function QuestionSimpleView(props) {
     onClick,
     id,
     disableDelete,
-    data
+    data,
+    endings
   } = props
-
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const {
@@ -36,12 +36,26 @@ function QuestionSimpleView(props) {
         )?.length > 0
     )?.length > 0
 
+  const hasEndingOnIt = endings
+    ?.map((ending) =>
+      ending?.questionConfigurations?.filter(
+        (configEndings) =>
+          configEndings?.triggerQuestionId?.split(' ')[0] ===
+          currentQuestion?.id
+      )
+    )
+    ?.flat()?.length
+  console.log(currentQuestion)
+  console.log(endings)
+  // console.log(hasEndingOnIt)
+
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id
   //this one check or question includes any answerOption with redirectQuestion
   const hasConditions = currentQuestion?.questionConfigurations?.filter(
     (item, index) => item?.redirectQuestion?.length > 0
   )?.length
+  // console.log(endings)
 
   return (
     <NumberedCard current={current} onClick={onClick} number={number}>
@@ -65,7 +79,7 @@ function QuestionSimpleView(props) {
           <Popconfirm
             placement="topRight"
             title={
-              hasConditions || hasCondtitionOnIt
+              hasEndingOnIt || hasConditions || hasCondtitionOnIt
                 ? popconfirmOnDeleteQuestionWithConditions ||
                   'This question has connected logic. Delete it?'
                 : popconfirmOnDeleteQuestion || 'Delete this question?'
