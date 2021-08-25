@@ -21,7 +21,6 @@ function QuestionsList(props) {
     questionsData,
     endings
   } = props
-
   // [CUSTOM_HOOKS]
   const { setData, deleteData } = useFunctions()
   const currentQuestion = useCurrentQuestionContext()
@@ -167,6 +166,7 @@ function QuestionsList(props) {
           <QuestionSimpleView
             {...item}
             data={data}
+            endings={endings}
             action={handleDelete}
             number={index + 1}
             onClick={() => onItemClick(item, index)}

@@ -45,9 +45,6 @@ function QuestionSimpleView(props) {
       )
     )
     ?.flat()?.length
-  console.log(currentQuestion)
-  console.log(endings)
-  // console.log(hasEndingOnIt)
 
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id

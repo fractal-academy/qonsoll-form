@@ -307,6 +307,7 @@ function EditorSidebar(props) {
         {!!endings?.length && (
           <QuestionsList
             data={endings}
+            endings={endings}
             questionsData={questions}
             onItemClick={onItemClick}
             disableDelete={endings?.length === 1}
