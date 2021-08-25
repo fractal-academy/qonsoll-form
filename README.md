@@ -1,8 +1,4 @@
-import { Meta } from "@storybook/addon-docs/blocks";
-
-<Meta title="Example/Introduction" />
-
-# &#x1F4D8 Typeform documentation
+# &#x1F4D8; Typeform documentation
 
 [**Typeform**](https://github.com/fractal-academy/feedback-typeform-app) is a service for surveys' form builder. It makes collecting and sharing information comfortable and conversational.
 Current project can be used as module in other projects.
@@ -33,7 +29,7 @@ Some packages need manual instalation. Run following command:
 npm i fuse.js && use-media && ziggeo-client-sdk && react-ziggeo
 ```
 
-&#10071 For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
+For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
 Add formId and order as indexed fields for questions collection. Leave index rule default (ascending).
 
 ### How to implement module in existing project
@@ -78,11 +74,13 @@ Go the directory of your project and install all of packages:
 
 ```sh
 cd ../../../
+```
 
+```sh
 npm install
 ```
 
-&#10071 For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
+For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
 Add formId and order as indexed fields for questions collection. Leave index rule default (ascending).
 
 ### How to run app with already added typeform module
@@ -131,7 +129,7 @@ By following commands update modules:
 Go back to your project directory and install node modules:
 
 ```sh
-  run: cd ../../ && npm install
+- run: cd ../../ && npm install
 ```
 
 Next step - you need to build your application:
