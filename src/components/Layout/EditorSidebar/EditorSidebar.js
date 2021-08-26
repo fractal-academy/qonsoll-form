@@ -306,7 +306,6 @@ function EditorSidebar(props) {
       <Box mt="auto" overflow="auto" maxHeight="350px">
         {!!endings?.length && (
           <QuestionsList
-            data={endings}
             endings={endings}
             questionsData={questions}
             onItemClick={onItemClick}

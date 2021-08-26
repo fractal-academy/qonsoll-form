@@ -52,7 +52,6 @@ function QuestionSimpleView(props) {
   const hasConditions = currentQuestion?.questionConfigurations?.filter(
     (item, index) => item?.redirectQuestion?.length > 0
   )?.length
-  // console.log(endings)
 
   return (
     <NumberedCard current={current} onClick={onClick} number={number}>
