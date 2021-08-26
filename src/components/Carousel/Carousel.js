@@ -84,9 +84,12 @@ function Carousel(props) {
       previousQuestionOrder[previousQuestionOrder.length - 1]
     )
 
-    const temp = previousQuestionOrder.filter(
-      (_, index) => index < previousQuestionOrder.length - 1
-    )
+    const temp =
+      previousQuestionOrder?.[previousQuestionOrder.length - 1] === currentSlide
+        ? previousQuestionOrder?.filter(
+            (_, index) => index < previousQuestionOrder.length - 1
+          )
+        : previousQuestionOrder
     setPreviousQuestionOrder(temp)
   }
 
