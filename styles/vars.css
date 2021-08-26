@@ -836,6 +836,16 @@
   --select-multiple-item-disabled-color: #bfbfbf;
   --select-multiple-item-disabled-border-color: var(--select-border-color);
 
+
+  /* Micro config for select with search*/
+  --ql-select-with-search-bg: transparent;
+  --ql-select-with-search-border: unset;
+
+  /* Micro config for select multiple */
+  --ql-select-multiple-item-border-radius: var(--border-radius-base);
+
+
+
   /* Select —————————————————————————————— End */
 
   /*
