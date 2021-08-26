@@ -63,14 +63,17 @@ function ShortText(props) {
     }
   }
 
-  useEffect(
-    () =>
-      //when question was skipped by navigation buttons and input was focused - reset focus
-      currentSlide === question?.order && inputRef?.current
-        ? inputRef?.current?.focus?.()
-        : inputRef?.current?.blur?.(),
-    [currentSlide]
-  )
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
+  // useEffect(
+  //   () =>
+  //     //when question was skipped by navigation buttons and input was focused - reset focus
+  //     currentSlide === question?.order && inputRef?.current
+  //       ? inputRef?.current?.focus?.()
+  //       : inputRef?.current?.blur?.(),
+  //   [currentSlide]
+  // )
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
+
   return (
     <Container>
       <Form

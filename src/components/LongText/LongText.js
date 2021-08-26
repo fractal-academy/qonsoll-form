@@ -72,14 +72,17 @@ function LongText(props) {
     }
   }
 
-  useEffect(
-    () =>
-      //when question was skipped by navigation buttons and input was focused - reset focus
-      currentSlide === question?.order && textAreaRef?.current
-        ? textAreaRef?.current?.focus?.()
-        : textAreaRef?.current?.blur?.(),
-    [currentSlide]
-  )
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
+  // useEffect(
+  // () =>
+  //when question was skipped by navigation buttons and input was focused - reset focus
+  // currentSlide === question?.order && textAreaRef?.current
+  //   ? textAreaRef?.current?.focus?.()
+  //   : textAreaRef?.current?.blur?.(),
+  // [currentSlide]
+  // )
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
+
   return (
     <Container>
       <Form
