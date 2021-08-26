@@ -146,8 +146,8 @@ function QuestionsList(props) {
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
             <Box pl="20px">
               <QuestionSimpleView
-                endings={endings}
                 {...item}
+                endings={endings}
                 number="W"
                 action={handleDelete}
                 disableDelete={disableDelete}
