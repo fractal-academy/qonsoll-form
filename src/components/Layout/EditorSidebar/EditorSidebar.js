@@ -281,6 +281,7 @@ function EditorSidebar(props) {
       <Box overflow="auto">
         {!!questions?.length && (
           <QuestionsList
+            endings={endings}
             data={questions}
             onItemClick={onItemClick}
             disableDelete={questions?.length === 1}
@@ -306,6 +307,7 @@ function EditorSidebar(props) {
         {!!endings?.length && (
           <QuestionsList
             data={endings}
+            endings={endings}
             questionsData={questions}
             onItemClick={onItemClick}
             disableDelete={endings?.length === 1}

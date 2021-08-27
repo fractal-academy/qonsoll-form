@@ -11,7 +11,6 @@ import { TranslationContext } from '../../../../context/Translation'
 import { FormAdvancedView } from '../../../../domains/Form/components'
 import { ContentCard, Spinner, PageHeader } from '../../../../components'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import { QuestionAdvancedView } from '../../../../domains/Question/components'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
@@ -34,8 +33,7 @@ function FormShow(props) {
     wrapperHeight,
     wrapperOffset,
     configurations,
-    actions = {},
-    loadingSubmitButton
+    actions = {}
   } = props
 
   // [CUSTOM_HOOKS]
@@ -189,7 +187,6 @@ function FormShow(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLastQuestionWithoutEndings, isAnswered])
-
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>

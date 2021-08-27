@@ -218,9 +218,28 @@
   --dark-t-lighten8 : rgba(3,11,23,0.08);
   --dark-t-lighten9 : rgba(3,11,23,0.04);
 
+ /* White transparent */
+--white-t-lighten1 : rgba(255,255,255,0.75);
+--white-t-lighten2 : rgba(255,255,255,0.5);
+--white-t-lighten3 : rgba(255,255,255,0.25);
+--white-t-lighten4 : rgba(255,255,255,0.20);
+--white-t-lighten5 : rgba(255,255,255,0.15);
+--white-t-lighten6 : rgba(255,255,255,0.12);
+--white-t-lighten7 : rgba(255,255,255,0.10);
+--white-t-lighten8 : rgba(255,255,255,0.08);
+--white-t-lighten9 : rgba(255,255,255,0.04);
+
+/* Text light */
+--text-light-primary : rgba(255,255,255,0.85);
+--text-light-secondary : rgba(255,255,255,0.65);
+--text-light-disabled : rgba(255,255,255,0.35);
 
 
-  /* Success */
+ /* Text dark secondary */
+  --text-dark-secondary : rgba(3,11,23,0.45);
+
+
+    /* Success */
   --success-color: var(--green-6);
   --success-1: var(--green-1);
   --success-3: var(--green-3);
@@ -816,6 +835,16 @@
   --select-multiple-disabled-background: var(--input-disabled-bg);
   --select-multiple-item-disabled-color: #bfbfbf;
   --select-multiple-item-disabled-border-color: var(--select-border-color);
+
+
+  /* Micro config for select with search*/
+  --ql-select-with-search-bg: transparent;
+  --ql-select-with-search-border: unset;
+
+  /* Micro config for select multiple */
+  --ql-select-multiple-item-border-radius: var(--border-radius-base);
+
+
 
   /* Select —————————————————————————————— End */
 

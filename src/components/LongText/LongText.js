@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Typography, Input, message } from 'antd'
 import { SubmitButton } from '../../components'
@@ -37,11 +37,6 @@ function LongText(props) {
     }
   )
 
-  //when question was skipped by navigation buttons and input was focused - reset focus
-  currentSlide === question?.order && textAreaRef?.current
-    ? textAreaRef?.current?.focus?.()
-    : textAreaRef?.current?.blur?.()
-
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
     const data = { question, answer: { value: answer || '' } }
@@ -76,6 +71,17 @@ function LongText(props) {
       e.preventDefault()
     }
   }
+
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
+  // useEffect(
+  // () =>
+  //when question was skipped by navigation buttons and input was focused - reset focus
+  // currentSlide === question?.order && textAreaRef?.current
+  //   ? textAreaRef?.current?.focus?.()
+  //   : textAreaRef?.current?.blur?.(),
+  // [currentSlide]
+  // )
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
 
   return (
     <Container>

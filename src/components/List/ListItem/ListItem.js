@@ -14,7 +14,8 @@ import {
   ItemPreview,
   StyledIcon,
   StyledImage,
-  StyledBadge
+  StyledBadge,
+  StyledMenu
 } from './ListItem.styles'
 
 const { Text } = Typography
@@ -115,7 +116,7 @@ const ListItem = forwardRef((props, ref) => {
 
   // [MENU TEMPLATE]
   const menu = (
-    <Menu>
+    <StyledMenu>
       <Item onClick={(e) => showModal(e)} key={'showModal'}>
         <Text>{edit || 'Edit'}</Text>
         <FormSimpleFormWithModal
@@ -139,7 +140,7 @@ const ListItem = forwardRef((props, ref) => {
           <Text>{popconfirmDeleteButtonText || 'Delete'}</Text>
         </Popconfirm>
       </Item>
-    </Menu>
+    </StyledMenu>
   )
 
   return (

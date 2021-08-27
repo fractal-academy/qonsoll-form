@@ -13,8 +13,14 @@ import {
 } from '../../../../context/CurrentQuestion'
 
 function QuestionsList(props) {
-  const { data, setNewOrder, onItemClick, disableDelete, questionsData } = props
-
+  const {
+    data,
+    setNewOrder,
+    onItemClick,
+    disableDelete,
+    questionsData,
+    endings
+  } = props
   // [CUSTOM_HOOKS]
   const { setData, deleteData } = useFunctions()
   const currentQuestion = useCurrentQuestionContext()
@@ -141,6 +147,7 @@ function QuestionsList(props) {
             <Box pl="20px">
               <QuestionSimpleView
                 {...item}
+                endings={endings}
                 number="W"
                 action={handleDelete}
                 disableDelete={disableDelete}
@@ -159,6 +166,7 @@ function QuestionsList(props) {
           <QuestionSimpleView
             {...item}
             data={data}
+            endings={endings}
             action={handleDelete}
             number={index + 1}
             onClick={() => onItemClick(item, index)}

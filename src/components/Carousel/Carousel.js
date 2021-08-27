@@ -54,7 +54,7 @@ function Carousel(props) {
     setIsAnswered && setIsAnswered(false)
   }
 
-  const next = (skipButtonEvent) => {
+  const next = async (skipButtonEvent) => {
     if (currentSlideData?.isRequired && skipButtonEvent) {
       message.error(
         answerRequiredMessageError || 'It`s required question, please answer'
@@ -62,6 +62,7 @@ function Carousel(props) {
     } else {
       //check if carousel navigation button was pressed, to avoid repetition in answers context
       if (skipButtonEvent) {
+        await setIsAnswered(true)
         //form the answer according to the answers context structure
         const answerData = {
           question: currentSlideData,
@@ -125,11 +126,11 @@ function Carousel(props) {
       events: ['keydown', 'keyup']
     }
   )
-
   // [ ANSWER ]
   const currentSlideData = questionsData?.filter(
     (item) => item.order === currentSlide
   )?.[0]
+
   const questionConfig = currentSlideData?.questionConfigurations
   const givenAnswer =
     answersContext &&
@@ -217,7 +218,9 @@ function Carousel(props) {
         infinite={false}>
         {children?.map((el, index) =>
           cloneElement(el, {
-            wrapperHeight: height - 60,
+            /*HOTFIX - improve this part with calc because of error on b2g. Work fine with "height -60" on b2g
+            but got height recalculation on phones on pure typeform*/
+            wrapperHeight: height - buttonsHeight,
             key: index
           })
         )}
