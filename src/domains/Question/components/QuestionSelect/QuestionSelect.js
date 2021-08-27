@@ -47,9 +47,10 @@ function QuestionSelect(props) {
       allowClear
       onChange={(question) => onChange(question, index)}
       defaultValue="Go to the next question">
-      <Option value="Submit form">
-        <Text>Submit form</Text>
-      </Option>
+      {/*FOR FUTURE IMPROVEMENTS  - if it will be necessary - add option "Submit form"*/}
+      {/*<Option value="Submit form">*/}
+      {/*  <Text>Submit form</Text>*/}
+      {/*</Option>*/}
 
       <OptGroup label={<StyledCaptionText>JUMP TO...</StyledCaptionText>}>
         {questionList?.map((item, index) => (

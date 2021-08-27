@@ -54,7 +54,7 @@ function Carousel(props) {
     setIsAnswered && setIsAnswered(false)
   }
 
-  const next = (skipButtonEvent) => {
+  const next = async (skipButtonEvent) => {
     if (currentSlideData?.isRequired && skipButtonEvent) {
       message.error(
         answerRequiredMessageError || 'It`s required question, please answer'
@@ -62,6 +62,7 @@ function Carousel(props) {
     } else {
       //check if carousel navigation button was pressed, to avoid repetition in answers context
       if (skipButtonEvent) {
+        await setIsAnswered(true)
         //form the answer according to the answers context structure
         const answerData = {
           question: currentSlideData,
@@ -127,11 +128,11 @@ function Carousel(props) {
       events: ['keydown', 'keyup']
     }
   )
-
   // [ ANSWER ]
   const currentSlideData = questionsData?.filter(
     (item) => item.order === currentSlide
   )?.[0]
+
   const questionConfig = currentSlideData?.questionConfigurations
   const givenAnswer =
     answersContext &&

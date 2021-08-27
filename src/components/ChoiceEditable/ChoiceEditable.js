@@ -102,7 +102,7 @@ function ChoiceEditable(props) {
           withImage={withImage}>
           <ChoiceInput
             withImage={withImage}
-            maxlength="150"
+            maxLength="150"
             value={value}
             onBlur={onBlur}
             placeholder={`${editableChoicePlaceholder || 'choice'} ${index}`}

@@ -16,12 +16,12 @@ function QuestionSimpleView(props) {
     title,
     action,
     number,
+    endings,
     onClick,
     layoutType,
     hiddenDelete,
     disableDelete
   } = props
-
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const {
@@ -36,6 +36,16 @@ function QuestionSimpleView(props) {
           (config) => config?.redirectQuestion === currentQuestion?.id
         )?.length > 0
     )?.length > 0
+
+  const hasEndingOnIt = endings
+    ?.map((ending) =>
+      ending?.questionConfigurations?.filter(
+        (configEndings) =>
+          configEndings?.triggerQuestionId?.split(' ')[0] ===
+          currentQuestion?.id
+      )
+    )
+    ?.flat()?.length
 
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id
@@ -67,7 +77,7 @@ function QuestionSimpleView(props) {
           <Popconfirm
             placement="topRight"
             title={
-              hasConditions || hasCondtitionOnIt
+              hasEndingOnIt || hasConditions || hasCondtitionOnIt
                 ? popconfirmOnDeleteQuestionWithConditions ||
                   'This question has connected logic. Delete it?'
                 : popconfirmOnDeleteQuestion || 'Delete this question?'
