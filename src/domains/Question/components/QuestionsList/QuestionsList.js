@@ -144,13 +144,13 @@ function QuestionsList(props) {
       {dataSource?.map(
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
-            <Box pl="20px">
+            <Box pl="20px" key={item}>
               <QuestionSimpleView
                 {...item}
                 endings={endings}
                 number="W"
+                hiddenDelete
                 action={handleDelete}
-                disableDelete={disableDelete}
                 onClick={() => onItemClick(item)}
               />
             </Box>
@@ -159,8 +159,8 @@ function QuestionsList(props) {
       <DragableList
         itemLayout="horizontal"
         sortable={sortable}
-        dataSource={filteredDataSource}
         onUpdate={onUpdate}
+        dataSource={filteredDataSource}
         setNewOrder={setNewOrder}
         renderItem={(item, index) => (
           <QuestionSimpleView

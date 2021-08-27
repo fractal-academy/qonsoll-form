@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { Select } from 'antd'
-import { Box, Col, Row } from '@qonsoll/react-design'
-import { QuestionSelect } from '../../../../Question/components'
-import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
-import { CustomInput, StyledSelect } from './PlainTextItem.styles'
+import PropTypes from 'prop-types'
+import { Col, Row } from '@qonsoll/react-design'
+import React, { useState, useEffect } from 'react'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
+import { QuestionSelect } from '../../../../Question/components'
+import { CustomInput, StyledSelect } from './PlainTextItem.styles'
 import { useTranslation } from '../../../../../context/Translation'
+import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
 
 const { Option } = Select
 

@@ -1,9 +1,8 @@
-import { FileOutlined } from '@ant-design/icons'
-import { Box, Menu } from '@qonsoll/react-design'
 import { Button, Image } from 'antd'
 import styled from 'styled-components'
+import { FileOutlined } from '@ant-design/icons'
+import { Box, Menu } from '@qonsoll/react-design'
 import typeformTheme from '../../../../styles/theme'
-import theme from '../../../../styles/theme'
 
 export const ItemPreview = styled(Box)`
   display: flex;

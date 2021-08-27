@@ -1,25 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Tooltip } from 'antd'
+import PropTypes from 'prop-types'
 import { Popover, Button, Box } from '@qonsoll/react-design'
 import { PlusOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../context/Translation'
 import { QuestionTypeSelect } from '../../../domains/Question/components'
 
 function TypePopover(props) {
-  const { questions, onClick, customQuestionTypes, welcomeScreenShowRule } =
-    props
-
-  // [COMPONENT STATE HOOKS]
-  const [showPopover, setShowPopover] = useState(false)
+  const {
+    onClick,
+    questions,
+    showPopover,
+    setShowPopover,
+    popoverShowChange,
+    customQuestionTypes,
+    welcomeScreenShowRule
+  } = props
 
   // [ADDITIONAL HOOKS]
   const { createNewQuestionTooltip } = useTranslation()
-
-  // [CLEAN FUNCTIONS]
-  const popoverShowChange = () => {
-    //move to editor sidebar
-    setShowPopover(!showPopover)
-  }
 
   return (
     <Popover
@@ -33,8 +32,8 @@ function TypePopover(props) {
         // Box popoverContent was wrapped with Box with negative margin to cover antD default popover paddings
         <Box my={-12} mx={-16}>
           <QuestionTypeSelect
-            questions={questions}
             onClick={onClick}
+            questions={questions}
             customQuestionTypes={customQuestionTypes}
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
@@ -52,6 +51,16 @@ function TypePopover(props) {
       </Tooltip>
     </Popover>
   )
+}
+
+TypePopover.propTypes = {
+  onClick: PropTypes.func,
+  questions: PropTypes.array,
+  showPopover: PropTypes.bool,
+  setShowPopover: PropTypes.func,
+  popoverShowChange: PropTypes.func,
+  customQuestionTypes: PropTypes.array,
+  welcomeScreenShowRule: PropTypes.bool
 }
 
 export default TypePopover

@@ -85,11 +85,13 @@ function Carousel(props) {
     )
 
     const temp =
-      previousQuestionOrder?.[previousQuestionOrder.length - 1] === currentSlide
+      previousQuestionOrder?.[previousQuestionOrder.length - 1] ===
+      currentSlide - 1
         ? previousQuestionOrder?.filter(
             (_, index) => index < previousQuestionOrder.length - 1
           )
         : previousQuestionOrder
+
     setPreviousQuestionOrder(temp)
   }
 
@@ -207,7 +209,7 @@ function Carousel(props) {
   isAnswered && typeAction()
 
   return (
-    <Box height="100%" ref={ref} width="100%">
+    <Box ref={ref} height="100%" width="100%">
       <AntdCarousel
         dots={false}
         swipe={false}
@@ -218,8 +220,6 @@ function Carousel(props) {
         infinite={false}>
         {children?.map((el, index) =>
           cloneElement(el, {
-            /*HOTFIX - improve this part with calc because of error on b2g. Work fine with "height -60" on b2g
-            but got height recalculation on phones on pure typeform*/
             wrapperHeight: height - buttonsHeight,
             key: index
           })

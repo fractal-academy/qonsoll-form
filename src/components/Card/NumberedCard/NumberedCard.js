@@ -18,7 +18,7 @@ function NumberedCard(props) {
 }
 
 NumberedCard.propTypes = {
-  number: PropTypes.number,
+  number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   children: PropTypes.node
 }
 

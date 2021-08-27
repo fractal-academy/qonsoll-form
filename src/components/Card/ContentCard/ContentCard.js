@@ -7,7 +7,7 @@ function ContentCard(props) {
   const { image, leftSideMenu, brightnessValue, children } = props
 
   return (
-    <Row height="100%" noGutters overflowX="hidden" overflowY="hidden">
+    <Row flexGrow={1} noGutters overflowX="hidden" overflowY="hidden">
       {leftSideMenu && (
         <Col mr={3} cw="auto" px="0">
           {leftSideMenu}

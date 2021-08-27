@@ -1,7 +1,6 @@
 import React from 'react'
 import { Select, Tag } from 'antd'
 import PropTypes from 'prop-types'
-import Text from 'antd/lib/typography/Text'
 import { StyledSelect, StyledCaptionText } from './QuestionSelect.styles'
 import styled from 'styled-components'
 import typeformTheme from '../../../../../styles/theme'

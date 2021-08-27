@@ -1,4 +1,3 @@
-import { List } from 'antd'
 import arrayMove from 'array-move'
 import styled from 'styled-components'
 import SortableItem from './SortableItem'
@@ -11,8 +10,7 @@ const UnsortableItem = styled(Box)`
 `
 
 function DragableList(props) {
-  const { dataSource, setNewOrder, onUpdate, renderItem, sortable, ...args } =
-    props
+  const { dataSource, onUpdate, renderItem, sortable } = props
 
   // [COMPONENT STATE HOOKS]
   const [sortableItems, setSortableItems] = useState([])
@@ -53,16 +51,11 @@ function DragableList(props) {
 
   return (
     <Container onSortEnd={onSortEnd} useDragHandle>
-      <List
-        {...args}
-        dataSource={sortableItems}
-        locale={{ emptyText: ' ' }}
-        renderItem={(item, index) => (
-          <SortableWrapper key={`item-${index}`} index={index}>
-            {renderItem ? renderItem(dataSource[item], index) : item}
-          </SortableWrapper>
-        )}
-      />
+      {sortableItems?.map((item, index) => (
+        <SortableWrapper key={`item-${index}`} index={index}>
+          {renderItem ? renderItem(dataSource[item], index) : item}
+        </SortableWrapper>
+      ))}
     </Container>
   )
 }
