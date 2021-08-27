@@ -107,7 +107,7 @@ theme.color.text = {}
 // Text dark
 theme.color.text.dark = {}
 theme.color.text.dark.primary = theme.color.dark.t.lighten1
-theme.color.text.dark.secondary = '--var(--text-dark-secondary)'
+theme.color.text.dark.secondary = 'var(--text-dark-secondary)'
 theme.color.text.dark.disabled = theme.color.dark.t.lighten4
 
 // Text light

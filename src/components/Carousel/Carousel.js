@@ -126,12 +126,10 @@ function Carousel(props) {
       events: ['keydown', 'keyup']
     }
   )
-  console.log(currentSlide)
   // [ ANSWER ]
   const currentSlideData = questionsData?.filter(
     (item) => item.order === currentSlide
   )?.[0]
-  console.log(currentSlideData)
 
   const questionConfig = currentSlideData?.questionConfigurations
   const givenAnswer =
