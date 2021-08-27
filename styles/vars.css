@@ -1891,7 +1891,7 @@
   /* + */
   --alert-with-description-no-icon-padding-vertical: calc(var(--padding-md) - 1px);
   /* + */
-  --alert-with-description-padding-vertical: var(--padding-md) - 1px;
+  --alert-with-description-padding-vertical: calc(var(--padding-md) - 1px);
   --alert-with-description-padding: var(
       --alert-with-description-padding-vertical
     )
