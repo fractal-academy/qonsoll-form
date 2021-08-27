@@ -1,70 +1,151 @@
-# Getting Started with Create React App
+# &#x1F4D8; Typeform documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[**Typeform**](https://github.com/fractal-academy/feedback-typeform-app) is a service for surveys' form builder. It makes collecting and sharing information comfortable and conversational.
+Current project can be used as module in other projects.
 
-## Available Scripts
+### How to run app localy for further changes
 
-In the project directory, you can run:
+Pull the project using folowing command:
 
-### `npm start`
+```sh
+git clone --recurse-submodules https://github.com/fractal-academy/submodule_connection-testing
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Switch to project folder:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```sh
+cd submodule_connection-testing
+```
 
-### `npm test`
+Install all dependecies and pull latest changes:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+npm i
+```
 
-### `npm run build`
+Some packages need manual instalation. Run following command:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+npm i fuse.js && use-media && ziggeo-client-sdk && react-ziggeo
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
+Add formId and order as indexed fields for questions collection. Leave index rule default (ascending).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### How to implement module in existing project
 
-### `npm run eject`
+If it's first initialisation of module in project create folder for modules in directory of your existing project:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+mkdir src/modules
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Go to the created folder:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```sh
+cd src/modules
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Add typeform module to your project by following command:
 
-## Learn More
+```sh
+git submodule add https://github.com/fractal-academy/feedback-typeform-app.git
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Go to the /module folder:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+cd feedback-typeform-app
+```
 
-### Code Splitting
+Get newest changes of module:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```sh
+git pull origin library
+```
 
-### Analyzing the Bundle Size
+Some packages need manual instalation. Run following command:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```sh
+npm i fuse.js && use-media && ziggeo-client-sdk && react-ziggeo
+```
 
-### Making a Progressive Web App
+Go the directory of your project and install all of packages:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```sh
+cd ../../../
+```
 
-### Advanced Configuration
+```sh
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
+Add formId and order as indexed fields for questions collection. Leave index rule default (ascending).
 
-### Deployment
+### How to run app with already added typeform module
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+After cloning existing project to your computer, install all packages:
 
-### `npm run build` fails to minify
+```sh
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Make shure that there's present /modules folder and .gitmodules file in your project.
+Go to /modules folder and use following comands:
+
+```sh
+git submodule update --init --recursive
+```
+
+```sh
+git submodule update --recursive --remote
+```
+
+### How to configure workflow
+
+In block steps first you need to install all dependencies.
+
+```sh
+- run: npm install
+```
+
+Get the latest changes of module. Go to the modules directory:
+
+```sh
+- run: cd src/modules
+```
+
+By following commands update modules:
+
+```sh
+- run: git submodule update --init --recursive
+```
+
+```sh
+- run: git submodule update --recursive --remote
+```
+
+Go back to your project directory and install node modules:
+
+```sh
+- run: cd ../../ && npm install
+```
+
+Next step - you need to build your application:
+
+```sh
+npm run build:dev
+```
+
+If you project does'n run after following steps, that means that there's console warnings in you project. To fix that you need to add flag to you run command.
+
+```sh
+- run: CI=false npm run build:dev
+```
+
+After that, if there's exception that you have not enough memory in docker, you can run following command (it increases volume of memory to 8Gb):
+
+```sh
+- run: CI=false NODE_OPTIONS=--max-old-space-size=8192 npm run build:dev
+```
