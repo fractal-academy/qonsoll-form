@@ -45,7 +45,7 @@ function ShortText(props) {
     if (e.keyCode === 13) {
       //Prevent linebrake onEnter
 
-      e.preventDefault()
+      e.preventDefault().blur()
     }
   }
 

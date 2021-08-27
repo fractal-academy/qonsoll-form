@@ -68,7 +68,7 @@ function LongText(props) {
   const onFocusedKeyPress = (e) => {
     if (e.keyCode === 13 && !e.shiftKey) {
       //Prevent line brake onEnter
-      e.preventDefault()
+      e.preventDefault().blur()
     }
   }
 

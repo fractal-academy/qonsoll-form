@@ -1516,7 +1516,7 @@
   /* + */
   --calendar-bg: var(--component-background);
   --calendar-input-bg: var(--input-bg);
-  --calendar-border-color: var(--border-color-inverse);
+  /*--calendar-border-color: var(--border-color-inverse);*/
   --calendar-item-active-bg: var(--item-active-bg);
   --calendar-full-bg: var(--calendar-bg);
   /* + */
