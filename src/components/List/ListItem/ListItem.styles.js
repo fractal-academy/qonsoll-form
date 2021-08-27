@@ -1,7 +1,7 @@
-import { FileOutlined } from '@ant-design/icons'
-import { Box } from '@qonsoll/react-design'
 import { Button, Image } from 'antd'
 import styled from 'styled-components'
+import { FileOutlined } from '@ant-design/icons'
+import { Box, Menu } from '@qonsoll/react-design'
 import typeformTheme from '../../../../styles/theme'
 
 export const ItemPreview = styled(Box)`
@@ -32,4 +32,8 @@ export const StyledBadge = styled(Button)`
   width: 24px;
   right: -14px;
   top: -14px;
+`
+export const StyledMenu = styled(Menu)`
+  border-radius: ${({ theme }) =>
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
 `

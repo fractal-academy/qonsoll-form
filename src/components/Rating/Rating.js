@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useMedia from 'use-media'
 import { message } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
@@ -24,6 +24,7 @@ function CustomRating(props) {
   //[CUSTOM HOOKS]
   const { answerRequiredMessageError } = useTranslation()
   const answersContext = useAnswersContext()
+  const [selectedValue, setSelectedValue] = useState(0)
 
   //[ADDITIONAL HOOKS]
   const phoneSize = useMedia({ maxWidth: '430px' })
@@ -36,7 +37,7 @@ function CustomRating(props) {
   const onChange = (selectedStarsNumber) => {
     if (range.includes(selectedStarsNumber)) {
       const selectedStarData = questionConfigurations?.[selectedStarsNumber - 1]
-
+      setSelectedValue(selectedStarsNumber)
       //answer score if configured
       const score =
         answersScoreData?.find(
@@ -94,6 +95,7 @@ function CustomRating(props) {
   return (
     <Container>
       <StyledRate
+        value={selectedValue}
         autoFocus={false}
         tooltips={tooltips}
         onChange={onChange}

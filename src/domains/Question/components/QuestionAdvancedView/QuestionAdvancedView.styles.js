@@ -1,60 +1,28 @@
 import styled from 'styled-components'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Box, Col } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
 
 export const styles = {
-  questionCardColumnStyle: {
-    v: 'center',
-    order: 2,
-    mx: 4
-  },
-  sideImageColumnStyle: {
-    v: 'center',
-    h: 'justifyContent',
-    display: 'flex'
-  },
   mainRowStyle: {
     h: 'center',
     height: 'inherit',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
     position: 'relative'
   }
 }
 
-export const WrapperRow = styled(Row)`
-  ${({ theme }) => `
-    height: inherit;
-    background-size: cover;
-    background-repeat: no-repeat;
-    justify-content: center;
-    align-items: center;
-    display:flex;
-    border-radius: 
-        ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-    }
-`}
-`
-
 export const StyledBox = styled(Box)`
   ${({ specialLayoutRule }) => `
-  width: 100%;
-  background-color: transparent;
+  display:flex;
+  flex-direction:column;  
   text-align: ${specialLayoutRule && 'center'};
   justify-content: ${specialLayoutRule && 'center'};
+  align-items: ${specialLayoutRule && 'center'};
   max-height: 80vh;
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
   }
 `}
-`
-
-export const StyledCol = styled(Col)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
 `
 
 export const BackgroundImage = styled(Col)`

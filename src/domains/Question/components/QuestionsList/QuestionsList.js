@@ -13,8 +13,14 @@ import {
 } from '../../../../context/CurrentQuestion'
 
 function QuestionsList(props) {
-  const { data, setNewOrder, onItemClick, disableDelete, questionsData } = props
-
+  const {
+    data,
+    setNewOrder,
+    onItemClick,
+    disableDelete,
+    questionsData,
+    endings
+  } = props
   // [CUSTOM_HOOKS]
   const { setData, deleteData } = useFunctions()
   const currentQuestion = useCurrentQuestionContext()
@@ -134,30 +140,33 @@ function QuestionsList(props) {
   const sortable = filteredDataSource?.length > 1
 
   return (
-    <Box mr={2}>
+    <Box p={2}>
       {dataSource?.map(
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
-            <Box ml="24px" mb={3}>
+            <Box pl="20px" key={item}>
               <QuestionSimpleView
                 {...item}
+                endings={endings}
                 number="W"
+                hiddenDelete
                 action={handleDelete}
-                disableDelete={disableDelete}
-                onClick={() => onItemClick(item)}></QuestionSimpleView>
+                onClick={() => onItemClick(item)}
+              />
             </Box>
           )
       )}
       <DragableList
         itemLayout="horizontal"
         sortable={sortable}
-        dataSource={filteredDataSource}
         onUpdate={onUpdate}
+        dataSource={filteredDataSource}
         setNewOrder={setNewOrder}
         renderItem={(item, index) => (
           <QuestionSimpleView
             {...item}
             data={data}
+            endings={endings}
             action={handleDelete}
             number={index + 1}
             onClick={() => onItemClick(item, index)}

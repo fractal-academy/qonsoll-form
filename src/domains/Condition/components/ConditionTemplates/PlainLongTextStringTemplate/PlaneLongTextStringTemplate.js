@@ -8,10 +8,10 @@ import { v4 as uuid } from 'uuid'
 function PlaneLongTextStringTemplate(props) {
   const {
     id,
-    questionConfigurations,
     addCondition,
     questionList,
-    addRedirectQuestion
+    addRedirectQuestion,
+    questionConfigurations
   } = props
 
   // [CLEAN FUNCTIONS]
@@ -49,9 +49,10 @@ function PlaneLongTextStringTemplate(props) {
   )
 }
 PlaneLongTextStringTemplate.propTypes = {
-  questionOptions: PropTypes.array,
-  addCondition: PropTypes.func,
-  questionList: PropTypes.array,
-  addRedirectQuestion: PropTypes.func
+  id: PropTypes.string.isRequired,
+  addCondition: PropTypes.func.isRequired,
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired,
+  questionConfigurations: PropTypes.array.isRequired
 }
 export default PlaneLongTextStringTemplate

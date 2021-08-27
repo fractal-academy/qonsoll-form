@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSize } from '@umijs/hooks'
 import { Upload, Empty, Typography } from 'antd'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { ListItem, NewListItem } from '../../../components'
@@ -12,7 +11,6 @@ function StaticList(props) {
     setEdit,
     onClick,
     hasMedia,
-    columnWidth,
     beforeUpload,
     customRequest,
     disableAddButton = true,
@@ -20,22 +18,21 @@ function StaticList(props) {
     setSelectedBackgroundImg
   } = props
 
-  // const itemRef = useRef()
-  const [{ height: itemHeight }, itemRef] = useSize()
-
   // [ADDITIONAL HOOKS]
   const { emptyDescription, uploadImage, addForm } = useTranslation()
+
+  // [COMPUTED PROPERTIES]
+  const columnWidth = data?.[0]?.imageUrl ? 3 : [6, 4, 4, 2]
 
   return (
     <>
       {data?.length ? (
-        <Row display="flex" width="100%" noGutters>
+        <Row display="flex" width="100%" height="fit-content" noGutters>
           {disableAddButton && (
             <Col cw={columnWidth}>
               <NewListItem
                 onClick={onClick}
                 hasMedia={hasMedia}
-                itemHeight={itemHeight}
                 beforeUpload={beforeUpload}
                 customRequest={customRequest}
               />
@@ -46,7 +43,6 @@ function StaticList(props) {
               <ListItem
                 data={item}
                 setEdit={setEdit}
-                reference={itemRef}
                 selectedBackgroundImg={selectedBackgroundImg}
                 setSelectedBackgroundImg={setSelectedBackgroundImg}
               />

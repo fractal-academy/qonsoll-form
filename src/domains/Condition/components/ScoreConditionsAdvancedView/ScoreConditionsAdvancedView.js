@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography } from 'antd'
+import PropTypes from 'prop-types'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
 import { useTranslation } from '~/modules/feedback-typeform-app/src/context/Translation'
@@ -60,9 +61,9 @@ const ScoreConditionsAdvancedView = (props) => {
           {questionData?.title}
         </Title>
         {questionData?.questionConfigurations?.map((item, index) => (
-          <Row noGutters mb={2} key={index}>
-            <Col cw={8} style={{ paddingRight: '32px' }}>
-              <OptionBox px={2}>
+          <Row mb={2} key={index}>
+            <Col cw={8} pl={0} pr={2}>
+              <OptionBox px={3}>
                 <CustomTextBox mr={2} px={2}>
                   <Text strong>{String.fromCharCode(startLetter + index)}</Text>
                 </CustomTextBox>
@@ -72,6 +73,7 @@ const ScoreConditionsAdvancedView = (props) => {
             <Col cw={4}>
               <StyledInputNumber
                 min={0}
+                style={{ width: '100%' }}
                 placeholder={
                   scoreWeightTranslation || 'Enter score weight of answer'
                 }
@@ -91,6 +93,12 @@ const ScoreConditionsAdvancedView = (props) => {
       </Box>
     </NumberedCard>
   )
+}
+
+ScoreConditionsAdvancedView.propTypes = {
+  index: PropTypes.number.isRequired,
+  questionData: PropTypes.array.isRequired,
+  questionScoresData: PropTypes.array.isRequired
 }
 
 export default ScoreConditionsAdvancedView

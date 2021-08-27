@@ -3,6 +3,7 @@ import { SettingOutlined } from '@ant-design/icons'
 import { Popover, Button, Popconfirm, Tooltip } from 'antd'
 import { useTranslation } from '../../../../context/Translation'
 import { QuestionConfigurationPopoverContent } from '../../../../domains/Question/components'
+import { Box } from '@qonsoll/react-design'
 
 function QuestionConfigurationPopover(props) {
   const {
@@ -83,13 +84,16 @@ function QuestionConfigurationPopover(props) {
       placement="bottomRight"
       overlayStyle={{ width: '320px' }}
       content={
-        <QuestionConfigurationPopoverContent
-          questionData={questionData}
-          setShowPopover={setShowPopover}
-          customQuestionTypes={customQuestionTypes}
-          onQuestionTypeChange={onQuestionTypeChange}
-          welcomeScreenShowRule={welcomeScreenShowRule}
-        />
+        // Box popoverContent was wrapped with Box with negative margin to cover antD default popover paddings
+        <Box my={-12} mx={-16}>
+          <QuestionConfigurationPopoverContent
+            questionData={questionData}
+            setShowPopover={setShowPopover}
+            customQuestionTypes={customQuestionTypes}
+            onQuestionTypeChange={onQuestionTypeChange}
+            welcomeScreenShowRule={welcomeScreenShowRule}
+          />
+        </Box>
       }>
       <Tooltip title={questionConfigurationTooltip || 'Configure question'}>
         <Button

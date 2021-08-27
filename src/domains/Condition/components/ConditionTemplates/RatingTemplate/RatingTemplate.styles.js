@@ -10,8 +10,9 @@ export const CustomRatingBox = styled(Box)(({ theme }) => ({
     theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9,
   border: '1px solid',
   borderColor:
-    theme?.color?.dark?.t?.lighten5 || typeformTheme?.borderRadius?.md,
-  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
+    theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5,
+  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md,
+  height: '100%'
 }))
 export const CustomTextBox = styled(Box)(({ theme }) => ({
   minWidth: '30px',
@@ -20,6 +21,6 @@ export const CustomTextBox = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   border: '1px solid',
   borderColor:
-    theme?.color?.dark?.t?.lighten4 || typeformTheme?.borderRadius?.md,
-  borderRadius: theme?.borderRadius?.sm || typeformTheme?.borderRadius?.md
+    theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5,
+  borderRadius: theme?.borderRadius?.sm || typeformTheme?.borderRadius?.sm
 }))

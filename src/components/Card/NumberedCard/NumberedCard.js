@@ -4,19 +4,21 @@ import { Box } from '@qonsoll/react-design'
 
 import { HiddenBox, ContentBox, NumberBox } from './NumberedCard.styles'
 function NumberedCard(props) {
-  const { number, current, children } = props
+  const { number, current, children, ...args } = props
 
   return (
-    <Box position="relative">
+    <Box position="relative" mb={3}>
       <HiddenBox />
-      <ContentBox current={current}>{children}</ContentBox>
+      <ContentBox current={current} {...args}>
+        {children}
+      </ContentBox>
       <NumberBox>{number}</NumberBox>
     </Box>
   )
 }
 
 NumberedCard.propTypes = {
-  number: PropTypes.number,
+  number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   children: PropTypes.node
 }
 

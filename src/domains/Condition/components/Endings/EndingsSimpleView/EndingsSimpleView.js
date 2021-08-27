@@ -9,14 +9,24 @@ import { COLLECTIONS } from '../../../../../constants'
 import { NumberedCard } from '../../../../../components'
 import useFunctions from '../../../../../hooks/useFunctions'
 import { useTranslation } from '../../../../../context/Translation'
+import typeformTheme from '../../../../../../styles/theme'
 
 const StyledTag = styled(Tag)`
-  background-color: ${({ theme }) => theme.color.primary.t.lighten5};
-  color: ${({ theme }) => theme.color.primary.default};
-  border-color: ${({ theme }) => theme.color.primary.t.lighten2};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: ${({ theme }) => theme.typography.fontSize.body1};
+  background-color: ${({ theme }) =>
+    theme?.color?.primary?.t?.lighten5 ||
+    typeformTheme?.color?.primary?.t?.lighten5};
+  color: ${({ theme }) =>
+    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
+  border-color: ${({ theme }) =>
+    theme?.color?.primary?.t?.lighten2 ||
+    typeformTheme?.color?.primary?.t?.lighten2};
+  border-radius: ${({ theme }) =>
+    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  font-size: ${({ theme }) =>
+    theme?.typography?.fontSize?.body1 ||
+    typeformTheme?.typography?.fontSize?.body1};
   margin-right: 10px !important;
+  margin-left: 10px !important;
 `
 const StyledSelect = styled(Select)`
   .ant-select-clear {
@@ -115,10 +125,8 @@ function EndingSimpleView(props) {
   )
 }
 EndingSimpleView.propTypes = {
-  mockQuestionIndex: PropTypes.number,
   item: PropTypes.object.isRequired,
-  addCondition: PropTypes.func.isRequired,
-  addRedirectQuestion: PropTypes.func.isRequired,
-  getQuestionListRedirect: PropTypes.func.isRequired
+  index: PropTypes.number.isRequired,
+  questionsData: PropTypes.array.isRequired
 }
 export default EndingSimpleView

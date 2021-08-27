@@ -8,7 +8,6 @@ import { useTranslation } from '../../../../context/Translation'
 import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
 import {
   styles,
-  StyledCol,
   StyledBox,
   BackgroundImage
 } from './QuestionAdvancedView.styles'
@@ -39,7 +38,7 @@ function QuestionAdvancedView(props) {
   } = props
 
   // [ADDITIONAL_HOOKS]
-  const { finishButton, startButton } = useTranslation()
+  const { finishButton, startButton, videoQuestion } = useTranslation()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -66,7 +65,9 @@ function QuestionAdvancedView(props) {
       )
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <RangeButton onClick={onClick} currentSlide={currentSlide} />
+      component: (
+        <RangeButton onKeyDown onClick={onClick} currentSlide={currentSlide} />
+      )
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate onClick={onClick} currentSlide={currentSlide} />
@@ -123,6 +124,7 @@ function QuestionAdvancedView(props) {
     layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
     layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type &&
     layoutType.type !== LAYOUT_TYPES.DEFAULT.type
+  const backgroundRule = layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
   const bgImage = {
     ...(layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
       ? {
@@ -146,31 +148,31 @@ function QuestionAdvancedView(props) {
 
   return (
     <Row {...styles.mainRowStyle} noGutters>
-      {bgImage && (
+      {backgroundRule && (
         <BackgroundImage
           cw={12}
           image={bgImage}
           imageBrightness={data?.imageBrightness || 0}
         />
       )}
-      <Col
-        {...styles.questionCardColumnStyle}
-        cw={[12, 12, 6, 6]}
-        alignSelf={tabletImageCheck}>
+      <Col mx={2} order={2} cw={[12, 12, 6, 6]} alignSelf={tabletImageCheck}>
         <StyledBox
           pl={devicePadding}
+          pr={devicePadding}
           bordered={false}
           specialLayoutRule={specialLayoutRule}>
           <Row noGutters py={2}>
             <Col cw={12}>
               {data?.videoApiKey ? (
                 <Box
-                  display={'flex'}
-                  flexDirection={'column'}
-                  justifyContent={'center'}>
-                  <Title style={{ wordBreak: 'break-word' }} level={4}>
-                    {questionNumberRule && `${questionNumber}. `}Video question
-                  </Title>
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center">
+                  {questionNumberRule && (
+                    <Title style={{ wordBreak: 'break-word' }} level={4}>
+                      `${questionNumber}. ${videoQuestion || 'Video question'}`
+                    </Title>
+                  )}
                   <VideoPlayer videoKey={data?.videoApiKey} />
                 </Box>
               ) : (
@@ -208,9 +210,10 @@ function QuestionAdvancedView(props) {
         </StyledBox>
       </Col>
       {imageShowRule && (
-        <StyledCol
+        <Col
+          v="center"
+          h="center"
           height={deviceImageHeight}
-          {...styles.sideImageColumnStyle}
           order={widthTablet ? '1' : layoutType.imageOrder}>
           <QuestionImageContainer
             image={data?.image}
@@ -219,7 +222,7 @@ function QuestionAdvancedView(props) {
             {...layoutType.imgSize}
             imageBrightness={data?.imageBrightness || 0}
           />
-        </StyledCol>
+        </Col>
       )}
     </Row>
   )

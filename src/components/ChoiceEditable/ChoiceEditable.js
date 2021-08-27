@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { Popconfirm } from 'antd'
+import { useHover } from '@umijs/hooks'
+import { Row } from '@qonsoll/react-design'
+import { DEFAULT_IMAGE } from '../../constants'
+import { CloseOutlined } from '@ant-design/icons'
+import React, { useState, useEffect } from 'react'
+import { useTranslation } from '../../context/Translation'
+import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
 import {
   LetterBox,
   DeleteButton,
@@ -8,32 +15,25 @@ import {
   MediaBox,
   MainBox
 } from './ChoiceEditable.styles'
-import { DEFAULT_IMAGE } from '../../constants'
-import { Row } from '@qonsoll/react-design'
-import { CloseOutlined } from '@ant-design/icons'
-import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
-import { useTranslation } from '../../context/Translation'
-import { Popconfirm } from 'antd'
-import { useHover } from '@umijs/hooks'
 
 let startLetter = 65
 
 function ChoiceEditable(props) {
   const { index, data, withImage } = props
+
   //[CUSTOM HOOKS]
   const { editableChoicePlaceholder } = useTranslation()
 
   // [ADDITIONAL HOOKS]
+  const [isHovering, hoverRef] = useHover()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-
   const { popconfirmOnDeleteOptionWithConditions } = useTranslation()
-  const [isHovering, hoverRef] = useHover()
 
   // [COMPONENT STATE HOOKS]
   const [value, setValue] = useState(data?.answerOption)
@@ -96,13 +96,13 @@ function ChoiceEditable(props) {
         </MediaBox>
       )}
       <Row noGutters px={2}>
-        <LetterBox>{letter}</LetterBox>
+        <LetterBox withImage={withImage}>{letter}</LetterBox>
         <ChoiceOptionCol
           width={withImage ? '150px' : '100%'}
           withImage={withImage}>
           <ChoiceInput
             withImage={withImage}
-            maxlength="150"
+            maxLength="150"
             value={value}
             onBlur={onBlur}
             placeholder={`${editableChoicePlaceholder || 'choice'} ${index}`}

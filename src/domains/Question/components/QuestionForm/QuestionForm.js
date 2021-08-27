@@ -6,18 +6,12 @@ import { Col, Row, Box } from '@qonsoll/react-design'
 import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
 import { useTranslation } from '../../../../context/Translation'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { styles, StyledCol, CustomCard, CustomRow } from './QuestionForm.styles'
 import {
   DEFAULT_IMAGE,
   QUESTION_TYPES,
   LAYOUT_TYPES
 } from '../../../../constants'
-import {
-  styles,
-  StyledCol,
-  CustomCard,
-  CustomRow,
-  QuestionHeaderCol
-} from './QuestionForm.styles'
 import {
   QuestionConfigurationPopover,
   QuestionHeader,
@@ -36,11 +30,18 @@ import {
   DateTimeInput,
   ContentCard
 } from '../../../../components'
+import '../../../../../../../../src/styles/vars.css'
+import typeformTheme from '../../../../../styles/theme'
 
 const StyledTag = styled(Tag)`
-  background-color: ${({ theme }) => theme?.color?.primary?.t?.lighten5};
-  color: ${({ theme }) => theme?.color?.primary?.default};
-  border-color: ${({ theme }) => theme?.color?.primary?.t?.lighten2};
+  background-color: ${({ theme }) =>
+    theme?.color?.primary?.t?.lighten5 ||
+    typeformTheme?.color?.primary?.t?.lighten5};
+  color: ${({ theme }) =>
+    theme?.color?.primary?.default || theme?.color?.primary?.default};
+  border-color: ${({ theme }) =>
+    theme?.color?.primary?.t?.lighten2 ||
+    typeformTheme?.color?.primary?.t?.lighten2};
 `
 
 function QuestionForm(props) {
@@ -153,10 +154,12 @@ function QuestionForm(props) {
       )}
       {!!Object.keys(currentQuestion).length && (
         <CustomRow noGutters>
-          <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 8]}>
+          <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 8]} px="0">
             <CustomCard bordered={false}>
-              <Row noGutters v="center">
-                <Col>{tagRule && <StyledTag>{questionTag}</StyledTag>}</Col>
+              <Row noGutters v="center" h="between">
+                <Col cw="auto">
+                  {tagRule && <StyledTag>{questionTag}</StyledTag>}
+                </Col>
                 {isConfigurationPopoverVisible && (
                   <Col cw="auto">
                     <QuestionConfigurationPopover
@@ -170,7 +173,7 @@ function QuestionForm(props) {
                 )}
               </Row>
               <Row noGutters h="between" mb={4}>
-                <QuestionHeaderCol cw="12" mt={2}>
+                <Col cw="12" mt={2}>
                   <QuestionHeader
                     titlePlaceholder={
                       editableTitleHint || 'Editable question title'
@@ -179,7 +182,7 @@ function QuestionForm(props) {
                       editableSubtitleHint || 'Description(optional)'
                     }
                   />
-                </QuestionHeaderCol>
+                </Col>
               </Row>
               {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
                 <Row noGutters>

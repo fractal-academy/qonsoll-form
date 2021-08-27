@@ -15,6 +15,7 @@ export const styles = {
 }
 
 export const StyledCol = styled(Col)`
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,4 +40,3 @@ export const CustomRow = styled(Row)`
   flex-grow: 1;
   display: flex;
 `
-export const QuestionHeaderCol = styled(Col)``

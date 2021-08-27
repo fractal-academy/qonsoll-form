@@ -1,11 +1,11 @@
-import React, { useRef } from 'react'
-import { Form, Input, message } from 'antd'
 import PropTypes from 'prop-types'
+import React, { useRef } from 'react'
+import { useKeyPress } from '@umijs/hooks'
+import { Form, Input, message } from 'antd'
 import { globalStyles } from '../../../styles'
 import { SubmitButton } from '../../components'
 import { Box, Container } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
-import { useKeyPress } from '@umijs/hooks'
 
 function ShortText(props) {
   const { inputProps, onClick, question, currentSlide } = props
@@ -63,10 +63,16 @@ function ShortText(props) {
     }
   }
 
-  //when question was skipped by navigation buttons and input was focused - reset focus
-  inputRef?.current && currentSlide === question?.order
-    ? inputRef?.current?.focus?.()
-    : inputRef?.current?.blur?.()
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
+  // useEffect(
+  //   () =>
+  //     //when question was skipped by navigation buttons and input was focused - reset focus
+  //     currentSlide === question?.order && inputRef?.current
+  //       ? inputRef?.current?.focus?.()
+  //       : inputRef?.current?.blur?.(),
+  //   [currentSlide]
+  // )
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
 
   return (
     <Container>

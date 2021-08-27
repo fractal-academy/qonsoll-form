@@ -11,9 +11,9 @@ function YesNoChoiceTemplate(props) {
   return (
     <>
       {questionConfigurations?.map((item, index) => (
-        <Row mb={2} key={index} noGutters>
-          <Col cw={6}>
-            <CustomYesNoBox mr={4} pl={2}>
+        <Row mb={2} key={index}>
+          <Col cw={6} pl={0} pr={2}>
+            <CustomYesNoBox px={3}>
               <CustomTextBox mr={2} px={2}>
                 <Text strong>{item.answerOption[0].toUpperCase()}</Text>
               </CustomTextBox>
@@ -35,9 +35,9 @@ function YesNoChoiceTemplate(props) {
 }
 
 YesNoChoiceTemplate.propTypes = {
-  questionOptions: PropTypes.array,
-  questionList: PropTypes.array,
-  addRedirectQuestion: PropTypes.func
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired,
+  questionConfigurations: PropTypes.array.isRequired
 }
 
 export default YesNoChoiceTemplate

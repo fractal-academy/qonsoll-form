@@ -1,38 +1,22 @@
 import Fuse from 'fuse.js'
-import PropTypes from 'prop-types'
-import React, { useState, useEffect, useRef } from 'react'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import {
-  Breadcrumb,
-  Typography,
-  message,
-  Divider,
-  Button,
-  Menu,
-  Input
-} from 'antd'
 import useMedia from 'use-media'
-import { globalStyles } from '../../../../../styles'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
-import { Spinner, StaticList } from '../../../../components'
-import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
-import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { ArrowLeftOutlined, FolderOutlined } from '@ant-design/icons'
-import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
-import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import { TranslationContext } from '../../../../context/Translation'
+import PropTypes from 'prop-types'
+import { Typography, message, Input } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
+import React, { useState, useEffect, useRef } from 'react'
+import { Row, Col, Box, Container } from '@qonsoll/react-design'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
+import { TranslationContext } from '../../../../context/Translation'
+import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
+import { Spinner, StaticList, PageHeader } from '../../../../components'
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
+import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
-import { StyledBox } from './FormsAll.styles'
 
-const { Title, Text } = Typography
+const { Text } = Typography
 
-const mockRoutes = [
-  { path: '/forms', page: 'Forms' },
-  { path: '/images', page: 'Images' },
-  { path: '/videos', page: 'Videos' }
-]
 function FormsAll(props) {
   const {
     firebase,
@@ -40,7 +24,6 @@ function FormsAll(props) {
     actions = {},
     childrenModal,
     titleProps,
-    firstLevelHidden,
     configurations,
     onBack,
     disableAddButton
@@ -48,14 +31,14 @@ function FormsAll(props) {
 
   // [CUSTOM_HOOKS]
   const { getCollectionRef, getTimestamp, setData } = useFunctions(firebase)
+
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
-  // const history = useHistory()
   const [data] = useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
-  const mobileLayout = useMedia({ minWidth: '769px' })
-  // const squareDesctopLayout = useMedia({ minWidth: '1024px' })
+  const smallScreen = useMedia({ minWidth: '769px' })
+
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [currentData, setCurrentData] = useState(data)
@@ -64,6 +47,14 @@ function FormsAll(props) {
 
   // [COMPUTED PROPERTIES]
   let amountFiles = currentData?.length
+  const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
+    translations || {}
+  const containerPadding = smallScreen ? 4 : 2
+
+  // [USE_EFFECTS]
+  useEffect(() => {
+    setCurrentData(data)
+  }, [data])
 
   // [CLEAN FUNCTIONS]
   const searchData = () => {
@@ -72,12 +63,6 @@ function FormsAll(props) {
       setCurrentData(searchRes?.map((item) => item.item))
     } else setCurrentData(data)
   }
-
-  // [USE_EFFECTS]
-  useEffect(() => {
-    setCurrentData(data)
-  }, [data])
-
   const onFormCreate = async (data) => {
     const { title, subtitle, isQuiz, ...restData } = data
     const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
@@ -115,18 +100,6 @@ function FormsAll(props) {
       }).catch((e) => message.error(e.message))
     }
   }
-  // [COMPUTED PROPERTIES]
-  const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
-    translations || {}
-  const menu = (
-    <Menu>
-      {mockRoutes?.map((item, index) => (
-        <Menu.Item key={index}>
-          <Text>{item.page}</Text>
-        </Menu.Item>
-      ))}
-    </Menu>
-  )
   const showModal = () => {
     setIsModalVisible(true)
   }
@@ -139,69 +112,13 @@ function FormsAll(props) {
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={translations || {}}>
           <TypeformConfigurationContext.Provider value={configurations}>
-            <StyledBox mobileLayout={mobileLayout}>
-              {/* Page Header */}
-              {!firstLevelHidden && (
-                <Row noGutters display="flex">
-                  <Col cw="auto" v="center">
-                    <Button
-                      size="small"
-                      type="text"
-                      style={globalStyles.resetPadding}
-                      icon={<ArrowLeftOutlined />}
-                      // onClick={() => history.goBack()}
-                    />
-                  </Col>
-                  <Col cw="auto" v="center">
-                    <Divider type="vertical" />
-                  </Col>
-                  <Col v="center">
-                    <Breadcrumb>
-                      <Breadcrumb.Item>
-                        <FolderOutlined />
-                        <Text>Folder</Text>
-                      </Breadcrumb.Item>
-                      <Breadcrumb.Item overlay={menu}>
-                        <Text>Forms</Text>
-                      </Breadcrumb.Item>
-                    </Breadcrumb>
-                  </Col>
-                </Row>
-              )}
-
-              {/* SecondaryTitle */}
-              <Row noGutters h="between" v="center" mb={1} mt={3}>
-                <Col cw="auto" v="center">
-                  <Button
-                    type="text"
-                    style={globalStyles.resetPadding}
-                    icon={<ArrowLeftOutlined />}
-                    onClick={onBack}
-                  />
-                  <Divider
-                    type="vertical"
-                    style={{ height: '24px', marginRight: '16px' }}
-                  />
-                </Col>
-                <Col>
-                  <Title level={2} {...titleProps}>
-                    {formsAllRouteTitle || 'Forms'}
-                  </Title>
-                </Col>
-                {/* <Col cw="auto">
-                  <Tooltip
-                    placement="top"
-                    title={createNewFormTooltip || 'Create new form'}>
-                    <Button
-                      type="primary"
-                      onClick={showModal}
-                      disabled={disableAddButton}
-                      onMouseDown={(e) => e.preventDefault()}>
-                      + {addNewFormButton || 'Add'}
-                    </Button>
-                  </Tooltip>
-                </Col> */}
-              </Row>
+            <Container p={containerPadding}>
+              {/* 'onBack' func. also configures if there'll be back-button */}
+              <PageHeader
+                onBack={onBack}
+                titleProps={titleProps}
+                title={formsAllRouteTitle || 'Forms'}
+              />
               <Row noGutters mb={3}>
                 <Col>
                   <Text>
@@ -210,8 +127,8 @@ function FormsAll(props) {
                   </Text>
                 </Col>
               </Row>
-
               {data?.length > 4 && (
+                // Search will be visible only when there's will be more than 4 forms
                 <Row noGutters mb={3}>
                   <Col>
                     <Input
@@ -224,29 +141,22 @@ function FormsAll(props) {
                   </Col>
                 </Row>
               )}
-
-              <Box
-                mr="-10px"
-                display="flex"
-                flexWrap="wrap"
-                flexDirection="row"
-                className="custom-scroll">
+              <Box mr="-10px" className="custom-scroll">
                 <StaticList
-                  disableAddButton={!disableAddButton}
                   setEdit={setEdit}
                   data={currentData}
                   onClick={showModal}
-                  columnWidth={(mobileLayout && 2) || 6}
+                  disableAddButton={!disableAddButton}
                 />
 
                 <FormSimpleFormWithModal
+                  onModalSubmit={onFormCreate}
                   isModalVisible={isModalVisible}
-                  setIsModalVisible={setIsModalVisible}
-                  onModalSubmit={onFormCreate}>
+                  setIsModalVisible={setIsModalVisible}>
                   {childrenModal}
                 </FormSimpleFormWithModal>
               </Box>
-            </StyledBox>
+            </Container>
           </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
@@ -256,11 +166,12 @@ function FormsAll(props) {
 
 FormsAll.propTypes = {
   firebase: PropTypes.object.isRequired,
-  translate: PropTypes.func.isRequired,
+  translations: PropTypes.func.isRequired,
+  onBack: PropTypes.func,
+  titleProps: PropTypes.object,
   childrenModal: PropTypes.node,
+  configurations: PropTypes.object,
   disableAddButton: PropTypes.bool,
-  firstLevelHidden: PropTypes.bool,
-  titleText: PropTypes.string,
   actions: PropTypes.shape({
     onFormShow: PropTypes.func,
     onFormItemClick: PropTypes.func

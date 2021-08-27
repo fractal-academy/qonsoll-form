@@ -1,12 +1,12 @@
-import React, { useRef } from 'react'
+import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-import { Form, Typography, Input, message } from 'antd'
-import { SubmitButton } from '../../components'
-import { Container } from '@qonsoll/react-design'
-import { useTranslation } from '../../context/Translation'
+import React, { useRef } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { globalStyles } from '../../../styles'
-import useMedia from 'use-media'
+import { SubmitButton } from '../../components'
+import { Container } from '@qonsoll/react-design'
+import { Form, Typography, Input, message } from 'antd'
+import { useTranslation } from '../../context/Translation'
 
 const { TextArea } = Input
 
@@ -36,11 +36,6 @@ function LongText(props) {
       events: ['keydown', 'keyup']
     }
   )
-
-  //when question was skipped by navigation buttons and input was focused - reset focus
-  currentSlide === question?.order && textAreaRef?.current
-    ? textAreaRef?.current?.focus?.()
-    : textAreaRef?.current?.blur?.()
 
   // [CLEAN FUNCTIONS]
   const onFinish = ({ answer }) => {
@@ -76,6 +71,17 @@ function LongText(props) {
       e.preventDefault()
     }
   }
+
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
+  // useEffect(
+  // () =>
+  //when question was skipped by navigation buttons and input was focused - reset focus
+  // currentSlide === question?.order && textAreaRef?.current
+  //   ? textAreaRef?.current?.focus?.()
+  //   : textAreaRef?.current?.blur?.(),
+  // [currentSlide]
+  // )
+  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
 
   return (
     <Container>

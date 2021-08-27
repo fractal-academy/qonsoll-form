@@ -1,9 +1,8 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
 import styled from 'styled-components'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import typeformTheme from '../../../../styles/theme'
 
 export const ContentRow = styled(Row)`
-  display: flex;
   height: ${(props) => props.onEdit && '100%'};
 `
 
@@ -20,6 +19,7 @@ export const ContentColumn = styled(Col)`
 `
 export const ImageBackground = styled(Box)`
   ${({ theme, image, brightnessValue }) => `
+  padding:0;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -28,6 +28,13 @@ export const ImageBackground = styled(Box)`
   background-image: url(${image});
   filter: brightness(${brightnessValue + 100}%);
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  
+  `}
+`
+export const RoundedCol = styled(Col)`
+  ${({ theme }) => `
+  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  background-color: ${
+    theme?.color?.white?.default || typeformTheme?.color?.white?.default
+  }
   `}
 `
