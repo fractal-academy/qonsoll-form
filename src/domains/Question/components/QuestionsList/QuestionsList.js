@@ -1,7 +1,7 @@
 import { message } from 'antd'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
-import { Box, NoData } from '@qonsoll/react-design'
+import { Box } from '@qonsoll/react-design'
 import { DragableList } from '../../../../components'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { styles } from './PageHeader.styles'
 import { globalStyles } from '../../../../styles'
@@ -15,7 +15,7 @@ import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/us
 
 const { Title } = Typography
 
-const PageHeader = forwardRef((props, ref) => {
+function PageHeader(props) {
   const { id, title, titleProps, onBack, smallScreen, handlesPreview } = props
 
   // [ADDITIONAL HOOKS]
@@ -37,7 +37,7 @@ const PageHeader = forwardRef((props, ref) => {
   }
 
   return (
-    <Row noGutters v="center" mb={1} ref={ref}>
+    <Row noGutters v="center" mb={1}>
       {onBack && (
         <Col cw="auto" h="center" flexDirection="row">
           <Button
@@ -87,7 +87,7 @@ const PageHeader = forwardRef((props, ref) => {
       )}
     </Row>
   )
-})
+}
 
 PageHeader.propTypes = {
   id: PropTypes.string,

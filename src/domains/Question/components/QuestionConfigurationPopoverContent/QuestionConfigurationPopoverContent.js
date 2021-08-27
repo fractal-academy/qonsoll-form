@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Row, Col, Box } from '@qonsoll/react-design'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../../context/Translation'
-import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import {
   PopoverSwitcherRow,

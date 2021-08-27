@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
+import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
+import { StyledMenu, StyledItem } from './QuestionLayoutSwitcher.styles'
 import {
   PicCenterOutlined,
   PicRightOutlined,
@@ -7,12 +10,6 @@ import {
   ProfileFilled,
   MenuUnfoldOutlined
 } from '@ant-design/icons'
-import PropTypes from 'prop-types'
-import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
-import { StyledMenu, StyledItem } from './QuestionLayoutSwitcher.styles'
-import { Menu } from 'antd'
-
-const { Item } = Menu
 
 const menuMap = [
   {

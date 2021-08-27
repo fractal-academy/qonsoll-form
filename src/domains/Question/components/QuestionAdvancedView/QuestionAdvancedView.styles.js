@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Box, Col } from '@qonsoll/react-design'
 import typeformTheme from '../../../../../styles/theme'
 
 export const styles = {

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react'
-import { Form, Input, message } from 'antd'
 import PropTypes from 'prop-types'
+import React, { useRef } from 'react'
+import { useKeyPress } from '@umijs/hooks'
+import { Form, Input, message } from 'antd'
 import { globalStyles } from '../../../styles'
 import { SubmitButton } from '../../components'
 import { Box, Container } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
-import { useKeyPress } from '@umijs/hooks'
 
 function ShortText(props) {
   const { inputProps, onClick, question, currentSlide } = props

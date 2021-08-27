@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-import { Form, Typography, Input, message } from 'antd'
-import { SubmitButton } from '../../components'
-import { Container } from '@qonsoll/react-design'
-import { useTranslation } from '../../context/Translation'
+import React, { useRef } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { globalStyles } from '../../../styles'
-import useMedia from 'use-media'
+import { SubmitButton } from '../../components'
+import { Container } from '@qonsoll/react-design'
+import { Form, Typography, Input, message } from 'antd'
+import { useTranslation } from '../../context/Translation'
 
 const { TextArea } = Input
 

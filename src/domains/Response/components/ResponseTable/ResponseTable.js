@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
 import { Box, Col, Row } from '@qonsoll/react-design'
-import { useTranslation } from '../../../../context/Translation'
 import { Spinner } from '../../../../../src/components'
+import { useTranslation } from '../../../../context/Translation'
+import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import { StyledTable } from '../../../../domains/Response/components/ResponseTable/ResponseTable.style'
 
 const columns = [
@@ -77,7 +77,7 @@ function ResponseTable(props) {
         dataIndex: 'answerScore',
         key: 'answerScore'
       })
-  }, [])
+  }, [isFormQuiz])
 
   return (
     <Box display="flex" flex={1} justifyContent="center" overflowX="hidden">
