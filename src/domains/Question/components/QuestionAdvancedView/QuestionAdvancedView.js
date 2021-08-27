@@ -8,7 +8,6 @@ import { useTranslation } from '../../../../context/Translation'
 import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
 import {
   styles,
-  StyledCol,
   StyledBox,
   BackgroundImage
 } from './QuestionAdvancedView.styles'
@@ -156,10 +155,7 @@ function QuestionAdvancedView(props) {
           imageBrightness={data?.imageBrightness || 0}
         />
       )}
-      <Col
-        {...styles.questionCardColumnStyle}
-        cw={[12, 12, 6, 6]}
-        alignSelf={tabletImageCheck}>
+      <Col mx={2} order={2} cw={[12, 12, 6, 6]} alignSelf={tabletImageCheck}>
         <StyledBox
           pl={devicePadding}
           pr={devicePadding}
@@ -169,9 +165,9 @@ function QuestionAdvancedView(props) {
             <Col cw={12}>
               {data?.videoApiKey ? (
                 <Box
-                  display={'flex'}
-                  flexDirection={'column'}
-                  justifyContent={'center'}>
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center">
                   {questionNumberRule && (
                     <Title style={{ wordBreak: 'break-word' }} level={4}>
                       `${questionNumber}. ${videoQuestion || 'Video question'}`
@@ -215,11 +211,9 @@ function QuestionAdvancedView(props) {
       </Col>
       {imageShowRule && (
         <Col
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
+          v="center"
+          h="center"
           height={deviceImageHeight}
-          {...styles.sideImageColumnStyle}
           order={widthTablet ? '1' : layoutType.imageOrder}>
           <QuestionImageContainer
             image={data?.image}

@@ -261,6 +261,9 @@ function EditorSidebar(props) {
           <TypePopover
             questions={questions}
             onClick={addQuestion}
+            showPopover={showPopover}
+            setShowPopover={setShowPopover}
+            popoverShowChange={popoverShowChange}
             customQuestionTypes={customQuestionTypes}
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
@@ -278,13 +281,9 @@ function EditorSidebar(props) {
           </ModalWithFormConditionsForm>
         </Col>
       </Row>
-      <Box overflow="auto">
+      <Box overflow="auto" mb="auto">
         {!!questions?.length && (
-          <QuestionsList
-            data={questions}
-            onItemClick={onItemClick}
-            disableDelete={questions?.length === 1}
-          />
+          <QuestionsList data={questions} onItemClick={onItemClick} />
         )}
       </Box>
 
@@ -302,7 +301,7 @@ function EditorSidebar(props) {
           </Tooltip>
         </Col>
       </Row>
-      <Box mt="auto" overflow="auto" maxHeight="350px">
+      <Box overflow="auto" maxHeight="350px">
         {!!endings?.length && (
           <QuestionsList
             data={endings}

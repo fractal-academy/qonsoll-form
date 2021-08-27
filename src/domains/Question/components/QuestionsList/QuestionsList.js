@@ -1,7 +1,7 @@
 import { message } from 'antd'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
-import { Box } from '@qonsoll/react-design'
+import { Box, NoData } from '@qonsoll/react-design'
 import { DragableList } from '../../../../components'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
@@ -138,12 +138,12 @@ function QuestionsList(props) {
       {dataSource?.map(
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
-            <Box pl="20px">
+            <Box pl="20px" key={item}>
               <QuestionSimpleView
                 {...item}
                 number="W"
+                hiddenDelete
                 action={handleDelete}
-                disableDelete={disableDelete}
                 onClick={() => onItemClick(item)}
               />
             </Box>
@@ -152,8 +152,8 @@ function QuestionsList(props) {
       <DragableList
         itemLayout="horizontal"
         sortable={sortable}
-        dataSource={filteredDataSource}
         onUpdate={onUpdate}
+        dataSource={filteredDataSource}
         setNewOrder={setNewOrder}
         renderItem={(item, index) => (
           <QuestionSimpleView

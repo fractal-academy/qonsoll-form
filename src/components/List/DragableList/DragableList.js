@@ -53,16 +53,11 @@ function DragableList(props) {
 
   return (
     <Container onSortEnd={onSortEnd} useDragHandle>
-      <List
-        {...args}
-        dataSource={sortableItems}
-        locale={{ emptyText: ' ' }}
-        renderItem={(item, index) => (
-          <SortableWrapper key={`item-${index}`} index={index}>
-            {renderItem ? renderItem(dataSource[item], index) : item}
-          </SortableWrapper>
-        )}
-      />
+      {sortableItems?.map((item, index) => (
+        <SortableWrapper key={`item-${index}`} index={index}>
+          {renderItem ? renderItem(dataSource[item], index) : item}
+        </SortableWrapper>
+      ))}
     </Container>
   )
 }

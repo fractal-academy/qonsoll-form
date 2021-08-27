@@ -196,7 +196,11 @@ function FormShow(props) {
             {loading ? (
               <Spinner />
             ) : (
-              <Container height="inherit" p={containerPadding}>
+              <Container
+                height="100%"
+                display="flex"
+                flexDirection="column"
+                p={containerPadding}>
                 <PageHeader
                   id={id}
                   handlesPreview

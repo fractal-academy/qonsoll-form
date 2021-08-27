@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { Popconfirm } from 'antd'
 import React, { cloneElement } from 'react'
-import { Row, Col } from '@qonsoll/react-design'
 import { LAYOUT_TYPES } from '../../../../constants'
+import { Row, Col, Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
@@ -11,14 +11,15 @@ import { DescriptionContainer, StyledButton } from './QuestionSimpleView.styles'
 
 function QuestionSimpleView(props) {
   const {
+    id,
+    data,
     title,
     action,
     number,
-    layoutType,
     onClick,
-    id,
-    disableDelete,
-    data
+    layoutType,
+    hiddenDelete,
+    disableDelete
   } = props
 
   // [ADDITIONAL HOOKS]
@@ -60,6 +61,7 @@ function QuestionSimpleView(props) {
         </Col>
         <Col width="150px">
           <DescriptionContainer>{title}</DescriptionContainer>
+          {/* <Title level={5}>{title}</Title> */}
         </Col>
         <Col cw="auto">
           <Popconfirm
@@ -74,14 +76,18 @@ function QuestionSimpleView(props) {
             disabled={disableDelete}
             okType="danger"
             okText="Delete">
-            <StyledButton
-              type="text"
-              shape="circle"
-              size="small"
-              danger
-              disabled={disableDelete}>
-              <DeleteOutlined style={{ fontSize: '18px' }} />
-            </StyledButton>
+            {hiddenDelete ? (
+              <Box height="24px" width="24px"></Box>
+            ) : (
+              <StyledButton
+                type="text"
+                shape="circle"
+                size="small"
+                danger
+                disabled={disableDelete}>
+                <DeleteOutlined style={{ fontSize: '18px' }} />
+              </StyledButton>
+            )}
           </Popconfirm>
         </Col>
       </Row>

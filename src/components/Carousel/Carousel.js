@@ -39,6 +39,7 @@ function Carousel(props) {
   const { answerRequiredMessageError } = useTranslation()
 
   const [{ height }, ref] = useSize()
+  const [{ height: buttonsHeight }, buttonsRef] = useSize()
 
   // [CLEAN FUNCTIONS]
   const onCurrentSlideChange = (slideIndex) => {
@@ -83,11 +84,13 @@ function Carousel(props) {
     )
 
     const temp =
-      previousQuestionOrder?.[previousQuestionOrder.length - 1] === currentSlide
+      previousQuestionOrder?.[previousQuestionOrder.length - 1] ===
+      currentSlide - 1
         ? previousQuestionOrder?.filter(
             (_, index) => index < previousQuestionOrder.length - 1
           )
         : previousQuestionOrder
+
     setPreviousQuestionOrder(temp)
   }
 
@@ -216,12 +219,12 @@ function Carousel(props) {
         infinite={false}>
         {children?.map((el, index) =>
           cloneElement(el, {
-            wrapperHeight: height - 64,
+            wrapperHeight: height - buttonsHeight,
             key: index
           })
         )}
       </AntdCarousel>
-      <Box>
+      <Box ref={buttonsRef}>
         {!submitLoading && (
           <Row h="right" p={2} noGutters>
             <Col cw="auto" mr={2}>
