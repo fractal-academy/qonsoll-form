@@ -21,8 +21,7 @@ const TextEditable = styled(TextArea).attrs(() => ({
   ${({ theme, textSecondary }) =>
     textSecondary &&
     css`
-      color: ${theme?.color?.dark?.t?.lighten2 ||
-      typeformTheme?.color?.dark?.t?.lighten2};
+      color: var(--text-color);
     `};
 `
 
