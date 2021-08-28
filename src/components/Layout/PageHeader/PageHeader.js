@@ -16,7 +16,15 @@ import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/us
 const { Title } = Typography
 
 function PageHeader(props) {
-  const { id, title, titleProps, onBack, smallScreen, handlesPreview } = props
+  const {
+    id,
+    title,
+    titleProps,
+    onBack,
+    smallScreen,
+    handlesPreview,
+    hideResults
+  } = props
 
   // [ADDITIONAL HOOKS]
   const { onFormShow } = useActionsFunctionsContext()
@@ -54,31 +62,32 @@ function PageHeader(props) {
           {title}
         </Title>
       </Col>
-      {handlesPreview && title && (
-        <>
-          <Col cw="auto" v="center" mr={1}>
-            {smallScreen && (
-              <Button
-                type="text"
-                icon={<ReadOutlined />}
-                onClick={onFormResultsDisplay}>
-                {resultButton || 'Results'}
-              </Button>
-            )}
-          </Col>
 
-          <Col cw="auto" v="center">
-            <Tooltip
-              placement="bottom"
-              title={formPreviewTooltip || 'Form preview'}>
-              <Button
-                type="text"
-                icon={<EyeOutlined />}
-                onClick={onFormShowDisplay}
-              />
-            </Tooltip>
-          </Col>
-        </>
+      {!hideResults && (
+        <Col cw="auto" v="center" mr={1}>
+          {smallScreen && (
+            <Button
+              type="text"
+              icon={<ReadOutlined />}
+              onClick={onFormResultsDisplay}>
+              {resultButton || 'Results'}
+            </Button>
+          )}
+        </Col>
+      )}
+
+      {handlesPreview && title && (
+        <Col cw="auto" v="center">
+          <Tooltip
+            placement="bottom"
+            title={formPreviewTooltip || 'Form preview'}>
+            <Button
+              type="text"
+              icon={<EyeOutlined />}
+              onClick={onFormShowDisplay}
+            />
+          </Tooltip>
+        </Col>
       )}
       {!title && (
         <Button type="text" icon={<ReloadOutlined />} onClick={onRestart}>

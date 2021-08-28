@@ -71,6 +71,7 @@ function FormEdit(props) {
     firebase,
     actions = {},
     onBack,
+    hideResults,
     translations,
     showCondition,
     configurations,
@@ -286,6 +287,7 @@ function FormEdit(props) {
                     id={id}
                     handlesPreview
                     title={form?.title}
+                    hideResults={hideResults}
                     smallScreen={smallScreen}
                     onBack={onBack || history.goBack}
                   />
@@ -316,7 +318,7 @@ function FormEdit(props) {
                 </Box>
                 {smallScreen && (
                   <EditorSidebar
-                    // transparent
+                    transparent
                     id={id}
                     formData={form}
                     endings={endings}
@@ -327,40 +329,6 @@ function FormEdit(props) {
                     welcomeScreenShowRule={welcomeScreenShowRule}
                   />
                 )}
-
-                {/* <PageLayout
-                  id={id}
-                  handleSmallScreen={handleSmallScreen}
-                  title={form?.title}
-                  questionsList={questionsList}
-                  onBack={onBack}>
-                  <QuestionForm
-                    defaultTab={defaultTab}
-                    questionsList={questionsList}
-                    questionData={currentQuestion}
-                    brightnessValue={brightnessValue}
-                    handleSmallScreen={handleSmallScreen}
-                    setBrightnessValue={setBrightnessValue}
-                    customQuestionTypes={customQuestionTypes}
-                    onQuestionTypeChange={onQuestionTypeChange}
-                    welcomeScreenShowRule={welcomeScreenShowRule}
-                    onQuestionLayoutChange={onQuestionLayoutChange}
-                  />
-                </PageLayout> */}
-                {/*TODO id in EditorSidebar*/}
-                {/* {handleSmallScreen && (
-                  <EditorSidebar
-                    // transparent
-                    id={id}
-                    formData={form}
-                    endings={endings}
-                    questions={questions}
-                    showCondition={showCondition}
-                    customQuestionTypes={customQuestionTypes}
-                    answerScoresData={answerScoresList}
-                    welcomeScreenShowRule={welcomeScreenShowRule}
-                  />
-                )} */}
               </Container>
             )}
           </TypeformConfigurationContext.Provider>

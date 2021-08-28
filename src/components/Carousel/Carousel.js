@@ -95,6 +95,9 @@ function Carousel(props) {
     setPreviousQuestionOrder(temp)
   }
 
+  console.log('current: ', currentSlide)
+  questionsData.map((item) => console.log(item?.order))
+
   const handleNextClick = (e) => {
     // Check if function 'next' can be called
     // Prevents skiping

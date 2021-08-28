@@ -293,7 +293,7 @@ function EditorSidebar(props) {
 
       <Divider type="horizontal" style={globalStyles.resetMargin} />
 
-      <Row mb={2} v="center" h="between">
+      <Row my={2} v="center" h="between">
         <Col cw="auto">
           <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
         </Col>
