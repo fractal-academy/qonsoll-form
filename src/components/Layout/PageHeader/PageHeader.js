@@ -44,6 +44,9 @@ function PageHeader(props) {
     window.location.reload()
   }
 
+  // [ COMPUTED PROPERTIES ]
+  const showResultsRule = !hideResults || (!title && !hideResults)
+
   return (
     <Row noGutters v="center" mb={1}>
       {onBack && (
@@ -63,7 +66,7 @@ function PageHeader(props) {
         </Title>
       </Col>
 
-      {!hideResults && (
+      {!showResultsRule && (
         <Col cw="auto" v="center" mr={1}>
           {smallScreen && (
             <Button
