@@ -6,17 +6,6 @@ export const ContentRow = styled(Row)`
   height: ${(props) => props.onEdit && '100%'};
 `
 
-export const ContentColumn = styled(Col)`
-  ${({ theme, image }) => `
-  flex: 1;
-  position: relative;
-  background: ${
-    !image && 'var(--typeform-content-bg)'
-    // (theme?.color?.white.default || typeformTheme?.color?.white.default)
-  };
-  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  `}
-`
 export const ImageBackground = styled(Box)`
   ${({ theme, image, brightnessValue }) => `
   padding:0;
@@ -33,8 +22,6 @@ export const ImageBackground = styled(Box)`
 export const RoundedCol = styled(Col)`
   ${({ theme }) => `
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  background-color: ${
-    theme?.color?.white?.default || typeformTheme?.color?.white?.default
-  }
+  background-color: ${'var(--typeform-content-bg)'}
   `}
 `
