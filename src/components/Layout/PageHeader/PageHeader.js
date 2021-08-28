@@ -48,7 +48,7 @@ function PageHeader(props) {
   const showResultsRule = !hideResults || (!title && !hideResults)
 
   return (
-    <Row noGutters v="center" mb={1}>
+    <Row noGutters v="center" mb="var(--typeform-header-mb)">
       {onBack && (
         <Col cw="auto" h="center" flexDirection="row">
           <Button
