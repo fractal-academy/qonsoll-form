@@ -12,7 +12,6 @@ import {
   QuestionTypeSelect,
   QuestionConfigurationMenu
 } from '../../../../domains/Question/components'
-import '../../../../../styles/vars.css'
 
 const { Title } = Typography
 

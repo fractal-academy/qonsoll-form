@@ -21,7 +21,6 @@ import {
   StarOutlined,
   UploadOutlined
 } from '@ant-design/icons'
-import '../../../../../styles/vars.css'
 
 const StyledText = styled(Text)`
   cursor: pointer !important;
