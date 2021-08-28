@@ -13,7 +13,10 @@ export const ItemPreview = styled(Box)`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) =>
-    theme?.color?.white?.default || typeformTheme?.color?.white?.default};
+    /* changed background accordint to b2g request*/
+    // theme?.color?.white?.default || typeformTheme?.color?.white?.default};
+    /* changed background accordint to b2g request*/
+    'var(--typeform-content-bg)'};
 `
 export const StyledIcon = styled(FileOutlined)`
   font-size: 40px;

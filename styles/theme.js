@@ -107,15 +107,16 @@ theme.color.text = {}
 
 // Text dark
 theme.color.text.dark = {}
-theme.color.text.dark.primary = theme.color.dark.t.lighten1
-theme.color.text.dark.secondary = 'var(--text-dark-secondary)'
+// theme.color.text.dark.primary = theme.color.dark.t.lighten1
+theme.color.text.dark.primary = 'var(--text-color)'
+theme.color.text.dark.secondary = 'var (--text-dark-secondary)'
 theme.color.text.dark.disabled = theme.color.dark.t.lighten4
 
 // Text light
 theme.color.text.light = {}
-theme.color.text.light.primary = '--text-light-primary'
-theme.color.text.light.secondary = '--text-light-secondary'
-theme.color.text.light.disabled = '--text-light-disabled'
+theme.color.text.light.primary = 'var(--text-light-primary)'
+theme.color.text.light.secondary = 'var(--text-light-secondary)'
+theme.color.text.light.disabled = 'var(--text-light-disabled)'
 
 //// GRADIENTS
 theme.primaryGradient = 'linear-gradient(-45deg, #0D42B1, #247EE5)'
