@@ -72,7 +72,6 @@ theme.color.dark.t.lighten9 = 'var(--dark-t-lighten9)'
 // White pure
 theme.color.white = {}
 theme.color.white.default = 'var(--white)'
-theme.color.content = { background: 'var(--white)' }
 
 // theme.color.white.lighten1 = '#fff'
 // theme.color.white.lighten2 = '#fff'

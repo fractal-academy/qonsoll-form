@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Box, Col, Row } from '@qonsoll/react-design'
 import typeformTheme from '../../../../styles/theme'
-import theme from '../../../../styles/theme'
 
 export const ContentRow = styled(Row)`
   height: ${(props) => props.onEdit && '100%'};
@@ -12,9 +11,8 @@ export const ContentColumn = styled(Col)`
   flex: 1;
   position: relative;
   background: ${
-    !image &&
-    (theme?.color?.content?.background ||
-      typeformTheme?.color?.content?.background)
+    !image && 'var(--typeform-content-bg)'
+    // (theme?.color?.white.default || typeformTheme?.color?.white.default)
   };
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   `}
