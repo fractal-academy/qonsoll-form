@@ -30,7 +30,6 @@ import {
   DateTimeInput,
   ContentCard
 } from '../../../../components'
-import '../../../../../../../../src/styles/vars.css'
 import typeformTheme from '../../../../../styles/theme'
 
 const StyledTag = styled(Tag)`
