@@ -197,6 +197,8 @@
   --primary-10: var(--purple-10); /* Not used */
 
    --typeform-content-bg: var(--white);
+   --typeform-header-mb: var(--margin-xxs);
+
 
   /* Primary Transparent color*/
   --primary-t-lighten1: rgba(114,46,209,0.75);
