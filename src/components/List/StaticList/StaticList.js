@@ -69,9 +69,11 @@ function StaticList(props) {
                     </Typography.Link>
                   </Upload>
                 ) : (
-                  <Typography.Link onClick={onClick}>
-                    {addForm || 'Add new form'}
-                  </Typography.Link>
+                  disableAddButton && (
+                    <Typography.Link onClick={onClick}>
+                      {addForm || 'Add new form'}
+                    </Typography.Link>
+                  )
                 )}
               </>
             }
