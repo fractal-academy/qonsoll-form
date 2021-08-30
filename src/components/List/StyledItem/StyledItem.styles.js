@@ -9,7 +9,7 @@ export const Item = styled(Box)`
   padding: 6px;
   cursor: pointer;
   background: ${({ theme }) =>
-    theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9};
+    theme?.color?.dark?.t?.lighten9 || 'var(--typeform-card-bg)'};
   width: -webkit-fill-available;
   display: flex;
   flex: 1;
@@ -18,8 +18,7 @@ export const Item = styled(Box)`
   justify-content: center;
   &:hover {
     background-color: ${({ theme }) =>
-      theme?.color?.dark?.t?.lighten8 ||
-      typeformTheme?.color?.dark?.t?.lighten8};
+      theme?.color?.dark?.t?.lighten8 || 'var(--typeform-card-hover-bg)'};
     border-color: ${({ theme }) =>
       theme?.color?.dark?.t?.lighten8 ||
       typeformTheme?.color?.dark?.t?.lighten8};

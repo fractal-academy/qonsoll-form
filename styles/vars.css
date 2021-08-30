@@ -171,7 +171,7 @@
 
   /* Semantic color palettes */
 
-  /*!* Primary *!*/  /*Extra COPY*/
+  /*!* Primary *!*/ /*Extra COPY*/
   /*--primary-color: var(--blue-6);*/
   /*--primary-1: var(--blue-1);*/
   /*--primary-2: var(--blue-2);*/
@@ -196,54 +196,51 @@
   --primary-9: var(--purple-9); /* Not used */
   --primary-10: var(--purple-10); /* Not used */
 
-   --typeform-content-bg: var(--white);
-   --typeform-header-mb: var(--margin-xxs);
-
+  --typeform-content-bg: var(--white);
+  --typeform-header-mb: var(--margin-xxs);
 
   /* Primary Transparent color*/
-  --primary-t-lighten1: rgba(114,46,209,0.75);
-  --primary-t-lighten2: rgba(114,46,209,0.5);
-  --primary-t-lighten3: rgba(114,46,209,0.25);
-  --primary-t-lighten4: rgba(114,46,209,0.20);
-  --primary-t-lighten5: rgba(114,46,209,0.15);
-  --primary-t-lighten6: rgba(114,46,209,0.12);
-  --primary-t-lighten7: rgba(114,46,209,0.10);
-  --primary-t-lighten8: rgba(114,46,209,0.08);
-  --primary-t-lighten9: rgba(114,46,209,0.04);
+  --primary-t-lighten1: rgba(114, 46, 209, 0.75);
+  --primary-t-lighten2: rgba(114, 46, 209, 0.5);
+  --primary-t-lighten3: rgba(114, 46, 209, 0.25);
+  --primary-t-lighten4: rgba(114, 46, 209, 0.2);
+  --primary-t-lighten5: rgba(114, 46, 209, 0.15);
+  --primary-t-lighten6: rgba(114, 46, 209, 0.12);
+  --primary-t-lighten7: rgba(114, 46, 209, 0.1);
+  --primary-t-lighten8: rgba(114, 46, 209, 0.08);
+  --primary-t-lighten9: rgba(114, 46, 209, 0.04);
 
   /* Dark transparent color  */
-  --dark-t-lighten1 : rgba(3,11,23,0.75);
-  --dark-t-lighten2 : rgba(3,11,23,0.5);
-  --dark-t-lighten3 : rgba(3,11,23,0.25);
-  --dark-t-lighten4 : rgba(3,11,23,0.20);
-  --dark-t-lighten5 : rgba(3,11,23,0.15);
-  --dark-t-lighten6 : rgba(3,11,23,0.12);
-  --dark-t-lighten7 : rgba(3,11,23,0.10);
-  --dark-t-lighten8 : rgba(3,11,23,0.08);
-  --dark-t-lighten9 : rgba(3,11,23,0.04);
+  --dark-t-lighten1: rgba(3, 11, 23, 0.75);
+  --dark-t-lighten2: rgba(3, 11, 23, 0.5);
+  --dark-t-lighten3: rgba(3, 11, 23, 0.25);
+  --dark-t-lighten4: rgba(3, 11, 23, 0.2);
+  --dark-t-lighten5: rgba(3, 11, 23, 0.15);
+  --dark-t-lighten6: rgba(3, 11, 23, 0.12);
+  --dark-t-lighten7: rgba(3, 11, 23, 0.1);
+  --dark-t-lighten8: rgba(3, 11, 23, 0.08);
+  --dark-t-lighten9: rgba(3, 11, 23, 0.04);
 
- /* White transparent */
---white-t-lighten1 : rgba(255,255,255,0.75);
---white-t-lighten2 : rgba(255,255,255,0.5);
---white-t-lighten3 : rgba(255,255,255,0.25);
---white-t-lighten4 : rgba(255,255,255,0.20);
---white-t-lighten5 : rgba(255,255,255,0.15);
---white-t-lighten6 : rgba(255,255,255,0.12);
---white-t-lighten7 : rgba(255,255,255,0.10);
---white-t-lighten8 : rgba(255,255,255,0.08);
---white-t-lighten9 : rgba(255,255,255,0.04);
+  /* White transparent */
+  --white-t-lighten1: rgba(255, 255, 255, 0.75);
+  --white-t-lighten2: rgba(255, 255, 255, 0.5);
+  --white-t-lighten3: rgba(255, 255, 255, 0.25);
+  --white-t-lighten4: rgba(255, 255, 255, 0.2);
+  --white-t-lighten5: rgba(255, 255, 255, 0.15);
+  --white-t-lighten6: rgba(255, 255, 255, 0.12);
+  --white-t-lighten7: rgba(255, 255, 255, 0.1);
+  --white-t-lighten8: rgba(255, 255, 255, 0.08);
+  --white-t-lighten9: rgba(255, 255, 255, 0.04);
 
-/* Text light */
---text-light-primary : rgba(255,255,255,0.85);
---text-light-secondary : rgba(255,255,255,0.65);
---text-light-disabled : rgba(255,255,255,0.35);
+  /* Text light */
+  --text-light-primary: rgba(255, 255, 255, 0.85);
+  --text-light-secondary: rgba(255, 255, 255, 0.65);
+  --text-light-disabled: rgba(255, 255, 255, 0.35);
 
+  /* Text dark secondary */
+  --text-dark-secondary: rgba(3, 11, 23, 0.45);
 
- /* Text dark secondary */
-  --text-dark-secondary : rgba(3,11,23,0.45);
-
-
-    /* Success */
+  /* Success */
   --success-color: var(--green-6);
   --success-1: var(--green-1);
   --success-3: var(--green-3);
@@ -840,15 +837,12 @@
   --select-multiple-item-disabled-color: #bfbfbf;
   --select-multiple-item-disabled-border-color: var(--select-border-color);
 
-
   /* Micro config for select with search*/
   --ql-select-with-search-bg: transparent;
   --ql-select-with-search-border: unset;
 
   /* Micro config for select multiple */
   --ql-select-multiple-item-border-radius: var(--border-radius-base);
-
-
 
   /* Select —————————————————————————————— End */
 
@@ -1893,7 +1887,9 @@
   /* + */
   --alert-no-icon-padding-vertical: var(--padding-xs);
   /* + */
-  --alert-with-description-no-icon-padding-vertical: calc(var(--padding-md) - 1px);
+  --alert-with-description-no-icon-padding-vertical: calc(
+    var(--padding-md) - 1px
+  );
   /* + */
   --alert-with-description-padding-vertical: calc(var(--padding-md) - 1px);
   --alert-with-description-padding: var(
@@ -2033,4 +2029,11 @@
   --image-preview-operation-disabled-color: rgba(255, 255, 255, 0.25);
 
   /* Image —————————————————————————————— End */
+
+  /* */
+  --typeform-card-bg: var(--dark-t-lighten9);
+  --typeform-content-bg: var(--dark-t-lighten4);
+
+  --typeform-card-hover-bg: var(--dark-t-lighten8);
+  --typeform-content-hover-bg: var(--dark-transparent-4);
 }
