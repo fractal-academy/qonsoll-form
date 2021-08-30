@@ -64,12 +64,6 @@ Get newest changes of module:
 git pull origin library
 ```
 
-Some packages need manual instalation. Run following command:
-
-```sh
-npm i fuse.js && use-media && ziggeo-client-sdk && react-ziggeo
-```
-
 Go the directory of your project and install all of packages:
 
 ```sh
@@ -78,6 +72,12 @@ cd ../../../
 
 ```sh
 npm install
+```
+
+Some packages need manual instalation. Run following command:
+
+```sh
+npm i fuse.js && use-media && ziggeo-client-sdk && react-ziggeo
 ```
 
 For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
