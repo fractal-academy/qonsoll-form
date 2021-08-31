@@ -26,7 +26,9 @@ function FormsAll(props) {
     titleProps,
     configurations,
     onBack,
-    disableAddButton
+    disableAddButton,
+    paddings,
+    additionalData /* FOI Helse */
   } = props
 
   // [CUSTOM_HOOKS]
@@ -48,9 +50,9 @@ function FormsAll(props) {
   // [COMPUTED PROPERTIES]
   let amountFiles = currentData?.length
   const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
-    translations || {}
-  const containerPadding = smallScreen ? 4 : 2
-
+  translations || {}
+  const containerPadding = paddings !== undefined ? paddings : smallScreen ? 4 : 2
+  
   // [USE_EFFECTS]
   useEffect(() => {
     setCurrentData(data)
@@ -68,6 +70,7 @@ function FormsAll(props) {
     const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
     const formData = {
       ...restData,
+      ...additionalData,
       title,
       subtitle,
       id: formId,
