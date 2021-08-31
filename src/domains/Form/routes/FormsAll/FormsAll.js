@@ -3,7 +3,7 @@ import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import { Typography, message, Input } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Row, Col, Box, Container } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
@@ -28,7 +28,7 @@ function FormsAll(props) {
     onBack,
     disableAddButton,
     wrapperPaddings,
-    additionalData, /* FOI Helse */
+    additionalData /* FOI Helse */,
     formsList /* FOI Helse */
   } = props
 
@@ -37,8 +37,14 @@ function FormsAll(props) {
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
-  const [data] = formsList ? [formsList] : useCollectionData(
-    getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
+  const [_data] = useCollectionData(
+    !formsList &&
+      getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
+  )
+
+  const data = useMemo(
+    () => (formsList ? [formsList] : _data),
+    [_data, formsList]
   )
   const smallScreen = useMedia({ minWidth: '769px' })
 
@@ -47,13 +53,14 @@ function FormsAll(props) {
   const [currentData, setCurrentData] = useState(data)
   const [edit, setEdit] = useState(false)
   const fuse = new Fuse(data, { keys: ['title'] })
- 
+
   // [COMPUTED PROPERTIES]
   let amountFiles = currentData?.length
   const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
-  translations || {}
-  const containerPadding = wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
-  
+    translations || {}
+  const containerPadding =
+    wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
+
   // [USE_EFFECTS]
   useEffect(() => {
     setCurrentData(data)

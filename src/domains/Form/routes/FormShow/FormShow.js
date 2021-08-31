@@ -72,7 +72,8 @@ function FormShow(props) {
   const [previousQuestionOrder, setPreviousQuestionOrder] = useState([])
 
   // [COMPUTED PROPERTIES]
-  const containerPadding = wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
+  const containerPadding =
+    wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
   const filteredQuestionsList = useMemo(
     () =>
       questionsData?.filter(
