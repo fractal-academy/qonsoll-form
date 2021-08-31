@@ -37,7 +37,7 @@ function FormsAll(props) {
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
-  const [forms] = useCollectionData(
+  const [data] = formsList ? [formsList] : useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
   const smallScreen = useMedia({ minWidth: '769px' })
@@ -49,7 +49,6 @@ function FormsAll(props) {
   const fuse = new Fuse(data, { keys: ['title'] })
  
   // [COMPUTED PROPERTIES]
-  const data = formsList || forms
   let amountFiles = currentData?.length
   const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
   translations || {}
