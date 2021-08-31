@@ -27,7 +27,7 @@ function FormsAll(props) {
     configurations,
     onBack,
     disableAddButton,
-    paddings,
+    wrapperPaddings,
     additionalData, /* FOI Helse */
     formsList /* FOI Helse */
   } = props
@@ -52,7 +52,7 @@ function FormsAll(props) {
   let amountFiles = currentData?.length
   const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
   translations || {}
-  const containerPadding = paddings !== undefined ? paddings : smallScreen ? 4 : 2
+  const containerPadding = wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
   
   // [USE_EFFECTS]
   useEffect(() => {
