@@ -3,7 +3,7 @@ import { Typography } from 'antd'
 import PropTypes from 'prop-types'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
-import { useTranslation } from '~/modules/feedback-typeform-app/src/context/Translation'
+import { useTranslation } from '../../../../context/Translation'
 import {
   OptionBox,
   StyledInputNumber,
