@@ -28,7 +28,8 @@ function FormsAll(props) {
     onBack,
     disableAddButton,
     paddings,
-    additionalData /* FOI Helse */
+    additionalData, /* FOI Helse */
+    formsList /* FOI Helse */
   } = props
 
   // [CUSTOM_HOOKS]
@@ -36,7 +37,7 @@ function FormsAll(props) {
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
-  const [data] = useCollectionData(
+  const [forms] = useCollectionData(
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
   const smallScreen = useMedia({ minWidth: '769px' })
@@ -46,8 +47,9 @@ function FormsAll(props) {
   const [currentData, setCurrentData] = useState(data)
   const [edit, setEdit] = useState(false)
   const fuse = new Fuse(data, { keys: ['title'] })
-
+ 
   // [COMPUTED PROPERTIES]
+  const data = formsList || forms
   let amountFiles = currentData?.length
   const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
   translations || {}
@@ -65,6 +67,7 @@ function FormsAll(props) {
       setCurrentData(searchRes?.map((item) => item.item))
     } else setCurrentData(data)
   }
+
   const onFormCreate = async (data) => {
     const { title, subtitle, isQuiz, ...restData } = data
     const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
