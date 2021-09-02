@@ -44,7 +44,7 @@ const ListItem = forwardRef((props, ref) => {
     data?.id &&
       getCollectionRef(COLLECTIONS.ANSWERS).where('formId', '==', data?.id)
   )
-  const { onFormItemClick } = useActionsFunctionsContext()
+  const { onFormItemClick, onFormDelete } = useActionsFunctionsContext()
   const {
     listItemNoDescription,
     edit,
@@ -82,6 +82,9 @@ const ListItem = forwardRef((props, ref) => {
       .then(deleteQuestions)
       .then(deleteAnswers)
       .then(deleteUserAnswersGroup)
+      .then(() => {
+        onFormDelete?.(data?.buyingTypeId)
+      })
       .catch((e) => message.error(e.message))
 
     setIsPopconfirmVisible(false)

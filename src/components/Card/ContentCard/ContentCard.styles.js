@@ -22,6 +22,6 @@ export const ImageBackground = styled(Box)`
 export const RoundedCol = styled(Col)`
   ${({ theme }) => `
   border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  background-color: ${'var(--typeform-content-bg)'}
+  background-color: ${'var(--typeform-content-bg)'};
   `}
 `

@@ -265,7 +265,8 @@ function FormEdit(props) {
   }, [currentQuestion])
 
   // [COMPUTED PROPERTIES]
-  const containerPadding = wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
+  const containerPadding =
+    wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
   const welcomeScreenShowRule = questions?.some(
     (question) => question['questionType'] === QUESTION_TYPES.WELCOME_SCREEN
   )
@@ -278,7 +279,7 @@ function FormEdit(props) {
             {formLoading || questionsListLoading || answerScoresListLoading ? (
               <Spinner />
             ) : (
-              <Container display="flex" height="inherit" overflowX="hidden" >
+              <Container display="flex" height="inherit" overflowX="hidden">
                 <Box
                   flex={1}
                   display="flex"

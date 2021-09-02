@@ -34,7 +34,8 @@ function FormShow(props) {
     wrapperOffset,
     configurations,
     actions = {},
-    wrapperPaddings
+    wrapperPaddings,
+    hideHeader
   } = props
 
   // [CUSTOM_HOOKS]
@@ -72,7 +73,8 @@ function FormShow(props) {
   const [previousQuestionOrder, setPreviousQuestionOrder] = useState([])
 
   // [COMPUTED PROPERTIES]
-  const containerPadding = wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
+  const containerPadding =
+    wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
   const filteredQuestionsList = useMemo(
     () =>
       questionsData?.filter(
@@ -201,13 +203,15 @@ function FormShow(props) {
                 display="flex"
                 flexDirection="column"
                 p={containerPadding}>
-                <PageHeader
-                  id={id}
-                  handlesPreview
-                  ref={headerRef}
-                  smallScreen={smallScreen}
-                  onBack={onBack || history.goBack}
-                />
+                {!hideHeader && (
+                  <PageHeader
+                    id={id}
+                    handlesPreview
+                    ref={headerRef}
+                    smallScreen={smallScreen}
+                    onBack={onBack || history.goBack}
+                  />
+                )}
                 <ContentCard
                   topOffset={wrapperOffset}
                   headerHeight={headerHeight}
