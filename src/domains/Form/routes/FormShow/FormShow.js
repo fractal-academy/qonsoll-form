@@ -100,8 +100,8 @@ function FormShow(props) {
     () =>
       !!Object.values(answersContext).length
         ? Object.values(answersContext).map((item) => {
-          if (item?.answerId) return item?.answerId
-        })
+            if (item?.answerId) return item?.answerId
+          })
         : [],
     [answersContext]
   )
