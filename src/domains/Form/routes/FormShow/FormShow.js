@@ -34,7 +34,8 @@ function FormShow(props) {
     wrapperOffset,
     configurations,
     actions = {},
-    wrapperPaddings
+    wrapperPaddings,
+    hideHeader
   } = props
 
   // [CUSTOM_HOOKS]
@@ -99,8 +100,8 @@ function FormShow(props) {
     () =>
       !!Object.values(answersContext).length
         ? Object.values(answersContext).map((item) => {
-            if (item?.answerId) return item?.answerId
-          })
+          if (item?.answerId) return item?.answerId
+        })
         : [],
     [answersContext]
   )
@@ -202,13 +203,15 @@ function FormShow(props) {
                 display="flex"
                 flexDirection="column"
                 p={containerPadding}>
-                <PageHeader
-                  id={id}
-                  handlesPreview
-                  ref={headerRef}
-                  smallScreen={smallScreen}
-                  onBack={onBack || history.goBack}
-                />
+                {!hideHeader && (
+                  <PageHeader
+                    id={id}
+                    handlesPreview
+                    ref={headerRef}
+                    smallScreen={smallScreen}
+                    onBack={onBack || history.goBack}
+                  />
+                )}
                 <ContentCard
                   topOffset={wrapperOffset}
                   headerHeight={headerHeight}
