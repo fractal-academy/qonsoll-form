@@ -86,17 +86,14 @@ function Carousel(props) {
 
     const temp =
       previousQuestionOrder?.[previousQuestionOrder.length - 1] ===
-      currentSlide - 1
+        currentSlide - 1
         ? previousQuestionOrder?.filter(
-            (_, index) => index < previousQuestionOrder.length - 1
-          )
+          (_, index) => index < previousQuestionOrder.length - 1
+        )
         : previousQuestionOrder
 
     setPreviousQuestionOrder(temp)
   }
-
-  console.log('current: ', currentSlide)
-  questionsData.map((item) => console.log(item?.order))
 
   const handleNextClick = (e) => {
     // Check if function 'next' can be called
@@ -148,8 +145,8 @@ function Carousel(props) {
   const getNextSlide = (config) => {
     const nextOrder = config
       ? questionsData?.filter(
-          (item) => item.id === config[0]?.redirectQuestion
-        )[0]?.order
+        (item) => item.id === config[0]?.redirectQuestion
+      )[0]?.order
       : 0
 
     const ruledOrder = containWelcomeScreen ? nextOrder : nextOrder - 1
@@ -212,7 +209,7 @@ function Carousel(props) {
   isAnswered && typeAction()
 
   return (
-    <Box ref={ref} height="100%" width="100%">
+    <Box ref={ref} height="100%" width="100%" position='relative' >
       <AntdCarousel
         dots={false}
         swipe={false}
@@ -228,7 +225,7 @@ function Carousel(props) {
           })
         )}
       </AntdCarousel>
-      <Box ref={buttonsRef}>
+      <Box ref={buttonsRef} position='absolute' bottom='0' right='0' >
         {!submitLoading && (
           <Row h="right" p={2} noGutters>
             <Col cw="auto" mr={2}>
@@ -252,7 +249,7 @@ function Carousel(props) {
           </Row>
         )}
       </Box>
-    </Box>
+    </Box >
   )
 }
 
