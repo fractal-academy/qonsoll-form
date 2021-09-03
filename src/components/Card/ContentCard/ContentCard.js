@@ -7,7 +7,12 @@ function ContentCard(props) {
   const { image, leftSideMenu, brightnessValue, children } = props
 
   return (
-    <Row flexGrow={1} noGutters overflowX="hidden" overflowY="hidden" style={{ flexGrow: 1 }}>
+    <Row
+      flexGrow={1}
+      noGutters
+      overflowX="hidden"
+      overflowY="hidden"
+      style={{ flexGrow: 1 }}>
       {leftSideMenu && (
         <Col mr={3} cw="auto" px="0">
           {leftSideMenu}
@@ -19,7 +24,7 @@ function ContentCard(props) {
         )}
         {children}
       </RoundedCol>
-    </Row >
+    </Row>
   )
 }
 
