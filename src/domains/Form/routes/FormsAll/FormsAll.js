@@ -39,11 +39,11 @@ function FormsAll(props) {
   const searchRef = useRef()
   const [_data] = useCollectionData(
     !formsList &&
-      getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
+    getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
 
   const data = useMemo(
-    () => (formsList ? [formsList] : _data),
+    () => (formsList ? formsList : _data),
     [_data, formsList]
   )
   const smallScreen = useMedia({ minWidth: '769px' })
@@ -145,9 +145,8 @@ function FormsAll(props) {
                   <Col>
                     <Input
                       ref={searchRef}
-                      placeholder={`${
-                        formSearchPlaceholder || 'Search form by name'
-                      }...`}
+                      placeholder={`${formSearchPlaceholder || 'Search form by name'
+                        }...`}
                       onChange={(input) => searchData(input.target.value)}
                     />
                   </Col>

@@ -2031,8 +2031,8 @@
   /* Image —————————————————————————————— End */
 
   /* */
-  --typeform-card-bg: var(--dark-t-lighten9);
-  --typeform-content-bg: var(--dark-t-lighten4);
+  --typeform-card-bg: var(--white);
+  --typeform-content-bg: var(--white);
 
   --typeform-card-hover-bg: var(--dark-t-lighten8);
   --typeform-content-hover-bg: var(--dark-transparent-4);
