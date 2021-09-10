@@ -65,7 +65,7 @@ function EndingSimpleView(props) {
                   <StyledTag style={{ marginLeft: '-10px' }}>
                     {questionListItem?.order}
                   </StyledTag>
-                  <Text type="secondary">
+                  <Text fontSize="var(--qf-font-size-body1)" type="secondary">
                     {questionListItem?.title || questionListItem?.order}
                   </Text>
                 </>

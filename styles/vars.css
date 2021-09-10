@@ -1,34 +1,110 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
 
 :root {
+  /* [ QONSOLL FORM ] */
+
+  /* static list */
+  --qf-list-item-bg: var(--ql-color-dark-t-lighten5);
+  --qf-list-item-hover: var(--ql-color-dark-t-lighten6);
+
+  --qf-list-item-preview: var(--ql-color-white);
+
+  /* drag and drop */
+  --qf-dnd-item-badge-bg: var(--ql-color-dark-lighten1);
+  --qf-dnd-item-badge-color: var(--ql-color-white);
+  
+  --qf-dnd-item-bg: var(--ql-color-dark-t-lighten5);
+  --qf-dnd-item-hover: var(--ql-color-dark-t-lighten4); 
+
+  --qf-dnd-active-item-bg: var(--ql-color-accent1-t-lighten4);
+  --qf-dnd-active-item-hover: var(--ql-color-accent1-t-lighten3); 
+
+  /* content card */
+  --qf-content-card-bg: var(--ql-color-white);
+
+  /* layout */
+  --qf-sidebar-bg: var(--ql-color-white);
+  --qf-header-mb: 8px;
+
+  /* button */
+  --qf-button-bg: var(--ql-color-accent1-t-lighten4);
+  --qf-button-hover: var(--ql-color-accent1-t-lighten3);
+  --qf-active-button-bg: var(--ql-color-accent1-t-lighten2);
+
+  --qf-active-keybox-bg: var(--ql-color-accent1);
+  --qf-keybox-bg: var(--ql-color-white);
+
+  --qf-button-color: var(--ql-color-accent1);
+  --qf-active-button-color: var(--ql-color-white); /* unused */
+
+  
+  /* input */
+  --qf-input-background: var(--ql-color-dark-t-lighten5); /* needs refactoring */
+
+  /* overwritten menu */
+  --menu-vertical-inline-item-padding: 8px;
+  --menu-item-active-bg: var(--ql-color-accent1-t-lighten3);
+
+  /* overwritten form */
+  --ql-form-item-vertical-spacing: 24px;  
+
+  /* uploader */
+  --qf-uploader-color: var(--ql-color-white);
+  --qf-uploader-bg: var(--ql-color-accent1);
+  --qf-uploader-hover: var(--ql-color-accent1-t-lighten1);
+
+  --qf-uploader-item-bg: var(--ql-color-dark-t-lighten5);
+
+  /* domain component: question */
+  --qf-question-type-icon-default: var(--ql-color-dark-t-lighten4);
+  --qf-question-type-icon-danger: var(--ql-color-danger-t-lighten3);
+
+  /*domain component: condition */
+  --qf-condition-item-bg: var(--ql-color-dark-t-lighten6);
+  --qf-condition-item-border: var(--ql-color-dark-t-lighten4);
+
   /* typography */
-  --qf-card-bg: var(--ql-color-white);
-  --qf-content-bg: var(--ql-color-white);
-  --qf-card-hover-bg: var(--ql-color-dark-t-lighten6);
-  --qf-content-hover-bg: var(--ql-color-dark-t-lighten6);
+  --qf-font-size-h1: var(--ql-font-size-h1); /* unused */
+  --qf-font-size-h2: var(--ql-font-size-h2); /* unused */
+  --qf-font-size-h3: var(--ql-font-size-h3);
+  --qf-font-size-h4: var(--ql-font-size-h4);
+  --qf-font-size-h5: var(--ql-font-size-h5); /* unused */
+  --qf-font-size-h6: var(--ql-font-size-h6); /* unused */
+  --qf-font-size-overline: var(--ql-font-size-overline);  /* unused */
+  --qf-font-size-body1: var(--ql-font-size-body1);
+  --qf-font-size-body2: var(--ql-font-size-body2);
+  --qf-font-size-caption1: var(--ql-font-size-caption1);
+  --qf-font-size-caption2: var(--ql-font-size-caption2);
 
-  /* colors */
+  --qf-font-color-primary: var(--ql-color-black);
+  --qf-font-color-accent: var(--ql-color-accent1);
+  --qf-font-color-secondary: var(--ql-color-dark-t-lighten2);
 
-  /* typography */
+  /* border radius */
+  --qf-border-radius-sm: var(--ql-border-radius-sm); /* 6px */
+  --qf-border-radius-md: var(--ql-border-radius-md); /* 8px */
+  --qf-border-radius-lg: var(--ql-border-radius-16); /* 12px */
+  --qf-border-radius-full: var(--ql-border-radius-full); /* 50% */
 
-  /* general */
-  --ql-body-bg: var(--ql-color-dark-t-lighten4);
-
+  /* [ OPTIONAL VARS ] */
+  --ql-font-family-main: 'Rubik'; 
+  --ql-body-bg: var(--ql-color-dark-t-lighten6); 
 }
 
 #root {
-    height: inherit;
+  height: inherit;
 }
 
+/* [ CUSTOM SCROLLBAR ] */
 ::-webkit-scrollbar {
-    width: 4px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 8px rgba(3, 11, 23, 0.15);
+  box-shadow: inset 0 0 8px rgba(3, 11, 23, 0.15);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(3, 11, 23, 0.75);
-    border-radius: 8px;
+  background: rgba(3, 11, 23, 0.75);
+  border-radius: 8px;
 }

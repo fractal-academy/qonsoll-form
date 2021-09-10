@@ -10,6 +10,5 @@ export const PopoverSwitcherRow = styled(Row)`
 export const CustomDivider = styled(Divider)`
   margin-top: 0px;
   margin-bottom: 0px;
-  background: var(--qf-font-color-primary);
   height: 2px;
 `

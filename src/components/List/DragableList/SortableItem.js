@@ -5,7 +5,7 @@ import { sortableElement } from 'react-sortable-hoc'
 
 const SortableItem = sortableElement(({ children }) => (
   <Row noGutters v="center">
-    <Col cw="auto" mr={1} mb={3}>
+    <Col cw="auto" mr={1}>
       <DragHandle />
     </Col>
     <Col flex="auto" position="relative">

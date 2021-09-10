@@ -64,18 +64,17 @@ function PageHeader(props) {
         </Title>
       </Col>
 
-      {showResultsRule && (
+      {/* {showResultsRule && (
         <Col cw="auto" v="center" mr={1}>
           {smallScreen && (
             <Button
               type="text"
               icon={<ReadOutlined />}
-              onClick={onFormResultsDisplay}>
-              {resultButton || 'Results'}
-            </Button>
+              onClick={onFormResultsDisplay}
+            />
           )}
         </Col>
-      )}
+      )} */}
 
       {handlesPreview && title && (
         <Col cw="auto" v="center">

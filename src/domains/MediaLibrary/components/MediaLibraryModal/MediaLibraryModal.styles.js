@@ -9,12 +9,6 @@ export const CustomButton = styled(Button)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--qf-button-bg);
-  border-color: var(--qf-button-bg);
-  :hover {
-    background-color: var(--qf-button-hover);
-    border-color: var(--qf-button-bg);
-  }
 `
 
 export const MediaListContainer = styled(Box)`

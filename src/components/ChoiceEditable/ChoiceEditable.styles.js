@@ -47,7 +47,7 @@ export const DeleteButton = styled(Box)`
   justify-content: center;
   align-items: center;
   font-size: var(--qf-font-size-caption2);
-  background-color: var(--qf-button-detail-bg);
+  background-color: var(--qf-active-keybox-bg);
   border-radius: var(--qf-border-radius-full);
 `
 export const ChoiceInput = styled(TextArea)`

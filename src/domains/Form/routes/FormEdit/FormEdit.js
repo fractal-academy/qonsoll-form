@@ -320,7 +320,6 @@ function FormEdit(props) {
                 </Box>
                 {smallScreen && (
                   <EditorSidebar
-                    transparent
                     id={id}
                     formData={form}
                     endings={endings}

@@ -53,7 +53,7 @@ function StaticList(props) {
         <Box mt={4} width="100%" display="flex" justifyContent="center">
           <NoData
             description={
-              <>
+              <Box display="flex" flexDirection="column">
                 <Text>{emptyDescription || "There's nothing here"}</Text>
                 {hasMedia ? (
                   <Upload
@@ -71,7 +71,7 @@ function StaticList(props) {
                     <Link onClick={onClick}>{addForm || 'Add new form'}</Link>
                   )
                 )}
-              </>
+              </Box>
             }
           />
         </Box>
