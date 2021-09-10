@@ -1,14 +1,13 @@
 import React from 'react'
-import { Typography, Select } from 'antd'
-import { Row, Col } from '@qonsoll/react-design'
+import { Select } from 'antd'
+import { Row, Col, Text } from '@qonsoll/react-design'
+import { useTranslation } from '../../../../context/Translation'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
-import { useTranslation } from '../../../../context/Translation'
 
-const { Text } = Typography
 const { Option } = Select
 
 const maxRange = [...Array(10)].map((_, index) => index + 1)

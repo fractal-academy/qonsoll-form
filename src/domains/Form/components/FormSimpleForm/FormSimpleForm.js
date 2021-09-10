@@ -1,8 +1,9 @@
+import { Form, Switch } from 'antd'
 import React, { useMemo } from 'react'
-import { Form, Input, Switch } from 'antd'
+import { TextArea, Input } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 
-const { TextArea } = Input
+// const { TextArea } = Input
 function FormSimpleForm(props) {
   const { formData, children, ...rest } = props
 

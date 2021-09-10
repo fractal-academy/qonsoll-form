@@ -1,24 +1,22 @@
-import React, { useState } from 'react'
+import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-import typeformTheme from '../../../../styles/theme'
 import styled from 'styled-components'
+import React, { useState } from 'react'
 import { Button, Typography } from 'antd'
+import { useKeyPress } from '@umijs/hooks'
 import { Row, Col } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
-import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import COLLECTIONS from '../../../constants/collection'
 import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
-import { useKeyPress } from '@umijs/hooks'
-import useMedia from 'use-media'
-import COLLECTIONS from '../../../constants/collection'
 import useFunctions from '../../../../src/hooks/useFunctions'
+import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 const { Text } = Typography
 
 const StyledSubmit = styled(Button)`
   height: 56px;
-  font-size: ${({ theme }) =>
-    theme?.typography?.fontSize?.h4 || typeformTheme?.typography?.fontSize?.h4};
+  font-size: var(--qf-font-size-h4);
 `
 
 function SubmitButton(props) {
@@ -41,7 +39,7 @@ function SubmitButton(props) {
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
   const { pressEnter } = useTranslation()
-  const IsntDesktop = useMedia({ minWidth: '1024px' })
+  const isntDesktop = useMedia({ minWidth: '1024px' })
 
   const mockUser = { name: 'John Doe' }
 
@@ -103,7 +101,7 @@ function SubmitButton(props) {
     } else onClick?.()
   }
   return (
-    <Row display="flex" v="center" mt={!IsntDesktop && 3} noGutters>
+    <Row display="flex" v="center" mt={!isntDesktop && 3} noGutters>
       <Col cw="auto" mr={3}>
         <StyledSubmit
           type="primary"
@@ -123,7 +121,7 @@ function SubmitButton(props) {
           )}
         </StyledSubmit>
       </Col>
-      {IsntDesktop && (
+      {isntDesktop && (
         <Col cw="auto">
           <Text>{(pressEnter || 'Press enter') + ' ↵'} </Text>
         </Col>

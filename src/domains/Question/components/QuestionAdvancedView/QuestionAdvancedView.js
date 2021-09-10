@@ -1,8 +1,7 @@
 import useMedia from 'use-media'
-import { Typography } from 'antd'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import { Col, Row, Box } from '@qonsoll/react-design'
+import { Col, Row, Box, Title, Text } from '@qonsoll/react-design'
 import QuestionImageContainer from '../QuestionImageContainer'
 import { useTranslation } from '../../../../context/Translation'
 import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
@@ -23,8 +22,6 @@ import {
   SubmitButton,
   VideoPlayer
 } from '../../../../components'
-
-const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
   const {

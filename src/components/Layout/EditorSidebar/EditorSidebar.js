@@ -1,8 +1,8 @@
 import { v4 as uuid } from 'uuid'
 import PropTypes from 'prop-types'
+import { Tooltip, message } from 'antd'
 import TypePopover from './TypePopover'
 import { globalStyles } from '../../../../styles'
-import { Row, Col, Box } from '@qonsoll/react-design'
 import useFunctions from '../../../hooks/useFunctions'
 import { SidebarBoxWrapper } from './EditorSidebar.styles'
 import React, { useEffect, useState, useMemo } from 'react'
@@ -11,7 +11,7 @@ import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import { QuestionsList } from '../../../domains/Question/components'
-import { Typography, Button, Divider, Tooltip, message } from 'antd'
+import { Row, Col, Box, Title, Button, Divider } from '@qonsoll/react-design'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
 import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
 import {
@@ -19,13 +19,11 @@ import {
   DISPATCH_EVENTS
 } from '../../../context/CurrentQuestion'
 
-const { Title } = Typography
-
 //configuration for certain types of questions
 const choicesConfiguration = [
   {
     answerOptionId: uuid(),
-    answerOption: 'default',
+    answerOption: 'choice 0',
     image: '',
     redirectQuestion: '',
     redirectConditionRule: ''

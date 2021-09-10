@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react'
+import { message } from 'antd'
 import PropTypes from 'prop-types'
-import { KeyBox } from '../../../components'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
-import { message } from 'antd'
+import { KeyBox } from '../../../components'
+import React, { useState, useMemo } from 'react'
+import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
 import { getQuestionAnswerFromContext } from '../../../helpers'
-import { useAnswersContext } from '../../../context/Answers'
 
 function YesnoButton(props) {
   const { onClick, question, isFormQuiz, currentSlide, answersScoreData } =

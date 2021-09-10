@@ -1,19 +1,17 @@
 import React, { useRef } from 'react'
+import styled from 'styled-components'
 import { DatePicker, message } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
-import { useTranslation } from '../../context/Translation'
-import typeformTheme from '../../../styles/theme'
-import styled from 'styled-components'
-import { getQuestionAnswerFromContext } from '../../helpers'
 import { useAnswersContext } from '../../context/Answers'
+import { useTranslation } from '../../context/Translation'
+import { getQuestionAnswerFromContext } from '../../helpers'
 
 const StyledDatePicker = styled(DatePicker)`
-  background-color: ${({ theme }) =>
-    theme?.color?.dark?.t?.lighten7 || typeformTheme?.color?.dark?.t?.lighten7};
+  background-color: var(--qf-input-background);
 
   .ant-picker-clear {
-    border-radius: 50%;
-    font-size: 18px;
+    border-radius: var(--qf-border-radius-full);
+    font-size: var(--qf-font-size-body1);
   }
 `
 

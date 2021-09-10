@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 import { useKeyPress } from '@umijs/hooks'
-import { Form, Input, message } from 'antd'
+import { Form, message } from 'antd'
 import { globalStyles } from '../../../styles'
 import { SubmitButton } from '../../components'
-import { Box, Container } from '@qonsoll/react-design'
+import { Box, Container, Input } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 
 function ShortText(props) {
@@ -43,9 +43,8 @@ function ShortText(props) {
 
   const onFocusedKeyPress = (e) => {
     if (e.keyCode === 13) {
-      //Prevent linebrake onEnter
-
-      e.preventDefault().blur()
+      //Prevent line brake onEnter
+      e.preventDefault()
     }
   }
 

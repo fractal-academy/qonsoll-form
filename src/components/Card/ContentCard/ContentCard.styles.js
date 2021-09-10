@@ -1,13 +1,12 @@
 import styled from 'styled-components'
-import { Box, Col, Row } from '@qonsoll/react-design'
-import typeformTheme from '../../../../styles/theme'
+import { Row, Col, Box } from '@qonsoll/react-design'
 
 export const ContentRow = styled(Row)`
   height: ${(props) => props.onEdit && '100%'};
 `
 
 export const ImageBackground = styled(Box)`
-  ${({ theme, image, brightnessValue }) => `
+  ${({ image, brightnessValue }) => `
   padding:0;
   width: 100%;
   height: 100%;
@@ -16,12 +15,10 @@ export const ImageBackground = styled(Box)`
   background-repeat: no-repeat;
   background-image: url(${image});
   filter: brightness(${brightnessValue + 100}%);
-  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  border-radius: var(--qf-border-radius-md);
   `}
 `
 export const RoundedCol = styled(Col)`
-  ${({ theme }) => `
-  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  background-color: ${'var(--typeform-content-bg)'};
-  `}
+  border-radius: var(--qf-border-radius-lg);
+  background-color: var(--qf-content-card-bg);
 `

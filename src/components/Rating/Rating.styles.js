@@ -1,6 +1,5 @@
-import typeformTheme from '../../../styles/theme'
-import styled from 'styled-components'
 import { Rate } from 'antd'
+import styled from 'styled-components'
 
 export const StyledRate = styled(Rate)`
   &.ant-rate {
@@ -14,7 +13,6 @@ export const StyledRate = styled(Rate)`
         : tabletSize
         ? '45px'
         : '50px'};
-    color: ${({ theme }) =>
-      theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
+    color: var(--qf-button-detail-bg);
   }
 `

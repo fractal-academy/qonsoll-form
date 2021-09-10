@@ -1,6 +1,6 @@
 import React from 'react'
-import { Typography, Select } from 'antd'
-import { Row, Col } from '@qonsoll/react-design'
+import { Select } from 'antd'
+import { Row, Col, Text } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import {
   DISPATCH_EVENTS,
@@ -8,7 +8,6 @@ import {
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
 
-const { Text } = Typography
 const { Option } = Select
 
 const opinionScaleTo = [5, 6, 7, 8, 9, 10]

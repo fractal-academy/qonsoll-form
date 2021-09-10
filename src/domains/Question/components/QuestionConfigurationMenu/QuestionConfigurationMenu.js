@@ -1,6 +1,6 @@
-import { Typography, Switch } from 'antd'
+import { Switch } from 'antd'
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col, Box, Text } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
 import {
@@ -9,8 +9,6 @@ import {
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
 import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
-
-const { Text } = Typography
 
 function QuestionConfigurationMenu() {
   // [ADDITIONAL_HOOKS]

@@ -4,11 +4,11 @@ import {
   ScoreConditionsAdvancedView,
   EndingsSimpleView
 } from '../../../../domains/Condition/components'
+import { Tabs } from 'antd'
 import { QUESTION_TYPES } from '../../../../constants'
-import { Box } from '@qonsoll/react-design'
+import { Box, NoData } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
-import { Tabs, Empty } from 'antd'
 import PropTypes from 'prop-types'
 import { useTranslation } from '../../../../context/Translation'
 import { EmptyState, CustomTabs } from './FormConditionsForm.styles'
@@ -100,7 +100,7 @@ function FormConditionsForm(props) {
             ))
           ) : (
             <EmptyState
-              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              image={NoData.PRESENTED_IMAGE_SIMPLE}
               description={
                 noDataToConfigureLogicJumps ||
                 'There are no any question that allows to configure Logic Jumps.'
@@ -128,7 +128,7 @@ function FormConditionsForm(props) {
             ))
           ) : (
             <EmptyState
-              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              image={NoData.PRESENTED_IMAGE_SIMPLE}
               description={
                 noDataToConfigureEndings ||
                 'There are no any question that allows to configure endings.'
@@ -156,7 +156,7 @@ function FormConditionsForm(props) {
               ))
             ) : (
               <EmptyState
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                image={NoData.PRESENTED_IMAGE_SIMPLE}
                 description={
                   noDataToConfigureEndings ||
                   `There are no any question that allows to configure answers scores.`

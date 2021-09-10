@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Text from 'antd/lib/typography/Text'
-import { Col, Row } from '@qonsoll/react-design'
+import { Col, Row, Text } from '@qonsoll/react-design'
 import { CustomOpinionBox, CustomTextBox } from './OpinionScaleTemplate.styles'
 import { QuestionSelect } from '../../../../../domains/Question/components'
 

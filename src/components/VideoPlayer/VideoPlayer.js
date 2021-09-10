@@ -15,15 +15,6 @@ function VideoPlayer(props) {
     onSeek
   } = props
 
-  // const [player, setPlayer] = useState(null)
-
-  //   useEffect(() => {
-  //     if (player) {
-  //       // DO stuff here
-  //       player.on('attached', function (embedding) {}, player)
-  //     }
-  //   }, [player])
-
   return (
     <ZiggeoPlayer
       locale="en"

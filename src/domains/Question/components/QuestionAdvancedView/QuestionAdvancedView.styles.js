@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Box, Col } from '@qonsoll/react-design'
-import typeformTheme from '../../../../../styles/theme'
 
 export const styles = {
   mainRowStyle: {
@@ -33,7 +32,5 @@ export const BackgroundImage = styled(Col)`
   background-repeat: no-repeat;
   background-image: ${({ image }) => image};
   filter: brightness(${({ imageBrightness }) => imageBrightness + 100}%);
-  ${({ theme }) => `
-border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-`}
+  border-radius: var(--qf-border-radius-md);
 `

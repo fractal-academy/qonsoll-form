@@ -14,12 +14,16 @@ function ResponseList(props) {
     onListItemClick,
     setCurrentUserAnswerGroup
   } = props
+
+  // [ADDITIONAL HOOKS]
   const { emptyStateDescription } = useTranslation()
 
+  // [COMPUTED PROPERTIES]
   const sortedUserAnswerGroup = userAnswerGroup?.sort(
     (a, b) =>
       moment(a.date.toDate()).format('x') - moment(b.date.toDate()).format('x')
   )
+
   return (
     <Box display="flex" flex={1} flexDirection="column" alignItems="center">
       {loading ? (

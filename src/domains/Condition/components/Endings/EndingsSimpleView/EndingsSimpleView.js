@@ -1,41 +1,15 @@
+import { Select } from 'antd'
 import PropTypes from 'prop-types'
-import { Select, Tag } from 'antd'
 import React, { useMemo } from 'react'
-import styled from 'styled-components'
-import Text from 'antd/es/typography/Text'
-import { Box } from '@qonsoll/react-design'
-import Title from 'antd/lib/typography/Title'
 import { COLLECTIONS } from '../../../../../constants'
 import { NumberedCard } from '../../../../../components'
+import { Box, Text, Title } from '@qonsoll/react-design'
 import useFunctions from '../../../../../hooks/useFunctions'
 import { useTranslation } from '../../../../../context/Translation'
-import typeformTheme from '../../../../../../styles/theme'
-
-const StyledTag = styled(Tag)`
-  background-color: ${({ theme }) =>
-    theme?.color?.primary?.t?.lighten5 ||
-    typeformTheme?.color?.primary?.t?.lighten5};
-  color: ${({ theme }) =>
-    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
-  border-color: ${({ theme }) =>
-    theme?.color?.primary?.t?.lighten2 ||
-    typeformTheme?.color?.primary?.t?.lighten2};
-  border-radius: ${({ theme }) =>
-    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  font-size: ${({ theme }) =>
-    theme?.typography?.fontSize?.body1 ||
-    typeformTheme?.typography?.fontSize?.body1};
-  margin-right: 10px !important;
-  margin-left: 10px !important;
-`
-const StyledSelect = styled(Select)`
-  .ant-select-clear {
-    border-radius: 50%;
-    font-size: 14px;
-  }
-`
+import { StyledTag, StyledSelect } from './EndingsSimpleView.styles'
 
 const { Option, OptGroup } = Select
+
 let startLetter = 65
 
 function EndingSimpleView(props) {

@@ -53,7 +53,7 @@ function ConditionForm(props) {
       component: <FileUploadTemplate isUploaded />
     },
     [QUESTION_TYPES.ENDING]: {
-      component: <>Ending.</>
+      component: <></>
     }
   }
 

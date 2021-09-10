@@ -1,18 +1,16 @@
 import React from 'react'
-import { Typography } from 'antd'
 import PropTypes from 'prop-types'
-import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
+import { NumberedCard } from '../../../../components'
+import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslation } from '../../../../context/Translation'
+import { Box, Row, Col, Text, Title } from '@qonsoll/react-design'
 import {
   OptionBox,
   StyledInputNumber,
   CustomTextBox
 } from './ScoreConditionsAdvancedView.style'
-import { Box, Row, Col } from '@qonsoll/react-design'
-import { NumberedCard } from '../../../../components'
 
-const { Text, Title } = Typography
 const startLetter = 65
 
 const ScoreConditionsAdvancedView = (props) => {

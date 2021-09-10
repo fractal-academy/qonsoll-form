@@ -91,12 +91,13 @@ function ResponseTable(props) {
                 sortOrder
                 columns={columns}
                 dataSource={data}
-                pagination={{ pageSize: 50 }}
+                pagination={false}
               />
             ) : (
               <EmptyState
                 description={
-                  emptyStateAnswersDescription || 'Choose answers to display'
+                  emptyStateAnswersDescription ||
+                  'Choose user to display their answers'
                 }
               />
             )}
