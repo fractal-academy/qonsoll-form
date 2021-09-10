@@ -53,7 +53,7 @@ const ScoreConditionsAdvancedView = (props) => {
     )?.score
 
   return (
-    <NumberedCard number={index + 1} key={index}>
+    <NumberedCard top="24px" number={index + 1} key={index}>
       <Box ml={3}>
         <Title level={5} style={{ marginBottom: '10px' }}>
           {questionData?.title}

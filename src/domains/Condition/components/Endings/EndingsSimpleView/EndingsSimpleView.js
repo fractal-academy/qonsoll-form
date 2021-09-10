@@ -40,7 +40,7 @@ function EndingSimpleView(props) {
   )
 
   return (
-    <NumberedCard number={index + 1} key={index}>
+    <NumberedCard top="24px" number={index + 1} key={index}>
       <Box ml={3}>
         <Title style={{ overflow: 'ellipsis' }} level={5}>
           {item?.title}
