@@ -166,14 +166,20 @@ function QuestionAdvancedView(props) {
                   flexDirection="column"
                   justifyContent="center">
                   {questionNumberRule && (
-                    <Title style={{ wordBreak: 'break-word' }} level={4}>
+                    <Title
+                      color="var(--qf-font-color-primary)"
+                      style={{ wordBreak: 'break-word' }}
+                      level={4}>
                       `${questionNumber}. ${videoQuestion || 'Video question'}`
                     </Title>
                   )}
                   <VideoPlayer videoKey={data?.videoApiKey} />
                 </Box>
               ) : (
-                <Title style={{ wordBreak: 'break-word' }} level={4}>
+                <Title
+                  color="var(--qf-font-color-primary)"
+                  style={{ wordBreak: 'break-word' }}
+                  level={4}>
                   {questionNumberRule && `${questionNumber}.`} {data?.title}
                 </Title>
               )}
@@ -181,7 +187,9 @@ function QuestionAdvancedView(props) {
           </Row>
           <Row noGutters mb={3}>
             <Col>
-              <Text>{data?.subtitle}</Text>
+              <Text color="var(--qf-font-color-caption1)">
+                {data?.subtitle}
+              </Text>
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (

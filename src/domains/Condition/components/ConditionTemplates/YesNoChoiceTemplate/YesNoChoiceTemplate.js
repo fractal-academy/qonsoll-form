@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Text from 'antd/lib/typography/Text'
+import { Col, Row, Text } from '@qonsoll/react-design'
 import { CustomTextBox, CustomYesNoBox } from './YesNoChoiceTemplate.styles'
-import { Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from '../../../../../domains/Question/components'
 
 function YesNoChoiceTemplate(props) {
@@ -15,7 +14,9 @@ function YesNoChoiceTemplate(props) {
           <Col cw={6} pl={0} pr={2}>
             <CustomYesNoBox px={3}>
               <CustomTextBox mr={2} px={2}>
-                <Text strong>{item.answerOption[0].toUpperCase()}</Text>
+                <Text color="var(--qf-font-color-caption1)" strong>
+                  {item.answerOption[0].toUpperCase()}
+                </Text>
               </CustomTextBox>
               {item?.answerOption}
             </CustomYesNoBox>

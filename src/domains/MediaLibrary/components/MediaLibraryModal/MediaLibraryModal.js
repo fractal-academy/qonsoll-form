@@ -143,7 +143,9 @@ function MediaLibraryModal(props) {
         }}>
         <Row v="center" py={3} px={3}>
           <Col>
-            <Title level={3}>{mediaLibraryTitle || 'Media Library'}</Title>
+            <Title color="var(--qf-font-color-primary)" level={3}>
+              {mediaLibraryTitle || 'Media Library'}
+            </Title>
             <CustomText>
               {amountTitle || 'Amount of shown files: '}
               {amountFiles}

@@ -59,7 +59,7 @@ function PageHeader(props) {
         </Col>
       )}
       <Col>
-        <Title level={2} {...titleProps}>
+        <Title color="var(--qf-font-color-primary)" level={2} {...titleProps}>
           {title}
         </Title>
       </Col>

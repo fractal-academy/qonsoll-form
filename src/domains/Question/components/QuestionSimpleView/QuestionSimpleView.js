@@ -71,7 +71,6 @@ function QuestionSimpleView(props) {
         </Col>
         <Col width="150px">
           <DescriptionContainer>{title}</DescriptionContainer>
-          {/* <Title level={5}>{title}</Title> */}
         </Col>
         <Col cw="auto">
           <Popconfirm

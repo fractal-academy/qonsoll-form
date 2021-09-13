@@ -21,4 +21,5 @@ export const QuestionMenuItem = styled(Menu.Item)`
 `
 export const Description = styled(Text)`
   font-size: var(--qf-font-size-caption1);
+  color: var(--qf-font-color-caption1);
 `

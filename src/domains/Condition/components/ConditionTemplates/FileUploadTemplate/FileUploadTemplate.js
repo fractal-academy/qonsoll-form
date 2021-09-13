@@ -16,7 +16,11 @@ function FileUploadTemplate(props) {
     <Row mb={2}>
       <Col cw={6} pl={0} pr={2}>
         <CustomUploaderBox px={3}>
-          {isUploaded ? <Text>is uploaded</Text> : <Text>not uploaded</Text>}
+          {isUploaded ? (
+            <Text color="var(--qf-font-color-caption1)">is uploaded</Text>
+          ) : (
+            <Text color="var(--qf-font-color-caption1)">not uploaded</Text>
+          )}
         </CustomUploaderBox>
       </Col>
       <Col cw={6}>

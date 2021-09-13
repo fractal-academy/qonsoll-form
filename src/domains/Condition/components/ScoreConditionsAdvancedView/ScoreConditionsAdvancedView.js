@@ -55,7 +55,10 @@ const ScoreConditionsAdvancedView = (props) => {
   return (
     <NumberedCard top="24px" number={index + 1} key={index}>
       <Box ml={3}>
-        <Title level={5} style={{ marginBottom: '10px' }}>
+        <Title
+          color="var(--qf-font-color-primary)"
+          level={5}
+          style={{ marginBottom: '10px' }}>
           {questionData?.title}
         </Title>
         {questionData?.questionConfigurations?.map((item, index) => (
@@ -63,9 +66,13 @@ const ScoreConditionsAdvancedView = (props) => {
             <Col cw={8} pl={0} pr={2}>
               <OptionBox px={3}>
                 <CustomTextBox mr={2} px={2}>
-                  <Text strong>{String.fromCharCode(startLetter + index)}</Text>
+                  <Text color="var(--qf-font-color-caption1)" strong>
+                    {String.fromCharCode(startLetter + index)}
+                  </Text>
                 </CustomTextBox>
-                <Text ellipsis>{item?.answerOption}</Text>
+                <Text color="var(--qf-font-color-caption1)" ellipsis>
+                  {item?.answerOption}
+                </Text>
               </OptionBox>
             </Col>
             <Col cw={4}>

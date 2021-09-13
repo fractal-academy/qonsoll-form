@@ -27,6 +27,7 @@ export const StyledSelect = styled(Select)`
 `
 
 export const StyledCaptionText = styled(Text)`
+  color: var(--qf-font-color-caption1);
   font-size: var(--qf-font-size-caption1);
   line-height: var(--ql-line-height-caption1);
   font-weight: var(--ql-font-weight-regular);

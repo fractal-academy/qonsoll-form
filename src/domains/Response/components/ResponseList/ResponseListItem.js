@@ -27,7 +27,7 @@ function ResponseList(props) {
             <Text variant="h4" color="var(--qf-font-color-accent)">
               {user}
             </Text>
-            <Text color="var(--qf-font-color-secondary)">{formattedDate}</Text>
+            <Text color="var(--qf-font-color-caption1)">{formattedDate}</Text>
           </Col>
         </Row>
       </NumberedCard>

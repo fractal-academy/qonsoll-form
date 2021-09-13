@@ -59,7 +59,9 @@ function QuestionConfigurationMenu() {
       {isNotWelcomeScreenOrStatement && (
         <Row mb={3} noGutters v="center">
           <Col v="center">
-            <Text>{requiredSwitcher || 'Required'}</Text>
+            <Text color="var(--qf-font-color-caption1)">
+              {requiredSwitcher || 'Required'}
+            </Text>
           </Col>
           <Col cw="auto" px={2}>
             <Switch
@@ -72,7 +74,9 @@ function QuestionConfigurationMenu() {
       )}
       <Row mb={3} noGutters v="center">
         <Col v="center">
-          <Text>{videoQuestionSwitcher || 'Video question'}</Text>
+          <Text color="var(--qf-font-color-caption1)">
+            {videoQuestionSwitcher || 'Video question'}
+          </Text>
         </Col>
         <Col cw="auto" px={2}>
           <Switch

@@ -2,17 +2,15 @@ import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import React, { useState } from 'react'
-import { Button, Typography } from 'antd'
+import { Button } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row, Col, Text } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 import COLLECTIONS from '../../../constants/collection'
 import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
 import useFunctions from '../../../../src/hooks/useFunctions'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
-
-const { Text } = Typography
 
 const StyledSubmit = styled(Button)`
   height: 56px;
@@ -123,7 +121,9 @@ function SubmitButton(props) {
       </Col>
       {isntDesktop && (
         <Col cw="auto">
-          <Text>{(pressEnter || 'Press enter') + ' ↵'} </Text>
+          <Text color="var(--qf-font-color-caption1)">
+            {(pressEnter || 'Press enter') + ' ↵'}{' '}
+          </Text>
         </Col>
       )}
     </Row>

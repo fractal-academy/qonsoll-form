@@ -2,9 +2,9 @@ import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { StyledItem } from '../../../components'
 import { COLLECTIONS } from '../../../constants'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col, Box, Text } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Popconfirm, Typography, Dropdown, Menu, message } from 'antd'
+import { Popconfirm, Dropdown, Menu, message } from 'antd'
 import { useTranslation } from '../../../context/Translation'
 import { FormSimpleFormWithModal } from '../../../domains/Form/components'
 import { MoreOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons'
@@ -18,7 +18,6 @@ import {
   StyledMenu
 } from './ListItem.styles'
 
-const { Text } = Typography
 const { Item } = Menu
 
 const ListItem = forwardRef((props, ref) => {
@@ -121,7 +120,7 @@ const ListItem = forwardRef((props, ref) => {
   const menu = (
     <StyledMenu>
       <Item onClick={(e) => showModal(e)} key={'showModal'}>
-        <Text>{edit || 'Edit'}</Text>
+        <Text color="var(--qf-font-color-caption1)">{edit || 'Edit'}</Text>
         <FormSimpleFormWithModal
           isEdit
           formData={data}
@@ -140,7 +139,9 @@ const ListItem = forwardRef((props, ref) => {
           okButtonProps={{ loading: confirmLoading }}
           okType="danger"
           okText="Delete">
-          <Text>{popconfirmDeleteButtonText || 'Delete'}</Text>
+          <Text color="var(--qf-font-color-caption1)">
+            {popconfirmDeleteButtonText || 'Delete'}
+          </Text>
         </Popconfirm>
       </Item>
     </StyledMenu>
@@ -177,9 +178,14 @@ const ListItem = forwardRef((props, ref) => {
 
         <Row noGutters h="between" mt={2}>
           <Col display="grid">
-            <Text ellipsis>{data?.title}</Text>
+            <Text color="var(--qf-font-color-caption1)" ellipsis>
+              {data?.title}
+            </Text>
             {!data?.imageUrl && (
-              <Text ellipsis type="secondary">
+              <Text
+                color="var(--qf-font-color-caption1)"
+                ellipsis
+                type="secondary">
                 {description}
               </Text>
             )}

@@ -54,7 +54,9 @@ function ModalWithFormConditionsForm(props) {
           <>
             <Row v="center" noGutters>
               <Col>
-                <Title level={3}>{modalTitle || 'Logic'}</Title>
+                <Title color="var(--qf-font-color-primary)" level={3}>
+                  {modalTitle || 'Logic'}
+                </Title>
               </Col>
               <Col cw="auto" v="center">
                 <Popconfirm

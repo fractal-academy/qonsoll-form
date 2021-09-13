@@ -42,7 +42,10 @@ function EndingSimpleView(props) {
   return (
     <NumberedCard top="24px" number={index + 1} key={index}>
       <Box ml={3}>
-        <Title style={{ overflow: 'ellipsis' }} level={5}>
+        <Title
+          color="var(--qf-font-color-primary)"
+          style={{ overflow: 'ellipsis' }}
+          level={5}>
           {item?.title}
         </Title>
         <StyledSelect
@@ -65,7 +68,10 @@ function EndingSimpleView(props) {
                   <StyledTag style={{ marginLeft: '-10px' }}>
                     {questionListItem?.order}
                   </StyledTag>
-                  <Text fontSize="var(--qf-font-size-body1)" type="secondary">
+                  <Text
+                    color="var(--qf-font-color-caption1)"
+                    fontSize="var(--qf-font-size-body1)"
+                    type="secondary">
                     {questionListItem?.title || questionListItem?.order}
                   </Text>
                 </>

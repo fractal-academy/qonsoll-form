@@ -170,7 +170,7 @@ const UploadArea = (props) => {
             </IconLabel>
           </Box>
           <Box textAlign="center" mt={2}>
-            <Text>
+            <Text color="var(--qf-font-color-caption1)">
               {fileUploaderTitle || 'Click or drag file to this area to upload'}
             </Text>
           </Box>
@@ -184,7 +184,11 @@ const UploadArea = (props) => {
                 <FileOutlined />
               </Col>
               <Col v="center">
-                <Text style={{ wordBreak: 'break-all' }}>{file?.name}</Text>
+                <Text
+                  color="var(--qf-font-color-caption1)"
+                  style={{ wordBreak: 'break-all' }}>
+                  {file?.name}
+                </Text>
               </Col>
               <Col cw="auto" v="center">
                 {file?.percent ? (

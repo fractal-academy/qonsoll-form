@@ -56,7 +56,7 @@ function QuestionConfigurationPopoverContent(props) {
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>
         <Col cw="auto" order={2}>
-          <Title level={4}>
+          <Title color="var(--qf-font-color-primary)" level={4}>
             {isQuestionConfig
               ? configurationTitle
               : typeConfiguration || 'Question types'}

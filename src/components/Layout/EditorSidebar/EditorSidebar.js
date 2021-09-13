@@ -253,7 +253,9 @@ function EditorSidebar(props) {
     <SidebarBoxWrapper transparent={transparent}>
       <Row mb={2} v="center" h="between">
         <Col cw="auto">
-          <Title level={5}>{editorSidebarQuestionsTitle || 'Questions'}</Title>
+          <Title color="var(--qf-font-color-primary)" level={5}>
+            {editorSidebarQuestionsTitle || 'Questions'}
+          </Title>
         </Col>
         <Col display="block" cw="auto">
           <TypePopover
@@ -293,7 +295,9 @@ function EditorSidebar(props) {
 
       <Row my={2} v="center" h="between">
         <Col cw="auto">
-          <Title level={5}>{editorSidebarEndingsTitle || 'Endings'}</Title>
+          <Title color="var(--qf-font-color-primary)" level={5}>
+            {editorSidebarEndingsTitle || 'Endings'}
+          </Title>
         </Col>
         <Col display="block" cw="auto">
           <Tooltip

@@ -1,10 +1,10 @@
 import Fuse from 'fuse.js'
 import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-import { Typography, message, Input } from 'antd'
+import { message, Input } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
 import React, { useState, useEffect, useRef, useMemo } from 'react'
-import { Row, Col, Box, Container } from '@qonsoll/react-design'
+import { Row, Col, Box, Container, Text } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { TranslationContext } from '../../../../context/Translation'
@@ -14,8 +14,6 @@ import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
-
-const { Text } = Typography
 
 function FormsAll(props) {
   const {
@@ -133,7 +131,7 @@ function FormsAll(props) {
               />
               <Row noGutters mb={3}>
                 <Col>
-                  <Text>
+                  <Text color="var(--qf-font-color-caption2)">
                     {formsCounterDeclaration || 'Amount of shown forms: '}
                     {amountFiles}
                   </Text>
