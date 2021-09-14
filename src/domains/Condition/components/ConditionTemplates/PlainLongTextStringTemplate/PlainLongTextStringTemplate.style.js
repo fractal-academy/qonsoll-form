@@ -1,21 +1,13 @@
-import typeformTheme from '../../../../../../styles/theme'
 import styled from 'styled-components'
-import { Button, Typography } from 'antd'
-
-const { Text } = Typography
+import { Button, Text } from '@qonsoll/react-design'
 
 export const CustomText = styled(Text)`
-  color: ${({ theme }) =>
-    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default};
+  color: var(--qf-font-color-accent);
 `
 
 export const CustomButton = styled(Button)`
-  background-color: ${({ theme }) =>
-    theme?.color?.primary?.t?.lighten7 ||
-    typeformTheme?.color?.primary?.t?.lighten7};
+  background-color: var(--qf-button-bg);
   &:hover {
-    background-color: ${({ theme }) =>
-      theme?.color?.primary?.t?.lighten3 ||
-      typeformTheme?.color?.primary?.t?.lighten3};
+    background-color: var(--qf-button-hover);
   }
 `

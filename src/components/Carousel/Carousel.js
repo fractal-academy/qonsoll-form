@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import { QUESTION_TYPES } from '../../constants'
 import { useSize, useKeyPress } from '@umijs/hooks'
 import React, { cloneElement, useRef } from 'react'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col, Box, Button } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import { Button, Carousel as AntdCarousel, message } from 'antd'
+import { Carousel as AntdCarousel, message } from 'antd'
 import {
   ANSWERS_DISPATCH_EVENTS,
   useAnswersContext,

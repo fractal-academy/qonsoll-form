@@ -1,8 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { CustomButton, CustomText } from './PlainTextDateTemplate.style'
-import PlaneDateItem from './PlainDateItem'
 import { v4 as uuid } from 'uuid'
+import PropTypes from 'prop-types'
+import PlaneDateItem from './PlainDateItem'
+import { CustomButton, CustomText } from './PlainTextDateTemplate.style'
 
 function PlaneTextDateTemplate(props) {
   const {

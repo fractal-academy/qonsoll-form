@@ -1,46 +1,27 @@
-import { Button } from 'antd'
+import { Button } from '@qonsoll/react-design'
 import styled, { css } from 'styled-components'
-import typeformTheme from '../../../../styles/theme'
 import { blinkBackground } from '../../../animation'
 
 export const StyledRangeButton = styled(Button)`
-  ${({ theme, isActive }) => `
-  width: -webkit-fill-available;
+  ${({ isActive }) => `
   height: 60px;
+  width: -webkit-fill-available;
   border-color: ${
-    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
+    isActive ? 'var(--qf-button-color)' : 'var(--qf-active-button-color)'
   };
   background-color: ${
-    isActive
-      ? theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
-      : theme?.color?.primary?.t?.lighten5 ||
-        typeformTheme?.color?.primary?.t?.lighten5
+    isActive ? 'var(--qf-active-button-bg)' : 'var(--qf-button-bg)'
   };
   color: ${
-    isActive
-      ? theme?.color?.white?.default || typeformTheme?.color?.white?.default
-      : theme?.color?.primary?.t?.lighten1 ||
-        typeformTheme?.color?.primary?.t?.lighten1
+    isActive ? 'var(--qf-button-color)' : 'var(--qf-active-button-color)'
   };
 
   &:hover {
     color: ${
-      isActive
-        ? theme?.color?.white?.default || typeformTheme?.color?.white?.default
-        : theme?.color?.primary?.t?.lighten1 ||
-          typeformTheme?.color?.primary?.t?.lighten1
+      isActive ? 'var(--qf-active-button-color)' : 'var(--qf-button-color)'
     };
-    border-color: ${
-      isActive &&
-      (theme?.color?.primary?.default || typeformTheme?.color?.primary?.default)
-    };
-    background-color: ${
-      isActive
-        ? theme?.color?.primary?.t?.lighten2 ||
-          typeformTheme?.color?.primary?.t?.lighten2
-        : theme?.color?.primary?.t?.lighten3 ||
-          typeformTheme?.color?.primary?.t?.lighten3
-    };
+    border-color: ${isActive ? 'var(--qf-active-button-color)' : 'transparent'};
+   background-color: var(--qf-active-button-bg);
   }
   ${blinkBackground}
   ${

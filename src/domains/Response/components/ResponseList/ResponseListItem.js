@@ -1,13 +1,12 @@
 import React from 'react'
-import { Box } from '@qonsoll/react-design'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import { useTranslation } from '../../../../context/Translation'
+import { UserOutlined } from '@ant-design/icons'
 import { NumberedCard } from '../../../../components'
+import { Row, Col, Box, Avatar, Text } from '@qonsoll/react-design'
 
 function ResponseList(props) {
   const { date, user, index, onClick } = props
-  const { userAnswerGroupResponseEnding } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onItemClick = () => {
@@ -15,15 +14,22 @@ function ResponseList(props) {
   }
 
   // [COMPUTED PROPERTIES]
-  const formattedDate = moment(date.toDate()).format('MMMM Do YYYY, h:mm:ss a')
+  const formattedDate = moment(date.toDate(), 'YYYYMMDD').fromNow()
 
   return (
     <Box my={2} onClick={onItemClick}>
       <NumberedCard number={index + 1}>
-        <Box ml={3} my={2}>
-          {formattedDate}, {user}
-          {userAnswerGroupResponseEnding || "'s response"}
-        </Box>
+        <Row v="center" noGutters>
+          <Col cw="auto" ml={2} mr={3}>
+            <Avatar size={44} icon={<UserOutlined />} />
+          </Col>
+          <Col>
+            <Text variant="h4" color="var(--qf-font-color-accent)">
+              {user}
+            </Text>
+            <Text color="var(--qf-font-color-caption1)">{formattedDate}</Text>
+          </Col>
+        </Row>
       </NumberedCard>
     </Box>
   )

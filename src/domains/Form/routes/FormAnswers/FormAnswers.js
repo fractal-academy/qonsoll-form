@@ -1,43 +1,50 @@
+import { message } from 'antd'
+import useMedia from 'use-media'
+import { useHistory } from 'react-router-dom'
 import React, { useState } from 'react'
+import { PageHeader } from '../../../../components'
+import { COLLECTIONS } from '../../../../constants'
+import useFunctions from '../../../../hooks/useFunctions'
+import { Container, Row, Col, Box, Text } from '@qonsoll/react-design'
+import { ResponseTable, ResponseList } from '../../../Response/components'
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import { EmptyState } from '../../../../../src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
 import {
   TranslationContext,
   useTranslation
 } from '../../../../context/Translation'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
-import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import useFunctions from '../../../../hooks/useFunctions'
-import { COLLECTIONS } from '../../../../constants'
 import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
-import { Row, Col, Box } from '@qonsoll/react-design'
-import { ResponseTable, ResponseList } from '../../../Response/components'
-import { message } from 'antd'
-import { EmptyState } from '../../../../../src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
-import useMedia from 'use-media'
-import Text from 'antd/es/typography/Text'
 
 function FormAnswers(props) {
-  const { actions = {}, id, translate, firebase, configurations } = props
-  const { emptyStateDescription } = useTranslation()
+  const { id, firebase, translate, configurations, actions = {} } = props
 
   // [COMPONENT STATE HOOKS]
   const [userAnswers, setUserAnswers] = useState([])
   const [userAnswersLoading, setUserAnswersLoading] = useState(false)
+
   // [CUSTOM HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
 
   // [ADDITIONAL HOOKS]
+  const history = useHistory()
+  const { emptyStateDescription } = useTranslation()
   const [userAnswerGroup, userAnswerGroupLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where('formId', '==', id)
   )
   const [formData] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
+  const smallScreen = useMedia({ minWidth: '769px' })
   const handleSmallScreen = useMedia({ minWidth: '900px' })
   const { smallScreenHandleWarning } = useTranslation()
+
+  // [COMPUTED PROPERTIES]
+  const containerPadding = smallScreen ? 4 : 2
 
   // [CLEAN FUNCTIONS]
   const onListItemClick = async (user, date) => {
@@ -78,45 +85,48 @@ function FormAnswers(props) {
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={{ t: translate }}>
           <TypeformConfigurationContext.Provider value={configurations}>
-            {handleSmallScreen ? (
-              checkUserAswerGroup ? (
-                <Row noGutters height="inherit" my={3}>
-                  <Col height="inherit" cw="auto" ml={3}>
-                    <ResponseList
-                      userAnswerGroup={userAnswerGroup}
-                      loading={userAnswerGroupLoading}
-                      onListItemClick={onListItemClick}
-                    />
-                  </Col>
-                  <Col height="inherit" overflowY="scroll">
-                    <ResponseTable
-                      isFormQuiz={formData?.isQuiz}
-                      data={userAnswers}
-                      loading={userAnswersLoading}
-                    />
-                  </Col>
-                </Row>
+            <Container p={containerPadding}>
+              <PageHeader onBack={() => history.goBack()} title="Answers" />
+              {handleSmallScreen ? (
+                checkUserAswerGroup ? (
+                  <Row noGutters height="inherit" my={3}>
+                    <Col height="inherit" cw="auto" ml={3}>
+                      <ResponseList
+                        userAnswerGroup={userAnswerGroup}
+                        loading={userAnswerGroupLoading}
+                        onListItemClick={onListItemClick}
+                      />
+                    </Col>
+                    <Col height="inherit" overflowY="scroll">
+                      <ResponseTable
+                        isFormQuiz={formData?.isQuiz}
+                        data={userAnswers}
+                        loading={userAnswersLoading}
+                      />
+                    </Col>
+                  </Row>
+                ) : (
+                  <EmptyState
+                    description={
+                      emptyStateDescription ||
+                      "This form doesn't have any responses yet"
+                    }
+                  />
+                )
               ) : (
-                <EmptyState
-                  description={
-                    emptyStateDescription ||
-                    "This form doesn't have any responses yet"
-                  }
-                />
-              )
-            ) : (
-              <Box
-                width="100%"
-                height="100%"
-                display="flex"
-                alignItems="center"
-                justifyContent="center">
-                <Text>
-                  {smallScreenHandleWarning ||
-                    'This feature is available only on desktop.'}
-                </Text>
-              </Box>
-            )}
+                <Box
+                  width="100%"
+                  height="100%"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center">
+                  <Text color="var(--qf-font-color-caption1)">
+                    {smallScreenHandleWarning ||
+                      'This feature is available only on desktop.'}
+                  </Text>
+                </Box>
+              )}
+            </Container>
           </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>

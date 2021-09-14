@@ -1,10 +1,10 @@
 import React from 'react'
+import { Tooltip } from 'antd'
 import PropTypes from 'prop-types'
 import { styles } from './PageHeader.styles'
 import { globalStyles } from '../../../../styles'
-import { Row, Col } from '@qonsoll/react-design'
-import { Button, Divider, Tooltip, Typography } from 'antd'
 import { useTranslation } from '../../../context/Translation'
+import { Row, Col, Button, Divider, Title } from '@qonsoll/react-design'
 import {
   ArrowLeftOutlined,
   EyeOutlined,
@@ -12,8 +12,6 @@ import {
   ReloadOutlined
 } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
-
-const { Title } = Typography
 
 function PageHeader(props) {
   const {
@@ -48,7 +46,7 @@ function PageHeader(props) {
   const showResultsRule = !hideResults || (!title && !hideResults)
 
   return (
-    <Row noGutters v="center" mb="var(--typeform-header-mb)">
+    <Row noGutters v="center" mb="var(--qf-header-mb)">
       {onBack && (
         <Col cw="auto" h="center" flexDirection="row">
           <Button
@@ -61,23 +59,22 @@ function PageHeader(props) {
         </Col>
       )}
       <Col>
-        <Title level={2} {...titleProps}>
+        <Title color="var(--qf-font-color-primary)" level={2} {...titleProps}>
           {title}
         </Title>
       </Col>
 
-      {/*{!showResultsRule && (*/}
-      {/*  <Col cw="auto" v="center" mr={1}>*/}
-      {/*    {smallScreen && (*/}
-      {/*      <Button*/}
-      {/*        type="text"*/}
-      {/*        icon={<ReadOutlined />}*/}
-      {/*        onClick={onFormResultsDisplay}>*/}
-      {/*        {resultButton || 'Results'}*/}
-      {/*      </Button>*/}
-      {/*    )}*/}
-      {/*  </Col>*/}
-      {/*)}*/}
+      {/* {showResultsRule && (
+        <Col cw="auto" v="center" mr={1}>
+          {smallScreen && (
+            <Button
+              type="text"
+              icon={<ReadOutlined />}
+              onClick={onFormResultsDisplay}
+            />
+          )}
+        </Col>
+      )} */}
 
       {handlesPreview && title && (
         <Col cw="auto" v="center">

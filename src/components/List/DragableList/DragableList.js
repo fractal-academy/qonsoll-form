@@ -6,7 +6,7 @@ import SortableContainer from './SortableContainer'
 import React, { useEffect, useMemo, useState } from 'react'
 
 const UnsortableItem = styled(Box)`
-  padding-left: 20px;
+  padding-left: 24px;
 `
 
 function DragableList(props) {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import { Popconfirm, Tooltip } from 'antd'
 import { SettingOutlined } from '@ant-design/icons'
-import { Popover, Button, Popconfirm, Tooltip } from 'antd'
+import { Box, Button, Popover } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { QuestionConfigurationPopoverContent } from '../../../../domains/Question/components'
-import { Box } from '@qonsoll/react-design'
 
 function QuestionConfigurationPopover(props) {
   const {

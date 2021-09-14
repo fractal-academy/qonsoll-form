@@ -53,15 +53,17 @@ function ConditionForm(props) {
       component: <FileUploadTemplate isUploaded />
     },
     [QUESTION_TYPES.ENDING]: {
-      component: <>Ending.</>
+      component: <></>
     }
   }
 
   return (
-    <NumberedCard number={index + 1} key={index}>
+    <NumberedCard top="24px" number={index + 1} key={index}>
       <Box ml={3}>
         <Box mb={2}>
-          <Title level={5}>{item?.title}</Title>
+          <Title color="var(--qf-font-color-primary)" level={5}>
+            {item?.title}
+          </Title>
         </Box>
         {cloneElement(questionTypesMap[item?.questionType].component, {
           ...item,

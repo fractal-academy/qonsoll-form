@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import typeformTheme from '../../../styles/theme'
 
 const IconRoundContainer = styled(Box)`
-  ${({ theme, danger }) => `
+  ${({ danger }) => `
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,11 +10,8 @@ const IconRoundContainer = styled(Box)`
   width: 40px;
   height: 40px;
   background-color: ${
-    (danger &&
-      (theme.color?.danger?.t?.lighten ||
-        typeformTheme.color?.danger?.t?.lighten)) ||
-    theme?.color?.dark?.t?.lighten6 ||
-    typeformTheme?.color?.dark?.t?.lighten6
+    (danger && 'var(--qf-question-type-icon-danger)') ||
+    'var(--qf-question-type-icon-default)'
   };
   `}
 `

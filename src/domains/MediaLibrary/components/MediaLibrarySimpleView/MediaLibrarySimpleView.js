@@ -40,7 +40,7 @@ function MediaLibrarySimpleView(props) {
 
   return (
     <Box>
-      <CustomBox backgroundImage={bgImage} ref={hoverRef}>
+      <CustomBox backgroundImage={bgImage} mb={2} ref={hoverRef}>
         <MediaLibraryModal
           onClick={() => {
             setIsImageEditVisible(false)

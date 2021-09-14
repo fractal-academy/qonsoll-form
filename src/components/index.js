@@ -10,7 +10,6 @@ export { default as ShortText } from './ShortText'
 
 export { default as EditorSidebar } from './Layout/EditorSidebar'
 export { default as PageHeader } from './Layout/PageHeader'
-export { default as PageLayout } from './Layout/PageLayout'
 
 export { default as NumberedCard } from './Card/NumberedCard'
 export { default as ContentCard } from './Card/ContentCard'

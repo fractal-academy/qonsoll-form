@@ -1,8 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { CustomButton, CustomText } from './PlainShortTextStringTemplate.style'
-import { PlaneTextItem } from '../PlainTextItem'
 import { v4 as uuid } from 'uuid'
+import PropTypes from 'prop-types'
+import { PlaneTextItem } from '../PlainTextItem'
+import { CustomButton, CustomText } from './PlainShortTextStringTemplate.style'
 
 function PlaneShortTextStringTemplate(props) {
   const {

@@ -1,39 +1,22 @@
-import { Menu } from 'antd'
+import { Menu, MenuItem } from '@qonsoll/react-design'
 import styled from 'styled-components'
-import typeformTheme from '../../../../../styles/theme'
 
 export const StyledMenu = styled(Menu)`
-  ${({ theme }) => `
-  background-color: ${
-    theme?.color?.dark?.t?.lighten6 || typeformTheme?.color?.dark?.t?.lighten6
-  };
-  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  background-color: var(--ql-body-bg);
+  border-radius: var(--qf-border-radius-md);
   height: fit-content;
   border: none;
-
-`}
 `
-export const StyledItem = styled(Menu?.Item)`
-  ${({ theme }) => `
+export const StyledItem = styled(MenuItem)`
   display: flex;
   align-items: center;
   margin: 0 !important;
-  padding: ${theme?.space?.[2] || typeformTheme?.space[2]} !important;
   &:last-child {
-  border-bottom-left-radius:${
-    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
-  };
-  border-bottom-right-radius:${
-    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
-  };
+    border-bottom-left-radius: var(--qf-border-radius-md);
+    border-bottom-right-radius: var(--qf-border-radius-md);
   }
   &:first-child {
-  border-top-left-radius:${
-    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
-  };
-  border-top-right-radius:${
-    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md
-  };
+    border-top-left-radius: var(--qf-border-radius-md);
+    border-top-right-radius: var(--qf-border-radius-md);
   }
-`}
 `

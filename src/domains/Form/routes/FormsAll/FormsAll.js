@@ -1,10 +1,10 @@
 import Fuse from 'fuse.js'
 import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-import { Typography, message, Input } from 'antd'
+import { message, Input } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
-import React, { useState, useEffect, useRef, useMemo } from 'react'
-import { Row, Col, Box, Container } from '@qonsoll/react-design'
+import React, { useState, useEffect, useRef } from 'react'
+import { Row, Col, Box, Container, Text } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { TranslationContext } from '../../../../context/Translation'
@@ -15,21 +15,16 @@ import TypeformConfigurationContext from '../../../../context/TypeformConfigurat
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
-const { Text } = Typography
-
 function FormsAll(props) {
   const {
     firebase,
     translations,
     actions = {},
     childrenModal,
-    titleProps,
     configurations,
     onBack,
     disableAddButton,
-    wrapperPaddings,
-    additionalData /* FOI Helse */,
-    formsList /* FOI Helse */
+    wrapperPaddings
   } = props
 
   // [CUSTOM_HOOKS]
@@ -37,15 +32,11 @@ function FormsAll(props) {
 
   // [ADDITIONAL HOOKS]
   const searchRef = useRef()
-  const [_data] = useCollectionData(
-    !formsList &&
-      getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
+
+  const [data] = useCollectionData(
+    getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
 
-  const data = useMemo(
-    () => (formsList ? formsList : _data),
-    [_data, formsList]
-  )
   const smallScreen = useMedia({ minWidth: '769px' })
 
   // [COMPONENT STATE HOOKS]
@@ -56,7 +47,7 @@ function FormsAll(props) {
 
   // [COMPUTED PROPERTIES]
   let amountFiles = currentData?.length
-  const { formsAllRouteTitle, formSearchPlaceholder, formsCounterDeclaration } =
+  const { formsAllTitle, formSearchPlaceholder, formCounter } =
     translations || {}
   const containerPadding =
     wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
@@ -79,7 +70,6 @@ function FormsAll(props) {
     const formId = getCollectionRef(COLLECTIONS.FORMS).doc().id
     const formData = {
       ...restData,
-      ...additionalData,
       title,
       subtitle,
       id: formId,
@@ -128,13 +118,13 @@ function FormsAll(props) {
               {/* 'onBack' func. also configures if there'll be back-button */}
               <PageHeader
                 onBack={onBack}
-                titleProps={titleProps}
-                title={formsAllRouteTitle || 'Forms'}
+                // titleProps={titleProps}
+                title={formsAllTitle || 'Forms'}
               />
               <Row noGutters mb={3}>
                 <Col>
-                  <Text>
-                    {formsCounterDeclaration || 'Amount of shown forms: '}
+                  <Text color="var(--qf-font-color-caption2)">
+                    {formCounter || 'Amount of forms: '}
                     {amountFiles}
                   </Text>
                 </Col>

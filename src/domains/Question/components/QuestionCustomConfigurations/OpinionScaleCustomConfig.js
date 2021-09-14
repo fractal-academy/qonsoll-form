@@ -1,6 +1,6 @@
 import React from 'react'
-import { Typography, Select } from 'antd'
-import { Row, Col } from '@qonsoll/react-design'
+import { Select } from 'antd'
+import { Row, Col, Text } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import {
   DISPATCH_EVENTS,
@@ -8,7 +8,6 @@ import {
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
 
-const { Text } = Typography
 const { Option } = Select
 
 const opinionScaleTo = [5, 6, 7, 8, 9, 10]
@@ -45,7 +44,9 @@ function OpinionScaleCustomConfig() {
   return (
     <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>
-        <Text strong>{fromSetting || 'From'}</Text>
+        <Text color="var(--qf-font-color-caption1)" strong>
+          {fromSetting || 'From'}
+        </Text>
       </Col>
       <Col>
         <Select
@@ -57,7 +58,9 @@ function OpinionScaleCustomConfig() {
         </Select>
       </Col>
       <Col v="center" cw="auto" mr={3}>
-        <Text strong>{toSetting || 'to'}</Text>
+        <Text color="var(--qf-font-color-caption1)" strong>
+          {toSetting || 'to'}
+        </Text>
       </Col>
       <Col cw="auto">
         <Select

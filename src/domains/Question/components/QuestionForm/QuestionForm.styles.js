@@ -1,6 +1,6 @@
-import { Col, Row } from '@qonsoll/react-design'
-import { Card } from 'antd'
+import { Card, Tag } from 'antd'
 import styled from 'styled-components'
+import { Col, Row } from '@qonsoll/react-design'
 
 export const styles = {
   questionCardColumnStyle: {
@@ -14,13 +14,11 @@ export const styles = {
   }
 }
 
-export const StyledCol = styled(Col)`
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
+export const StyledTag = styled(Tag)`
+  background-color: var(--qf-button-bg);
+  color: var(--qf-font-color-accent);
 `
+
 export const CustomCard = styled(Card)`
   width: 100%;
   max-height: 70vh;
@@ -39,4 +37,11 @@ export const CustomRow = styled(Row)`
   height: 100%;
   flex-grow: 1;
   display: flex;
+`
+export const StyledCol = styled(Col)`
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 `

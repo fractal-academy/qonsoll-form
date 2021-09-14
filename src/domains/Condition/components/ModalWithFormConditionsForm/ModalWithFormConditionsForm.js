@@ -1,17 +1,13 @@
 import React from 'react'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Modal, Button, Typography, Popconfirm, Tooltip } from 'antd'
-import { Row, Col } from '@qonsoll/react-design'
-import typeformTheme from '../../../../../styles/theme'
-import { ThemeContext } from 'styled-components'
+import { Modal, Popconfirm, Tooltip } from 'antd'
+import { Row, Col, Button, Title } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
-
-const { Title } = Typography
 
 function ModalWithFormConditionsForm(props) {
   const { btnProps, children, onResetClick, popconfirmReset } = props
-  const theme = useContext(ThemeContext)
+
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
 
@@ -47,20 +43,20 @@ function ModalWithFormConditionsForm(props) {
           paddingTop: '8px',
           height: '70vh',
           overflow: 'auto',
-          backgroundColor:
-            theme?.color?.primary?.t?.lighten9 ||
-            typeformTheme?.color?.primary?.t?.lighten9
+          backgroundColor: 'var(--ql-body-bg)'
         }}
         footer={
           <Button type="primary" onClick={onSave}>
-            {submitBtn || 'Continue'}
+            {submitBtn || 'Close'}
           </Button>
         }
         title={
           <>
             <Row v="center" noGutters>
               <Col>
-                <Title level={3}>{modalTitle || 'Logic'}</Title>
+                <Title color="var(--qf-font-color-primary)" level={3}>
+                  {modalTitle || 'Logic'}
+                </Title>
               </Col>
               <Col cw="auto" v="center">
                 <Popconfirm

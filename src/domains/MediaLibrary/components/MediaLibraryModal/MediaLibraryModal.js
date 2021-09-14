@@ -1,23 +1,19 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
-import theme from '../../../../../styles/theme'
 import { StaticList } from '../../../../components'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col, Box, Input, Title, Button } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import React, { useEffect, useRef, useState } from 'react'
 import COLLECTIONS from '../../../../constants/collection'
 import { SearchOutlined, EditOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../../context/Translation'
-import { Modal, Button, Typography, Upload, message } from 'antd'
+import { Modal, Upload, message } from 'antd'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import {
   MediaListContainer,
   CustomButton,
-  CustomInput,
   CustomText
 } from './MediaLibraryModal.styles'
-
-const { Title } = Typography
 
 function MediaLibraryModal(props) {
   const { btnProps, onClick, onContinue, isHovering } = props
@@ -147,7 +143,9 @@ function MediaLibraryModal(props) {
         }}>
         <Row v="center" py={3} px={3}>
           <Col>
-            <Title level={3}>{mediaLibraryTitle || 'Media Library'}</Title>
+            <Title color="var(--qf-font-color-primary)" level={3}>
+              {mediaLibraryTitle || 'Media Library'}
+            </Title>
             <CustomText>
               {amountTitle || 'Amount of shown files: '}
               {amountFiles}
@@ -156,10 +154,10 @@ function MediaLibraryModal(props) {
         </Row>
         <Row px={3} pb={3}>
           <Col>
-            <CustomInput
+            <Input
               allowClear
               ref={searchRef}
-              prefix={<SearchOutlined style={{ paddingRight: '10px' }} />}
+              prefix={<SearchOutlined />}
               placeholder={searchPlaceholder || 'Search media file by name...'}
               onSearch={searchData}
               onChange={onChange}
@@ -169,7 +167,7 @@ function MediaLibraryModal(props) {
 
         <MediaListContainer px={4} pt={2}>
           {/* RENDER MEDIA */}
-          <Box width="100%" mr="-12px">
+          <Box width="100%" mr="-10px">
             <StaticList
               hasMedia
               data={imagesList}
@@ -181,12 +179,11 @@ function MediaLibraryModal(props) {
           </Box>
         </MediaListContainer>
         <Row
-          noGutters
-          borderBottomLeftRadius={theme?.borderRadius?.md}
-          borderBottomRightRadius={theme?.borderRadius?.md}
-          h="right"
           p={3}
-          bg={theme.color.white.default}>
+          h="right"
+          noGutters
+          borderBottomLeftRadius="var(--qf-border-radius-md)"
+          borderBottomRightRadius="var(--qf-border-radius-md)">
           <Col cw="auto" mr={2}>
             <Button type="text" onClick={onModalCancel}>
               Cancel

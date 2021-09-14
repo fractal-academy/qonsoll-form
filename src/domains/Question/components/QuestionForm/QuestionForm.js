@@ -1,12 +1,16 @@
-import { Tag } from 'antd'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import React, { cloneElement, useEffect } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
 import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
 import { useTranslation } from '../../../../context/Translation'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
-import { styles, StyledCol, CustomCard, CustomRow } from './QuestionForm.styles'
+import {
+  styles,
+  StyledCol,
+  CustomCard,
+  CustomRow,
+  StyledTag
+} from './QuestionForm.styles'
 import {
   DEFAULT_IMAGE,
   QUESTION_TYPES,
@@ -30,18 +34,6 @@ import {
   DateTimeInput,
   ContentCard
 } from '../../../../components'
-import typeformTheme from '../../../../../styles/theme'
-
-const StyledTag = styled(Tag)`
-  background-color: ${({ theme }) =>
-    theme?.color?.primary?.t?.lighten5 ||
-    typeformTheme?.color?.primary?.t?.lighten5};
-  color: ${({ theme }) =>
-    theme?.color?.primary?.default || theme?.color?.primary?.default};
-  border-color: ${({ theme }) =>
-    theme?.color?.primary?.t?.lighten2 ||
-    typeformTheme?.color?.primary?.t?.lighten2};
-`
 
 function QuestionForm(props) {
   const {

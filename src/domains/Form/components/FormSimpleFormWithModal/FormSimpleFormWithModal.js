@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Form, Modal } from 'antd'
-import Title from 'antd/lib/typography/Title'
+import { Form, Modal } from 'antd'
+import { Title, Button } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { FormSimpleForm } from '../../../../domains/Form/components'
 
@@ -46,7 +46,7 @@ const FormSimpleFormWithModal = (props) => {
   return (
     <Modal
       title={
-        <Title level={4}>
+        <Title color="var(--qf-font-color-primary)" level={4}>
           {isEdit
             ? formModalTitleEdit || 'Edit form'
             : formModalTitleCreate || 'Create new form'}

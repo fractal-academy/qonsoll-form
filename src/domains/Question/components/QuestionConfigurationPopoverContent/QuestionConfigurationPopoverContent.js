@@ -1,6 +1,5 @@
-import { Typography } from 'antd'
 import React, { useState } from 'react'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col, Box, Title } from '@qonsoll/react-design'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../../context/Translation'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
@@ -12,8 +11,6 @@ import {
   QuestionTypeSelect,
   QuestionConfigurationMenu
 } from '../../../../domains/Question/components'
-
-const { Title } = Typography
 
 function QuestionConfigurationPopoverContent(props) {
   const {
@@ -59,7 +56,7 @@ function QuestionConfigurationPopoverContent(props) {
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>
         <Col cw="auto" order={2}>
-          <Title level={4}>
+          <Title color="var(--qf-font-color-primary)" level={4}>
             {isQuestionConfig
               ? configurationTitle
               : typeConfiguration || 'Question types'}

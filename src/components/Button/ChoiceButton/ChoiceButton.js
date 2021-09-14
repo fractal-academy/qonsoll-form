@@ -1,12 +1,12 @@
+import { message } from 'antd'
+import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-import { KeyBox } from '../../../components'
 import { useKeyPress } from '@umijs/hooks'
+import { KeyBox } from '../../../components'
 import { Row, Col } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
-import useMedia from 'use-media'
-import { message } from 'antd'
-import { useTranslation } from '../../../context/Translation'
 import { useAnswersContext } from '../../../context/Answers'
+import { useTranslation } from '../../../context/Translation'
 import { getQuestionAnswerFromContext } from '../../../helpers'
 
 let startLetter = 65

@@ -4,8 +4,8 @@ import React, { useRef } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { globalStyles } from '../../../styles'
 import { SubmitButton } from '../../components'
-import { Container } from '@qonsoll/react-design'
-import { Form, Typography, Input, message } from 'antd'
+import { Form, Typography, message } from 'antd'
+import { Container, Input } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 
 const { TextArea } = Input
@@ -68,7 +68,7 @@ function LongText(props) {
   const onFocusedKeyPress = (e) => {
     if (e.keyCode === 13 && !e.shiftKey) {
       //Prevent line brake onEnter
-      e.preventDefault().blur()
+      e.preventDefault()
     }
   }
 

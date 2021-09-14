@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Text from 'antd/lib/typography/Text'
-import { Col, Row } from '@qonsoll/react-design'
-import { QuestionSelect } from '../../../../../domains/Question/components'
+import { Row, Col, Text } from '@qonsoll/react-design'
 import { CustomUploaderBox } from './FileUploadTemplate.style'
+import { QuestionSelect } from '../../../../../domains/Question/components'
 
 function FileUploadTemplate(props) {
   const {
@@ -17,7 +16,11 @@ function FileUploadTemplate(props) {
     <Row mb={2}>
       <Col cw={6} pl={0} pr={2}>
         <CustomUploaderBox px={3}>
-          {isUploaded ? <Text>is uploaded</Text> : <Text>not uploaded</Text>}
+          {isUploaded ? (
+            <Text color="var(--qf-font-color-caption1)">is uploaded</Text>
+          ) : (
+            <Text color="var(--qf-font-color-caption1)">not uploaded</Text>
+          )}
         </CustomUploaderBox>
       </Col>
       <Col cw={6}>

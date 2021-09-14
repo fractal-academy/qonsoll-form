@@ -1,60 +1,45 @@
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import typeformTheme from '../../../../styles/theme'
 
 export const HiddenBox = styled(Box)`
   position: absolute;
-  top: 20px;
+  left: -4px;
+  top: ${({ top }) => `${top ? `${top}px` : '50%'}`};
+  transform: ${({ top }) => !top && 'translate(0, -50%);'};
   width: 4px;
   height: 32px;
   z-index: 600;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  background-color: ${({ theme }) =>
-    theme?.color?.dark?.lighten1 || typeformTheme?.color?.dark?.lighten1};
+  border-top-left-radius: var(--qf-border-radius-sm);
+  border-bottom-left-radius: var(--qf-border-radius-sm);
+  background-color: var(--qf-dnd-item-badge-bg);
 `
 export const ContentBox = styled(Box)`
-  ${({ theme, current }) => `
-  position: inherit;
-  z-index: 400;
-  left: 4px;
+  ${({ current }) => `
   cursor: pointer;
-  padding: 16px;
+  z-index: 400;
+  padding: 16px 24px;
   border-radius: 16px;
   background-color: ${
-    (current &&
-      (theme?.color?.primary?.t?.lighten6 ||
-        typeformTheme?.color?.primary?.t?.lighten6)) ||
-    theme?.color?.dark?.t?.lighten9 ||
-    typeformTheme?.color?.dark?.t?.lighten9
+    (current && 'var(--qf-dnd-active-item-bg)') || 'var(--qf-dnd-item-bg)'
   };
   &:hover {
-    background-color: ${
-      (current &&
-        (theme?.color?.primary?.t?.lighten4 ||
-          typeformTheme?.color?.primary?.t?.lighten4)) ||
-      theme?.color?.dark?.t?.lighten8 ||
-      typeformTheme?.color?.dark?.t?.lighten8
-    };
-    transition: background-color 0.3s;
+  background-color:  ${
+    (current && 'var(--qf-dnd-active-item-hover)') || 'var(--qf-dnd-item-hover)'
+  };
   }
 `}
 `
 export const NumberBox = styled(Box)`
-  ${({ theme }) => `
   position: absolute;
-  top: 25px;
+  left: -4px;
+  top: ${({ top }) => `${top ? `calc(${top} + 5px)` : '50%'}`};
+  transform: ${({ top }) => !top && 'translate(0, -50%);'};
   width: 24px;
   height: 22px;
   z-index: 600;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-right-radius: var(--qf-border-radius-sm);
+  border-bottom-right-radius: var(--qf-border-radius-sm);
   text-align: center;
-  color: ${
-    theme?.color?.white?.t?.lighten1 || typeformTheme?.color?.white?.t?.lighten1
-  };
-  background-color: ${
-    theme?.color?.dark?.lighten1 || typeformTheme?.color?.dark?.lighten1
-  };
-`}
+  color: var(--qf-dnd-item-badge-color);
+  background-color: var(--qf-dnd-item-badge-bg);
 `

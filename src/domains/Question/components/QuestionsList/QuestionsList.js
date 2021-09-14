@@ -144,7 +144,7 @@ function QuestionsList(props) {
       {dataSource?.map(
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
-            <Box pl="20px" key={item}>
+            <Box pl="24px" mb={2} key={item}>
               <QuestionSimpleView
                 {...item}
                 endings={endings}
@@ -171,6 +171,7 @@ function QuestionsList(props) {
             number={index + 1}
             onClick={() => onItemClick(item, index)}
             disableDelete={disableDelete}
+            className="QUESTION-SIMPLE-VIEW"
           />
         )}
       />

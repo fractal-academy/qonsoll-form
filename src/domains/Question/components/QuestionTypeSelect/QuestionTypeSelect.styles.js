@@ -1,7 +1,6 @@
 import { Menu } from 'antd'
 import styled from 'styled-components'
 import Text from 'antd/lib/typography/Text'
-import typeformTheme from '../../../../../styles/theme'
 
 export const QuestionsTypeMenu = styled(Menu)`
   height: 300px;
@@ -13,19 +12,14 @@ export const QuestionMenuItem = styled(Menu.Item)`
   padding: 8px 0 !important;
   margin-top: 4px !important;
   margin-bottom: 4px !important;
-  line-height: ${({ theme }) =>
-    theme?.typography?.lineHeight?.caption1 ||
-    typeformTheme?.typography?.lineHeight?.caption1} !important;
+  line-height: var(--ql-line-height-caption1) !important;
 
   &:hover {
-    border-radius: 8px;
-    background-color: ${({ theme }) =>
-      theme?.color?.dark?.t?.lighten8 ||
-      typeformTheme?.color?.dark?.t?.lighten8};
+    border-radius: var(--qf-border-radius-md);
+    background-color: var(--qf-button-bg);
   }
 `
 export const Description = styled(Text)`
-  font-size: ${({ theme }) =>
-    theme?.typography?.fontSize?.caption1 ||
-    typeformTheme?.typography?.fontSize?.caption1};
+  font-size: var(--qf-font-size-caption1);
+  color: var(--qf-font-color-caption1);
 `

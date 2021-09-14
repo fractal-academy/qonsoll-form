@@ -1,18 +1,16 @@
 import React from 'react'
-import { Typography } from 'antd'
 import PropTypes from 'prop-types'
-import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
+import { NumberedCard } from '../../../../components'
+import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslation } from '../../../../context/Translation'
+import { Box, Row, Col, Text, Title } from '@qonsoll/react-design'
 import {
   OptionBox,
   StyledInputNumber,
   CustomTextBox
 } from './ScoreConditionsAdvancedView.style'
-import { Box, Row, Col } from '@qonsoll/react-design'
-import { NumberedCard } from '../../../../components'
 
-const { Text, Title } = Typography
 const startLetter = 65
 
 const ScoreConditionsAdvancedView = (props) => {
@@ -55,9 +53,12 @@ const ScoreConditionsAdvancedView = (props) => {
     )?.score
 
   return (
-    <NumberedCard number={index + 1} key={index}>
+    <NumberedCard top="24px" number={index + 1} key={index}>
       <Box ml={3}>
-        <Title level={5} style={{ marginBottom: '10px' }}>
+        <Title
+          color="var(--qf-font-color-primary)"
+          level={5}
+          style={{ marginBottom: '10px' }}>
           {questionData?.title}
         </Title>
         {questionData?.questionConfigurations?.map((item, index) => (
@@ -65,9 +66,13 @@ const ScoreConditionsAdvancedView = (props) => {
             <Col cw={8} pl={0} pr={2}>
               <OptionBox px={3}>
                 <CustomTextBox mr={2} px={2}>
-                  <Text strong>{String.fromCharCode(startLetter + index)}</Text>
+                  <Text color="var(--qf-font-color-caption1)" strong>
+                    {String.fromCharCode(startLetter + index)}
+                  </Text>
                 </CustomTextBox>
-                <Text ellipsis>{item?.answerOption}</Text>
+                <Text color="var(--qf-font-color-caption1)" ellipsis>
+                  {item?.answerOption}
+                </Text>
               </OptionBox>
             </Col>
             <Col cw={4}>

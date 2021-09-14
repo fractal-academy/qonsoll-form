@@ -1,7 +1,8 @@
-import { Tabs, Empty } from 'antd'
+import { Tabs } from 'antd'
 import styled from 'styled-components'
+import { NoData } from '@qonsoll/react-design'
 
-export const EmptyState = styled(Empty)`
+export const EmptyState = styled(NoData)`
   height: 100% !important;
   width: 100%;
   display: flex !important;

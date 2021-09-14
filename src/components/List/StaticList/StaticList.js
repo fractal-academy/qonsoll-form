@@ -1,7 +1,7 @@
 import React from 'react'
+import { Upload } from 'antd'
 import PropTypes from 'prop-types'
-import { Upload, Empty, Typography } from 'antd'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col, Box, Text, Link, NoData } from '@qonsoll/react-design'
 import { ListItem, NewListItem } from '../../../components'
 import { useTranslation } from '../../../context/Translation'
 
@@ -51,12 +51,12 @@ function StaticList(props) {
         </Row>
       ) : (
         <Box mt={4} width="100%" display="flex" justifyContent="center">
-          <Empty
+          <NoData
             description={
-              <>
-                <Typography>
+              <Box display="flex" flexDirection="column">
+                <Text color="var(--qf-font-color-caption1)">
                   {emptyDescription || "There's nothing here"}
-                </Typography>
+                </Text>
                 {hasMedia ? (
                   <Upload
                     multiple
@@ -64,18 +64,16 @@ function StaticList(props) {
                     showUploadList={false}
                     customRequest={customRequest}
                     beforeUpload={beforeUpload}>
-                    <Typography.Link onClick={(e) => e.preventDefault()}>
+                    <Link onClick={(e) => e.preventDefault()}>
                       {uploadImage || 'Upload image'}
-                    </Typography.Link>
+                    </Link>
                   </Upload>
                 ) : (
                   disableAddButton && (
-                    <Typography.Link onClick={onClick}>
-                      {addForm || 'Add new form'}
-                    </Typography.Link>
+                    <Link onClick={onClick}>{addForm || 'Add new form'}</Link>
                   )
                 )}
-              </>
+              </Box>
             }
           />
         </Box>

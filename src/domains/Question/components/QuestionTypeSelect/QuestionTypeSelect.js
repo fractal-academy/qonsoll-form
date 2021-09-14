@@ -24,6 +24,7 @@ import {
 
 const StyledText = styled(Text)`
   cursor: pointer !important;
+  color: var(--qf-font-color-caption1);
 `
 
 function QuestionTypeSelect(props) {
@@ -132,7 +133,7 @@ function QuestionTypeSelect(props) {
         {updatedMap?.map((item) => (
           <QuestionMenuItem key={item.type} onClick={onClick}>
             <Row h="center" v="center" noGutters>
-              <Col cw="auto" ml={2} mr={3}>
+              <Col cw="auto" ml={2} mr={1}>
                 {item.icon}
               </Col>
               <Col display="grid">

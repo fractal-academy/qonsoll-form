@@ -1,6 +1,6 @@
-import { Typography, Switch } from 'antd'
+import { Switch } from 'antd'
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col, Box, Text } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
 import {
@@ -9,8 +9,6 @@ import {
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
 import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
-
-const { Text } = Typography
 
 function QuestionConfigurationMenu() {
   // [ADDITIONAL_HOOKS]
@@ -61,7 +59,9 @@ function QuestionConfigurationMenu() {
       {isNotWelcomeScreenOrStatement && (
         <Row mb={3} noGutters v="center">
           <Col v="center">
-            <Text>{requiredSwitcher || 'Required'}</Text>
+            <Text color="var(--qf-font-color-caption1)">
+              {requiredSwitcher || 'Required'}
+            </Text>
           </Col>
           <Col cw="auto" px={2}>
             <Switch
@@ -74,7 +74,9 @@ function QuestionConfigurationMenu() {
       )}
       <Row mb={3} noGutters v="center">
         <Col v="center">
-          <Text>{videoQuestionSwitcher || 'Video question'}</Text>
+          <Text color="var(--qf-font-color-caption1)">
+            {videoQuestionSwitcher || 'Video question'}
+          </Text>
         </Col>
         <Col cw="auto" px={2}>
           <Switch

@@ -1,1 +1,4 @@
-["MediaLibraryFilter","MediaLibrarySimpleView","MediaLibraryItemSimpleView"]
+[
+    "MediaLibraryModal",
+    "MediaLibrarySimpleView"
+]

@@ -1,33 +1,22 @@
-import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
-import typeformTheme from '../../../styles/theme'
+import { Box } from '@qonsoll/react-design'
 
 export const styles = {
   mainBox: {
+    width: '100%',
     display: 'flex',
-    flexWrap: 'wrap',
-    width: '100%'
+    flexWrap: 'wrap'
   }
 }
 
 export const AddNewChoiceBox = styled(Box)`
-  ${({ theme }) => `
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center !important;
-  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
-  cursor: pointer;
-  background-color:
-    ${
-      theme?.color?.primary?.t?.lighten6 ||
-      typeformTheme?.color?.primary?.t?.lighten6
-    };
+  border-radius: var(--qf-border-radius-md);
+  background-color: var(--qf-button-bg);
   &:hover {
-     background-color:
-    ${
-      theme?.color?.primary?.t?.lighten3 ||
-      typeformTheme?.color?.primary?.t?.lighten3
-    };
+    background-color: var(--qf-active-button-bg);
   }
-`}
 `

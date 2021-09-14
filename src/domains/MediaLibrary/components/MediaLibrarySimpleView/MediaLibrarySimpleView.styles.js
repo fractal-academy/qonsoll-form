@@ -1,21 +1,13 @@
-import { Typography } from 'antd'
 import styled from 'styled-components'
-import { Box } from '@qonsoll/react-design'
-import typeformTheme from '../../../../../styles/theme'
-
-const { Text } = Typography
+import { Box, Text } from '@qonsoll/react-design'
 
 export const CustomText = styled(Text)`
-  font-size: ${({ theme }) =>
-    theme?.typography?.fontSize?.body2 ||
-    typeformTheme?.typography?.fontSize?.body2};
+  font-size: var(--qf-font-size-body2);
 `
 export const CustomBox = styled(Box)`
+  border-radius: var(--qf-border-radius-md);
   height: 150px;
-  border-radius: ${({ theme }) =>
-    theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
-  margin-bottom: 32px;
 `

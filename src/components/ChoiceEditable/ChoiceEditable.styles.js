@@ -1,91 +1,57 @@
-import { Input } from 'antd'
 import styled from 'styled-components'
-import { Box, Col } from '@qonsoll/react-design'
-import typeformTheme from '../../../styles/theme'
+import { Box, Col, Input } from '@qonsoll/react-design'
 
 const { TextArea } = Input
 
 export const MainBox = styled(Box)`
-  ${({ theme, withImage }) => `
-  border-radius: ${theme?.borderRadius?.md || typeformTheme?.borderRadius?.md};
+  ${({ withImage }) => `
+  border-radius: var(--qf-border-radius-md);
   width: ${withImage ? 'auto' : '100%'};
   position: relative;
-  background-color:
-    ${
-      theme?.color?.primary?.t?.lighten6 ||
-      typeformTheme?.color?.primary?.t?.lighten6
-    };
+  background-color: var(--qf-button-bg);
   &:hover{
-     background-color:
-    ${
-      theme?.color?.primary?.t?.lighten3 ||
-      typeformTheme?.color?.primary?.t?.lighten3
-    };
+     background-color: var(--qf-active-button-bg);
   }
 `}
 `
 
-export const MediaBox = styled(Box)(({ theme }) => ({
-  height: '100px',
-  width: '150px',
-  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md,
-  position: 'relative',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover'
-}))
+export const MediaBox = styled(Box)`
+  height: 100px;
+  width: 150px;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: var(--qf-border-radius-md);
+`
 
 export const LetterBox = styled(Box)`
-  ${({ theme, withImage }) => `
-    position: absolute;
+  ${({ withImage }) => `
+  position: absolute;
   top: ${withImage ? '12px' : '6px'};
   width: 20px;
-  border: 1px solid ${
-    theme?.color?.primary?.t?.lighten2 ||
-    typeformTheme?.color?.primary?.t?.lighten2
-  };
   text-align: center;
-  font-size: ${
-    theme?.typography?.fontSize?.body2 ||
-    typeformTheme?.typography?.fontSize?.body2
-  };
-  line-height: ${
-    theme?.typography?.lineHeight?.body2 ||
-    typeformTheme?.typography?.lineHeight?.body2
-  };
-  color: ${
-    theme?.color?.primary?.default || typeformTheme?.color?.primary?.default
-  };
-  background-color: ${
-    theme?.color?.white?.default || typeformTheme?.color?.white?.default
-  };
+  color: var(--qf-button-color);
+  font-size: var(--qf-font-size-body2);
+  background-color: var(--qf-keybox-bg);
+  border: 1px solid var(--qf-button-color);
 `}
 `
 export const DeleteButton = styled(Box)`
-  ${({ theme }) => `
   position: absolute;
   right: -6px;
   top: -6px;
   cursor: pointer;
-  background-color: ${
-    theme?.color?.primary?.t?.lighten3 ||
-    typeformTheme?.color?.primary?.t?.lighten3
-  };
-  font-size: ${
-    theme?.typography?.fontSize?.caption2 ||
-    typeformTheme?.typography?.fontSize?.caption2
-  };
   height: 16px;
   width: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-`}
+  font-size: var(--qf-font-size-caption2);
+  background-color: var(--qf-active-keybox-bg);
+  border-radius: var(--qf-border-radius-full);
 `
 export const ChoiceInput = styled(TextArea)`
-  color: ${({ theme }) =>
-    theme?.color?.text?.dark?.primary ||
-    typeformTheme?.color?.text?.dark?.primary};
+  color: var(--qf-font-color-secondary);
 `
 export const CustomCol = styled(Col)`
   position: absolute;

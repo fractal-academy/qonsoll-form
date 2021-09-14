@@ -1,22 +1,15 @@
-import typeformTheme from '../../../../../../styles/theme'
 import styled from 'styled-components'
-import { DatePicker, Select, Button, Typography } from 'antd'
-
-const { Text } = Typography
+import { DatePicker, Select } from 'antd'
+import { Text, Button } from '@qonsoll/react-design'
 
 export const CustomText = styled(Text)`
-  color: ${({ theme }) =>
-    theme?.color?.primary?.default || typeformTheme.color.primary.default};
+  color: var(--qf-font-color-accent);
 `
 
 export const CustomButton = styled(Button)`
-  background-color: ${({ theme }) =>
-    theme?.color?.primary?.t?.lighten7 ||
-    typeformTheme?.color?.primary?.t?.lighten7};
+  background-color: var(--qf-button-bg);
   &:hover {
-    background-color: ${({ theme }) =>
-      theme?.color?.primary?.t?.lighten3 ||
-      typeformTheme?.color?.primary?.t?.lighten3};
+    background-color: var(--qf-button-hover);
   }
 `
 
@@ -25,9 +18,7 @@ export const StyledSelect = styled(Select)`
   align-items: center;
   .ant-select-clear {
     border-radius: 50%;
-    font-size: ${({ theme }) =>
-      theme?.typography?.fontSize?.body1 ||
-      typeformTheme?.typography?.fontSize?.body1};
+    font-size: var(--qf-font-size-body1);
   }
   &:hover .ant-select-arrow {
     opacity: 0;
@@ -35,43 +26,28 @@ export const StyledSelect = styled(Select)`
 
   .ant-select-selector {
     cursor: pointer !important;
-    background-color: ${({ theme }) =>
-      theme?.color?.dark?.t?.lighten9 ||
-      typeformTheme?.color?.dark?.t?.lighten9} !important;
-    border-color: ${({ theme }) =>
-      theme?.color?.dark?.t?.lighten5 ||
-      typeformTheme?.color?.dark?.t?.lighten5} !important;
+    background-color: var(--qf-condition-item-bg) !important;
+    border-color: var(--qf-condition-item-border) !important;
   }
 `
 export const StyledDatePicker = styled(DatePicker)`
   flex: 1;
   cursor: pointer;
-  background-color: ${({ theme }) =>
-    theme?.color?.dark?.t?.lighten9 ||
-    typeformTheme?.color?.dark?.t?.lighten9} !important;
-  
-  
   border: 1px solid;
-  border-color: ${({ theme }) =>
-    theme?.color?.dark?.t?.lighten5 ||
-    typeformTheme?.color?.dark?.t?.lighten5} !important;
-  
   display: flex;
   align-items: center;
+  border-color: var(--qf-condition-item-border) !important;
+  background-color: var(--qf-condition-item-bg) !important;
+
   .ant-picker-input input {
     cursor: pointer;
   }
   .ant-picker-clear {
-      border-radius: 50%;
-    background-color: ${({ theme }) =>
-      theme?.color?.dark?.t?.lighten8 ||
-      typeformTheme?.color?.dark?.t?.lighten8} !important;
-    }
+    border-radius: 50%;
+    background-color: var(--qf-condition-item-bg) !important;
   }
   .ant-select-clear {
     border-radius: 50%;
-    font-size: ${({ theme }) =>
-      theme?.typography?.fontSize?.body1 ||
-      typeformTheme?.typography?.fontSize?.body1};
+    font-size: var(--qf-font-size-body1);
   }
 `

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Text from 'antd/lib/typography/Text'
-import { Col, Row } from '@qonsoll/react-design'
+import { Col, Row, Text } from '@qonsoll/react-design'
 import { CustomOpinionBox, CustomTextBox } from './OpinionScaleTemplate.styles'
 import { QuestionSelect } from '../../../../../domains/Question/components'
 
@@ -17,7 +16,9 @@ function OpinionScaleTemplate(props) {
           <Col cw={6} pl={0} pr={2}>
             <CustomOpinionBox px={3}>
               <CustomTextBox mr={2} px={2}>
-                <Text strong>{String.fromCharCode(startLetter + index)}</Text>
+                <Text color="var(--qf-font-color-caption1)" strong>
+                  {String.fromCharCode(startLetter + index)}
+                </Text>
               </CustomTextBox>
               {item?.answerOption}
             </CustomOpinionBox>

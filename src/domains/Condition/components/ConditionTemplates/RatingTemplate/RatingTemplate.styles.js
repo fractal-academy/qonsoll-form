@@ -1,26 +1,21 @@
-import typeformTheme from '../../../../../../styles/theme'
 import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
 
-export const CustomRatingBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  width: '100%',
-  backgroundColor:
-    theme?.color?.dark?.t?.lighten9 || typeformTheme?.color?.dark?.t?.lighten9,
-  border: '1px solid',
-  borderColor:
-    theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5,
-  borderRadius: theme?.borderRadius?.md || typeformTheme?.borderRadius?.md,
-  height: '100%'
-}))
-export const CustomTextBox = styled(Box)(({ theme }) => ({
-  minWidth: '30px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  border: '1px solid',
-  borderColor:
-    theme?.color?.dark?.t?.lighten5 || typeformTheme?.color?.dark?.t?.lighten5,
-  borderRadius: theme?.borderRadius?.sm || typeformTheme?.borderRadius?.sm
-}))
+export const CustomRatingBox = styled(Box)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--qf-condition-item-bg);
+  border: 1px solid var(--qf-condition-item-border);
+  border-radius: var(--qf-border-radius-md);
+`
+
+export const CustomTextBox = styled(Box)`
+  min-width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--qf-condition-item-border);
+  border-radius: var(--qf-border-radius-md);
+`

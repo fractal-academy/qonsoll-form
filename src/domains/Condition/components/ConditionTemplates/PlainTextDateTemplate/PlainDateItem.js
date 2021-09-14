@@ -1,13 +1,13 @@
+import moment from 'moment'
+import { Select } from 'antd'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import { Col, Row } from '@qonsoll/react-design'
 import { QuestionSelect } from '../../../../../domains/Question/components'
-import { Select } from 'antd'
 import { DATE_CONDITION_RULES_VALUES } from '../../../../../constants/dateConditionRules'
 import { StyledDatePicker, StyledSelect } from './PlainTextDateTemplate.style'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
-import moment from 'moment'
 import { useTranslation } from '../../../../../context/Translation'
 
 const { Option } = Select

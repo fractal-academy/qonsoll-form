@@ -1,8 +1,7 @@
 import useMedia from 'use-media'
-import { Typography } from 'antd'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import { Col, Row, Box } from '@qonsoll/react-design'
+import { Col, Row, Box, Title, Text } from '@qonsoll/react-design'
 import QuestionImageContainer from '../QuestionImageContainer'
 import { useTranslation } from '../../../../context/Translation'
 import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
@@ -23,8 +22,6 @@ import {
   SubmitButton,
   VideoPlayer
 } from '../../../../components'
-
-const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
   const {
@@ -169,14 +166,20 @@ function QuestionAdvancedView(props) {
                   flexDirection="column"
                   justifyContent="center">
                   {questionNumberRule && (
-                    <Title style={{ wordBreak: 'break-word' }} level={4}>
+                    <Title
+                      color="var(--qf-font-color-primary)"
+                      style={{ wordBreak: 'break-word' }}
+                      level={4}>
                       `${questionNumber}. ${videoQuestion || 'Video question'}`
                     </Title>
                   )}
                   <VideoPlayer videoKey={data?.videoApiKey} />
                 </Box>
               ) : (
-                <Title style={{ wordBreak: 'break-word' }} level={4}>
+                <Title
+                  color="var(--qf-font-color-primary)"
+                  style={{ wordBreak: 'break-word' }}
+                  level={4}>
                   {questionNumberRule && `${questionNumber}.`} {data?.title}
                 </Title>
               )}
@@ -184,7 +187,9 @@ function QuestionAdvancedView(props) {
           </Row>
           <Row noGutters mb={3}>
             <Col>
-              <Text>{data?.subtitle}</Text>
+              <Text color="var(--qf-font-color-caption1)">
+                {data?.subtitle}
+              </Text>
             </Col>
           </Row>
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
