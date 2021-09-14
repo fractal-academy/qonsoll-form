@@ -12,6 +12,7 @@ const SecondIcon = styled(MoreOutlined)`
 `
 const HandlerBox = styled(Box)`
   cursor: grab;
+  display: flex;
 `
 
 const DragHandler = sortableHandle(() => (

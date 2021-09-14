@@ -1,9 +1,9 @@
 import useMedia from 'use-media'
 import { v4 as uuid } from 'uuid'
 import PropTypes from 'prop-types'
-import { Typography, message } from 'antd'
+import { message } from 'antd'
 import { useHistory } from 'react-router-dom'
-import { Box, Container } from '@qonsoll/react-design'
+import { Box, Container, Text } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import React, { useState, useEffect, useMemo } from 'react'
 import { QuestionForm } from '../../../../domains/Question/components'
@@ -311,10 +311,10 @@ function FormEdit(props) {
                       display="flex"
                       alignItems="center"
                       justifyContent="center">
-                      <Typography>
+                      <Text>
                         {screenSizeWarning ||
                           'This feature is available only on desktop.'}
-                      </Typography>
+                      </Text>
                     </Box>
                   )}
                 </Box>

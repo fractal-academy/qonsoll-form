@@ -7,7 +7,7 @@ function NumberedCard(props) {
   const { top, number, current, children, ...args } = props
 
   return (
-    <Box position="relative" p={2}>
+    <Box position="relative">
       <HiddenBox top={top} />
       <ContentBox current={current} {...args}>
         {children}

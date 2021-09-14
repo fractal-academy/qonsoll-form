@@ -2,7 +2,7 @@ import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { StyledItem } from '../../../components'
 import { COLLECTIONS } from '../../../constants'
-import { Row, Col, Box, Text } from '@qonsoll/react-design'
+import { Row, Col, Box, Text, Title } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Popconfirm, Dropdown, Menu, message } from 'antd'
 import { useTranslation } from '../../../context/Translation'
@@ -139,7 +139,7 @@ const ListItem = forwardRef((props, ref) => {
           okButtonProps={{ loading: confirmLoading }}
           okType="danger"
           okText="Delete">
-          <Text color="var(--qf-font-color-caption1)">
+          <Text color="var(--ql-color-danger)">
             {popconfirmDeleteButtonText || 'Delete'}
           </Text>
         </Popconfirm>
@@ -178,9 +178,9 @@ const ListItem = forwardRef((props, ref) => {
 
         <Row noGutters h="between" mt={2}>
           <Col display="grid">
-            <Text color="var(--qf-font-color-caption1)" ellipsis>
+            <Title color="var(--qf-font-color-caption1)" level={5} ellipsis>
               {data?.title}
-            </Text>
+            </Title>
             {!data?.imageUrl && (
               <Text
                 color="var(--qf-font-color-caption1)"

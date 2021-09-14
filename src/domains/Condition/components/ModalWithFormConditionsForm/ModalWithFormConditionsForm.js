@@ -47,7 +47,7 @@ function ModalWithFormConditionsForm(props) {
         }}
         footer={
           <Button type="primary" onClick={onSave}>
-            {submitBtn || 'Continue'}
+            {submitBtn || 'Close'}
           </Button>
         }
         title={

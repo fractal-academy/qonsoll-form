@@ -122,7 +122,7 @@ function SubmitButton(props) {
       {isntDesktop && (
         <Col cw="auto">
           <Text color="var(--qf-font-color-caption1)">
-            {(pressEnter || 'Press enter') + ' ↵'}{' '}
+            {(pressEnter || 'Press enter') + ' ↵'}
           </Text>
         </Col>
       )}

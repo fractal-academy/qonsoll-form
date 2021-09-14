@@ -3,7 +3,7 @@ import { Box } from '@qonsoll/react-design'
 
 export const HiddenBox = styled(Box)`
   position: absolute;
-  left: 4px;
+  left: -4px;
   top: ${({ top }) => `${top ? `${top}px` : '50%'}`};
   transform: ${({ top }) => !top && 'translate(0, -50%);'};
   width: 4px;
@@ -17,7 +17,7 @@ export const ContentBox = styled(Box)`
   ${({ current }) => `
   cursor: pointer;
   z-index: 400;
-  padding: 16px;
+  padding: 16px 24px;
   border-radius: 16px;
   background-color: ${
     (current && 'var(--qf-dnd-active-item-bg)') || 'var(--qf-dnd-item-bg)'
@@ -31,7 +31,7 @@ export const ContentBox = styled(Box)`
 `
 export const NumberBox = styled(Box)`
   position: absolute;
-  left: 4px;
+  left: -4px;
   top: ${({ top }) => `${top ? `calc(${top} + 5px)` : '50%'}`};
   transform: ${({ top }) => !top && 'translate(0, -50%);'};
   width: 24px;

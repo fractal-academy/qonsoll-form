@@ -84,7 +84,10 @@ function FormConditionsForm(props) {
         <TabPane
           tab={conditionsLogicJumpsTab || 'Logic jumps'}
           key="1"
-          style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+          style={{
+            overflowY: 'scroll',
+            overflowX: 'hidden'
+          }}>
           {data?.length > 0 ? (
             data?.map((item, index) => (
               <Box mb={3}>
