@@ -120,7 +120,7 @@ function FormAnswers(props) {
                   display="flex"
                   alignItems="center"
                   justifyContent="center">
-                  <Text color="var(--qf-font-color-caption1)">
+                  <Text color="var(--qf-typography-subtitle-color)">
                     {smallScreenHandleWarning ||
                       'This feature is available only on desktop.'}
                   </Text>

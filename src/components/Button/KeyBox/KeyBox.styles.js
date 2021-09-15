@@ -50,5 +50,5 @@ export const StyledText = styled(Text)`
     hasImages ? (phoneSmall ? '100%' : '15ch') : '100%'};
   padding-left: ${({ hasImages }) => (hasImages ? '0' : '30px')};
   word-break: break-word;
-  color: var(--qf-font-color-caption1);
+  color: var(--qf-typography-subtitle-color);
 `

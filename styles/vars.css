@@ -24,6 +24,7 @@
 
   /* layout */
   --qf-sidebar-bg: var(--ql-color-white);
+  --qf-sidebar-width: 350px;
   --qf-header-mb: 8px;
 
   /* button */
@@ -35,18 +36,21 @@
   --qf-keybox-bg: var(--ql-color-white);
 
   --qf-button-color: var(--ql-color-accent1);
-  --qf-active-button-color: var(--ql-color-white); /* unused */
+  --qf-active-button-color: var(--ql-color-white); 
 
+  --qf-submit-button-font-size: var(--ql-font-size-h4);
   
   /* input */
   --qf-input-background: var(--ql-color-dark-t-lighten5); /* needs refactoring */
 
+  /* tag */
+  --qf-tag-color: var(--ql-color-accent1);
+
   /* overwritten menu */
-  --menu-vertical-inline-item-padding: 8px;
-  --menu-item-active-bg: var(--ql-color-accent1-t-lighten3);
+  --ql-menu-item-active-bg: var(--ql-color-accent1-t-lighten3);
 
   /* overwritten form */
-  --ql-form-item-vertical-spacing: 24px;  
+  --ql-form-item-vertical-spacing: 24px;
 
   /* uploader */
   --qf-uploader-color: var(--ql-color-white);
@@ -58,27 +62,19 @@
   /* domain component: question */
   --qf-question-type-icon-default: var(--ql-color-dark-t-lighten4);
   --qf-question-type-icon-danger: var(--ql-color-danger-t-lighten3);
+  --qf-question-header-font-size: var(--ql-font-size-h3);
 
   /*domain component: condition */
   --qf-condition-item-bg: var(--ql-color-dark-t-lighten6);
   --qf-condition-item-border: var(--ql-color-dark-t-lighten4);
 
   /* typography */
-  --qf-font-size-h1: var(--ql-font-size-h1); /* unused */
-  --qf-font-size-h2: var(--ql-font-size-h2); /* unused */
-  --qf-font-size-h3: var(--ql-font-size-h3);
-  --qf-font-size-h4: var(--ql-font-size-h4);
-  --qf-font-size-h5: var(--ql-font-size-h5); /* unused */
-  --qf-font-size-h6: var(--ql-font-size-h6); /* unused */
-  --qf-font-size-overline: var(--ql-font-size-overline);  /* unused */
-  --qf-font-size-body1: var(--ql-font-size-body1);
-  --qf-font-size-body2: var(--ql-font-size-body2);
-  --qf-font-size-caption1: var(--ql-font-size-caption1);
-  --qf-font-size-caption2: var(--ql-font-size-caption2);
+  --qf-typography-fs-body: var(--ql-font-size-body1);
+  --qf-typography-fs-caption: var(--ql-font-size-caption1);
 
-  --qf-font-color-primary: var(--ql-color-black);
-  --qf-font-color-accent: var(--ql-color-accent1);
-  --qf-font-color-secondary: var(--ql-color-dark-t-lighten2);
+  --qf-typography-title-color: var(--ql-color-dark);
+  --qf-typography-subtitle-color: var(--ql-color-dark-t-lighten1);
+  --qf-typography-caption-color: var(--ql-color-dark-t-lighten2);
 
   /* border radius */
   --qf-border-radius-sm: var(--ql-border-radius-sm); /* 6px */

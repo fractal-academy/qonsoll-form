@@ -20,6 +20,6 @@ export const QuestionMenuItem = styled(Menu.Item)`
   }
 `
 export const Description = styled(Text)`
-  font-size: var(--qf-font-size-caption1);
-  color: var(--qf-font-color-caption1);
+  font-size: var(--qf-typography-fs-caption);
+  color: var(--qf-typography-subtitle-color);
 `

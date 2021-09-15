@@ -120,7 +120,9 @@ const ListItem = forwardRef((props, ref) => {
   const menu = (
     <StyledMenu>
       <Item onClick={(e) => showModal(e)} key={'showModal'}>
-        <Text color="var(--qf-font-color-caption1)">{edit || 'Edit'}</Text>
+        <Text color="var(--qf-typography-subtitle-color)">
+          {edit || 'Edit'}
+        </Text>
         <FormSimpleFormWithModal
           isEdit
           formData={data}
@@ -178,12 +180,15 @@ const ListItem = forwardRef((props, ref) => {
 
         <Row noGutters h="between" mt={2}>
           <Col display="grid">
-            <Title color="var(--qf-font-color-caption1)" level={5} ellipsis>
+            <Title
+              color="var(--qf-typography-subtitle-color)"
+              level={5}
+              ellipsis>
               {data?.title}
             </Title>
             {!data?.imageUrl && (
               <Text
-                color="var(--qf-font-color-caption1)"
+                color="var(--qf-typography-subtitle-color)"
                 ellipsis
                 type="secondary">
                 {description}

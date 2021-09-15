@@ -123,7 +123,7 @@ function FormsAll(props) {
               />
               <Row noGutters mb={3}>
                 <Col>
-                  <Text color="var(--qf-font-color-caption2)">
+                  <Text color="var(--qf-typography-caption-color)">
                     {formCounter || 'Amount of forms: '}
                     {amountFiles}
                   </Text>

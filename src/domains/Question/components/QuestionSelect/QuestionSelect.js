@@ -35,7 +35,7 @@ function QuestionSelect(props) {
       defaultValue="Go to the next question">
       {/*FOR FUTURE IMPROVEMENTS  - if it will be necessary - add option "Submit form"*/}
       {/*<Option value="Submit form">*/}
-      {/*  <Text color="var(--qf-font-color-caption1)" >Submit form</Text>*/}
+      {/*  <Text color="var(--qf-typography-subtitle-color)" >Submit form</Text>*/}
       {/*</Option>*/}
 
       <OptGroup label={<StyledCaptionText>JUMP TO...</StyledCaptionText>}>

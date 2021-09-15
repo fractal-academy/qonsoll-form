@@ -2,11 +2,11 @@ import { Select, Tag } from 'antd'
 import styled from 'styled-components'
 
 export const StyledTag = styled(Tag)`
-  color: var(--qf-font-color-primary);
+  color: var(--qf-typography-title-color);
   background-color: var(--qf-condition-item-bg);
   border-color: var(--qf-condition-item-border);
   border-radius: var(--qf-border-radius-md);
-  font-size: var(--qf-font-size-body1);
+  font-size: var(--qf-typography-fs-body);
   margin-right: 10px !important;
   margin-left: 10px !important;
 `

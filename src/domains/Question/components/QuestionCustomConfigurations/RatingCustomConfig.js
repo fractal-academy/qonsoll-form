@@ -40,7 +40,7 @@ function AmountOptionsCustomConfig() {
   return (
     <Row noGutters mb={2} h="between">
       <Col v="center" mb={2}>
-        <Text color="var(--qf-font-color-caption1)">
+        <Text color="var(--qf-typography-subtitle-color)">
           {questionConfigurationAmountOfOptions || 'Amount of options '}
         </Text>
       </Col>

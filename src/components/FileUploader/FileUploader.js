@@ -170,7 +170,7 @@ const UploadArea = (props) => {
             </IconLabel>
           </Box>
           <Box textAlign="center" mt={2}>
-            <Text color="var(--qf-font-color-caption1)">
+            <Text color="var(--qf-typography-subtitle-color)">
               {fileUploaderTitle || 'Click or drag file to this area to upload'}
             </Text>
           </Box>
@@ -185,7 +185,7 @@ const UploadArea = (props) => {
               </Col>
               <Col v="center">
                 <Text
-                  color="var(--qf-font-color-caption1)"
+                  color="var(--qf-typography-subtitle-color)"
                   style={{ wordBreak: 'break-all' }}>
                   {file?.name}
                 </Text>

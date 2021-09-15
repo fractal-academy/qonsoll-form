@@ -54,7 +54,7 @@ function StaticList(props) {
           <NoData
             description={
               <Box display="flex" flexDirection="column">
-                <Text color="var(--qf-font-color-caption1)">
+                <Text color="var(--qf-typography-subtitle-color)">
                   {emptyDescription || "There's nothing here"}
                 </Text>
                 {hasMedia ? (

@@ -11,7 +11,7 @@ const StyledDatePicker = styled(DatePicker)`
 
   .ant-picker-clear {
     border-radius: var(--qf-border-radius-full);
-    font-size: var(--qf-font-size-body1);
+    font-size: var(--qf-typography-fs-body);
   }
 `
 

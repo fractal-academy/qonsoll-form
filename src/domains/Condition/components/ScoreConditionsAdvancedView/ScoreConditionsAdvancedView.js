@@ -56,7 +56,7 @@ const ScoreConditionsAdvancedView = (props) => {
     <NumberedCard top="24px" number={index + 1} key={index}>
       <Box ml={3}>
         <Title
-          color="var(--qf-font-color-primary)"
+          color="var(--qf-typography-title-color)"
           level={5}
           style={{ marginBottom: '10px' }}>
           {questionData?.title}
@@ -66,11 +66,11 @@ const ScoreConditionsAdvancedView = (props) => {
             <Col cw={8} pl={0} pr={2}>
               <OptionBox px={3}>
                 <CustomTextBox mr={2} px={2}>
-                  <Text color="var(--qf-font-color-caption1)" strong>
+                  <Text color="var(--qf-typography-subtitle-color)" strong>
                     {String.fromCharCode(startLetter + index)}
                   </Text>
                 </CustomTextBox>
-                <Text color="var(--qf-font-color-caption1)" ellipsis>
+                <Text color="var(--qf-typography-subtitle-color)" ellipsis>
                   {item?.answerOption}
                 </Text>
               </OptionBox>

@@ -3,7 +3,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import { UserOutlined } from '@ant-design/icons'
 import { NumberedCard } from '../../../../components'
-import { Row, Col, Box, Avatar, Text } from '@qonsoll/react-design'
+import { Row, Col, Box, Avatar, Title, Text } from '@qonsoll/react-design'
 
 function ResponseList(props) {
   const { date, user, index, onClick } = props
@@ -24,10 +24,12 @@ function ResponseList(props) {
             <Avatar size={44} icon={<UserOutlined />} />
           </Col>
           <Col>
-            <Text variant="h4" color="var(--qf-font-color-accent)">
+            <Title variant={4} color="var(--qf-typography-title-color)">
               {user}
+            </Title>
+            <Text color="var(--qf-typography-subtitle-color)">
+              {formattedDate}
             </Text>
-            <Text color="var(--qf-font-color-caption1)">{formattedDate}</Text>
           </Col>
         </Row>
       </NumberedCard>

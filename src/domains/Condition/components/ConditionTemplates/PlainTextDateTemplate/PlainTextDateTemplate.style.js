@@ -18,7 +18,7 @@ export const StyledSelect = styled(Select)`
   align-items: center;
   .ant-select-clear {
     border-radius: 50%;
-    font-size: var(--qf-font-size-body1);
+    font-size: var(--qf-typography-fs-body);
   }
   &:hover .ant-select-arrow {
     opacity: 0;
@@ -48,6 +48,6 @@ export const StyledDatePicker = styled(DatePicker)`
   }
   .ant-select-clear {
     border-radius: 50%;
-    font-size: var(--qf-font-size-body1);
+    font-size: var(--qf-typography-fs-body);
   }
 `

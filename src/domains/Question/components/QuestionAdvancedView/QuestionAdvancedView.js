@@ -167,7 +167,7 @@ function QuestionAdvancedView(props) {
                   justifyContent="center">
                   {questionNumberRule && (
                     <Title
-                      color="var(--qf-font-color-primary)"
+                      color="var(--qf-typography-title-color)"
                       style={{ wordBreak: 'break-word' }}
                       level={4}>
                       `${questionNumber}. ${videoQuestion || 'Video question'}`
@@ -177,7 +177,7 @@ function QuestionAdvancedView(props) {
                 </Box>
               ) : (
                 <Title
-                  color="var(--qf-font-color-primary)"
+                  color="var(--qf-typography-title-color)"
                   style={{ wordBreak: 'break-word' }}
                   level={4}>
                   {questionNumberRule && `${questionNumber}.`} {data?.title}
@@ -187,7 +187,7 @@ function QuestionAdvancedView(props) {
           </Row>
           <Row noGutters mb={3}>
             <Col>
-              <Text color="var(--qf-font-color-caption1)">
+              <Text color="var(--qf-typography-subtitle-color)">
                 {data?.subtitle}
               </Text>
             </Col>

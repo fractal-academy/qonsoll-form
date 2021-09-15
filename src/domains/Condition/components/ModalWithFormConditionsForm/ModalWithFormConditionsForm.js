@@ -54,7 +54,7 @@ function ModalWithFormConditionsForm(props) {
           <>
             <Row v="center" noGutters>
               <Col>
-                <Title color="var(--qf-font-color-primary)" level={3}>
+                <Title color="var(--qf-typography-title-color)" level={3}>
                   {modalTitle || 'Logic'}
                 </Title>
               </Col>

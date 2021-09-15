@@ -16,7 +16,7 @@ export const styles = {
 
 export const StyledTag = styled(Tag)`
   background-color: var(--qf-button-bg);
-  color: var(--qf-font-color-accent);
+  color: var(--qf-tag-color);
 `
 
 export const CustomCard = styled(Card)`

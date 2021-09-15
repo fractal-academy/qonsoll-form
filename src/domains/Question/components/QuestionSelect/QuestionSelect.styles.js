@@ -8,7 +8,6 @@ export const StyledSelect = styled(Select)`
   align-items: center;
   .ant-select-clear {
     border-radius: var(--qf-border-radius-full);
-    font-size: var(--qf-font-size-body2);
   }
   &:hover .ant-select-arrow {
     opacity: 0;
@@ -27,8 +26,8 @@ export const StyledSelect = styled(Select)`
 `
 
 export const StyledCaptionText = styled(Text)`
-  color: var(--qf-font-color-caption1);
-  font-size: var(--qf-font-size-caption1);
+  color: var(--qf-typography-subtitle-color);
+  font-size: var(--qf-typography-fs-caption);
   line-height: var(--ql-line-height-caption1);
   font-weight: var(--ql-font-weight-regular);
   letter-spacing: var(--ql-letter-spacing-none);
@@ -36,7 +35,7 @@ export const StyledCaptionText = styled(Text)`
 
 export const StyledTag = styled(Tag)`
   background-color: var(--qf-condition-item-bg);
-  color: var(--qf-font-color-primary);
+  color: var(--qf-typography-title-color);
   border-color: var(--qf-condition-item-border);
   border-radius: var(--qf-border-radius-md);
   margin-right: 10px !important;
