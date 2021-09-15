@@ -253,7 +253,7 @@ function EditorSidebar(props) {
     <SidebarBoxWrapper transparent={transparent}>
       <Row mb={2} v="center" h="between">
         <Col cw="auto">
-          <Title color="var(--qf-font-color-primary)" level={5}>
+          <Title color="var(--qf-typography-title-color)" level={5}>
             {editorSidebarQuestionsTitle || 'Questions'}
           </Title>
         </Col>
@@ -295,7 +295,7 @@ function EditorSidebar(props) {
 
       <Row my={2} v="center" h="between">
         <Col cw="auto">
-          <Title color="var(--qf-font-color-primary)" level={5}>
+          <Title color="var(--qf-typography-title-color)" level={5}>
             {editorSidebarEndingsTitle || 'Endings'}
           </Title>
         </Col>

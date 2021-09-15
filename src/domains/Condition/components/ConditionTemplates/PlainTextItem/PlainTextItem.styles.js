@@ -14,7 +14,7 @@ export const StyledSelect = styled(Select)`
   }
   .ant-select-clear {
     border-radius: 50%;
-    font-size: var(--qf-font-size-body1);
+    font-size: var(--qf-typography-fs-body);
   }
   .ant-select-selector {
     cursor: pointer !important;

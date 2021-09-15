@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Box, Text, Button } from '@qonsoll/react-design'
 
 export const CustomText = styled(Text)`
-  color: var(--qf-font-color-secondary);
+  color: var(--qf-typography-caption-color);
 `
 
 export const CustomButton = styled(Button)`

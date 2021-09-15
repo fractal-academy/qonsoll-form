@@ -14,7 +14,7 @@ import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/us
 
 const StyledSubmit = styled(Button)`
   height: 56px;
-  font-size: var(--qf-font-size-h4);
+  font-size: var(--qf-submit-button-font-size);
 `
 
 function SubmitButton(props) {
@@ -121,7 +121,7 @@ function SubmitButton(props) {
       </Col>
       {isntDesktop && (
         <Col cw="auto">
-          <Text color="var(--qf-font-color-caption1)">
+          <Text color="var(--qf-typography-subtitle-color)">
             {(pressEnter || 'Press enter') + ' ↵'}
           </Text>
         </Col>

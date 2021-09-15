@@ -8,5 +8,6 @@ export const StyledTextEditable = styled(TextArea)`
   font-weight: bold;
   color: ${({ textSecondary }) =>
     textSecondary && 'var(--qf-font-color-secondary)'};
-  font-size: ${({ isTitle }) => isTitle && 'var(--qf-font-size-h3)'};
+  font-size: ${({ isTitle }) =>
+    isTitle && 'var(--qf-question-header-font-size)'};
 `

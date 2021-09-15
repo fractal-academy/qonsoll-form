@@ -16,11 +16,11 @@ function ChoiceTemplate(props) {
           <Col cw={6} pl={0} pr={2}>
             <CustomChoiceBox px={3}>
               <CustomTextBox mr={2} px={2}>
-                <Text color="var(--qf-font-color-caption1)" strong>
+                <Text color="var(--qf-typography-subtitle-color)" strong>
                   {String.fromCharCode(startLetter + index)}
                 </Text>
               </CustomTextBox>
-              <Text color="var(--qf-font-color-caption1)" ellipsis>
+              <Text color="var(--qf-typography-subtitle-color)" ellipsis>
                 {item?.answerOption}
               </Text>
             </CustomChoiceBox>

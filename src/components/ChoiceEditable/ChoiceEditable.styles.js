@@ -31,7 +31,6 @@ export const LetterBox = styled(Box)`
   width: 20px;
   text-align: center;
   color: var(--qf-button-color);
-  font-size: var(--qf-font-size-body2);
   background-color: var(--qf-keybox-bg);
   border: 1px solid var(--qf-button-color);
 `}
@@ -46,7 +45,7 @@ export const DeleteButton = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: var(--qf-font-size-caption2);
+  font-size: var(--qf-typography-fs-caption);
   background-color: var(--qf-active-keybox-bg);
   border-radius: var(--qf-border-radius-full);
 `

@@ -24,7 +24,7 @@ import {
 
 const StyledText = styled(Text)`
   cursor: pointer !important;
-  color: var(--qf-font-color-caption1);
+  color: var(--qf-typography-subtitle-color);
 `
 
 function QuestionTypeSelect(props) {

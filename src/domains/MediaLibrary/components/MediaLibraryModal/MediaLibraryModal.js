@@ -143,7 +143,7 @@ function MediaLibraryModal(props) {
         }}>
         <Row v="center" py={3} px={3}>
           <Col>
-            <Title color="var(--qf-font-color-primary)" level={3}>
+            <Title color="var(--qf-typography-title-color)" level={3}>
               {mediaLibraryTitle || 'Media Library'}
             </Title>
             <CustomText>

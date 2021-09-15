@@ -44,7 +44,7 @@ function OpinionScaleCustomConfig() {
   return (
     <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>
-        <Text color="var(--qf-font-color-caption1)" strong>
+        <Text color="var(--qf-typography-subtitle-color)" strong>
           {fromSetting || 'From'}
         </Text>
       </Col>
@@ -58,7 +58,7 @@ function OpinionScaleCustomConfig() {
         </Select>
       </Col>
       <Col v="center" cw="auto" mr={3}>
-        <Text color="var(--qf-font-color-caption1)" strong>
+        <Text color="var(--qf-typography-subtitle-color)" strong>
           {toSetting || 'to'}
         </Text>
       </Col>
