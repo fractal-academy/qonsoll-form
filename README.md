@@ -279,6 +279,27 @@ Qonsoll app will perfectly fine work without translations propagating, but app w
 ```sh
 const qformTranslations = (t) => {
   return {
+    requiredAnswerMessage: t('requiredAnswerMessage'),
+    submitHint: t('submitHint'),
+    choicePlaceholder: t('choicePlaceholder'),
+    conditionRemovingWarn: t('conditionRemovingWarn'),
+    removeButton: t('removeButton'),
+    uploaderHint: t('uploaderHint'),
+    itemRemovingHint: t('itemRemovingHint'),
+    questionListTitle: t('questionListTitle'),
+    endingListTitle: t('endingListTitle'),
+    questionCreationTooltip: t('questionCreationTooltip'),
+    endingCreationTooltip: t('endingCreationTooltip'),
+    formViewTooltip: t('formViewTooltip'),
+    answerViewTooltip: t('answerViewTooltip'),
+    longTextHint: t('longTextHint'),
+    textQuestionPlaceholder: t('longTextPlaceholder'),
+    
+    
+    
+
+    //for fix
+
     finishButton: t('finishButton'),
     startButton: t('startButton'),
     requiredSwitcher: t('requiredSwitcher'),
