@@ -279,6 +279,7 @@ Qonsoll app will perfectly fine work without translations propagating, but app w
 ```sh
 const qformTranslations = (t) => {
   return {
+    //global components
     requiredAnswerMessage: t('requiredAnswerMessage'),
     submitHint: t('submitHint'),
     choicePlaceholder: t('choicePlaceholder'),
@@ -295,22 +296,58 @@ const qformTranslations = (t) => {
     longTextHint: t('longTextHint'),
     textQuestionPlaceholder: t('longTextPlaceholder'),
     
+    //domains: form components
+    conditionsEndingsTab: t('conditionsEndingsTab'),
+    conditionsLogicJumpsTab: t('conditionsLogicJumpsTab'),
+    conditionsQuizTab: t('conditionsQuizTab'),
+    conditionsNoData: t('conditionsNoData'),
+    conditionAddQuestionType: t('conditionAddQuestionType'),
+    formTitlePlaceholder: t('formTitlePlaceholder'),
+    formSubtitlePlaceholder: t('formSubtitlePlaceholder'),
+    quizSwitcherText: t('quizSwitcherText'),
+    formModalCreateTitle: t('formModalCreateTitle'),
+    formModalEditTitle: t('formModalEditTitle'),
+    formModalEditButton: t('formModalEditButton'),
+    formModalCreateButton: t('formModalCreateButton'),
     
+    //domains: form routes
+    phoneBrakepointDummy: t('phoneBrakepointDummy'),
+    formsAllTitle: t('formsAllTitle'),
+    formCounter: t('formCounter'),
+    formSearchPlaceholder: t('formSearchPlaceholder'),
     
-
-    //for fix
-
-    finishButton: t('finishButton'),
-    startButton: t('startButton'),
-    requiredSwitcher: t('requiredSwitcher'),
-    typeConfiguration: t('typeConfiguration'),
-    fromSetting: t('fromSetting'),
-    toSetting: t('toSetting'),
-    commonQuestion: t('commonQuestion'),
-    endingQuestion: t('endingQuestion'),
-    editableTitleHint: t('editableTitleHint'),
-    editableSubtitleHint: t('editableSubtitleHint'),
-    popconfirmTitle: t('popconfirmTitle'),
+    //domains: condition components
+    conditionsEndingSelectPlaceholder: t('conditionsEndingSelectPlaceholder'),
+    conditionModalTitle: t('conditionModalTitle'),
+    conditionModalResetLogic: t('conditionModalResetLogic'),
+    conditionModalSubmitButton: t('conditionModalSubmitButton'),
+    conditionsModalTooltip: t('conditionsModalTooltip'),
+    conditionRedirectRulePlaceholder: t('conditionRedirectRulePlaceholder'),
+    scoreWeightTitle: t('scoreWeightTitle'),
+    
+    //domains: media library components
+    mediaLibraryCounter: t('mediaLibraryCounter'),
+    mediaLibraryButton: t('mediaLibraryButton'),
+    mediaLibrarySearchPlaceholder: t('mediaLibrarySearchPlaceholder'),
+    mediaLibraryTitle: t('mediaLibraryTitle'),
+    mediaLibraryBrightness: t('mediaLibraryBrightness'),
+    
+    //domains: question components
+    questionFinishButton: t('questionFinishButton'),
+    questionStartButton: t('questionStartButton'),
+    questionVideo: t('questionVideo'),
+    questionVideoSetting: t('questionVideoSetting'),
+    questionRequiredSetting: t('questionRequiredSetting'),
+    questionConfigurationTooltip: t('questionConfigurationTooltip'),
+    questionTypeConfiguration: t('questionTypeConfiguration'),
+    questionConfigurationTitle: t('questionConfigurationTitle'),
+    questionRangeBottomSetting: t('questionRangeBottomSetting'),
+    questionRangeUpperSetting: t('questionRangeUpperSetting'),
+    questionConfigurationOptions: t('questionConfigurationOptions'),
+    questionEditableTitleHint: t('questionEditableTitleHint'),
+    questionEditableSubtitleHint: t('questionEditableSubtitleHint'),
+    questionRemovingPopconfirm: t('questionRemovingPopconfirm'),
+    questionWithLogicRemovingPopconfirm: t('questionWithLogicRemovingPopconfirm'),
     welcomeScreenDesc: t('welcomeScreenDesc'),
     longTextDesc: t('longTextDesc'),
     shortTextDesc: t('shortTextDesc'),
@@ -321,70 +358,17 @@ const qformTranslations = (t) => {
     choiceDesc: t('choiceDesc'),
     ratingDesc: t('ratingDesc'),
     statementDesc: t('statementDesc'),
-    yesnoDesc: t('yesnoDesc'),
-    imageName: t('imageName'),
-    brightness: t('brightness'),
-    imageInputPlaceholder: t('imageInputPlaceholder'),
-    addButton: t('addButton'),
-    amountTitle: t('amountTitle'),
-    changeButton: t('changeButton'),
-    searchPlaceholder: t('searchPlaceholder'),
-    mediaLibraryTitle: t('mediaLibraryTitle'),
-    answerRequiredMessageError: t('answerRequiredMessageError'),
-    pressEnter: t('pressEnter'),
-    yes: t('yes'),
-    no: t('no'),
-    editableChoicePlaceholder: t('editableChoicePlaceholder'),
-    editorSidebarEndingsTitle: t('editorSidebarEndingsTitle'),
-    editorSidebarQuestionsTitle: t('editorSidebarQuestionsTitle'),
-    formEditTitle: t('formEditTitle'),
-    smallScreenHandleWarning: t('smallScreenHandleWarning'),
-    listItemNoDescription: t('listItemNoDescription'),
-    rename: t('rename'),
-    popconfirmDeleteForm: t('popconfirmDeleteForm'),
-    popconfirmDeleteButtonText: t('popconfirmDeleteButtonText'),
-    popconfirmDeleteImageTitle: t('popconfirmDeleteImageTitle'),
-    longTextEnterHint: t('longTextEnterHint'),
-    longTextInputPlaceholder: t('longTextInputPlaceholder'),
-    fileUploaderTitle: t('fileUploaderTitle'),
-    fileUploaderSubtitle: t('fileUploaderSubtitle'),
-    shortTextInputPlaceholder: t('shortTextInputPlaceholder'),
-    questionConfigurationAmountOfOptions: t('questionConfigurationAmountOfOptions'),
-    enableQuizLabel: t('enableQuizLabel'),
-    conditionslogicJumpsTab: t('conditionslogicJumpsTab'),
-    conditionsEndingsTab: t('conditionsEndingsTab'),
-    noDataToConfigureEnings: t('noDataToConfigureEnings'),
-    conditionsAnswersScoreConfigTab: t('conditionsAnswersScoreConfigTab'),
-    promiseAddSpecialQuestionTypes: t('promiseAddSpecialQuestionTypes'),
-    formModalTitleCreate: t('formModalTitleCreate'),
-    formModalTitleEdit: t('formModalTitleEdit'),
-    formModalSaveChangesButton: t('formModalSaveChangesButton'),
-    formModalCreateButton: t('formModalCreateButton'),
-    formNamePlaceholder: t('formNamePlaceholder'),
-    formDescriptionPlaceholder: t('formDescriptionPlaceholder'),
-    formsAllRouteTitle: t('TestFormsAllRouteTitle'),
-    addNewFormButton: t('addNewFormButton'),
-    formSearchPlaceholder: t('formSearchPlaceholder'),
-    formsCounterDeclaration: t('formsCounterDeclaration: '),
-    formsCounterMeasure: t('formsCounterMeasure'),
-    endingTitle: t('endingTitle'),
-    formEditChoiceButtonDefaultTitle: t('formEditChoiceButtonDefaultTitle'),
-    modalTitle: t('modalTitle'),
-    modalResetLogic: t('modalResetLogic'),
-    submitBtn: t('submitBtn'),
-    cancelBtn: t('cancelBtn'),
-    questionsForEndingSelectPlaceholder: t('questionsForEndingSelectPlaceholder'),
-    popconfirmOnDeleteQuestion: t('popconfirmOnDeleteQuestion'),
-    popconfirmOnDeleteQuestionWithConditions: t('popconfirmOnDeleteQuestionWithConditions')
+    yesnoDesc: t('yesnoDesc')
   }
 }
 
 export default qformTranslations
 ```
-- In new component's file (with module), import translations object and propagate it with function further:
+- In new component's file (with imported module component), import translations object and propagate it with translating function further:
 
 ```sh
 import { FormsAll } from 'qonsoll-form/src'
+import { useTranslations } from 'app/contexts/Translation/hooks' //example
 . . .
 
 function YourComponentName() {
@@ -405,4 +389,3 @@ const translations = useCallback(() => {
   )
 }
 ```
-
