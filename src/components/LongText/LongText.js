@@ -91,7 +91,9 @@ function LongText(props) {
             ref={textAreaRef}
             maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
-            placeholder={textQuestionPlaceholder || 'Type your answer here...'}
+            placeholder={`${
+              textQuestionPlaceholder || 'Type your answer here'
+            }...`}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}
           />

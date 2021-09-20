@@ -81,7 +81,9 @@ function ShortText(props) {
             {...inputProps}
             ref={inputRef}
             maxLength={300}
-            placeholder={textQuestionPlaceholder || 'Type your answer here...'}
+            placeholder={`${
+              textQuestionPlaceholder || 'Type your answer here'
+            }...`}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}
           />

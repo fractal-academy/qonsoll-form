@@ -151,7 +151,7 @@ function MediaLibraryModal(props) {
               {mediaLibraryTitle || 'Media Library'}
             </Title>
             <CustomText>
-              {mediaLibraryCounter || 'Amount of shown files: '}
+              {`${mediaLibraryCounter || 'Amount of shown files'}: `}
               {amountFiles}
             </CustomText>
           </Col>
@@ -162,9 +162,9 @@ function MediaLibraryModal(props) {
               allowClear
               ref={searchRef}
               prefix={<SearchOutlined />}
-              placeholder={
-                mediaLibrarySearchPlaceholder || 'Search media file by name...'
-              }
+              placeholder={`${
+                mediaLibrarySearchPlaceholder || 'Search media file by name'
+              }...`}
               onSearch={searchData}
               onChange={onChange}
             />
