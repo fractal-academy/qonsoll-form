@@ -139,7 +139,7 @@ function FormConditionsForm(props) {
         {formData?.isQuiz && (
           <TabPane
             style={{ overflowY: 'scroll', overflowX: 'hidden' }}
-            tab={conditionsQuizTab || 'Answers score configurations'}
+            tab={conditionsQuizTab || 'Answer score configurations'}
             key="3">
             {filteredAnswerForEndings?.length > 0 ? (
               filteredAnswerForEndings?.map((item, index) => (
@@ -158,8 +158,10 @@ function FormConditionsForm(props) {
                 description={
                   conditionsNoData || 'There are no question to configure.'
                 }>
-                {conditionAddQuestionType ||
-                  'Please, add one of the following questions types:'}
+                {`${
+                  conditionAddQuestionType ||
+                  'Please, add one of the following questions types'
+                }:`}
                 <br />
                 {`${QUESTION_TYPES.CHOICE},
                 ${QUESTION_TYPES.PICTURE_CHOICE},

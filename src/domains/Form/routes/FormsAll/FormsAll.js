@@ -120,7 +120,7 @@ function FormsAll(props) {
                   <PageHeader title={formsAllTitle || 'Forms'} />
                   <Box mb={3}>
                     <Text color="var(--qf-typography-caption-color)">
-                      {formCounter || 'Amount of forms: '}
+                      {`${formCounter || 'Amount of forms'}: `}
                       {amountFiles}
                     </Text>
                   </Box>
