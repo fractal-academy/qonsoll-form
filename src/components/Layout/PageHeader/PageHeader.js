@@ -2,7 +2,6 @@ import React from 'react'
 import { Tooltip } from 'antd'
 import PropTypes from 'prop-types'
 import { styles } from './PageHeader.styles'
-import { globalStyles } from '../../../../styles'
 import { useTranslation } from '../../../context/Translation'
 import { Row, Col, Button, Divider, Title } from '@qonsoll/react-design'
 import {
@@ -14,20 +13,12 @@ import {
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 function PageHeader(props) {
-  const {
-    id,
-    title,
-    titleProps,
-    onBack,
-    smallScreen,
-    handlesPreview,
-    hideResults
-  } = props
+  const { id, title, titleProps, onBack, smallScreen, handlesPreview } = props
 
   // [ADDITIONAL HOOKS]
+  const { formViewTooltip, answerViewTooltip } = useTranslation()
   const { onFormShow } = useActionsFunctionsContext()
   const { onFormResultsShow } = useActionsFunctionsContext()
-  const { formPreviewTooltip, resultButton } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onFormShowDisplay = () => {
@@ -42,45 +33,42 @@ function PageHeader(props) {
     window.location.reload()
   }
 
-  // [ COMPUTED PROPERTIES ]
-  const showResultsRule = !hideResults || (!title && !hideResults)
-
   return (
     <Row noGutters v="center" mb="var(--qf-header-mb)">
       {onBack && (
         <Col cw="auto" h="center" flexDirection="row">
-          <Button
-            type="text"
-            onClick={onBack}
-            icon={<ArrowLeftOutlined />}
-            style={globalStyles.resetPadding}
-          />
+          <Button type="text" onClick={onBack} icon={<ArrowLeftOutlined />} />
           {title && <Divider type="vertical" style={styles.dividerHeight} />}
         </Col>
       )}
       <Col>
-        <Title color="var(--qf-typography-title-color)" level={2} {...titleProps}>
+        <Title
+          color="var(--qf-typography-title-color)"
+          level={2}
+          {...titleProps}>
           {title}
         </Title>
       </Col>
 
-      {/* {showResultsRule && (
+      {title && (
         <Col cw="auto" v="center" mr={1}>
           {smallScreen && (
-            <Button
-              type="text"
-              icon={<ReadOutlined />}
-              onClick={onFormResultsDisplay}
-            />
+            <Tooltip
+              placement="bottom"
+              title={answerViewTooltip || 'Answers preview'}>
+              <Button
+                type="text"
+                icon={<ReadOutlined />}
+                onClick={onFormResultsDisplay}
+              />
+            </Tooltip>
           )}
         </Col>
-      )} */}
+      )}
 
       {handlesPreview && title && (
         <Col cw="auto" v="center">
-          <Tooltip
-            placement="bottom"
-            title={formPreviewTooltip || 'Form preview'}>
+          <Tooltip placement="bottom" title={formViewTooltip || 'Form preview'}>
             <Button
               type="text"
               icon={<EyeOutlined />}
@@ -90,9 +78,7 @@ function PageHeader(props) {
         </Col>
       )}
       {!title && (
-        <Button type="text" icon={<ReloadOutlined />} onClick={onRestart}>
-          Restart
-        </Button>
+        <Button type="text" onClick={onRestart} icon={<ReloadOutlined />} />
       )}
     </Row>
   )

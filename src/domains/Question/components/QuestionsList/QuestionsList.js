@@ -171,7 +171,6 @@ function QuestionsList(props) {
             number={index + 1}
             onClick={() => onItemClick(item, index)}
             disableDelete={disableDelete}
-            className="QUESTION-SIMPLE-VIEW"
           />
         )}
       />

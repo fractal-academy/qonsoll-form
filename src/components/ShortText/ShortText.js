@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { Form, message } from 'antd'
-import { globalStyles } from '../../../styles'
 import { SubmitButton } from '../../components'
 import { Box, Container, Input } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
@@ -12,8 +11,7 @@ function ShortText(props) {
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
-  const { answerRequiredMessageError, shortTextInputPlaceholder } =
-    useTranslation()
+  const { requiredAnswerMessage, textQuestionPlaceholder } = useTranslation()
   const inputRef = useRef()
 
   useKeyPress(
@@ -54,9 +52,7 @@ function ShortText(props) {
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     if (question?.isRequired && !value) {
-      message.error(
-        answerRequiredMessageError || 'It`s required question, please answer'
-      )
+      message.error(requiredAnswerMessage || 'Answer is required.')
     } else {
       form.submit()
     }
@@ -80,17 +76,12 @@ function ShortText(props) {
         form={form}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}>
-        <Form.Item
-          style={globalStyles.resetMarginB}
-          name="answer"
-          rules={[{ required: question?.isRequired }]}>
+        <Form.Item name="answer" rules={[{ required: question?.isRequired }]}>
           <Input
             {...inputProps}
             ref={inputRef}
             maxLength={300}
-            placeholder={
-              shortTextInputPlaceholder || 'Type your answer here...'
-            }
+            placeholder={textQuestionPlaceholder || 'Type your answer here...'}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}
           />

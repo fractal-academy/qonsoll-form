@@ -27,13 +27,13 @@ function ChoiceEditable(props) {
   const { index, data, withImage } = props
 
   //[CUSTOM HOOKS]
-  const { editableChoicePlaceholder } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const [isHovering, hoverRef] = useHover()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const { popconfirmOnDeleteOptionWithConditions } = useTranslation()
+  const { choicePlaceholder, conditionRemovingWarn, removeButton } =
+    useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [value, setValue] = useState(data?.answerOption)
@@ -105,7 +105,7 @@ function ChoiceEditable(props) {
             maxLength="150"
             value={value}
             onBlur={onBlur}
-            placeholder={`${editableChoicePlaceholder || 'choice'} ${index}`}
+            placeholder={`${choicePlaceholder || 'choice'} ${index}`}
             autoSize={{ minRows: 1, maxRows: 12 }}
             bordered={false}
             onChange={onChange}
@@ -116,12 +116,12 @@ function ChoiceEditable(props) {
         (hasConditions ? (
           <Popconfirm
             title={
-              popconfirmOnDeleteOptionWithConditions ||
+              conditionRemovingWarn ||
               'This option has connected logic. Delete it?'
             }
             onConfirm={onDelete}
             okType="danger"
-            okText="Delete">
+            okText={removeButton || 'Delete'}>
             <DeleteButton>
               <CloseOutlined />
             </DeleteButton>

@@ -22,7 +22,7 @@ function CustomRating(props) {
   const { questionConfigurations } = question
 
   //[CUSTOM HOOKS]
-  const { answerRequiredMessageError } = useTranslation()
+  const { requiredAnswerMessage } = useTranslation()
   const answersContext = useAnswersContext()
   const [selectedValue, setSelectedValue] = useState(0)
 
@@ -78,10 +78,7 @@ function CustomRating(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(
-                answerRequiredMessageError ||
-                  'It`s required question, please answer'
-              )
+            ? message.error(requiredAnswerMessage || 'Answer is required.')
             : onClick?.(answerData)
         } else {
           onChange(Number(event.key))

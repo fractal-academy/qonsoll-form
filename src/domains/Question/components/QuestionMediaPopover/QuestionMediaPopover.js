@@ -3,7 +3,6 @@ import { Popover, Button } from 'antd'
 import React, { useState } from 'react'
 import { Box } from '@qonsoll/react-design'
 import { PictureOutlined } from '@ant-design/icons'
-import { PopoverNegativeMarin } from '../../../../../styles/NegativeMargin'
 import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
 
 const StyledBookmarkButton = styled(Button)`
@@ -30,7 +29,7 @@ function QuestionMediaPopover(props) {
       trigger="click"
       placement="rightTop"
       content={
-        <Box width="190px" mx={PopoverNegativeMarin.h / 2}>
+        <Box width="190px">
           <MediaLibrarySimpleView
             brightnessValue={brightnessValue}
             setBrightnessValue={setBrightnessValue}

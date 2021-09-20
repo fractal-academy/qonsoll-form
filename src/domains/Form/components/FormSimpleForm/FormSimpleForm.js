@@ -8,7 +8,7 @@ function FormSimpleForm(props) {
   const { formData, children, ...rest } = props
 
   // [ADDITIONAL_HOOKS]
-  const { formNamePlaceholder, formDescriptionPlaceholder, enableQuizLabel } =
+  const { formTitlePlaceholder, formSubtitlePlaceholder, quizSwitcherText } =
     useTranslation()
 
   // [COMPUTED PROPERTIES]
@@ -26,10 +26,7 @@ function FormSimpleForm(props) {
       <Form.Item
         name="title"
         rules={[{ required: true, message: 'Please, enter form name.' }]}>
-        <Input
-          allowClear
-          placeholder={formNamePlaceholder || 'Type form name'}
-        />
+        <Input allowClear placeholder={formTitlePlaceholder || 'Form name'} />
       </Form.Item>
       <Form.Item name="subtitle">
         <TextArea
@@ -37,10 +34,10 @@ function FormSimpleForm(props) {
           autoSize={{ minRows: 3, maxRows: 5 }}
           maxLength={1000}
           allowClear
-          placeholder={formDescriptionPlaceholder || 'Form short description'}
+          placeholder={formSubtitlePlaceholder || 'Form short description'}
         />
       </Form.Item>
-      <Form.Item name="isQuiz" label={enableQuizLabel || 'Enable quiz system'}>
+      <Form.Item name="isQuiz" label={quizSwitcherText || 'Enable quiz system'}>
         <Switch defaultChecked={!!formData?.isQuiz} />
       </Form.Item>
       {children}

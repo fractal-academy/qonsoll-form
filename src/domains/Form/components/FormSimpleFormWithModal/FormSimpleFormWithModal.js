@@ -21,9 +21,9 @@ const FormSimpleFormWithModal = (props) => {
   // [ADDITIONAL_HOOKS]
   const [form] = Form.useForm()
   const {
-    formModalTitleCreate,
-    formModalTitleEdit,
-    formModalSaveChangesButton,
+    formModalCreateTitle,
+    formModalEditTitle,
+    formModalEditButton,
     formModalCreateButton
   } = useTranslation()
 
@@ -48,8 +48,8 @@ const FormSimpleFormWithModal = (props) => {
       title={
         <Title color="var(--qf-typography-title-color)" level={4}>
           {isEdit
-            ? formModalTitleEdit || 'Edit form'
-            : formModalTitleCreate || 'Create new form'}
+            ? formModalEditTitle || 'Edit form'
+            : formModalCreateTitle || 'Create new form'}
         </Title>
       }
       visible={isModalVisible}
@@ -63,7 +63,7 @@ const FormSimpleFormWithModal = (props) => {
         </Button>,
         <Button onClick={() => form.submit()} type="primary" loading={loading}>
           {isEdit
-            ? formModalSaveChangesButton || 'Save changes'
+            ? formModalEditButton || 'Save changes'
             : formModalCreateButton || 'Create form'}
         </Button>
       ]}>

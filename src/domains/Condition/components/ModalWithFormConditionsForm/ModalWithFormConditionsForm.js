@@ -12,8 +12,12 @@ function ModalWithFormConditionsForm(props) {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   // [ADDITIONAL_HOOKS]
-  const { modalTitle, modalResetLogic, submitBtn, conditionsFormTooltip } =
-    useTranslation()
+  const {
+    conditionModalTitle,
+    conditionModalResetLogic,
+    conditionModalSubmitButton,
+    conditionsModalTooltip
+  } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onSave = () => {
@@ -24,7 +28,7 @@ function ModalWithFormConditionsForm(props) {
     <>
       <Tooltip
         placement="bottomRight"
-        title={conditionsFormTooltip || 'Configure logic jumps'}>
+        title={conditionsModalTooltip || 'Configure logic jumps'}>
         <Button
           {...btnProps}
           onClick={() => {
@@ -47,7 +51,7 @@ function ModalWithFormConditionsForm(props) {
         }}
         footer={
           <Button type="primary" onClick={onSave}>
-            {submitBtn || 'Close'}
+            {conditionModalSubmitButton || 'Close'}
           </Button>
         }
         title={
@@ -55,7 +59,7 @@ function ModalWithFormConditionsForm(props) {
             <Row v="center" noGutters>
               <Col>
                 <Title color="var(--qf-typography-title-color)" level={3}>
-                  {modalTitle || 'Logic'}
+                  {conditionModalTitle || 'Logic'}
                 </Title>
               </Col>
               <Col cw="auto" v="center">
@@ -68,7 +72,7 @@ function ModalWithFormConditionsForm(props) {
                   okType="danger"
                   onConfirm={onResetClick}>
                   <Button type="text" onMouseDown={(e) => e.preventDefault()}>
-                    {modalResetLogic || 'Reset logic'}
+                    {conditionModalResetLogic || 'Reset logic'}
                   </Button>
                 </Popconfirm>
               </Col>

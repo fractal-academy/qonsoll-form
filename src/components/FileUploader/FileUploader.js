@@ -20,11 +20,8 @@ const UploadArea = (props) => {
   const { onContinue, question, currentSlide } = props
 
   // [ADDITIONAL_HOOKS]
-  const {
-    answerRequiredMessageError,
-    fileUploaderTitle,
-    deleteUploadedItemTitle
-  } = useTranslation()
+  const { requiredAnswerMessage, uploaderHint, itemRemovingHint } =
+    useTranslation()
   const { getCollectionRef, storage } = useFunctions()
   const [isHovering, hoverRef] = useHover()
 
@@ -136,10 +133,7 @@ const UploadArea = (props) => {
     question?.isRequired
       ? uploaderData
         ? onContinue?.(data)
-        : message.error(
-            answerRequiredMessageError ||
-              'It`s required question, please answer'
-          )
+        : message.error(requiredAnswerMessage || 'Answer is required.')
       : onContinue?.(data)
   }
 
@@ -171,7 +165,7 @@ const UploadArea = (props) => {
           </Box>
           <Box textAlign="center" mt={2}>
             <Text color="var(--qf-typography-subtitle-color)">
-              {fileUploaderTitle || 'Click or drag file to this area to upload'}
+              {uploaderHint || 'Click or drag file to this area to upload'}
             </Text>
           </Box>
         </Box>
@@ -196,7 +190,7 @@ const UploadArea = (props) => {
                 ) : (
                   <Popconfirm
                     onConfirm={() => onRemove(file)}
-                    title={deleteUploadedItemTitle || 'Delete this item?'}
+                    title={itemRemovingHint || 'Delete this item?'}
                     okType="danger"
                     okText="Delete">
                     <Button

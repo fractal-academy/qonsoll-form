@@ -14,7 +14,7 @@ function YesnoButton(props) {
   const { order, questionConfigurations } = question
 
   //[CUSTOM HOOKS]
-  const { answerRequiredMessageError } = useTranslation()
+  const { requiredAnswerMessage } = useTranslation()
   const answersContext = useAnswersContext()
   // [ADDITIONAL_HOOKS]
   useKeyPress(
@@ -33,10 +33,7 @@ function YesnoButton(props) {
             answer: { value: '', letterKey: '' }
           }
           question?.isRequired && !questionAnswer
-            ? message.error(
-                answerRequiredMessageError ||
-                  'It`s required question, please answer'
-              )
+            ? message.error(requiredAnswerMessage || 'Answer is required.')
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()

@@ -21,12 +21,11 @@ function FormConditionsForm(props) {
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
   const {
+    conditionsQuizTab,
     conditionsEndingsTab,
     conditionsLogicJumpsTab,
-    noDataToConfigureEndings,
-    noDataToConfigureLogicJumps,
-    promiseAddSpecialQuestionTypes,
-    conditionsAnswersScoreConfigTab
+    conditionsNoData,
+    conditionAddQuestionType
   } = useTranslation()
 
   // [CLEAN FUNCTIONS]
@@ -105,8 +104,7 @@ function FormConditionsForm(props) {
             <EmptyState
               image={NoData.PRESENTED_IMAGE_SIMPLE}
               description={
-                noDataToConfigureLogicJumps ||
-                'There are no any question that allows to configure Logic Jumps.'
+                conditionsNoData || 'There are no question to configure.'
               }
             />
           )}
@@ -133,8 +131,7 @@ function FormConditionsForm(props) {
             <EmptyState
               image={NoData.PRESENTED_IMAGE_SIMPLE}
               description={
-                noDataToConfigureEndings ||
-                'There are no any question that allows to configure endings.'
+                conditionsNoData || 'There are no question to configure.'
               }
             />
           )}
@@ -142,9 +139,7 @@ function FormConditionsForm(props) {
         {formData?.isQuiz && (
           <TabPane
             style={{ overflowY: 'scroll', overflowX: 'hidden' }}
-            tab={
-              conditionsAnswersScoreConfigTab || 'Answers score configurations'
-            }
+            tab={conditionsQuizTab || 'Answers score configurations'}
             key="3">
             {filteredAnswerForEndings?.length > 0 ? (
               filteredAnswerForEndings?.map((item, index) => (
@@ -161,11 +156,10 @@ function FormConditionsForm(props) {
               <EmptyState
                 image={NoData.PRESENTED_IMAGE_SIMPLE}
                 description={
-                  noDataToConfigureEndings ||
-                  `There are no any question that allows to configure answers scores.`
+                  conditionsNoData || 'There are no question to configure.'
                 }>
-                {promiseAddSpecialQuestionTypes ||
-                  'Please, add one of the types of questions:'}
+                {conditionAddQuestionType ||
+                  'Please, add one of the following questions types:'}
                 <br />
                 {`${QUESTION_TYPES.CHOICE},
                 ${QUESTION_TYPES.PICTURE_CHOICE},

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { message, Input } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
 import React, { useState, useEffect, useRef } from 'react'
-import { Row, Col, Box, Container, Text } from '@qonsoll/react-design'
+import { Box, Container, Text } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { TranslationContext } from '../../../../context/Translation'
@@ -22,7 +22,7 @@ function FormsAll(props) {
     actions = {},
     childrenModal,
     configurations,
-    onBack,
+    showHeader,
     disableAddButton,
     wrapperPaddings
   } = props
@@ -115,33 +115,29 @@ function FormsAll(props) {
         <TranslationContext.Provider value={translations || {}}>
           <TypeformConfigurationContext.Provider value={configurations}>
             <Container p={containerPadding}>
-              {/* 'onBack' func. also configures if there'll be back-button */}
-              <PageHeader
-                onBack={onBack}
-                // titleProps={titleProps}
-                title={formsAllTitle || 'Forms'}
-              />
-              <Row noGutters mb={3}>
-                <Col>
-                  <Text color="var(--qf-typography-caption-color)">
-                    {formCounter || 'Amount of forms: '}
-                    {amountFiles}
-                  </Text>
-                </Col>
-              </Row>
+              {showHeader && (
+                <>
+                  <PageHeader title={formsAllTitle || 'Forms'} />
+                  <Box mb={3}>
+                    <Text color="var(--qf-typography-caption-color)">
+                      {formCounter || 'Amount of forms: '}
+                      {amountFiles}
+                    </Text>
+                  </Box>
+                </>
+              )}
+
               {data?.length > 4 && (
                 // Search will be visible only when there's will be more than 4 forms
-                <Row noGutters mb={3}>
-                  <Col>
-                    <Input
-                      ref={searchRef}
-                      placeholder={`${
-                        formSearchPlaceholder || 'Search form by name'
-                      }...`}
-                      onChange={(input) => searchData(input.target.value)}
-                    />
-                  </Col>
-                </Row>
+                <Box mb={3}>
+                  <Input
+                    ref={searchRef}
+                    placeholder={`${
+                      formSearchPlaceholder || 'Search form by name'
+                    }...`}
+                    onChange={(input) => searchData(input.target.value)}
+                  />
+                </Box>
               )}
               <Box mr="-10px" className="custom-scroll">
                 <StaticList

@@ -18,7 +18,7 @@ const ScoreConditionsAdvancedView = (props) => {
 
   // [ADDITIONAL HOOKS]
   const { setData, getCollectionRef } = useFunctions()
-  const { scoreWeightTranslation } = useTranslation()
+  const { scoreWeightTitle } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onMarkChange = async (
@@ -79,9 +79,7 @@ const ScoreConditionsAdvancedView = (props) => {
               <StyledInputNumber
                 min={0}
                 style={{ width: '100%' }}
-                placeholder={
-                  scoreWeightTranslation || 'Enter score weight of answer'
-                }
+                placeholder={scoreWeightTitle || 'Enter score weight of answer'}
                 value={getScoreByAnswerOptionId(item?.answerOptionId)}
                 onBlur={(event) =>
                   onMarkChange(

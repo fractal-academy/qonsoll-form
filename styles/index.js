@@ -1,9 +1,3 @@
-export const globalStyles = {
-  resetPadding: { padding: 0 },
-  resetMargin: { margin: 0 },
-  resetMarginB: { marginBottom: 0 },
-  fullWidth: { width: '100%' },
-  fullHeight: { height: '100%' },
-  cursorGrab: { cursor: 'grab' },
-  cursorPointer: { cursor: 'pointer' }
-}
+import './vars.css'
+
+export const breakpoints = ['576px', '768px', '1024px', '1200px', '1600px']

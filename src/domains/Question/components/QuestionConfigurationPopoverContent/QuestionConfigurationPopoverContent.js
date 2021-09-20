@@ -23,7 +23,8 @@ function QuestionConfigurationPopoverContent(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
-  const { typeConfiguration, configurationSetting } = useTranslation()
+  const { questionTypeConfiguration, questionConfigurationTitle } =
+    useTranslation()
 
   // [COMPONENT STATE HOOKS]
   const [isQuestionConfig, setIsQuestionConfig] = useState(false)
@@ -39,13 +40,11 @@ function QuestionConfigurationPopoverContent(props) {
 
   //[COMPUTED PROPERTIES]
   const configurationTitle =
-    (configurationSetting &&
-      `${currentQuestion?.questionType} ${configurationSetting}`) ||
+    (questionConfigurationTitle &&
+      `${currentQuestion?.questionType} ${questionConfigurationTitle}`) ||
     `${currentQuestion?.questionType} settings`
 
   return (
-    // TODO Keep this place for future improvements - make box receive negative margins based on vars instead of strict value
-    // <Box my={PopoverNegativeMarin.v} mx={PopoverNegativeMarin.h}>
     <Box px={0} py={0}>
       <PopoverSwitcherRow
         noGutters
@@ -59,7 +58,7 @@ function QuestionConfigurationPopoverContent(props) {
           <Title color="var(--qf-typography-title-color)" level={4}>
             {isQuestionConfig
               ? configurationTitle
-              : typeConfiguration || 'Question types'}
+              : questionTypeConfiguration || 'Question types'}
           </Title>
         </Col>
       </PopoverSwitcherRow>

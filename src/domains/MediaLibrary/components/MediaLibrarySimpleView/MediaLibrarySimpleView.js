@@ -22,7 +22,7 @@ function MediaLibrarySimpleView(props) {
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const [isHovering, hoverRef] = useHover()
-  const { brightness } = useTranslation()
+  const { mediaLibraryBrightness } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onMediaModalContinue = (selectedImage) => {
@@ -52,7 +52,7 @@ function MediaLibrarySimpleView(props) {
           }}
         />
       </CustomBox>
-      <CustomText>{brightness || 'Brightness'}</CustomText>
+      <CustomText>{mediaLibraryBrightness || 'Brightness'}</CustomText>
       <Box>
         <RangeSlider
           onBlur={onBlur}

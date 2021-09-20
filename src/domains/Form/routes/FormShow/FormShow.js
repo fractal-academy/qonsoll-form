@@ -2,7 +2,7 @@ import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Container } from '@qonsoll/react-design'
-import { useSize, useKeyPress } from '@umijs/hooks'
+import { useKeyPress } from '@umijs/hooks'
 import useFunctions from '../../../../hooks/useFunctions'
 import React, { useState, useEffect, useMemo } from 'react'
 import FormShowHeightWrapper from './FormShowHeightWrapper'
@@ -26,7 +26,6 @@ import {
 function FormShow(props) {
   const {
     id,
-    onBack,
     firebase,
     translate,
     submitLoading,
@@ -35,7 +34,7 @@ function FormShow(props) {
     configurations,
     actions = {},
     wrapperPaddings,
-    hideHeader
+    showHeader
   } = props
 
   // [CUSTOM_HOOKS]
@@ -45,7 +44,6 @@ function FormShow(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const [{ height: headerHeight }, headerRef] = useSize()
   const smallScreen = useMedia({ minWidth: '769px' })
   useKeyPress(9, (e) => {
     e.preventDefault()
@@ -203,18 +201,16 @@ function FormShow(props) {
                 display="flex"
                 flexDirection="column"
                 p={containerPadding}>
-                {!hideHeader && (
+                {showHeader && (
                   <PageHeader
                     id={id}
                     handlesPreview
-                    ref={headerRef}
                     smallScreen={smallScreen}
-                    onBack={onBack || history.goBack}
+                    onBack={history.goBack}
                   />
                 )}
                 <ContentCard
                   topOffset={wrapperOffset}
-                  headerHeight={headerHeight}
                   wrapperHeight={wrapperHeight}>
                   <FormAdvancedView
                     isAnswered={isAnswered}

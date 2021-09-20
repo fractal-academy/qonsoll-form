@@ -1,19 +1,10 @@
+import { message } from 'antd'
 import React, { useRef } from 'react'
-import styled from 'styled-components'
-import { DatePicker, message } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
+import { StyledDatePicker } from './DateTimeInput.styles'
 import { useAnswersContext } from '../../context/Answers'
 import { useTranslation } from '../../context/Translation'
 import { getQuestionAnswerFromContext } from '../../helpers'
-
-const StyledDatePicker = styled(DatePicker)`
-  background-color: var(--qf-input-background);
-
-  .ant-picker-clear {
-    border-radius: var(--qf-border-radius-full);
-    font-size: var(--qf-typography-fs-body);
-  }
-`
 
 const DateTimeInput = (props) => {
   const { onDateChange, question, currentSlide } = props
@@ -25,7 +16,7 @@ const DateTimeInput = (props) => {
     datePickerRef.current.blur()
   }
   //[CUSTOM HOOKS]
-  const { answerRequiredMessageError } = useTranslation()
+  const { requiredAnswerMessage } = useTranslation()
   const answersContext = useAnswersContext()
 
   // [ADDITIONAL_HOOKS]
@@ -45,10 +36,7 @@ const DateTimeInput = (props) => {
         }
 
         question?.isRequired && !questionAnswer
-          ? message.error(
-              answerRequiredMessageError ||
-                'It`s required question, please answer'
-            )
+          ? message.error(requiredAnswerMessage || 'Answer is required.')
           : onDateChange?.(answerData)
       }
     },

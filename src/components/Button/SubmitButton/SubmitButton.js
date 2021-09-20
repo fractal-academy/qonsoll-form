@@ -36,7 +36,7 @@ function SubmitButton(props) {
   // [ADDITIONAL_HOOKS]
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
-  const { pressEnter } = useTranslation()
+  const { submitHint } = useTranslation()
   const isntDesktop = useMedia({ minWidth: '1024px' })
 
   const mockUser = { name: 'John Doe' }
@@ -122,7 +122,7 @@ function SubmitButton(props) {
       {isntDesktop && (
         <Col cw="auto">
           <Text color="var(--qf-typography-subtitle-color)">
-            {(pressEnter || 'Press enter') + ' ↵'}
+            {(submitHint || 'Press enter') + ' ↵'}
           </Text>
         </Col>
       )}

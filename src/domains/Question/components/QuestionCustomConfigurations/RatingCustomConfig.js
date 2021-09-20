@@ -16,7 +16,7 @@ function AmountOptionsCustomConfig() {
   // [CUSTOM HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const { questionConfigurationAmountOfOptions } = useTranslation()
+  const { questionConfigurationOptions } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   const onRattingSelectChange = (amountOptions) => {
@@ -41,7 +41,7 @@ function AmountOptionsCustomConfig() {
     <Row noGutters mb={2} h="between">
       <Col v="center" mb={2}>
         <Text color="var(--qf-typography-subtitle-color)">
-          {questionConfigurationAmountOfOptions || 'Amount of options '}
+          {questionConfigurationOptions || 'Amount of options '}
         </Text>
       </Col>
       <Col cw="auto" v="center">

@@ -23,8 +23,12 @@ function MediaLibraryModal(props) {
 
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
-  const { amountTitle, changeButton, searchPlaceholder, mediaLibraryTitle } =
-    useTranslation()
+  const {
+    mediaLibraryCounter,
+    mediaLibraryButton,
+    mediaLibrarySearchPlaceholder,
+    mediaLibraryTitle
+  } = useTranslation()
 
   const searchRef = useRef()
 
@@ -125,7 +129,7 @@ function MediaLibraryModal(props) {
             <Box mr={2}>
               <EditOutlined />
             </Box>
-            {changeButton || 'Change'}
+            {mediaLibraryButton || 'Change'}
           </Box>
         </CustomButton>
       )}
@@ -147,7 +151,7 @@ function MediaLibraryModal(props) {
               {mediaLibraryTitle || 'Media Library'}
             </Title>
             <CustomText>
-              {amountTitle || 'Amount of shown files: '}
+              {mediaLibraryCounter || 'Amount of shown files: '}
               {amountFiles}
             </CustomText>
           </Col>
@@ -158,7 +162,9 @@ function MediaLibraryModal(props) {
               allowClear
               ref={searchRef}
               prefix={<SearchOutlined />}
-              placeholder={searchPlaceholder || 'Search media file by name...'}
+              placeholder={
+                mediaLibrarySearchPlaceholder || 'Search media file by name...'
+              }
               onSearch={searchData}
               onChange={onChange}
             />

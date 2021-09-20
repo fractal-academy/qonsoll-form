@@ -51,17 +51,17 @@ function QuestionForm(props) {
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const {
-    startButton,
-    finishButton,
-    endingQuestion,
-    commonQuestion,
-    editableTitleHint,
-    editableSubtitleHint
+    questionStartButton,
+    questionFinishButton,
+    endingListTitle,
+    questionListTitle,
+    questionEditableTitleHint,
+    questionEditableSubtitleHint
   } = useTranslation()
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton>{startButton || 'Start'}</SubmitButton>
+      component: <SubmitButton>{questionStartButton || 'Start'}</SubmitButton>
     },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
@@ -94,7 +94,7 @@ function QuestionForm(props) {
       component: <SubmitButton />
     },
     [QUESTION_TYPES.ENDING]: {
-      component: <SubmitButton>{finishButton || 'Finish'}</SubmitButton>
+      component: <SubmitButton>{questionFinishButton || 'Finish'}</SubmitButton>
     }
   }
 
@@ -103,8 +103,8 @@ function QuestionForm(props) {
   const popoverImage = `url(${computedMediaUrl})`
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
-      ? endingQuestion || 'Ending'
-      : `${commonQuestion || 'Question'} ${questionData?.order}`
+      ? endingListTitle || 'Ending'
+      : `${questionListTitle || 'Question'} ${questionData?.order}`
   const layoutType = LAYOUT_TYPES[questionData?.layoutType]
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
@@ -167,10 +167,10 @@ function QuestionForm(props) {
                 <Col cw="12" mt={2}>
                   <QuestionHeader
                     titlePlaceholder={
-                      editableTitleHint || 'Editable question title'
+                      questionEditableTitleHint || 'Editable question title'
                     }
                     subtitlePlaceholder={
-                      editableSubtitleHint || 'Description(optional)'
+                      questionEditableSubtitleHint || 'Description(optional)'
                     }
                   />
                 </Col>

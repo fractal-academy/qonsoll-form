@@ -70,22 +70,20 @@ function FormEdit(props) {
     id,
     firebase,
     actions = {},
-    onBack,
-    hideResults,
+    showHeader,
     translations,
-    showCondition,
     configurations,
     customQuestionTypes,
     wrapperPaddings
   } = props
 
   //[CUSTOM HOOKS]
-  const { screenSizeWarning } = useTranslation()
+  const { phoneBrakepointDummy } = useTranslation()
 
   // [ADDITIONAL HOOKS]
+  const history = useHistory()
   const smallScreen = useMedia({ minWidth: '769px' })
   const currentQuestion = useCurrentQuestionContext()
-  const history = useHistory()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
 
@@ -171,7 +169,7 @@ function FormEdit(props) {
       ? opinionAndRatingConfiguration
       : [defaultConfigurations]
 
-    /*define new order for options when the type of question changes to/from Welocome screen
+    /*define new order for options when the type of question changes to/from Welcome screen
       if changes from Welcome screen type order will be 1, else if changes to welcome screen order will be - 0*/
     const updatedOrder = isChangeFromWelcomeScreen ? 1 : 0
     /* updated data for current question,
@@ -285,14 +283,15 @@ function FormEdit(props) {
                   display="flex"
                   p={containerPadding}
                   flexDirection="column">
-                  <PageHeader
-                    id={id}
-                    handlesPreview
-                    title={form?.title}
-                    hideResults={hideResults}
-                    smallScreen={smallScreen}
-                    onBack={onBack || history.goBack}
-                  />
+                  {showHeader && (
+                    <PageHeader
+                      id={id}
+                      handlesPreview
+                      title={form?.title}
+                      onBack={history.goBack}
+                      smallScreen={smallScreen}
+                    />
+                  )}
                   {smallScreen ? (
                     <QuestionForm
                       defaultTab={defaultTab}
@@ -312,7 +311,7 @@ function FormEdit(props) {
                       alignItems="center"
                       justifyContent="center">
                       <Text>
-                        {screenSizeWarning ||
+                        {phoneBrakepointDummy ||
                           'This feature is available only on desktop.'}
                       </Text>
                     </Box>
@@ -324,7 +323,6 @@ function FormEdit(props) {
                     formData={form}
                     endings={endings}
                     questions={questions}
-                    showCondition={showCondition}
                     answerScoresData={answerScoresList}
                     customQuestionTypes={customQuestionTypes}
                     welcomeScreenShowRule={welcomeScreenShowRule}

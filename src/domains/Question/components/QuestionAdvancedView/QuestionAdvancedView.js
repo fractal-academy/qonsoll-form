@@ -35,7 +35,8 @@ function QuestionAdvancedView(props) {
   } = props
 
   // [ADDITIONAL_HOOKS]
-  const { finishButton, startButton, videoQuestion } = useTranslation()
+  const { questionFinishButton, questionStartButton, questionVideo } =
+    useTranslation()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -91,7 +92,7 @@ function QuestionAdvancedView(props) {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
         <SubmitButton onClick={onClick} currentSlide={currentSlide}>
-          {startButton || 'Start'}
+          {questionStartButton || 'Start'}
         </SubmitButton>
       )
     },
@@ -102,7 +103,7 @@ function QuestionAdvancedView(props) {
           currentSlide={currentSlide}
           finish
           loading={submitLoading}>
-          {finishButton || 'Finish'}
+          {questionFinishButton || 'Finish'}
         </SubmitButton>
       )
     }
@@ -170,7 +171,7 @@ function QuestionAdvancedView(props) {
                       color="var(--qf-typography-title-color)"
                       style={{ wordBreak: 'break-word' }}
                       level={4}>
-                      `${questionNumber}. ${videoQuestion || 'Video question'}`
+                      `${questionNumber}. ${questionVideo || 'Video question'}`
                     </Title>
                   )}
                   <VideoPlayer videoKey={data?.videoApiKey} />
