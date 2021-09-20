@@ -17,7 +17,7 @@ function EndingSimpleView(props) {
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const { questionsForEndingSelectPlaceholder } = useTranslation()
+  const { conditionsEndingSelectPlaceholder } = useTranslation()
 
   // [CLEAN FUNCTIONS]
   async function handleChange(_, selectedItems) {
@@ -54,7 +54,7 @@ function EndingSimpleView(props) {
           style={{ width: '100%' }}
           mode="multiple"
           placeholder={
-            questionsForEndingSelectPlaceholder ||
+            conditionsEndingSelectPlaceholder ||
             'Select questions to call current ending'
           }
           defaultValue={defaultSelectValue}

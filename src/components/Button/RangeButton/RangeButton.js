@@ -20,7 +20,7 @@ function RangeButton(props) {
   const cwSmall = useMedia({ minWidth: '500px' })
 
   //[CUSTOM HOOKS]
-  const { answerRequiredMessageError } = useTranslation()
+  const { requiredAnswerMessage } = useTranslation()
   const answersContext = useAnswersContext()
 
   // [ADDITIONAL HOOKS]
@@ -42,10 +42,7 @@ function RangeButton(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(
-                answerRequiredMessageError ||
-                  'It`s required question, please answer'
-              )
+            ? message.error(requiredAnswerMessage || 'Answer is required.')
             : onClick?.(answerData)
         } else {
           onButtonClick(event.key)

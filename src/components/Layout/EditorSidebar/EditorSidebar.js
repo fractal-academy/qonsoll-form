@@ -2,7 +2,6 @@ import { v4 as uuid } from 'uuid'
 import PropTypes from 'prop-types'
 import { Tooltip, message } from 'antd'
 import TypePopover from './TypePopover'
-import { globalStyles } from '../../../../styles'
 import useFunctions from '../../../hooks/useFunctions'
 import { SidebarBoxWrapper } from './EditorSidebar.styles'
 import React, { useEffect, useState, useMemo } from 'react'
@@ -81,11 +80,8 @@ function EditorSidebar(props) {
 
   //[CUSTOM HOOKS]
   const { getCollectionRef, setData } = useFunctions()
-  const {
-    endingCreateTooltip,
-    editorSidebarEndingsTitle,
-    editorSidebarQuestionsTitle
-  } = useTranslation()
+  const { endingCreationTooltip, endingListTitle, questionListTitle } =
+    useTranslation()
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -254,7 +250,7 @@ function EditorSidebar(props) {
       <Row mb={2} v="center" h="between">
         <Col cw="auto">
           <Title color="var(--qf-typography-title-color)" level={5}>
-            {editorSidebarQuestionsTitle || 'Questions'}
+            {questionListTitle || 'Questions'}
           </Title>
         </Col>
         <Col display="block" cw="auto">
@@ -291,18 +287,18 @@ function EditorSidebar(props) {
         )}
       </Box>
 
-      <Divider type="horizontal" style={globalStyles.resetMargin} />
+      <Divider type="horizontal" />
 
       <Row my={2} v="center" h="between">
         <Col cw="auto">
           <Title color="var(--qf-typography-title-color)" level={5}>
-            {editorSidebarEndingsTitle || 'Endings'}
+            {endingListTitle || 'Endings'}
           </Title>
         </Col>
         <Col display="block" cw="auto">
           <Tooltip
             placement="topRight"
-            title={endingCreateTooltip || 'Create new ending'}>
+            title={endingCreationTooltip || 'Create new ending'}>
             <Button type="text" onClick={addQuestion} icon={<PlusOutlined />} />
           </Tooltip>
         </Col>
@@ -320,11 +316,6 @@ function EditorSidebar(props) {
       </Box>
     </SidebarBoxWrapper>
   )
-}
-
-EditorSidebar.defaultProps = {
-  questionsList: 'Questions list',
-  questionsEndingsList: 'Question endings list'
 }
 
 EditorSidebar.propTypes = {

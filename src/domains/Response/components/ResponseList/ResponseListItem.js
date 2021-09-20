@@ -17,14 +17,14 @@ function ResponseList(props) {
   const formattedDate = moment(date.toDate(), 'YYYYMMDD').fromNow()
 
   return (
-    <Box my={2} onClick={onItemClick}>
+    <Box mb={2} onClick={onItemClick}>
       <NumberedCard number={index + 1}>
         <Row v="center" noGutters>
           <Col cw="auto" ml={2} mr={3}>
             <Avatar size={44} icon={<UserOutlined />} />
           </Col>
           <Col>
-            <Title variant={4} color="var(--qf-typography-title-color)">
+            <Title level={5} color="var(--qf-typography-title-color)">
               {user}
             </Title>
             <Text color="var(--qf-typography-subtitle-color)">

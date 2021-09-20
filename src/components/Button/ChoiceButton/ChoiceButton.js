@@ -27,7 +27,7 @@ function ChoiceButton(props) {
   const [buttonKey, setButtonKey] = useState()
 
   //[CUSTOM HOOKS]
-  const { answerRequiredMessageError } = useTranslation()
+  const { requiredAnswerMessage } = useTranslation()
   const answersContext = useAnswersContext()
   // [ADDITIONAL HOOKS]
   const mappedChoices = useMemo(
@@ -64,10 +64,7 @@ function ChoiceButton(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(
-                answerRequiredMessageError ||
-                  'It`s required question, please answer'
-              )
+            ? message.error(requiredAnswerMessage || 'Answer is required.')
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()

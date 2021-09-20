@@ -24,10 +24,8 @@ function QuestionSimpleView(props) {
   } = props
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
-  const {
-    popconfirmOnDeleteQuestion,
-    popconfirmOnDeleteQuestionWithConditions
-  } = useTranslation()
+  const { questionRemovingPopconfirm, questionWithLogicRemovingPopconfirm } =
+    useTranslation()
 
   const hasCondtitionOnIt =
     data?.filter(
@@ -80,9 +78,9 @@ function QuestionSimpleView(props) {
               placement="topRight"
               title={
                 hasEndingOnIt || hasConditions || hasCondtitionOnIt
-                  ? popconfirmOnDeleteQuestionWithConditions ||
+                  ? questionWithLogicRemovingPopconfirm ||
                     'This question has connected logic. Delete it?'
-                  : popconfirmOnDeleteQuestion || 'Delete this question?'
+                  : questionRemovingPopconfirm || 'Delete this question?'
               }
               onConfirm={(e) => action(e, id)}
               disabled={disableDelete}

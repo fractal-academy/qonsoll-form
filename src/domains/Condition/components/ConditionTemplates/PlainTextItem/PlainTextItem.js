@@ -23,12 +23,14 @@ function PlaneTextItem(props) {
 
   //[ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const { rulePlaceholder } = useTranslation()
+  const { conditionRedirectRulePlaceholder } = useTranslation()
 
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState(item?.answerOption)
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.redirectConditionRule || rulePlaceholder || 'Select redirect rule'
+    item?.redirectConditionRule ||
+      conditionRedirectRulePlaceholder ||
+      'Select redirect rule'
   )
 
   //[CLEAR FUNCTIONS]
@@ -72,9 +74,11 @@ function PlaneTextItem(props) {
   useEffect(() => {
     setInputValue(item?.answerOption || '')
     setRuleSelectValue(
-      item?.redirectConditionRule || rulePlaceholder || 'Select redirect rule'
+      item?.redirectConditionRule ||
+        conditionRedirectRulePlaceholder ||
+        'Select redirect rule'
     )
-  }, [item, rulePlaceholder])
+  }, [item, conditionRedirectRulePlaceholder])
 
   return (
     <Row mb={2} key={index}>
@@ -85,7 +89,9 @@ function PlaneTextItem(props) {
               showSearch
               allowClear
               value={
-                ruleSelectValue || rulePlaceholder || 'Select redirect rule'
+                ruleSelectValue ||
+                conditionRedirectRulePlaceholder ||
+                'Select redirect rule'
               }
               onChange={onRuleSelectValueChange}>
               {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (

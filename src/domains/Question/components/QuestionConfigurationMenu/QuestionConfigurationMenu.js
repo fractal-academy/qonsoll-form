@@ -12,8 +12,7 @@ import { AmountOptionsCustomConfig } from '../../../../domains/Question/componen
 
 function QuestionConfigurationMenu() {
   // [ADDITIONAL_HOOKS]
-  const { videoQuestionSwitcher } = useTranslation()
-  const { requiredSwitcher } = useTranslation()
+  const { questionVideoSetting, questionRequiredSetting } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -60,7 +59,7 @@ function QuestionConfigurationMenu() {
         <Row mb={3} noGutters v="center">
           <Col v="center">
             <Text color="var(--qf-typography-subtitle-color)">
-              {requiredSwitcher || 'Required'}
+              {questionRequiredSetting || 'Required'}
             </Text>
           </Col>
           <Col cw="auto" px={2}>
@@ -75,7 +74,7 @@ function QuestionConfigurationMenu() {
       <Row mb={3} noGutters v="center">
         <Col v="center">
           <Text color="var(--qf-typography-subtitle-color)">
-            {videoQuestionSwitcher || 'Video question'}
+            {questionVideoSetting || 'Video question'}
           </Text>
         </Col>
         <Col cw="auto" px={2}>

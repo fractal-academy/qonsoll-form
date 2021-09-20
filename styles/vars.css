@@ -41,13 +41,14 @@
   --qf-submit-button-font-size: var(--ql-font-size-h4);
   
   /* input */
-  --qf-input-background: var(--ql-color-dark-t-lighten5); /* needs refactoring */
+  --qf-input-background: var(--ql-color-dark-t-lighten5);
 
   /* tag */
   --qf-tag-color: var(--ql-color-accent1);
 
   /* overwritten menu */
   --ql-menu-item-active-bg: var(--ql-color-accent1-t-lighten3);
+  --ql-form-item-vertical-spacing: 0px;
 
   /* overwritten form */
   --ql-form-item-vertical-spacing: 24px;
@@ -77,10 +78,10 @@
   --qf-typography-caption-color: var(--ql-color-dark-t-lighten2);
 
   /* border radius */
-  --qf-border-radius-sm: var(--ql-border-radius-sm); /* 6px */
-  --qf-border-radius-md: var(--ql-border-radius-md); /* 8px */
-  --qf-border-radius-lg: var(--ql-border-radius-16); /* 12px */
-  --qf-border-radius-full: var(--ql-border-radius-full); /* 50% */
+  --qf-border-radius-sm: var(--ql-border-radius-sm);
+  --qf-border-radius-md: var(--ql-border-radius-md);
+  --qf-border-radius-lg: var(--ql-border-radius-16);
+  --qf-border-radius-full: var(--ql-border-radius-full);
 
   /* [ OPTIONAL VARS ] */
   --ql-font-family-main: 'Rubik'; 

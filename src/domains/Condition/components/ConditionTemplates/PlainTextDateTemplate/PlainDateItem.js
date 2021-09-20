@@ -24,14 +24,16 @@ const PlaneDateItem = (props) => {
 
   //[ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const { rulePlaceholder } = useTranslation()
+  const { conditionRedirectRulePlaceholder } = useTranslation()
 
   //[COMPONENT STATE HOOKS]
   const [datePickerValue, setDatePickerValue] = useState(
     item?.answerOption ? moment(item?.answerOption) : ''
   )
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.redirectConditionRule || rulePlaceholder || 'Select redirect rule'
+    item?.redirectConditionRule ||
+      conditionRedirectRulePlaceholder ||
+      'Select redirect rule'
   )
 
   //[CLEAN FUNCTIONS]
@@ -74,9 +76,11 @@ const PlaneDateItem = (props) => {
   useEffect(() => {
     setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
     setRuleSelectValue(
-      item?.redirectConditionRule || rulePlaceholder || 'Select redirect rule'
+      item?.redirectConditionRule ||
+        conditionRedirectRulePlaceholder ||
+        'Select redirect rule'
     )
-  }, [item, rulePlaceholder])
+  }, [item, conditionRedirectRulePlaceholder])
 
   return (
     <Row mb={2} key={index}>
@@ -87,7 +91,9 @@ const PlaneDateItem = (props) => {
               showSearch
               allowClear
               value={
-                ruleSelectValue || rulePlaceholder || 'Select redirect rule'
+                ruleSelectValue ||
+                conditionRedirectRulePlaceholder ||
+                'Select redirect rule'
               }
               onChange={onRuleSelectValueChange}>
               {DATE_CONDITION_RULES_VALUES?.map((item, index) => (

@@ -2,24 +2,18 @@ import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 import { useKeyPress } from '@umijs/hooks'
-import { globalStyles } from '../../../styles'
 import { SubmitButton } from '../../components'
-import { Form, Typography, message } from 'antd'
-import { Container, Input } from '@qonsoll/react-design'
+import { Form, message } from 'antd'
+import { Container, Text, TextArea } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
-
-const { TextArea } = Input
 
 function LongText(props) {
   const { textAreaProps, onClick, question, currentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
-  const {
-    longTextEnterHint,
-    answerRequiredMessageError,
-    longTextInputPlaceholder
-  } = useTranslation()
+  const { longTextHint, requiredAnswerMessage, textQuestionPlaceholder } =
+    useTranslation()
   const IsntDesktop = useMedia({ minWidth: '1024px' })
   const textAreaRef = useRef()
 
@@ -48,8 +42,7 @@ function LongText(props) {
   }
 
   // [COMPUTED_PROPERTIES]
-  const explanation =
-    longTextEnterHint || 'Shift ⇧ + Enter ↵ to make a line break'
+  const explanation = longTextHint || 'Shift ⇧ + Enter ↵ to make a line break'
 
   const onPressOk = () => {
     //get values from form to check if there is any answer data
@@ -57,9 +50,7 @@ function LongText(props) {
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     if (question?.isRequired && !value) {
-      message.error(
-        answerRequiredMessageError || 'It`s required question, please answer'
-      )
+      message.error(requiredAnswerMessage || 'Answer is required.')
     } else {
       form.submit()
     }
@@ -91,8 +82,8 @@ function LongText(props) {
         onFinishFailed={onFinishFailed}
         style={{ width: '100%' }}>
         <Form.Item
-          style={globalStyles.resetMarginB}
           name="answer"
+          style={{ margin: 0 }}
           rules={[{ required: question?.isRequired }]}>
           <TextArea
             {...textAreaProps}
@@ -100,19 +91,18 @@ function LongText(props) {
             ref={textAreaRef}
             maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
-            placeholder={longTextInputPlaceholder || 'Type your answer here...'}
+            placeholder={textQuestionPlaceholder || 'Type your answer here...'}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}
           />
         </Form.Item>
         {IsntDesktop && (
-          <Form.Item style={globalStyles.resetMarginB}>
-            <Typography>{explanation}</Typography>
+          <Form.Item>
+            <Text>{explanation}</Text>
           </Form.Item>
         )}
       </Form>
 
-      {/* <SubmitButton /> */}
       <SubmitButton onClick={onPressOk} disablePressEnter />
     </Container>
   )

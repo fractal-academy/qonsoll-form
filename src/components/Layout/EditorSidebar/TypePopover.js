@@ -18,7 +18,7 @@ function TypePopover(props) {
   } = props
 
   // [ADDITIONAL HOOKS]
-  const { createNewQuestionTooltip } = useTranslation()
+  const { questionCreationTooltip } = useTranslation()
 
   return (
     <Popover
@@ -41,7 +41,7 @@ function TypePopover(props) {
       }>
       <Tooltip
         placement="bottom"
-        title={createNewQuestionTooltip || 'Create new question'}>
+        title={questionCreationTooltip || 'Create new question'}>
         <Button
           type="text"
           icon={<PlusOutlined />}

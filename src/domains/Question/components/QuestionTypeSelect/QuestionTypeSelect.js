@@ -122,13 +122,7 @@ function QuestionTypeSelect(props) {
   // ).length
 
   return (
-    <Box
-      pl={1}
-      display="block"
-      // TODO Keep this place for future improvements - make box receive negative margins based on vars instead of strict value
-      // my={PopoverNegativeMarin.v}
-      // mx={PopoverNegativeMarin.h}
-    >
+    <Box pl={1} display="block">
       <QuestionsTypeMenu>
         {updatedMap?.map((item) => (
           <QuestionMenuItem key={item.type} onClick={onClick}>

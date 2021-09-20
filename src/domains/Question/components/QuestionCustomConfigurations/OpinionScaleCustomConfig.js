@@ -14,7 +14,8 @@ const opinionScaleTo = [5, 6, 7, 8, 9, 10]
 
 function OpinionScaleCustomConfig() {
   // [ADDITIONAL_HOOKS]
-  const { fromSetting, toSetting } = useTranslation()
+  const { questionRangeBottomSetting, questionRangeUpperSetting } =
+    useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -45,7 +46,7 @@ function OpinionScaleCustomConfig() {
     <Row noGutters mb={2}>
       <Col cw="auto" mr={3}>
         <Text color="var(--qf-typography-subtitle-color)" strong>
-          {fromSetting || 'From'}
+          {questionRangeBottomSetting || 'From'}
         </Text>
       </Col>
       <Col>
@@ -59,7 +60,7 @@ function OpinionScaleCustomConfig() {
       </Col>
       <Col v="center" cw="auto" mr={3}>
         <Text color="var(--qf-typography-subtitle-color)" strong>
-          {toSetting || 'to'}
+          {questionRangeUpperSetting || 'to'}
         </Text>
       </Col>
       <Col cw="auto">

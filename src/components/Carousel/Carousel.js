@@ -36,7 +36,7 @@ function Carousel(props) {
   const carouselRef = useRef()
   const answersContext = useAnswersContext()
   const answersContextDispatch = useAnswersContextDispatch()
-  const { answerRequiredMessageError } = useTranslation()
+  const { requiredAnswerMessage } = useTranslation()
 
   const [{ height }, ref] = useSize()
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
@@ -56,9 +56,7 @@ function Carousel(props) {
 
   const next = async (skipButtonEvent) => {
     if (currentSlideData?.isRequired && skipButtonEvent) {
-      message.error(
-        answerRequiredMessageError || 'It`s required question, please answer'
-      )
+      message.error(requiredAnswerMessage || 'Answer is required.')
     } else {
       //check if carousel navigation button was pressed, to avoid repetition in answers context
       if (skipButtonEvent) {
