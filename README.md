@@ -281,10 +281,10 @@ Qonsollform will perfectly fine work without translations propagating, but app w
 const qformTranslations = (t) => {
   return {
     //global components
-    requiredAnswerMessage: t('Answer is required.'),
+    requiredAnswerMessage: t('The answer is required'),
     submitHint: t('Press enter'),
     choicePlaceholder: t('choice'),
-    conditionRemovingWarn: t('This option has connected logic. Delete it?'),
+    conditionRemovingWarn: t('This option has connected logic, delete it anyway?'),
     removeButton: t('Delete'),
     uploaderHint: t('Click or drag file to this area to upload'),
     itemRemovingHint: t('Delete this item?'),
@@ -295,14 +295,14 @@ const qformTranslations = (t) => {
     formViewTooltip: t('Form preview'),
     answerViewTooltip: t('Answers preview'),
     longTextHint: t('Shift ⇧ + Enter ↵ to make a line break'),
-    textQuestionPlaceholder: t('Type your answer here...'),
+    textQuestionPlaceholder: t('Type your answer here'),
     
     //domains: form components
     conditionsEndingsTab: t('Endings'),
     conditionsLogicJumpsTab: t('Logic jumps'),
     conditionsQuizTab: t('Answer score configurations'),
-    conditionsNoData: t('There are no question to configure.'),
-    conditionAddQuestionType: t('Please, add one of the following questions types:'),
+    conditionsNoData: t('There are no question to configure'),
+    conditionAddQuestionType: t('Please, add one of the following questions types'),
     quizSwitcherText: t('Enable quiz system'),
     formTitlePlaceholder: t('Form name'),
     formSubtitlePlaceholder: t('Form short description'),
@@ -312,9 +312,9 @@ const qformTranslations = (t) => {
     formModalCreateButton: t('Create form'),
     
     //domains: form routes
-    phoneBrakepointDummy: t('This feature is available only on desktop.'),
+    phoneBrakepointDummy: t('This feature is available only on desktop'),
     formsAllTitle: t('Forms'),
-    formCounter: t('Amount of forms:'),
+    formCounter: t('Amount of forms'),
     formSearchPlaceholder: t('Search form by name'),
     
     //domains: condition components
@@ -327,10 +327,10 @@ const qformTranslations = (t) => {
     scoreWeightTitle: t('Enter score weight of answer'),
     
     //domains: media library components
-    mediaLibraryCounter: t('Amount of shown files:'),
+    mediaLibraryCounter: t('Amount of shown files'),
     mediaLibraryButton: t('Change'),
-    mediaLibrarySearchPlaceholder: t('Search media file by name...'),
-    mediaLibraryTitle: t('Media Library'),
+    mediaLibrarySearchPlaceholder: t('Search media file by name'),
+    mediaLibraryTitle: t('Media library'),
     mediaLibraryBrightness: t('Brightness'),
     
     //domains: question components
@@ -347,7 +347,7 @@ const qformTranslations = (t) => {
     questionEditableTitleHint: t('Editable question title'),
     questionEditableSubtitleHint: t('Description (optional)'),
     questionRemovingPopconfirm: t('Delete this question?'),
-    questionWithLogicRemovingPopconfirm: t('This question has connected logic. Delete it?'),
+    questionWithLogicRemovingPopconfirm: t('This question has connected logic, delete it anyway?'),
     welcomeScreenDesc: t('Invite your audience in'),
     longTextDesc: t('More space to spill the beans'),
     shortTextDesc: t('For short answers, like names'),
@@ -358,7 +358,7 @@ const qformTranslations = (t) => {
     choiceDesc: t('Multiple choice'),
     ratingDesc: t('Rate'),
     statementDesc: t('Take the mic for a moment'),
-    yesnoDesc: t('Just 2 options: Yes or No')
+    yesnoDesc: t('Just 2 options, yes or no')
   }
 }
 
