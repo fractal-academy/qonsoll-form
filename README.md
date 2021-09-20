@@ -185,6 +185,7 @@ As required properties module components need `firebase` object of your applicat
 
 ## How to configure module theme
 - First of all, if you new to qonsoll/react-design package, check out this [**documentation**](https://github.com/qonsoll/react-design/tree/doc-usage-vars). Qonsoll form is built using its components and theme.
+- Qonsollform supports theme changing. Most of theme colors and spacings'll be taken from your
 - After fulfilling steps from documentation (or if you pulled existing project with configured qonsole/react-design package), you'll have a vars.css file in /styles directory. Extend this file with Qonsole forms vars:
 
 ```sh
@@ -273,92 +274,91 @@ Feel free to change variable values to configure component appearance. Due to un
 ```
 
 ## How to configure translations
-Qonsoll app will perfectly fine work without translations propagating, but app will appear only in English. If you need to add another interface language, follow next steps:
+Qonsollform will perfectly fine work without translations propagating, but app will appear only in English. If you need to add another interface language, follow next steps:
 - First you need to add object with translations to your constants. For example, `qformTranslations.js`. Add following object to it:
 
 ```sh
 const qformTranslations = (t) => {
   return {
     //global components
-    requiredAnswerMessage: t('requiredAnswerMessage'),
-    submitHint: t('submitHint'),
-    choicePlaceholder: t('choicePlaceholder'),
-    conditionRemovingWarn: t('conditionRemovingWarn'),
-    removeButton: t('removeButton'),
-    uploaderHint: t('uploaderHint'),
-    itemRemovingHint: t('itemRemovingHint'),
-    questionListTitle: t('questionListTitle'),
-    endingListTitle: t('endingListTitle'),
-    questionCreationTooltip: t('questionCreationTooltip'),
-    endingCreationTooltip: t('endingCreationTooltip'),
-    formViewTooltip: t('formViewTooltip'),
-    answerViewTooltip: t('answerViewTooltip'),
-    longTextHint: t('longTextHint'),
-    textQuestionPlaceholder: t('longTextPlaceholder'),
+    requiredAnswerMessage: t('Answer is required.'),
+    submitHint: t('Press enter'),
+    choicePlaceholder: t('choice'),
+    conditionRemovingWarn: t('This option has connected logic. Delete it?'),
+    removeButton: t('Delete'),
+    uploaderHint: t('Click or drag file to this area to upload'),
+    itemRemovingHint: t('Delete this item?'),
+    questionListTitle: t('Questions'),
+    endingListTitle: t('Endings'),
+    questionCreationTooltip: t('Create new question'),
+    endingCreationTooltip: t('Create new ending'),
+    formViewTooltip: t('Form preview'),
+    answerViewTooltip: t('Answers preview'),
+    longTextHint: t('Shift ⇧ + Enter ↵ to make a line break'),
+    textQuestionPlaceholder: t('Type your answer here...'),
     
     //domains: form components
-    conditionsEndingsTab: t('conditionsEndingsTab'),
-    conditionsLogicJumpsTab: t('conditionsLogicJumpsTab'),
-    conditionsQuizTab: t('conditionsQuizTab'),
-    conditionsNoData: t('conditionsNoData'),
-    conditionAddQuestionType: t('conditionAddQuestionType'),
-    formTitlePlaceholder: t('formTitlePlaceholder'),
-    formSubtitlePlaceholder: t('formSubtitlePlaceholder'),
-    quizSwitcherText: t('quizSwitcherText'),
-    formModalCreateTitle: t('formModalCreateTitle'),
-    formModalEditTitle: t('formModalEditTitle'),
-    formModalEditButton: t('formModalEditButton'),
-    formModalCreateButton: t('formModalCreateButton'),
+    conditionsEndingsTab: t('Endings'),
+    conditionsLogicJumpsTab: t('Logic jumps'),
+    conditionsQuizTab: t('Answer score configurations'),
+    conditionsNoData: t('There are no question to configure.'),
+    conditionAddQuestionType: t('Please, add one of the following questions types:'),
+    quizSwitcherText: t('Enable quiz system'),
+    formTitlePlaceholder: t('Form name'),
+    formSubtitlePlaceholder: t('Form short description'),
+    formModalCreateTitle: t('Create new form'),
+    formModalEditTitle: t('Edit form'),
+    formModalEditButton: t('Save changes'),
+    formModalCreateButton: t('Create form'),
     
     //domains: form routes
-    phoneBrakepointDummy: t('phoneBrakepointDummy'),
-    formsAllTitle: t('formsAllTitle'),
-    formCounter: t('formCounter'),
-    formSearchPlaceholder: t('formSearchPlaceholder'),
+    phoneBrakepointDummy: t('This feature is available only on desktop.'),
+    formsAllTitle: t('Forms'),
+    formCounter: t('Amount of forms:'),
+    formSearchPlaceholder: t('Search form by name'),
     
     //domains: condition components
-    conditionsEndingSelectPlaceholder: t('conditionsEndingSelectPlaceholder'),
-    conditionModalTitle: t('conditionModalTitle'),
-    conditionModalResetLogic: t('conditionModalResetLogic'),
-    conditionModalSubmitButton: t('conditionModalSubmitButton'),
-    conditionsModalTooltip: t('conditionsModalTooltip'),
-    conditionRedirectRulePlaceholder: t('conditionRedirectRulePlaceholder'),
-    scoreWeightTitle: t('scoreWeightTitle'),
+    conditionsEndingSelectPlaceholder: t('Select questions to call current ending'),
+    conditionModalTitle: t('Logic'),
+    conditionModalResetLogic: t('Reset logic'),
+    conditionModalSubmitButton: t('Close'),
+    conditionsModalTooltip: t('Configure logic jumps'),
+    conditionRedirectRulePlaceholder: t('Select redirect rule'),
+    scoreWeightTitle: t('Enter score weight of answer'),
     
     //domains: media library components
-    mediaLibraryCounter: t('mediaLibraryCounter'),
-    mediaLibraryButton: t('mediaLibraryButton'),
-    mediaLibrarySearchPlaceholder: t('mediaLibrarySearchPlaceholder'),
-    mediaLibraryTitle: t('mediaLibraryTitle'),
-    mediaLibraryBrightness: t('mediaLibraryBrightness'),
+    mediaLibraryCounter: t('Amount of shown files:'),
+    mediaLibraryButton: t('Change'),
+    mediaLibrarySearchPlaceholder: t('Search media file by name...'),
+    mediaLibraryTitle: t('Media Library'),
+    mediaLibraryBrightness: t('Brightness'),
     
     //domains: question components
-    questionFinishButton: t('questionFinishButton'),
-    questionStartButton: t('questionStartButton'),
-    questionVideo: t('questionVideo'),
-    questionVideoSetting: t('questionVideoSetting'),
-    questionRequiredSetting: t('questionRequiredSetting'),
-    questionConfigurationTooltip: t('questionConfigurationTooltip'),
-    questionTypeConfiguration: t('questionTypeConfiguration'),
-    questionConfigurationTitle: t('questionConfigurationTitle'),
-    questionRangeBottomSetting: t('questionRangeBottomSetting'),
-    questionRangeUpperSetting: t('questionRangeUpperSetting'),
-    questionConfigurationOptions: t('questionConfigurationOptions'),
-    questionEditableTitleHint: t('questionEditableTitleHint'),
-    questionEditableSubtitleHint: t('questionEditableSubtitleHint'),
-    questionRemovingPopconfirm: t('questionRemovingPopconfirm'),
-    questionWithLogicRemovingPopconfirm: t('questionWithLogicRemovingPopconfirm'),
-    welcomeScreenDesc: t('welcomeScreenDesc'),
-    longTextDesc: t('longTextDesc'),
-    shortTextDesc: t('shortTextDesc'),
-    dateDesc: t('dateDesc'),
-    fileUploadDesc: t('fileUploadDesc'),
-    opinionDesc: t('opinionDesc'),
-    pictureChoiceDesc: t('pictureChoiceDesc'),
-    choiceDesc: t('choiceDesc'),
-    ratingDesc: t('ratingDesc'),
-    statementDesc: t('statementDesc'),
-    yesnoDesc: t('yesnoDesc')
+    questionFinishButton: t('Finish'),
+    questionStartButton: t('Start'),
+    questionVideo: t('Video question'),
+    questionRequiredSetting: t('Required'),
+    questionConfigurationTooltip: t('Configure question'),
+    questionTypeConfiguration: t('Question types'),
+    questionConfigurationTitle: t('settings'),
+    questionRangeBottomSetting: t('From'),
+    questionRangeUpperSetting: t('to'),
+    questionConfigurationOptions: t('Amount of options'),
+    questionEditableTitleHint: t('Editable question title'),
+    questionEditableSubtitleHint: t('Description (optional)'),
+    questionRemovingPopconfirm: t('Delete this question?'),
+    questionWithLogicRemovingPopconfirm: t('This question has connected logic. Delete it?'),
+    welcomeScreenDesc: t('Invite your audience in'),
+    longTextDesc: t('More space to spill the beans'),
+    shortTextDesc: t('For short answers, like names'),
+    dateDesc: t('Collect answers in date format'),
+    fileUploadDesc: t('Upload a file up to 10MB'),
+    opinionDesc: t('A customizable, numbered scale'),
+    pictureChoiceDesc: t('Multiple choice but prettier'),
+    choiceDesc: t('Multiple choice'),
+    ratingDesc: t('Rate'),
+    statementDesc: t('Take the mic for a moment'),
+    yesnoDesc: t('Just 2 options: Yes or No')
   }
 }
 
@@ -368,20 +368,18 @@ export default qformTranslations
 
 ```sh
 import { FormsAll } from 'qonsoll-form/src'
-import { useTranslations } from 'app/contexts/Translation/hooks' //example
+import { useTranslations } from 'app/contexts'
 . . .
 
 function YourComponentName() {
 
 const { t } = useTranslations()
-
-const translations = useCallback(() => {
-  translationsForTypeForm(t)
-}, [t])
+const translations = useMemo(() => {
+    return qformTranslations(t)
+  }, [t])
 
   return (
     <FormAll
-      translate={t}
       translations={translations}
       firebase={firebase}
       actions={{}}
