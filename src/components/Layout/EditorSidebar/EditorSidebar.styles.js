@@ -4,7 +4,7 @@ import { Box } from '@qonsoll/react-design'
 export const SidebarBoxWrapper = styled(Box)`
   background-color: ${({ transparent }) =>
     transparent ? 'transparent' : 'var(--qf-sidebar-bg)'};
-  padding: 18px 0;
+  padding: 4px 0;
   display: flex;
   flex-direction: column;
   width: var(--qf-sidebar-width);

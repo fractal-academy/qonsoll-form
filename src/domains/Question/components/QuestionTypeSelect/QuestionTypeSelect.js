@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import Text from 'antd/lib/typography/Text'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Row, Col, Box, Text } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
 import {
@@ -21,11 +19,6 @@ import {
   StarOutlined,
   UploadOutlined
 } from '@ant-design/icons'
-
-const StyledText = styled(Text)`
-  cursor: pointer !important;
-  color: var(--qf-typography-subtitle-color);
-`
 
 function QuestionTypeSelect(props) {
   const {
@@ -122,17 +115,21 @@ function QuestionTypeSelect(props) {
   // ).length
 
   return (
-    <Box pl={1} display="block">
+    <Box pl={2} display="block">
       <QuestionsTypeMenu>
         {updatedMap?.map((item) => (
           <QuestionMenuItem key={item.type} onClick={onClick}>
             <Row h="center" v="center" noGutters>
-              <Col cw="auto" ml={2} mr={1}>
+              <Col cw="auto" ml={2}>
                 {item.icon}
               </Col>
               <Col display="grid">
-                {item.type}
-                <StyledText disabled> {item.description}</StyledText>
+                <Text color="var(--qf-typography-title-color)">
+                  {item.type}
+                </Text>
+                <Text color="var(--qf-typography-caption-color)">
+                  {item.description}
+                </Text>
               </Col>
             </Row>
           </QuestionMenuItem>

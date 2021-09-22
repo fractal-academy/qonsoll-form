@@ -247,7 +247,7 @@ function EditorSidebar(props) {
 
   return (
     <SidebarBoxWrapper transparent={transparent}>
-      <Row mb={2} v="center" h="between">
+      <Row my={2} v="center" h="between">
         <Col cw="auto">
           <Title color="var(--qf-typography-title-color)" level={5}>
             {questionListTitle || 'Questions'}
@@ -303,7 +303,7 @@ function EditorSidebar(props) {
           </Tooltip>
         </Col>
       </Row>
-      <Box overflow="auto" maxHeight="350px">
+      <Box overflow="auto" maxHeight="550px">
         {!!endings?.length && (
           <QuestionsList
             data={endings}
