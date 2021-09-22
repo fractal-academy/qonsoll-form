@@ -3,7 +3,7 @@ import { DatePicker, Select } from 'antd'
 import { Text, Button } from '@qonsoll/react-design'
 
 export const CustomText = styled(Text)`
-  color: var(--qf-font-color-accent);
+  color: var(--qf-typography-title-color);
 `
 
 export const CustomButton = styled(Button)`

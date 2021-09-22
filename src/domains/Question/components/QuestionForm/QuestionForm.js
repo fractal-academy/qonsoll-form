@@ -170,7 +170,7 @@ function QuestionForm(props) {
                       questionEditableTitleHint || 'Editable question title'
                     }
                     subtitlePlaceholder={
-                      questionEditableSubtitleHint || 'Description(optional)'
+                      questionEditableSubtitleHint || 'Description (optional)'
                     }
                   />
                 </Col>

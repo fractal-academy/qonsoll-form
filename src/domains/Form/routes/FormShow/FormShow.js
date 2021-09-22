@@ -27,7 +27,7 @@ function FormShow(props) {
   const {
     id,
     firebase,
-    translate,
+    translations,
     submitLoading,
     wrapperHeight,
     wrapperOffset,
@@ -191,7 +191,7 @@ function FormShow(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <TranslationContext.Provider value={{ t: translate }}>
+        <TranslationContext.Provider value={translations || {}}>
           <TypeformConfigurationContext.Provider value={configurations}>
             {loading ? (
               <Spinner />

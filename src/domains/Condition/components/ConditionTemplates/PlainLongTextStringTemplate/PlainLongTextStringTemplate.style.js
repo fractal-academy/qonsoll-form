@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Button, Text } from '@qonsoll/react-design'
 
 export const CustomText = styled(Text)`
-  color: var(--qf-font-color-accent);
+  color: var(--qf-typography-title-color);
 `
 
 export const CustomButton = styled(Button)`

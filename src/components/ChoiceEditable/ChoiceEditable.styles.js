@@ -50,7 +50,7 @@ export const DeleteButton = styled(Box)`
   border-radius: var(--qf-border-radius-full);
 `
 export const ChoiceInput = styled(TextArea)`
-  color: var(--qf-font-color-secondary);
+  color: var(--qf-typography-subtitle-color);
 `
 export const CustomCol = styled(Col)`
   position: absolute;
