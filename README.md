@@ -274,7 +274,8 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
   }
 ]
 ```
-- `FormShow` component has `id` (form id) and `firebase` as required properties. As optional it has also `showHeader`, `wrapperPaddings`, `translations` and `submitLoading` (action on form finish button). The `actions` property is not needed.
+- `FormShow` component has `id` (form id) and `firebase` as required properties. As optional it has also `showHeader`, `wrapperPaddings`, `translations` and `submitLoading` (action on form finish button) properties. The `actions` property is not needed.
+- `FormAnswers` component has also `id` (form id) and `firebase` as required properties. As optional it has also `showHeader`, `wrapperPaddings` and `translations` properties. The `actions` property is not needed.
 - To correct work of components you need to add vars of qonsoll form. Check out [next step](#how-to-configure-module-theme) for it.
 
 ## How to configure module theme
@@ -360,7 +361,7 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
 - Qonsoll form has also overwritten `antd` components vars. Use the following vars with care.
 
 ```sh
-    /* overwritten menu */
+   /* overwritten menu */
   --ql-menu-item-active-bg: var(--ql-color-accent1-t-lighten3);
 
   /* overwritten form */
@@ -406,7 +407,7 @@ const qformTranslations = (t) => {
     formModalCreateButton: t('Create form'),
     
     //domains: form routes
-    phoneBrakepointDummy: t('This feature is available only on desktop'),
+    phoneBreakpointDummy: t('This feature is available only on desktop'),
     formsAllTitle: t('Forms'),
     formCounter: t('Amount of forms'),
     formSearchPlaceholder: t('Search form by name'),
@@ -452,7 +453,13 @@ const qformTranslations = (t) => {
     choiceDesc: t('Multiple choice'),
     ratingDesc: t('Rate'),
     statementDesc: t('Take the mic for a moment'),
-    yesnoDesc: t('Just 2 options, yes or no')
+    yesnoDesc: t('Just 2 options, yes or no'),
+
+    //domains: answer components
+    answerTitle: t('Answers'),
+    answerEmptyList: t('There is no responses yet'),
+    answerUserListTitle: t('Users'),
+    answersNoSelectedUser: t('Choose user to display their answers')
   }
 }
 
