@@ -163,33 +163,128 @@ After that, if there's exception that you have not enough memory in docker, you 
 ## How to configure and use module
 
 For correct module work you need to fulfill next steps.
-- To use qonsoll form component, you need to import it and propagate required properties. There are four in total components: `FormsAll`, `FormEdit`, `FormShow` and `FormAnswers`. There's example of component usage:
+- To use qonsoll form component, you need to import it and propagate required properties. There are four in total components: `FormsAll`, `FormEdit`, `FormShow` and `FormAnswers`. There's example of `FormsAll` component usage:
 
 ```sh
+import React from 'react'
 import { FormsAll } from 'qonsoll-form/src'
 . . .
 
 function YourComponentName() {
+  
+  const history = useHistory()
+
+  //this name is required
+  const onFormItemClick = (id) => {
+    const path = generatePath(ROUTES_PATHS.FORM_EDIT, { id })
+    history.push(path)
+  }
 
   return (
     <FormAll
       firebase={firebase}
-      actions={{}}
-      id={id}
+      actions={{
+        onFormItemClick: onFormItemClick
+      }}
     />
   )
 }
 ```
-As required properties module components need `firebase` object of your application and `actions`. On all routes except `FormsAll` also required `id` of form. Actions are functions, that are responding for routing between qonsoll form routes. There are also optional properties: `translations`,  `childrenModal` (allows to add new form item to form creation modal), `wrapperPaddings`, `titleText` (changes route title) and `showHeader` (allows to use qonsoll form header).
-- To correct work of components you need to фвв vars of qonsoll form. Check out [next step](#how-to-configure-module-theme) for it.
+&#10071; Qonsollform module requires outer handling of routing. That means you need to have prepared constant with route name and propagate through `actions` object routing function with correct naming.
+- `FormsAll` has only one required property: `firebase`. There's also optional properties: `showHeader` - handles whether will be used header of module, or your own, `wrapperPaddings` - handles size of outer wrapper of conponent; default value - 32px, `translations` - object with translated UI texting (see [this step](#how-to-configure-translations) for more information), `childrenModal` - propagates node as child to form creation modal, if you need more form items, `disableAddButton` - handles showing of form creation button.
+- `FormEdit` component has `id` (form id) and `firebase` as required properties. As optional it has also `actions` property to be propagated. Example of needed functions:
+
+```sh
+  const { id } = useParams()
+  const history = useHistory()
+  
+  const onFormShow = (id) => {
+    const path = generatePath(ROUTES_PATHS.FORM_SHOW, { id })
+    history.push(path)
+  }
+  const onFormResultsShow = (id) => {
+    const path = generatePath(ROUTES_PATHS.FORM_ANSWERS, { id })
+    history.push(path)
+  }
+```
+Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all are the same as in `FormsAll`) and `customQuestionTypes` - if you need to configure question type list (to remove excess question types), configure following array and propagate it through property:
+
+```sh
+[
+  {
+    type: QUESTION_TYPES.WELCOME_SCREEN,
+    description: welcomeScreenDesc || 'Invite your audience in',
+    icon: <HomeOutlined />
+  },
+  {
+    type: QUESTION_TYPES.LONG_TEXT,
+    description: longTextDesc || 'More space to spill the beans',
+    icon: <FileTextOutlined />
+  },
+  {
+    type: QUESTION_TYPES.SHORT_TEXT,
+    description: shortTextDesc || 'For short answers, like names',
+    icon: <SmallDashOutlined />
+  },
+  {
+    type: QUESTION_TYPES.DATE,
+    description: dateDesc || 'Collect answers in date format',
+    icon: <CalendarOutlined />
+  },
+  {
+    type: QUESTION_TYPES.FILE_UPLOAD,
+    description: fileUploadDesc || 'Upload a file up to 10MB',
+    icon: <UploadOutlined />
+  },
+
+  {
+    type: QUESTION_TYPES.OPINION_SCALE,
+    description: opinionDesc || 'A customizable, numbered scale',
+    icon: <HomeOutlined />
+  },
+  {
+    type: QUESTION_TYPES.PICTURE_CHOICE,
+    description: pictureChoiceDesc || 'Multiple choice but prettier',
+    icon: <PictureOutlined />
+  },
+  {
+    type: QUESTION_TYPES.CHOICE,
+    description: choiceDesc || 'Multiple choice',
+    icon: <GoldOutlined />
+  },
+  {
+    type: QUESTION_TYPES.RATING,
+    description: ratingDesc || 'Rate us',
+    icon: <StarOutlined />
+  },
+  {
+    type: QUESTION_TYPES.RATING_EXTENDED,
+    description: ratingExtendedDesc || 'Rate us or not',
+    icon: <StarOutlined />
+  },
+  {
+    type: QUESTION_TYPES.STATEMENT,
+    description: statementDesc || 'Take the mic for a moment',
+    icon: <CopyrightOutlined />
+  },
+  {
+    type: QUESTION_TYPES.YES_NO,
+    description: yesnoDesc || 'Just 2 options, yes or no',
+    icon: <ShareAltOutlined />
+  }
+]
+```
+- `FormShow` component has `id` (form id) and `firebase` as required properties. As optional it has also `showHeader`, `wrapperPaddings`, `translations` and `submitLoading` (action on form finish button) properties. The `actions` property is not needed.
+- `FormAnswers` component has also `id` (form id) and `firebase` as required properties. As optional it has also `showHeader`, `wrapperPaddings` and `translations` properties. The `actions` property is not needed.
+- To correct work of components you need to add vars of qonsoll form. Check out [next step](#how-to-configure-module-theme) for it.
 
 ## How to configure module theme
 - First of all, if you new to qonsoll/react-design package, check out this [**documentation**](https://github.com/qonsoll/react-design/tree/doc-usage-vars). Qonsoll form is built using its components and theme.
-- Qonsollform supports theme changing. Most of theme colors and spacings'll be taken from your
-- After fulfilling steps from documentation (or if you pulled existing project with configured qonsole/react-design package), you'll have a vars.css file in /styles directory. Extend this file with Qonsole forms vars:
+- Qonsollform supports theme changing. Most of theme colors and spacings'll be taken from your original vars.css file, that was added to project earlier. Follow next steps to configure module theme.
+- There's list of all vars, used in Qonsollform. If you need change something in module appearance, just rewrite suitable var with needed value. Due to unical name of variables, your app'll still remaining its previous appearence.
 
 ```sh
-  /* static list */
+   /* static list */
   --qf-list-item-bg: var(--ql-color-dark-t-lighten5);
   --qf-list-item-hover: var(--ql-color-dark-t-lighten6);
 
@@ -227,7 +322,7 @@ As required properties module components need `firebase` object of your applicat
   --qf-submit-button-font-size: var(--ql-font-size-h4);
   
   /* input */
-  --qf-input-background: var(--ql-color-dark-t-lighten5); /* needs refactoring */
+  --qf-input-background: var(--ql-color-dark-t-lighten5);
 
   /* tag */
   --qf-tag-color: var(--ql-color-accent1);
@@ -257,16 +352,16 @@ As required properties module components need `firebase` object of your applicat
   --qf-typography-caption-color: var(--ql-color-dark-t-lighten2);
 
   /* border radius */
-  --qf-border-radius-sm: var(--ql-border-radius-sm); /* 6px */
-  --qf-border-radius-md: var(--ql-border-radius-md); /* 8px */
-  --qf-border-radius-lg: var(--ql-border-radius-16); /* 12px */
-  --qf-border-radius-full: var(--ql-border-radius-full); /* 50% */
+  --qf-border-radius-sm: var(--ql-border-radius-sm);
+  --qf-border-radius-md: var(--ql-border-radius-md);
+  --qf-border-radius-lg: var(--ql-border-radius-16);
+  --qf-border-radius-full: var(--ql-border-radius-full);
 ```
-Feel free to change variable values to configure component appearance. Due to unical name of variables, your app'll still remaining its previous appearence.
+
 - Qonsoll form has also overwritten `antd` components vars. Use the following vars with care.
 
 ```sh
-    /* overwritten menu */
+   /* overwritten menu */
   --ql-menu-item-active-bg: var(--ql-color-accent1-t-lighten3);
 
   /* overwritten form */
@@ -312,7 +407,7 @@ const qformTranslations = (t) => {
     formModalCreateButton: t('Create form'),
     
     //domains: form routes
-    phoneBrakepointDummy: t('This feature is available only on desktop'),
+    phoneBreakpointDummy: t('This feature is available only on desktop'),
     formsAllTitle: t('Forms'),
     formCounter: t('Amount of forms'),
     formSearchPlaceholder: t('Search form by name'),
@@ -358,7 +453,13 @@ const qformTranslations = (t) => {
     choiceDesc: t('Multiple choice'),
     ratingDesc: t('Rate'),
     statementDesc: t('Take the mic for a moment'),
-    yesnoDesc: t('Just 2 options, yes or no')
+    yesnoDesc: t('Just 2 options, yes or no'),
+
+    //domains: answer components
+    answerTitle: t('Answers'),
+    answerEmptyList: t('There is no responses yet'),
+    answerUserListTitle: t('Users'),
+    answersNoSelectedUser: t('Choose user to display their answers')
   }
 }
 
@@ -380,9 +481,8 @@ const translations = useMemo(() => {
 
   return (
     <FormAll
-      translations={translations}
       firebase={firebase}
-      actions={{}}
+      translations={translations}
     />
   )
 }
