@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Box, NoData } from '@qonsoll/react-design'
 import { Spinner } from '../../../../../src/components'
 import { useTranslation } from '../../../../context/Translation'
-import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
 import { StyledTable } from '../../../../domains/Response/components/ResponseTable/ResponseTable.style'
 
 const columns = [
@@ -58,7 +57,7 @@ const columns = [
 
 function ResponseTable(props) {
   const { data, loading, isFormQuiz } = props
-  const { emptyStateAnswersDescription } = useTranslation()
+  const { answersNoSelectedUser } = useTranslation()
 
   useEffect(() => {
     if (isFormQuiz)
@@ -80,29 +79,26 @@ function ResponseTable(props) {
   }, [isFormQuiz])
 
   return (
-    <Box display="flex" flex={1} justifyContent="center" overflowX="hidden">
+    <Box overflowX="hidden">
       {loading ? (
         <Spinner width="100%" size="large" />
       ) : (
-        <Row width="100%">
-          <Col>
-            {data?.length > 0 ? (
-              <StyledTable
-                sortOrder
-                columns={columns}
-                dataSource={data}
-                pagination={false}
-              />
-            ) : (
-              <EmptyState
-                description={
-                  emptyStateAnswersDescription ||
-                  'Choose user to display their answers'
-                }
-              />
-            )}
-          </Col>
-        </Row>
+        <Box>
+          {data?.length > 0 ? (
+            <StyledTable
+              sortOrder
+              columns={columns}
+              dataSource={data}
+              pagination={false}
+            />
+          ) : (
+            <NoData
+              description={
+                answersNoSelectedUser || 'Choose user to display their answers'
+              }
+            />
+          )}
+        </Box>
       )}
     </Box>
   )
@@ -110,7 +106,8 @@ function ResponseTable(props) {
 
 ResponseTable.propTypes = {
   data: PropTypes.array,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  isFormQuiz: PropTypes.bool
 }
 
 export default ResponseTable

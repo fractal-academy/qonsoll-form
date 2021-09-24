@@ -6,7 +6,7 @@ import {
 } from '../../../../domains/Condition/components'
 import { Tabs } from 'antd'
 import { QUESTION_TYPES } from '../../../../constants'
-import { Box, NoData } from '@qonsoll/react-design'
+import { Container, Box, NoData } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS } from '../../../../constants'
 import PropTypes from 'prop-types'
@@ -78,18 +78,18 @@ function FormConditionsForm(props) {
   )
 
   return (
-    <>
+    <Container>
       <CustomTabs onChange={onTabChange}>
         <TabPane
           tab={conditionsLogicJumpsTab || 'Logic jumps'}
           key="1"
           style={{
             overflowY: 'scroll',
-            overflowX: 'hidden'
+            overflow: 'hidden'
           }}>
           {data?.length > 0 ? (
             data?.map((item, index) => (
-              <Box mb={3}>
+              <Box mb={3} ml={2}>
                 <ConditionForm
                   key={index}
                   item={item}
@@ -112,10 +112,10 @@ function FormConditionsForm(props) {
         <TabPane
           tab={conditionsEndingsTab || 'Endings'}
           key="2"
-          style={{ overflowY: 'scroll', overflowX: 'hidden', color: 'red' }}>
+          style={{ overflowY: 'scroll', overflow: 'hidden' }}>
           {!!filteredAnswerForEndings?.length > 0 && endings?.length > 0 ? (
             endings?.map((item, index) => (
-              <Box mb={3}>
+              <Box mb={3} ml={2}>
                 <EndingsSimpleView
                   key={index}
                   item={item}
@@ -138,12 +138,12 @@ function FormConditionsForm(props) {
         </TabPane>
         {formData?.isQuiz && (
           <TabPane
-            style={{ overflowY: 'scroll', overflowX: 'hidden' }}
+            style={{ overflowY: 'scroll', overflow: 'hidden' }}
             tab={conditionsQuizTab || 'Answer score configurations'}
             key="3">
             {filteredAnswerForEndings?.length > 0 ? (
               filteredAnswerForEndings?.map((item, index) => (
-                <Box mb={3}>
+                <Box mb={3} ml={2}>
                   <ScoreConditionsAdvancedView
                     key={index}
                     questionData={item}
@@ -173,7 +173,7 @@ function FormConditionsForm(props) {
           </TabPane>
         )}
       </CustomTabs>
-    </>
+    </Container>
   )
 }
 

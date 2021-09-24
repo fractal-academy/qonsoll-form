@@ -6,6 +6,7 @@ const QUESTION_TYPES = {
   PICTURE_CHOICE: 'Picture choice',
   CHOICE: 'Choice',
   RATING: 'Rating',
+  RATING_EXTENDED: 'Extended rating',
   YES_NO: 'Yes/No',
   OPINION_SCALE: 'Opinion scale',
   DATE: 'Date',

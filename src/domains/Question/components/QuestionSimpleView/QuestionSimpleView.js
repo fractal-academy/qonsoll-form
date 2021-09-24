@@ -110,7 +110,7 @@ QuestionSimpleView.propTypes = {
   onClick: PropTypes.func,
   layoutType: PropTypes.string,
   disableDelete: PropTypes.bool,
-  number: PropTypes.number.isRequired
+  number: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 
 export default QuestionSimpleView

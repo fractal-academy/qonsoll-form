@@ -72,7 +72,6 @@ function EditorSidebar(props) {
     endings,
     formData,
     questions,
-    transparent,
     answerScoresData,
     customQuestionTypes,
     welcomeScreenShowRule
@@ -246,7 +245,7 @@ function EditorSidebar(props) {
   }, [questions?.length])
 
   return (
-    <SidebarBoxWrapper transparent={transparent}>
+    <SidebarBoxWrapper>
       <Row my={2} v="center" h="between">
         <Col cw="auto">
           <Title color="var(--qf-typography-title-color)" level={5}>
@@ -303,8 +302,8 @@ function EditorSidebar(props) {
           </Tooltip>
         </Col>
       </Row>
-      <Box overflow="auto" maxHeight="550px">
-        {!!endings?.length && (
+      {!!endings?.length && (
+        <Box overflow="auto" maxHeight="400px" minHeight="90px">
           <QuestionsList
             data={endings}
             endings={endings}
@@ -312,15 +311,20 @@ function EditorSidebar(props) {
             onItemClick={onItemClick}
             disableDelete={endings?.length === 1}
           />
-        )}
-      </Box>
+        </Box>
+      )}
     </SidebarBoxWrapper>
   )
 }
 
 EditorSidebar.propTypes = {
-  questionsList: PropTypes.node.isRequired,
-  questionsEndingsList: PropTypes.node.isRequired
+  id: PropTypes.string,
+  endings: PropTypes.array,
+  formData: PropTypes.object,
+  questions: PropTypes.array,
+  answerScoresData: PropTypes.array,
+  customQuestionTypes: PropTypes.array,
+  welcomeScreenShowRule: PropTypes.bool
 }
 
 export default EditorSidebar

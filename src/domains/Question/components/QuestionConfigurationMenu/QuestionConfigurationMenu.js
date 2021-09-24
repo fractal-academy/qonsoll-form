@@ -85,9 +85,11 @@ function QuestionConfigurationMenu() {
           />
         </Col>
       </Row>
-      {[QUESTION_TYPES.OPINION_SCALE, QUESTION_TYPES.RATING].includes(
-        currentQuestion.questionType
-      ) && <AmountOptionsCustomConfig />}
+      {[
+        QUESTION_TYPES.OPINION_SCALE,
+        QUESTION_TYPES.RATING,
+        QUESTION_TYPES.RATING_EXTENDED
+      ].includes(currentQuestion.questionType) && <AmountOptionsCustomConfig />}
     </Box>
   )
 }

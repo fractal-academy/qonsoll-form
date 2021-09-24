@@ -78,7 +78,7 @@ function FormEdit(props) {
   } = props
 
   //[CUSTOM HOOKS]
-  const { phoneBrakepointDummy } = useTranslation()
+  const { phoneBreakpointDummy } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -311,7 +311,7 @@ function FormEdit(props) {
                       alignItems="center"
                       justifyContent="center">
                       <Text>
-                        {phoneBrakepointDummy ||
+                        {phoneBreakpointDummy ||
                           'This feature is available only on desktop.'}
                       </Text>
                     </Box>

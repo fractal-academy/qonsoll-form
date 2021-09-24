@@ -34,6 +34,7 @@ import {
   DateTimeInput,
   ContentCard
 } from '../../../../components'
+import { ExtendedRating } from '~/modules/feedback-typeform-app/src/components/Rating'
 
 function QuestionForm(props) {
   const {
@@ -77,6 +78,9 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.RATING]: {
       component: <Rate />
+    },
+    [QUESTION_TYPES.RATING_EXTENDED]: {
+      component: <ExtendedRating />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
       component: <ShortText />

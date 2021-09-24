@@ -38,6 +38,7 @@ function QuestionTypeSelect(props) {
     opinionDesc,
     pictureChoiceDesc,
     choiceDesc,
+    ratingExtendedDesc,
     ratingDesc,
     statementDesc,
     yesnoDesc
@@ -88,7 +89,12 @@ function QuestionTypeSelect(props) {
     },
     {
       type: QUESTION_TYPES.RATING,
-      description: ratingDesc || 'Rate',
+      description: ratingDesc || 'Rate us',
+      icon: <StarOutlined />
+    },
+    {
+      type: QUESTION_TYPES.RATING_EXTENDED,
+      description: ratingExtendedDesc || 'Rate us or not',
       icon: <StarOutlined />
     },
     {
@@ -98,7 +104,7 @@ function QuestionTypeSelect(props) {
     },
     {
       type: QUESTION_TYPES.YES_NO,
-      description: yesnoDesc || 'Just 2 options: Yes or No',
+      description: yesnoDesc || 'Just 2 options, yes or no',
       icon: <ShareAltOutlined />
     }
   ]

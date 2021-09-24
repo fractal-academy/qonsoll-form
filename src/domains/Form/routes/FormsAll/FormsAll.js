@@ -164,7 +164,7 @@ function FormsAll(props) {
 
 FormsAll.propTypes = {
   firebase: PropTypes.object.isRequired,
-  translations: PropTypes.func.isRequired,
+  translations: PropTypes.func,
   onBack: PropTypes.func,
   titleProps: PropTypes.object,
   childrenModal: PropTypes.node,

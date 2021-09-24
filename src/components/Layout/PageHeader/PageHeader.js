@@ -57,6 +57,7 @@ function PageHeader(props) {
               placement="bottom"
               title={answerViewTooltip || 'Answers preview'}>
               <Button
+                mr={1}
                 type="text"
                 icon={<ReadOutlined />}
                 onClick={onFormResultsDisplay}

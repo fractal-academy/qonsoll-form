@@ -30,6 +30,7 @@ function ModalWithFormConditionsForm(props) {
         placement="bottomRight"
         title={conditionsModalTooltip || 'Configure logic jumps'}>
         <Button
+          ml={1}
           {...btnProps}
           onClick={() => {
             setIsModalVisible(!isModalVisible)

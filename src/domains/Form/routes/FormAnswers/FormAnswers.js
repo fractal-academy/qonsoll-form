@@ -1,16 +1,16 @@
 import { message } from 'antd'
 import useMedia from 'use-media'
-import { useHistory } from 'react-router-dom'
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { PageHeader } from '../../../../components'
 import { COLLECTIONS } from '../../../../constants'
 import useFunctions from '../../../../hooks/useFunctions'
-import { Container, Row, Col, Box, Text } from '@qonsoll/react-design'
+import { Container, Title, NoData } from '@qonsoll/react-design'
 import { ResponseTable, ResponseList } from '../../../Response/components'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
-import { EmptyState } from '../../../../../src/domains/Form/components/FormConditionsForm/FormConditionsForm.styles'
+import { SidebarBoxWrapper } from '../../../../components/Layout/EditorSidebar/EditorSidebar.styles'
 import {
   TranslationContext,
   useTranslation
@@ -21,7 +21,15 @@ import {
 } from 'react-firebase-hooks/firestore'
 
 function FormAnswers(props) {
-  const { id, firebase, translate, configurations, actions = {} } = props
+  const {
+    id,
+    firebase,
+    translations,
+    configurations,
+    showHeader,
+    wrapperPaddings,
+    actions = {}
+  } = props
 
   // [COMPONENT STATE HOOKS]
   const [userAnswers, setUserAnswers] = useState([])
@@ -32,7 +40,7 @@ function FormAnswers(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const { emptyStateDescription } = useTranslation()
+  const { answerEmptyList, answerTitle, answerUserListTitle } = useTranslation()
   const [userAnswerGroup, userAnswerGroupLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where('formId', '==', id)
   )
@@ -40,11 +48,10 @@ function FormAnswers(props) {
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
   const smallScreen = useMedia({ minWidth: '769px' })
-  const handleSmallScreen = useMedia({ minWidth: '900px' })
-  const { smallScreenHandleWarning } = useTranslation()
 
   // [COMPUTED PROPERTIES]
-  const containerPadding = smallScreen ? 4 : 2
+  const containerPadding =
+    wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
 
   // [CLEAN FUNCTIONS]
   const onListItemClick = async (user, date) => {
@@ -83,49 +90,43 @@ function FormAnswers(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <TranslationContext.Provider value={{ t: translate }}>
+        <TranslationContext.Provider value={translations || {}}>
           <TypeformConfigurationContext.Provider value={configurations}>
-            <Container p={containerPadding}>
-              <PageHeader onBack={() => history.goBack()} title="Answers" />
-              {handleSmallScreen ? (
-                checkUserAswerGroup ? (
-                  <Row noGutters height="inherit" my={3}>
-                    <Col height="inherit" cw="auto" ml={3}>
-                      <ResponseList
-                        userAnswerGroup={userAnswerGroup}
-                        loading={userAnswerGroupLoading}
-                        onListItemClick={onListItemClick}
-                      />
-                    </Col>
-                    <Col height="inherit" overflowY="scroll">
-                      <ResponseTable
-                        isFormQuiz={formData?.isQuiz}
-                        data={userAnswers}
-                        loading={userAnswersLoading}
-                      />
-                    </Col>
-                  </Row>
-                ) : (
-                  <EmptyState
-                    description={
-                      emptyStateDescription ||
-                      "This form doesn't have any responses yet"
-                    }
+            <Container display="flex" height="inherit">
+              <SidebarBoxWrapper>
+                <Title
+                  ml={3}
+                  my={3}
+                  level={5}
+                  color="var(--qf-typography-title-color)">
+                  {answerUserListTitle || 'Users'}
+                </Title>
+                {checkUserAswerGroup ? (
+                  <ResponseList
+                    userAnswerGroup={userAnswerGroup}
+                    loading={userAnswerGroupLoading}
+                    onListItemClick={onListItemClick}
                   />
-                )
-              ) : (
-                <Box
-                  width="100%"
-                  height="100%"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center">
-                  <Text color="var(--qf-typography-subtitle-color)">
-                    {smallScreenHandleWarning ||
-                      'This feature is available only on desktop.'}
-                  </Text>
-                </Box>
-              )}
+                ) : (
+                  <NoData
+                    description={answerEmptyList || "There's no responses yet"}
+                  />
+                )}
+              </SidebarBoxWrapper>
+              <Container p={containerPadding}>
+                {showHeader && (
+                  <PageHeader
+                    onBack={() => history.goBack()}
+                    title={answerTitle || 'Answers'}
+                  />
+                )}
+
+                <ResponseTable
+                  isFormQuiz={formData?.isQuiz}
+                  data={userAnswers}
+                  loading={userAnswersLoading}
+                />
+              </Container>
             </Container>
           </TypeformConfigurationContext.Provider>
         </TranslationContext.Provider>

@@ -51,7 +51,12 @@ function QuestionConfigurationPopoverContent(props) {
         py={2}
         h="between"
         onClick={changeQuestionConfigState}>
-        <Col v="center" cw="auto" order={isQuestionConfig ? 1 : 3}>
+        <Col
+          v="center"
+          cw="auto"
+          pr={isQuestionConfig && '0px'}
+          pl={!isQuestionConfig && '0px'}
+          order={isQuestionConfig ? 1 : 3}>
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>
         <Col cw="auto" order={2}>
