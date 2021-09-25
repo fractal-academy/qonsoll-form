@@ -300,7 +300,7 @@ const qformTranslations = (t) => {
     //domains: form components
     conditionsEndingsTab: t('Endings'),
     conditionsLogicJumpsTab: t('Logic jumps'),
-    conditionsQuizTab: t('Answer score configurations'),
+    conditionsQuizTab: t('Scores'),
     conditionsNoData: t('There are no question to configure'),
     conditionAddQuestionType: t('Please, add one of the following questions types'),
     quizSwitcherText: t('Enable quiz system'),
@@ -312,7 +312,7 @@ const qformTranslations = (t) => {
     formModalCreateButton: t('Create form'),
     
     //domains: form routes
-    phoneBrakepointDummy: t('This feature is available only on desktop'),
+    phoneBreakpointDummy: t('This feature is available only on desktop'),
     formsAllTitle: t('Forms'),
     formCounter: t('Amount of forms'),
     formSearchPlaceholder: t('Search form by name'),

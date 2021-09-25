@@ -9,7 +9,6 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { QuestionForm } from '../../../../domains/Question/components'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import { EditorSidebar, Spinner, PageHeader } from '../../../../components'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
   useTranslation,
@@ -72,7 +71,6 @@ function FormEdit(props) {
     actions = {},
     showHeader,
     translations,
-    configurations,
     customQuestionTypes,
     wrapperPaddings
   } = props
@@ -273,64 +271,62 @@ function FormEdit(props) {
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={translations || {}}>
-          <TypeformConfigurationContext.Provider value={configurations}>
-            {formLoading || questionsListLoading || answerScoresListLoading ? (
-              <Spinner />
-            ) : (
-              <Container display="flex" height="inherit" overflowX="hidden">
-                <Box
-                  flex={1}
-                  display="flex"
-                  p={containerPadding}
-                  flexDirection="column">
-                  {showHeader && (
-                    <PageHeader
-                      id={id}
-                      handlesPreview
-                      title={form?.title}
-                      onBack={history.goBack}
-                      smallScreen={smallScreen}
-                    />
-                  )}
-                  {smallScreen ? (
-                    <QuestionForm
-                      defaultTab={defaultTab}
-                      questionsList={questionsList}
-                      questionData={currentQuestion}
-                      brightnessValue={brightnessValue}
-                      setBrightnessValue={setBrightnessValue}
-                      customQuestionTypes={customQuestionTypes}
-                      onQuestionTypeChange={onQuestionTypeChange}
-                      welcomeScreenShowRule={welcomeScreenShowRule}
-                      onQuestionLayoutChange={onQuestionLayoutChange}
-                    />
-                  ) : (
-                    <Box
-                      height="100%"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center">
-                      <Text>
-                        {phoneBreakpointDummy ||
-                          'This feature is available only on desktop.'}
-                      </Text>
-                    </Box>
-                  )}
-                </Box>
-                {smallScreen && (
-                  <EditorSidebar
+          {formLoading || questionsListLoading || answerScoresListLoading ? (
+            <Spinner />
+          ) : (
+            <Container display="flex" height="inherit" overflowX="hidden">
+              <Box
+                flex={1}
+                display="flex"
+                p={containerPadding}
+                flexDirection="column">
+                {showHeader && (
+                  <PageHeader
                     id={id}
-                    formData={form}
-                    endings={endings}
-                    questions={questions}
-                    answerScoresData={answerScoresList}
-                    customQuestionTypes={customQuestionTypes}
-                    welcomeScreenShowRule={welcomeScreenShowRule}
+                    handlesPreview
+                    title={form?.title}
+                    onBack={history.goBack}
+                    smallScreen={smallScreen}
                   />
                 )}
-              </Container>
-            )}
-          </TypeformConfigurationContext.Provider>
+                {smallScreen ? (
+                  <QuestionForm
+                    defaultTab={defaultTab}
+                    questionsList={questionsList}
+                    questionData={currentQuestion}
+                    brightnessValue={brightnessValue}
+                    setBrightnessValue={setBrightnessValue}
+                    customQuestionTypes={customQuestionTypes}
+                    onQuestionTypeChange={onQuestionTypeChange}
+                    welcomeScreenShowRule={welcomeScreenShowRule}
+                    onQuestionLayoutChange={onQuestionLayoutChange}
+                  />
+                ) : (
+                  <Box
+                    height="100%"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center">
+                    <Text>
+                      {phoneBreakpointDummy ||
+                        'This feature is available only on desktop.'}
+                    </Text>
+                  </Box>
+                )}
+              </Box>
+              {smallScreen && (
+                <EditorSidebar
+                  id={id}
+                  formData={form}
+                  endings={endings}
+                  questions={questions}
+                  answerScoresData={answerScoresList}
+                  customQuestionTypes={customQuestionTypes}
+                  welcomeScreenShowRule={welcomeScreenShowRule}
+                />
+              )}
+            </Container>
+          )}
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>

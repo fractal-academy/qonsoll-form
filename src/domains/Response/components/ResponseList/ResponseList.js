@@ -20,7 +20,7 @@ function ResponseList(props) {
   )
 
   return (
-    <Box p={2} width="100%">
+    <Box p={3} width="100%">
       {loading ? (
         <Box display="flex" flex={1} alignItems="center">
           <Spin size="large" />

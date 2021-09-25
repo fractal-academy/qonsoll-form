@@ -1,6 +1,6 @@
-import { Form, Switch } from 'antd'
+import { Form } from 'antd'
 import React, { useMemo } from 'react'
-import { TextArea, Input } from '@qonsoll/react-design'
+import { TextArea, Input, Switch } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 
 // const { TextArea } = Input

@@ -11,10 +11,10 @@ const { Option, OptGroup } = Select
 
 function QuestionSelect(props) {
   const {
-    questionList,
-    questionConfigurations,
     index = 0,
-    addRedirectQuestion
+    questionList,
+    addRedirectQuestion,
+    questionConfigurations
   } = props
 
   // [CLEAN FUNCTIONS]
@@ -51,10 +51,10 @@ function QuestionSelect(props) {
 }
 
 QuestionSelect.propTypes = {
-  questionList: PropTypes.array.isRequired,
-  questionOptions: PropTypes.array.isRequired,
   index: PropTypes.number.isRequired,
-  addRedirectQuestion: PropTypes.func.isRequired
+  questionList: PropTypes.array.isRequired,
+  addRedirectQuestion: PropTypes.func.isRequired,
+  questionConfigurations: PropTypes.array.isRequired
 }
 
 export default QuestionSelect

@@ -1,6 +1,5 @@
-import { Switch } from 'antd'
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Box, Text } from '@qonsoll/react-design'
+import { Row, Col, Box, Text, Switch } from '@qonsoll/react-design'
 import { QUESTION_TYPES } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
 import {
@@ -11,7 +10,7 @@ import {
 import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
 
 function QuestionConfigurationMenu() {
-  // [ADDITIONAL_HOOKS]
+  // [CUSTOM_HOOKS]
   const { questionVideo, questionRequiredSetting } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -24,7 +23,7 @@ function QuestionConfigurationMenu() {
     currentQuestion?.isVideoQuestion
   )
 
-  // [CLEAN FUNCTIONS]
+  // [CLEAN_FUNCTIONS]
   const requireStateChange = (switchValue) => {
     setRequiredSwitchValue(!switchValue)
     currentQuestionDispatch({

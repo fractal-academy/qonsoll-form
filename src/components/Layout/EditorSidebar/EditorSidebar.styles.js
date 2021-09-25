@@ -7,6 +7,6 @@ export const SidebarBoxWrapper = styled(Box)`
   padding: 4px 0;
   display: flex;
   flex-direction: column;
-  width: var(--qf-sidebar-width);
   min-width: 300px;
+  width: var(--qf-sidebar-width);
 `

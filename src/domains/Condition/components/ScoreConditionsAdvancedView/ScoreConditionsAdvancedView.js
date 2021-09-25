@@ -100,8 +100,8 @@ const ScoreConditionsAdvancedView = (props) => {
 
 ScoreConditionsAdvancedView.propTypes = {
   index: PropTypes.number.isRequired,
-  questionData: PropTypes.array.isRequired,
-  questionScoresData: PropTypes.array.isRequired
+  questionData: PropTypes.object,
+  questionScoresData: PropTypes.object
 }
 
 export default ScoreConditionsAdvancedView

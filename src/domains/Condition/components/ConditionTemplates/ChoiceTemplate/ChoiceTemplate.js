@@ -1,46 +1,65 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col, Text } from '@qonsoll/react-design'
-import { CustomChoiceBox, CustomTextBox } from './ChoiceTemplate.styles'
 import { QuestionSelect } from '../../../../Question/components'
+import { Container, Row, Col, Text } from '@qonsoll/react-design'
+import { useTranslation } from '../../../../../context/Translation'
+import { QuestionPreview, LetterBox } from '../ConditionTemplates.styles'
 
 let startLetter = 65
 
 function ChoiceTemplate(props) {
-  const { questionConfigurations, questionList, addRedirectQuestion } = props
+  const {
+    questionList,
+    handlesUpload,
+    addRedirectQuestion,
+    questionConfigurations
+  } = props
+
+  // [ADDITIONAL_HOOKS]
+  const { conditionModalIsUploaded } = useTranslation()
 
   return (
-    <>
+    <Container>
       {questionConfigurations?.map((item, index) => (
         <Row mb={2} key={index}>
-          <Col cw={6} pl={0} pr={2}>
-            <CustomChoiceBox px={3}>
-              <CustomTextBox mr={2} px={2}>
-                <Text color="var(--qf-typography-subtitle-color)" strong>
-                  {String.fromCharCode(startLetter + index)}
-                </Text>
-              </CustomTextBox>
-              <Text color="var(--qf-typography-subtitle-color)" ellipsis>
-                {item?.answerOption}
+          <Col cw={6} pr={2} pl={0}>
+            <QuestionPreview px={3}>
+              {!handlesUpload && (
+                <LetterBox px={2} mr={2}>
+                  <Text color="var(--qf-typography-subtitle-color)" strong>
+                    {String.fromCharCode(startLetter + index)}
+                  </Text>
+                </LetterBox>
+              )}
+              <Text
+                color="var(--qf-typography-title-color)"
+                variant="body1"
+                ellipsis>
+                {handlesUpload
+                  ? conditionModalIsUploaded || 'is uploaded'
+                  : item?.answerOption}
               </Text>
-            </CustomChoiceBox>
+            </QuestionPreview>
           </Col>
-          <Col cw={6}>
+          <Col cw={6} pr={0} pl={2}>
             <QuestionSelect
-              addRedirectQuestion={addRedirectQuestion}
-              questionConfigurations={questionConfigurations}
               index={index}
               questionList={questionList}
+              addRedirectQuestion={addRedirectQuestion}
+              questionConfigurations={questionConfigurations}
             />
           </Col>
         </Row>
       ))}
-    </>
+    </Container>
   )
 }
+
 ChoiceTemplate.propTypes = {
-  questionConfigurations: PropTypes.array.isRequired,
-  questionList: PropTypes.array.isRequired,
-  addRedirectQuestion: PropTypes.func.isRequired
+  handlesUpload: PropTypes.bool,
+  questionList: PropTypes.array,
+  addRedirectQuestion: PropTypes.func,
+  questionConfigurations: PropTypes.array
 }
+
 export default ChoiceTemplate

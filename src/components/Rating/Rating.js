@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
 import useMedia from 'use-media'
-import { message } from 'antd'
+import { message, Radio } from 'antd'
+import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
-import { Container } from '@qonsoll/react-design'
-import { useTranslation } from '../../context/Translation'
 import { StyledRate } from './Rating.styles'
 import { StarFilled } from '@ant-design/icons'
-import { getQuestionAnswerFromContext } from '../../helpers'
+import { Container, Box, Text } from '@qonsoll/react-design'
 import { useAnswersContext } from '../../context/Answers'
+import { useTranslation } from '../../context/Translation'
+import { getQuestionAnswerFromContext } from '../../helpers'
 
 function CustomRating(props) {
   const {
@@ -22,8 +22,9 @@ function CustomRating(props) {
   const { questionConfigurations } = question
 
   //[CUSTOM HOOKS]
-  const { requiredAnswerMessage } = useTranslation()
   const answersContext = useAnswersContext()
+  const { requiredAnswerMessage, checkboxIrrelevant, checkboxNonPreferred } =
+    useTranslation()
   const [selectedValue, setSelectedValue] = useState(0)
 
   //[ADDITIONAL HOOKS]
@@ -32,6 +33,10 @@ function CustomRating(props) {
 
   // [COMPUTED PROPERTIES]
   const range = questionConfigurations?.map((el) => el?.answerOption)
+  const irrelevantCheckboxLabel =
+    checkboxIrrelevant || 'This is not relevant to me'
+  const notPreferredCheckboxLabel =
+    checkboxNonPreferred || 'I prefer not to answer'
 
   // [CLEAN FUNCTIONS]
   const onChange = (selectedStarsNumber) => {
@@ -39,6 +44,7 @@ function CustomRating(props) {
       const selectedStarData = questionConfigurations?.[selectedStarsNumber - 1]
       setSelectedValue(selectedStarsNumber)
       //answer score if configured
+      console.log(selectedStarData)
       const score =
         answersScoreData?.find(
           (item) => item?.answerOptionId === selectedStarData?.answerOptionId
@@ -51,12 +57,25 @@ function CustomRating(props) {
         answerScore: isFormQuiz ? score : ''
       }
 
-      // if the data is sent we delay and animate the selected value, else - just go to next question
-      if (!!selectedStarsNumber) {
-        onClick && setTimeout(onClick, 700, data)
-      } else {
-        onClick?.(data)
-      }
+      onClick && setTimeout(onClick, 700, data)
+    }
+  }
+
+  const onRadioChange = (option) => {
+    const score = ''
+
+    const data = {
+      question,
+      answer: { value: option.target.value || '' },
+      answerId: '1',
+      answerScore: isFormQuiz ? score : ''
+    }
+
+    // if the data is sent we delay and animate the selected value, else - just go to next question
+    if (!!option) {
+      onClick && setTimeout(onClick, 700, data)
+    } else {
+      onClick?.(data)
     }
   }
 
@@ -89,8 +108,9 @@ function CustomRating(props) {
       events: ['keydown', 'keyup']
     }
   )
+
   return (
-    <Container>
+    <Container display="grid">
       <StyledRate
         value={selectedValue}
         autoFocus={false}
@@ -103,6 +123,24 @@ function CustomRating(props) {
         count={questionConfigurations?.length}
         character={<StarFilled onMouseDown={(e) => e.preventDefault()} />}
       />
+      {question?.isExtended && (
+        <Radio.Group onChange={onRadioChange}>
+          <Box mt={4}>
+            <Radio value={notPreferredCheckboxLabel} disabled={!onClick}>
+              <Text color="var(--qf-typography-subtitle-color)" variant="body1">
+                {notPreferredCheckboxLabel}
+              </Text>
+            </Radio>
+          </Box>
+          <Box mt={2}>
+            <Radio value={irrelevantCheckboxLabel} disabled={!onClick}>
+              <Text color="var(--qf-typography-subtitle-color)" variant="body1">
+                {irrelevantCheckboxLabel}
+              </Text>
+            </Radio>
+          </Box>
+        </Radio.Group>
+      )}
     </Container>
   )
 }

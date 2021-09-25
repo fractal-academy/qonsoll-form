@@ -5,10 +5,9 @@ import { useHistory } from 'react-router-dom'
 import { PageHeader } from '../../../../components'
 import { COLLECTIONS } from '../../../../constants'
 import useFunctions from '../../../../hooks/useFunctions'
-import { Container, Title, NoData } from '@qonsoll/react-design'
+import { Container, Title, NoData, Box } from '@qonsoll/react-design'
 import { ResponseTable, ResponseList } from '../../../Response/components'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import { SidebarBoxWrapper } from '../../../../components/Layout/EditorSidebar/EditorSidebar.styles'
 import {
@@ -25,7 +24,6 @@ function FormAnswers(props) {
     id,
     firebase,
     translations,
-    configurations,
     showHeader,
     wrapperPaddings,
     actions = {}
@@ -80,7 +78,6 @@ function FormAnswers(props) {
       })
       setUserAnswers(answersData.sort((a, b) => a.order - b.order))
     } catch (e) {
-      console.log(e)
       message.error('Error occurred during user answers loading')
     }
     setUserAnswersLoading(false)
@@ -91,44 +88,44 @@ function FormAnswers(props) {
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={translations || {}}>
-          <TypeformConfigurationContext.Provider value={configurations}>
-            <Container display="flex" height="inherit">
-              <SidebarBoxWrapper>
-                <Title
-                  ml={3}
-                  my={3}
-                  level={5}
-                  color="var(--qf-typography-title-color)">
-                  {answerUserListTitle || 'Users'}
-                </Title>
-                {checkUserAswerGroup ? (
+          <Container display="flex" height="inherit">
+            <Container p={containerPadding}>
+              {showHeader && (
+                <PageHeader
+                  onBack={() => history.goBack()}
+                  title={answerTitle || 'Answers'}
+                />
+              )}
+
+              <ResponseTable
+                isFormQuiz={formData?.isQuiz}
+                data={userAnswers}
+                loading={userAnswersLoading}
+              />
+            </Container>
+            <SidebarBoxWrapper>
+              <Title
+                ml={3}
+                my={3}
+                level={5}
+                color="var(--qf-typography-title-color)">
+                {answerUserListTitle || 'Users'}
+              </Title>
+              {checkUserAswerGroup ? (
+                <Box overflow="auto">
                   <ResponseList
                     userAnswerGroup={userAnswerGroup}
                     loading={userAnswerGroupLoading}
                     onListItemClick={onListItemClick}
                   />
-                ) : (
-                  <NoData
-                    description={answerEmptyList || "There's no responses yet"}
-                  />
-                )}
-              </SidebarBoxWrapper>
-              <Container p={containerPadding}>
-                {showHeader && (
-                  <PageHeader
-                    onBack={() => history.goBack()}
-                    title={answerTitle || 'Answers'}
-                  />
-                )}
-
-                <ResponseTable
-                  isFormQuiz={formData?.isQuiz}
-                  data={userAnswers}
-                  loading={userAnswersLoading}
+                </Box>
+              ) : (
+                <NoData
+                  description={answerEmptyList || "There's no responses yet"}
                 />
-              </Container>
-            </Container>
-          </TypeformConfigurationContext.Provider>
+              )}
+            </SidebarBoxWrapper>
+          </Container>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>

@@ -38,7 +38,6 @@ function QuestionTypeSelect(props) {
     opinionDesc,
     pictureChoiceDesc,
     choiceDesc,
-    ratingExtendedDesc,
     ratingDesc,
     statementDesc,
     yesnoDesc
@@ -93,11 +92,6 @@ function QuestionTypeSelect(props) {
       icon: <StarOutlined />
     },
     {
-      type: QUESTION_TYPES.RATING_EXTENDED,
-      description: ratingExtendedDesc || 'Rate us or not',
-      icon: <StarOutlined />
-    },
-    {
       type: QUESTION_TYPES.STATEMENT,
       description: statementDesc || 'Take the mic for a moment',
       icon: <CopyrightOutlined />
@@ -112,7 +106,7 @@ function QuestionTypeSelect(props) {
   const updatedMap =
     (welcomeScreenShowRule &&
       questionTypeMap?.filter(
-        (item) => item.type !== QUESTION_TYPES.WELCOME_SCREEN
+        (item) => item?.type !== QUESTION_TYPES.WELCOME_SCREEN
       )) ||
     questionTypeMap
 
@@ -124,17 +118,17 @@ function QuestionTypeSelect(props) {
     <Box pl={2} display="block">
       <QuestionsTypeMenu>
         {updatedMap?.map((item) => (
-          <QuestionMenuItem key={item.type} onClick={onClick}>
+          <QuestionMenuItem key={item?.type} onClick={onClick}>
             <Row h="center" v="center" noGutters>
               <Col cw="auto" ml={2}>
-                {item.icon}
+                {item?.icon}
               </Col>
               <Col display="grid">
                 <Text color="var(--qf-typography-title-color)">
-                  {item.type}
+                  {item?.type}
                 </Text>
                 <Text color="var(--qf-typography-caption-color)">
-                  {item.description}
+                  {item?.description}
                 </Text>
               </Col>
             </Row>

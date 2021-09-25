@@ -88,10 +88,10 @@ function PageHeader(props) {
 PageHeader.propTypes = {
   id: PropTypes.string,
   onBack: PropTypes.func,
+  title: PropTypes.string,
   smallScreen: PropTypes.bool,
   titleProps: PropTypes.object,
-  handlesPreview: PropTypes.bool,
-  title: PropTypes.string.isRequired
+  handlesPreview: PropTypes.bool
 }
 
 export default PageHeader

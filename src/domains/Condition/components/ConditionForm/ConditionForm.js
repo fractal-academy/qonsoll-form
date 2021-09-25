@@ -1,17 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import { Box, Title } from '@qonsoll/react-design'
+import { Title } from '@qonsoll/react-design'
 import { NumberedCard } from '../../../../components'
 import { QUESTION_TYPES } from '../../../../constants'
 import {
-  RatingTemplate,
-  FileUploadTemplate,
-  YesNoChoiceTemplate,
-  OpinionScaleTemplate,
-  PlaneTextDateTemplate,
-  ChoiceTemplate,
-  PlaneLongTextStringTemplate,
-  PlaneShortTextStringTemplate
+  TextTemplate,
+  ChoiceTemplate
 } from '../../../../domains/Condition/components/ConditionTemplates'
 
 function ConditionForm(props) {
@@ -25,7 +19,7 @@ function ConditionForm(props) {
 
   const questionTypesMap = {
     [QUESTION_TYPES.YES_NO]: {
-      component: <YesNoChoiceTemplate />
+      component: <ChoiceTemplate />
     },
     [QUESTION_TYPES.PICTURE_CHOICE]: {
       component: <ChoiceTemplate choices={item?.questionConfigurations} />
@@ -34,22 +28,22 @@ function ConditionForm(props) {
       component: <ChoiceTemplate choices={item?.questionConfigurations} />
     },
     [QUESTION_TYPES.OPINION_SCALE]: {
-      component: <OpinionScaleTemplate />
+      component: <ChoiceTemplate />
     },
     [QUESTION_TYPES.RATING]: {
-      component: <RatingTemplate />
+      component: <ChoiceTemplate />
     },
     [QUESTION_TYPES.SHORT_TEXT]: {
-      component: <PlaneShortTextStringTemplate />
+      component: <TextTemplate />
     },
     [QUESTION_TYPES.LONG_TEXT]: {
-      component: <PlaneLongTextStringTemplate />
+      component: <TextTemplate />
     },
     [QUESTION_TYPES.DATE]: {
-      component: <PlaneTextDateTemplate />
+      component: <TextTemplate handlesDate />
     },
     [QUESTION_TYPES.FILE_UPLOAD]: {
-      component: <FileUploadTemplate isUploaded />
+      component: <ChoiceTemplate handlesUpload />
     },
     [QUESTION_TYPES.ENDING]: {
       component: <></>
@@ -58,20 +52,17 @@ function ConditionForm(props) {
 
   return (
     <NumberedCard top="24px" number={index + 1} key={index}>
-      <Box>
-        <Box mb={2}>
-          <Title color="var(--qf-typography-title-color)" level={5}>
-            {item?.title}
-          </Title>
-        </Box>
-        {cloneElement(questionTypesMap[item?.questionType].component, {
-          ...item,
-          addCondition: (answer) => addCondition(answer, index),
-          addRedirectQuestion: (question, answerIndex) =>
-            addRedirectQuestion(question, answerIndex, index),
-          questionList: getQuestionListRedirect(index)
-        })}
-      </Box>
+      <Title color="var(--qf-typography-title-color)" level={5} mb={2}>
+        {item?.title}
+      </Title>
+
+      {cloneElement(questionTypesMap[item?.questionType].component, {
+        ...item,
+        addCondition: (answer) => addCondition(answer, index),
+        addRedirectQuestion: (question, answerIndex) =>
+          addRedirectQuestion(question, answerIndex, index),
+        questionList: getQuestionListRedirect(index)
+      })}
     </NumberedCard>
   )
 }

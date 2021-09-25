@@ -11,7 +11,6 @@ import { TranslationContext } from '../../../../context/Translation'
 import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
 import { Spinner, StaticList, PageHeader } from '../../../../components'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 
@@ -21,7 +20,6 @@ function FormsAll(props) {
     translations,
     actions = {},
     childrenModal,
-    configurations,
     showHeader,
     disableAddButton,
     wrapperPaddings
@@ -113,49 +111,47 @@ function FormsAll(props) {
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={translations || {}}>
-          <TypeformConfigurationContext.Provider value={configurations}>
-            <Container p={containerPadding}>
-              {showHeader && (
-                <>
-                  <PageHeader title={formsAllTitle || 'Forms'} />
-                  <Box mb={3}>
-                    <Text color="var(--qf-typography-caption-color)">
-                      {`${formCounter || 'Amount of forms'}: `}
-                      {amountFiles}
-                    </Text>
-                  </Box>
-                </>
-              )}
-
-              {data?.length > 4 && (
-                // Search will be visible only when there's will be more than 4 forms
+          <Container p={containerPadding}>
+            {showHeader && (
+              <>
+                <PageHeader title={formsAllTitle || 'Forms'} />
                 <Box mb={3}>
-                  <Input
-                    ref={searchRef}
-                    placeholder={`${
-                      formSearchPlaceholder || 'Search form by name'
-                    }...`}
-                    onChange={(input) => searchData(input.target.value)}
-                  />
+                  <Text color="var(--qf-typography-caption-color)">
+                    {`${formCounter || 'Amount of forms'}: `}
+                    {amountFiles}
+                  </Text>
                 </Box>
-              )}
-              <Box mr="-10px" className="custom-scroll">
-                <StaticList
-                  setEdit={setEdit}
-                  data={currentData}
-                  onClick={showModal}
-                  disableAddButton={!disableAddButton}
-                />
+              </>
+            )}
 
-                <FormSimpleFormWithModal
-                  onModalSubmit={onFormCreate}
-                  isModalVisible={isModalVisible}
-                  setIsModalVisible={setIsModalVisible}>
-                  {childrenModal}
-                </FormSimpleFormWithModal>
+            {data?.length > 4 && (
+              // Search will be visible only when there's will be more than 4 forms
+              <Box mb={3}>
+                <Input
+                  ref={searchRef}
+                  placeholder={`${
+                    formSearchPlaceholder || 'Search form by name'
+                  }...`}
+                  onChange={(input) => searchData(input.target.value)}
+                />
               </Box>
-            </Container>
-          </TypeformConfigurationContext.Provider>
+            )}
+            <Box mr="-10px" className="custom-scroll">
+              <StaticList
+                setEdit={setEdit}
+                data={currentData}
+                onClick={showModal}
+                disableAddButton={!disableAddButton}
+              />
+
+              <FormSimpleFormWithModal
+                onModalSubmit={onFormCreate}
+                isModalVisible={isModalVisible}
+                setIsModalVisible={setIsModalVisible}>
+                {childrenModal}
+              </FormSimpleFormWithModal>
+            </Box>
+          </Container>
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>

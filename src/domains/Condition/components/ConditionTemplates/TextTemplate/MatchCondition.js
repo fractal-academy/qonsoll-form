@@ -1,21 +1,20 @@
-import { Select } from 'antd'
+import moment from 'moment'
 import PropTypes from 'prop-types'
-import { Col, Row } from '@qonsoll/react-design'
 import React, { useState, useEffect } from 'react'
 import { COLLECTIONS } from '../../../../../constants'
 import useFunctions from '../../../../../hooks/useFunctions'
+import { Row, Col, Input, Select } from '@qonsoll/react-design'
+import { StyledDatePicker } from '../ConditionTemplates.styles'
 import { QuestionSelect } from '../../../../Question/components'
-import { CustomInput, StyledSelect } from './PlainTextItem.styles'
 import { useTranslation } from '../../../../../context/Translation'
-import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
+import { TEXT_CONDITION_SELECT_OPTIONS } from '../../../../../constants/planeTextStringConditionRules'
 
-const { Option } = Select
-
-function PlaneTextItem(props) {
+function MatchCondition(props) {
   const {
     item,
     index,
     questionId,
+    handlesDate,
     questionList,
     addRedirectQuestion,
     questionConfigurations
@@ -23,19 +22,25 @@ function PlaneTextItem(props) {
 
   //[ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const { conditionRedirectRulePlaceholder } = useTranslation()
+  const { conditionRedirectPlaceholder } = useTranslation()
 
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState(item?.answerOption)
+  const [datePickerValue, setDatePickerValue] = useState(
+    item?.answerOption ? moment(item?.answerOption) : ''
+  )
   const [ruleSelectValue, setRuleSelectValue] = useState(
     item?.redirectConditionRule ||
-      conditionRedirectRulePlaceholder ||
+      conditionRedirectPlaceholder ||
       'Select redirect rule'
   )
 
   //[CLEAR FUNCTIONS]
   const onInputValueChange = ({ target }) => {
     setInputValue(target.value)
+  }
+  const onDatePickerValueChange = (datePickerVal, stringDateValue = '') => {
+    setDatePickerValue(datePickerVal || '')
   }
 
   const onRuleSelectValueChange = (selectValue) => {
@@ -73,63 +78,64 @@ function PlaneTextItem(props) {
 
   useEffect(() => {
     setInputValue(item?.answerOption || '')
+    setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
     setRuleSelectValue(
       item?.redirectConditionRule ||
-        conditionRedirectRulePlaceholder ||
+        conditionRedirectPlaceholder ||
         'Select redirect rule'
     )
-  }, [item, conditionRedirectRulePlaceholder])
+  }, [item, conditionRedirectPlaceholder])
 
   return (
     <Row mb={2} key={index}>
-      <Col cw={6} px={0}>
-        <Row>
-          <Col cw={6} px={0}>
-            <StyledSelect
-              showSearch
-              allowClear
-              value={
-                ruleSelectValue ||
-                conditionRedirectRulePlaceholder ||
-                'Select redirect rule'
-              }
-              onChange={onRuleSelectValueChange}>
-              {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
-                <Option key={index} value={item}>
-                  {item}
-                </Option>
-              ))}
-            </StyledSelect>
-          </Col>
-          <Col cw={6} pl={1} pr={2}>
-            <CustomInput
-              placeholder="Enter value"
-              value={inputValue}
-              onChange={onInputValueChange}
-              onBlur={onBlur}
-            />
-          </Col>
-        </Row>
+      <Col cw={3} pr={2} pl={0}>
+        <Select
+          showSearch
+          allowClear
+          value={
+            ruleSelectValue ||
+            conditionRedirectPlaceholder ||
+            'Select redirect rule'
+          }
+          options={TEXT_CONDITION_SELECT_OPTIONS}
+          onChange={onRuleSelectValueChange}
+        />
       </Col>
-
-      <Col cw={6} pr={0}>
+      <Col cw={3} pl={0} pr={2}>
+        {handlesDate ? (
+          <StyledDatePicker
+            value={datePickerValue}
+            onChange={onDatePickerValueChange}
+          />
+        ) : (
+          <Input
+            placeholder="Enter value"
+            value={inputValue}
+            onChange={onInputValueChange}
+            onBlur={onBlur}
+          />
+        )}
+      </Col>
+      <Col cw={6} pr={0} pl={2}>
         <QuestionSelect
-          addRedirectQuestion={addRedirectQuestion}
-          questionConfigurations={questionConfigurations}
           index={index}
           questionList={questionList}
+          addRedirectQuestion={addRedirectQuestion}
+          questionConfigurations={questionConfigurations}
         />
       </Col>
     </Row>
   )
 }
-PlaneTextItem.propTypes = {
+
+MatchCondition.propTypes = {
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
-  questionId: PropTypes.string.isRequired,
-  addCondition: PropTypes.func.isRequired,
-  questionList: PropTypes.array.isRequired,
-  addRedirectQuestion: PropTypes.func.isRequired,
-  questionConfigurations: PropTypes.array.isRequired
+  questionId: PropTypes.string,
+  addCondition: PropTypes.func,
+  questionList: PropTypes.array,
+  addRedirectQuestion: PropTypes.func,
+  questionConfigurations: PropTypes.array
 }
-export default PlaneTextItem
+
+export default MatchCondition
