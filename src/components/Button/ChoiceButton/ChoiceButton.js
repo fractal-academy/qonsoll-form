@@ -109,7 +109,7 @@ function ChoiceButton(props) {
         <Col
           mr={2}
           key={index}
-          cw={hasImages ? (phoneSize ? '10' : 'auto') : '12'}>
+          cw={hasImages ? (phoneSize ? '10' : '3') : '12'}>
           <KeyBox
             index={index}
             item={item}

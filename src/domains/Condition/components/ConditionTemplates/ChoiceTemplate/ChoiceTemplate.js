@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { QuestionSelect } from '../../../../Question/components'
 import { Container, Row, Col, Text } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../../context/Translation'
-import { QuestionPreview, LetterBox } from '../ConditionTemplates.styles'
+import { QuestionPreview, LetterBox } from '../../ConditionTemplates.styles'
 
 let startLetter = 65
 

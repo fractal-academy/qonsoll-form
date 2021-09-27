@@ -5,23 +5,24 @@ import { blinkBackground } from '../../../animation'
 export const StyledRangeButton = styled(Button)`
   ${({ isActive }) => `
   height: 60px;
-  width: -webkit-fill-available;
-  border-color: ${
-    isActive ? 'var(--qf-button-color)' : 'var(--qf-active-button-color)'
-  };
+  border-color: transparent;
   background-color: ${
-    isActive ? 'var(--qf-active-button-bg)' : 'var(--qf-button-bg)'
+    isActive ? 'var(--qf-button-bg-active)' : 'var(--qf-button-bg)'
   };
   color: ${
-    isActive ? 'var(--qf-button-color)' : 'var(--qf-active-button-color)'
+    isActive ? 'var(--qf-button-color-active)' : 'var(--qf-button-color)'
   };
 
   &:hover {
-    color: ${
-      isActive ? 'var(--qf-active-button-color)' : 'var(--qf-button-color)'
+    transform: translate(0, -4px);
+    translate: all 0.3s ease-in-out;
+    border-color: transparent;
+    background-color: ${
+      isActive ? 'var(--qf-button-bg-active)' : 'var(--qf-button-bg-hover)'
     };
-    border-color: ${isActive ? 'var(--qf-active-button-color)' : 'transparent'};
-   background-color: var(--qf-active-button-bg);
+    color: ${
+      isActive ? 'var(--qf-button-color-active)' : 'var(--qf-button-color)'
+    };
   }
   ${blinkBackground}
   ${

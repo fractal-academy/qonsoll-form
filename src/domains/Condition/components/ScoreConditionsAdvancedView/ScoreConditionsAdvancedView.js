@@ -1,15 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { InputNumber } from 'antd'
 import { COLLECTIONS } from '../../../../constants'
 import { NumberedCard } from '../../../../components'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslation } from '../../../../context/Translation'
 import { Box, Row, Col, Text, Title } from '@qonsoll/react-design'
-import {
-  OptionBox,
-  StyledInputNumber,
-  CustomTextBox
-} from './ScoreConditionsAdvancedView.style'
+import { QuestionPreview, LetterBox } from '../ConditionTemplates.styles'
 
 const startLetter = 65
 
@@ -54,31 +51,36 @@ const ScoreConditionsAdvancedView = (props) => {
 
   return (
     <NumberedCard top="24px" number={index + 1} key={index}>
-      <Box ml={3}>
+      <Box>
         <Title
           color="var(--qf-typography-title-color)"
+          textOverflow="ellipsis"
           level={5}
-          style={{ marginBottom: '10px' }}>
+          mb={2}>
           {questionData?.title}
         </Title>
+
         {questionData?.questionConfigurations?.map((item, index) => (
           <Row mb={2} key={index}>
-            <Col cw={8} pl={0} pr={2}>
-              <OptionBox px={3}>
-                <CustomTextBox mr={2} px={2}>
+            <Col cw={8} pr={2} pl={0}>
+              <QuestionPreview px={3}>
+                <LetterBox px={2} mr={2}>
                   <Text color="var(--qf-typography-subtitle-color)" strong>
                     {String.fromCharCode(startLetter + index)}
                   </Text>
-                </CustomTextBox>
-                <Text color="var(--qf-typography-subtitle-color)" ellipsis>
+                </LetterBox>
+                <Text
+                  color="var(--qf-typography-title-color)"
+                  variant="body1"
+                  ellipsis>
                   {item?.answerOption}
                 </Text>
-              </OptionBox>
+              </QuestionPreview>
             </Col>
-            <Col cw={4}>
-              <StyledInputNumber
+            <Col cw={4} pr={0} pl={2}>
+              <InputNumber
                 min={0}
-                style={{ width: '100%' }}
+                max={10}
                 placeholder={scoreWeightTitle || 'Enter score weight of answer'}
                 value={getScoreByAnswerOptionId(item?.answerOptionId)}
                 onBlur={(event) =>

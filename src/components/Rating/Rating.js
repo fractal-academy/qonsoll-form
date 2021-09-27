@@ -1,10 +1,12 @@
+import { message } from 'antd'
 import useMedia from 'use-media'
-import { message, Radio } from 'antd'
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { StyledRate } from './Rating.styles'
 import { StarFilled } from '@ant-design/icons'
-import { Container, Box, Text } from '@qonsoll/react-design'
+import RatingExtension from './RatingExtension'
+import { Container } from '@qonsoll/react-design'
 import { useAnswersContext } from '../../context/Answers'
 import { useTranslation } from '../../context/Translation'
 import { getQuestionAnswerFromContext } from '../../helpers'
@@ -23,8 +25,7 @@ function CustomRating(props) {
 
   //[CUSTOM HOOKS]
   const answersContext = useAnswersContext()
-  const { requiredAnswerMessage, checkboxIrrelevant, checkboxNonPreferred } =
-    useTranslation()
+  const { requiredAnswerMessage } = useTranslation()
   const [selectedValue, setSelectedValue] = useState(0)
 
   //[ADDITIONAL HOOKS]
@@ -33,10 +34,6 @@ function CustomRating(props) {
 
   // [COMPUTED PROPERTIES]
   const range = questionConfigurations?.map((el) => el?.answerOption)
-  const irrelevantCheckboxLabel =
-    checkboxIrrelevant || 'This is not relevant to me'
-  const notPreferredCheckboxLabel =
-    checkboxNonPreferred || 'I prefer not to answer'
 
   // [CLEAN FUNCTIONS]
   const onChange = (selectedStarsNumber) => {
@@ -44,7 +41,6 @@ function CustomRating(props) {
       const selectedStarData = questionConfigurations?.[selectedStarsNumber - 1]
       setSelectedValue(selectedStarsNumber)
       //answer score if configured
-      console.log(selectedStarData)
       const score =
         answersScoreData?.find(
           (item) => item?.answerOptionId === selectedStarData?.answerOptionId
@@ -57,25 +53,9 @@ function CustomRating(props) {
         answerScore: isFormQuiz ? score : ''
       }
 
-      onClick && setTimeout(onClick, 700, data)
-    }
-  }
-
-  const onRadioChange = (option) => {
-    const score = ''
-
-    const data = {
-      question,
-      answer: { value: option.target.value || '' },
-      answerId: '1',
-      answerScore: isFormQuiz ? score : ''
-    }
-
-    // if the data is sent we delay and animate the selected value, else - just go to next question
-    if (!!option) {
-      onClick && setTimeout(onClick, 700, data)
-    } else {
-      onClick?.(data)
+      selectedStarsNumber && onClick
+        ? setTimeout(onClick, 700, data)
+        : onClick(data)
     }
   }
 
@@ -124,27 +104,25 @@ function CustomRating(props) {
         character={<StarFilled onMouseDown={(e) => e.preventDefault()} />}
       />
       {question?.isExtended && (
-        <Radio.Group onChange={onRadioChange}>
-          <Box mt={4}>
-            <Radio value={notPreferredCheckboxLabel} disabled={!onClick}>
-              <Text color="var(--qf-typography-subtitle-color)" variant="body1">
-                {notPreferredCheckboxLabel}
-              </Text>
-            </Radio>
-          </Box>
-          <Box mt={2}>
-            <Radio value={irrelevantCheckboxLabel} disabled={!onClick}>
-              <Text color="var(--qf-typography-subtitle-color)" variant="body1">
-                {irrelevantCheckboxLabel}
-              </Text>
-            </Radio>
-          </Box>
-        </Radio.Group>
+        <RatingExtension
+          onClick={onClick}
+          question={question}
+          isFormQuiz={isFormQuiz}
+          isMultiple={question?.isMultiple}
+        />
       )}
     </Container>
   )
 }
 
-CustomRating.propTypes = {}
+CustomRating.propTypes = {
+  onClick: PropTypes.func,
+  tooltips: PropTypes.array,
+  question: PropTypes.object,
+  isFormQuiz: PropTypes.bool,
+  allowClear: PropTypes.bool,
+  currentSlide: PropTypes.number,
+  answersScoreData: PropTypes.array
+}
 
 export { CustomRating }

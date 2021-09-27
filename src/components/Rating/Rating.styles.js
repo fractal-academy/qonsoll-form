@@ -13,6 +13,6 @@ export const StyledRate = styled(Rate)`
         : tabletSize
         ? '45px'
         : '50px'};
-    color: var(--qf-button-color);
+    color: var(--qf-button-bg-active);
   }
 `

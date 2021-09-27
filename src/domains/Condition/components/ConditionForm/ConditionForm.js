@@ -52,7 +52,11 @@ function ConditionForm(props) {
 
   return (
     <NumberedCard top="24px" number={index + 1} key={index}>
-      <Title color="var(--qf-typography-title-color)" level={5} mb={2}>
+      <Title
+        color="var(--qf-typography-title-color)"
+        textOverflow="ellipsis"
+        level={5}
+        mb={2}>
         {item?.title}
       </Title>
 

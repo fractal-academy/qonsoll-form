@@ -15,11 +15,18 @@ function AmountOptionsCustomConfig() {
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const { questionConfigurationOptions } = useTranslation()
+  const {
+    questionConfigurationOptions,
+    questionConfigurationExtended,
+    questionConfigurationMultiple
+  } = useTranslation()
 
   // [COMPONENT_STATE_HOOKS]
   const [extendedSwitchValue, setExtendedSwitchValue] = useState(
     currentQuestion?.isExtended
+  )
+  const [multipleSelectSwitchValue, setMultipleSelectSwitchValue] = useState(
+    currentQuestion?.isMultiple
   )
 
   // [CLEAN_FUNCTIONS]
@@ -43,6 +50,13 @@ function AmountOptionsCustomConfig() {
       payload: { isExtended: switchValue }
     })
   }
+  const multipleStateChange = (switchValue) => {
+    setMultipleSelectSwitchValue(!switchValue)
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { isMultiple: switchValue }
+    })
+  }
 
   // [COMPUTED PROPERTIES]
   const questionConfigurations = currentQuestion?.questionConfigurations
@@ -52,6 +66,7 @@ function AmountOptionsCustomConfig() {
   useEffect(() => {
     //update text area value when delete element
     setExtendedSwitchValue(currentQuestion?.isExtended)
+    setMultipleSelectSwitchValue(currentQuestion?.isMultiple)
   }, [currentQuestion])
 
   return (
@@ -59,11 +74,10 @@ function AmountOptionsCustomConfig() {
       <Row noGutters mb={3} v="center" h="between">
         <Col v="center">
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionConfigurationOptions || 'Turn on extended options'}
+            {questionConfigurationExtended || 'Turn on extended options'}
           </Text>
         </Col>
         <Col cw="auto" v="center">
-          {/* //// */}
           <Switch
             size="small"
             onChange={extendedStateChange}
@@ -71,10 +85,26 @@ function AmountOptionsCustomConfig() {
           />
         </Col>
       </Row>
+      {currentQuestion?.isExtended && (
+        <Row noGutters mb={3} v="center" h="between">
+          <Col v="center">
+            <Text color="var(--qf-typography-subtitle-color)">
+              {questionConfigurationMultiple || 'Switch to multiple option'}
+            </Text>
+          </Col>
+          <Col cw="auto" v="center">
+            <Switch
+              size="small"
+              onChange={multipleStateChange}
+              checked={multipleSelectSwitchValue}
+            />
+          </Col>
+        </Row>
+      )}
       <Row noGutters mb={2} h="between">
         <Col v="center" mb={2}>
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionConfigurationOptions || 'Amount of options'}
+            {questionConfigurationOptions || 'Amount of stars'}
           </Text>
         </Col>
         <Col cw="auto">

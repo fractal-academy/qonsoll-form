@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import MatchCondition from './MatchCondition'
 import { Container } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../../context/Translation'
-import { CustomButton } from '../ConditionTemplates.styles'
+import { CustomButton } from '../../ConditionTemplates.styles'
 
 function TextTemplate(props) {
   const {
