@@ -1,3 +1,4 @@
+import { TEXTINGS } from '../../../../constants'
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from '../../../../context/Translation'
 import { Row, Col, Text, Switch, Select } from '@qonsoll/react-design'
@@ -47,7 +48,7 @@ function AmountOptionsCustomConfig() {
     setExtendedSwitchValue(!switchValue)
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { isExtended: switchValue }
+      payload: { isExtended: switchValue, ratingAdditionalOptions: [] }
     })
   }
   const multipleStateChange = (switchValue) => {
@@ -74,7 +75,8 @@ function AmountOptionsCustomConfig() {
       <Row noGutters mb={3} v="center" h="between">
         <Col v="center">
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionConfigurationExtended || 'Turn on extended options'}
+            {questionConfigurationExtended ||
+              TEXTINGS.questionConfigurationExtended}
           </Text>
         </Col>
         <Col cw="auto" v="center">
@@ -89,7 +91,8 @@ function AmountOptionsCustomConfig() {
         <Row noGutters mb={3} v="center" h="between">
           <Col v="center">
             <Text color="var(--qf-typography-subtitle-color)">
-              {questionConfigurationMultiple || 'Switch to multiple option'}
+              {questionConfigurationMultiple ||
+                TEXTINGS.questionConfigurationExtended}
             </Text>
           </Col>
           <Col cw="auto" v="center">
@@ -104,7 +107,8 @@ function AmountOptionsCustomConfig() {
       <Row noGutters mb={2} h="between">
         <Col v="center" mb={2}>
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionConfigurationOptions || 'Amount of stars'}
+            {questionConfigurationOptions ||
+              TEXTINGS.questionConfigurationOptions}
           </Text>
         </Col>
         <Col cw="auto">

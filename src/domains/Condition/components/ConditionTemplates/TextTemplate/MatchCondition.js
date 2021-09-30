@@ -1,10 +1,10 @@
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
-import { COLLECTIONS } from '../../../../../constants'
+import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
+import { StyledDatePicker } from './TextTemplate.styles'
 import useFunctions from '../../../../../hooks/useFunctions'
 import { Row, Col, Input, Select } from '@qonsoll/react-design'
-import { StyledDatePicker } from '../../ConditionTemplates.styles'
 import { QuestionSelect } from '../../../../Question/components'
 import { useTranslation } from '../../../../../context/Translation'
 import { TEXT_CONDITION_SELECT_OPTIONS } from '../../../../../constants/planeTextStringConditionRules'
@@ -32,7 +32,7 @@ function MatchCondition(props) {
   const [ruleSelectValue, setRuleSelectValue] = useState(
     item?.redirectConditionRule ||
       conditionRedirectPlaceholder ||
-      'Select redirect rule'
+      TEXTINGS.conditionRedirectPlaceholder
   )
 
   //[CLEAR FUNCTIONS]

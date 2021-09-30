@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { TEXTINGS } from '../../../../constants'
 import { Row, Col, Box, Title } from '@qonsoll/react-design'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../../context/Translation'
@@ -63,7 +64,7 @@ function QuestionConfigurationPopoverContent(props) {
           <Title color="var(--qf-typography-title-color)" level={4}>
             {isQuestionConfig
               ? configurationTitle
-              : questionTypeConfiguration || 'Question types'}
+              : questionTypeConfiguration || TEXTINGS.questionTypeConfiguration}
           </Title>
         </Col>
       </PopoverSwitcherRow>

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { QuestionSelect } from '../../../../Question/components'
 import { Container, Row, Col, Text } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../../context/Translation'
-import { QuestionPreview, LetterBox } from '../../ConditionTemplates.styles'
+import QuestionPreview from '../../QuestionPreview'
+import { TEXTINGS } from '../../../../../constants'
+import LetterBox from '../../LetterBox'
 
 let startLetter = 65
 
@@ -33,10 +35,11 @@ function ChoiceTemplate(props) {
               )}
               <Text
                 color="var(--qf-typography-title-color)"
-                variant="body1"
-                ellipsis>
+                textOverflow="ellipsis"
+                variant="body1">
                 {handlesUpload
-                  ? conditionModalIsUploaded || 'is uploaded'
+                  ? conditionModalIsUploaded ||
+                    TEXTINGS.conditionModalIsUploaded
                   : item?.answerOption}
               </Text>
             </QuestionPreview>

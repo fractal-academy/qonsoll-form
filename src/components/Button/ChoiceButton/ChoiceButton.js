@@ -5,6 +5,7 @@ import { useKeyPress } from '@umijs/hooks'
 import { KeyBox } from '../../../components'
 import { Row, Col } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
+import { TEXTINGS } from '../../../constants'
 import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
 import { getQuestionAnswerFromContext } from '../../../helpers'
@@ -64,7 +65,9 @@ function ChoiceButton(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(requiredAnswerMessage || 'Answer is required.')
+            ? message.error(
+                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
+              )
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()

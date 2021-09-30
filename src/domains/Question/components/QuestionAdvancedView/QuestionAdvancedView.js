@@ -1,10 +1,10 @@
 import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import { Col, Row, Box, Title, Text } from '@qonsoll/react-design'
 import QuestionImageContainer from '../QuestionImageContainer'
 import { useTranslation } from '../../../../context/Translation'
-import { QUESTION_TYPES, LAYOUT_TYPES } from '../../../../constants'
+import { Col, Row, Box, Title, Text } from '@qonsoll/react-design'
+import { QUESTION_TYPES, LAYOUT_TYPES, TEXTINGS } from '../../../../constants'
 import {
   styles,
   StyledBox,
@@ -92,7 +92,7 @@ function QuestionAdvancedView(props) {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
         <SubmitButton onClick={onClick} currentSlide={currentSlide}>
-          {questionStartButton || 'Start'}
+          {questionStartButton || TEXTINGS.questionStartButton}
         </SubmitButton>
       )
     },
@@ -103,7 +103,7 @@ function QuestionAdvancedView(props) {
           currentSlide={currentSlide}
           finish
           loading={submitLoading}>
-          {questionFinishButton || 'Finish'}
+          {questionFinishButton || TEXTINGS.questionFinishButton}
         </SubmitButton>
       )
     }
@@ -171,7 +171,8 @@ function QuestionAdvancedView(props) {
                       color="var(--qf-typography-title-color)"
                       style={{ wordBreak: 'break-word' }}
                       level={4}>
-                      `${questionNumber}. ${questionVideo || 'Video question'}`
+                      `${questionNumber}. $
+                      {questionVideo || TEXTINGS.questionVideo}`
                     </Title>
                   )}
                   <VideoPlayer videoKey={data?.videoApiKey} />

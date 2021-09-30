@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
+import LetterBox from '../../LetterBox'
 import { Select as AntSelect } from 'antd'
-import { COLLECTIONS } from '../../../../../constants'
+import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
 import { NumberedCard } from '../../../../../components'
 import { Title, Text, Select, Box } from '@qonsoll/react-design'
 import useFunctions from '../../../../../hooks/useFunctions'
-import { LetterBox } from '../../ConditionTemplates.styles'
 import { useTranslation } from '../../../../../context/Translation'
 
 let startLetter = 65
@@ -56,7 +56,7 @@ function EndingSimpleView(props) {
         defaultValue={defaultSelectValue}
         placeholder={
           conditionsEndingSelectPlaceholder ||
-          'Select questions to call current ending'
+          TEXTINGS.conditionsEndingSelectPlaceholder
         }>
         {questionsData?.map((questionListItem, index) => (
           <AntSelect.OptGroup

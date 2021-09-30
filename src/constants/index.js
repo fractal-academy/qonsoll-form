@@ -6,6 +6,7 @@ import ANSWER_TYPES from './answerType'
 import DATE_CONDITION_RULES from './dateConditionRules'
 import TEXT_CONDITION_RULES from './planeTextStringConditionRules'
 import COLLECTIONS from './collection'
+import TEXTINGS from './textings'
 import DEFAULT_IMAGE from './defaultImage'
 
 export {
@@ -17,5 +18,6 @@ export {
   DATE_CONDITION_RULES,
   TEXT_CONDITION_RULES,
   COLLECTIONS,
-  DEFAULT_IMAGE
+  DEFAULT_IMAGE,
+  TEXTINGS
 }

@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { InputNumber } from 'antd'
-import { COLLECTIONS } from '../../../../constants'
+import { COLLECTIONS, TEXTINGS } from '../../../../constants'
 import { NumberedCard } from '../../../../components'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslation } from '../../../../context/Translation'
 import { Box, Row, Col, Text, Title } from '@qonsoll/react-design'
-import { QuestionPreview, LetterBox } from '../ConditionTemplates.styles'
+import { QuestionPreview, LetterBox } from '../../components'
 
 const startLetter = 65
 
@@ -71,8 +71,8 @@ const ScoreConditionsAdvancedView = (props) => {
                 </LetterBox>
                 <Text
                   color="var(--qf-typography-title-color)"
-                  variant="body1"
-                  ellipsis>
+                  textOverflow="ellipsis"
+                  variant="body1">
                   {item?.answerOption}
                 </Text>
               </QuestionPreview>
@@ -81,7 +81,7 @@ const ScoreConditionsAdvancedView = (props) => {
               <InputNumber
                 min={0}
                 max={10}
-                placeholder={scoreWeightTitle || 'Enter score weight of answer'}
+                placeholder={scoreWeightTitle || TEXTINGS.scoreWeightTitle}
                 value={getScoreByAnswerOptionId(item?.answerOptionId)}
                 onBlur={(event) =>
                   onMarkChange(

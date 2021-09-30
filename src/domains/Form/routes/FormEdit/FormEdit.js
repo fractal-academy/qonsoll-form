@@ -15,9 +15,10 @@ import {
   TranslationContext
 } from '../../../../context/Translation'
 import {
-  QUESTION_TYPES,
+  TEXTINGS,
   COLLECTIONS,
-  DEFAULT_IMAGE
+  DEFAULT_IMAGE,
+  QUESTION_TYPES
 } from '../../../../constants'
 import {
   useCurrentQuestionContext,
@@ -308,8 +309,7 @@ function FormEdit(props) {
                     alignItems="center"
                     justifyContent="center">
                     <Text>
-                      {phoneBreakpointDummy ||
-                        'This feature is available only on desktop.'}
+                      {phoneBreakpointDummy || TEXTINGS.phoneBreakpointDummy}
                     </Text>
                   </Box>
                 )}

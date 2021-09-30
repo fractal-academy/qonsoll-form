@@ -12,9 +12,10 @@ import {
   StyledTag
 } from './QuestionForm.styles'
 import {
+  TEXTINGS,
+  LAYOUT_TYPES,
   DEFAULT_IMAGE,
-  QUESTION_TYPES,
-  LAYOUT_TYPES
+  QUESTION_TYPES
 } from '../../../../constants'
 import {
   QuestionConfigurationPopover,
@@ -61,7 +62,11 @@ function QuestionForm(props) {
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: <SubmitButton>{questionStartButton || 'Start'}</SubmitButton>
+      component: (
+        <SubmitButton>
+          {questionStartButton || TEXTINGS.questionStartButton}
+        </SubmitButton>
+      )
     },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
@@ -94,7 +99,11 @@ function QuestionForm(props) {
       component: <SubmitButton />
     },
     [QUESTION_TYPES.ENDING]: {
-      component: <SubmitButton>{questionFinishButton || 'Finish'}</SubmitButton>
+      component: (
+        <SubmitButton>
+          {questionFinishButton || TEXTINGS.questionFinishButton}
+        </SubmitButton>
+      )
     }
   }
 
@@ -103,8 +112,10 @@ function QuestionForm(props) {
   const popoverImage = `url(${computedMediaUrl})`
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
-      ? endingListTitle || 'Ending'
-      : `${questionListTitle || 'Question'} ${questionData?.order}`
+      ? endingListTitle || TEXTINGS.endingListTitle
+      : `${questionListTitle || TEXTINGS.questionListTitle} ${
+          questionData?.order
+        }`
   const layoutType = LAYOUT_TYPES[questionData?.layoutType]
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
@@ -167,10 +178,12 @@ function QuestionForm(props) {
                 <Col cw="12" mt={2}>
                   <QuestionHeader
                     titlePlaceholder={
-                      questionEditableTitleHint || 'Editable question title'
+                      questionEditableTitleHint ||
+                      TEXTINGS.questionEditableTitleHint
                     }
                     subtitlePlaceholder={
-                      questionEditableSubtitleHint || 'Description (optional)'
+                      questionEditableSubtitleHint ||
+                      TEXTINGS.questionEditableSubtitleHint
                     }
                   />
                 </Col>

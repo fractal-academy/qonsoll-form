@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
+import { TEXTINGS } from '../../../../constants'
 import { Box, NoData } from '@qonsoll/react-design'
 import { Spinner } from '../../../../../src/components'
 import { useTranslation } from '../../../../context/Translation'
@@ -94,7 +95,7 @@ function ResponseTable(props) {
           ) : (
             <NoData
               description={
-                answersNoSelectedUser || 'Choose user to display their answers'
+                answersNoSelectedUser || TEXTINGS.answersNoSelectedUser
               }
             />
           )}

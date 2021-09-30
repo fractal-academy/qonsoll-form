@@ -1,9 +1,10 @@
 import { message } from 'antd'
+import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
+import { TEXTINGS } from '../../../constants'
 import { Row, Col } from '@qonsoll/react-design'
-import useMedia from 'use-media'
 import { useTranslation } from '../../../context/Translation'
 import { StyledRangeButton } from './RangeButton.styles'
 import { useAnswersContext } from '../../../context/Answers'
@@ -42,7 +43,9 @@ function RangeButton(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(requiredAnswerMessage || 'Answer is required.')
+            ? message.error(
+                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
+              )
             : onClick?.(answerData)
         } else {
           onButtonClick(event.key)

@@ -1,6 +1,7 @@
 import { message } from 'antd'
 import React, { useRef } from 'react'
 import { useKeyPress } from '@umijs/hooks'
+import { TEXTINGS } from '../../constants'
 import { StyledDatePicker } from './DateTimeInput.styles'
 import { useAnswersContext } from '../../context/Answers'
 import { useTranslation } from '../../context/Translation'
@@ -36,7 +37,9 @@ const DateTimeInput = (props) => {
         }
 
         question?.isRequired && !questionAnswer
-          ? message.error(requiredAnswerMessage || 'Answer is required.')
+          ? message.error(
+              requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
+            )
           : onDateChange?.(answerData)
       }
     },

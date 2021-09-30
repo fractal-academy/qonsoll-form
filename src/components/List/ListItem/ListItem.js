@@ -1,13 +1,13 @@
 import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { StyledItem } from '../../../components'
-import { COLLECTIONS } from '../../../constants'
+import { COLLECTIONS, TEXTINGS } from '../../../constants'
 import { Row, Col, Box, Text, Title } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Popconfirm, Dropdown, Menu, message } from 'antd'
 import { useTranslation } from '../../../context/Translation'
 import { FormSimpleFormWithModal } from '../../../domains/Form/components'
-import { MoreOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons'
+import { MoreOutlined, DeleteOutlined, CheckOutlined } from '@ant-design/icons'
 import useFunctions from '../../../hooks/useFunctions'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import {
@@ -45,10 +45,10 @@ const ListItem = forwardRef((props, ref) => {
   )
   const { onFormItemClick, onFormDelete } = useActionsFunctionsContext()
   const {
+    editButton,
+    removeButton,
     listItemNoDescription,
-    edit,
     popconfirmDeleteFormTitle,
-    popconfirmDeleteButtonText,
     popconfirmDeleteImageTitle
   } = useTranslation()
 
@@ -59,7 +59,7 @@ const ListItem = forwardRef((props, ref) => {
 
   // [COMPUTED PROPERTIES]
   const description =
-    data?.subtitle || listItemNoDescription || 'No description'
+    data?.subtitle || listItemNoDescription || TEXTINGS.listItemNoDescription
   const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
@@ -121,7 +121,7 @@ const ListItem = forwardRef((props, ref) => {
     <StyledMenu>
       <Item onClick={(e) => showModal(e)} key={'showModal'}>
         <Text color="var(--qf-typography-subtitle-color)">
-          {edit || 'Edit'}
+          {editButton || TEXTINGS.editButton}
         </Text>
         <FormSimpleFormWithModal
           isEdit
@@ -137,12 +137,14 @@ const ListItem = forwardRef((props, ref) => {
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
-          title={popconfirmDeleteFormTitle || 'Delete this form?'}
+          title={
+            popconfirmDeleteFormTitle || TEXTINGS.popconfirmDeleteFormTitle
+          }
           okButtonProps={{ loading: confirmLoading }}
           okType="danger"
           okText="Delete">
           <Text color="var(--ql-color-danger)">
-            {popconfirmDeleteButtonText || 'Delete'}
+            {removeButton || TEXTINGS.removeButton}
           </Text>
         </Popconfirm>
       </Item>
@@ -182,14 +184,18 @@ const ListItem = forwardRef((props, ref) => {
           <Col display="grid">
             <Title
               color="var(--qf-typography-subtitle-color)"
-              level={5}
-              ellipsis>
+              wordBreak="break-all"
+              ellipsis={true}
+              textOverflow="ellipsis"
+              level={5}>
               {data?.title}
             </Title>
             {!data?.imageUrl && (
               <Text
                 color="var(--qf-typography-subtitle-color)"
-                ellipsis
+                wordBreak="break-all"
+                ellipsis={true}
+                textOverflow="ellipsis"
                 type="secondary">
                 {description}
               </Text>
@@ -198,12 +204,15 @@ const ListItem = forwardRef((props, ref) => {
           <Col cw="auto" display="flex" v="center">
             {data?.imageUrl ? (
               <Popconfirm
-                title={popconfirmDeleteImageTitle || 'Delete this image?'}
+                title={
+                  popconfirmDeleteImageTitle ||
+                  TEXTINGS.popconfirmDeleteImageTitle
+                }
                 onConfirm={handleDelete}
                 okButtonProps={{ loading: confirmLoading }}
                 okType="danger"
                 okText="Delete">
-                <CloseOutlined />
+                <DeleteOutlined />
               </Popconfirm>
             ) : (
               <Dropdown overlay={menu} placement="bottomRight">

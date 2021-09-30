@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Box, Text, Switch } from '@qonsoll/react-design'
-import { QUESTION_TYPES } from '../../../../constants'
+import { QUESTION_TYPES, TEXTINGS } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
+import { Row, Col, Box, Text, Switch } from '@qonsoll/react-design'
+import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
-import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
 
 function QuestionConfigurationMenu() {
   // [CUSTOM_HOOKS]
@@ -58,7 +58,7 @@ function QuestionConfigurationMenu() {
         <Row mb={3} noGutters v="center">
           <Col v="center">
             <Text color="var(--qf-typography-subtitle-color)">
-              {questionRequiredSetting || 'Required'}
+              {questionRequiredSetting || TEXTINGS.questionRequiredSetting}
             </Text>
           </Col>
           <Col cw="auto" px={2}>
@@ -73,7 +73,7 @@ function QuestionConfigurationMenu() {
       <Row mb={3} noGutters v="center">
         <Col v="center">
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionVideo || 'Video question'}
+            {questionVideo || TEXTINGS.questionVideo}
           </Text>
         </Col>
         <Col cw="auto" px={2}>

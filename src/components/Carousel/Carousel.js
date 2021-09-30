@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { QUESTION_TYPES } from '../../constants'
+import { QUESTION_TYPES, TEXTINGS } from '../../constants'
 import { useSize, useKeyPress } from '@umijs/hooks'
 import React, { cloneElement, useRef } from 'react'
 import { Row, Col, Box, Button } from '@qonsoll/react-design'
@@ -56,7 +56,7 @@ function Carousel(props) {
 
   const next = async (skipButtonEvent) => {
     if (currentSlideData?.isRequired && skipButtonEvent) {
-      message.error(requiredAnswerMessage || 'Answer is required.')
+      message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
     } else {
       //check if carousel navigation button was pressed, to avoid repetition in answers context
       if (skipButtonEvent) {

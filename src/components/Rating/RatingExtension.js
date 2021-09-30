@@ -1,8 +1,12 @@
 import React from 'react'
 import { v4 as uuid } from 'uuid'
-import { Radio, Checkbox } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
-import { Container, Box, Button, Text } from '@qonsoll/react-design'
+import { useHover } from '@umijs/hooks'
+import { TEXTINGS } from '../../constants'
+import ExtentionItem from './ExtentionItem'
+import { Radio, Checkbox, Popconfirm } from 'antd'
+import { useTranslation } from '../../context/Translation'
+import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
+import { Container, Box, Button } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
@@ -12,16 +16,20 @@ import {
 function RatingExtension(props) {
   const { question, onClick, isFormQuiz, isMultiple } = props
 
+  // [ADDITIONAL HOOKS]
+  const [isHovering, hoverRef] = useHover()
+
   //[CUSTOM HOOKS]
   const currentQuestion = useCurrentQuestionContext()
+  const { removeButton, conditionRemovingWarn } = useTranslation()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPUTED PROPERTIES]
-  const ratingProps = currentQuestion.questionConfigurations || []
+  const ratingProps = currentQuestion?.ratingAdditionalOptions || []
 
   // [CLEAN FUNCTIONS]
   const onRadioChange = (option) => {
-    const score = ''
+    const score = 0
 
     const data = {
       question,
@@ -38,59 +46,128 @@ function RatingExtension(props) {
     }
   }
 
-  const onCheckboxChange = (option) => {}
+  const onCheckboxChange = (option) => {
+    const score = 0
+
+    const data = {
+      question,
+      answer: { value: option || [] },
+      answerId: '1',
+      answerScore: isFormQuiz ? score : ''
+    }
+
+    // if the data is sent we delay and animate the selected value, else - just go to next question
+    !!option && onClick ? setTimeout(onClick, 700, data) : onClick?.(data)
+  }
 
   const addOption = () => {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: [
-        ...ratingProps,
-        {
-          answerOption: '',
-          redirectQuestion: '',
-          answerOptionId: uuid(),
-          redirectConditionRule: ''
-        }
-      ]
+      payload: {
+        // ...questionConfigurations,
+        ratingAdditionalOptions: ratingProps
+          ? [
+              ...ratingProps,
+              {
+                answerOption: 'option',
+                redirectQuestion: '',
+                answerOptionId: uuid(),
+                redirectConditionRule: ''
+              }
+            ]
+          : [
+              {
+                answerOption: 'option',
+                redirectQuestion: '',
+                answerOptionId: uuid(),
+                redirectConditionRule: ''
+              }
+            ]
+      }
+    })
+  }
+  const deleteOption = (index) => {
+    ratingProps.splice(index, 1)
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { ratingAdditionalOptions: ratingProps }
     })
   }
 
-  //testing data
-  const checkOptions = ['I prefer not to answer', 'This is not relevant for me']
-
   return (
-    <Container mt={4}>
+    <Container mt={4} ref={hoverRef}>
       {isMultiple ? (
         <Checkbox.Group disabled={!onClick} onChange={onCheckboxChange}>
-          {checkOptions.map((item) => (
-            <Box mb={2}>
-              <Checkbox value={item} disabled={!onClick}>
-                <Text
-                  color="var(--qf-typography-subtitle-color)"
-                  variant="body1">
-                  {item}
-                </Text>
+          {question?.ratingAdditionalOptions?.map((item, index) => (
+            <Box key={index} mb={2} display="flex" alignItems="center">
+              <Popconfirm
+                title={conditionRemovingWarn || TEXTINGS.conditionRemovingWarn}
+                okType="danger"
+                onConfirm={() => deleteOption(index)}
+                okText={removeButton || TEXTINGS.removeButton}>
+                <Box
+                  opacity={isHovering ? 1 : 0}
+                  color="var(--ql-color-danger)"
+                  mr={2}
+                  type="text"
+                  size="small"
+                  p={0}>
+                  <DeleteOutlined />
+                </Box>
+              </Popconfirm>
+
+              <Checkbox value={item || ''} disabled={!onClick}>
+                <ExtentionItem
+                  item={item}
+                  index={index}
+                  onClick={onClick}
+                  isMultiple={isMultiple}
+                  ratingProps={ratingProps}
+                  defaultValue={item?.answerOption || ''}
+                />
               </Checkbox>
             </Box>
           ))}
         </Checkbox.Group>
       ) : (
         <Radio.Group onChange={onRadioChange}>
-          {checkOptions.map((item) => (
-            <Box>
-              <Radio value={item} disabled={!onClick}>
-                <Text
-                  color="var(--qf-typography-subtitle-color)"
-                  variant="body1">
-                  {item}
-                </Text>
+          {question?.ratingAdditionalOptions?.map((item, index) => (
+            <Box
+              key={index}
+              display="flex"
+              alignItems="center"
+              justifyContent="center">
+              <Popconfirm
+                title={conditionRemovingWarn || TEXTINGS.conditionRemovingWarn}
+                okType="danger"
+                onConfirm={() => deleteOption(index)}
+                okText={removeButton || 'Delete'}>
+                <Box
+                  opacity={isHovering ? 1 : 0}
+                  color="var(--ql-color-danger)"
+                  mr={2}
+                  type="text"
+                  size="small"
+                  p={0}>
+                  <DeleteOutlined />
+                </Box>
+              </Popconfirm>
+
+              <Radio value={item || ''} disabled={!onClick}>
+                <ExtentionItem
+                  item={item}
+                  index={index}
+                  onClick={onClick}
+                  ratingProps={ratingProps}
+                  defaultValue={item?.answerOption || ''}
+                />
               </Radio>
             </Box>
           ))}
         </Radio.Group>
       )}
 
-      <Box mt={2}>
+      <Box mt={2} ml={2}>
         <Button type="dashed" onClick={addOption}>
           <PlusOutlined />
         </Button>

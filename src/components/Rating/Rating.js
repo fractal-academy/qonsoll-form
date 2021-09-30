@@ -3,6 +3,7 @@ import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
+import { TEXTINGS } from '../../constants'
 import { StyledRate } from './Rating.styles'
 import { StarFilled } from '@ant-design/icons'
 import RatingExtension from './RatingExtension'
@@ -55,7 +56,7 @@ function CustomRating(props) {
 
       selectedStarsNumber && onClick
         ? setTimeout(onClick, 700, data)
-        : onClick(data)
+        : onClick?.(data)
     }
   }
 
@@ -77,7 +78,9 @@ function CustomRating(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(requiredAnswerMessage || 'Answer is required.')
+            ? message.error(
+                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
+              )
             : onClick?.(answerData)
         } else {
           onChange(Number(event.key))
@@ -103,6 +106,7 @@ function CustomRating(props) {
         count={questionConfigurations?.length}
         character={<StarFilled onMouseDown={(e) => e.preventDefault()} />}
       />
+
       {question?.isExtended && (
         <RatingExtension
           onClick={onClick}

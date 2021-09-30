@@ -4,6 +4,7 @@ import { DeleteOutlined, InboxOutlined, FileOutlined } from '@ant-design/icons'
 import { SubmitButton } from '..'
 import { useTranslation } from '../../context/Translation'
 import COLLECTIONS from '../../constants/collection'
+import { TEXTINGS } from '../../constants'
 import useFunctions from '../../hooks/useFunctions'
 import { Box, Row, Col, Text, Button } from '@qonsoll/react-design'
 import { useKeyPress, useHover } from '@umijs/hooks'
@@ -133,7 +134,7 @@ const UploadArea = (props) => {
     question?.isRequired
       ? uploaderData
         ? onContinue?.(data)
-        : message.error(requiredAnswerMessage || 'Answer is required.')
+        : message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
       : onContinue?.(data)
   }
 
@@ -165,7 +166,7 @@ const UploadArea = (props) => {
           </Box>
           <Box textAlign="center" mt={2}>
             <Text color="var(--qf-typography-subtitle-color)">
-              {uploaderHint || 'Click or drag file to this area to upload'}
+              {uploaderHint || TEXTINGS.uploaderHint}
             </Text>
           </Box>
         </Box>
@@ -180,7 +181,7 @@ const UploadArea = (props) => {
               <Col v="center">
                 <Text
                   color="var(--qf-typography-subtitle-color)"
-                  style={{ wordBreak: 'break-all' }}>
+                  wordBreak="break-all">
                   {file?.name}
                 </Text>
               </Col>
@@ -190,7 +191,7 @@ const UploadArea = (props) => {
                 ) : (
                   <Popconfirm
                     onConfirm={() => onRemove(file)}
-                    title={itemRemovingHint || 'Delete this item?'}
+                    title={itemRemovingHint || TEXTINGS.itemRemovingHint}
                     okType="danger"
                     okText="Delete">
                     <Button
