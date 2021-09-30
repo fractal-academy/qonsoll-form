@@ -25,7 +25,6 @@ function LongText(props) {
     (e) => {
       if (e.type === 'keyup') {
         onPressOk()
-        console.log('unfocused')
       }
     },
     {
@@ -62,7 +61,6 @@ function LongText(props) {
     if (e.keyCode === 13 && !e.shiftKey) {
       //Prevent line brake onEnter
       e.preventDefault()
-      console.log('focused')
     }
   }
 
