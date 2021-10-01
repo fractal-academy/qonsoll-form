@@ -2,11 +2,11 @@ import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import React, { useState } from 'react'
-import { Button } from 'antd'
 import { useKeyPress } from '@umijs/hooks'
-import { Row, Col, Text } from '@qonsoll/react-design'
+import { Row, Col, Text, Button } from '@qonsoll/react-design'
 import { CheckOutlined } from '@ant-design/icons'
 import COLLECTIONS from '../../../constants/collection'
+import { TEXTINGS } from '../../../constants'
 import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
 import useFunctions from '../../../../src/hooks/useFunctions'
@@ -122,7 +122,7 @@ function SubmitButton(props) {
       {isntDesktop && (
         <Col cw="auto">
           <Text color="var(--qf-typography-subtitle-color)">
-            {(submitHint || 'Press enter') + ' ↵'}
+            {(submitHint || TEXTINGS.submitHint) + ' ↵'}
           </Text>
         </Col>
       )}

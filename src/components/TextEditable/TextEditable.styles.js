@@ -5,7 +5,7 @@ const { TextArea } = Input
 
 export const StyledTextEditable = styled(TextArea)`
   padding-left: 0;
-  font-weight: bold;
+  font-weight: ${({ isTitle }) => isTitle && 'bold'};
   color: ${({ textSecondary }) =>
     textSecondary && 'var(--qf-typography-subtitle-color)'};
   font-size: ${({ isTitle }) =>

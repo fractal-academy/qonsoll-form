@@ -1,2 +1,2 @@
-import PictureChoiceTemplate from './ChoiceTemplate'
-export default PictureChoiceTemplate
+import ChoiceTemplate from './ChoiceTemplate'
+export default ChoiceTemplate

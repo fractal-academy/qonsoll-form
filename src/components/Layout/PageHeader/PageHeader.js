@@ -2,6 +2,7 @@ import React from 'react'
 import { Tooltip } from 'antd'
 import PropTypes from 'prop-types'
 import { styles } from './PageHeader.styles'
+import { TEXTINGS } from '../../../constants'
 import { useTranslation } from '../../../context/Translation'
 import { Row, Col, Button, Divider, Title } from '@qonsoll/react-design'
 import {
@@ -55,8 +56,9 @@ function PageHeader(props) {
           {smallScreen && (
             <Tooltip
               placement="bottom"
-              title={answerViewTooltip || 'Answers preview'}>
+              title={answerViewTooltip || TEXTINGS.answerViewTooltip}>
               <Button
+                mr={1}
                 type="text"
                 icon={<ReadOutlined />}
                 onClick={onFormResultsDisplay}
@@ -68,7 +70,9 @@ function PageHeader(props) {
 
       {handlesPreview && title && (
         <Col cw="auto" v="center">
-          <Tooltip placement="bottom" title={formViewTooltip || 'Form preview'}>
+          <Tooltip
+            placement="bottom"
+            title={formViewTooltip || TEXTINGS.formViewTooltip}>
             <Button
               type="text"
               icon={<EyeOutlined />}
@@ -87,10 +91,10 @@ function PageHeader(props) {
 PageHeader.propTypes = {
   id: PropTypes.string,
   onBack: PropTypes.func,
+  title: PropTypes.string,
   smallScreen: PropTypes.bool,
   titleProps: PropTypes.object,
-  handlesPreview: PropTypes.bool,
-  title: PropTypes.string.isRequired
+  handlesPreview: PropTypes.bool
 }
 
 export default PageHeader

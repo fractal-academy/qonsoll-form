@@ -395,7 +395,7 @@ const qformTranslations = (t) => {
     //domains: form components
     conditionsEndingsTab: t('Endings'),
     conditionsLogicJumpsTab: t('Logic jumps'),
-    conditionsQuizTab: t('Answer score configurations'),
+    conditionsQuizTab: t('Scores'),
     conditionsNoData: t('There are no question to configure'),
     conditionAddQuestionType: t('Please, add one of the following questions types'),
     quizSwitcherText: t('Enable quiz system'),

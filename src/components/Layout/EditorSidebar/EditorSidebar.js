@@ -6,7 +6,7 @@ import useFunctions from '../../../hooks/useFunctions'
 import { SidebarBoxWrapper } from './EditorSidebar.styles'
 import React, { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from '../../../context/Translation'
-import { QUESTION_TYPES, COLLECTIONS } from '../../../constants'
+import { QUESTION_TYPES, COLLECTIONS, TEXTINGS } from '../../../constants'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import { QuestionsList } from '../../../domains/Question/components'
@@ -72,7 +72,6 @@ function EditorSidebar(props) {
     endings,
     formData,
     questions,
-    transparent,
     answerScoresData,
     customQuestionTypes,
     welcomeScreenShowRule
@@ -246,11 +245,11 @@ function EditorSidebar(props) {
   }, [questions?.length])
 
   return (
-    <SidebarBoxWrapper transparent={transparent}>
+    <SidebarBoxWrapper>
       <Row my={2} v="center" h="between">
         <Col cw="auto">
           <Title color="var(--qf-typography-title-color)" level={5}>
-            {questionListTitle || 'Questions'}
+            {questionListTitle || TEXTINGS.questionListTitle}
           </Title>
         </Col>
         <Col display="block" cw="auto">
@@ -292,19 +291,19 @@ function EditorSidebar(props) {
       <Row my={2} v="center" h="between">
         <Col cw="auto">
           <Title color="var(--qf-typography-title-color)" level={5}>
-            {endingListTitle || 'Endings'}
+            {endingListTitle || TEXTINGS.endingListTitle}
           </Title>
         </Col>
         <Col display="block" cw="auto">
           <Tooltip
             placement="topRight"
-            title={endingCreationTooltip || 'Create new ending'}>
+            title={endingCreationTooltip || TEXTINGS.endingCreationTooltip}>
             <Button type="text" onClick={addQuestion} icon={<PlusOutlined />} />
           </Tooltip>
         </Col>
       </Row>
-      <Box overflow="auto" maxHeight="550px">
-        {!!endings?.length && (
+      {!!endings?.length && (
+        <Box overflow="auto" maxHeight="400px" minHeight="90px">
           <QuestionsList
             data={endings}
             endings={endings}
@@ -312,15 +311,20 @@ function EditorSidebar(props) {
             onItemClick={onItemClick}
             disableDelete={endings?.length === 1}
           />
-        )}
-      </Box>
+        </Box>
+      )}
     </SidebarBoxWrapper>
   )
 }
 
 EditorSidebar.propTypes = {
-  questionsList: PropTypes.node.isRequired,
-  questionsEndingsList: PropTypes.node.isRequired
+  id: PropTypes.string,
+  endings: PropTypes.array,
+  formData: PropTypes.object,
+  questions: PropTypes.array,
+  answerScoresData: PropTypes.array,
+  customQuestionTypes: PropTypes.array,
+  welcomeScreenShowRule: PropTypes.bool
 }
 
 export default EditorSidebar

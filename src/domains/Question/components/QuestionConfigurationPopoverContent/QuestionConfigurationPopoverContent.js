@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { TEXTINGS } from '../../../../constants'
 import { Row, Col, Box, Title } from '@qonsoll/react-design'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../../context/Translation'
@@ -51,14 +52,19 @@ function QuestionConfigurationPopoverContent(props) {
         py={2}
         h="between"
         onClick={changeQuestionConfigState}>
-        <Col v="center" cw="auto" order={isQuestionConfig ? 1 : 3}>
+        <Col
+          v="center"
+          cw="auto"
+          pr={isQuestionConfig && '0px'}
+          pl={!isQuestionConfig && '0px'}
+          order={isQuestionConfig ? 1 : 3}>
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>
         <Col cw="auto" order={2}>
           <Title color="var(--qf-typography-title-color)" level={4}>
             {isQuestionConfig
               ? configurationTitle
-              : questionTypeConfiguration || 'Question types'}
+              : questionTypeConfiguration || TEXTINGS.questionTypeConfiguration}
           </Title>
         </Col>
       </PopoverSwitcherRow>

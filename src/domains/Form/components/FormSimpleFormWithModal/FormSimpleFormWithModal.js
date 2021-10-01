@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
 import { Form, Modal } from 'antd'
+import React, { useState } from 'react'
+import { TEXTINGS } from '../../../../constants'
 import { Title, Button } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { FormSimpleForm } from '../../../../domains/Form/components'
@@ -48,8 +49,8 @@ const FormSimpleFormWithModal = (props) => {
       title={
         <Title color="var(--qf-typography-title-color)" level={4}>
           {isEdit
-            ? formModalEditTitle || 'Edit form'
-            : formModalCreateTitle || 'Create new form'}
+            ? formModalEditTitle || TEXTINGS.formModalEditTitle
+            : formModalCreateTitle || TEXTINGS.formModalCreateTitle}
         </Title>
       }
       visible={isModalVisible}
@@ -63,8 +64,8 @@ const FormSimpleFormWithModal = (props) => {
         </Button>,
         <Button onClick={() => form.submit()} type="primary" loading={loading}>
           {isEdit
-            ? formModalEditButton || 'Save changes'
-            : formModalCreateButton || 'Create form'}
+            ? formModalEditButton || TEXTINGS.formModalEditButton
+            : formModalCreateButton || TEXTINGS.formModalCreateButton}
         </Button>
       ]}>
       <FormSimpleForm

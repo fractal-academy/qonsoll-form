@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
-import useMedia from 'use-media'
 import { message } from 'antd'
+import useMedia from 'use-media'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
-import { Container } from '@qonsoll/react-design'
-import { useTranslation } from '../../context/Translation'
+import { TEXTINGS } from '../../constants'
 import { StyledRate } from './Rating.styles'
 import { StarFilled } from '@ant-design/icons'
-import { getQuestionAnswerFromContext } from '../../helpers'
+import RatingExtension from './RatingExtension'
+import { Container } from '@qonsoll/react-design'
 import { useAnswersContext } from '../../context/Answers'
+import { useTranslation } from '../../context/Translation'
+import { getQuestionAnswerFromContext } from '../../helpers'
 
 function CustomRating(props) {
   const {
@@ -22,8 +25,8 @@ function CustomRating(props) {
   const { questionConfigurations } = question
 
   //[CUSTOM HOOKS]
-  const { requiredAnswerMessage } = useTranslation()
   const answersContext = useAnswersContext()
+  const { requiredAnswerMessage } = useTranslation()
   const [selectedValue, setSelectedValue] = useState(0)
 
   //[ADDITIONAL HOOKS]
@@ -51,12 +54,9 @@ function CustomRating(props) {
         answerScore: isFormQuiz ? score : ''
       }
 
-      // if the data is sent we delay and animate the selected value, else - just go to next question
-      if (!!selectedStarsNumber) {
-        onClick && setTimeout(onClick, 700, data)
-      } else {
-        onClick?.(data)
-      }
+      selectedStarsNumber && onClick
+        ? setTimeout(onClick, 700, data)
+        : onClick?.(data)
     }
   }
 
@@ -78,7 +78,9 @@ function CustomRating(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(requiredAnswerMessage || 'Answer is required.')
+            ? message.error(
+                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
+              )
             : onClick?.(answerData)
         } else {
           onChange(Number(event.key))
@@ -89,8 +91,9 @@ function CustomRating(props) {
       events: ['keydown', 'keyup']
     }
   )
+
   return (
-    <Container>
+    <Container display="grid">
       <StyledRate
         value={selectedValue}
         autoFocus={false}
@@ -103,10 +106,27 @@ function CustomRating(props) {
         count={questionConfigurations?.length}
         character={<StarFilled onMouseDown={(e) => e.preventDefault()} />}
       />
+
+      {question?.isExtended && (
+        <RatingExtension
+          onClick={onClick}
+          question={question}
+          isFormQuiz={isFormQuiz}
+          isMultiple={question?.isMultiple}
+        />
+      )}
     </Container>
   )
 }
 
-CustomRating.propTypes = {}
+CustomRating.propTypes = {
+  onClick: PropTypes.func,
+  tooltips: PropTypes.array,
+  question: PropTypes.object,
+  isFormQuiz: PropTypes.bool,
+  allowClear: PropTypes.bool,
+  currentSlide: PropTypes.number,
+  answersScoreData: PropTypes.array
+}
 
 export { CustomRating }

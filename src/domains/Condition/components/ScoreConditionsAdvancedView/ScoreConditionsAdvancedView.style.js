@@ -13,8 +13,8 @@ export const OptionBox = styled(Box)`
 `
 
 export const StyledInputNumber = styled(InputNumber)`
-  flex: 1;
-  text-align: center;
+  // flex: 1;
+  // text-align: center;
 `
 
 export const CustomTextBox = styled(Box)`

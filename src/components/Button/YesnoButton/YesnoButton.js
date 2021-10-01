@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useKeyPress } from '@umijs/hooks'
 import { Box } from '@qonsoll/react-design'
 import { KeyBox } from '../../../components'
+import { TEXTINGS } from '../../../constants'
 import React, { useState, useMemo } from 'react'
 import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
@@ -33,7 +34,9 @@ function YesnoButton(props) {
             answer: { value: '', letterKey: '' }
           }
           question?.isRequired && !questionAnswer
-            ? message.error(requiredAnswerMessage || 'Answer is required.')
+            ? message.error(
+                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
+              )
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()

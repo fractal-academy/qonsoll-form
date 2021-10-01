@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { Popconfirm } from 'antd'
 import { useHover } from '@umijs/hooks'
 import { Row } from '@qonsoll/react-design'
-import { DEFAULT_IMAGE } from '../../constants'
+import { DEFAULT_IMAGE, TEXTINGS } from '../../constants'
 import { CloseOutlined } from '@ant-design/icons'
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from '../../context/Translation'
@@ -105,7 +105,9 @@ function ChoiceEditable(props) {
             maxLength="150"
             value={value}
             onBlur={onBlur}
-            placeholder={`${choicePlaceholder || 'choice'} ${index}`}
+            placeholder={`${
+              choicePlaceholder || TEXTINGS.choicePlaceholder
+            } ${index}`}
             autoSize={{ minRows: 1, maxRows: 12 }}
             bordered={false}
             onChange={onChange}
@@ -115,13 +117,10 @@ function ChoiceEditable(props) {
       {isHovering &&
         (hasConditions ? (
           <Popconfirm
-            title={
-              conditionRemovingWarn ||
-              'This option has connected logic. Delete it?'
-            }
+            title={conditionRemovingWarn || TEXTINGS.conditionRemovingWarn}
             onConfirm={onDelete}
             okType="danger"
-            okText={removeButton || 'Delete'}>
+            okText={removeButton || TEXTINGS.removeButton}>
             <DeleteButton>
               <CloseOutlined />
             </DeleteButton>

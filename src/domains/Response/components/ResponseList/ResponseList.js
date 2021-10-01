@@ -1,11 +1,9 @@
-import { Box } from '@qonsoll/react-design'
-import { Spin } from 'antd'
 import React from 'react'
-import { EmptyState } from '../../../Form/components/FormConditionsForm/FormConditionsForm.styles'
-import ResponseListItem from './ResponseListItem'
-import { useTranslation } from '../../../../context/Translation'
-import PropTypes from 'prop-types'
 import moment from 'moment'
+import { Spin } from 'antd'
+import PropTypes from 'prop-types'
+import { Box } from '@qonsoll/react-design'
+import ResponseListItem from './ResponseListItem'
 
 function ResponseList(props) {
   const {
@@ -15,9 +13,6 @@ function ResponseList(props) {
     setCurrentUserAnswerGroup
   } = props
 
-  // [ADDITIONAL HOOKS]
-  const { emptyStateDescription } = useTranslation()
-
   // [COMPUTED PROPERTIES]
   const sortedUserAnswerGroup = userAnswerGroup?.sort(
     (a, b) =>
@@ -25,33 +20,22 @@ function ResponseList(props) {
   )
 
   return (
-    <Box display="flex" flex={1} flexDirection="column" alignItems="center">
+    <Box p={3} width="100%">
       {loading ? (
         <Box display="flex" flex={1} alignItems="center">
           <Spin size="large" />
         </Box>
       ) : (
-        <Box overflowY="scroll" overflowX="hidden" pr={3}>
-          {sortedUserAnswerGroup?.length > 0 ? (
-            sortedUserAnswerGroup?.map((item, index) => (
-              <ResponseListItem
-                setCurrentUserAnswerGroup={setCurrentUserAnswerGroup}
-                key={index}
-                index={index}
-                user={item.user}
-                date={item.date}
-                onClick={onListItemClick}
-              />
-            ))
-          ) : (
-            <EmptyState
-              description={
-                emptyStateDescription ||
-                "This form doesn't have any responses yet"
-              }
-            />
-          )}
-        </Box>
+        sortedUserAnswerGroup?.map((item, index) => (
+          <ResponseListItem
+            setCurrentUserAnswerGroup={setCurrentUserAnswerGroup}
+            key={index}
+            index={index}
+            user={item.user}
+            date={item.date}
+            onClick={onListItemClick}
+          />
+        ))
       )}
     </Box>
   )

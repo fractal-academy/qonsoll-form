@@ -6,6 +6,7 @@ import { SubmitButton } from '../../components'
 import { Form, message } from 'antd'
 import { Container, Text, TextArea } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
+import { TEXTINGS } from '../../constants'
 
 function LongText(props) {
   const { textAreaProps, onClick, question, currentSlide } = props
@@ -42,7 +43,7 @@ function LongText(props) {
   }
 
   // [COMPUTED_PROPERTIES]
-  const explanation = longTextHint || 'Shift ⇧ + Enter ↵ to make a line break'
+  const explanation = longTextHint || TEXTINGS.longTextHint
 
   const onPressOk = () => {
     //get values from form to check if there is any answer data
@@ -50,7 +51,7 @@ function LongText(props) {
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     if (question?.isRequired && !value) {
-      message.error(requiredAnswerMessage || 'Answer is required.')
+      message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
     } else {
       form.submit()
     }
@@ -92,7 +93,7 @@ function LongText(props) {
             maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
             placeholder={`${
-              textQuestionPlaceholder || 'Type your answer here'
+              textQuestionPlaceholder || TEXTINGS.textQuestionPlaceholder
             }...`}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}

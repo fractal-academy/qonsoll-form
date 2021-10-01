@@ -14,7 +14,7 @@ export const StyledKeybox = styled(Box)`
   margin-left: ${({ isHovering, phoneSmall }) =>
     isHovering && phoneSmall ? '' : isHovering && '-40px'};
   background-color: ${({ isActive }) =>
-    isActive ? 'var(--qf-active-keybox-bg)' : 'var(--qf-keybox-bg)'};
+    isActive ? 'var(--qf-keybox-bg)' : 'var(--qf-keybox-bg)'};
   width: ${({ isHovering, phoneSmall }) =>
     isHovering && !phoneSmall ? '66px !important' : '26px !important'};
 `
@@ -34,9 +34,10 @@ export const StyledButton = styled(Box)`
   border-radius: var(--qf-border-radius-md);
   color: var(--qf-button-color);
   background-color: ${({ isActive }) =>
-    isActive ? 'var(--qf-active-button-bg)' : 'var(--qf-button-bg)'};
+    isActive ? 'var(--qf-button-bg-active)' : 'var(--qf-button-bg)'};
   &:hover {
-    background-color: var(--qf-active-button-bg);
+    background-color: ${({ isActive }) =>
+      isActive ? 'var(--qf-button-bg-active)' : 'var(--qf-button-bg-hover)'};
   }
   ${blinkBackground}
   ${({ isActive }) =>
@@ -50,5 +51,7 @@ export const StyledText = styled(Text)`
     hasImages ? (phoneSmall ? '100%' : '15ch') : '100%'};
   padding-left: ${({ hasImages }) => (hasImages ? '0' : '30px')};
   word-break: break-word;
-  color: var(--qf-typography-subtitle-color);
+  color: ${({ isActive }) =>
+    isActive ? 'var(--qf-button-color-active)' : 'var(--qf-button-color)'};
+  font-size: var(--qf-typography-fs-body);
 `

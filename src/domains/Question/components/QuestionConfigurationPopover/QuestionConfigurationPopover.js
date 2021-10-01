@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Popconfirm, Tooltip } from 'antd'
+import { TEXTINGS } from '../../../../constants'
 import { SettingOutlined } from '@ant-design/icons'
 import { Box, Button, Popover } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
@@ -67,7 +68,11 @@ function QuestionConfigurationPopover(props) {
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
         }>
-        <Tooltip title={questionConfigurationTooltip || 'Configure question'}>
+        <Tooltip
+          title={
+            questionConfigurationTooltip ||
+            TEXTINGS.questionConfigurationTooltip
+          }>
           <Button
             type="primary"
             icon={<SettingOutlined />}
@@ -95,7 +100,10 @@ function QuestionConfigurationPopover(props) {
           />
         </Box>
       }>
-      <Tooltip title={questionConfigurationTooltip || 'Configure question'}>
+      <Tooltip
+        title={
+          questionConfigurationTooltip || TEXTINGS.questionConfigurationTooltip
+        }>
         <Button
           type="primary"
           icon={<SettingOutlined />}

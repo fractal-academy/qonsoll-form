@@ -10,7 +10,7 @@ export const MainBox = styled(Box)`
   position: relative;
   background-color: var(--qf-button-bg);
   &:hover{
-     background-color: var(--qf-active-button-bg);
+     background-color: var(--qf-button-bg-hover);
   }
 `}
 `
@@ -30,9 +30,9 @@ export const LetterBox = styled(Box)`
   top: ${withImage ? '12px' : '6px'};
   width: 20px;
   text-align: center;
-  color: var(--qf-button-color);
+  color: var(--qf-keybox-color);
   background-color: var(--qf-keybox-bg);
-  border: 1px solid var(--qf-button-color);
+  border: 1px solid var(--qf-keybox-color);
 `}
 `
 export const DeleteButton = styled(Box)`
@@ -46,7 +46,8 @@ export const DeleteButton = styled(Box)`
   justify-content: center;
   align-items: center;
   font-size: var(--qf-typography-fs-caption);
-  background-color: var(--qf-active-keybox-bg);
+  background-color: var(--qf-keybox-bg-active);
+  color: var(--qf-keybox-color-active);
   border-radius: var(--qf-border-radius-full);
 `
 export const ChoiceInput = styled(TextArea)`

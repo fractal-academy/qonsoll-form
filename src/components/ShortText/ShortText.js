@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
-import { useKeyPress } from '@umijs/hooks'
 import { Form, message } from 'antd'
+import { TEXTINGS } from '../../constants'
+import { useKeyPress } from '@umijs/hooks'
 import { SubmitButton } from '../../components'
 import { Box, Container, Input } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
@@ -52,7 +53,7 @@ function ShortText(props) {
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     if (question?.isRequired && !value) {
-      message.error(requiredAnswerMessage || 'Answer is required.')
+      message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
     } else {
       form.submit()
     }
@@ -82,7 +83,7 @@ function ShortText(props) {
             ref={inputRef}
             maxLength={300}
             placeholder={`${
-              textQuestionPlaceholder || 'Type your answer here'
+              textQuestionPlaceholder || TEXTINGS.textQuestionPlaceholder
             }...`}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Box } from '@qonsoll/react-design'
+import { TEXTINGS } from '../../../../constants'
 import RangeSlider from '../../../../components/RangeSlider'
 import { useTranslation } from '../../../../context/Translation'
 import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
@@ -52,7 +53,9 @@ function MediaLibrarySimpleView(props) {
           }}
         />
       </CustomBox>
-      <CustomText>{mediaLibraryBrightness || 'Brightness'}</CustomText>
+      <CustomText>
+        {mediaLibraryBrightness || TEXTINGS.mediaLibraryBrightness}
+      </CustomText>
       <Box>
         <RangeSlider
           onBlur={onBlur}

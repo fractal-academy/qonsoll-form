@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { Popconfirm } from 'antd'
 import React, { cloneElement } from 'react'
 import { Box } from '@qonsoll/react-design'
-import { LAYOUT_TYPES } from '../../../../constants'
+import { LAYOUT_TYPES, TEXTINGS } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
 import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { NumberedCard, IconRoundContainer } from '../../../../components'
@@ -79,8 +79,9 @@ function QuestionSimpleView(props) {
               title={
                 hasEndingOnIt || hasConditions || hasCondtitionOnIt
                   ? questionWithLogicRemovingPopconfirm ||
-                    'This question has connected logic. Delete it?'
-                  : questionRemovingPopconfirm || 'Delete this question?'
+                    TEXTINGS.questionWithLogicRemovingPopconfirm
+                  : questionRemovingPopconfirm ||
+                    TEXTINGS.questionRemovingPopconfirm
               }
               onConfirm={(e) => action(e, id)}
               disabled={disableDelete}
@@ -110,7 +111,7 @@ QuestionSimpleView.propTypes = {
   onClick: PropTypes.func,
   layoutType: PropTypes.string,
   disableDelete: PropTypes.bool,
-  number: PropTypes.number.isRequired
+  number: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 }
 
 export default QuestionSimpleView

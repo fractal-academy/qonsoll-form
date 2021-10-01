@@ -1,17 +1,16 @@
+import { Tabs } from 'antd'
+import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import {
   ConditionForm,
   ScoreConditionsAdvancedView,
   EndingsSimpleView
 } from '../../../../domains/Condition/components'
-import { Tabs } from 'antd'
-import { QUESTION_TYPES } from '../../../../constants'
-import { Box, NoData } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
-import { COLLECTIONS } from '../../../../constants'
-import PropTypes from 'prop-types'
+import { Container, Box, NoData } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { EmptyState, CustomTabs } from './FormConditionsForm.styles'
+import { QUESTION_TYPES, COLLECTIONS, TEXTINGS } from '../../../../constants'
 
 const { TabPane } = Tabs
 
@@ -78,18 +77,18 @@ function FormConditionsForm(props) {
   )
 
   return (
-    <>
+    <Container>
       <CustomTabs onChange={onTabChange}>
         <TabPane
-          tab={conditionsLogicJumpsTab || 'Logic jumps'}
+          tab={conditionsLogicJumpsTab || TEXTINGS.conditionsLogicJumpsTab}
           key="1"
           style={{
             overflowY: 'scroll',
-            overflowX: 'hidden'
+            overflow: 'hidden'
           }}>
-          {data?.length > 0 ? (
+          {!!data?.length ? (
             data?.map((item, index) => (
-              <Box mb={3}>
+              <Box mb={3} ml={2} key={index}>
                 <ConditionForm
                   key={index}
                   item={item}
@@ -103,19 +102,17 @@ function FormConditionsForm(props) {
           ) : (
             <EmptyState
               image={NoData.PRESENTED_IMAGE_SIMPLE}
-              description={
-                conditionsNoData || 'There are no question to configure.'
-              }
+              description={conditionsNoData || TEXTINGS.conditionsNoData}
             />
           )}
         </TabPane>
         <TabPane
-          tab={conditionsEndingsTab || 'Endings'}
+          tab={conditionsEndingsTab || TEXTINGS.conditionsEndingsTab}
           key="2"
-          style={{ overflowY: 'scroll', overflowX: 'hidden', color: 'red' }}>
-          {!!filteredAnswerForEndings?.length > 0 && endings?.length > 0 ? (
+          style={{ overflowY: 'scroll', overflow: 'hidden' }}>
+          {!!filteredAnswerForEndings?.length && !!endings?.length ? (
             endings?.map((item, index) => (
-              <Box mb={3}>
+              <Box mb={3} ml={2} key={index}>
                 <EndingsSimpleView
                   key={index}
                   item={item}
@@ -130,20 +127,18 @@ function FormConditionsForm(props) {
           ) : (
             <EmptyState
               image={NoData.PRESENTED_IMAGE_SIMPLE}
-              description={
-                conditionsNoData || 'There are no question to configure.'
-              }
+              description={conditionsNoData || TEXTINGS.conditionsNoData}
             />
           )}
         </TabPane>
         {formData?.isQuiz && (
           <TabPane
-            style={{ overflowY: 'scroll', overflowX: 'hidden' }}
-            tab={conditionsQuizTab || 'Answer score configurations'}
+            style={{ overflowY: 'scroll', overflow: 'hidden' }}
+            tab={conditionsQuizTab || TEXTINGS.conditionsQuizTab}
             key="3">
-            {filteredAnswerForEndings?.length > 0 ? (
+            {!!filteredAnswerForEndings?.length ? (
               filteredAnswerForEndings?.map((item, index) => (
-                <Box mb={3}>
+                <Box mb={3} ml={2} key={index}>
                   <ScoreConditionsAdvancedView
                     key={index}
                     questionData={item}
@@ -155,12 +150,9 @@ function FormConditionsForm(props) {
             ) : (
               <EmptyState
                 image={NoData.PRESENTED_IMAGE_SIMPLE}
-                description={
-                  conditionsNoData || 'There are no question to configure.'
-                }>
+                description={conditionsNoData || TEXTINGS.conditionsNoData}>
                 {`${
-                  conditionAddQuestionType ||
-                  'Please, add one of the following questions types'
+                  conditionAddQuestionType || TEXTINGS.conditionAddQuestionType
                 }:`}
                 <br />
                 {`${QUESTION_TYPES.CHOICE},
@@ -173,7 +165,7 @@ function FormConditionsForm(props) {
           </TabPane>
         )}
       </CustomTabs>
-    </>
+    </Container>
   )
 }
 

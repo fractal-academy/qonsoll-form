@@ -17,6 +17,6 @@ export const AddNewChoiceBox = styled(Box)`
   border-radius: var(--qf-border-radius-md);
   background-color: var(--qf-button-bg);
   &:hover {
-    background-color: var(--qf-active-button-bg);
+    background-color: var(--qf-button-bg-hover);
   }
 `

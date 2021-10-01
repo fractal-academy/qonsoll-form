@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { TEXTINGS } from '../../../../constants'
 import { Modal, Popconfirm, Tooltip } from 'antd'
 import { Row, Col, Button, Title } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
@@ -28,8 +29,9 @@ function ModalWithFormConditionsForm(props) {
     <>
       <Tooltip
         placement="bottomRight"
-        title={conditionsModalTooltip || 'Configure logic jumps'}>
+        title={conditionsModalTooltip || TEXTINGS.conditionsModalTooltip}>
         <Button
+          ml={1}
           {...btnProps}
           onClick={() => {
             setIsModalVisible(!isModalVisible)
@@ -51,7 +53,7 @@ function ModalWithFormConditionsForm(props) {
         }}
         footer={
           <Button type="primary" onClick={onSave}>
-            {conditionModalSubmitButton || 'Close'}
+            {conditionModalSubmitButton || TEXTINGS.conditionModalSubmitButton}
           </Button>
         }
         title={
@@ -59,20 +61,18 @@ function ModalWithFormConditionsForm(props) {
             <Row v="center" noGutters>
               <Col>
                 <Title color="var(--qf-typography-title-color)" level={3}>
-                  {conditionModalTitle || 'Logic'}
+                  {conditionModalTitle || TEXTINGS.conditionModalTitle}
                 </Title>
               </Col>
               <Col cw="auto" v="center">
                 <Popconfirm
-                  title={
-                    popconfirmReset ||
-                    'Are you sure, you want to reset logic jumps?'
-                  }
+                  title={popconfirmReset || TEXTINGS.popconfirmReset}
                   okText="Reset"
                   okType="danger"
                   onConfirm={onResetClick}>
                   <Button type="text" onMouseDown={(e) => e.preventDefault()}>
-                    {conditionModalResetLogic || 'Reset logic'}
+                    {conditionModalResetLogic ||
+                      TEXTINGS.conditionModalResetLogic}
                   </Button>
                 </Popconfirm>
               </Col>

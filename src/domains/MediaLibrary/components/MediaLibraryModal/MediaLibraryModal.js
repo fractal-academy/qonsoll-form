@@ -1,14 +1,14 @@
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
+import { Modal, Upload, message } from 'antd'
 import { StaticList } from '../../../../components'
-import { Row, Col, Box, Input, Title, Button } from '@qonsoll/react-design'
 import useFunctions from '../../../../hooks/useFunctions'
 import React, { useEffect, useRef, useState } from 'react'
-import COLLECTIONS from '../../../../constants/collection'
+import { COLLECTIONS, TEXTINGS } from '../../../../constants'
 import { SearchOutlined, EditOutlined } from '@ant-design/icons'
 import { useTranslation } from '../../../../context/Translation'
-import { Modal, Upload, message } from 'antd'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { Row, Col, Box, Input, Title, Button } from '@qonsoll/react-design'
 import {
   MediaListContainer,
   CustomButton,
@@ -129,7 +129,7 @@ function MediaLibraryModal(props) {
             <Box mr={2}>
               <EditOutlined />
             </Box>
-            {mediaLibraryButton || 'Change'}
+            {mediaLibraryButton || TEXTINGS.mediaLibraryButton}
           </Box>
         </CustomButton>
       )}
@@ -148,10 +148,10 @@ function MediaLibraryModal(props) {
         <Row v="center" py={3} px={3}>
           <Col>
             <Title color="var(--qf-typography-title-color)" level={3}>
-              {mediaLibraryTitle || 'Media Library'}
+              {mediaLibraryTitle || TEXTINGS.mediaLibraryTitle}
             </Title>
             <CustomText>
-              {`${mediaLibraryCounter || 'Amount of shown files'}: `}
+              {`${mediaLibraryCounter || TEXTINGS.mediaLibraryCounter}: `}
               {amountFiles}
             </CustomText>
           </Col>
@@ -163,7 +163,8 @@ function MediaLibraryModal(props) {
               ref={searchRef}
               prefix={<SearchOutlined />}
               placeholder={`${
-                mediaLibrarySearchPlaceholder || 'Search media file by name'
+                mediaLibrarySearchPlaceholder ||
+                TEXTINGS.mediaLibrarySearchPlaceholder
               }...`}
               onSearch={searchData}
               onChange={onChange}

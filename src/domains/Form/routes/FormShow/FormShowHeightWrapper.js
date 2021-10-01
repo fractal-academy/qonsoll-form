@@ -39,7 +39,7 @@ FormShowHeightWrapper.propTypes = {
   isFormQuiz: PropTypes.bool,
   currentSlide: PropTypes.number,
   wrapperHeight: PropTypes.number,
-  answersScoreData: PropTypes.object,
+  answersScoreData: PropTypes.array,
   containWelcomeScreen: PropTypes.bool
 }
 

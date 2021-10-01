@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col, Box, Text } from '@qonsoll/react-design'
-import { QUESTION_TYPES } from '../../../../constants'
+import { QUESTION_TYPES, QUESTION_DESCRIPTIONS } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
 import {
   QuestionsTypeMenu,
@@ -47,58 +47,58 @@ function QuestionTypeSelect(props) {
   const questionTypeMap = customQuestionTypes || [
     {
       type: QUESTION_TYPES.WELCOME_SCREEN,
-      description: welcomeScreenDesc || 'Invite your audience in',
+      description: welcomeScreenDesc || QUESTION_DESCRIPTIONS.WELCOME_SCREEN,
       icon: <HomeOutlined />
     },
     {
       type: QUESTION_TYPES.LONG_TEXT,
-      description: longTextDesc || 'More space to spill the beans',
+      description: longTextDesc || QUESTION_DESCRIPTIONS.LONG_TEXT,
       icon: <FileTextOutlined />
     },
     {
       type: QUESTION_TYPES.SHORT_TEXT,
-      description: shortTextDesc || 'For short answers, like names',
+      description: shortTextDesc || QUESTION_DESCRIPTIONS.SHORT_TEXT,
       icon: <SmallDashOutlined />
     },
     {
       type: QUESTION_TYPES.DATE,
-      description: dateDesc || 'Collect answers in date format',
+      description: dateDesc || QUESTION_DESCRIPTIONS.DATE,
       icon: <CalendarOutlined />
     },
     {
       type: QUESTION_TYPES.FILE_UPLOAD,
-      description: fileUploadDesc || 'Upload a file up to 10MB',
+      description: fileUploadDesc || QUESTION_DESCRIPTIONS.FILE_UPLOAD,
       icon: <UploadOutlined />
     },
 
     {
       type: QUESTION_TYPES.OPINION_SCALE,
-      description: opinionDesc || 'A customizable, numbered scale',
+      description: opinionDesc || QUESTION_DESCRIPTIONS.OPINION_SCALE,
       icon: <HomeOutlined />
     },
     {
       type: QUESTION_TYPES.PICTURE_CHOICE,
-      description: pictureChoiceDesc || 'Multiple choice but prettier',
+      description: pictureChoiceDesc || QUESTION_DESCRIPTIONS.PICTURE_CHOICE,
       icon: <PictureOutlined />
     },
     {
       type: QUESTION_TYPES.CHOICE,
-      description: choiceDesc || 'Multiple choice',
+      description: choiceDesc || QUESTION_DESCRIPTIONS.CHOICE,
       icon: <GoldOutlined />
     },
     {
       type: QUESTION_TYPES.RATING,
-      description: ratingDesc || 'Rate',
+      description: ratingDesc || QUESTION_DESCRIPTIONS.RATING,
       icon: <StarOutlined />
     },
     {
       type: QUESTION_TYPES.STATEMENT,
-      description: statementDesc || 'Take the mic for a moment',
+      description: statementDesc || QUESTION_DESCRIPTIONS.STATEMENT,
       icon: <CopyrightOutlined />
     },
     {
       type: QUESTION_TYPES.YES_NO,
-      description: yesnoDesc || 'Just 2 options: Yes or No',
+      description: yesnoDesc || QUESTION_DESCRIPTIONS.YES_NO,
       icon: <ShareAltOutlined />
     }
   ]
@@ -106,7 +106,7 @@ function QuestionTypeSelect(props) {
   const updatedMap =
     (welcomeScreenShowRule &&
       questionTypeMap?.filter(
-        (item) => item.type !== QUESTION_TYPES.WELCOME_SCREEN
+        (item) => item?.type !== QUESTION_TYPES.WELCOME_SCREEN
       )) ||
     questionTypeMap
 
@@ -118,17 +118,17 @@ function QuestionTypeSelect(props) {
     <Box pl={2} display="block">
       <QuestionsTypeMenu>
         {updatedMap?.map((item) => (
-          <QuestionMenuItem key={item.type} onClick={onClick}>
+          <QuestionMenuItem key={item?.type} onClick={onClick}>
             <Row h="center" v="center" noGutters>
               <Col cw="auto" ml={2}>
-                {item.icon}
+                {item?.icon}
               </Col>
               <Col display="grid">
                 <Text color="var(--qf-typography-title-color)">
-                  {item.type}
+                  {item?.type}
                 </Text>
                 <Text color="var(--qf-typography-caption-color)">
-                  {item.description}
+                  {item?.description}
                 </Text>
               </Col>
             </Row>

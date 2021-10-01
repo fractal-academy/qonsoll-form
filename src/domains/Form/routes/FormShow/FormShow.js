@@ -11,7 +11,6 @@ import { TranslationContext } from '../../../../context/Translation'
 import { FormAdvancedView } from '../../../../domains/Form/components'
 import { ContentCard, Spinner, PageHeader } from '../../../../components'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import TypeformConfigurationContext from '../../../../context/TypeformConfigurationContext'
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
   useAnswersContextDispatch,
@@ -31,7 +30,6 @@ function FormShow(props) {
     submitLoading,
     wrapperHeight,
     wrapperOffset,
-    configurations,
     actions = {},
     wrapperPaddings,
     showHeader
@@ -192,60 +190,57 @@ function FormShow(props) {
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
         <TranslationContext.Provider value={translations || {}}>
-          <TypeformConfigurationContext.Provider value={configurations}>
-            {loading ? (
-              <Spinner />
-            ) : (
-              <Container
-                height="100%"
-                display="flex"
-                flexDirection="column"
-                p={containerPadding}>
-                {showHeader && (
-                  <PageHeader
-                    id={id}
-                    handlesPreview
-                    smallScreen={smallScreen}
-                    onBack={history.goBack}
-                  />
-                )}
-                <ContentCard
-                  topOffset={wrapperOffset}
-                  wrapperHeight={wrapperHeight}>
-                  <FormAdvancedView
-                    isAnswered={isAnswered}
-                    disabledUp={disabledUp}
-                    currentSlide={currentSlide}
-                    disabledDown={disabledDown}
-                    submitLoading={submitLoading}
-                    setIsAnswered={setIsAnswered}
-                    questionsData={questionsData}
-                    setCurrentSlide={setCurrentSlide}
-                    containWelcomeScreen={containWelcomeScreen}
-                    previousQuestionOrder={previousQuestionOrder}
-                    setPreviousQuestionOrder={setPreviousQuestionOrder}>
-                    {filteredQuestionsList?.map((question, index) => (
-                      <FormShowHeightWrapper
-                        key={index}
-                        index={index}
-                        onClick={onClick}
-                        question={question}
-                        isFormQuiz={formData?.isQuiz}
-                        currentSlide={currentSlide}
-                        containWelcomeScreen={containWelcomeScreen}
-                        answersScoreData={
-                          answersScoreData?.find(
-                            (scoreItem) =>
-                              scoreItem?.questionId === question?.id
-                          )?.questionScores
-                        }
-                      />
-                    ))}
-                  </FormAdvancedView>
-                </ContentCard>
-              </Container>
-            )}
-          </TypeformConfigurationContext.Provider>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <Container
+              height="100%"
+              display="flex"
+              flexDirection="column"
+              p={containerPadding}>
+              {showHeader && (
+                <PageHeader
+                  id={id}
+                  handlesPreview
+                  smallScreen={smallScreen}
+                  onBack={history.goBack}
+                />
+              )}
+              <ContentCard
+                topOffset={wrapperOffset}
+                wrapperHeight={wrapperHeight}>
+                <FormAdvancedView
+                  isAnswered={isAnswered}
+                  disabledUp={disabledUp}
+                  currentSlide={currentSlide}
+                  disabledDown={disabledDown}
+                  submitLoading={submitLoading}
+                  setIsAnswered={setIsAnswered}
+                  questionsData={questionsData}
+                  setCurrentSlide={setCurrentSlide}
+                  containWelcomeScreen={containWelcomeScreen}
+                  previousQuestionOrder={previousQuestionOrder}
+                  setPreviousQuestionOrder={setPreviousQuestionOrder}>
+                  {filteredQuestionsList?.map((question, index) => (
+                    <FormShowHeightWrapper
+                      key={index}
+                      index={index}
+                      onClick={onClick}
+                      question={question}
+                      isFormQuiz={formData?.isQuiz}
+                      currentSlide={currentSlide}
+                      containWelcomeScreen={containWelcomeScreen}
+                      answersScoreData={
+                        answersScoreData?.find(
+                          (scoreItem) => scoreItem?.questionId === question?.id
+                        )?.questionScores
+                      }
+                    />
+                  ))}
+                </FormAdvancedView>
+              </ContentCard>
+            </Container>
+          )}
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>

@@ -1,17 +1,16 @@
-import { Switch } from 'antd'
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Box, Text } from '@qonsoll/react-design'
-import { QUESTION_TYPES } from '../../../../constants'
+import { QUESTION_TYPES, TEXTINGS } from '../../../../constants'
 import { useTranslation } from '../../../../context/Translation'
+import { Row, Col, Box, Text, Switch } from '@qonsoll/react-design'
+import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
-import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
 
 function QuestionConfigurationMenu() {
-  // [ADDITIONAL_HOOKS]
+  // [CUSTOM_HOOKS]
   const { questionVideo, questionRequiredSetting } = useTranslation()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -24,7 +23,7 @@ function QuestionConfigurationMenu() {
     currentQuestion?.isVideoQuestion
   )
 
-  // [CLEAN FUNCTIONS]
+  // [CLEAN_FUNCTIONS]
   const requireStateChange = (switchValue) => {
     setRequiredSwitchValue(!switchValue)
     currentQuestionDispatch({
@@ -59,7 +58,7 @@ function QuestionConfigurationMenu() {
         <Row mb={3} noGutters v="center">
           <Col v="center">
             <Text color="var(--qf-typography-subtitle-color)">
-              {questionRequiredSetting || 'Required'}
+              {questionRequiredSetting || TEXTINGS.questionRequiredSetting}
             </Text>
           </Col>
           <Col cw="auto" px={2}>
@@ -74,7 +73,7 @@ function QuestionConfigurationMenu() {
       <Row mb={3} noGutters v="center">
         <Col v="center">
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionVideo || 'Video question'}
+            {questionVideo || TEXTINGS.questionVideo}
           </Text>
         </Col>
         <Col cw="auto" px={2}>
@@ -85,9 +84,11 @@ function QuestionConfigurationMenu() {
           />
         </Col>
       </Row>
-      {[QUESTION_TYPES.OPINION_SCALE, QUESTION_TYPES.RATING].includes(
-        currentQuestion.questionType
-      ) && <AmountOptionsCustomConfig />}
+      {[
+        QUESTION_TYPES.OPINION_SCALE,
+        QUESTION_TYPES.RATING,
+        QUESTION_TYPES.RATING_EXTENDED
+      ].includes(currentQuestion.questionType) && <AmountOptionsCustomConfig />}
     </Box>
   )
 }
