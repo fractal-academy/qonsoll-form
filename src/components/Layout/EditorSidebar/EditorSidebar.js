@@ -241,8 +241,7 @@ function EditorSidebar(props) {
           : questions?.length + index + 1
       })
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questions?.length])
+  }, [containWelcomeScreen, endings, questions?.length, setData])
 
   return (
     <SidebarBoxWrapper>

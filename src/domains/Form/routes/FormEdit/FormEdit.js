@@ -226,9 +226,7 @@ function FormEdit(props) {
         type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
         payload: defaultCurrentQuestion || questionsList?.[0] || {}
       })
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questionsListLoading])
+  }, [currentQuestionDispatch, questionsList, questionsListLoading])
 
   useEffect(() => {
     //set default active tab for questionLayout switcher every time when we change current question
@@ -258,8 +256,7 @@ function FormEdit(props) {
       //set question id in state
       setCurrentQuestionId(currentQuestion?.id)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentQuestion])
+  }, [currentQuestion, currentQuestionId, setData])
 
   // [COMPUTED PROPERTIES]
   const containerPadding =
