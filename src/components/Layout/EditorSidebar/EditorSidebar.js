@@ -241,7 +241,8 @@ function EditorSidebar(props) {
           : questions?.length + index + 1
       })
     )
-  }, [containWelcomeScreen, endings, questions?.length, setData])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questions?.length])
 
   return (
     <SidebarBoxWrapper>
@@ -285,7 +286,7 @@ function EditorSidebar(props) {
         )}
       </Box>
 
-      <Divider type="horizontal" />
+      <Divider mt={2} type="horizontal" />
 
       <Row my={2} v="center" h="between">
         <Col cw="auto">
