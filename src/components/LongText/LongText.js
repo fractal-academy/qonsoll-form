@@ -4,7 +4,7 @@ import React, { useRef } from 'react'
 import { useKeyPress } from '@umijs/hooks'
 import { SubmitButton } from '../../components'
 import { Form, message } from 'antd'
-import { Container, Text, TextArea } from '@qonsoll/react-design'
+import { Container, Box, Text, TextArea } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 import { TEXTINGS } from '../../constants'
 
@@ -82,10 +82,7 @@ function LongText(props) {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         style={{ width: '100%' }}>
-        <Form.Item
-          name="answer"
-          style={{ margin: 0 }}
-          rules={[{ required: question?.isRequired }]}>
+        <Form.Item name="answer" rules={[{ required: question?.isRequired }]}>
           <TextArea
             {...textAreaProps}
             bordered
@@ -105,8 +102,9 @@ function LongText(props) {
           </Form.Item>
         )}
       </Form>
-
-      <SubmitButton onClick={onPressOk} disablePressEnter />
+      <Box mt={4}>
+        <SubmitButton onClick={onPressOk} disablePressEnter />
+      </Box>
     </Container>
   )
 }

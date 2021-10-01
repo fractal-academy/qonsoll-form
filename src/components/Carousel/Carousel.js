@@ -73,6 +73,7 @@ function Carousel(props) {
         })
       }
       carouselRef.current?.next()
+
       setIsAnswered && setIsAnswered(false)
     }
   }
