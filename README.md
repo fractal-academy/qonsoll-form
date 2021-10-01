@@ -284,7 +284,7 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
 - There's list of all vars, used in Qonsollform. If you need change something in module appearance, just rewrite suitable var with needed value. Due to unical name of variables, your app'll still remaining its previous appearence.
 
 ```sh
-   /* static list */
+    /* static list */
   --qf-list-item-bg: var(--ql-color-dark-t-lighten5);
   --qf-list-item-hover: var(--ql-color-dark-t-lighten6);
 
@@ -309,15 +309,17 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
   --qf-header-mb: 8px;
 
   /* button */
-  --qf-button-bg: var(--ql-color-accent1-t-lighten4);
-  --qf-button-hover: var(--ql-color-accent1-t-lighten3);
-  --qf-active-button-bg: var(--ql-color-accent1-t-lighten2);
+  --qf-button-bg: var(--ql-color-dark-t-lighten5);
+  --qf-button-bg-hover: var(--ql-color-accent1-t-lighten4);
+  --qf-button-bg-active: var(--ql-color-accent1);
 
-  --qf-active-keybox-bg: var(--ql-color-accent1);
+  --qf-button-color: var(--ql-color-dark);
+  --qf-button-color-active: var(--ql-color-white);
+
   --qf-keybox-bg: var(--ql-color-white);
-
-  --qf-button-color: var(--ql-color-accent1);
-  --qf-active-button-color: var(--ql-color-white); 
+  --qf-keybox-bg-active: var(--ql-color-accent1);
+  --qf-keybox-color: var(--ql-color-dark);
+  --qf-keybox-color-active: var(--ql-color-white);
 
   --qf-submit-button-font-size: var(--ql-font-size-h4);
   
@@ -365,7 +367,7 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
   --ql-menu-item-active-bg: var(--ql-color-accent1-t-lighten3);
 
   /* overwritten form */
-  --ql-form-item-vertical-spacing: 24px;
+  --ql-form-item-vertical-spacing: 0px;
 ```
 
 ## How to configure translations
@@ -375,12 +377,15 @@ Qonsollform will perfectly fine work without translations propagating, but app w
 ```sh
 const qformTranslations = (t) => {
   return {
-    //global components
+     //global components
     requiredAnswerMessage: t('The answer is required'),
     submitHint: t('Press enter'),
     choicePlaceholder: t('choice'),
     conditionRemovingWarn: t('This option has connected logic, delete it anyway?'),
+    editButton: t('Edit'),
     removeButton: t('Delete'),
+    createForm: t('Add new form'),
+    uploadImage: t('Upload new image'),
     uploaderHint: t('Click or drag file to this area to upload'),
     itemRemovingHint: t('Delete this item?'),
     questionListTitle: t('Questions'),
@@ -391,11 +396,16 @@ const qformTranslations = (t) => {
     answerViewTooltip: t('Answers preview'),
     longTextHint: t('Shift ⇧ + Enter ↵ to make a line break'),
     textQuestionPlaceholder: t('Type your answer here'),
+    listItemNoDescription: t('No description'),
+    popconfirmDeleteFormTitle: t('Remove item?'),
+    popconfirmDeleteImageTitle: t('Remove image?'),
+    conditionModalIsUploaded: t('is uploaded'),
+    emptyDescription: t('Nothing was found'),
     
     //domains: form components
     conditionsEndingsTab: t('Endings'),
     conditionsLogicJumpsTab: t('Logic jumps'),
-    conditionsQuizTab: t('Scores'),
+    conditionsQuizTab: t('Answer score configurations'),
     conditionsNoData: t('There are no question to configure'),
     conditionAddQuestionType: t('Please, add one of the following questions types'),
     quizSwitcherText: t('Enable quiz system'),
@@ -418,6 +428,7 @@ const qformTranslations = (t) => {
     conditionModalResetLogic: t('Reset logic'),
     conditionModalSubmitButton: t('Close'),
     conditionsModalTooltip: t('Configure logic jumps'),
+    conditionModalAddCondition: t('+ Add condition'),
     conditionRedirectRulePlaceholder: t('Select redirect rule'),
     scoreWeightTitle: t('Enter score weight of answer'),
     
@@ -443,6 +454,8 @@ const qformTranslations = (t) => {
     questionEditableSubtitleHint: t('Description (optional)'),
     questionRemovingPopconfirm: t('Delete this question?'),
     questionWithLogicRemovingPopconfirm: t('This question has connected logic, delete it anyway?'),
+    questionConfigurationExtended: t('Turn on extended options'),
+    questionConfigurationMultiple: t('Switch to multiple option'),
     welcomeScreenDesc: t('Invite your audience in'),
     longTextDesc: t('More space to spill the beans'),
     shortTextDesc: t('For short answers, like names'),
@@ -453,7 +466,8 @@ const qformTranslations = (t) => {
     choiceDesc: t('Multiple choice'),
     ratingDesc: t('Rate'),
     statementDesc: t('Take the mic for a moment'),
-    yesnoDesc: t('Just 2 options, yes or no'),
+    yesnoDesc: t('Just 2 options, yes or no')
+  }
 
     //domains: answer components
     answerTitle: t('Answers'),
