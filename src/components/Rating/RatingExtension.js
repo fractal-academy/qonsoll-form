@@ -132,11 +132,7 @@ function RatingExtension(props) {
       ) : (
         <Radio.Group onChange={onRadioChange}>
           {question?.ratingAdditionalOptions?.map((item, index) => (
-            <Box
-              key={index}
-              display="flex"
-              alignItems="center"
-              justifyContent="center">
+            <Box mb={2} key={index} display="flex" alignItems="center">
               <Popconfirm
                 title={conditionRemovingWarn || TEXTINGS.conditionRemovingWarn}
                 okType="danger"
