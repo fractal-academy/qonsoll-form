@@ -92,7 +92,7 @@ function AmountOptionsCustomConfig() {
           <Col v="center">
             <Text color="var(--qf-typography-subtitle-color)">
               {questionConfigurationMultiple ||
-                TEXTINGS.questionConfigurationExtended}
+                TEXTINGS.questionConfigurationMultiple}
             </Text>
           </Col>
           <Col cw="auto" v="center">

@@ -12,6 +12,10 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
+import {
+  useAnswersContextDispatch,
+  ANSWERS_DISPATCH_EVENTS
+} from '../../context/Answers'
 
 function RatingExtension(props) {
   const { question, onClick, isFormQuiz, isMultiple } = props
@@ -20,6 +24,7 @@ function RatingExtension(props) {
   const [isHovering, hoverRef] = useHover()
 
   //[CUSTOM HOOKS]
+  const answersDispatch = useAnswersContextDispatch()
   const currentQuestion = useCurrentQuestionContext()
   const { removeButton, conditionRemovingWarn } = useTranslation()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -33,7 +38,7 @@ function RatingExtension(props) {
 
     const data = {
       question,
-      answer: { value: option.target.value || '' },
+      answer: { value: option?.target?.value?.answerOption || '' },
       answerId: '1',
       answerScore: isFormQuiz ? score : ''
     }
@@ -49,15 +54,20 @@ function RatingExtension(props) {
   const onCheckboxChange = (option) => {
     const score = 0
 
+    let answerValues = option?.map((item) => item?.answerOption)
+
     const data = {
       question,
-      answer: { value: option || [] },
+      answer: { value: answerValues?.join(', ') || '' },
       answerId: '1',
       answerScore: isFormQuiz ? score : ''
     }
 
-    // if the data is sent we delay and animate the selected value, else - just go to next question
-    !!option && onClick ? setTimeout(onClick, 700, data) : onClick?.(data)
+    !!data &&
+      answersDispatch({
+        type: ANSWERS_DISPATCH_EVENTS.ADD_ANSWER,
+        payload: data
+      })
   }
 
   const addOption = () => {
@@ -132,11 +142,7 @@ function RatingExtension(props) {
       ) : (
         <Radio.Group onChange={onRadioChange}>
           {question?.ratingAdditionalOptions?.map((item, index) => (
-            <Box
-              key={index}
-              display="flex"
-              alignItems="center"
-              justifyContent="center">
+            <Box mb={2} key={index} display="flex" alignItems="center">
               <Popconfirm
                 title={conditionRemovingWarn || TEXTINGS.conditionRemovingWarn}
                 okType="danger"

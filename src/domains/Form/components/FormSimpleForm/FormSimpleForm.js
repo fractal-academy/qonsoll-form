@@ -28,12 +28,14 @@ function FormSimpleForm(props) {
         name="title"
         rules={[{ required: true, message: 'Please, enter form name.' }]}>
         <Input
+          mb={4}
           allowClear
           placeholder={formTitlePlaceholder || TEXTINGS.formTitlePlaceholder}
         />
       </Form.Item>
       <Form.Item name="subtitle">
         <TextArea
+          mb={4}
           showCount
           autoSize={{ minRows: 3, maxRows: 5 }}
           maxLength={1000}

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Container } from '@qonsoll/react-design'
 import { useKeyPress } from '@umijs/hooks'
 import useFunctions from '../../../../hooks/useFunctions'
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import FormShowHeightWrapper from './FormShowHeightWrapper'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { TranslationContext } from '../../../../context/Translation'
@@ -92,15 +92,14 @@ function FormShow(props) {
       ),
     [questionsData]
   )
-  const answersId = useMemo(
-    () =>
-      !!Object.values(answersContext).length
-        ? Object.values(answersContext).map((item) => {
-            if (item?.answerId) return item?.answerId
-          })
-        : [],
-    [answersContext]
-  )
+  const answersId = useMemo(() => {
+    const filteredAnswerContext = Object.values(answersContext)
+
+    !!filteredAnswerContext?.length &&
+      filteredAnswerContext.filter((item) => item?.answerId)
+    return filteredAnswerContext
+  }, [answersContext])
+
   const containWelcomeScreen = useMemo(
     () => questionsData?.[0]?.questionType === QUESTION_TYPES.WELCOME_SCREEN,
     [questionsData]
@@ -120,7 +119,7 @@ function FormShow(props) {
 
   // [CLEAN FUNCTIONS]
   //function that calculate what ending will be displayed
-  const determineEnding = () => {
+  const determineEnding = useCallback(() => {
     let maxMatches = 0
     let tempMatches = 0
     //by default first ending will be displayed
@@ -149,7 +148,7 @@ function FormShow(props) {
     })
     //add computed ending to other questions
     filteredQuestionsList.push(computedEnding)
-  }
+  }, [answersId, endings, filteredQuestionsList])
 
   const onClick = (answerData) => {
     !!answerData &&
@@ -174,9 +173,7 @@ function FormShow(props) {
       const firstSlideRule = containWelcomeScreen ? 0 : 1
       setCurrentSlide(firstSlideRule)
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, questionsData])
+  }, [containWelcomeScreen, loading, questionsData])
   useEffect(() => {
     // when questions was uploaded, its last one question without ending
     // and we got answer for this question
@@ -184,8 +181,7 @@ function FormShow(props) {
       //calculate ending
       determineEnding()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastQuestionWithoutEndings, isAnswered])
+  }, [isLastQuestionWithoutEndings, isAnswered, loading, determineEnding])
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>

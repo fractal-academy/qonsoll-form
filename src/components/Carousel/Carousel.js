@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { QUESTION_TYPES, TEXTINGS } from '../../constants'
 import { useSize, useKeyPress } from '@umijs/hooks'
-import React, { cloneElement, useRef } from 'react'
+import React, { cloneElement, useEffect, useRef } from 'react'
 import { Row, Col, Box, Button } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 import { UpOutlined, DownOutlined } from '@ant-design/icons'
@@ -73,6 +73,7 @@ function Carousel(props) {
         })
       }
       carouselRef.current?.next()
+
       setIsAnswered && setIsAnswered(false)
     }
   }
@@ -204,7 +205,9 @@ function Carousel(props) {
 
   const typeAction = actionRuleMap[currentSlideData?.questionType] || next
 
-  isAnswered && typeAction()
+  useEffect(() => {
+    isAnswered && typeAction()
+  }, [isAnswered, typeAction])
 
   return (
     <Box ref={ref} height="100%" width="100%" position="relative">
