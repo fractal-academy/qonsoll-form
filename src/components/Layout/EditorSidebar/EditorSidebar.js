@@ -182,7 +182,10 @@ function EditorSidebar(props) {
         (answerConfig) => {
           const formattedObject = Object.entries(answerConfig)
           const resetFields = formattedObject?.map((tuple) => {
-            if (tuple[0] === 'answerOption' && condition) {
+            if (
+              (tuple[0] === 'answerOption' || tuple[0] === 'answerOptionId') &&
+              condition
+            ) {
               return tuple
             } else {
               return [tuple[0], '']
