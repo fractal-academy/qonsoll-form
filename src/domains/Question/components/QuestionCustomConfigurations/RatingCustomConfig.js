@@ -54,7 +54,17 @@ function AmountOptionsCustomConfig() {
     setExtendedSwitchValue(!switchValue)
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { isExtended: switchValue, ratingAdditionalOptions: [] }
+      payload: {
+        isExtended: switchValue,
+        ratingAdditionalOptions: [
+          {
+            answerOption: 'Extended option',
+            redirectQuestion: '',
+            answerOptionId: uuid(),
+            redirectConditionRule: ''
+          }
+        ]
+      }
     })
   }
   const multipleStateChange = (switchValue) => {

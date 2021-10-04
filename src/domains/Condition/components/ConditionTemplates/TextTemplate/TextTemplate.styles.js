@@ -6,7 +6,8 @@ export const CustomButton = styled(Button)`
   color: var(--qf-typography-title-color);
   background-color: var(--qf-button-bg);
   &:hover {
-    background-color: var(--qf-button-hover);
+    color: var(--qf-typography-title-color);
+    background-color: var(--qf-button-bg-hover);
   }
 `
 

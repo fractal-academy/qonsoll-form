@@ -26,7 +26,7 @@ function RatingExtension(props) {
   //[CUSTOM HOOKS]
   const answersDispatch = useAnswersContextDispatch()
   const currentQuestion = useCurrentQuestionContext()
-  const { removeButton, conditionRemovingWarn } = useTranslation()
+  const { removeButton, itemRemovingHint } = useTranslation()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPUTED PROPERTIES]
@@ -79,7 +79,7 @@ function RatingExtension(props) {
           ? [
               ...ratingProps,
               {
-                answerOption: 'option',
+                answerOption: 'Extended option',
                 redirectQuestion: '',
                 answerOptionId: uuid(),
                 redirectConditionRule: ''
@@ -87,7 +87,7 @@ function RatingExtension(props) {
             ]
           : [
               {
-                answerOption: 'option',
+                answerOption: 'Extended option',
                 redirectQuestion: '',
                 answerOptionId: uuid(),
                 redirectConditionRule: ''
@@ -96,6 +96,7 @@ function RatingExtension(props) {
       }
     })
   }
+
   const deleteOption = (index) => {
     ratingProps.splice(index, 1)
     currentQuestionDispatch({
@@ -111,17 +112,17 @@ function RatingExtension(props) {
           {question?.ratingAdditionalOptions?.map((item, index) => (
             <Box key={index} mb={2} display="flex" alignItems="center">
               <Popconfirm
-                title={conditionRemovingWarn || TEXTINGS.conditionRemovingWarn}
                 okType="danger"
+                title={itemRemovingHint || TEXTINGS.itemRemovingHint}
                 onConfirm={() => deleteOption(index)}
                 okText={removeButton || TEXTINGS.removeButton}>
                 <Box
-                  opacity={isHovering ? 1 : 0}
-                  color="var(--ql-color-danger)"
+                  p={0}
                   mr={2}
                   type="text"
                   size="small"
-                  p={0}>
+                  opacity={isHovering ? 1 : 0}
+                  color="var(--ql-color-danger)">
                   <DeleteOutlined />
                 </Box>
               </Popconfirm>
@@ -144,7 +145,7 @@ function RatingExtension(props) {
           {question?.ratingAdditionalOptions?.map((item, index) => (
             <Box mb={2} key={index} display="flex" alignItems="center">
               <Popconfirm
-                title={conditionRemovingWarn || TEXTINGS.conditionRemovingWarn}
+                title={itemRemovingHint || TEXTINGS.itemRemovingHint}
                 okType="danger"
                 onConfirm={() => deleteOption(index)}
                 okText={removeButton || 'Delete'}>

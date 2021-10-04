@@ -18,7 +18,7 @@ const TEXTINGS = {
   longTextHint: 'Shift ⇧ + Enter ↵ to make a line break',
   textQuestionPlaceholder: 'Type your answer here',
   listItemNoDescription: 'No description',
-  popconfirmDeleteFormTitle: 'Remove item?',
+  popconfirmDeleteFormTitle: 'Remove form?',
   popconfirmDeleteImageTitle: 'Remove image?',
   conditionModalIsUploaded: 'is uploaded',
   emptyDescription: 'Nothing was found',
