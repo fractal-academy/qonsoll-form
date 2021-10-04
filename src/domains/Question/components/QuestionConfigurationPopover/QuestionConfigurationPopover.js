@@ -45,10 +45,7 @@ function QuestionConfigurationPopover(props) {
       overlayInnerStyle={{
         width: '400px'
       }}
-      title={
-        'Please note that this question has logic settings.\n' +
-        'Changing the question type will delete all of them.'
-      }
+      title={TEXTINGS.questionTypeChangePopconfirm}
       style={{ width: '350px' }}
       onConfirm={popoverShowChange}
       onCancel={!popoverShowChange}

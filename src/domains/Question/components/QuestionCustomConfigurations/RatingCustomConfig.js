@@ -58,7 +58,7 @@ function AmountOptionsCustomConfig() {
         isExtended: switchValue,
         ratingAdditionalOptions: [
           {
-            answerOption: 'Extended option',
+            answerOption: TEXTINGS.ratingExtendedDefaultOption,
             redirectQuestion: '',
             answerOptionId: uuid(),
             redirectConditionRule: ''

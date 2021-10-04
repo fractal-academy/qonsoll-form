@@ -1,6 +1,7 @@
 import React from 'react'
 import { Select } from 'antd'
 import PropTypes from 'prop-types'
+import { TEXTINGS } from '../../../../constants'
 import {
   StyledSelect,
   StyledCaptionText,
@@ -27,12 +28,12 @@ function QuestionSelect(props) {
     <StyledSelect
       value={
         questionConfigurations?.[index]?.redirectQuestion ||
-        'Go to the next question'
+        TEXTINGS.conditionNextQuestionRedirect
       }
       showSearch
       allowClear
       onChange={(question) => onChange(question, index)}
-      defaultValue="Go to the next question">
+      defaultValue={TEXTINGS.conditionNextQuestionRedirect}>
       {/*FOR FUTURE IMPROVEMENTS  - if it will be necessary - add option "Submit form"*/}
       {/*<Option value="Submit form">*/}
       {/*  <Text color="var(--qf-typography-subtitle-color)" >Submit form</Text>*/}

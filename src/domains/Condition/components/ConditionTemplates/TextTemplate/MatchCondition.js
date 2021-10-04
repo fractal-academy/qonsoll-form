@@ -63,7 +63,7 @@ function MatchCondition(props) {
   }
 
   const onBlur = () => {
-    //breack if value didn`t change
+    //break if value didn't change
     if (questionConfigurations[index].answerOption === inputValue) return
 
     //create new array questionConfigurations of certain question
@@ -82,7 +82,7 @@ function MatchCondition(props) {
     setRuleSelectValue(
       item?.redirectConditionRule ||
         conditionRedirectPlaceholder ||
-        'Select redirect rule'
+        TEXTINGS.conditionRedirectPlaceholder
     )
   }, [item, conditionRedirectPlaceholder])
 
@@ -95,7 +95,7 @@ function MatchCondition(props) {
           value={
             ruleSelectValue ||
             conditionRedirectPlaceholder ||
-            'Select redirect rule'
+            TEXTINGS.conditionRedirectPlaceholder
           }
           options={TEXT_CONDITION_SELECT_OPTIONS}
           onChange={onRuleSelectValueChange}
@@ -109,9 +109,9 @@ function MatchCondition(props) {
           />
         ) : (
           <Input
-            placeholder="Enter value"
-            value={inputValue}
+            placeholder={TEXTINGS.conditionTextInputPlaceholder}
             onChange={onInputValueChange}
+            value={inputValue}
             onBlur={onBlur}
           />
         )}

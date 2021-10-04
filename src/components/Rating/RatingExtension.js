@@ -148,7 +148,7 @@ function RatingExtension(props) {
                 title={itemRemovingHint || TEXTINGS.itemRemovingHint}
                 okType="danger"
                 onConfirm={() => deleteOption(index)}
-                okText={removeButton || 'Delete'}>
+                okText={removeButton || TEXTINGS.removeButton}>
                 <Box
                   opacity={isHovering ? 1 : 0}
                   color="var(--ql-color-danger)"

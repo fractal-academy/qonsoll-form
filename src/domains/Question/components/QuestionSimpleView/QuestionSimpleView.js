@@ -84,9 +84,9 @@ function QuestionSimpleView(props) {
                     TEXTINGS.questionRemovingPopconfirm
               }
               onConfirm={(e) => action(e, id)}
+              okText={TEXTINGS.removeButton}
               disabled={disableDelete}
-              okType="danger"
-              okText="Delete">
+              okType="danger">
               <StyledButton
                 type="text"
                 shape="circle"
