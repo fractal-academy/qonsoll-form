@@ -2,11 +2,11 @@ import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import LetterBox from '../../LetterBox'
 import { Select as AntSelect } from 'antd'
-import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
 import { NumberedCard } from '../../../../../components'
-import { Title, Text, Select, Box } from '@qonsoll/react-design'
 import useFunctions from '../../../../../hooks/useFunctions'
+import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
 import { useTranslation } from '../../../../../context/Translation'
+import { Title, Text, Select, Box, Divider } from '@qonsoll/react-design'
 
 let startLetter = 65
 
@@ -84,14 +84,13 @@ function EndingSimpleView(props) {
                   key={questionAnswerItem?.answerOptionId}
                   value={`${questionListItem?.id} ${index}${ind}`}>
                   <Box display="flex">
-                    <LetterBox px={2} mr={2}>
-                      <Text
-                        color="var(--qf-typography-subtitle-color)"
-                        fontSize="var(--qf-typography-fs-body)"
-                        strong>
-                        {String.fromCharCode(startLetter + ind)}
-                      </Text>
-                    </LetterBox>
+                    <Text
+                      color="var(--qf-typography-subtitle-color)"
+                      fontSize="var(--qf-typography-fs-body)"
+                      strong>
+                      {String.fromCharCode(startLetter + ind)}
+                    </Text>
+                    <Divider height="auto" type="vertical" />
                     <Text
                       color="var(--qf-typography-title-color)"
                       fontSize="var(--qf-typography-fs-body)">

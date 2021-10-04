@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Popconfirm } from 'antd'
 import { useHover } from '@umijs/hooks'
-import { Row } from '@qonsoll/react-design'
+import { Row, Col } from '@qonsoll/react-design'
 import { DEFAULT_IMAGE, TEXTINGS } from '../../constants'
 import { CloseOutlined } from '@ant-design/icons'
 import React, { useState, useEffect } from 'react'
@@ -83,7 +83,7 @@ function ChoiceEditable(props) {
   }, [data])
 
   return (
-    <MainBox m={1} withImage={withImage} ref={hoverRef}>
+    <MainBox mb={2} mr={withImage && 2} withImage={withImage} ref={hoverRef}>
       {withImage && (
         <MediaBox backgroundImage={bgImage} mx={2} mt={2}>
           <MediaLibraryModal
