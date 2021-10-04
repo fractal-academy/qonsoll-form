@@ -72,7 +72,7 @@ const TEXTINGS = {
   questionRangeUpperSetting: 'to',
   questionConfigurationOptions: 'Amount of options',
   questionEditableTitleHint: 'Editable question title',
-  questionEditableSubtitleHint: 'Description (optional',
+  questionEditableSubtitleHint: 'Description (optional)',
   questionRemovingPopconfirm: 'Delete this question?',
   questionWithLogicRemovingPopconfirm:
     'This question has connected logic, delete it anyway?',

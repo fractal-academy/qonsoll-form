@@ -66,7 +66,7 @@ function ModalWithFormConditionsForm(props) {
               </Col>
               <Col cw="auto" v="center">
                 <Popconfirm
-                  title={popconfirmReset || TEXTINGS.popconfirmReset}
+                  title={popconfirmReset || TEXTINGS.conditionModalResetLogic}
                   okText="Reset"
                   okType="danger"
                   onConfirm={onResetClick}>

@@ -71,6 +71,7 @@
   --qf-condition-item-border: var(--ql-color-dark-t-lighten4);
 
   /* typography */
+  --qf-typography-fs-title: var(--ql-font-size-h4);
   --qf-typography-fs-title: var(--ql-font-size-h2);
   --qf-typography-fs-body: var(--ql-font-size-body1);
   --qf-typography-fs-caption: var(--ql-font-size-caption1);
