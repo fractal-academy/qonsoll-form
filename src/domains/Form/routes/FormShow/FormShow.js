@@ -173,7 +173,8 @@ function FormShow(props) {
       const firstSlideRule = containWelcomeScreen ? 0 : 1
       setCurrentSlide(firstSlideRule)
     }
-  }, [containWelcomeScreen, loading, questionsData])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, questionsData])
   useEffect(() => {
     // when questions was uploaded, its last one question without ending
     // and we got answer for this question

@@ -7,6 +7,7 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+import { v4 as uuid } from 'uuid'
 
 const maxRange = [...Array(10)].map((_, index) =>
   Object.create({ value: index + 1 })
@@ -34,11 +35,16 @@ function AmountOptionsCustomConfig() {
   const onRattingSelectChange = (amountOptions) => {
     const questionConfigurations = Array(amountOptions - 1 + 1)
       .fill(0)
-      ?.map((_, index) => ({
-        answerOption: 1 + index,
-        redirectQuestion: '',
-        redirectConditionRule: ''
-      }))
+      ?.map((_, index) => {
+        return (
+          currentQuestion?.questionConfigurations?.[index] || {
+            answerOption: 1 + index,
+            answerOptionId: uuid(),
+            redirectQuestion: '',
+            redirectConditionRule: ''
+          }
+        )
+      })
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { questionConfigurations }
