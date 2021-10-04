@@ -284,7 +284,7 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
 - There's list of all vars, used in Qonsollform. If you need change something in module appearance, just rewrite suitable var with needed value. Due to unical name of variables, your app'll still remaining its previous appearence.
 
 ```sh
-    /* static list */
+  /* static list */
   --qf-list-item-bg: var(--ql-color-dark-t-lighten5);
   --qf-list-item-hover: var(--ql-color-dark-t-lighten6);
 
@@ -346,6 +346,7 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
   --qf-condition-item-border: var(--ql-color-dark-t-lighten4);
 
   /* typography */
+  --qf-typography-fs-title: var(--ql-font-size-h2);
   --qf-typography-fs-body: var(--ql-font-size-body1);
   --qf-typography-fs-caption: var(--ql-font-size-caption1);
 
@@ -380,7 +381,7 @@ const qformTranslations = (t) => {
      //global components
     requiredAnswerMessage: t('The answer is required'),
     submitHint: t('Press enter'),
-    choicePlaceholder: t('choice'),
+    choicePlaceholder: t('Сhoice'),
     conditionRemovingWarn: t('This option has connected logic, delete it anyway?'),
     editButton: t('Edit'),
     removeButton: t('Delete'),
@@ -401,6 +402,7 @@ const qformTranslations = (t) => {
     popconfirmDeleteImageTitle: t('Remove image?'),
     conditionModalIsUploaded: t('is uploaded'),
     emptyDescription: t('Nothing was found'),
+    ratingExtendedDefaultOption: t('Extended option'),
     
     //domains: form components
     conditionsEndingsTab: t('Endings'),
@@ -415,21 +417,27 @@ const qformTranslations = (t) => {
     formModalEditTitle: t('Edit form'),
     formModalEditButton: t('Save changes'),
     formModalCreateButton: t('Create form'),
+    formValidationRule: t('Please, enter form name'),
     
     //domains: form routes
     phoneBreakpointDummy: t('This feature is available only on desktop'),
     formsAllTitle: t('Forms'),
     formCounter: t('Amount of forms'),
     formSearchPlaceholder: t('Search form by name'),
+    formDefaultWelcomeScreenTitle: t('Welcome screen'),
+    formDefaultEndingTitle: t('Thank you for attention!'),
     
     //domains: condition components
     conditionsEndingSelectPlaceholder: t('Select questions to call current ending'),
     conditionModalTitle: t('Logic'),
     conditionModalResetLogic: t('Reset logic'),
+    conditionModalResetLogicButton: t('Reset'),
     conditionModalSubmitButton: t('Close'),
+    conditionRedirectPlaceholder: t('Select redirect rule'),
     conditionsModalTooltip: t('Configure logic jumps'),
     conditionModalAddCondition: t('+ Add condition'),
-    conditionRedirectRulePlaceholder: t('Select redirect rule'),
+    conditionTextInputPlaceholder: t('Enter value'),
+    conditionNextQuestionRedirect: t('Go to the next question'),
     scoreWeightTitle: t('Enter score weight of answer'),
     
     //domains: media library components
@@ -438,6 +446,9 @@ const qformTranslations = (t) => {
     mediaLibrarySearchPlaceholder: t('Search media file by name'),
     mediaLibraryTitle: t('Media library'),
     mediaLibraryBrightness: t('Brightness'),
+    mediaLibraryTypeError: t('is not a picture'),
+    mediaLibraryCancelButton: t('Cancel'),
+    mediaLibrarySubmitButton: t('Continue'),
     
     //domains: question components
     questionFinishButton: t('Finish'),
@@ -466,14 +477,17 @@ const qformTranslations = (t) => {
     choiceDesc: t('Multiple choice'),
     ratingDesc: t('Rate'),
     statementDesc: t('Take the mic for a moment'),
-    yesnoDesc: t('Just 2 options, yes or no')
-  }
+    yesnoDesc: t('Just 2 options, yes or no'),
+    questionTypeChangePopconfirm: t('Changing the question type will delete all connected logic'),
 
     //domains: answer components
     answerTitle: t('Answers'),
     answerEmptyList: t('There is no responses yet'),
     answerUserListTitle: t('Users'),
-    answersNoSelectedUser: t('Choose user to display their answers')
+    answersNoSelectedUser: t('Choose user to display their answers'),
+    answerTableQuestionTitle: t('Question'),
+    answerTableAnswerTitle: t('Answer'),
+    answerTableScoreTitle: t('Score')
   }
 }
 
