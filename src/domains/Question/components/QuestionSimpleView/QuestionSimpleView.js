@@ -27,28 +27,26 @@ function QuestionSimpleView(props) {
   const { questionRemovingPopconfirm, questionWithLogicRemovingPopconfirm } =
     useTranslation()
 
-  const hasCondtitionOnIt =
-    data?.filter(
-      (question) =>
-        question?.questionConfigurations?.filter(
-          (config) => config?.redirectQuestion === currentQuestion?.id
-        )?.length > 0
-    )?.length > 0
+  const hasCondtitionOnIt = !!data?.filter(
+    (question) =>
+      question?.questionConfigurations?.filter(
+        (config) => config?.redirectQuestion === currentQuestion?.id
+      )?.length
+  )?.length
 
-  const hasEndingOnIt = endings
-    ?.map((ending) =>
-      ending?.questionConfigurations?.filter(
+  const hasEndingOnIt = !!endings?.filter(
+    (ending) =>
+      !!ending?.questionConfigurations?.filter(
         (configEndings) =>
           configEndings?.triggerQuestionId?.split(' ')[0] ===
           currentQuestion?.id
-      )
-    )
-    ?.flat()?.length
+      )?.length
+  )?.length
 
   // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id
   //this one check or question includes any answerOption with redirectQuestion
-  const hasConditions = currentQuestion?.questionConfigurations?.filter(
+  const hasConditions = !!currentQuestion?.questionConfigurations?.filter(
     (item, index) => item?.redirectQuestion?.length > 0
   )?.length
 
@@ -84,9 +82,9 @@ function QuestionSimpleView(props) {
                     TEXTINGS.questionRemovingPopconfirm
               }
               onConfirm={(e) => action(e, id)}
+              okText={TEXTINGS.removeButton}
               disabled={disableDelete}
-              okType="danger"
-              okText="Delete">
+              okType="danger">
               <StyledButton
                 type="text"
                 shape="circle"

@@ -25,17 +25,19 @@ const ScoreConditionsAdvancedView = (props) => {
     answerOptionId
   ) => {
     if (!/^\d+$/.test(questionScoreValue) || questionScoreValue < 0) return
+
     const answerScoresId =
       questionScoresData?.id ||
       getCollectionRef(COLLECTIONS.ANSWERS_SCORES_CONDITIONS).doc().id
     const questionScores = questionScoresData.questionScores?.length
       ? [
-          ...questionScoresData?.questionScores.filter(
-            (item) => item.answerOptionId !== answerOptionId
+          ...questionScoresData?.questionScores?.filter(
+            (item) => item?.answerOptionId !== answerOptionId
           ),
           { answerOptionId, score: questionScoreValue }
         ]
       : [{ answerOptionId, score: questionScoreValue }]
+
     await setData(COLLECTIONS.ANSWERS_SCORES_CONDITIONS, answerScoresId, {
       questionId,
       formId: formId,

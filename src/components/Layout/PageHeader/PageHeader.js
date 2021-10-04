@@ -14,7 +14,15 @@ import {
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 
 function PageHeader(props) {
-  const { id, title, titleProps, onBack, smallScreen, handlesPreview } = props
+  const {
+    id,
+    title,
+    onBack,
+    titleProps,
+    smallScreen,
+    showAnswers,
+    handlesPreview
+  } = props
 
   // [ADDITIONAL HOOKS]
   const { formViewTooltip, answerViewTooltip } = useTranslation()
@@ -44,14 +52,15 @@ function PageHeader(props) {
       )}
       <Col>
         <Title
-          color="var(--qf-typography-title-color)"
           level={2}
+          color="var(--qf-typography-title-color)"
+          fontSize="var(--qf-typography-fs-title)"
           {...titleProps}>
           {title}
         </Title>
       </Col>
 
-      {title && (
+      {showAnswers && (
         <Col cw="auto" v="center" mr={1}>
           {smallScreen && (
             <Tooltip

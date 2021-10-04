@@ -193,7 +193,7 @@ const UploadArea = (props) => {
                     onConfirm={() => onRemove(file)}
                     title={itemRemovingHint || TEXTINGS.itemRemovingHint}
                     okType="danger"
-                    okText="Delete">
+                    okText={TEXTINGS.removeButton}>
                     <Button
                       shape="circle"
                       type="text"
@@ -209,7 +209,7 @@ const UploadArea = (props) => {
           </UploadItem>
         ))}
       </Box>
-      <Box mt={3}>
+      <Box mt={4}>
         <SubmitButton onClick={onApply} disablePressEnter />
       </Box>
     </Box>

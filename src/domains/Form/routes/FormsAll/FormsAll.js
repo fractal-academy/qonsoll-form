@@ -6,7 +6,7 @@ import useFunctions from '../../../../hooks/useFunctions'
 import React, { useState, useEffect, useRef } from 'react'
 import { Box, Container, Text } from '@qonsoll/react-design'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
+import { COLLECTIONS, QUESTION_TYPES, TEXTINGS } from '../../../../constants'
 import { TranslationContext } from '../../../../context/Translation'
 import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
 import { Spinner, StaticList, PageHeader } from '../../../../components'
@@ -87,7 +87,7 @@ function FormsAll(props) {
         id: questionId,
         layoutType: LAYOUT_TYPE_KEYS[0],
         questionType: QUESTION_TYPES.WELCOME_SCREEN,
-        title: 'WS.',
+        title: TEXTINGS.formDefaultWelcomeScreenTitle,
         order: 0
       }).catch((e) => message.error(e.message))
       setData(COLLECTIONS.QUESTIONS, endingId, {
@@ -95,7 +95,7 @@ function FormsAll(props) {
         id: endingId,
         layoutType: LAYOUT_TYPE_KEYS[0],
         questionType: QUESTION_TYPES.ENDING,
-        title: 'Thank you for attention!',
+        title: TEXTINGS.formDefaultEndingTitle,
         order: 1
       }).catch((e) => message.error(e.message))
     }
@@ -114,10 +114,10 @@ function FormsAll(props) {
           <Container p={containerPadding}>
             {showHeader && (
               <>
-                <PageHeader title={formsAllTitle || 'Forms'} />
+                <PageHeader title={formsAllTitle || TEXTINGS.formsAllTitle} />
                 <Box mb={3}>
                   <Text color="var(--qf-typography-caption-color)">
-                    {`${formCounter || 'Amount of forms'}: `}
+                    {`${formCounter || TEXTINGS.formCounter}: `}
                     {amountFiles}
                   </Text>
                 </Box>
@@ -130,7 +130,7 @@ function FormsAll(props) {
                 <Input
                   ref={searchRef}
                   placeholder={`${
-                    formSearchPlaceholder || 'Search form by name'
+                    formSearchPlaceholder || TEXTINGS.formSearchPlaceholder
                   }...`}
                   onChange={(input) => searchData(input.target.value)}
                 />

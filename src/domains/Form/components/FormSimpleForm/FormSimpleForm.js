@@ -26,7 +26,7 @@ function FormSimpleForm(props) {
     <Form {...rest} initialValues={initialValues}>
       <Form.Item
         name="title"
-        rules={[{ required: true, message: 'Please, enter form name.' }]}>
+        rules={[{ required: true, message: TEXTINGS.formValidationRule }]}>
         <Input
           mb={4}
           allowClear

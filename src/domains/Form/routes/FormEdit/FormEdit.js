@@ -71,6 +71,7 @@ function FormEdit(props) {
     firebase,
     actions = {},
     showHeader,
+    showAnswers,
     translations,
     customQuestionTypes,
     wrapperPaddings
@@ -226,7 +227,8 @@ function FormEdit(props) {
         type: DISPATCH_EVENTS.SET_CURRENT_QUESTION_TO_STATE,
         payload: defaultCurrentQuestion || questionsList?.[0] || {}
       })
-  }, [currentQuestionDispatch, questionsList, questionsListLoading])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionsListLoading])
 
   useEffect(() => {
     //set default active tab for questionLayout switcher every time when we change current question
@@ -256,7 +258,8 @@ function FormEdit(props) {
       //set question id in state
       setCurrentQuestionId(currentQuestion?.id)
     }
-  }, [currentQuestion, currentQuestionId, setData])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuestion])
 
   // [COMPUTED PROPERTIES]
   const containerPadding =
@@ -284,6 +287,7 @@ function FormEdit(props) {
                     handlesPreview
                     title={form?.title}
                     onBack={history.goBack}
+                    showAnswers={showAnswers}
                     smallScreen={smallScreen}
                   />
                 )}

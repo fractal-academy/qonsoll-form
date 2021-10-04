@@ -35,7 +35,7 @@ const columns = [
         {text}
       </div>
     ),
-    title: 'Question',
+    title: TEXTINGS.answerTableQuestionTitle,
     dataIndex: 'questionTitle',
     key: 'questionTitle'
   },
@@ -50,7 +50,7 @@ const columns = [
         {text}
       </div>
     ),
-    title: 'Answer',
+    title: TEXTINGS.answerTableAnswerTitle,
     dataIndex: 'answer',
     key: 'answer'
   }
@@ -73,7 +73,7 @@ function ResponseTable(props) {
             {text}
           </div>
         ),
-        title: 'Answer Scores',
+        title: TEXTINGS.answerTableScoreTitle,
         dataIndex: 'answerScore',
         key: 'answerScore'
       })

@@ -1,21 +1,15 @@
 import useMedia from 'use-media'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
-import { Row, Col, Text, Button } from '@qonsoll/react-design'
+import { TEXTINGS } from '../../../constants'
 import { CheckOutlined } from '@ant-design/icons'
 import COLLECTIONS from '../../../constants/collection'
-import { TEXTINGS } from '../../../constants'
 import { useAnswersContext } from '../../../context/Answers'
 import { useTranslation } from '../../../context/Translation'
 import useFunctions from '../../../../src/hooks/useFunctions'
+import { Row, Col, Text, Button } from '@qonsoll/react-design'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
-
-const StyledSubmit = styled(Button)`
-  height: 56px;
-  font-size: var(--qf-submit-button-font-size);
-`
 
 function SubmitButton(props) {
   const {
@@ -101,12 +95,14 @@ function SubmitButton(props) {
   return (
     <Row display="flex" v="center" mt={!isntDesktop && 3} noGutters>
       <Col cw="auto" mr={3}>
-        <StyledSubmit
+        <Button
           type="primary"
+          height="56px"
+          loading={loading}
           onClick={onButtonClick}
           onMouseDown={(e) => e.preventDefault()}
-          {...rest}
-          loading={loading}>
+          fontSize="var(--qf-submit-button-font-size)"
+          {...rest}>
           {children || (
             <Row display="flex" noGutters>
               <Col cw="auto" mr={2}>
@@ -117,7 +113,7 @@ function SubmitButton(props) {
               </Col>
             </Row>
           )}
-        </StyledSubmit>
+        </Button>
       </Col>
       {isntDesktop && (
         <Col cw="auto">

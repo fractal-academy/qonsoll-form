@@ -66,20 +66,9 @@ function QuestionTypeSelect(props) {
       icon: <CalendarOutlined />
     },
     {
-      type: QUESTION_TYPES.FILE_UPLOAD,
-      description: fileUploadDesc || QUESTION_DESCRIPTIONS.FILE_UPLOAD,
-      icon: <UploadOutlined />
-    },
-
-    {
-      type: QUESTION_TYPES.OPINION_SCALE,
-      description: opinionDesc || QUESTION_DESCRIPTIONS.OPINION_SCALE,
-      icon: <HomeOutlined />
-    },
-    {
-      type: QUESTION_TYPES.PICTURE_CHOICE,
-      description: pictureChoiceDesc || QUESTION_DESCRIPTIONS.PICTURE_CHOICE,
-      icon: <PictureOutlined />
+      type: QUESTION_TYPES.YES_NO,
+      description: yesnoDesc || QUESTION_DESCRIPTIONS.YES_NO,
+      icon: <ShareAltOutlined />
     },
     {
       type: QUESTION_TYPES.CHOICE,
@@ -87,19 +76,29 @@ function QuestionTypeSelect(props) {
       icon: <GoldOutlined />
     },
     {
+      type: QUESTION_TYPES.PICTURE_CHOICE,
+      description: pictureChoiceDesc || QUESTION_DESCRIPTIONS.PICTURE_CHOICE,
+      icon: <PictureOutlined />
+    },
+    {
+      type: QUESTION_TYPES.OPINION_SCALE,
+      description: opinionDesc || QUESTION_DESCRIPTIONS.OPINION_SCALE,
+      icon: <HomeOutlined />
+    },
+    {
       type: QUESTION_TYPES.RATING,
       description: ratingDesc || QUESTION_DESCRIPTIONS.RATING,
       icon: <StarOutlined />
     },
     {
+      type: QUESTION_TYPES.FILE_UPLOAD,
+      description: fileUploadDesc || QUESTION_DESCRIPTIONS.FILE_UPLOAD,
+      icon: <UploadOutlined />
+    },
+    {
       type: QUESTION_TYPES.STATEMENT,
       description: statementDesc || QUESTION_DESCRIPTIONS.STATEMENT,
       icon: <CopyrightOutlined />
-    },
-    {
-      type: QUESTION_TYPES.YES_NO,
-      description: yesnoDesc || QUESTION_DESCRIPTIONS.YES_NO,
-      icon: <ShareAltOutlined />
     }
   ]
 

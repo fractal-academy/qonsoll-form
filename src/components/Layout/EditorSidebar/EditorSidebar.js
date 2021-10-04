@@ -182,7 +182,10 @@ function EditorSidebar(props) {
         (answerConfig) => {
           const formattedObject = Object.entries(answerConfig)
           const resetFields = formattedObject?.map((tuple) => {
-            if (tuple[0] === 'answerOption' && condition) {
+            if (
+              (tuple[0] === 'answerOption' || tuple[0] === 'answerOptionId') &&
+              condition
+            ) {
               return tuple
             } else {
               return [tuple[0], '']
@@ -241,7 +244,8 @@ function EditorSidebar(props) {
           : questions?.length + index + 1
       })
     )
-  }, [containWelcomeScreen, endings, questions?.length, setData])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questions?.length])
 
   return (
     <SidebarBoxWrapper>
@@ -275,7 +279,7 @@ function EditorSidebar(props) {
           </ModalWithFormConditionsForm>
         </Col>
       </Row>
-      <Box overflow="auto" mb="auto">
+      <Box overflow="auto">
         {!!questions?.length && (
           <QuestionsList
             data={questions}
@@ -284,34 +288,39 @@ function EditorSidebar(props) {
           />
         )}
       </Box>
+      <Box mt="auto">
+        <Divider mt={2} type="horizontal" />
 
-      <Divider type="horizontal" />
-
-      <Row my={2} v="center" h="between">
-        <Col cw="auto">
-          <Title color="var(--qf-typography-title-color)" level={5}>
-            {endingListTitle || TEXTINGS.endingListTitle}
-          </Title>
-        </Col>
-        <Col display="block" cw="auto">
-          <Tooltip
-            placement="topRight"
-            title={endingCreationTooltip || TEXTINGS.endingCreationTooltip}>
-            <Button type="text" onClick={addQuestion} icon={<PlusOutlined />} />
-          </Tooltip>
-        </Col>
-      </Row>
-      {!!endings?.length && (
-        <Box overflow="auto" maxHeight="400px" minHeight="90px">
-          <QuestionsList
-            data={endings}
-            endings={endings}
-            questionsData={questions}
-            onItemClick={onItemClick}
-            disableDelete={endings?.length === 1}
-          />
-        </Box>
-      )}
+        <Row my={2} v="center" h="between">
+          <Col cw="auto">
+            <Title color="var(--qf-typography-title-color)" level={5}>
+              {endingListTitle || TEXTINGS.endingListTitle}
+            </Title>
+          </Col>
+          <Col display="block" cw="auto">
+            <Tooltip
+              placement="topRight"
+              title={endingCreationTooltip || TEXTINGS.endingCreationTooltip}>
+              <Button
+                type="text"
+                onClick={addQuestion}
+                icon={<PlusOutlined />}
+              />
+            </Tooltip>
+          </Col>
+        </Row>
+        {!!endings?.length && (
+          <Box overflow="auto" maxHeight="250px">
+            <QuestionsList
+              data={endings}
+              endings={endings}
+              questionsData={questions}
+              onItemClick={onItemClick}
+              disableDelete={endings?.length === 1}
+            />
+          </Box>
+        )}
+      </Box>
     </SidebarBoxWrapper>
   )
 }

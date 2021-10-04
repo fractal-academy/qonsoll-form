@@ -28,7 +28,7 @@ export const LetterBox = styled(Box)`
   ${({ withImage }) => `
   position: absolute;
   top: ${withImage ? '12px' : '6px'};
-  width: 20px;
+  width: 26px;
   text-align: center;
   color: var(--qf-keybox-color);
   background-color: var(--qf-keybox-bg);
@@ -58,5 +58,5 @@ export const CustomCol = styled(Col)`
   bottom: 8px;
 `
 export const ChoiceOptionCol = styled(Col)`
-  padding-left: ${({ withImage }) => (withImage ? '0' : '15px')};
+  padding-left: ${({ withImage }) => (withImage ? '0' : '18px')};
 `

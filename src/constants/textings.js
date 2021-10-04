@@ -1,7 +1,7 @@
 const TEXTINGS = {
   requiredAnswerMessage: 'The answer is required',
   submitHint: 'Press enter',
-  choicePlaceholder: 'choice',
+  choicePlaceholder: 'Choice',
   conditionRemovingWarn: 'This option has connected logic, delete it anyway?',
   editButton: 'Edit',
   removeButton: 'Delete',
@@ -18,10 +18,11 @@ const TEXTINGS = {
   longTextHint: 'Shift ⇧ + Enter ↵ to make a line break',
   textQuestionPlaceholder: 'Type your answer here',
   listItemNoDescription: 'No description',
-  popconfirmDeleteFormTitle: 'Remove item?',
+  popconfirmDeleteFormTitle: 'Remove form?',
   popconfirmDeleteImageTitle: 'Remove image?',
   conditionModalIsUploaded: 'is uploaded',
   emptyDescription: 'Nothing was found',
+  ratingExtendedDefaultOption: 'Extended option',
 
   //domains: form components
   conditionsEndingsTab: 'Endings',
@@ -36,21 +37,27 @@ const TEXTINGS = {
   formModalEditTitle: 'Edit form',
   formModalEditButton: 'Save changes',
   formModalCreateButton: 'Create form',
+  formValidationRule: 'Please, enter form name',
 
   //domains: form routes
   phoneBreakpointDummy: 'This feature is available only on desktop',
   formsAllTitle: 'Forms',
   formCounter: 'Amount of forms',
   formSearchPlaceholder: 'Search form by name',
+  formDefaultWelcomeScreenTitle: 'Welcome screen',
+  formDefaultEndingTitle: 'Thank you for attention!',
 
   //domains: condition components
   conditionsEndingSelectPlaceholder: 'Select questions to call current ending',
   conditionModalTitle: 'Logic',
   conditionModalResetLogic: 'Reset logic',
+  conditionModalResetLogicButton: 'Reset',
   conditionModalSubmitButton: 'Close',
   conditionsModalTooltip: 'Configure logic jumps',
   conditionRedirectPlaceholder: 'Select redirect rule',
   conditionModalAddCondition: '+ Add condition',
+  conditionTextInputPlaceholder: 'Enter value',
+  conditionNextQuestionRedirect: 'Go to the next question',
   scoreWeightTitle: 'Enter score weight of answer',
 
   //domains: media library components
@@ -59,6 +66,9 @@ const TEXTINGS = {
   mediaLibrarySearchPlaceholder: 'Search media file by name',
   mediaLibraryTitle: 'Media library',
   mediaLibraryBrightness: 'Brightness',
+  mediaLibraryTypeError: 'is not a picture',
+  mediaLibraryCancelButton: 'Cancel',
+  mediaLibrarySubmitButton: 'Continue',
 
   //domains: question components
   questionFinishButton: 'Finish',
@@ -72,18 +82,23 @@ const TEXTINGS = {
   questionRangeUpperSetting: 'to',
   questionConfigurationOptions: 'Amount of options',
   questionEditableTitleHint: 'Editable question title',
-  questionEditableSubtitleHint: 'Description (optional',
+  questionEditableSubtitleHint: 'Description (optional)',
   questionRemovingPopconfirm: 'Delete this question?',
   questionWithLogicRemovingPopconfirm:
     'This question has connected logic, delete it anyway?',
   questionConfigurationExtended: 'Turn on extended options',
   questionConfigurationMultiple: 'Switch to multiple option',
+  questionTypeChangePopconfirm:
+    'Changing the question type will delete all connected logic',
 
   //domains: answer components
   answerTitle: 'Answers',
   answerEmptyList: 'There is no responses yet',
   answerUserListTitle: 'Users',
-  answersNoSelectedUser: 'Choose user to display their answers'
+  answersNoSelectedUser: 'Choose user to display their answers',
+  answerTableQuestionTitle: 'Question',
+  answerTableAnswerTitle: 'Answer',
+  answerTableScoreTitle: 'Score'
 }
 
 export default TEXTINGS

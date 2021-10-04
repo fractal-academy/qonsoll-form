@@ -3,7 +3,7 @@ import useMedia from 'use-media'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { PageHeader } from '../../../../components'
-import { COLLECTIONS } from '../../../../constants'
+import { COLLECTIONS, TEXTINGS } from '../../../../constants'
 import useFunctions from '../../../../hooks/useFunctions'
 import { Container, Title, NoData, Box } from '@qonsoll/react-design'
 import { ResponseTable, ResponseList } from '../../../Response/components'
@@ -93,7 +93,7 @@ function FormAnswers(props) {
               {showHeader && (
                 <PageHeader
                   onBack={() => history.goBack()}
-                  title={answerTitle || 'Answers'}
+                  title={answerTitle || TEXTINGS.answerTitle}
                 />
               )}
 
@@ -109,7 +109,7 @@ function FormAnswers(props) {
                 my={3}
                 level={5}
                 color="var(--qf-typography-title-color)">
-                {answerUserListTitle || 'Users'}
+                {answerUserListTitle || TEXTINGS.answerUserListTitle}
               </Title>
               {checkUserAswerGroup ? (
                 <Box overflow="auto">
@@ -121,7 +121,7 @@ function FormAnswers(props) {
                 </Box>
               ) : (
                 <NoData
-                  description={answerEmptyList || "There's no responses yet"}
+                  description={answerEmptyList || TEXTINGS.answerEmptyList}
                 />
               )}
             </SidebarBoxWrapper>

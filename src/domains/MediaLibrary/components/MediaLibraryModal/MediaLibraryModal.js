@@ -102,7 +102,7 @@ function MediaLibraryModal(props) {
 
   const beforeUpload = (file) => {
     if (!file?.type?.includes('image')) {
-      message.error(`${file.name} is not a picture`)
+      message.error(`${file.name} ${TEXTINGS.mediaLibraryTypeError}`)
     }
     return file?.type?.includes('image') ? true : Upload.LIST_IGNORE
   }
@@ -193,12 +193,12 @@ function MediaLibraryModal(props) {
           borderBottomRightRadius="var(--qf-border-radius-md)">
           <Col cw="auto" mr={2}>
             <Button type="text" onClick={onModalCancel}>
-              Cancel
+              {TEXTINGS.mediaLibraryCancelButton}
             </Button>
           </Col>
           <Col cw="auto">
             <Button type="primary" onClick={onModalContinue}>
-              Continue
+              {TEXTINGS.mediaLibrarySubmitButton}
             </Button>
           </Col>
         </Row>

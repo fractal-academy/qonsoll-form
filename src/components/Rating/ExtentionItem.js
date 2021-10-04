@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Text, Input } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
@@ -9,7 +9,7 @@ function ExtentionItem(props) {
   const { index, item, ratingProps, onClick } = props
 
   // [COMPONENT STATE HOOKS]
-  const [itemValue, setItemValue] = useState()
+  const [itemValue, setItemValue] = useState(item?.answerOption)
 
   // [CUSTOM HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -28,6 +28,12 @@ function ExtentionItem(props) {
     })
   }
 
+  // [USE_EFFECTS]
+  useEffect(() => {
+    //update text area value when delete element
+    setItemValue(item?.answerOption)
+  }, [item])
+
   return (
     <Container>
       {onClick ? (
@@ -35,18 +41,16 @@ function ExtentionItem(props) {
           {item?.answerOption || ''}
         </Text>
       ) : (
-        <>
-          <Input
-            p={0}
-            index={index}
-            onChange={onItemChange}
-            onBlur={onItemBlur}
-            defaultValue={item?.answerOption || ''}
-            background="transparent"
-            borderColor="transparent"
-            color="var(--qf-typography-subtitle-color)"
-          />
-        </>
+        <Input
+          p={0}
+          index={index}
+          onChange={onItemChange}
+          onBlur={onItemBlur}
+          value={itemValue}
+          background="transparent"
+          borderColor="transparent"
+          color="var(--qf-typography-subtitle-color)"
+        />
       )}
     </Container>
   )
