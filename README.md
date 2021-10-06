@@ -346,6 +346,7 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
   --qf-condition-item-border: var(--ql-color-dark-t-lighten4);
 
   /* typography */
+  --qf-typography-fs-title: var(--ql-font-size-h2);
   --qf-typography-fs-body: var(--ql-font-size-body1);
   --qf-typography-fs-caption: var(--ql-font-size-caption1);
 
@@ -377,7 +378,7 @@ Qonsollform will perfectly fine work without translations propagating, but app w
 ```sh
 const qformTranslations = (t) => {
   return {
-     //global components
+    //global components
     requiredAnswerMessage: t('The answer is required'),
     submitHint: t('Press enter'),
     choicePlaceholder: t('choice'),
@@ -430,6 +431,12 @@ const qformTranslations = (t) => {
     conditionsModalTooltip: t('Configure logic jumps'),
     conditionModalAddCondition: t('+ Add condition'),
     conditionRedirectRulePlaceholder: t('Select redirect rule'),
+    conditionIsEqual: t('is equal to'),
+    conditionIsntEqual: t('is not equal to'),
+    conditionBegins: t('begins with'),
+    conditionEnds: t('ends with'),
+    conditionContains: t('contains'),
+    conditionDoesntContains: t('does not contains'),
     scoreWeightTitle: t('Enter score weight of answer'),
     
     //domains: media library components
@@ -456,6 +463,17 @@ const qformTranslations = (t) => {
     questionWithLogicRemovingPopconfirm: t('This question has connected logic, delete it anyway?'),
     questionConfigurationExtended: t('Turn on extended options'),
     questionConfigurationMultiple: t('Switch to multiple option'),
+    welcomeScreenTitle: t('Welcome screen'),
+    longTextTitle: t('Long text'),
+    shortTextTitle: t('Short text'),
+    dateTitle: t('Date'),
+    yesnoTitle: t('Yes/No'),
+    choiceTitle: t('Choice'),
+    pictureChoiceTitle: t('PictureChoice'),
+    opinionTitle: t('Opinion scale'),
+    ratingTitle: t('Rating'),
+    fileUploadTitle: t('File upload'),
+    statementTitle: t('Statement'),
     welcomeScreenDesc: t('Invite your audience in'),
     longTextDesc: t('More space to spill the beans'),
     shortTextDesc: t('For short answers, like names'),
@@ -466,9 +484,8 @@ const qformTranslations = (t) => {
     choiceDesc: t('Multiple choice'),
     ratingDesc: t('Rate'),
     statementDesc: t('Take the mic for a moment'),
-    yesnoDesc: t('Just 2 options, yes or no')
-  }
-
+    yesnoDesc: t('Just 2 options, yes or no'),
+    
     //domains: answer components
     answerTitle: t('Answers'),
     answerEmptyList: t('There is no responses yet'),
