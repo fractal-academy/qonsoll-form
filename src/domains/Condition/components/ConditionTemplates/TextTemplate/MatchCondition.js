@@ -1,13 +1,14 @@
 import moment from 'moment'
 import PropTypes from 'prop-types'
+import { Select as AntSelect } from 'antd'
 import React, { useState, useEffect } from 'react'
 import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
 import { StyledDatePicker } from './TextTemplate.styles'
 import useFunctions from '../../../../../hooks/useFunctions'
-import { Row, Col, Input, Select } from '@qonsoll/react-design'
+import { Row, Col, Input, Select, Text } from '@qonsoll/react-design'
 import { QuestionSelect } from '../../../../Question/components'
 import { useTranslation } from '../../../../../context/Translation'
-import { TEXT_CONDITION_SELECT_OPTIONS } from '../../../../../constants/planeTextStringConditionRules'
+import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
 
 function MatchCondition(props) {
   const {
@@ -22,7 +23,15 @@ function MatchCondition(props) {
 
   //[ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const { conditionRedirectPlaceholder } = useTranslation()
+  const {
+    conditionRedirectPlaceholder,
+    conditionIsEqual,
+    conditionIsntEqual,
+    conditionBegins,
+    conditionEnds,
+    conditionContains,
+    conditionDoesntContains
+  } = useTranslation()
 
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState(item?.answerOption)
@@ -76,6 +85,21 @@ function MatchCondition(props) {
     })
   }
 
+  // [COMPUTED PROPERTIES]
+  const translatedSelectOptions = [
+    conditionIsEqual,
+    conditionIsntEqual,
+    conditionBegins,
+    conditionEnds,
+    conditionContains,
+    conditionDoesntContains
+  ]
+  const matchRulesSelctOptions = translatedSelectOptions.filter(
+    (item) => !!item === true
+  ).length
+    ? translatedSelectOptions
+    : TEXT_CONDITION_RULES_VALUES
+
   useEffect(() => {
     setInputValue(item?.answerOption || '')
     setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
@@ -97,9 +121,13 @@ function MatchCondition(props) {
             conditionRedirectPlaceholder ||
             TEXTINGS.conditionRedirectPlaceholder
           }
-          options={TEXT_CONDITION_SELECT_OPTIONS}
-          onChange={onRuleSelectValueChange}
-        />
+          onChange={onRuleSelectValueChange}>
+          {matchRulesSelctOptions.map((item, index) => (
+            <AntSelect.Option key={index}>
+              <Text>{item}</Text>
+            </AntSelect.Option>
+          ))}
+        </Select>
       </Col>
       <Col cw={3} pl={0} pr={2}>
         {handlesDate ? (

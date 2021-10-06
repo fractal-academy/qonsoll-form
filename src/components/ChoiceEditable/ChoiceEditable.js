@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Popconfirm } from 'antd'
 import { useHover } from '@umijs/hooks'
-import { Row, Col } from '@qonsoll/react-design'
+import { Row } from '@qonsoll/react-design'
 import { DEFAULT_IMAGE, TEXTINGS } from '../../constants'
 import { CloseOutlined } from '@ant-design/icons'
 import React, { useState, useEffect } from 'react'

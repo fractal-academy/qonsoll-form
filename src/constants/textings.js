@@ -23,6 +23,7 @@ const TEXTINGS = {
   conditionModalIsUploaded: 'is uploaded',
   emptyDescription: 'Nothing was found',
   ratingExtendedDefaultOption: 'Extended option',
+  datepickerPlaceholder: 'Select date',
 
   //domains: form components
   conditionsEndingsTab: 'Endings',

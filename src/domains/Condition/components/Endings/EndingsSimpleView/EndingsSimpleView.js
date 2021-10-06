@@ -88,6 +88,7 @@ function EndingSimpleView(props) {
                       color="var(--qf-typography-subtitle-color)"
                       fontSize="var(--qf-typography-fs-body)"
                       strong>
+                      {questionListItem?.order}
                       {String.fromCharCode(startLetter + ind)}
                     </Text>
                     <Divider height="auto" type="vertical" />
