@@ -17,7 +17,7 @@ const DateTimeInput = (props) => {
     datePickerRef.current.blur()
   }
   //[CUSTOM HOOKS]
-  const { requiredAnswerMessage } = useTranslation()
+  const { requiredAnswerMessage, datepickerPlaceholder } = useTranslation()
   const answersContext = useAnswersContext()
 
   // [ADDITIONAL_HOOKS]
@@ -53,6 +53,7 @@ const DateTimeInput = (props) => {
       ref={datePickerRef}
       onChange={onChange}
       disabled={!onDateChange}
+      placeholder={datepickerPlaceholder || TEXTINGS.datepickerPlaceholder}
       {...props}
     />
   )
