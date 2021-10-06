@@ -378,7 +378,7 @@ Qonsollform will perfectly fine work without translations propagating, but app w
 ```sh
 const qformTranslations = (t) => {
   return {
-     //global components
+    //global components
     requiredAnswerMessage: t('The answer is required'),
     submitHint: t('Press enter'),
     choicePlaceholder: t('Сhoice'),
@@ -438,6 +438,13 @@ const qformTranslations = (t) => {
     conditionModalAddCondition: t('+ Add condition'),
     conditionTextInputPlaceholder: t('Enter value'),
     conditionNextQuestionRedirect: t('Go to the next question'),
+    conditionRedirectRulePlaceholder: t('Select redirect rule'),
+    conditionIsEqual: t('is equal to'),
+    conditionIsntEqual: t('is not equal to'),
+    conditionBegins: t('begins with'),
+    conditionEnds: t('ends with'),
+    conditionContains: t('contains'),
+    conditionDoesntContains: t('does not contains'),
     scoreWeightTitle: t('Enter score weight of answer'),
     
     //domains: media library components
@@ -467,6 +474,17 @@ const qformTranslations = (t) => {
     questionWithLogicRemovingPopconfirm: t('This question has connected logic, delete it anyway?'),
     questionConfigurationExtended: t('Turn on extended options'),
     questionConfigurationMultiple: t('Switch to multiple option'),
+    welcomeScreenTitle: t('Welcome screen'),
+    longTextTitle: t('Long text'),
+    shortTextTitle: t('Short text'),
+    dateTitle: t('Date'),
+    yesnoTitle: t('Yes/No'),
+    choiceTitle: t('Choice'),
+    pictureChoiceTitle: t('PictureChoice'),
+    opinionTitle: t('Opinion scale'),
+    ratingTitle: t('Rating'),
+    fileUploadTitle: t('File upload'),
+    statementTitle: t('Statement'),
     welcomeScreenDesc: t('Invite your audience in'),
     longTextDesc: t('More space to spill the beans'),
     shortTextDesc: t('For short answers, like names'),
