@@ -82,7 +82,6 @@ const ScoreConditionsAdvancedView = (props) => {
             <Col cw={4} pr={0} pl={2}>
               <InputNumber
                 min={0}
-                max={10}
                 placeholder={scoreWeightTitle || TEXTINGS.scoreWeightTitle}
                 value={getScoreByAnswerOptionId(item?.answerOptionId)}
                 onBlur={(event) =>

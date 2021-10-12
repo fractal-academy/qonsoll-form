@@ -111,22 +111,23 @@ function RatingExtension(props) {
         <Checkbox.Group disabled={!onClick} onChange={onCheckboxChange}>
           {question?.ratingAdditionalOptions?.map((item, index) => (
             <Box key={index} mb={2} display="flex" alignItems="center">
-              <Popconfirm
-                okType="danger"
-                title={itemRemovingHint || TEXTINGS.itemRemovingHint}
-                onConfirm={() => deleteOption(index)}
-                okText={removeButton || TEXTINGS.removeButton}>
-                <Box
-                  p={0}
-                  mr={2}
-                  type="text"
-                  size="small"
-                  opacity={isHovering ? 1 : 0}
-                  color="var(--ql-color-danger)">
-                  <DeleteOutlined />
-                </Box>
-              </Popconfirm>
-
+              {!onClick && (
+                <Popconfirm
+                  okType="danger"
+                  title={itemRemovingHint || TEXTINGS.itemRemovingHint}
+                  onConfirm={() => deleteOption(index)}
+                  okText={removeButton || TEXTINGS.removeButton}>
+                  <Box
+                    p={0}
+                    mr={2}
+                    type="text"
+                    size="small"
+                    opacity={isHovering ? 1 : 0}
+                    color="var(--ql-color-danger)">
+                    <DeleteOutlined />
+                  </Box>
+                </Popconfirm>
+              )}
               <Checkbox value={item || ''} disabled={!onClick}>
                 <ExtentionItem
                   item={item}
@@ -144,21 +145,23 @@ function RatingExtension(props) {
         <Radio.Group onChange={onRadioChange}>
           {question?.ratingAdditionalOptions?.map((item, index) => (
             <Box mb={2} key={index} display="flex" alignItems="center">
-              <Popconfirm
-                title={itemRemovingHint || TEXTINGS.itemRemovingHint}
-                okType="danger"
-                onConfirm={() => deleteOption(index)}
-                okText={removeButton || TEXTINGS.removeButton}>
-                <Box
-                  opacity={isHovering ? 1 : 0}
-                  color="var(--ql-color-danger)"
-                  mr={2}
-                  type="text"
-                  size="small"
-                  p={0}>
-                  <DeleteOutlined />
-                </Box>
-              </Popconfirm>
+              {!onClick && (
+                <Popconfirm
+                  title={itemRemovingHint || TEXTINGS.itemRemovingHint}
+                  okType="danger"
+                  onConfirm={() => deleteOption(index)}
+                  okText={removeButton || TEXTINGS.removeButton}>
+                  <Box
+                    opacity={isHovering ? 1 : 0}
+                    color="var(--ql-color-danger)"
+                    mr={2}
+                    type="text"
+                    size="small"
+                    p={0}>
+                    <DeleteOutlined />
+                  </Box>
+                </Popconfirm>
+              )}
 
               <Radio value={item || ''} disabled={!onClick}>
                 <ExtentionItem
@@ -173,12 +176,13 @@ function RatingExtension(props) {
           ))}
         </Radio.Group>
       )}
-
-      <Box mt={2} ml={2}>
-        <Button type="dashed" onClick={addOption}>
-          <PlusOutlined />
-        </Button>
-      </Box>
+      {!onClick && (
+        <Box mt={2} ml={2}>
+          <Button type="dashed" onClick={addOption}>
+            <PlusOutlined />
+          </Button>
+        </Box>
+      )}
     </Container>
   )
 }
