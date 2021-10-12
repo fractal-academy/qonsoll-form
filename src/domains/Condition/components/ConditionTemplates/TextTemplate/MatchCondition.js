@@ -98,8 +98,8 @@ function MatchCondition(props) {
           }
           value={ruleSelectValue}
           onChange={onRuleSelectValueChange}>
-          {TEXT_CONDITION_RULES_VALUES.map((item) => (
-            <Option>{item}</Option>
+          {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
+            <Option key={index}>{item}</Option>
           ))}
         </Select>
       </Col>
