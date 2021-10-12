@@ -23,15 +23,7 @@ function MatchCondition(props) {
 
   //[ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const {
-    conditionRedirectPlaceholder,
-    conditionIsEqual,
-    conditionIsntEqual,
-    conditionBegins,
-    conditionEnds,
-    conditionContains,
-    conditionDoesntContains
-  } = useTranslation()
+  const { conditionRedirectPlaceholder } = useTranslation()
 
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState(item?.answerOption)
@@ -86,20 +78,6 @@ function MatchCondition(props) {
   }
 
   // [COMPUTED PROPERTIES]
-  const translatedSelectOptions = [
-    conditionIsEqual,
-    conditionIsntEqual,
-    conditionBegins,
-    conditionEnds,
-    conditionContains,
-    conditionDoesntContains
-  ]
-  const matchRulesSelctOptions = translatedSelectOptions.filter(
-    (item) => !!item === true
-  ).length
-    ? translatedSelectOptions
-    : TEXT_CONDITION_RULES_VALUES
-
   useEffect(() => {
     setInputValue(item?.answerOption || '')
     setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
@@ -109,6 +87,12 @@ function MatchCondition(props) {
         TEXTINGS.conditionRedirectPlaceholder
     )
   }, [item, conditionRedirectPlaceholder])
+
+  console.log(
+    ruleSelectValue,
+    conditionRedirectPlaceholder,
+    TEXTINGS.conditionRedirectPlaceholder
+  )
 
   return (
     <Row mb={2} key={index}>
@@ -122,7 +106,7 @@ function MatchCondition(props) {
             TEXTINGS.conditionRedirectPlaceholder
           }
           onChange={onRuleSelectValueChange}>
-          {matchRulesSelctOptions.map((item, index) => (
+          {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
             <AntSelect.Option key={index}>
               <Text>{item}</Text>
             </AntSelect.Option>

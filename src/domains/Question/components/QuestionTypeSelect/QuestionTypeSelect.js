@@ -30,17 +30,6 @@ function QuestionTypeSelect(props) {
 
   // [ADDITIONAL_HOOKS]
   const {
-    welcomeScreenTitle,
-    longTextTitle,
-    shortTextTitle,
-    dateTitle,
-    yesnoTitle,
-    choiceTitle,
-    pictureChoiceTitle,
-    opinionTitle,
-    ratingTitle,
-    fileUploadTitle,
-    statementTitle,
     welcomeScreenDesc,
     longTextDesc,
     shortTextDesc,
@@ -57,57 +46,57 @@ function QuestionTypeSelect(props) {
   // [COMPUTED_PROPERTIES]
   const questionTypeMap = customQuestionTypes || [
     {
-      type: welcomeScreenTitle || QUESTION_TYPES.WELCOME_SCREEN,
+      type: QUESTION_TYPES.WELCOME_SCREEN,
       description: welcomeScreenDesc || QUESTION_DESCRIPTIONS.WELCOME_SCREEN,
       icon: <HomeOutlined />
     },
     {
-      type: longTextTitle || QUESTION_TYPES.LONG_TEXT,
+      type: QUESTION_TYPES.LONG_TEXT,
       description: longTextDesc || QUESTION_DESCRIPTIONS.LONG_TEXT,
       icon: <FileTextOutlined />
     },
     {
-      type: shortTextTitle || QUESTION_TYPES.SHORT_TEXT,
+      type: QUESTION_TYPES.SHORT_TEXT,
       description: shortTextDesc || QUESTION_DESCRIPTIONS.SHORT_TEXT,
       icon: <SmallDashOutlined />
     },
     {
-      type: dateTitle || QUESTION_TYPES.DATE,
+      type: QUESTION_TYPES.DATE,
       description: dateDesc || QUESTION_DESCRIPTIONS.DATE,
       icon: <CalendarOutlined />
     },
     {
-      type: yesnoTitle || QUESTION_TYPES.YES_NO,
+      type: QUESTION_TYPES.YES_NO,
       description: yesnoDesc || QUESTION_DESCRIPTIONS.YES_NO,
       icon: <ShareAltOutlined />
     },
     {
-      type: choiceTitle || QUESTION_TYPES.CHOICE,
+      type: QUESTION_TYPES.CHOICE,
       description: choiceDesc || QUESTION_DESCRIPTIONS.CHOICE,
       icon: <GoldOutlined />
     },
     {
-      type: pictureChoiceTitle || QUESTION_TYPES.PICTURE_CHOICE,
+      type: QUESTION_TYPES.PICTURE_CHOICE,
       description: pictureChoiceDesc || QUESTION_DESCRIPTIONS.PICTURE_CHOICE,
       icon: <PictureOutlined />
     },
     {
-      type: opinionTitle || QUESTION_TYPES.OPINION_SCALE,
+      type: QUESTION_TYPES.OPINION_SCALE,
       description: opinionDesc || QUESTION_DESCRIPTIONS.OPINION_SCALE,
       icon: <HomeOutlined />
     },
     {
-      type: ratingTitle || QUESTION_TYPES.RATING,
+      type: QUESTION_TYPES.RATING,
       description: ratingDesc || QUESTION_DESCRIPTIONS.RATING,
       icon: <StarOutlined />
     },
     {
-      type: fileUploadTitle || QUESTION_TYPES.FILE_UPLOAD,
+      type: QUESTION_TYPES.FILE_UPLOAD,
       description: fileUploadDesc || QUESTION_DESCRIPTIONS.FILE_UPLOAD,
       icon: <UploadOutlined />
     },
     {
-      type: statementTitle || QUESTION_TYPES.STATEMENT,
+      type: QUESTION_TYPES.STATEMENT,
       description: statementDesc || QUESTION_DESCRIPTIONS.STATEMENT,
       icon: <CopyrightOutlined />
     }
