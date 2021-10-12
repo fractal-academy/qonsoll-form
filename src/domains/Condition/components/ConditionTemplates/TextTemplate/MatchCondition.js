@@ -1,13 +1,12 @@
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import { Select as AntSelect } from 'antd'
 import React, { useState, useEffect } from 'react'
-import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
 import { StyledDatePicker } from './TextTemplate.styles'
 import useFunctions from '../../../../../hooks/useFunctions'
-import { Row, Col, Input, Select, Text } from '@qonsoll/react-design'
+import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
 import { QuestionSelect } from '../../../../Question/components'
 import { useTranslation } from '../../../../../context/Translation'
+import { Row, Col, Input, Select, Option } from '@qonsoll/react-design'
 import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
 
 function MatchCondition(props) {
@@ -88,28 +87,19 @@ function MatchCondition(props) {
     )
   }, [item, conditionRedirectPlaceholder])
 
-  console.log(
-    ruleSelectValue,
-    conditionRedirectPlaceholder,
-    TEXTINGS.conditionRedirectPlaceholder
-  )
-
   return (
     <Row mb={2} key={index}>
       <Col cw={3} pr={2} pl={0}>
         <Select
-          showSearch
           allowClear
-          value={
-            ruleSelectValue ||
+          placeholder={
             conditionRedirectPlaceholder ||
             TEXTINGS.conditionRedirectPlaceholder
           }
+          value={ruleSelectValue}
           onChange={onRuleSelectValueChange}>
           {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
-            <AntSelect.Option key={index}>
-              <Text>{item}</Text>
-            </AntSelect.Option>
+            <Option key={index}>{item}</Option>
           ))}
         </Select>
       </Col>

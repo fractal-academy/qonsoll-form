@@ -1,12 +1,20 @@
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import LetterBox from '../../LetterBox'
-import { Select as AntSelect } from 'antd'
+// import { Select as AntSelect } from 'antd'
 import { NumberedCard } from '../../../../../components'
 import useFunctions from '../../../../../hooks/useFunctions'
 import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
 import { useTranslation } from '../../../../../context/Translation'
-import { Title, Text, Select, Box, Divider } from '@qonsoll/react-design'
+import {
+  Title,
+  Text,
+  Select,
+  Box,
+  Divider,
+  OptGroup,
+  Option
+} from '@qonsoll/react-design'
 
 let startLetter = 65
 
@@ -59,7 +67,7 @@ function EndingSimpleView(props) {
           TEXTINGS.conditionsEndingSelectPlaceholder
         }>
         {questionsData?.map((questionListItem, index) => (
-          <AntSelect.OptGroup
+          <OptGroup
             key={index}
             label={
               <Box display="flex">
@@ -80,7 +88,7 @@ function EndingSimpleView(props) {
             }>
             {questionListItem?.questionConfigurations?.map(
               (questionAnswerItem, ind) => (
-                <AntSelect.Option
+                <Option
                   key={questionAnswerItem?.answerOptionId}
                   value={`${questionListItem?.id} ${index}${ind}`}>
                   <Box display="flex">
@@ -98,10 +106,10 @@ function EndingSimpleView(props) {
                       {questionAnswerItem?.answerOption || '-'}
                     </Text>
                   </Box>
-                </AntSelect.Option>
+                </Option>
               )
             )}
-          </AntSelect.OptGroup>
+          </OptGroup>
         ))}
       </Select>
     </NumberedCard>
