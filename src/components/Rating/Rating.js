@@ -28,6 +28,8 @@ function CustomRating(props) {
   const answersContext = useAnswersContext()
   const { requiredAnswerMessage } = useTranslation()
   const [selectedValue, setSelectedValue] = useState(0)
+  const [radioChecked, setRadioChecked] = useState()
+  const [checkboxChecked, setCheckboxChecked] = useState()
 
   //[ADDITIONAL HOOKS]
   const phoneSize = useMedia({ maxWidth: '430px' })
@@ -38,6 +40,8 @@ function CustomRating(props) {
 
   // [CLEAN FUNCTIONS]
   const onChange = (selectedStarsNumber) => {
+    setRadioChecked(false)
+    setCheckboxChecked(false)
     if (range.includes(selectedStarsNumber)) {
       const selectedStarData = questionConfigurations?.[selectedStarsNumber - 1]
       setSelectedValue(selectedStarsNumber)
@@ -112,6 +116,9 @@ function CustomRating(props) {
           onClick={onClick}
           question={question}
           isFormQuiz={isFormQuiz}
+          radioChecked={radioChecked}
+          checkboxChecked={checkboxChecked}
+          setSelectedValue={setSelectedValue}
           isMultiple={question?.isMultiple}
         />
       )}

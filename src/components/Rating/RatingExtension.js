@@ -18,7 +18,15 @@ import {
 } from '../../context/Answers'
 
 function RatingExtension(props) {
-  const { question, onClick, isFormQuiz, isMultiple } = props
+  const {
+    question,
+    onClick,
+    isFormQuiz,
+    isMultiple,
+    setSelectedValue,
+    radioChecked,
+    checkboxChecked
+  } = props
 
   // [ADDITIONAL HOOKS]
   const [isHovering, hoverRef] = useHover()
@@ -34,6 +42,7 @@ function RatingExtension(props) {
 
   // [CLEAN FUNCTIONS]
   const onRadioChange = (option) => {
+    setSelectedValue(0)
     const score = 0
 
     const data = {
@@ -52,6 +61,7 @@ function RatingExtension(props) {
   }
 
   const onCheckboxChange = (option) => {
+    setSelectedValue(0)
     const score = 0
 
     let answerValues = option?.map((item) => item?.answerOption)
@@ -105,6 +115,8 @@ function RatingExtension(props) {
     })
   }
 
+  console.log(checkboxChecked)
+
   return (
     <Container mt={4} ref={hoverRef}>
       {isMultiple ? (
@@ -128,7 +140,10 @@ function RatingExtension(props) {
                   </Box>
                 </Popconfirm>
               )}
-              <Checkbox value={item || ''} disabled={!onClick}>
+              <Checkbox
+                value={item || ''}
+                disabled={!onClick}
+                checked={checkboxChecked}>
                 <ExtentionItem
                   item={item}
                   index={index}
@@ -163,7 +178,10 @@ function RatingExtension(props) {
                 </Popconfirm>
               )}
 
-              <Radio value={item || ''} disabled={!onClick}>
+              <Radio
+                value={item || ''}
+                disabled={!onClick}
+                radioChecked={radioChecked}>
                 <ExtentionItem
                   item={item}
                   index={index}
