@@ -19,6 +19,7 @@ function SubmitButton(props) {
     question,
     currentSlide,
     disablePressEnter,
+    preventFirebaseUsage,
     ...rest
   } = props
 
@@ -59,30 +60,32 @@ function SubmitButton(props) {
       const updatedAnswers = { formId, answers }
       const sendAnswersTimestamp = getTimestamp().fromDate(new Date())
 
-      Object.values(answers).forEach((item) => {
-        const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
-        setData(COLLECTIONS?.ANSWERS, answerId, {
-          id: answerId,
-          formId: formId,
-          questionId: item?.question?.id,
-          answer: item?.answer?.value,
-          answerScore: item?.answerScore || '',
-          questionType: item?.question?.questionType,
-          questionTitle: item?.question?.title,
-          user: mockUser?.name,
-          date: sendAnswersTimestamp,
-          order: item?.question?.order
+      if (!preventFirebaseUsage) {
+        Object.values(answers).forEach((item) => {
+          const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
+          setData(COLLECTIONS?.ANSWERS, answerId, {
+            id: answerId,
+            formId: formId,
+            questionId: item?.question?.id,
+            answer: item?.answer?.value,
+            answerScore: item?.answerScore || '',
+            questionType: item?.question?.questionType,
+            questionTitle: item?.question?.title,
+            user: mockUser?.name,
+            date: sendAnswersTimestamp,
+            order: item?.question?.order
+          })
         })
-      })
-      const userAnswersGroupId = getCollectionRef(
-        COLLECTIONS.USER_ANSWERS_GROUP
-      ).doc().id
-      setData(COLLECTIONS?.USER_ANSWERS_GROUP, userAnswersGroupId, {
-        id: userAnswersGroupId,
-        formId: formId,
-        date: sendAnswersTimestamp,
-        user: mockUser?.name
-      })
+        const userAnswersGroupId = getCollectionRef(
+          COLLECTIONS.USER_ANSWERS_GROUP
+        ).doc().id
+        setData(COLLECTIONS?.USER_ANSWERS_GROUP, userAnswersGroupId, {
+          id: userAnswersGroupId,
+          formId: formId,
+          date: sendAnswersTimestamp,
+          user: mockUser?.name
+        })
+      }
       //This part for future improvements - add answer for answer layout
       // Object.values(answers)?.map((questionWithAnswer, index) => {})
       setLoading(true)
@@ -92,6 +95,7 @@ function SubmitButton(props) {
       setLoading(false)
     } else onClick?.()
   }
+
   return (
     <Row display="flex" v="center" mt={!isntDesktop && 3} noGutters>
       <Col cw="auto" mr={3}>

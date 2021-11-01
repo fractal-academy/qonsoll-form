@@ -31,7 +31,8 @@ function QuestionAdvancedView(props) {
     currentSlide,
     submitLoading,
     questionNumber,
-    answersScoreData
+    answersScoreData,
+    preventFirebaseUsage
   } = props
 
   // [ADDITIONAL_HOOKS]
@@ -99,10 +100,11 @@ function QuestionAdvancedView(props) {
     [QUESTION_TYPES.ENDING]: {
       component: (
         <SubmitButton
-          onClick={onClick}
-          currentSlide={currentSlide}
           finish
-          loading={submitLoading}>
+          onClick={onClick}
+          loading={submitLoading}
+          currentSlide={currentSlide}
+          preventFirebaseUsage={preventFirebaseUsage}>
           {questionFinishButton || TEXTINGS.questionFinishButton}
         </SubmitButton>
       )
