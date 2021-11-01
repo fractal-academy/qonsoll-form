@@ -115,8 +115,6 @@ function RatingExtension(props) {
     })
   }
 
-  console.log(checkboxChecked)
-
   return (
     <Container mt={4} ref={hoverRef}>
       {isMultiple ? (
