@@ -20,7 +20,8 @@ import {
   LongText,
   DateTimeInput,
   SubmitButton,
-  VideoPlayer
+  VideoPlayer,
+  VideoAnswer
 } from '../../../../components'
 
 function QuestionAdvancedView(props) {
@@ -33,7 +34,7 @@ function QuestionAdvancedView(props) {
     questionNumber,
     answersScoreData
   } = props
-
+  console.log(data)
   // [ADDITIONAL_HOOKS]
   const { questionFinishButton, questionStartButton, questionVideo } =
     useTranslation()
@@ -88,6 +89,9 @@ function QuestionAdvancedView(props) {
     },
     [QUESTION_TYPES.STATEMENT]: {
       component: <SubmitButton onClick={onClick} currentSlide={currentSlide} />
+    },
+    [QUESTION_TYPES.VIDEO_ANSWER]: {
+      component: <VideoAnswer onClick={onClick} />
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
@@ -163,6 +167,8 @@ function QuestionAdvancedView(props) {
             <Col cw={12}>
               {data?.videoApiKey ? (
                 <Box
+                  height={450}
+                  position="relative"
                   display="flex"
                   flexDirection="column"
                   justifyContent="center">
@@ -171,11 +177,16 @@ function QuestionAdvancedView(props) {
                       color="var(--qf-typography-title-color)"
                       style={{ wordBreak: 'break-word' }}
                       level={4}>
-                      `${questionNumber}. $
-                      {questionVideo || TEXTINGS.questionVideo}`
+                      {questionNumber}.{questionVideo || TEXTINGS.questionVideo}
                     </Title>
                   )}
-                  <VideoPlayer videoKey={data?.videoApiKey} />
+                  <VideoPlayer
+                    videoKey={data?.videoApiKey}
+                    autoStart="false"
+                    customOptions={{
+                      autoplay: false
+                    }}
+                  />
                 </Box>
               ) : (
                 <Title

@@ -10,6 +10,7 @@ import {
   useCurrentQuestionContext,
   DISPATCH_EVENTS
 } from '../../../../context/CurrentQuestion'
+import { Box } from '@qonsoll/react-design'
 
 function QuestionHeader(props) {
   const { titlePlaceholder, subtitlePlaceholder } = props
@@ -50,11 +51,18 @@ function QuestionHeader(props) {
   const onSubtitleChange = ({ target }) => {
     setSubtitleText(target.value)
   }
-  const onUploadedVideoQuestion = (embedding) => {
-    setVideo(embedding.video)
+  const onUploadedVideoQuestion = (videoToken) => {
+    setVideo(videoToken)
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-      payload: { videoApiKey: embedding.video }
+      payload: { videoApiKey: videoToken }
+    })
+  }
+
+  const deleteVideo = () => {
+    currentQuestionDispatch({
+      type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
+      payload: { videoApiKey: '' }
     })
   }
 
@@ -68,13 +76,20 @@ function QuestionHeader(props) {
   return (
     <>
       {currentQuestion?.isVideoQuestion ? (
-        <>
+        <Box height={600} position="relative">
           {video ? (
-            <VideoPlayer videoKey={currentQuestion?.videoApiKey} />
+            <VideoPlayer
+              withDelete
+              videoKey={currentQuestion?.videoApiKey}
+              deleteVideo={deleteVideo}
+              customOptions={{
+                autoplay: false
+              }}
+            />
           ) : (
-            <VideoRecording onUploaded={onUploadedVideoQuestion} />
+            <VideoRecording onUpload={onUploadedVideoQuestion} />
           )}
-        </>
+        </Box>
       ) : (
         <>
           <TextEditable

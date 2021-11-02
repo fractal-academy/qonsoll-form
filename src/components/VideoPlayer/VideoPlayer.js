@@ -1,40 +1,43 @@
 import React from 'react'
-import { ZiggeoPlayer } from 'react-ziggeo'
+import '@qonsoll/qvideo/dist/styles/styles.css'
+import { Player } from '@qonsoll/qvideo'
+import { Button } from '@qonsoll/react-design'
+import { Tooltip } from 'antd'
+import { useTranslation } from '../../context/Translation'
 
-const API_KEY = 'r1aabb2782dec6629e9650b5c6197c92'
+const API_KEY = '6da3bb20-8bfb-44b6-b96a-94be93941aa0'
 
 function VideoPlayer(props) {
-  const {
-    videoKey,
-    onPlaying,
-    onPaused,
-    onAttached,
-    onLoaded,
-    onEnded,
-    onError,
-    onSeek
-  } = props
+  const { videoKey, deleteVideo, withDelete, customOptions } = props
+
+  const { qvideoDeleteVideoButton } = useTranslation()
 
   return (
-    <ZiggeoPlayer
-      locale="en"
-      apiKey={API_KEY}
-      video={videoKey}
-      height="-webkit-fill-available"
-      width="-webkit-fill-available"
-      ziggeo-theme="space"
-      theme="space"
-      themecolor="black"
-      skipinitial={false}
-      onPlaying={onPlaying}
-      onPaused={onPaused}
-      onAttached={onAttached}
-      onLoaded={onLoaded}
-      onEnded={onEnded}
-      onError={onError}
-      onSeek={onSeek}
-      // onRef={(ref) => setPlayer(ref)}
-    />
+    <>
+      {withDelete && (
+        <Tooltip
+          title={qvideoDeleteVideoButton || 'Delete this video and record new'}>
+          <Button
+            //TODO add delete video from DB with onClick
+            onClick={deleteVideo}
+            size="small"
+            type="danger"
+            position="absolute"
+            zIndex="1"
+            videoToken=""
+            right={1}
+            top={1}>
+            X
+          </Button>
+        </Tooltip>
+      )}
+      <Player
+        circle
+        apiKey={API_KEY}
+        videoToken={videoKey}
+        customOptions={customOptions}
+      />
+    </>
   )
 }
 
