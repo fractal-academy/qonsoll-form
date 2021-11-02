@@ -32,6 +32,7 @@ function FormShow(props) {
     wrapperOffset,
     actions = {},
     wrapperPaddings,
+    preventFirebaseUsage,
     showHeader
   } = props
 
@@ -226,6 +227,7 @@ function FormShow(props) {
                       question={question}
                       isFormQuiz={formData?.isQuiz}
                       currentSlide={currentSlide}
+                      preventFirebaseUsage={preventFirebaseUsage}
                       containWelcomeScreen={containWelcomeScreen}
                       answersScoreData={
                         answersScoreData?.find(

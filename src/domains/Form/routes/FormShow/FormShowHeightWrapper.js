@@ -12,7 +12,8 @@ function FormShowHeightWrapper(props) {
     currentSlide,
     wrapperHeight,
     answersScoreData,
-    containWelcomeScreen
+    containWelcomeScreen,
+    preventFirebaseUsage
   } = props
 
   //[COMPUTED PROPERTIES]
@@ -27,6 +28,7 @@ function FormShowHeightWrapper(props) {
         currentSlide={currentSlide}
         questionNumber={questionNumber}
         answersScoreData={answersScoreData}
+        preventFirebaseUsage={preventFirebaseUsage}
       />
     </Box>
   )
