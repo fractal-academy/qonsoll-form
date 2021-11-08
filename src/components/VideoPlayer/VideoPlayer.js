@@ -4,8 +4,9 @@ import { Player } from '@qonsoll/qvideo'
 import { Button } from '@qonsoll/react-design'
 import { Tooltip } from 'antd'
 import { useTranslation } from '../../context/Translation'
+import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
 
-const API_KEY = '6da3bb20-8bfb-44b6-b96a-94be93941aa0'
+const API_KEY = QVIDEO_API_KEY
 
 function VideoPlayer(props) {
   const { videoKey, deleteVideo, withDelete, customOptions } = props

@@ -35,7 +35,6 @@ function QuestionAdvancedView(props) {
     answersScoreData,
     preventFirebaseUsage
   } = props
-  console.log(data)
   // [ADDITIONAL_HOOKS]
   const { questionFinishButton, questionStartButton, questionVideo } =
     useTranslation()

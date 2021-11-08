@@ -18,7 +18,6 @@ const VideoAnswer = ({ onClick, isFormQuiz, question }) => {
     } else {
       onClick?.(data)
     }
-    console.log('VIDEOID', videoId)
   }
   return (
     <Box height={700}>
