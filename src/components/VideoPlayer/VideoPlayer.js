@@ -33,7 +33,6 @@ function VideoPlayer(props) {
         </Tooltip>
       )}
       <Player
-        circle
         spinnerText="qForm"
         apiKey={API_KEY}
         videoToken={videoKey}
