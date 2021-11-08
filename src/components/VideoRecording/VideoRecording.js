@@ -8,6 +8,7 @@ function VideoRecording(props) {
 
   return (
     <Recorder
+      // circle
       apiKey={API_KEY}
       autoStart
       isCameraConfig

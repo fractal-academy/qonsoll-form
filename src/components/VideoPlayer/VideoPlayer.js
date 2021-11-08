@@ -26,7 +26,7 @@ function VideoPlayer(props) {
             position="absolute"
             zIndex="1"
             videoToken=""
-            right={1}
+            left={1}
             top={1}>
             X
           </Button>
