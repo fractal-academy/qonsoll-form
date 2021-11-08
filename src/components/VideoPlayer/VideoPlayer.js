@@ -33,6 +33,7 @@ function VideoPlayer(props) {
       )}
       <Player
         circle
+        spinnerText="qForm"
         apiKey={API_KEY}
         videoToken={videoKey}
         customOptions={customOptions}
