@@ -10,6 +10,7 @@ const QUESTION_DESCRIPTIONS = {
   OPINION_SCALE: 'A customizable, numbered scale',
   DATE: 'Collect answers in date format',
   FILE_UPLOAD: 'Upload a file up to 10MB',
+  VIDEO_ANSWER: 'Answer question via video',
   ENDING: 'Ending'
 }
 

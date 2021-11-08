@@ -2,6 +2,7 @@ export { default as FileUploader } from './FileUploader'
 
 export { default as LongText } from './LongText'
 export { default as TextEditable } from './TextEditable'
+export { default as VideoAnswer } from './VideoAnswer'
 
 export { default as DateTimeInput } from './DateTimeInput'
 export { default as ChoiceEditable } from './ChoiceEditable'

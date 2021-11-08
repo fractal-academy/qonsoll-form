@@ -104,6 +104,10 @@ function QuestionForm(props) {
           {questionFinishButton || TEXTINGS.questionFinishButton}
         </SubmitButton>
       )
+    },
+    [QUESTION_TYPES.VIDEO_ANSWER]: {
+      // component: <VideoAnswer />
+      component: <SubmitButton disabled children="Video answer" />
     }
   }
 

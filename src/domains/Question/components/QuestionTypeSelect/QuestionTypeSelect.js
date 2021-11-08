@@ -17,7 +17,8 @@ import {
   ShareAltOutlined,
   SmallDashOutlined,
   StarOutlined,
-  UploadOutlined
+  UploadOutlined,
+  VideoCameraOutlined
 } from '@ant-design/icons'
 
 function QuestionTypeSelect(props) {
@@ -40,6 +41,7 @@ function QuestionTypeSelect(props) {
     choiceDesc,
     ratingDesc,
     statementDesc,
+    videoAnswerDesc,
     yesnoDesc
   } = useTranslation()
 
@@ -99,6 +101,11 @@ function QuestionTypeSelect(props) {
       type: QUESTION_TYPES.STATEMENT,
       description: statementDesc || QUESTION_DESCRIPTIONS.STATEMENT,
       icon: <CopyrightOutlined />
+    },
+    {
+      type: QUESTION_TYPES.VIDEO_ANSWER,
+      description: videoAnswerDesc || QUESTION_DESCRIPTIONS.VIDEO_ANSWER,
+      icon: <VideoCameraOutlined />
     }
   ]
 

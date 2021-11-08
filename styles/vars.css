@@ -12,12 +12,12 @@
   /* drag and drop */
   --qf-dnd-item-badge-bg: var(--ql-color-dark-lighten1);
   --qf-dnd-item-badge-color: var(--ql-color-white);
-  
+
   --qf-dnd-item-bg: var(--ql-color-dark-t-lighten5);
-  --qf-dnd-item-hover: var(--ql-color-dark-t-lighten4); 
+  --qf-dnd-item-hover: var(--ql-color-dark-t-lighten4);
 
   --qf-dnd-active-item-bg: var(--ql-color-accent1-t-lighten4);
-  --qf-dnd-active-item-hover: var(--ql-color-accent1-t-lighten3); 
+  --qf-dnd-active-item-hover: var(--ql-color-accent1-t-lighten3);
 
   /* content card */
   --qf-content-card-bg: var(--ql-color-white);
@@ -41,7 +41,7 @@
   --qf-keybox-color-active: var(--ql-color-white);
 
   --qf-submit-button-font-size: var(--ql-font-size-h4);
-  
+
   /* input */
   --qf-input-background: var(--ql-color-dark-t-lighten5);
 
@@ -87,8 +87,8 @@
   --qf-border-radius-full: var(--ql-border-radius-full);
 
   /* [ OPTIONAL VARS ] */
-  --ql-font-family-main: 'Rubik'; 
-  --ql-body-bg: var(--ql-color-dark-t-lighten6); 
+  --ql-font-family-main: 'Rubik';
+  --ql-body-bg: var(--ql-color-dark-t-lighten6);
 }
 
 #root {
