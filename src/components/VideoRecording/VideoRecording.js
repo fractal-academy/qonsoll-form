@@ -8,7 +8,8 @@ function VideoRecording(props) {
 
   return (
     <Recorder
-      // circle
+      spinnerText="loading"
+      spinnerSize="md"
       apiKey={API_KEY}
       autoStart
       isCameraConfig
