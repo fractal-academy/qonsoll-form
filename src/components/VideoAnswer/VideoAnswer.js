@@ -2,7 +2,7 @@ import React from 'react'
 import { v4 as uuid } from 'uuid'
 import { API_KEY } from '../../constants'
 import { Box } from '@qonsoll/react-design'
-import { VideoRecording } from 'feedback-typeform-app/src/components'
+import VideoRecording from '../VideoRecording'
 
 const VideoAnswer = ({ onClick, isFormQuiz, question }) => {
   const onUpload = (videoId) => {
@@ -20,7 +20,7 @@ const VideoAnswer = ({ onClick, isFormQuiz, question }) => {
     }
   }
   return (
-    <Box height={700}>
+    <Box height={600}>
       <VideoRecording apiKey={API_KEY} onUpload={onUpload} />
     </Box>
   )
