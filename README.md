@@ -401,6 +401,7 @@ const qformTranslations = (t) => {
     popconfirmDeleteFormTitle: t('Remove item?'),
     popconfirmDeleteImageTitle: t('Remove image?'),
     conditionModalIsUploaded: t('is uploaded'),
+    conditionModalIsRecorded: t('is recorded'),
     emptyDescription: t('Nothing was found'),
     ratingExtendedDefaultOption: t('Extended option'),
     

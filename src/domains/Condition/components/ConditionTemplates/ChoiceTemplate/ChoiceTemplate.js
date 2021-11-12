@@ -13,12 +13,18 @@ function ChoiceTemplate(props) {
   const {
     questionList,
     handlesUpload,
+		handlesRecord,
     addRedirectQuestion,
     questionConfigurations
   } = props
 
   // [ADDITIONAL_HOOKS]
-  const { conditionModalIsUploaded } = useTranslation()
+  const { conditionModalIsUploaded, conditionModalIsRecorded } = useTranslation()
+	
+  // [COMPUTED PROPERTIES]
+	const uploadChoiceText = conditionModalIsUploaded || TEXTINGS.conditionModalIsUploaded
+	const recordChoiceText = conditionModalIsRecorded || TEXTINGS.conditionModalIsRecorded
+	const choiceAutoTextComputed = (handlesUpload && uploadChoiceText) || (handlesRecord && recordChoiceText)
 
   return (
     <Container>
@@ -26,7 +32,7 @@ function ChoiceTemplate(props) {
         <Row mb={2} key={index}>
           <Col cw={6} pr={2} pl={0}>
             <QuestionPreview px={3}>
-              {!handlesUpload && (
+              {!handlesUpload && !handlesRecord && (
                 <LetterBox px={2} mr={2}>
                   <Text color="var(--qf-typography-subtitle-color)" strong>
                     {String.fromCharCode(startLetter + index)}
@@ -37,10 +43,7 @@ function ChoiceTemplate(props) {
                 color="var(--qf-typography-title-color)"
                 textOverflow="ellipsis"
                 variant="body1">
-                {handlesUpload
-                  ? conditionModalIsUploaded ||
-                    TEXTINGS.conditionModalIsUploaded
-                  : item?.answerOption}
+                {choiceAutoTextComputed || item?.answerOption}
               </Text>
             </QuestionPreview>
           </Col>
@@ -60,6 +63,7 @@ function ChoiceTemplate(props) {
 
 ChoiceTemplate.propTypes = {
   handlesUpload: PropTypes.bool,
+	handlesRecord: PropTypes.bool,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func,
   questionConfigurations: PropTypes.array
