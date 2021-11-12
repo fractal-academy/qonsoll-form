@@ -21,7 +21,7 @@ const TEXTINGS = {
   popconfirmDeleteFormTitle: 'Remove form?',
   popconfirmDeleteImageTitle: 'Remove image?',
   conditionModalIsUploaded: 'is uploaded',
-	conditionModalIsRecorded: 'is recorded',
+  conditionModalIsRecorded: 'is recorded',
   emptyDescription: 'Nothing was found',
   ratingExtendedDefaultOption: 'Extended option',
   datepickerPlaceholder: 'Select date',
