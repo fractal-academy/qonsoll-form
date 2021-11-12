@@ -45,6 +45,9 @@ function ConditionForm(props) {
     [QUESTION_TYPES.FILE_UPLOAD]: {
       component: <ChoiceTemplate handlesUpload />
     },
+		[QUESTION_TYPES.VIDEO_ANSWER]: {
+			component: <ChoiceTemplate handlesUpload/>
+		},
     [QUESTION_TYPES.ENDING]: {
       component: <></>
     }
