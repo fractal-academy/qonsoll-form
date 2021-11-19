@@ -13,18 +13,22 @@ function ChoiceTemplate(props) {
   const {
     questionList,
     handlesUpload,
-		handlesRecord,
+    handlesRecord,
     addRedirectQuestion,
     questionConfigurations
   } = props
 
   // [ADDITIONAL_HOOKS]
-  const { conditionModalIsUploaded, conditionModalIsRecorded } = useTranslation()
-	
+  const { conditionModalIsUploaded, conditionModalIsRecorded } =
+    useTranslation()
+
   // [COMPUTED PROPERTIES]
-	const uploadChoiceText = conditionModalIsUploaded || TEXTINGS.conditionModalIsUploaded
-	const recordChoiceText = conditionModalIsRecorded || TEXTINGS.conditionModalIsRecorded
-	const choiceAutoTextComputed = (handlesUpload && uploadChoiceText) || (handlesRecord && recordChoiceText)
+  const uploadChoiceText =
+    conditionModalIsUploaded || TEXTINGS.conditionModalIsUploaded
+  const recordChoiceText =
+    conditionModalIsRecorded || TEXTINGS.conditionModalIsRecorded
+  const choiceAutoTextComputed =
+    (handlesUpload && uploadChoiceText) || (handlesRecord && recordChoiceText)
 
   return (
     <Container>
@@ -63,7 +67,7 @@ function ChoiceTemplate(props) {
 
 ChoiceTemplate.propTypes = {
   handlesUpload: PropTypes.bool,
-	handlesRecord: PropTypes.bool,
+  handlesRecord: PropTypes.bool,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func,
   questionConfigurations: PropTypes.array

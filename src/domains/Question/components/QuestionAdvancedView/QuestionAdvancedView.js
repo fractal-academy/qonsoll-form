@@ -164,7 +164,7 @@ function QuestionAdvancedView(props) {
           pr={devicePadding}
           bordered={false}
           specialLayoutRule={specialLayoutRule}>
-          <Row noGutters py={2}>
+          <Row noGutters py={2} width="100%">
             <Col cw={12}>
               {data?.videoApiKey ? (
                 <Box
@@ -182,6 +182,7 @@ function QuestionAdvancedView(props) {
                     </Title>
                   )}
                   <VideoPlayer
+                    autoLoad
                     videoKey={data?.videoApiKey}
                     autoStart="false"
                     customOptions={{
