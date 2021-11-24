@@ -20,7 +20,7 @@ const VideoAnswer = ({ onClick, isFormQuiz, question }) => {
     }
   }
   return (
-    <Box height={600}>
+    <Box height={350}>
       <VideoRecording apiKey={API_KEY} onUpload={onUpload} />
     </Box>
   )

@@ -168,7 +168,7 @@ function QuestionAdvancedView(props) {
             <Col cw={12}>
               {data?.videoApiKey ? (
                 <Box
-                  height={450}
+                  height={350}
                   position="relative"
                   display="flex"
                   flexDirection="column"
