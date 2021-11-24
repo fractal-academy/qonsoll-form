@@ -1,8 +1,10 @@
 import React from 'react'
 import { v4 as uuid } from 'uuid'
-import { API_KEY } from '../../constants'
 import { Box } from '@qonsoll/react-design'
 import VideoRecording from '../VideoRecording'
+import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
+
+const API_KEY = process.env.REACT_APP_QVIDEO_API_KEY || QVIDEO_API_KEY
 
 const VideoAnswer = ({ onClick, isFormQuiz, question }) => {
   const onUpload = (videoId) => {

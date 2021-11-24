@@ -1,11 +1,11 @@
 import React from 'react'
 import { Recorder } from '@qonsoll/qvideo'
+import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
 
-const API_KEY = '6da3bb20-8bfb-44b6-b96a-94be93941aa0'
+const API_KEY = process.env.REACT_APP_QVIDEO_API_KEY || QVIDEO_API_KEY
 
 function VideoRecording(props) {
   const { customOptions, onUpload } = props
-
   return (
     <Recorder
       spinnerText="loading"
