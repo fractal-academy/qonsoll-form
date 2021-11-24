@@ -6,8 +6,7 @@ import { Tooltip } from 'antd'
 import { useTranslation } from '../../context/Translation'
 import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
 
-const API_KEY = QVIDEO_API_KEY
-
+const API_KEY = process.env.REACT_APP_QVIDEO_API_KEY || QVIDEO_API_KEY
 function VideoPlayer(props) {
   const { videoKey, deleteVideo, withDelete, customOptions } = props
 
