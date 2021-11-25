@@ -166,7 +166,7 @@ function QuestionAdvancedView(props) {
           specialLayoutRule={specialLayoutRule}>
           <Row noGutters py={2} width="100%">
             <Col cw={12}>
-              {data?.videoApiKey ? (
+              {data?.isVideoQuestion ? (
                 <Box
                   height={350}
                   position="relative"
