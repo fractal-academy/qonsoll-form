@@ -7,6 +7,7 @@ import { useTranslation } from '../../context/Translation'
 import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
 
 const API_KEY = process.env.REACT_APP_QVIDEO_API_KEY || QVIDEO_API_KEY
+
 function VideoPlayer(props) {
   const { videoKey, deleteVideo, withDelete, customOptions } = props
 
@@ -18,13 +19,11 @@ function VideoPlayer(props) {
         <Tooltip
           title={qvideoDeleteVideoButton || 'Delete this video and record new'}>
           <Button
-            //TODO add delete video from DB with onClick
             onClick={deleteVideo}
+            position="absolute"
             size="small"
             type="danger"
-            position="absolute"
             zIndex="1"
-            videoToken=""
             left={1}
             top={1}>
             X
@@ -32,7 +31,6 @@ function VideoPlayer(props) {
         </Tooltip>
       )}
       <Player
-        autoLoad
         spinnerText="loading"
         spinnerSize="md"
         apiKey={API_KEY}

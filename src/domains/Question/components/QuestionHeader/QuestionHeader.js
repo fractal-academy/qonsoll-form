@@ -10,7 +10,7 @@ import {
   useCurrentQuestionContext,
   DISPATCH_EVENTS
 } from '../../../../context/CurrentQuestion'
-import { Box } from '@qonsoll/react-design'
+import { Container, Row, Col } from '@qonsoll/react-design'
 
 function QuestionHeader(props) {
   const { titlePlaceholder, subtitlePlaceholder } = props
@@ -74,42 +74,45 @@ function QuestionHeader(props) {
   }, [currentQuestion])
 
   return (
-    <>
-      {currentQuestion?.isVideoQuestion ? (
-        <Box height={350} position="relative">
-          {video ? (
-            <VideoPlayer
-              withDelete
-              videoKey={currentQuestion?.videoApiKey}
-              deleteVideo={deleteVideo}
-              customOptions={{
-                autoplay: false
-              }}
+    <Container>
+      <Row noGutters>
+        {currentQuestion?.isVideoQuestion ? (
+          <Col cw={12} height={500} position="relative">
+            {video ? (
+              <VideoPlayer
+                withDelete
+                deleteVideo={deleteVideo}
+                videoKey={currentQuestion?.videoApiKey}
+                customOptions={{
+                  autoplay: false
+                }}
+              />
+            ) : (
+              <VideoRecording onUpload={onUploadedVideoQuestion} />
+            )}
+          </Col>
+        ) : (
+          <Col cw={12}>
+            <TextEditable
+              isTitle
+              value={titleText}
+              onBlur={onTitleBlur}
+              onChange={onTitleChange}
+              placeholder={titlePlaceholder}
+              {...props}
             />
-          ) : (
-            <VideoRecording onUpload={onUploadedVideoQuestion} />
-          )}
-        </Box>
-      ) : (
-        <>
-          <TextEditable
-            isTitle
-            onBlur={onTitleBlur}
-            value={titleText}
-            onChange={onTitleChange}
-            placeholder={titlePlaceholder}
-            {...props}
-          />
-          <TextEditable
-            textSecondary
-            onBlur={onSubtitleBlur}
-            value={subtitleText}
-            onChange={onSubtitleChange}
-            placeholder={subtitlePlaceholder}
-          />
-        </>
-      )}
-    </>
+
+            <TextEditable
+              textSecondary
+              value={subtitleText}
+              onBlur={onSubtitleBlur}
+              onChange={onSubtitleChange}
+              placeholder={subtitlePlaceholder}
+            />
+          </Col>
+        )}
+      </Row>
+    </Container>
   )
 }
 

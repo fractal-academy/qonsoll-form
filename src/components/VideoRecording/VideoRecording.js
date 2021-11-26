@@ -6,16 +6,17 @@ const API_KEY = process.env.REACT_APP_QVIDEO_API_KEY || QVIDEO_API_KEY
 
 function VideoRecording(props) {
   const { customOptions, onUpload } = props
+
   return (
     <Recorder
       spinnerText="loading"
       spinnerSize="md"
-      apiKey={API_KEY}
+      isUpload
       autoStart
-      isCameraConfig
       isMicroConfig
       isScreenRecord
-      isNotes
+      isCameraConfig
+      apiKey={API_KEY}
       onUpload={onUpload}
       customOptions={customOptions}
     />

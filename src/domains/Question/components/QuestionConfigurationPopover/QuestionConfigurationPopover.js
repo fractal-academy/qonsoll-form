@@ -102,6 +102,7 @@ function QuestionConfigurationPopover(props) {
           questionConfigurationTooltip || TEXTINGS.questionConfigurationTooltip
         }>
         <Button
+          borderRadius="0 0 var(--ql-border-radius-md) var(--ql-border-radius-md)"
           type="primary"
           icon={<SettingOutlined />}
           onClick={popoverShowChange}

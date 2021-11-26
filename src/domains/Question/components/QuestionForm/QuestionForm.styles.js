@@ -15,6 +15,7 @@ export const styles = {
 }
 
 export const StyledTag = styled(Tag)`
+  width: fit-content;
   background-color: var(--qf-button-bg);
   color: var(--qf-tag-color);
 `

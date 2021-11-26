@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement, useEffect } from 'react'
-import { Col, Row, Box } from '@qonsoll/react-design'
-import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
+import { Col, Row, Box, Text } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
-import {
-  styles,
-  StyledCol,
-  CustomCard,
-  CustomRow,
-  StyledTag
-} from './QuestionForm.styles'
+import { StyledTag } from './QuestionForm.styles'
+
+import SideLayoutImage from './SideLayoutImage'
+import MiddleLayoutImage from './MiddleLayoutImage'
+import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
+
 import {
   TEXTINGS,
   LAYOUT_TYPES,
@@ -18,10 +16,10 @@ import {
   QUESTION_TYPES
 } from '../../../../constants'
 import {
-  QuestionConfigurationPopover,
   QuestionHeader,
   QuestionMediaPopover,
-  QuestionImageContainer
+  // QuestionImageContainer,
+  QuestionConfigurationPopover
 } from '../../../../domains/Question/components'
 import {
   Rate,
@@ -48,6 +46,8 @@ function QuestionForm(props) {
     welcomeScreenShowRule,
     onQuestionLayoutChange
   } = props
+
+  console.log(questionData)
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
@@ -106,14 +106,18 @@ function QuestionForm(props) {
       )
     },
     [QUESTION_TYPES.VIDEO_ANSWER]: {
-      // component: <VideoAnswer />
-      component: <SubmitButton disabled children="Video answer" />
+      component: (
+        <Box display="flex" fontWeight="500" m={2}>
+          {/* MOVE TO CONSTANTS */}
+          Here will be answer as video. ;)
+        </Box>
+      )
     }
   }
 
   const computedMediaUrl = currentQuestion?.image || DEFAULT_IMAGE
   const tagRule = questionData?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
-  const popoverImage = `url(${computedMediaUrl})`
+  const url = `url(${computedMediaUrl})`
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
       ? endingListTitle || TEXTINGS.endingListTitle
@@ -131,6 +135,12 @@ function QuestionForm(props) {
   const isConfigurationPopoverVisible = !(
     currentQuestion.questionType === QUESTION_TYPES.ENDING
   )
+  const video = questionData?.isVideoQuestion
+  const configButtonPlacementRule = [
+    LAYOUT_TYPES.FULL_SCREEN.type,
+    LAYOUT_TYPES.RIGHT_SIDE_BIG.type,
+    LAYOUT_TYPES.RIGHT_SIDE_SMALL.type
+  ].includes(layoutType?.type)
 
   useEffect(() => {
     setBrightnessValue(currentQuestion.imageBrightness || 0)
@@ -138,18 +148,117 @@ function QuestionForm(props) {
 
   return (
     <ContentCard
-      onEdit
       image={bgImage}
       brightnessValue={questionData?.brightnessValue || brightnessValue}
       leftSideMenu={
         !!Object.keys(currentQuestion).length && (
           <QuestionLayoutSwitcher
-            onChange={onQuestionLayoutChange}
+            disabled={video}
             defaultActive={defaultTab}
+            onChange={onQuestionLayoutChange}
           />
         )
       }>
       {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
+        <Box position="absolute" right={0} mr={4}>
+          <QuestionMediaPopover
+            MediaModalButtonBackground={url}
+            setBrightnessValue={setBrightnessValue}
+            brightnessValue={questionData?.brightnessValue || brightnessValue}
+          />
+        </Box>
+      )}
+      <Row noGutters height="100%" h="center" position="relative">
+        {isConfigurationPopoverVisible && (
+          <Box
+            mx={4}
+            position="absolute"
+            left={configButtonPlacementRule && 0}
+            right={!configButtonPlacementRule && 0}>
+            <QuestionConfigurationPopover
+              questionData={questionData}
+              questionsList={questionsList}
+              customQuestionTypes={customQuestionTypes}
+              onQuestionTypeChange={onQuestionTypeChange}
+              welcomeScreenShowRule={welcomeScreenShowRule}
+            />
+          </Box>
+        )}
+
+        {imageShowRule && (
+          <Col cw={4} order={layoutType?.imageOrder}>
+            <SideLayoutImage
+              url={url}
+              layoutType={layoutType}
+              brightness={brightnessValue}
+              setBrightness={setBrightnessValue}
+            />
+          </Col>
+        )}
+
+        <Col cw={video ? 11 : 8} order={2}>
+          <Row
+            noGutters
+            v="center"
+            h="center"
+            width="100%"
+            height="100%"
+            flexDirection={questionData?.isVideoQuestion ? 'row' : 'column'}>
+            <Col cw={questionData?.isVideoQuestion ? 5 : 11} mb={4}>
+              <Box mb={2}>
+                {tagRule && <StyledTag>{questionTag}</StyledTag>}
+              </Box>
+              <QuestionHeader
+                tagRule={tagRule}
+                questionTag={questionTag}
+                titlePlaceholder={
+                  questionEditableTitleHint ||
+                  TEXTINGS.questionEditableTitleHint
+                }
+                subtitlePlaceholder={
+                  questionEditableSubtitleHint ||
+                  TEXTINGS.questionEditableSubtitleHint
+                }
+              />
+            </Col>
+            {layoutType?.type === LAYOUT_TYPES.BETWEEN.type &&
+              !questionData?.isVideoQuestion && (
+                <Col cw="auto">
+                  <MiddleLayoutImage
+                    url={url}
+                    layoutType={layoutType}
+                    brightness={brightnessValue}
+                    setBrightness={setBrightnessValue}
+                  />
+                </Col>
+              )}
+            <Col ml={video && 2} cw={questionData?.isVideoQuestion ? 6 : 11}>
+              {cloneElement(
+                questionTypesMap[questionData?.questionType].component,
+                {
+                  question: questionData
+                }
+              )}
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </ContentCard>
+  )
+}
+
+QuestionForm.propTypes = {
+  questionData: PropTypes.object,
+  onQuestionTypeChange: PropTypes.func,
+  setShowPopover: PropTypes.func,
+  showPopover: PropTypes.bool,
+  setIsImageEditVisible: PropTypes.func,
+  isImageEditVisible: PropTypes.bool
+}
+
+export default QuestionForm
+
+/* {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
         <Box position="absolute" right="48px">
           <QuestionMediaPopover
             brightnessValue={questionData?.brightnessValue || brightnessValue}
@@ -178,51 +287,54 @@ function QuestionForm(props) {
                   </Col>
                 )}
               </Row>
-              <Row noGutters h="between" mb={4}>
-                <Col cw="12" mt={2}>
-                  <QuestionHeader
-                    titlePlaceholder={
-                      questionEditableTitleHint ||
-                      TEXTINGS.questionEditableTitleHint
-                    }
-                    subtitlePlaceholder={
-                      questionEditableSubtitleHint ||
-                      TEXTINGS.questionEditableSubtitleHint
-                    }
-                  />
-                </Col>
-              </Row>
-              {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
-                <Row noGutters>
-                  <Col cw="auto" flexDirection="end">
-                    <QuestionImageContainer
-                      {...layoutType.imgSize}
-                      mb={4}
-                      image={computedMediaUrl}
-                      style={{
-                        filter: `brightness(${
-                          questionData?.brightnessValue + 100 ||
-                          brightnessValue + 100
-                        }%)`
-                      }}>
-                      <Box display="flex" justifyContent="flex-end" mr={4}>
-                        <QuestionMediaPopover
-                          brightnessValue={brightnessValue}
-                          setBrightnessValue={setBrightnessValue}
-                          MediaModalButtonBackground={popoverImage}
-                        />
-                      </Box>
-                    </QuestionImageContainer>
+              <Box>
+                <Row noGutters h="between" mb={4}>
+                  <Col cw="12" mt={2}>
+                    <QuestionHeader
+                      titlePlaceholder={
+                        questionEditableTitleHint ||
+                        TEXTINGS.questionEditableTitleHint
+                      }
+                      subtitlePlaceholder={
+                        questionEditableSubtitleHint ||
+                        TEXTINGS.questionEditableSubtitleHint
+                      }
+                    />
                   </Col>
                 </Row>
-              )}
-              <Box>
-                {cloneElement(
-                  questionTypesMap[questionData?.questionType].component,
-                  {
-                    question: questionData
-                  }
-                )}
+                {layoutType?.type === LAYOUT_TYPES.BETWEEN.type &&
+                  !questionData?.isVideoQuestion && (
+                    <Row noGutters>
+                      <Col cw="auto" flexDirection="end">
+                        <QuestionImageContainer
+                          {...layoutType.imgSize}
+                          mb={4}
+                          image={computedMediaUrl}
+                          style={{
+                            filter: `brightness(${
+                              questionData?.brightnessValue + 100 ||
+                              brightnessValue + 100
+                            }%)`
+                          }}>
+                          <Box display="flex" justifyContent="flex-end" mr={4}>
+                            <QuestionMediaPopover
+                              brightnessValue={brightnessValue}
+                              setBrightnessValue={setBrightnessValue}
+                              MediaModalButtonBackground={popoverImage}
+                            />
+                          </Box>
+                        </QuestionImageContainer>
+                      </Col>
+                    </Row>
+                  )}
+                <Box>
+                  {cloneElement(
+                    questionTypesMap[questionData?.questionType].component,
+                    {
+                      question: questionData
+                    }
+                  )}
+                </Box>
               </Box>
             </CustomCard>
           </Col>
@@ -248,18 +360,4 @@ function QuestionForm(props) {
             </StyledCol>
           )}
         </CustomRow>
-      )}
-    </ContentCard>
-  )
-}
-
-QuestionForm.propTypes = {
-  questionData: PropTypes.object,
-  onQuestionTypeChange: PropTypes.func,
-  setShowPopover: PropTypes.func,
-  showPopover: PropTypes.bool,
-  setIsImageEditVisible: PropTypes.func,
-  isImageEditVisible: PropTypes.bool
-}
-
-export default QuestionForm
+      )} */
