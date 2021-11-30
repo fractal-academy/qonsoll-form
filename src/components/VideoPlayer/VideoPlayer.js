@@ -1,8 +1,8 @@
 import React from 'react'
-import '@qonsoll/qvideo/dist/styles/styles.css'
-import { Player } from '@qonsoll/qvideo'
-import { Button } from '@qonsoll/react-design'
 import { Tooltip } from 'antd'
+import { Player } from '@qonsoll/qvideo'
+import '@qonsoll/qvideo/dist/styles/styles.css'
+import { Button } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
 

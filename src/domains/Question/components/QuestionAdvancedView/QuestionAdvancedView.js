@@ -1,7 +1,8 @@
 import useMedia from 'use-media'
 import PropTypes from 'prop-types'
 import React, { cloneElement } from 'react'
-import QuestionImageContainer from '../QuestionImageContainer'
+import SideLayoutImage from '../QuestionForm/SideLayoutImage'
+import MiddleLayoutImage from '../QuestionForm/MiddleLayoutImage'
 import { useTranslation } from '../../../../context/Translation'
 import { Col, Row, Box, Title, Text } from '@qonsoll/react-design'
 import { QUESTION_TYPES, LAYOUT_TYPES, TEXTINGS } from '../../../../constants'
@@ -91,7 +92,11 @@ function QuestionAdvancedView(props) {
       component: <SubmitButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.VIDEO_ANSWER]: {
-      component: <VideoAnswer onClick={onClick} />
+      component: (
+        <Box>
+          <VideoAnswer onClick={onClick} />
+        </Box>
+      )
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
@@ -207,19 +212,19 @@ function QuestionAdvancedView(props) {
               </Text>
             </Col>
           </Row>
-          {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
-            <Row noGutters mb={3} h={widthTablet && 'center'}>
-              <Col cw="auto">
-                <QuestionImageContainer
-                  layoutType={layoutType?.type}
-                  widthTablet={widthTablet}
-                  {...layoutType.imgSize}
-                  image={data?.image}
-                  imageBrightness={data?.imageBrightness || 0}
-                />
-              </Col>
-            </Row>
-          )}
+          {layoutType?.type === LAYOUT_TYPES.BETWEEN.type &&
+            !data?.isVideoQuestion && (
+              <Row noGutters mb={3} h={widthTablet && 'center'}>
+                <Col cw="auto">
+                  <MiddleLayoutImage
+                    url={`url(${data?.image})`}
+                    layoutType={layoutType}
+                    tabletSupport={widthTablet}
+                    brightness={data?.imageBrightness || 0}
+                  />
+                </Col>
+              </Row>
+            )}
           <Box>
             {cloneElement(component, {
               question: data,
@@ -235,12 +240,11 @@ function QuestionAdvancedView(props) {
           h="center"
           height={deviceImageHeight}
           order={widthTablet ? '1' : layoutType.imageOrder}>
-          <QuestionImageContainer
-            image={data?.image}
-            layoutType={layoutType?.type}
-            widthTablet={widthTablet}
-            {...layoutType.imgSize}
-            imageBrightness={data?.imageBrightness || 0}
+          <SideLayoutImage
+            url={`url(${data?.image})`}
+            layoutType={layoutType}
+            tabletSupport={widthTablet}
+            brightness={data?.imageBrightness || 0}
           />
         </Col>
       )}

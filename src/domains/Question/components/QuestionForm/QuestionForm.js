@@ -1,10 +1,15 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement, useEffect } from 'react'
-import { Col, Row, Box, Text } from '@qonsoll/react-design'
+import { Col, Row, Box } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
-import { StyledTag } from './QuestionForm.styles'
-
+import {
+  CustomCard,
+  CustomRow,
+  StyledCol,
+  StyledTag,
+  styles
+} from './QuestionForm.styles'
 import SideLayoutImage from './SideLayoutImage'
 import MiddleLayoutImage from './MiddleLayoutImage'
 import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
@@ -18,7 +23,6 @@ import {
 import {
   QuestionHeader,
   QuestionMediaPopover,
-  // QuestionImageContainer,
   QuestionConfigurationPopover
 } from '../../../../domains/Question/components'
 import {
@@ -107,7 +111,12 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.VIDEO_ANSWER]: {
       component: (
-        <Box display="flex" fontWeight="500" m={2}>
+        <Box
+          m={2}
+          height="100%"
+          display="flex"
+          fontWeight="500"
+          alignItems="center">
           {/* MOVE TO CONSTANTS */}
           Here will be answer as video. ;)
         </Box>
@@ -168,7 +177,7 @@ function QuestionForm(props) {
           />
         </Box>
       )}
-      <Row noGutters height="100%" h="center" position="relative">
+      {/*<Row noGutters height="100%" h="center" position="relative">
         {isConfigurationPopoverVisible && (
           <Box
             mx={4}
@@ -197,52 +206,134 @@ function QuestionForm(props) {
         )}
 
         <Col cw={video ? 11 : 8} order={2}>
-          <Row
-            noGutters
-            v="center"
-            h="center"
-            width="100%"
-            height="100%"
-            flexDirection={questionData?.isVideoQuestion ? 'row' : 'column'}>
-            <Col cw={questionData?.isVideoQuestion ? 5 : 11} mb={4}>
-              <Box mb={2}>
-                {tagRule && <StyledTag>{questionTag}</StyledTag>}
-              </Box>
-              <QuestionHeader
-                tagRule={tagRule}
-                questionTag={questionTag}
-                titlePlaceholder={
-                  questionEditableTitleHint ||
-                  TEXTINGS.questionEditableTitleHint
-                }
-                subtitlePlaceholder={
-                  questionEditableSubtitleHint ||
-                  TEXTINGS.questionEditableSubtitleHint
-                }
-              />
-            </Col>
-            {layoutType?.type === LAYOUT_TYPES.BETWEEN.type &&
-              !questionData?.isVideoQuestion && (
-                <Col cw="auto">
-                  <MiddleLayoutImage
-                    url={url}
-                    layoutType={layoutType}
-                    brightness={brightnessValue}
-                    setBrightness={setBrightnessValue}
-                  />
-                </Col>
-              )}
-            <Col ml={video && 2} cw={questionData?.isVideoQuestion ? 6 : 11}>
-              {cloneElement(
-                questionTypesMap[questionData?.questionType].component,
-                {
-                  question: questionData
-                }
-              )}
-            </Col>
-          </Row>
+          {!!Object.keys(currentQuestion).length && (
+            <CustomRow noGutters>
+              <Col
+                {...styles.questionCardColumnStyle}
+                cw={[12, 12, 10, 8]}
+                px="0">
+                <CustomCard bordered={false}>
+                  <Row noGutters v="center" h="between">
+                    <Col cw="auto">
+                      {tagRule && <StyledTag>{questionTag}</StyledTag>}
+                    </Col>
+                  </Row>
+                  <Box display={video && 'flex'}>
+                    <Row noGutters h="between" mb={4}>
+                      <Col cw="12" mt={2}>
+                        <QuestionHeader
+                          titlePlaceholder={
+                            questionEditableTitleHint ||
+                            TEXTINGS.questionEditableTitleHint
+                          }
+                          subtitlePlaceholder={
+                            questionEditableSubtitleHint ||
+                            TEXTINGS.questionEditableSubtitleHint
+                          }
+                        />
+                      </Col>
+                    </Row>
+                    {layoutType?.type === LAYOUT_TYPES.BETWEEN.type &&
+                      !questionData?.isVideoQuestion && (
+                        <Row noGutters>
+                          <Col cw="auto" flexDirection="end">
+                            <MiddleLayoutImage
+                              url={url}
+                              layoutType={layoutType}
+                              brightness={brightnessValue}
+                              setBrightness={setBrightnessValue}
+                            />
+                          </Col>
+                        </Row>
+                      )}
+                    <Box width={video && '50%'} ml={video && 2}>
+                      {cloneElement(
+                        questionTypesMap[questionData?.questionType].component,
+                        {
+                          question: questionData
+                        }
+                      )}
+                    </Box>
+                  </Box>
+                </CustomCard>
+              </Col>
+            </CustomRow>
+          )}
         </Col>
-      </Row>
+      </Row> */}
+      {!!Object.keys(currentQuestion).length && (
+        <CustomRow noGutters>
+          <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 8]} px="0">
+            <CustomCard bordered={false}>
+              <Row noGutters v="center" h="between">
+                <Col cw="auto">
+                  {tagRule && <StyledTag>{questionTag}</StyledTag>}
+                </Col>
+                {isConfigurationPopoverVisible && (
+                  <Col cw="auto">
+                    <QuestionConfigurationPopover
+                      questionData={questionData}
+                      welcomeScreenShowRule={welcomeScreenShowRule}
+                      questionsList={questionsList}
+                      customQuestionTypes={customQuestionTypes}
+                      onQuestionTypeChange={onQuestionTypeChange}
+                    />
+                  </Col>
+                )}
+              </Row>
+              <Box>
+                <Row noGutters h="between" mb={4}>
+                  <Col cw="12" mt={2}>
+                    <QuestionHeader
+                      titlePlaceholder={
+                        questionEditableTitleHint ||
+                        TEXTINGS.questionEditableTitleHint
+                      }
+                      subtitlePlaceholder={
+                        questionEditableSubtitleHint ||
+                        TEXTINGS.questionEditableSubtitleHint
+                      }
+                    />
+                  </Col>
+                </Row>
+                {layoutType?.type === LAYOUT_TYPES.BETWEEN.type &&
+                  !questionData?.isVideoQuestion && (
+                    <Row noGutters>
+                      <Col cw="auto" flexDirection="end">
+                        <MiddleLayoutImage
+                          url={url}
+                          layoutType={layoutType}
+                          brightness={brightnessValue}
+                          setBrightness={setBrightnessValue}
+                        />
+                      </Col>
+                    </Row>
+                  )}
+                <Box>
+                  {cloneElement(
+                    questionTypesMap[questionData?.questionType].component,
+                    {
+                      question: questionData
+                    }
+                  )}
+                </Box>
+              </Box>
+            </CustomCard>
+          </Col>
+          {imageShowRule && (
+            <StyledCol
+              order={layoutType?.imageOrder}
+              {...styles.sideImageColumnStyle}>
+              <SideLayoutImage
+                url={url}
+                layoutType={layoutType}
+                brightness={brightnessValue}
+                setBrightness={setBrightnessValue}
+              />
+            </StyledCol>
+          )}
+        </CustomRow>
+      )}
     </ContentCard>
   )
 }
@@ -361,3 +452,48 @@ export default QuestionForm
           )}
         </CustomRow>
       )} */
+
+/* <Row
+    noGutters
+    v="center"
+    h="center"
+    width="100%"
+    height="100%"
+    flexDirection={questionData?.isVideoQuestion ? 'row' : 'column'}>
+    <Col cw={questionData?.isVideoQuestion ? 5 : 11} mb={4}>
+      <Box mb={2}>
+        {tagRule && <StyledTag>{questionTag}</StyledTag>}
+      </Box>
+      <QuestionHeader
+        tagRule={tagRule}
+        questionTag={questionTag}
+        titlePlaceholder={
+          questionEditableTitleHint ||
+          TEXTINGS.questionEditableTitleHint
+        }
+        subtitlePlaceholder={
+          questionEditableSubtitleHint ||
+          TEXTINGS.questionEditableSubtitleHint
+        }
+      />
+    </Col>
+    {layoutType?.type === LAYOUT_TYPES.BETWEEN.type &&
+      !questionData?.isVideoQuestion && (
+        <Col cw="auto">
+          <MiddleLayoutImage
+            url={url}
+            layoutType={layoutType}
+            brightness={brightnessValue}
+            setBrightness={setBrightnessValue}
+          />
+        </Col>
+      )}
+    <Col ml={video && 2} cw={questionData?.isVideoQuestion ? 6 : 11}>
+      {cloneElement(
+        questionTypesMap[questionData?.questionType].component,
+        {
+          question: questionData
+        }
+      )}
+    </Col>
+  </Row> */

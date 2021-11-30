@@ -9,8 +9,7 @@ function VideoRecording(props) {
 
   return (
     <Recorder
-      spinnerText="loading"
-      spinnerSize="md"
+      spinnerSize="sm"
       isUpload
       autoStart
       isMicroConfig

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
+import useMedia from 'use-media'
 import {
   TextEditable,
   VideoPlayer,
@@ -77,7 +78,7 @@ function QuestionHeader(props) {
     <Container>
       <Row noGutters>
         {currentQuestion?.isVideoQuestion ? (
-          <Col cw={12} height={500} position="relative">
+          <Col cw={6} height={500} width={300} position="relative">
             {video ? (
               <VideoPlayer
                 withDelete
