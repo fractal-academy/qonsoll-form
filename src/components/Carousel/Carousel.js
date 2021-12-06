@@ -24,7 +24,6 @@ function Carousel(props) {
     disabledDown,
     currentSlide,
     setIsAnswered,
-    submitLoading,
     questionsData,
     setCurrentSlide,
     containWelcomeScreen,
@@ -227,28 +226,26 @@ function Carousel(props) {
         )}
       </AntdCarousel>
       <Box ref={buttonsRef} position="absolute" bottom="0" right="0">
-        {!submitLoading && (
-          <Row h="right" p={2} noGutters>
-            <Col cw="auto" mr={2}>
-              <Button
-                disabled={disabledUp}
-                type="primary"
-                onClick={previous}
-                onMouseDown={(e) => e.preventDefault()}>
-                <UpOutlined />
-              </Button>
-            </Col>
-            <Col cw="auto">
-              <Button
-                disabled={disabledDown}
-                type="primary"
-                onClick={handleNextClick}
-                onMouseDown={(e) => e.preventDefault()}>
-                <DownOutlined />
-              </Button>
-            </Col>
-          </Row>
-        )}
+        <Row h="right" p={2} noGutters>
+          <Col cw="auto" mr={2}>
+            <Button
+              disabled={disabledUp}
+              type="primary"
+              onClick={previous}
+              onMouseDown={(e) => e.preventDefault()}>
+              <UpOutlined />
+            </Button>
+          </Col>
+          <Col cw="auto">
+            <Button
+              disabled={disabledDown}
+              type="primary"
+              onClick={handleNextClick}
+              onMouseDown={(e) => e.preventDefault()}>
+              <DownOutlined />
+            </Button>
+          </Col>
+        </Row>
       </Box>
     </Box>
   )
