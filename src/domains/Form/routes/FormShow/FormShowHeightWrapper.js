@@ -10,6 +10,7 @@ function FormShowHeightWrapper(props) {
     question,
     isFormQuiz,
     currentSlide,
+    submitLoading,
     wrapperHeight,
     answersScoreData,
     containWelcomeScreen,
@@ -24,6 +25,7 @@ function FormShowHeightWrapper(props) {
       <QuestionAdvancedView
         data={question}
         onClick={onClick}
+        submitLoading={submitLoading}
         isFormQuiz={isFormQuiz}
         currentSlide={currentSlide}
         questionNumber={questionNumber}

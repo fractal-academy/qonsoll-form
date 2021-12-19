@@ -18,6 +18,7 @@ function SubmitButton(props) {
     finish,
     question,
     currentSlide,
+    submitLoading,
     disablePressEnter,
     preventFirebaseUsage,
     ...rest
@@ -102,7 +103,7 @@ function SubmitButton(props) {
         <Button
           type="primary"
           height="56px"
-          loading={loading}
+          loading={submitLoading || loading}
           onClick={onButtonClick}
           onMouseDown={(e) => e.preventDefault()}
           fontSize="var(--qf-submit-button-font-size)"

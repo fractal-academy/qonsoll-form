@@ -105,7 +105,7 @@ function QuestionAdvancedView(props) {
         <SubmitButton
           finish
           onClick={onClick}
-          loading={submitLoading}
+          submitLoading={submitLoading}
           currentSlide={currentSlide}
           preventFirebaseUsage={preventFirebaseUsage}>
           {questionFinishButton || TEXTINGS.questionFinishButton}

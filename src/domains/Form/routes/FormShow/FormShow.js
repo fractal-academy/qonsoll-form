@@ -212,7 +212,6 @@ function FormShow(props) {
                   disabledUp={disabledUp}
                   currentSlide={currentSlide}
                   disabledDown={disabledDown}
-                  submitLoading={submitLoading}
                   setIsAnswered={setIsAnswered}
                   questionsData={questionsData}
                   setCurrentSlide={setCurrentSlide}
@@ -225,6 +224,7 @@ function FormShow(props) {
                       index={index}
                       onClick={onClick}
                       question={question}
+                      submitLoading={submitLoading}
                       isFormQuiz={formData?.isQuiz}
                       currentSlide={currentSlide}
                       preventFirebaseUsage={preventFirebaseUsage}
