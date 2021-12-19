@@ -264,9 +264,7 @@ function FormEdit(props) {
   // [COMPUTED PROPERTIES]
   const containerPadding =
     wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
-  const welcomeScreenShowRule = questions?.some(
-    (question) => question['questionType'] === QUESTION_TYPES.WELCOME_SCREEN
-  )
+  const welcomeScreenShowRule = true
 
   return (
     <FirebaseContext.Provider value={firebase}>

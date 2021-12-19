@@ -43,12 +43,16 @@ const menuMap = [
 ]
 
 function QuestionLayoutSwitcher(props) {
-  const { onChange, defaultActive } = props
+  const { onChange, defaultActive, disabled } = props
 
   return (
     <StyledMenu selectedKeys={defaultActive}>
       {menuMap?.map((item) => (
-        <StyledItem key={item.layoutType} onClick={onChange} p={2}>
+        <StyledItem
+          disabled={disabled}
+          key={item.layoutType}
+          onClick={onChange}
+          p={2}>
           {cloneElement(item.icon, { style: { margin: 0 } })}
         </StyledItem>
       ))}

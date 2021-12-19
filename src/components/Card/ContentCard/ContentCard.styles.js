@@ -15,7 +15,7 @@ export const ImageBackground = styled(Box)`
   background-repeat: no-repeat;
   background-image: url(${image});
   filter: brightness(${brightnessValue + 100}%);
-  border-radius: var(--qf-border-radius-md);
+  border-radius: var(--qf-border-radius-lg);
   `}
 `
 export const RoundedCol = styled(Col)`
