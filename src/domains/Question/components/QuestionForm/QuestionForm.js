@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement, useEffect } from 'react'
 import { Col, Row, Box } from '@qonsoll/react-design'
+import SideLayoutImage from './SideLayoutImage'
+import MiddleLayoutImage from './MiddleLayoutImage'
 import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
 import { useTranslation } from '../../../../context/Translation'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
@@ -106,14 +108,24 @@ function QuestionForm(props) {
       )
     },
     [QUESTION_TYPES.VIDEO_ANSWER]: {
-      // component: <VideoAnswer />
-      component: <SubmitButton disabled children="Video answer" />
+      component: (
+        <Box
+          m={2}
+          height="100%"
+          display="flex"
+          fontWeight="500"
+          alignItems="center">
+          {/* MOVE TO CONSTANTS */}
+          Here will be answer as video. ;)
+        </Box>
+      )
     }
   }
 
   const computedMediaUrl = currentQuestion?.image || DEFAULT_IMAGE
   const tagRule = questionData?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
-  const popoverImage = `url(${computedMediaUrl})`
+  const url = `url(${computedMediaUrl})`
+  const video = questionData?.isVideoQuestion
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
       ? endingListTitle || TEXTINGS.endingListTitle
@@ -146,6 +158,7 @@ function QuestionForm(props) {
           <QuestionLayoutSwitcher
             onChange={onQuestionLayoutChange}
             defaultActive={defaultTab}
+            disabled={video}
           />
         )
       }>
@@ -154,7 +167,7 @@ function QuestionForm(props) {
           <QuestionMediaPopover
             brightnessValue={questionData?.brightnessValue || brightnessValue}
             setBrightnessValue={setBrightnessValue}
-            MediaModalButtonBackground={popoverImage}
+            MediaModalButtonBackground={url}
           />
         </Box>
       )}
@@ -195,24 +208,19 @@ function QuestionForm(props) {
               {layoutType?.type === LAYOUT_TYPES.BETWEEN.type && (
                 <Row noGutters>
                   <Col cw="auto" flexDirection="end">
-                    <QuestionImageContainer
-                      {...layoutType.imgSize}
-                      mb={4}
-                      image={computedMediaUrl}
-                      style={{
-                        filter: `brightness(${
-                          questionData?.brightnessValue + 100 ||
-                          brightnessValue + 100
-                        }%)`
-                      }}>
+                    <MiddleLayoutImage
+                      url={url}
+                      layoutType={layoutType}
+                      brightness={brightnessValue}
+                      setBrightness={setBrightnessValue}>
                       <Box display="flex" justifyContent="flex-end" mr={4}>
                         <QuestionMediaPopover
                           brightnessValue={brightnessValue}
                           setBrightnessValue={setBrightnessValue}
-                          MediaModalButtonBackground={popoverImage}
+                          MediaModalButtonBackground={url}
                         />
                       </Box>
-                    </QuestionImageContainer>
+                    </MiddleLayoutImage>
                   </Col>
                 </Row>
               )}
@@ -230,21 +238,21 @@ function QuestionForm(props) {
             <StyledCol
               order={layoutType?.imageOrder}
               {...styles.sideImageColumnStyle}>
-              <QuestionImageContainer
-                layoutType={layoutType?.type}
-                {...layoutType?.imgSize}
-                image={computedMediaUrl}
-                style={{ filter: `brightness(${brightnessValue + 100}%)` }}>
+              <SideLayoutImage
+                url={url}
+                layoutType={layoutType}
+                brightness={brightnessValue}
+                setBrightness={setBrightnessValue}>
                 <Row h="right">
                   <Col cw="auto" mr={4}>
                     <QuestionMediaPopover
                       brightnessValue={brightnessValue}
                       setBrightnessValue={setBrightnessValue}
-                      MediaModalButtonBackground={popoverImage}
+                      MediaModalButtonBackground={url}
                     />
                   </Col>
                 </Row>
-              </QuestionImageContainer>
+              </SideLayoutImage>
             </StyledCol>
           )}
         </CustomRow>

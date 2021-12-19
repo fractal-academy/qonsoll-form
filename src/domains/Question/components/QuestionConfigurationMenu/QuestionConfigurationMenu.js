@@ -56,9 +56,9 @@ function QuestionConfigurationMenu() {
     if (!!currentQuestion?.isVideoQuestion)
       currentQuestionDispatch({
         type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
-        payload: { title: 'Video question' }
+        payload: { title: 'Video question', layoutType: 'DEFAULT' }
       })
-  }, [currentQuestion?.isVideoQuestion])
+  }, [currentQuestion?.isVideoQuestion, currentQuestionDispatch])
 
   return (
     <Box px={3} pt={3} h="between">
