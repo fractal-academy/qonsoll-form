@@ -36,7 +36,7 @@ npm i
 Some packages need manual instalation. Run following command:
 
 ```sh
-npm i fuse.js use-media react-ziggeo ziggeo-client-sdk
+npm i fuse.js use-media
 ```
 
 &#10071; For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
@@ -87,7 +87,7 @@ npm install
 Some packages need manual instalation. Run following command:
 
 ```sh
-npm i fuse.js use-media react-ziggeo ziggeo-client-sdk
+npm i fuse.js use-media
 ```
 
 &#10071; For correct work of components you'll need to add an index to your firebase. In [**console firebase**](https://console.firebase.google.com) select your project, go to Firestore Database menu item and choose Indexes tab.
@@ -213,64 +213,63 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
 [
   {
     type: QUESTION_TYPES.WELCOME_SCREEN,
-    description: welcomeScreenDesc || 'Invite your audience in',
+    description: welcomeScreenDesc || QUESTION_DESCRIPTIONS.WELCOME_SCREEN,
     icon: <HomeOutlined />
   },
   {
     type: QUESTION_TYPES.LONG_TEXT,
-    description: longTextDesc || 'More space to spill the beans',
+    description: longTextDesc || QUESTION_DESCRIPTIONS.LONG_TEXT,
     icon: <FileTextOutlined />
   },
   {
     type: QUESTION_TYPES.SHORT_TEXT,
-    description: shortTextDesc || 'For short answers, like names',
+    description: shortTextDesc || QUESTION_DESCRIPTIONS.SHORT_TEXT,
     icon: <SmallDashOutlined />
   },
   {
     type: QUESTION_TYPES.DATE,
-    description: dateDesc || 'Collect answers in date format',
+    description: dateDesc || QUESTION_DESCRIPTIONS.DATE,
     icon: <CalendarOutlined />
   },
   {
-    type: QUESTION_TYPES.FILE_UPLOAD,
-    description: fileUploadDesc || 'Upload a file up to 10MB',
-    icon: <UploadOutlined />
-  },
-
-  {
-    type: QUESTION_TYPES.OPINION_SCALE,
-    description: opinionDesc || 'A customizable, numbered scale',
-    icon: <HomeOutlined />
-  },
-  {
-    type: QUESTION_TYPES.PICTURE_CHOICE,
-    description: pictureChoiceDesc || 'Multiple choice but prettier',
-    icon: <PictureOutlined />
+    type: QUESTION_TYPES.YES_NO,
+    description: yesnoDesc || QUESTION_DESCRIPTIONS.YES_NO,
+    icon: <ShareAltOutlined />
   },
   {
     type: QUESTION_TYPES.CHOICE,
-    description: choiceDesc || 'Multiple choice',
+    description: choiceDesc || QUESTION_DESCRIPTIONS.CHOICE,
     icon: <GoldOutlined />
   },
   {
+    type: QUESTION_TYPES.PICTURE_CHOICE,
+    description: pictureChoiceDesc || QUESTION_DESCRIPTIONS.PICTURE_CHOICE,
+    icon: <PictureOutlined />
+  },
+  {
+    type: QUESTION_TYPES.OPINION_SCALE,
+    description: opinionDesc || QUESTION_DESCRIPTIONS.OPINION_SCALE,
+    icon: <HomeOutlined />
+  },
+  {
     type: QUESTION_TYPES.RATING,
-    description: ratingDesc || 'Rate us',
+    description: ratingDesc || QUESTION_DESCRIPTIONS.RATING,
     icon: <StarOutlined />
   },
   {
-    type: QUESTION_TYPES.RATING_EXTENDED,
-    description: ratingExtendedDesc || 'Rate us or not',
-    icon: <StarOutlined />
+    type: QUESTION_TYPES.FILE_UPLOAD,
+    description: fileUploadDesc || QUESTION_DESCRIPTIONS.FILE_UPLOAD,
+    icon: <UploadOutlined />
   },
   {
     type: QUESTION_TYPES.STATEMENT,
-    description: statementDesc || 'Take the mic for a moment',
+    description: statementDesc || QUESTION_DESCRIPTIONS.STATEMENT,
     icon: <CopyrightOutlined />
   },
   {
-    type: QUESTION_TYPES.YES_NO,
-    description: yesnoDesc || 'Just 2 options, yes or no',
-    icon: <ShareAltOutlined />
+    type: QUESTION_TYPES.VIDEO_ANSWER,
+    description: videoAnswerDesc || QUESTION_DESCRIPTIONS.VIDEO_ANSWER,
+    icon: <VideoCameraOutlined />
   }
 ]
 ```
@@ -368,7 +367,7 @@ Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all 
   --ql-menu-item-active-bg: var(--ql-color-accent1-t-lighten3);
 
   /* overwritten form */
-  --ql-form-item-vertical-spacing: 0px;
+  --ql-form-item-vertical-spacing: 0;
 ```
 
 ## How to configure translations
