@@ -5,7 +5,7 @@ import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
 const API_KEY = process.env.REACT_APP_QVIDEO_API_KEY || QVIDEO_API_KEY
 
 function VideoRecording(props) {
-  const { customOptions, onUpload } = props
+  const { customOptions, onUpload, isChapters } = props
   return (
     <Recorder
       spinnerSize="md"
@@ -16,7 +16,7 @@ function VideoRecording(props) {
       isScreenRecord
       isNotes
       isLink
-      isChapters
+      isChapters={isChapters || true}
       onUpload={onUpload}
       customOptions={customOptions}
     />
