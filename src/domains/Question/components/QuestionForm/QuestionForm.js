@@ -20,10 +20,9 @@ import {
   QUESTION_TYPES
 } from '../../../../constants'
 import {
-  QuestionConfigurationPopover,
   QuestionHeader,
   QuestionMediaPopover,
-  QuestionImageContainer
+  QuestionConfigurationPopover
 } from '../../../../domains/Question/components'
 import {
   Rate,
@@ -110,7 +109,7 @@ function QuestionForm(props) {
     [QUESTION_TYPES.VIDEO_ANSWER]: {
       component: (
         <Box
-          m={2}
+          my={2}
           height="100%"
           display="flex"
           fontWeight="500"
