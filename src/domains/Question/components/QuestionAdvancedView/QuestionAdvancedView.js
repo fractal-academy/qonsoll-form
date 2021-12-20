@@ -148,6 +148,7 @@ function QuestionAdvancedView(props) {
 
   const questionNumberRule =
     data?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
+  const img = `url('${data?.image}')`
 
   return (
     <Row {...styles.mainRowStyle} noGutters>
@@ -214,7 +215,7 @@ function QuestionAdvancedView(props) {
                   layoutType={layoutType?.type}
                   widthTablet={widthTablet}
                   {...layoutType.imgSize}
-                  image={data?.image}
+                  image={img}
                   imageBrightness={data?.imageBrightness || 0}
                 />
               </Col>
@@ -236,7 +237,7 @@ function QuestionAdvancedView(props) {
           height={deviceImageHeight}
           order={widthTablet ? '1' : layoutType.imageOrder}>
           <QuestionImageContainer
-            image={data?.image}
+            image={img}
             layoutType={layoutType?.type}
             widthTablet={widthTablet}
             {...layoutType.imgSize}
