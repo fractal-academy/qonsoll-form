@@ -20,10 +20,9 @@ import {
   QUESTION_TYPES
 } from '../../../../constants'
 import {
-  QuestionConfigurationPopover,
   QuestionHeader,
   QuestionMediaPopover,
-  QuestionImageContainer
+  QuestionConfigurationPopover
 } from '../../../../domains/Question/components'
 import {
   Rate,
@@ -110,7 +109,7 @@ function QuestionForm(props) {
     [QUESTION_TYPES.VIDEO_ANSWER]: {
       component: (
         <Box
-          m={2}
+          my={2}
           height="100%"
           display="flex"
           fontWeight="500"
@@ -212,15 +211,8 @@ function QuestionForm(props) {
                       url={url}
                       layoutType={layoutType}
                       brightness={brightnessValue}
-                      setBrightness={setBrightnessValue}>
-                      <Box display="flex" justifyContent="flex-end" mr={4}>
-                        <QuestionMediaPopover
-                          brightnessValue={brightnessValue}
-                          setBrightnessValue={setBrightnessValue}
-                          MediaModalButtonBackground={url}
-                        />
-                      </Box>
-                    </MiddleLayoutImage>
+                      setBrightness={setBrightnessValue}
+                    />
                   </Col>
                 </Row>
               )}
@@ -242,17 +234,8 @@ function QuestionForm(props) {
                 url={url}
                 layoutType={layoutType}
                 brightness={brightnessValue}
-                setBrightness={setBrightnessValue}>
-                <Row h="right">
-                  <Col cw="auto" mr={4}>
-                    <QuestionMediaPopover
-                      brightnessValue={brightnessValue}
-                      setBrightnessValue={setBrightnessValue}
-                      MediaModalButtonBackground={url}
-                    />
-                  </Col>
-                </Row>
-              </SideLayoutImage>
+                setBrightness={setBrightnessValue}
+              />
             </StyledCol>
           )}
         </CustomRow>
