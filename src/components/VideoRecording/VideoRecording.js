@@ -8,7 +8,6 @@ function VideoRecording(props) {
   const { customOptions, onUpload } = props
   return (
     <Recorder
-      spinnerText="loading"
       spinnerSize="md"
       apiKey={API_KEY}
       autoStart
@@ -16,6 +15,8 @@ function VideoRecording(props) {
       isMicroConfig
       isScreenRecord
       isNotes
+      isLink
+      isChapters
       onUpload={onUpload}
       customOptions={customOptions}
     />

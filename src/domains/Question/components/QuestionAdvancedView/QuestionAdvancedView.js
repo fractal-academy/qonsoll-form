@@ -182,6 +182,7 @@ function QuestionAdvancedView(props) {
                       {questionNumber}.{questionVideo || TEXTINGS.questionVideo}
                     </Title>
                   )}
+
                   <VideoPlayer
                     autoLoad
                     videoKey={data?.videoApiKey}
