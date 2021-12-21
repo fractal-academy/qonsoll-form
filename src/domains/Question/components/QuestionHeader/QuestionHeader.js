@@ -76,7 +76,10 @@ function QuestionHeader(props) {
   return (
     <>
       {currentQuestion?.isVideoQuestion ? (
-        <Box height={350} position="relative">
+        <Box
+          height={350}
+          position="relative"
+          borderRadius="var(--ql-border-radius-lg)">
           {video ? (
             <VideoPlayer
               withDelete

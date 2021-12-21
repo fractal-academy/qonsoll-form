@@ -1,4 +1,5 @@
 import useMedia from 'use-media'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useKeyPress } from '@umijs/hooks'
@@ -30,6 +31,7 @@ function SubmitButton(props) {
   const { getCollectionRef, setData, getTimestamp } = useFunctions()
 
   // [ADDITIONAL_HOOKS]
+  const history = useHistory()
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
   const { submitHint } = useTranslation()
@@ -94,6 +96,7 @@ function SubmitButton(props) {
       //add function from b2g and provide updatedAnswers
       await onFinish?.(updatedAnswers)
       setLoading(false)
+      await history.goBack()
     } else onClick?.()
   }
 

@@ -33,7 +33,6 @@ function VideoPlayer(props) {
       )}
       <Player
         autoLoad
-        spinnerText="loading"
         spinnerSize="md"
         apiKey={API_KEY}
         videoToken={videoKey}
