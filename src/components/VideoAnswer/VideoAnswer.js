@@ -42,11 +42,7 @@ const VideoAnswer = ({ onClick, question }) => {
       {video ? (
         <VideoPlayer withDelete videoKey={video} deleteVideo={deleteVideo} />
       ) : (
-        <VideoRecording
-          isChapters={false}
-          apiKey={API_KEY}
-          onUpload={onUpload}
-        />
+        <VideoRecording disabledChapters apiKey={API_KEY} onUpload={onUpload} />
       )}
     </Box>
   )
