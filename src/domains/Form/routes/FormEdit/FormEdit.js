@@ -71,6 +71,7 @@ function FormEdit(props) {
     firebase,
     actions = {},
     showHeader,
+    customHeader,
     showAnswers,
     translations,
     customQuestionTypes,
@@ -279,15 +280,21 @@ function FormEdit(props) {
                 display="flex"
                 p={containerPadding}
                 flexDirection="column">
-                {showHeader && (
-                  <PageHeader
-                    id={id}
-                    handlesPreview
-                    title={form?.title}
-                    onBack={history.goBack}
-                    showAnswers={showAnswers}
-                    smallScreen={smallScreen}
-                  />
+                {customHeader !== null && (
+                  <>
+                    {customHeader ? (
+                      <>{customHeader}</>
+                    ) : (
+                      <PageHeader
+                        id={id}
+                        handlesPreview
+                        title={form?.title}
+                        onBack={history.goBack}
+                        showAnswers={showAnswers}
+                        smallScreen={smallScreen}
+                      />
+                    )}
+                  </>
                 )}
                 {smallScreen ? (
                   <QuestionForm
