@@ -207,7 +207,7 @@ function YourComponentName() {
     history.push(path)
   }
 ```
-Other optional properties: `showHeader`, `translations`, `wrapperPaddings` (all are the same as in `FormsAll`) and `customQuestionTypes` - if you need to configure question type list (to remove excess question types), configure following array and propagate it through property:
+Other optional properties: `customHeader` (propagate node for custom header and `null` to hide it), `translations`, `wrapperPaddings` (all are the same as in `FormsAll`) and `customQuestionTypes` - if you need to configure question type list (to remove excess question types), configure following array and propagate it through property:
 
 ```sh
 [
