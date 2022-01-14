@@ -478,7 +478,7 @@ const qformTranslations = (t) => {
     longTextTitle: t('Long text'),
     shortTextTitle: t('Short text'),
     dateTitle: t('Date'),
-    yesnoTitle: t('Yes/No'),
+    yesnoTitle: t('Yes')/t('No'),
     choiceTitle: t('Choice'),
     pictureChoiceTitle: t('PictureChoice'),
     opinionTitle: t('Opinion scale'),
