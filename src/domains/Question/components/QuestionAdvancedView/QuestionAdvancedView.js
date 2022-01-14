@@ -36,8 +36,11 @@ function QuestionAdvancedView(props) {
     preventFirebaseUsage
   } = props
   // [ADDITIONAL_HOOKS]
-  const { questionFinishButton, questionStartButton, questionVideo } =
-    useTranslation()
+  const {
+    questionFinishButton,
+    questionStartButton,
+    questionVideo
+  } = useTranslation()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
