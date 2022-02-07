@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import LetterBox from '../../LetterBox'
-// import { Select as AntSelect } from 'antd'
 import { NumberedCard } from '../../../../../components'
 import useFunctions from '../../../../../hooks/useFunctions'
 import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
@@ -27,10 +26,12 @@ function EndingSimpleView(props) {
 
   // [CLEAN FUNCTIONS]
   async function handleChange(_, selectedItems) {
-    const questionConfigurations = selectedItems?.map((item) => ({
-      answerOptionId: item.key,
-      triggerQuestionId: item?.value || ''
-    }))
+    const questionConfigurations = selectedItems?.map((item) => {
+      return {
+        answerOptionId: item?.key,
+        triggerQuestionId: item?.value || ''
+      }
+    })
     await setData(COLLECTIONS.QUESTIONS, item?.id, {
       questionConfigurations
     })
@@ -68,7 +69,7 @@ function EndingSimpleView(props) {
         }>
         {questionsData?.map((questionListItem, index) => (
           <OptGroup
-            key={index}
+            key={`${questionListItem}-${index}`}
             label={
               <Box display="flex">
                 <LetterBox px={2} mr={2}>
@@ -89,8 +90,8 @@ function EndingSimpleView(props) {
             {questionListItem?.questionConfigurations?.map(
               (questionAnswerItem, ind) => (
                 <Option
-                  key={questionAnswerItem?.answerOptionId}
-                  value={`${questionListItem?.id} ${index}${ind}`}>
+                  value={`${questionListItem?.id} ${index}${ind}`}
+                  key={questionAnswerItem?.answerOptionId}>
                   <Box display="flex">
                     <Text
                       color="var(--qf-typography-subtitle-color)"
@@ -115,9 +116,11 @@ function EndingSimpleView(props) {
     </NumberedCard>
   )
 }
+
 EndingSimpleView.propTypes = {
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   questionsData: PropTypes.array.isRequired
 }
+
 export default EndingSimpleView

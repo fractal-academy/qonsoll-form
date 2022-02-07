@@ -125,18 +125,26 @@ function FormShow(props) {
     let tempMatches = 0
     //by default first ending will be displayed
     let computedEnding = endings?.[0]
+
     //pass through all the endings
     endings?.forEach((ending) => {
       const { questionConfigurations } = ending
+
       //map all configurations for all endings
       questionConfigurations?.forEach((endingConfiguration) => {
         //if ending configuration contain answer options id
         //check if the context holds answer what was selected for ending
-        if (answersId.includes(endingConfiguration?.answerOptionId)) {
+
+        if (
+          answersId.some(
+            (item) => item?.answerId === endingConfiguration?.answerOptionId
+          )
+        ) {
           //increment matches of ending configurations with answers
           tempMatches++
         }
       })
+
       //if there are more matches for current(mapped) ending than for previous ending
       if (tempMatches > maxMatches) {
         //define new ending
