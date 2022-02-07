@@ -18,54 +18,6 @@ import {
   DISPATCH_EVENTS
 } from '../../../context/CurrentQuestion'
 
-//configuration for certain types of questions
-const choicesConfiguration = [
-  {
-    answerOptionId: uuid(),
-    answerOption: 'choice 0',
-    image: '',
-    redirectQuestion: '',
-    redirectConditionRule: ''
-  }
-]
-const yesNoConfiguration = [
-  {
-    answerOptionId: uuid(),
-    answerOption: 'Yes',
-    redirectQuestion: '',
-    redirectConditionRule: ''
-  },
-  {
-    answerOptionId: uuid(),
-    answerOption: 'No',
-    redirectQuestion: '',
-    redirectConditionRule: ''
-  }
-]
-const opinionAndRatingConfiguration = Array(5)
-  .fill(0)
-  ?.map((_, index) => ({
-    answerOptionId: uuid(),
-    answerOption: 1 + index,
-    redirectQuestion: '',
-    redirectConditionRule: ''
-  }))
-
-const defaultConfiguration = [
-  {
-    answerOptionId: '',
-    answerOption: '',
-    redirectQuestion: '',
-    redirectConditionRule: ''
-  }
-]
-const endingConfigurations = [
-  {
-    answerOptionId: '',
-    triggerQuestionId: ''
-  }
-]
-
 function EditorSidebar(props) {
   const {
     id,
@@ -105,6 +57,54 @@ function EditorSidebar(props) {
     ].includes(key)
 
     const isYesNo = key === QUESTION_TYPES.YES_NO
+
+    //configuration for certain types of questions
+    const choicesConfiguration = [
+      {
+        answerOptionId: uuid(),
+        answerOption: 'choice 0',
+        image: '',
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      }
+    ]
+    const yesNoConfiguration = [
+      {
+        answerOptionId: uuid(),
+        answerOption: 'Yes',
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      },
+      {
+        answerOptionId: uuid(),
+        answerOption: 'No',
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      }
+    ]
+    const opinionAndRatingConfiguration = Array(5)
+      .fill(0)
+      ?.map((_, index) => ({
+        answerOptionId: uuid(),
+        answerOption: 1 + index,
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      }))
+
+    const defaultConfiguration = [
+      {
+        answerOptionId: '',
+        answerOption: '',
+        redirectQuestion: '',
+        redirectConditionRule: ''
+      }
+    ]
+    const endingConfigurations = [
+      {
+        answerOptionId: '',
+        triggerQuestionId: ''
+      }
+    ]
 
     //pass data to question configurations depending on question type
     const questionConfigurations = isChoices
