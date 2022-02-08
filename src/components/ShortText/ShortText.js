@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types'
-import React, { useRef } from 'react'
+import { Box, Container, Input } from '@qonsoll/react-design'
 import { Form, message } from 'antd'
+import React, { useRef } from 'react'
+
+import PropTypes from 'prop-types'
+import { SubmitButton } from '../../components'
 import { TEXTINGS } from '../../constants'
 import { useKeyPress } from '@umijs/hooks'
-import { SubmitButton } from '../../components'
-import { Box, Container, Input } from '@qonsoll/react-design'
 import { useTranslation } from '../../context/Translation'
 
 function ShortText(props) {
@@ -81,7 +82,7 @@ function ShortText(props) {
           <Input
             {...inputProps}
             ref={inputRef}
-            maxLength={300}
+            maxLength={250}
             placeholder={`${
               textQuestionPlaceholder || TEXTINGS.textQuestionPlaceholder
             }...`}
