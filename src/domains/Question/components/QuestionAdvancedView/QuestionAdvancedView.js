@@ -1,28 +1,28 @@
-import useMedia from 'use-media'
-import PropTypes from 'prop-types'
-import React, { cloneElement } from 'react'
-import QuestionImageContainer from '../QuestionImageContainer'
-import { useTranslation } from '../../../../context/Translation'
-import { Col, Row, Box, Title, Text } from '@qonsoll/react-design'
-import { QUESTION_TYPES, LAYOUT_TYPES, TEXTINGS } from '../../../../constants'
 import {
-  styles,
+  BackgroundImage,
   StyledBox,
-  BackgroundImage
+  styles
 } from './QuestionAdvancedView.styles'
+import { Box, Col, Row, Text, Title } from '@qonsoll/react-design'
 import {
-  Rate,
-  ShortText,
-  YesnoButton,
-  RangeButton,
   ChoiceButton,
+  DateTimeInput,
   FileUploader,
   LongText,
-  DateTimeInput,
+  RangeButton,
+  Rate,
+  ShortText,
   SubmitButton,
+  VideoAnswer,
   VideoPlayer,
-  VideoAnswer
+  YesnoButton
 } from '../../../../components'
+import { LAYOUT_TYPES, QUESTION_TYPES, TEXTINGS } from '../../../../constants'
+import React, { cloneElement } from 'react'
+
+import PropTypes from 'prop-types'
+import QuestionImageContainer from '../QuestionImageContainer'
+import { useTranslation } from '../../../../context/Translation'
 
 function QuestionAdvancedView(props) {
   const {
@@ -136,7 +136,7 @@ function QuestionAdvancedView(props) {
         }
       : {})
   }
-  const widthTablet = useMedia({ maxWidth: '832px' })
+  const widthTablet = window.innerWidth <= 832
   const deviceImageHeight = (widthTablet && '40%') || '100%'
   const devicePadding = (widthTablet && 2) || 4
 

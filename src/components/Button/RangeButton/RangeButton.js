@@ -1,14 +1,15 @@
-import { message } from 'antd'
-import useMedia from 'use-media'
-import PropTypes from 'prop-types'
+import { Col, Row } from '@qonsoll/react-design'
 import React, { useState } from 'react'
-import { useKeyPress } from '@umijs/hooks'
-import { TEXTINGS } from '../../../constants'
-import { Row, Col } from '@qonsoll/react-design'
-import { useTranslation } from '../../../context/Translation'
+
+import PropTypes from 'prop-types'
 import { StyledRangeButton } from './RangeButton.styles'
-import { useAnswersContext } from '../../../context/Answers'
+import { TEXTINGS } from '../../../constants'
 import { getQuestionAnswerFromContext } from '../../../helpers'
+import { message } from 'antd'
+import { useAnswersContext } from '../../../context/Answers'
+import { useKeyPress } from '@umijs/hooks'
+import useMedia from 'use-media'
+import { useTranslation } from '../../../context/Translation'
 
 function RangeButton(props) {
   const { onClick, question, isFormQuiz, currentSlide, answersScoreData } =
@@ -17,8 +18,8 @@ function RangeButton(props) {
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
-  const cwMedium = useMedia({ minWidth: '1100px' })
-  const cwSmall = useMedia({ minWidth: '500px' })
+  const cwMedium = window.innerWidth >= 1100
+  const cwSmall = window.innerWidth >= 500
 
   //[CUSTOM HOOKS]
   const { requiredAnswerMessage } = useTranslation()

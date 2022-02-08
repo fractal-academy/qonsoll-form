@@ -1,41 +1,42 @@
-import PropTypes from 'prop-types'
-import React, { cloneElement, useEffect } from 'react'
-import { Col, Row, Box } from '@qonsoll/react-design'
-import SideLayoutImage from './SideLayoutImage'
-import MiddleLayoutImage from './MiddleLayoutImage'
-import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
-import { useTranslation } from '../../../../context/Translation'
-import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import {
-  styles,
-  StyledCol,
-  CustomCard,
-  CustomRow,
-  StyledTag
-} from './QuestionForm.styles'
-import {
-  TEXTINGS,
-  LAYOUT_TYPES,
-  DEFAULT_IMAGE,
-  QUESTION_TYPES
-} from '../../../../constants'
-import {
-  QuestionHeader,
-  QuestionMediaPopover,
-  QuestionConfigurationPopover
-} from '../../../../domains/Question/components'
-import {
-  Rate,
-  ShortText,
   ChoiceEditableGroup,
-  YesnoButton,
-  RangeButton,
-  SubmitButton,
+  ContentCard,
+  DateTimeInput,
   FileUploader,
   LongText,
-  DateTimeInput,
-  ContentCard
+  RangeButton,
+  Rate,
+  ShortText,
+  SubmitButton,
+  YesnoButton
 } from '../../../../components'
+import {
+  CustomCard,
+  CustomRow,
+  StyledCol,
+  StyledTag,
+  styles
+} from './QuestionForm.styles'
+import {
+  DEFAULT_IMAGE,
+  LAYOUT_TYPES,
+  QUESTION_TYPES,
+  TEXTINGS
+} from '../../../../constants'
+import {
+  QuestionConfigurationPopover,
+  QuestionHeader,
+  QuestionMediaPopover
+} from '../../../../domains/Question/components'
+import React, { cloneElement, useEffect } from 'react'
+
+import MiddleLayoutImage from './MiddleLayoutImage'
+import PropTypes from 'prop-types'
+import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
+import SideLayoutImage from './SideLayoutImage'
+import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { useTranslation } from '../../../../context/Translation'
 
 function QuestionForm(props) {
   const {
@@ -172,7 +173,7 @@ function QuestionForm(props) {
       )}
       {!!Object.keys(currentQuestion).length && (
         <CustomRow noGutters>
-          <Col {...styles.questionCardColumnStyle} cw={[12, 12, 10, 8]} px="0">
+          <Col {...styles.questionCardColumnStyle} cw={[12, 10, 10, 8]} px="0">
             <CustomCard bordered={false}>
               <Row noGutters v="center" h="between">
                 <Col cw="auto">

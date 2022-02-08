@@ -1,15 +1,15 @@
-import React from 'react'
-import useMedia from 'use-media'
-import PropTypes from 'prop-types'
-import { useHover } from '@umijs/hooks'
-import { DEFAULT_IMAGE } from '../../../constants'
-import { Row, Col, Box } from '@qonsoll/react-design'
+import { Box, Col, Row } from '@qonsoll/react-design'
 import {
-  StyledButton,
   ImageContainer,
+  StyledButton,
   StyledKeybox,
   StyledText
 } from './KeyBox.styles'
+
+import { DEFAULT_IMAGE } from '../../../constants'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { useHover } from '@umijs/hooks'
 
 function KeyBox(props) {
   const { onButtonClick, item, index, isActive, hasImages } = props
@@ -17,7 +17,7 @@ function KeyBox(props) {
 
   // [ADDITIONAL HOOKS]
   const [isHovering, hoverRef] = useHover()
-  const phoneSmall = useMedia({ maxWidth: '500px' })
+  const phoneSmall = window.innerWidth <= 500
 
   return (
     <Box

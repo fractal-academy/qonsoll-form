@@ -15,6 +15,7 @@ const TEXTINGS = {
   endingCreationTooltip: 'Create new ending',
   formViewTooltip: 'Form preview',
   answerViewTooltip: 'Answers preview',
+  showDrawerTooltip: 'Show question list',
   longTextHint: 'Shift ⇧ + Enter ↵ to make a line break',
   textQuestionPlaceholder: 'Type your answer here',
   listItemNoDescription: 'No description',
