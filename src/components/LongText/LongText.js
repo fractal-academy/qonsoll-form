@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import { SubmitButton } from '../../components'
 import { TEXTINGS } from '../../constants'
 import { useKeyPress } from '@umijs/hooks'
-import useMedia from 'use-media'
 import { useTranslation } from '../../context/Translation'
 
 function LongText(props) {

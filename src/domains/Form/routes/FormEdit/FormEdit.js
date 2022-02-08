@@ -28,7 +28,6 @@ import { QuestionForm } from '../../../../domains/Question/components'
 import { message } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useHistory } from 'react-router-dom'
-import useMedia from 'use-media'
 import { v4 as uuid } from 'uuid'
 
 //configuration for certain types of questions

@@ -10,7 +10,6 @@ import { getQuestionAnswerFromContext } from '../../helpers'
 import { message } from 'antd'
 import { useAnswersContext } from '../../context/Answers'
 import { useKeyPress } from '@umijs/hooks'
-import useMedia from 'use-media'
 import { useTranslation } from '../../context/Translation'
 
 function CustomRating(props) {

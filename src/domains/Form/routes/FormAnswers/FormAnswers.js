@@ -18,7 +18,6 @@ import SidebarBoxWrapper from '../../../../components/Layout/EditorSidebar/Edito
 import { message } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useHistory } from 'react-router-dom'
-import useMedia from 'use-media'
 
 function FormAnswers(props) {
   const {
@@ -33,6 +32,7 @@ function FormAnswers(props) {
   // [COMPONENT STATE HOOKS]
   const [userAnswers, setUserAnswers] = useState([])
   const [userAnswersLoading, setUserAnswersLoading] = useState(false)
+  const [isDrawerOpened, setDraverOpened] = useState(false)
 
   // [CUSTOM HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
@@ -93,6 +93,8 @@ function FormAnswers(props) {
             <Container p={containerPadding}>
               {showHeader && (
                 <PageHeader
+                  isDrawerOpened={isDrawerOpened}
+                  setDraverOpened={setDraverOpened}
                   onBack={() => history.goBack()}
                   title={answerTitle || TEXTINGS.answerTitle}
                 />
@@ -104,7 +106,9 @@ function FormAnswers(props) {
                 loading={userAnswersLoading}
               />
             </Container>
-            <SidebarBoxWrapper>
+            <SidebarBoxWrapper
+              // isDrawerVisible={true}
+              setDraverVisible={setDraverOpened}>
               <Title
                 ml={3}
                 my={3}

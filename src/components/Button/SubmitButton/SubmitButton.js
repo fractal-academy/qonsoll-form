@@ -10,7 +10,6 @@ import { useAnswersContext } from '../../../context/Answers'
 import useFunctions from '../../../../src/hooks/useFunctions'
 import { useHistory } from 'react-router-dom'
 import { useKeyPress } from '@umijs/hooks'
-import useMedia from 'use-media'
 import { useTranslation } from '../../../context/Translation'
 
 function SubmitButton(props) {

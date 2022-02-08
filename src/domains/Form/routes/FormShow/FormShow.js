@@ -21,7 +21,6 @@ import { TranslationContext } from '../../../../context/Translation'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useHistory } from 'react-router-dom'
 import { useKeyPress } from '@umijs/hooks'
-import useMedia from 'use-media'
 
 function FormShow(props) {
   const {

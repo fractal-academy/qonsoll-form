@@ -13,7 +13,6 @@ import PropTypes from 'prop-types'
 import { TranslationContext } from '../../../../context/Translation'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import useFunctions from '../../../../hooks/useFunctions'
-import useMedia from 'use-media'
 
 function FormsAll(props) {
   const {

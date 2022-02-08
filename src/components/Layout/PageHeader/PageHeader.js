@@ -99,7 +99,7 @@ function PageHeader(props) {
           </Tooltip>
         </Col>
       )}
-      {handlesPreview && title && (
+      {title && (
         <Col cw="auto" v="center">
           {smallScreen && (
             <Tooltip
