@@ -82,7 +82,7 @@ function FormEdit(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  let smallScreen = window.innerWidth >= 768
+  const smallScreen = window.innerWidth >= 768
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
@@ -313,7 +313,7 @@ function FormEdit(props) {
                 ) : (
                   <Box
                     height="100%"
-                    display={'flex'}
+                    display="flex"
                     alignItems="center"
                     justifyContent="center">
                     <Text>
