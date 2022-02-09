@@ -1,9 +1,10 @@
-import React from 'react'
-import { Box } from '@qonsoll/react-design'
 import {
-  QuestionMediaPopover,
-  QuestionImageContainer
+  QuestionImageContainer,
+  QuestionMediaPopover
 } from '../../../../domains/Question/components'
+
+import { Box } from '@qonsoll/react-design'
+import React from 'react'
 
 const SideLayoutImage = (props) => {
   const { layoutType, url, brightness, setBrightness } = props
@@ -21,7 +22,7 @@ const SideLayoutImage = (props) => {
         brightness={brightness}
         {...layoutType?.imgSize}
         layoutType={layoutType?.type}>
-        <Box right={0} position="fixed" mr={4}>
+        <Box right={0} position="fixed" mr={[3, 3, 4]}>
           <QuestionMediaPopover
             brightnessValue={brightness}
             setBrightnessValue={setBrightness}

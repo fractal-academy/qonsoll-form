@@ -1,13 +1,14 @@
-import moment from 'moment'
-import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
-import { StyledDatePicker } from './TextTemplate.styles'
-import useFunctions from '../../../../../hooks/useFunctions'
 import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
+import { Col, Input, Option, Row, Select } from '@qonsoll/react-design'
+import React, { useEffect, useState } from 'react'
+
+import PropTypes from 'prop-types'
 import { QuestionSelect } from '../../../../Question/components'
-import { useTranslation } from '../../../../../context/Translation'
-import { Row, Col, Input, Select, Option } from '@qonsoll/react-design'
+import { StyledDatePicker } from './TextTemplate.styles'
 import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
+import moment from 'moment'
+import useFunctions from '../../../../../hooks/useFunctions'
+import { useTranslation } from '../../../../../context/Translation'
 
 function MatchCondition(props) {
   const {
@@ -114,6 +115,7 @@ function MatchCondition(props) {
             placeholder={TEXTINGS.conditionTextInputPlaceholder}
             onChange={onInputValueChange}
             value={inputValue}
+            maxLength={250}
             onBlur={onBlur}
           />
         )}

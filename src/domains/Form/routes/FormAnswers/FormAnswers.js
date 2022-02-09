@@ -1,15 +1,7 @@
-import { message } from 'antd'
-import useMedia from 'use-media'
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import { PageHeader } from '../../../../components'
+import { Box, Container, NoData, Title } from '@qonsoll/react-design'
 import { COLLECTIONS, TEXTINGS } from '../../../../constants'
-import useFunctions from '../../../../hooks/useFunctions'
-import { Container, Title, NoData, Box } from '@qonsoll/react-design'
-import { ResponseTable, ResponseList } from '../../../Response/components'
-import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
-import { SidebarBoxWrapper } from '../../../../components/Layout/EditorSidebar/EditorSidebar.styles'
+import React, { useState } from 'react'
+import { ResponseList, ResponseTable } from '../../../Response/components'
 import {
   TranslationContext,
   useTranslation
@@ -18,6 +10,14 @@ import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
+
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import { PageHeader } from '../../../../components'
+import SidebarBoxWrapper from '../../../../components/Layout/EditorSidebar/EditorSidebar.styles'
+import { message } from 'antd'
+import useFunctions from '../../../../hooks/useFunctions'
+import { useHistory } from 'react-router-dom'
 
 function FormAnswers(props) {
   const {
@@ -32,6 +32,7 @@ function FormAnswers(props) {
   // [COMPONENT STATE HOOKS]
   const [userAnswers, setUserAnswers] = useState([])
   const [userAnswersLoading, setUserAnswersLoading] = useState(false)
+  const [isDrawerOpened, setDraverOpened] = useState(false)
 
   // [CUSTOM HOOKS]
   const { getCollectionRef } = useFunctions(firebase)
@@ -45,7 +46,7 @@ function FormAnswers(props) {
   const [formData] = useDocumentData(
     getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
-  const smallScreen = useMedia({ minWidth: '769px' })
+  const smallScreen = window.innerWidth >= 768
 
   // [COMPUTED PROPERTIES]
   const containerPadding =
@@ -92,6 +93,8 @@ function FormAnswers(props) {
             <Container p={containerPadding}>
               {showHeader && (
                 <PageHeader
+                  isDrawerOpened={isDrawerOpened}
+                  setDraverOpened={setDraverOpened}
                   onBack={() => history.goBack()}
                   title={answerTitle || TEXTINGS.answerTitle}
                 />
@@ -103,7 +106,9 @@ function FormAnswers(props) {
                 loading={userAnswersLoading}
               />
             </Container>
-            <SidebarBoxWrapper>
+            <SidebarBoxWrapper
+              // isDrawerVisible={true}
+              setDraverVisible={setDraverOpened}>
               <Title
                 ml={3}
                 my={3}

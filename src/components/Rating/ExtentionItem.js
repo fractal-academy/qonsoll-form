@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Text, Input } from '@qonsoll/react-design'
+import { Container, Input, Text } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
+import React, { useEffect, useState } from 'react'
 
 function ExtentionItem(props) {
   const { index, item, ratingProps, onClick } = props
@@ -43,6 +43,7 @@ function ExtentionItem(props) {
       ) : (
         <Input
           p={0}
+          maxLength={250}
           index={index}
           onChange={onItemChange}
           onBlur={onItemBlur}

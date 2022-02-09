@@ -1,16 +1,16 @@
-import { message } from 'antd'
-import useMedia from 'use-media'
-import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useKeyPress } from '@umijs/hooks'
-import { TEXTINGS } from '../../constants'
-import { StyledRate } from './Rating.styles'
-import { StarFilled } from '@ant-design/icons'
-import RatingExtension from './RatingExtension'
+
 import { Container } from '@qonsoll/react-design'
-import { useAnswersContext } from '../../context/Answers'
-import { useTranslation } from '../../context/Translation'
+import PropTypes from 'prop-types'
+import RatingExtension from './RatingExtension'
+import { StarFilled } from '@ant-design/icons'
+import { StyledRate } from './Rating.styles'
+import { TEXTINGS } from '../../constants'
 import { getQuestionAnswerFromContext } from '../../helpers'
+import { message } from 'antd'
+import { useAnswersContext } from '../../context/Answers'
+import { useKeyPress } from '@umijs/hooks'
+import { useTranslation } from '../../context/Translation'
 
 function CustomRating(props) {
   const {
@@ -32,8 +32,8 @@ function CustomRating(props) {
   const [checkboxChecked, setCheckboxChecked] = useState()
 
   //[ADDITIONAL HOOKS]
-  const phoneSize = useMedia({ maxWidth: '430px' })
-  const tabletSize = useMedia({ minWidth: '450px', maxWidth: '1050px' })
+  const phoneSize = window.innerWidth <= 430
+  const tabletSize = window.innerWidth >= 450 && window.innerWidth <= 1050
 
   // [COMPUTED PROPERTIES]
   const range = questionConfigurations?.map((el) => el?.answerOption)

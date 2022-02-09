@@ -1,17 +1,19 @@
-import React from 'react'
-import { Tooltip } from 'antd'
-import PropTypes from 'prop-types'
-import { styles } from './PageHeader.styles'
-import { TEXTINGS } from '../../../constants'
-import { useTranslation } from '../../../context/Translation'
-import { Row, Col, Button, Divider, Title } from '@qonsoll/react-design'
 import {
   ArrowLeftOutlined,
   EyeOutlined,
   ReadOutlined,
-  ReloadOutlined
+  ReloadOutlined,
+  UnorderedListOutlined
 } from '@ant-design/icons'
+import { Button, Col, Divider, Row, Title } from '@qonsoll/react-design'
+
+import PropTypes from 'prop-types'
+import React from 'react'
+import { TEXTINGS } from '../../../constants'
+import { Tooltip } from 'antd'
+import { styles } from './PageHeader.styles'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import { useTranslation } from '../../../context/Translation'
 
 function PageHeader(props) {
   const {
@@ -21,11 +23,14 @@ function PageHeader(props) {
     titleProps,
     smallScreen,
     showAnswers,
-    handlesPreview
+    handlesPreview,
+    isDrawerOpened,
+    setDraverOpened
   } = props
 
   // [ADDITIONAL HOOKS]
-  const { formViewTooltip, answerViewTooltip } = useTranslation()
+  const { formViewTooltip, answerViewTooltip, showDrawerTooltip } =
+    useTranslation()
   const { onFormShow } = useActionsFunctionsContext()
   const { onFormResultsShow } = useActionsFunctionsContext()
 
@@ -40,6 +45,9 @@ function PageHeader(props) {
   }
   const onRestart = () => {
     window.location.reload()
+  }
+  const handleDrawerOpen = () => {
+    setDraverOpened(!isDrawerOpened)
   }
 
   return (
@@ -83,11 +91,28 @@ function PageHeader(props) {
             placement="bottom"
             title={formViewTooltip || TEXTINGS.formViewTooltip}>
             <Button
+              mr={setDraverOpened && 1}
               type="text"
               icon={<EyeOutlined />}
               onClick={onFormShowDisplay}
             />
           </Tooltip>
+        </Col>
+      )}
+      {title && (
+        <Col cw="auto" v="center">
+          {smallScreen && (
+            <Tooltip
+              placement="bottom"
+              title={showDrawerTooltip || TEXTINGS.showDrawerTooltip}>
+              <Button
+                display={['flex', 'flex', 'flex', 'none']}
+                type="text"
+                icon={<UnorderedListOutlined />}
+                onClick={handleDrawerOpen}
+              />
+            </Tooltip>
+          )}
         </Col>
       )}
       {!title && (

@@ -1,26 +1,26 @@
-import useMedia from 'use-media'
-import PropTypes from 'prop-types'
-import { useHistory } from 'react-router-dom'
-import { Container } from '@qonsoll/react-design'
-import { useKeyPress } from '@umijs/hooks'
-import useFunctions from '../../../../hooks/useFunctions'
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
-import FormShowHeightWrapper from './FormShowHeightWrapper'
-import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
-import { TranslationContext } from '../../../../context/Translation'
-import { FormAdvancedView } from '../../../../domains/Form/components'
-import { ContentCard, Spinner, PageHeader } from '../../../../components'
-import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
-  useAnswersContextDispatch,
   ANSWERS_DISPATCH_EVENTS,
-  useAnswersContext
+  useAnswersContext,
+  useAnswersContextDispatch
 } from '../../../../context/Answers'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
+import { ContentCard, PageHeader, Spinner } from '../../../../components'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
+
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import { Container } from '@qonsoll/react-design'
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import { FormAdvancedView } from '../../../../domains/Form/components'
+import FormShowHeightWrapper from './FormShowHeightWrapper'
+import PropTypes from 'prop-types'
+import { TranslationContext } from '../../../../context/Translation'
+import useFunctions from '../../../../hooks/useFunctions'
+import { useHistory } from 'react-router-dom'
+import { useKeyPress } from '@umijs/hooks'
 
 function FormShow(props) {
   const {
@@ -43,7 +43,7 @@ function FormShow(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const smallScreen = useMedia({ minWidth: '769px' })
+  const smallScreen = window.innerWidth >= 768
   useKeyPress(9, (e) => {
     e.preventDefault()
   })

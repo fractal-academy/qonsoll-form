@@ -1,12 +1,12 @@
-import useMedia from 'use-media'
-import PropTypes from 'prop-types'
-import React, { useRef } from 'react'
-import { useKeyPress } from '@umijs/hooks'
-import { SubmitButton } from '../../components'
+import { Box, Container, Text, TextArea } from '@qonsoll/react-design'
 import { Form, message } from 'antd'
-import { Container, Box, Text, TextArea } from '@qonsoll/react-design'
-import { useTranslation } from '../../context/Translation'
+import React, { useRef } from 'react'
+
+import PropTypes from 'prop-types'
+import { SubmitButton } from '../../components'
 import { TEXTINGS } from '../../constants'
+import { useKeyPress } from '@umijs/hooks'
+import { useTranslation } from '../../context/Translation'
 
 function LongText(props) {
   const { textAreaProps, onClick, question, currentSlide } = props
@@ -15,7 +15,7 @@ function LongText(props) {
   const [form] = Form.useForm()
   const { longTextHint, requiredAnswerMessage, textQuestionPlaceholder } =
     useTranslation()
-  const IsntDesktop = useMedia({ minWidth: '1024px' })
+  const IsntDesktop = window.innerWidth >= 1024
   const textAreaRef = useRef()
 
   useKeyPress(

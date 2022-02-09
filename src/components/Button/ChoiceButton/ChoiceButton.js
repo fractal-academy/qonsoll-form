@@ -1,14 +1,14 @@
-import { message } from 'antd'
-import useMedia from 'use-media'
-import PropTypes from 'prop-types'
-import { useKeyPress } from '@umijs/hooks'
-import { KeyBox } from '../../../components'
-import { Row, Col } from '@qonsoll/react-design'
+import { Col, Row } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
+
+import { KeyBox } from '../../../components'
+import PropTypes from 'prop-types'
 import { TEXTINGS } from '../../../constants'
-import { useAnswersContext } from '../../../context/Answers'
-import { useTranslation } from '../../../context/Translation'
 import { getQuestionAnswerFromContext } from '../../../helpers'
+import { message } from 'antd'
+import { useAnswersContext } from '../../../context/Answers'
+import { useKeyPress } from '@umijs/hooks'
+import { useTranslation } from '../../../context/Translation'
 
 let startLetter = 65
 
@@ -43,7 +43,7 @@ function ChoiceButton(props) {
     () => (mappedChoices ? mappedChoices?.map(({ letter }) => letter) : []),
     [mappedChoices]
   )
-  const phoneSize = useMedia({ maxWidth: '500px' })
+  const phoneSize = window.innerWidth <= 500
 
   useKeyPress(
     (event) => ![].includes(event.key) && currentSlide === question?.order,

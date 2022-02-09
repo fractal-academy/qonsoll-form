@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Tooltip, message } from 'antd'
 import TypePopover from './TypePopover'
 import useFunctions from '../../../hooks/useFunctions'
-import { SidebarBoxWrapper } from './EditorSidebar.styles'
+import SidebarBoxWrapper from './EditorSidebar.styles'
 import React, { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from '../../../context/Translation'
 import { QUESTION_TYPES, COLLECTIONS, TEXTINGS } from '../../../constants'
@@ -24,6 +24,8 @@ function EditorSidebar(props) {
     endings,
     formData,
     questions,
+    isDrawerOpened,
+    setDraverOpened,
     answerScoresData,
     customQuestionTypes,
     welcomeScreenShowRule
@@ -248,7 +250,9 @@ function EditorSidebar(props) {
   }, [questions?.length])
 
   return (
-    <SidebarBoxWrapper>
+    <SidebarBoxWrapper
+      isDrawerVisible={isDrawerOpened}
+      setDraverVisible={setDraverOpened}>
       <Row my={2} v="center" h="between">
         <Col cw="auto">
           <Title color="var(--qf-typography-title-color)" level={5}>

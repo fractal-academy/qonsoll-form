@@ -1,34 +1,34 @@
-import useMedia from 'use-media'
-import { v4 as uuid } from 'uuid'
-import PropTypes from 'prop-types'
-import { message } from 'antd'
-import { useHistory } from 'react-router-dom'
 import { Box, Container, Text } from '@qonsoll/react-design'
-import useFunctions from '../../../../hooks/useFunctions'
-import React, { useState, useEffect, useMemo } from 'react'
-import { QuestionForm } from '../../../../domains/Question/components'
-import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
-import { EditorSidebar, Spinner, PageHeader } from '../../../../components'
-import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import {
-  useTranslation,
-  TranslationContext
-} from '../../../../context/Translation'
-import {
-  TEXTINGS,
   COLLECTIONS,
   DEFAULT_IMAGE,
-  QUESTION_TYPES
+  QUESTION_TYPES,
+  TEXTINGS
 } from '../../../../constants'
 import {
+  DISPATCH_EVENTS,
   useCurrentQuestionContext,
-  useCurrentQuestionContextDispatch,
-  DISPATCH_EVENTS
+  useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+import { EditorSidebar, PageHeader, Spinner } from '../../../../components'
+import React, { useEffect, useMemo, useState } from 'react'
+import {
+  TranslationContext,
+  useTranslation
+} from '../../../../context/Translation'
 import {
   useCollectionData,
   useDocumentData
 } from 'react-firebase-hooks/firestore'
+
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import PropTypes from 'prop-types'
+import { QuestionForm } from '../../../../domains/Question/components'
+import { message } from 'antd'
+import useFunctions from '../../../../hooks/useFunctions'
+import { useHistory } from 'react-router-dom'
+import { v4 as uuid } from 'uuid'
 
 //configuration for certain types of questions
 const defaultConfigurations = {
@@ -70,7 +70,6 @@ function FormEdit(props) {
     id,
     firebase,
     actions = {},
-    showHeader,
     customHeader,
     showAnswers,
     translations,
@@ -83,7 +82,7 @@ function FormEdit(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const smallScreen = useMedia({ minWidth: '769px' })
+  const smallScreen = window.innerWidth >= 768
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
@@ -108,6 +107,7 @@ function FormEdit(props) {
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
   const [brightnessValue, setBrightnessValue] = useState(0)
   const [currentQuestionId, setCurrentQuestionId] = useState()
+  const [isDrawerOpened, setDraverOpened] = useState(false)
 
   // [COMPUTED PROPERTIES]
   // divide all tasks of current form into 2 groups
@@ -292,6 +292,8 @@ function FormEdit(props) {
                         onBack={history.goBack}
                         showAnswers={showAnswers}
                         smallScreen={smallScreen}
+                        isDrawerOpened={isDrawerOpened}
+                        setDraverOpened={setDraverOpened}
                       />
                     )}
                   </>
@@ -326,6 +328,8 @@ function FormEdit(props) {
                   formData={form}
                   endings={endings}
                   questions={questions}
+                  isDrawerOpened={isDrawerOpened}
+                  setDraverOpened={setDraverOpened}
                   answerScoresData={answerScoresList}
                   customQuestionTypes={customQuestionTypes}
                   welcomeScreenShowRule={welcomeScreenShowRule}

@@ -1,16 +1,16 @@
-import useMedia from 'use-media'
-import { useHistory } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import { Button, Col, Row, Text } from '@qonsoll/react-design'
 import React, { useState } from 'react'
-import { useKeyPress } from '@umijs/hooks'
-import { TEXTINGS } from '../../../constants'
-import { CheckOutlined } from '@ant-design/icons'
+
 import COLLECTIONS from '../../../constants/collection'
-import { useAnswersContext } from '../../../context/Answers'
-import { useTranslation } from '../../../context/Translation'
-import useFunctions from '../../../../src/hooks/useFunctions'
-import { Row, Col, Text, Button } from '@qonsoll/react-design'
+import { CheckOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types'
+import { TEXTINGS } from '../../../constants'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import { useAnswersContext } from '../../../context/Answers'
+import useFunctions from '../../../../src/hooks/useFunctions'
+import { useHistory } from 'react-router-dom'
+import { useKeyPress } from '@umijs/hooks'
+import { useTranslation } from '../../../context/Translation'
 
 function SubmitButton(props) {
   const {
@@ -35,7 +35,7 @@ function SubmitButton(props) {
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
   const { submitHint } = useTranslation()
-  const isntDesktop = useMedia({ minWidth: '1024px' })
+  const isntDesktop = window.innerWidth >= 1024
 
   const mockUser = { name: 'John Doe' }
 

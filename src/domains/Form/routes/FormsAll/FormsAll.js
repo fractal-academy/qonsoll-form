@@ -1,18 +1,18 @@
-import Fuse from 'fuse.js'
-import useMedia from 'use-media'
-import PropTypes from 'prop-types'
-import { message, Input } from 'antd'
-import useFunctions from '../../../../hooks/useFunctions'
-import React, { useState, useEffect, useRef } from 'react'
 import { Box, Container, Text } from '@qonsoll/react-design'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { COLLECTIONS, QUESTION_TYPES, TEXTINGS } from '../../../../constants'
-import { TranslationContext } from '../../../../context/Translation'
-import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
-import { Spinner, StaticList, PageHeader } from '../../../../components'
+import { Input, message } from 'antd'
+import { PageHeader, Spinner, StaticList } from '../../../../components'
+import React, { useEffect, useRef, useState } from 'react'
+
+import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSimpleFormWithModal'
-import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
+import Fuse from 'fuse.js'
+import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
+import PropTypes from 'prop-types'
+import { TranslationContext } from '../../../../context/Translation'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import useFunctions from '../../../../hooks/useFunctions'
 
 function FormsAll(props) {
   const {
@@ -35,7 +35,7 @@ function FormsAll(props) {
     getCollectionRef(COLLECTIONS.FORMS).orderBy('creationDate', 'desc')
   )
 
-  const smallScreen = useMedia({ minWidth: '769px' })
+  const smallScreen = window.innerWidth >= 768
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)

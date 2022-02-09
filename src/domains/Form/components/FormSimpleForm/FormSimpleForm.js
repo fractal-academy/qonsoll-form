@@ -1,7 +1,8 @@
-import { Form } from 'antd'
+import { Input, Switch, TextArea } from '@qonsoll/react-design'
 import React, { useMemo } from 'react'
+
+import { Form } from 'antd'
 import { TEXTINGS } from '../../../../constants'
-import { TextArea, Input, Switch } from '@qonsoll/react-design'
 import { useTranslation } from '../../../../context/Translation'
 
 // const { TextArea } = Input
@@ -30,6 +31,7 @@ function FormSimpleForm(props) {
         <Input
           mb={4}
           allowClear
+          maxLength={250}
           placeholder={formTitlePlaceholder || TEXTINGS.formTitlePlaceholder}
         />
       </Form.Item>
