@@ -1,4 +1,4 @@
-import { Box, Container, Text } from '@qonsoll/react-design'
+import { Box, Button, Col, Container, Row, Text } from '@qonsoll/react-design'
 import {
   COLLECTIONS,
   DEFAULT_IMAGE,
@@ -12,6 +12,7 @@ import {
 } from '../../../../context/CurrentQuestion'
 import { EditorSidebar, PageHeader, Spinner } from '../../../../components'
 import React, { useEffect, useMemo, useState } from 'react'
+import { Tooltip, message } from 'antd'
 import {
   TranslationContext,
   useTranslation
@@ -25,7 +26,7 @@ import ActionsFunctionsContext from '../../../../context/ActionsFunctions/Action
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import PropTypes from 'prop-types'
 import { QuestionForm } from '../../../../domains/Question/components'
-import { message } from 'antd'
+import { UnorderedListOutlined } from '@ant-design/icons'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useHistory } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
@@ -78,7 +79,7 @@ function FormEdit(props) {
   } = props
 
   //[CUSTOM HOOKS]
-  const { phoneBreakpointDummy } = useTranslation()
+  const { phoneBreakpointDummy, showDrawerTooltip } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -141,7 +142,9 @@ function FormEdit(props) {
       }
     })
   }
-
+  const handleDrawerOpen = () => {
+    setDraverOpened(!isDrawerOpened)
+  }
   const onQuestionTypeChange = async ({ key }) => {
     //conditions to check if current question type changes to/from Welcome screen type
     const isChangeFromWelcomeScreen =
@@ -281,22 +284,37 @@ function FormEdit(props) {
                 p={containerPadding}
                 flexDirection="column">
                 {customHeader !== null && (
-                  <>
-                    {customHeader ? (
-                      <>{customHeader}</>
-                    ) : (
-                      <PageHeader
-                        id={id}
-                        handlesPreview
-                        title={form?.title}
-                        onBack={history.goBack}
-                        showAnswers={showAnswers}
-                        smallScreen={smallScreen}
-                        isDrawerOpened={isDrawerOpened}
-                        setDraverOpened={setDraverOpened}
-                      />
-                    )}
-                  </>
+                  <Row noGutters v="center">
+                    <Col>
+                      {customHeader ? (
+                        <>{customHeader}</>
+                      ) : (
+                        <PageHeader
+                          id={id}
+                          handlesPreview
+                          title={form?.title}
+                          onBack={history.goBack}
+                          showAnswers={showAnswers}
+                          smallScreen={smallScreen}
+                          isDrawerOpened={isDrawerOpened}
+                          setDraverOpened={setDraverOpened}
+                        />
+                      )}
+                    </Col>
+                    <Col cw="auto" mb={'var(--qf-header-mb)'}>
+                      <Tooltip
+                        placement="bottom"
+                        title={showDrawerTooltip || TEXTINGS.showDrawerTooltip}>
+                        <Button
+                          ml={1}
+                          display={['flex', 'flex', 'flex', 'none']}
+                          type="text"
+                          icon={<UnorderedListOutlined />}
+                          onClick={handleDrawerOpen}
+                        />
+                      </Tooltip>
+                    </Col>
+                  </Row>
                 )}
                 {smallScreen ? (
                   <QuestionForm

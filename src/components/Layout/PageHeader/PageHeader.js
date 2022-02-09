@@ -2,8 +2,7 @@ import {
   ArrowLeftOutlined,
   EyeOutlined,
   ReadOutlined,
-  ReloadOutlined,
-  UnorderedListOutlined
+  ReloadOutlined
 } from '@ant-design/icons'
 import { Button, Col, Divider, Row, Title } from '@qonsoll/react-design'
 
@@ -11,10 +10,19 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { TEXTINGS } from '../../../constants'
 import { Tooltip } from 'antd'
+import styled from 'styled-components'
 import { styles } from './PageHeader.styles'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useTranslation } from '../../../context/Translation'
 
+const StyledTitle = styled(Title)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-break: break-word;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+`
 function PageHeader(props) {
   const {
     id,
@@ -23,14 +31,11 @@ function PageHeader(props) {
     titleProps,
     smallScreen,
     showAnswers,
-    handlesPreview,
-    isDrawerOpened,
-    setDraverOpened
+    handlesPreview
   } = props
 
   // [ADDITIONAL HOOKS]
-  const { formViewTooltip, answerViewTooltip, showDrawerTooltip } =
-    useTranslation()
+  const { formViewTooltip, answerViewTooltip } = useTranslation()
   const { onFormShow } = useActionsFunctionsContext()
   const { onFormResultsShow } = useActionsFunctionsContext()
 
@@ -46,9 +51,6 @@ function PageHeader(props) {
   const onRestart = () => {
     window.location.reload()
   }
-  const handleDrawerOpen = () => {
-    setDraverOpened(!isDrawerOpened)
-  }
 
   return (
     <Row noGutters v="center" mb="var(--qf-header-mb)">
@@ -59,13 +61,14 @@ function PageHeader(props) {
         </Col>
       )}
       <Col>
-        <Title
+        <StyledTitle
+          isElipsis
           level={2}
           color="var(--qf-typography-title-color)"
           fontSize="var(--qf-typography-fs-title)"
           {...titleProps}>
           {title}
-        </Title>
+        </StyledTitle>
       </Col>
 
       {showAnswers && (
@@ -91,28 +94,11 @@ function PageHeader(props) {
             placement="bottom"
             title={formViewTooltip || TEXTINGS.formViewTooltip}>
             <Button
-              mr={setDraverOpened && 1}
               type="text"
               icon={<EyeOutlined />}
               onClick={onFormShowDisplay}
             />
           </Tooltip>
-        </Col>
-      )}
-      {title && (
-        <Col cw="auto" v="center">
-          {smallScreen && (
-            <Tooltip
-              placement="bottom"
-              title={showDrawerTooltip || TEXTINGS.showDrawerTooltip}>
-              <Button
-                display={['flex', 'flex', 'flex', 'none']}
-                type="text"
-                icon={<UnorderedListOutlined />}
-                onClick={handleDrawerOpen}
-              />
-            </Tooltip>
-          )}
         </Col>
       )}
       {!title && (
