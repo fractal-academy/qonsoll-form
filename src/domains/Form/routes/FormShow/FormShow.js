@@ -33,7 +33,10 @@ function FormShow(props) {
     actions = {},
     wrapperPaddings,
     preventFirebaseUsage,
-    showHeader
+    showHeader,
+    noFirebaseForm,
+    noFirebaseQuestions,
+    noFirebaseAnswersScore
   } = props
 
   // [CUSTOM_HOOKS]
@@ -49,20 +52,27 @@ function FormShow(props) {
   })
 
   const [questionsData, loading] = useCollectionData(
-    getCollectionRef(COLLECTIONS.QUESTIONS)
-      .where('formId', '==', id)
-      .orderBy('order')
+    firebase &&
+      getCollectionRef(COLLECTIONS.QUESTIONS)
+        .where('formId', '==', id)
+        .orderBy('order')
   )
+  const questionsDataChoosen = noFirebaseQuestions || questionsData
+
   const [answersScoreData] = useCollectionData(
-    getCollectionRef(COLLECTIONS.ANSWERS_SCORES_CONDITIONS).where(
-      'formId',
-      '==',
-      id
-    )
+    firebase &&
+      getCollectionRef(COLLECTIONS.ANSWERS_SCORES_CONDITIONS).where(
+        'formId',
+        '==',
+        id
+      )
   )
+  const answersScoreDataChoosen = noFirebaseAnswersScore || answersScoreData
+
   const [formData] = useDocumentData(
-    getCollectionRef(COLLECTIONS.FORMS).doc(id)
+    firebase && getCollectionRef(COLLECTIONS.FORMS).doc(id)
   )
+  const formDataChoosen = noFirebaseForm || formData
 
   // [COMPONENT STATE HOOKS]
   const [isAnswered, setIsAnswered] = useState(false)
@@ -74,24 +84,24 @@ function FormShow(props) {
     wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
   const filteredQuestionsList = useMemo(
     () =>
-      questionsData?.filter(
+      questionsDataChoosen?.filter(
         (item) => item?.questionType !== QUESTION_TYPES.ENDING
       ),
-    [questionsData]
+    [questionsDataChoosen]
   )
   const questionsWithEndingLength = useMemo(
     () =>
-      questionsData?.filter(
+      questionsDataChoosen?.filter(
         (item) => item?.questionType !== QUESTION_TYPES.ENDING
       )?.length + 1,
-    [questionsData]
+    [questionsDataChoosen]
   )
   const endings = useMemo(
     () =>
-      questionsData?.filter(
+      questionsDataChoosen?.filter(
         (item) => item?.questionType === QUESTION_TYPES.ENDING
       ),
-    [questionsData]
+    [questionsDataChoosen]
   )
   const answersId = useMemo(() => {
     const filteredAnswerContext = Object.values(answersContext)
@@ -102,8 +112,9 @@ function FormShow(props) {
   }, [answersContext])
 
   const containWelcomeScreen = useMemo(
-    () => questionsData?.[0]?.questionType === QUESTION_TYPES.WELCOME_SCREEN,
-    [questionsData]
+    () =>
+      questionsDataChoosen?.[0]?.questionType === QUESTION_TYPES.WELCOME_SCREEN,
+    [questionsDataChoosen]
   )
   const disabledDown =
     currentSlide ===
@@ -177,13 +188,13 @@ function FormShow(props) {
 
   // [USE EFFECTS]
   useEffect(() => {
-    if (!loading && questionsData) {
+    if (!loading && questionsDataChoosen) {
       //when data loaded from db, set default currentSlide value according to questions data
       const firstSlideRule = containWelcomeScreen ? 0 : 1
       setCurrentSlide(firstSlideRule)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, questionsData])
+  }, [loading, questionsDataChoosen])
   useEffect(() => {
     // when questions was uploaded, its last one question without ending
     // and we got answer for this question
@@ -221,7 +232,7 @@ function FormShow(props) {
                   currentSlide={currentSlide}
                   disabledDown={disabledDown}
                   setIsAnswered={setIsAnswered}
-                  questionsData={questionsData}
+                  questionsData={questionsDataChoosen}
                   setCurrentSlide={setCurrentSlide}
                   containWelcomeScreen={containWelcomeScreen}
                   previousQuestionOrder={previousQuestionOrder}
@@ -233,12 +244,12 @@ function FormShow(props) {
                       onClick={onClick}
                       question={question}
                       submitLoading={submitLoading}
-                      isFormQuiz={formData?.isQuiz}
+                      isFormQuiz={formDataChoosen?.isQuiz}
                       currentSlide={currentSlide}
                       preventFirebaseUsage={preventFirebaseUsage}
                       containWelcomeScreen={containWelcomeScreen}
                       answersScoreData={
-                        answersScoreData?.find(
+                        answersScoreDataChoosen?.find(
                           (scoreItem) => scoreItem?.questionId === question?.id
                         )?.questionScores
                       }
@@ -257,7 +268,7 @@ function FormShow(props) {
 FormShow.propTypes = {
   id: PropTypes.string.isRequired,
   onBack: PropTypes.func,
-  firebase: PropTypes.object.isRequired,
+  firebase: PropTypes.object,
   translate: PropTypes.object,
   submitLoading: PropTypes.bool,
   wrapperHeight: PropTypes.number,
