@@ -61,9 +61,10 @@ function SubmitButton(props) {
   const onButtonClick = async () => {
     if (finish) {
       const updatedAnswers = { formId, answers }
-      const sendAnswersTimestamp = getTimestamp().fromDate(new Date())
-
       if (!preventFirebaseUsage) {
+        setLoading(true)
+        const sendAnswersTimestamp = getTimestamp().fromDate(new Date())
+
         Object.values(answers).forEach((item) => {
           const answerId = getCollectionRef(COLLECTIONS?.ANSWERS).doc().id
           setData(COLLECTIONS?.ANSWERS, answerId, {
@@ -88,15 +89,14 @@ function SubmitButton(props) {
           date: sendAnswersTimestamp,
           user: mockUser?.name
         })
+        setLoading(false)
+        await history.goBack()
       }
       //This part for future improvements - add answer for answer layout
       // Object.values(answers)?.map((questionWithAnswer, index) => {})
-      setLoading(true)
 
       //add function from b2g and provide updatedAnswers
       await onFinish?.(updatedAnswers)
-      setLoading(false)
-      await history.goBack()
     } else onClick?.()
   }
 
