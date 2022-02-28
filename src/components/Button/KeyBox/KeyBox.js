@@ -28,6 +28,7 @@ function KeyBox(props) {
       width="100%">
       <StyledButton
         hasImages={hasImages}
+        onTouchStart={() => onButtonClick(item)}
         onClick={() => onButtonClick(item)}
         isActive={isActive}>
         {hasImages && (

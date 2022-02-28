@@ -90,6 +90,7 @@ function RangeButton(props) {
         <Col key={item} cw={columnWidth} mr={2} mb={2}>
           <StyledRangeButton
             key={item}
+            onTouchStart={() => onButtonClick(item)}
             onClick={() => onButtonClick(item)}
             onMouseDown={(e) => e.preventDefault()}
             isActive={Number(buttonKey) === item}>
