@@ -1,20 +1,21 @@
-import PropTypes from 'prop-types'
-import { QUESTION_TYPES, TEXTINGS } from '../../constants'
-import { useSize, useKeyPress } from '@umijs/hooks'
-import React, { cloneElement, useEffect, useRef } from 'react'
-import { Row, Col, Box, Button } from '@qonsoll/react-design'
-import { useTranslation } from '../../context/Translation'
-import { UpOutlined, DownOutlined } from '@ant-design/icons'
-import { Carousel as AntdCarousel, message } from 'antd'
 import {
   ANSWERS_DISPATCH_EVENTS,
   useAnswersContext,
   useAnswersContextDispatch
 } from '../../context/Answers'
+import { Carousel as AntdCarousel, message } from 'antd'
+import { Box, Button, Col, Row } from '@qonsoll/react-design'
+import { DownOutlined, UpOutlined } from '@ant-design/icons'
+import { QUESTION_TYPES, TEXTINGS } from '../../constants'
+import React, { cloneElement, useEffect, useRef } from 'react'
 import {
-  longAndShortAnswerConditionComparison,
-  dateAnswerConditionComparison
+  dateAnswerConditionComparison,
+  longAndShortAnswerConditionComparison
 } from '../../domains/Form/helpers'
+import { useKeyPress, useSize } from '@umijs/hooks'
+
+import PropTypes from 'prop-types'
+import { useTranslation } from '../../context/Translation'
 
 function Carousel(props) {
   const {
@@ -57,8 +58,12 @@ function Carousel(props) {
     if (currentSlideData?.isRequired && skipButtonEvent) {
       message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
     } else {
+      const isAnswerExists = !!answerValue
+      const isWelcomeScreen =
+        currentSlideData?.questionType === QUESTION_TYPES.WELCOME_SCREEN
+
       //check if carousel navigation button was pressed, to avoid repetition in answers context
-      if (skipButtonEvent) {
+      if (skipButtonEvent && !isAnswerExists && !isWelcomeScreen) {
         await setIsAnswered(true)
         //form the answer according to the answers context structure
         const answerData = {
@@ -72,8 +77,7 @@ function Carousel(props) {
         })
       }
       carouselRef.current?.next()
-
-      setIsAnswered && setIsAnswered(false)
+      setIsAnswered?.(false)
     }
   }
 
@@ -95,7 +99,7 @@ function Carousel(props) {
 
   const handleNextClick = (e) => {
     // Check if function 'next' can be called
-    // Prevents skiping
+    // Prevents skipping
     setPreviousQuestionOrder((prevState) =>
       prevState?.[prevState?.length - 1] !== currentSlide
         ? [...(prevState || []), currentSlide]
@@ -106,25 +110,14 @@ function Carousel(props) {
 
   useKeyPress(
     38,
-    (event) => {
-      if (event.type === 'keyup' && !disabledUp) {
-        previous()
-      }
-    },
-    {
-      events: ['keydown', 'keyup']
-    }
+    (event) => event.type === 'keyup' && !disabledUp && previous(),
+    { events: ['keydown', 'keyup'] }
   )
   useKeyPress(
     40,
-    (event) => {
-      if (event.type === 'keyup' && !disabledDown) {
-        handleNextClick(event)
-      }
-    },
-    {
-      events: ['keydown', 'keyup']
-    }
+    (event) =>
+      event.type === 'keyup' && !disabledDown && handleNextClick(event),
+    { events: ['keydown', 'keyup'] }
   )
   // [ ANSWER ]
   const currentSlideData = questionsData?.filter(
