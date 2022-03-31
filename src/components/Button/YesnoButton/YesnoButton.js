@@ -1,13 +1,14 @@
-import { message } from 'antd'
-import PropTypes from 'prop-types'
-import { useKeyPress } from '@umijs/hooks'
+import React, { useMemo, useState } from 'react'
+
 import { Box } from '@qonsoll/react-design'
 import { KeyBox } from '../../../components'
+import PropTypes from 'prop-types'
 import { TEXTINGS } from '../../../constants'
-import React, { useState, useMemo } from 'react'
-import { useAnswersContext } from '../../../context/Answers'
-import { useTranslation } from '../../../context/Translation'
 import { getQuestionAnswerFromContext } from '../../../helpers'
+import { message } from 'antd'
+import { useAnswersContext } from '../../../context/Answers'
+import { useKeyPress } from '@umijs/hooks'
+import { useTranslation } from '../../../context/Translation'
 
 function YesnoButton(props) {
   const { onClick, question, isFormQuiz, currentSlide, answersScoreData } =
@@ -17,6 +18,7 @@ function YesnoButton(props) {
   //[CUSTOM HOOKS]
   const { requiredAnswerMessage } = useTranslation()
   const answersContext = useAnswersContext()
+
   // [ADDITIONAL_HOOKS]
   useKeyPress(
     (event) =>
@@ -93,6 +95,7 @@ function YesnoButton(props) {
       onClick && setTimeout(onClick, 700, data)
     }
   }
+
   return (
     <Box display="block">
       {mappedChoices?.map((item, index) => (

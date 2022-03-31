@@ -1,22 +1,23 @@
-import { v4 as uuid } from 'uuid'
-import PropTypes from 'prop-types'
+import { Box, Button, Col, Divider, Row, Title } from '@qonsoll/react-design'
+import { COLLECTIONS, QUESTION_TYPES, TEXTINGS } from '../../../constants'
+import {
+  DISPATCH_EVENTS,
+  useCurrentQuestionContextDispatch
+} from '../../../context/CurrentQuestion'
+import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Tooltip, message } from 'antd'
+
+import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
+import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
+import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
+import PropTypes from 'prop-types'
+import { QuestionsList } from '../../../domains/Question/components'
+import SidebarBoxWrapper from './EditorSidebar.styles'
 import TypePopover from './TypePopover'
 import useFunctions from '../../../hooks/useFunctions'
-import SidebarBoxWrapper from './EditorSidebar.styles'
-import React, { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from '../../../context/Translation'
-import { QUESTION_TYPES, COLLECTIONS, TEXTINGS } from '../../../constants'
-import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
-import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
-import { QuestionsList } from '../../../domains/Question/components'
-import { Row, Col, Box, Title, Button, Divider } from '@qonsoll/react-design'
-import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
-import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
-import {
-  useCurrentQuestionContextDispatch,
-  DISPATCH_EVENTS
-} from '../../../context/CurrentQuestion'
+import { v4 as uuid } from 'uuid'
 
 function EditorSidebar(props) {
   const {
@@ -33,8 +34,14 @@ function EditorSidebar(props) {
 
   //[CUSTOM HOOKS]
   const { getCollectionRef, setData } = useFunctions()
-  const { endingCreationTooltip, endingListTitle, questionListTitle } =
-    useTranslation()
+  const {
+    endingCreationTooltip,
+    endingListTitle,
+    questionListTitle,
+    defaultChoiceTitle,
+    yesButton,
+    noButton
+  } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -64,7 +71,7 @@ function EditorSidebar(props) {
     const choicesConfiguration = [
       {
         answerOptionId: uuid(),
-        answerOption: 'choice 0',
+        answerOption: defaultChoiceTitle || TEXTINGS.defaultChoiceTitle,
         image: '',
         redirectQuestion: '',
         redirectConditionRule: ''
@@ -73,13 +80,13 @@ function EditorSidebar(props) {
     const yesNoConfiguration = [
       {
         answerOptionId: uuid(),
-        answerOption: 'Yes',
+        answerOption: yesButton || TEXTINGS.yesButton,
         redirectQuestion: '',
         redirectConditionRule: ''
       },
       {
         answerOptionId: uuid(),
-        answerOption: 'No',
+        answerOption: noButton || TEXTINGS.noButton,
         redirectQuestion: '',
         redirectConditionRule: ''
       }
