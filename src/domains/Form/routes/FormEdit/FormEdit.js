@@ -38,26 +38,6 @@ const defaultConfigurations = {
   answerOptionId: '',
   redirectConditionRule: ''
 }
-const choicesConfiguration = [
-  {
-    ...defaultConfigurations,
-    image: '',
-    answerOptionId: uuid(),
-    answerOption: 'default'
-  }
-]
-const yesNoConfiguration = [
-  {
-    ...defaultConfigurations,
-    answerOption: 'Yes',
-    answerOptionId: uuid()
-  },
-  {
-    ...defaultConfigurations,
-    answerOption: 'No',
-    answerOptionId: uuid()
-  }
-]
 const opinionAndRatingConfiguration = Array(5)
   .fill(0)
   ?.map((_, index) => ({
@@ -79,7 +59,13 @@ function FormEdit(props) {
   } = props
 
   //[CUSTOM HOOKS]
-  const { phoneBreakpointDummy, showDrawerTooltip } = useTranslation()
+  const {
+    phoneBreakpointDummy,
+    showDrawerTooltip,
+    defaultChoiceTitle,
+    yesButton,
+    noButton
+  } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -111,6 +97,26 @@ function FormEdit(props) {
   const [isDrawerOpened, setDraverOpened] = useState(false)
 
   // [COMPUTED PROPERTIES]
+  const choicesConfiguration = [
+    {
+      ...defaultConfigurations,
+      image: '',
+      answerOptionId: uuid(),
+      answerOption: defaultChoiceTitle || TEXTINGS.defaultChoiceTitle
+    }
+  ]
+  const yesNoConfiguration = [
+    {
+      ...defaultConfigurations,
+      answerOption: yesButton || TEXTINGS.yesButton,
+      answerOptionId: uuid()
+    },
+    {
+      ...defaultConfigurations,
+      answerOption: noButton || TEXTINGS.noButton,
+      answerOptionId: uuid()
+    }
+  ]
   // divide all tasks of current form into 2 groups
   const questions = useMemo(
     () =>
