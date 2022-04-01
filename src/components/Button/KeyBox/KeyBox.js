@@ -43,11 +43,11 @@ function KeyBox(props) {
               isHovering={isHovering}
               phoneSmall={phoneSmall}
               isActive={isActive}
-              hasImages={hasImages}
-              mr={1}>
+              hasImages={hasImages}>
               {isHovering && !phoneSmall ? `Key ${letter}` : letter}
             </StyledKeybox>
             <StyledText
+              ml={1}
               isActive={isActive}
               hasImages={hasImages}
               phoneSmall={phoneSmall}>
