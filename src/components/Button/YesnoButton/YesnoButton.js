@@ -48,8 +48,7 @@ function YesnoButton(props) {
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()
-          const currentChoice =
-            questionConfigurations?.[key === yesPressButtonLetter ? 0 : 1]
+          const currentChoice = questionConfigurations?.[key === 'Y' ? 0 : 1]
           onButtonClick({
             letter: key,
             choice: currentChoice
