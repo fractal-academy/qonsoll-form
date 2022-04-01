@@ -103,8 +103,6 @@ function YesnoButton(props) {
     ]
   )
 
-  console.log(mappedChoices)
-
   // [CLEAN FUNCTIONS]
   const onButtonClick = (choiceData) => {
     const { letter, choice } = choiceData
