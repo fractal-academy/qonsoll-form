@@ -34,14 +34,8 @@ function EditorSidebar(props) {
 
   //[CUSTOM HOOKS]
   const { getCollectionRef, setData } = useFunctions()
-  const {
-    endingCreationTooltip,
-    endingListTitle,
-    questionListTitle,
-    defaultChoiceTitle,
-    yesButton,
-    noButton
-  } = useTranslation()
+  const { endingCreationTooltip, endingListTitle, questionListTitle } =
+    useTranslation()
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -71,7 +65,7 @@ function EditorSidebar(props) {
     const choicesConfiguration = [
       {
         answerOptionId: uuid(),
-        answerOption: defaultChoiceTitle || TEXTINGS.defaultChoiceTitle,
+        answerOption: TEXTINGS.defaultChoiceTitle,
         image: '',
         redirectQuestion: '',
         redirectConditionRule: ''
@@ -80,13 +74,13 @@ function EditorSidebar(props) {
     const yesNoConfiguration = [
       {
         answerOptionId: uuid(),
-        answerOption: yesButton || TEXTINGS.yesButton,
+        answerOption: TEXTINGS.yesButton,
         redirectQuestion: '',
         redirectConditionRule: ''
       },
       {
         answerOptionId: uuid(),
-        answerOption: noButton || TEXTINGS.noButton,
+        answerOption: TEXTINGS.noButton,
         redirectQuestion: '',
         redirectConditionRule: ''
       }

@@ -16,7 +16,13 @@ function YesnoButton(props) {
   const { order, questionConfigurations } = question
 
   //[CUSTOM HOOKS]
-  const { requiredAnswerMessage } = useTranslation()
+  const {
+    requiredAnswerMessage,
+    yesButton,
+    noButton,
+    yesPressButtonLetter,
+    noPressButtonLetter
+  } = useTranslation()
   const answersContext = useAnswersContext()
 
   // [ADDITIONAL_HOOKS]
@@ -42,7 +48,8 @@ function YesnoButton(props) {
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()
-          const currentChoice = questionConfigurations?.[key === 'Y' ? 0 : 1]
+          const currentChoice =
+            questionConfigurations?.[key === yesPressButtonLetter ? 0 : 1]
           onButtonClick({
             letter: key,
             choice: currentChoice
@@ -64,14 +71,39 @@ function YesnoButton(props) {
     letters.push(item?.answerOption?.[0].toUpperCase())
   )
 
+  const yesButtonComputed = yesButton || TEXTINGS.yesButton
+  const noButtonComputed = noButton || TEXTINGS.noButton
+  const yesLetterComputed =
+    yesPressButtonLetter || TEXTINGS.yesPressButtonLetter
+  const noLetterComputed = noPressButtonLetter || TEXTINGS.noPressButtonLetter
+
   const mappedChoices = useMemo(
-    () =>
-      questionConfigurations?.map((choiceData) => ({
-        letter: choiceData?.answerOption?.[0].toUpperCase(),
-        choice: choiceData
-      })),
-    [questionConfigurations]
+    () => [
+      {
+        letter: yesLetterComputed,
+        choice: {
+          ...questionConfigurations?.[0],
+          answerOption: yesButtonComputed
+        }
+      },
+      {
+        letter: noLetterComputed,
+        choice: {
+          ...questionConfigurations?.[1],
+          answerOption: noButtonComputed
+        }
+      }
+    ],
+    [
+      questionConfigurations,
+      noButtonComputed,
+      noLetterComputed,
+      yesButtonComputed,
+      yesLetterComputed
+    ]
   )
+
+  console.log(mappedChoices)
 
   // [CLEAN FUNCTIONS]
   const onButtonClick = (choiceData) => {

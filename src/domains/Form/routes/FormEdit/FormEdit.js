@@ -59,13 +59,7 @@ function FormEdit(props) {
   } = props
 
   //[CUSTOM HOOKS]
-  const {
-    phoneBreakpointDummy,
-    showDrawerTooltip,
-    defaultChoiceTitle,
-    yesButton,
-    noButton
-  } = useTranslation()
+  const { phoneBreakpointDummy, showDrawerTooltip } = useTranslation()
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -102,18 +96,18 @@ function FormEdit(props) {
       ...defaultConfigurations,
       image: '',
       answerOptionId: uuid(),
-      answerOption: defaultChoiceTitle || TEXTINGS.defaultChoiceTitle
+      answerOption: TEXTINGS.defaultChoiceTitle
     }
   ]
   const yesNoConfiguration = [
     {
       ...defaultConfigurations,
-      answerOption: yesButton || TEXTINGS.yesButton,
+      answerOption: TEXTINGS.yesButton,
       answerOptionId: uuid()
     },
     {
       ...defaultConfigurations,
-      answerOption: noButton || TEXTINGS.noButton,
+      answerOption: TEXTINGS.noButton,
       answerOptionId: uuid()
     }
   ]
