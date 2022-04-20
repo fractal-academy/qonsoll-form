@@ -1,12 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Row, Col, Box, Text } from '@qonsoll/react-design'
-import { QUESTION_TYPES, QUESTION_DESCRIPTIONS } from '../../../../constants'
-import { useTranslation } from '../../../../context/Translation'
-import {
-  QuestionsTypeMenu,
-  QuestionMenuItem
-} from './QuestionTypeSelect.styles'
+import { Box, Col, Row, Text } from '@qonsoll/react-design'
 import {
   CalendarOutlined,
   CopyrightOutlined,
@@ -20,6 +12,15 @@ import {
   UploadOutlined,
   VideoCameraOutlined
 } from '@ant-design/icons'
+import { QUESTION_DESCRIPTIONS, QUESTION_TYPES } from '../../../../constants'
+import {
+  QuestionMenuItem,
+  QuestionsTypeMenu
+} from './QuestionTypeSelect.styles'
+
+import PropTypes from 'prop-types'
+import React from 'react'
+import { useTranslations } from '@qonsoll/translation'
 
 function QuestionTypeSelect(props) {
   const {
@@ -30,81 +31,80 @@ function QuestionTypeSelect(props) {
   } = props
 
   // [ADDITIONAL_HOOKS]
-  const {
-    welcomeScreenDesc,
-    longTextDesc,
-    shortTextDesc,
-    dateDesc,
-    fileUploadDesc,
-    opinionDesc,
-    pictureChoiceDesc,
-    choiceDesc,
-    ratingDesc,
-    statementDesc,
-    videoAnswerDesc,
-    yesnoDesc
-  } = useTranslation()
+  const { t } = useTranslations()
 
   // [COMPUTED_PROPERTIES]
   const questionTypeMap = customQuestionTypes || [
     {
+      label: t('Welcome screen'),
       type: QUESTION_TYPES.WELCOME_SCREEN,
-      description: welcomeScreenDesc || QUESTION_DESCRIPTIONS.WELCOME_SCREEN,
+      description: t(QUESTION_DESCRIPTIONS.WELCOME_SCREEN),
       icon: <HomeOutlined />
     },
     {
+      label: t('Long text'),
       type: QUESTION_TYPES.LONG_TEXT,
-      description: longTextDesc || QUESTION_DESCRIPTIONS.LONG_TEXT,
+      description: t(QUESTION_DESCRIPTIONS.LONG_TEXT),
       icon: <FileTextOutlined />
     },
     {
+      label: t('Short text'),
       type: QUESTION_TYPES.SHORT_TEXT,
-      description: shortTextDesc || QUESTION_DESCRIPTIONS.SHORT_TEXT,
+      description: t(QUESTION_DESCRIPTIONS.SHORT_TEXT),
       icon: <SmallDashOutlined />
     },
     {
+      label: t('Date'),
       type: QUESTION_TYPES.DATE,
-      description: dateDesc || QUESTION_DESCRIPTIONS.DATE,
+      description: t(QUESTION_DESCRIPTIONS.DATE),
       icon: <CalendarOutlined />
     },
     {
+      label: `${'Yes'}/${'No'}`,
       type: QUESTION_TYPES.YES_NO,
-      description: yesnoDesc || QUESTION_DESCRIPTIONS.YES_NO,
+      description: t(QUESTION_DESCRIPTIONS.YES_NO),
       icon: <ShareAltOutlined />
     },
     {
+      label: t('Choice'),
       type: QUESTION_TYPES.CHOICE,
-      description: choiceDesc || QUESTION_DESCRIPTIONS.CHOICE,
+      description: t(QUESTION_DESCRIPTIONS.CHOICE),
       icon: <GoldOutlined />
     },
     {
+      label: t('Picture choice'),
       type: QUESTION_TYPES.PICTURE_CHOICE,
-      description: pictureChoiceDesc || QUESTION_DESCRIPTIONS.PICTURE_CHOICE,
+      description: t(QUESTION_DESCRIPTIONS.PICTURE_CHOICE),
       icon: <PictureOutlined />
     },
     {
+      label: t('Opinion scale'),
       type: QUESTION_TYPES.OPINION_SCALE,
-      description: opinionDesc || QUESTION_DESCRIPTIONS.OPINION_SCALE,
+      description: t(QUESTION_DESCRIPTIONS.OPINION_SCALE),
       icon: <HomeOutlined />
     },
     {
+      label: t('Rating'),
       type: QUESTION_TYPES.RATING,
-      description: ratingDesc || QUESTION_DESCRIPTIONS.RATING,
+      description: t(QUESTION_DESCRIPTIONS.RATING),
       icon: <StarOutlined />
     },
     {
+      label: t('File upload'),
       type: QUESTION_TYPES.FILE_UPLOAD,
-      description: fileUploadDesc || QUESTION_DESCRIPTIONS.FILE_UPLOAD,
+      description: t(QUESTION_DESCRIPTIONS.FILE_UPLOAD),
       icon: <UploadOutlined />
     },
     {
+      label: t('Statement'),
       type: QUESTION_TYPES.STATEMENT,
-      description: statementDesc || QUESTION_DESCRIPTIONS.STATEMENT,
+      description: t(QUESTION_DESCRIPTIONS.STATEMENT),
       icon: <CopyrightOutlined />
     },
     {
+      label: t('Video answer'),
       type: QUESTION_TYPES.VIDEO_ANSWER,
-      description: videoAnswerDesc || QUESTION_DESCRIPTIONS.VIDEO_ANSWER,
+      description: t(QUESTION_DESCRIPTIONS.VIDEO_ANSWER),
       icon: <VideoCameraOutlined />
     }
   ]
@@ -131,7 +131,7 @@ function QuestionTypeSelect(props) {
               </Col>
               <Col display="grid">
                 <Text color="var(--qf-typography-title-color)">
-                  {item?.type}
+                  {item?.label}
                 </Text>
                 <Text color="var(--qf-typography-caption-color)">
                   {item?.description}

@@ -1,5 +1,5 @@
 import { Box, Button, Col, Divider, Row, Title } from '@qonsoll/react-design'
-import { COLLECTIONS, QUESTION_TYPES, TEXTINGS } from '../../../constants'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../constants'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
@@ -16,7 +16,7 @@ import { QuestionsList } from '../../../domains/Question/components'
 import SidebarBoxWrapper from './EditorSidebar.styles'
 import TypePopover from './TypePopover'
 import useFunctions from '../../../hooks/useFunctions'
-import { useTranslation } from '../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 import { v4 as uuid } from 'uuid'
 
 function EditorSidebar(props) {
@@ -34,8 +34,7 @@ function EditorSidebar(props) {
 
   //[CUSTOM HOOKS]
   const { getCollectionRef, setData } = useFunctions()
-  const { endingCreationTooltip, endingListTitle, questionListTitle } =
-    useTranslation()
+  const { t } = useTranslations()
 
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
@@ -65,7 +64,7 @@ function EditorSidebar(props) {
     const choicesConfiguration = [
       {
         answerOptionId: uuid(),
-        answerOption: TEXTINGS.defaultChoiceTitle,
+        answerOption: 'Default',
         image: '',
         redirectQuestion: '',
         redirectConditionRule: ''
@@ -74,13 +73,13 @@ function EditorSidebar(props) {
     const yesNoConfiguration = [
       {
         answerOptionId: uuid(),
-        answerOption: TEXTINGS.yesButton,
+        answerOption: 'Yes',
         redirectQuestion: '',
         redirectConditionRule: ''
       },
       {
         answerOptionId: uuid(),
-        answerOption: TEXTINGS.noButton,
+        answerOption: 'No',
         redirectQuestion: '',
         redirectConditionRule: ''
       }
@@ -257,7 +256,7 @@ function EditorSidebar(props) {
       <Row my={2} v="center" h="between">
         <Col cw="auto">
           <Title color="var(--qf-typography-title-color)" level={5}>
-            {questionListTitle || TEXTINGS.questionListTitle}
+            {t('Questions')}
           </Title>
         </Col>
         <Col display="block" cw="auto">
@@ -299,13 +298,11 @@ function EditorSidebar(props) {
         <Row my={2} v="center" h="between">
           <Col cw="auto">
             <Title color="var(--qf-typography-title-color)" level={5}>
-              {endingListTitle || TEXTINGS.endingListTitle}
+              {t('Endings')}
             </Title>
           </Col>
           <Col display="block" cw="auto">
-            <Tooltip
-              placement="topRight"
-              title={endingCreationTooltip || TEXTINGS.endingCreationTooltip}>
+            <Tooltip placement="topRight" title={t('Create new ending')}>
               <Button
                 type="text"
                 onClick={addQuestion}

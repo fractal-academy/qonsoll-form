@@ -2,8 +2,7 @@ import { Box, Button, Col, Container, Row, Text } from '@qonsoll/react-design'
 import {
   COLLECTIONS,
   DEFAULT_IMAGE,
-  QUESTION_TYPES,
-  TEXTINGS
+  QUESTION_TYPES
 } from '../../../../constants'
 import {
   DISPATCH_EVENTS,
@@ -13,10 +12,6 @@ import {
 import { EditorSidebar, PageHeader, Spinner } from '../../../../components'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Tooltip, message } from 'antd'
-import {
-  TranslationContext,
-  useTranslation
-} from '../../../../context/Translation'
 import {
   useCollectionData,
   useDocumentData
@@ -29,6 +24,7 @@ import { QuestionForm } from '../../../../domains/Question/components'
 import { UnorderedListOutlined } from '@ant-design/icons'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useHistory } from 'react-router-dom'
+import { useTranslations } from '@qonsoll/translation'
 import { v4 as uuid } from 'uuid'
 
 //configuration for certain types of questions
@@ -53,13 +49,12 @@ function FormEdit(props) {
     actions = {},
     customHeader,
     showAnswers,
-    translations,
     customQuestionTypes,
     wrapperPaddings
   } = props
 
   //[CUSTOM HOOKS]
-  const { phoneBreakpointDummy, showDrawerTooltip } = useTranslation()
+  const { t } = useTranslations()
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
@@ -96,18 +91,18 @@ function FormEdit(props) {
       ...defaultConfigurations,
       image: '',
       answerOptionId: uuid(),
-      answerOption: TEXTINGS.defaultChoiceTitle
+      answerOption: 'Default'
     }
   ]
   const yesNoConfiguration = [
     {
       ...defaultConfigurations,
-      answerOption: TEXTINGS.yesButton,
+      answerOption: 'Yes',
       answerOptionId: uuid()
     },
     {
       ...defaultConfigurations,
-      answerOption: TEXTINGS.noButton,
+      answerOption: 'No',
       answerOptionId: uuid()
     }
   ]
@@ -273,89 +268,83 @@ function FormEdit(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <TranslationContext.Provider value={translations || {}}>
-          {formLoading || questionsListLoading || answerScoresListLoading ? (
-            <Spinner />
-          ) : (
-            <Container display="flex" height="inherit" overflowX="hidden">
-              <Box
-                flex={1}
-                display="flex"
-                p={containerPadding}
-                flexDirection="column">
-                {customHeader !== null && (
-                  <Row noGutters v="center">
-                    <Col>
-                      {customHeader ? (
-                        <>{customHeader}</>
-                      ) : (
-                        <PageHeader
-                          id={id}
-                          handlesPreview
-                          title={form?.title}
-                          onBack={history.goBack}
-                          showAnswers={showAnswers}
-                          smallScreen={smallScreen}
-                          isDrawerOpened={isDrawerOpened}
-                          setDraverOpened={setDraverOpened}
-                        />
-                      )}
-                    </Col>
-                    <Col cw="auto" mb={'var(--qf-header-mb)'}>
-                      <Tooltip
-                        placement="bottom"
-                        title={showDrawerTooltip || TEXTINGS.showDrawerTooltip}>
-                        <Button
-                          ml={1}
-                          display={['flex', 'flex', 'flex', 'none']}
-                          type="text"
-                          icon={<UnorderedListOutlined />}
-                          onClick={handleDrawerOpen}
-                        />
-                      </Tooltip>
-                    </Col>
-                  </Row>
-                )}
-                {smallScreen ? (
-                  <QuestionForm
-                    defaultTab={defaultTab}
-                    questionsList={questionsList}
-                    questionData={currentQuestion}
-                    brightnessValue={brightnessValue}
-                    setBrightnessValue={setBrightnessValue}
-                    customQuestionTypes={customQuestionTypes}
-                    onQuestionTypeChange={onQuestionTypeChange}
-                    welcomeScreenShowRule={welcomeScreenShowRule}
-                    onQuestionLayoutChange={onQuestionLayoutChange}
-                  />
-                ) : (
-                  <Box
-                    height="100%"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center">
-                    <Text>
-                      {phoneBreakpointDummy || TEXTINGS.phoneBreakpointDummy}
-                    </Text>
-                  </Box>
-                )}
-              </Box>
-              {smallScreen && (
-                <EditorSidebar
-                  id={id}
-                  formData={form}
-                  endings={endings}
-                  questions={questions}
-                  isDrawerOpened={isDrawerOpened}
-                  setDraverOpened={setDraverOpened}
-                  answerScoresData={answerScoresList}
-                  customQuestionTypes={customQuestionTypes}
-                  welcomeScreenShowRule={welcomeScreenShowRule}
-                />
+        {formLoading || questionsListLoading || answerScoresListLoading ? (
+          <Spinner />
+        ) : (
+          <Container display="flex" height="inherit" overflowX="hidden">
+            <Box
+              flex={1}
+              display="flex"
+              p={containerPadding}
+              flexDirection="column">
+              {customHeader !== null && (
+                <Row noGutters v="center">
+                  <Col>
+                    {customHeader ? (
+                      <>{customHeader}</>
+                    ) : (
+                      <PageHeader
+                        id={id}
+                        handlesPreview
+                        title={form?.title}
+                        onBack={history.goBack}
+                        showAnswers={showAnswers}
+                        smallScreen={smallScreen}
+                        isDrawerOpened={isDrawerOpened}
+                        setDraverOpened={setDraverOpened}
+                      />
+                    )}
+                  </Col>
+                  <Col cw="auto" mb={'var(--qf-header-mb)'}>
+                    <Tooltip placement="bottom" title={t('Show question list')}>
+                      <Button
+                        ml={1}
+                        display={['flex', 'flex', 'flex', 'none']}
+                        type="text"
+                        icon={<UnorderedListOutlined />}
+                        onClick={handleDrawerOpen}
+                      />
+                    </Tooltip>
+                  </Col>
+                </Row>
               )}
-            </Container>
-          )}
-        </TranslationContext.Provider>
+              {smallScreen ? (
+                <QuestionForm
+                  defaultTab={defaultTab}
+                  questionsList={questionsList}
+                  questionData={currentQuestion}
+                  brightnessValue={brightnessValue}
+                  setBrightnessValue={setBrightnessValue}
+                  customQuestionTypes={customQuestionTypes}
+                  onQuestionTypeChange={onQuestionTypeChange}
+                  welcomeScreenShowRule={welcomeScreenShowRule}
+                  onQuestionLayoutChange={onQuestionLayoutChange}
+                />
+              ) : (
+                <Box
+                  height="100%"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center">
+                  <Text>{t('This feature is available only on desktop')}</Text>
+                </Box>
+              )}
+            </Box>
+            {smallScreen && (
+              <EditorSidebar
+                id={id}
+                formData={form}
+                endings={endings}
+                questions={questions}
+                isDrawerOpened={isDrawerOpened}
+                setDraverOpened={setDraverOpened}
+                answerScoresData={answerScoresList}
+                customQuestionTypes={customQuestionTypes}
+                welcomeScreenShowRule={welcomeScreenShowRule}
+              />
+            )}
+          </Container>
+        )}
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

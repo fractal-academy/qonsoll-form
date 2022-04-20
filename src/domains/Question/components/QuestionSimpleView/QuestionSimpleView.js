@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types'
-import { Popconfirm } from 'antd'
-import React, { cloneElement } from 'react'
-import { Box } from '@qonsoll/react-design'
-import { LAYOUT_TYPES, TEXTINGS } from '../../../../constants'
-import { useTranslation } from '../../../../context/Translation'
 import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
-import { NumberedCard, IconRoundContainer } from '../../../../components'
-import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { DescriptionContainer, StyledButton } from './QuestionSimpleView.styles'
+import { IconRoundContainer, NumberedCard } from '../../../../components'
+import React, { cloneElement } from 'react'
+
+import { Box } from '@qonsoll/react-design'
+import { LAYOUT_TYPES } from '../../../../constants'
+import { Popconfirm } from 'antd'
+import PropTypes from 'prop-types'
+import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { useTranslations } from '@qonsoll/translation'
 
 function QuestionSimpleView(props) {
   const {
@@ -22,11 +23,12 @@ function QuestionSimpleView(props) {
     hiddenDelete,
     disableDelete
   } = props
-  // [ADDITIONAL HOOKS]
-  const currentQuestion = useCurrentQuestionContext()
-  const { questionRemovingPopconfirm, questionWithLogicRemovingPopconfirm } =
-    useTranslation()
 
+  // [ADDITIONAL HOOKS]
+  const { t } = useTranslations()
+  const currentQuestion = useCurrentQuestionContext()
+
+  // [COMPUTED PROPERTIES]
   const hasCondtitionOnIt = !!data?.filter(
     (question) =>
       question?.questionConfigurations?.filter(
@@ -43,11 +45,10 @@ function QuestionSimpleView(props) {
       )?.length
   )?.length
 
-  // [COMPUTED PROPERTIES]
   const current = currentQuestion && currentQuestion.id === id
   //this one check or question includes any answerOption with redirectQuestion
   const hasConditions = !!currentQuestion?.questionConfigurations?.filter(
-    (item, index) => item?.redirectQuestion?.length > 0
+    (item) => item?.redirectQuestion?.length > 0
   )?.length
 
   return (
@@ -76,13 +77,11 @@ function QuestionSimpleView(props) {
               placement="topRight"
               title={
                 hasEndingOnIt || hasConditions || hasCondtitionOnIt
-                  ? questionWithLogicRemovingPopconfirm ||
-                    TEXTINGS.questionWithLogicRemovingPopconfirm
-                  : questionRemovingPopconfirm ||
-                    TEXTINGS.questionRemovingPopconfirm
+                  ? t('This question has connected logic, delete it anyway?')
+                  : t('Delete this question?')
               }
               onConfirm={(e) => action(e, id)}
-              okText={TEXTINGS.removeButton}
+              okText={t('Delete')}
               disabled={disableDelete}
               okType="danger">
               <StyledButton

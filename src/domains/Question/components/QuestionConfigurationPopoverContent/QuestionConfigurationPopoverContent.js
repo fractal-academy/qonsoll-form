@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import { TEXTINGS } from '../../../../constants'
-import { Row, Col, Box, Title } from '@qonsoll/react-design'
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'
-import { useTranslation } from '../../../../context/Translation'
-import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { Box, Col, Row, Title } from '@qonsoll/react-design'
 import {
-  PopoverSwitcherRow,
-  CustomDivider
+  CustomDivider,
+  PopoverSwitcherRow
 } from './QuestionConfigurationPopoverContent.styles'
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import {
-  QuestionTypeSelect,
-  QuestionConfigurationMenu
+  QuestionConfigurationMenu,
+  QuestionTypeSelect
 } from '../../../../domains/Question/components'
+import React, { useMemo, useState } from 'react'
+
+import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
+import { useTranslations } from '@qonsoll/translation'
 
 function QuestionConfigurationPopoverContent(props) {
   const {
@@ -24,8 +24,7 @@ function QuestionConfigurationPopoverContent(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
-  const { questionTypeConfiguration, questionConfigurationTitle } =
-    useTranslation()
+  const { t } = useTranslations()
 
   // [COMPONENT STATE HOOKS]
   const [isQuestionConfig, setIsQuestionConfig] = useState(false)
@@ -38,12 +37,13 @@ function QuestionConfigurationPopoverContent(props) {
     onQuestionTypeChange(questionType)
     setShowPopover(false)
   }
+  const translatedQuestionType = useMemo(
+    () => t(currentQuestion?.questionType),
+    [currentQuestion, t]
+  )
 
   //[COMPUTED PROPERTIES]
-  const configurationTitle =
-    (questionConfigurationTitle &&
-      `${currentQuestion?.questionType} ${questionConfigurationTitle}`) ||
-    `${currentQuestion?.questionType} settings`
+  const configurationTitle = `${translatedQuestionType} ${t('settings')}`
 
   return (
     <Box px={0} py={0}>
@@ -62,9 +62,7 @@ function QuestionConfigurationPopoverContent(props) {
         </Col>
         <Col cw="auto" order={2}>
           <Title color="var(--qf-typography-title-color)" level={4}>
-            {isQuestionConfig
-              ? configurationTitle
-              : questionTypeConfiguration || TEXTINGS.questionTypeConfiguration}
+            {isQuestionConfig ? configurationTitle : t('Question types')}
           </Title>
         </Col>
       </PopoverSwitcherRow>

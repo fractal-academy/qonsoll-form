@@ -17,12 +17,12 @@ import {
   VideoPlayer,
   YesnoButton
 } from '../../../../components'
-import { LAYOUT_TYPES, QUESTION_TYPES, TEXTINGS } from '../../../../constants'
+import { LAYOUT_TYPES, QUESTION_TYPES } from '../../../../constants'
 import React, { cloneElement } from 'react'
 
 import PropTypes from 'prop-types'
 import QuestionImageContainer from '../QuestionImageContainer'
-import { useTranslation } from '../../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function QuestionAdvancedView(props) {
   const {
@@ -36,8 +36,7 @@ function QuestionAdvancedView(props) {
     preventFirebaseUsage
   } = props
   // [ADDITIONAL_HOOKS]
-  const { questionFinishButton, questionStartButton, questionVideo } =
-    useTranslation()
+  const { t } = useTranslations()
 
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
@@ -91,12 +90,12 @@ function QuestionAdvancedView(props) {
       component: <SubmitButton onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.VIDEO_ANSWER]: {
-      component: <VideoAnswer onClick={onClick} />
+      component: <VideoAnswer onClick={onClick} currentSlide={currentSlide} />
     },
     [QUESTION_TYPES.WELCOME_SCREEN]: {
       component: (
         <SubmitButton onClick={onClick} currentSlide={currentSlide}>
-          {questionStartButton || TEXTINGS.questionStartButton}
+          {t('Start')}
         </SubmitButton>
       )
     },
@@ -108,7 +107,7 @@ function QuestionAdvancedView(props) {
           submitLoading={submitLoading}
           currentSlide={currentSlide}
           preventFirebaseUsage={preventFirebaseUsage}>
-          {questionFinishButton || TEXTINGS.questionFinishButton}
+          {t('Finish')}
         </SubmitButton>
       )
     }
@@ -179,7 +178,7 @@ function QuestionAdvancedView(props) {
                       color="var(--qf-typography-title-color)"
                       style={{ wordBreak: 'break-word' }}
                       level={4}>
-                      {questionNumber}.{questionVideo || TEXTINGS.questionVideo}
+                      {questionNumber}.{t('Video question')}
                     </Title>
                   )}
 

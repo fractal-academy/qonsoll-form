@@ -5,12 +5,11 @@ import PropTypes from 'prop-types'
 import RatingExtension from './RatingExtension'
 import { StarFilled } from '@ant-design/icons'
 import { StyledRate } from './Rating.styles'
-import { TEXTINGS } from '../../constants'
 import { getQuestionAnswerFromContext } from '../../helpers'
 import { message } from 'antd'
 import { useAnswersContext } from '../../context/Answers'
 import { useKeyPress } from '@umijs/hooks'
-import { useTranslation } from '../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function CustomRating(props) {
   const {
@@ -26,7 +25,7 @@ function CustomRating(props) {
 
   //[CUSTOM HOOKS]
   const answersContext = useAnswersContext()
-  const { requiredAnswerMessage } = useTranslation()
+  const { t } = useTranslations()
   const [selectedValue, setSelectedValue] = useState(0)
   const [radioChecked, setRadioChecked] = useState()
   const [checkboxChecked, setCheckboxChecked] = useState()
@@ -82,9 +81,7 @@ function CustomRating(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(
-                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
-              )
+            ? message.error(t('The answer is required'))
             : onClick?.(answerData)
         } else {
           onChange(Number(event.key))

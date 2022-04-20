@@ -1,19 +1,20 @@
-import PropTypes from 'prop-types'
-import React, { useMemo } from 'react'
-import LetterBox from '../../LetterBox'
-import { NumberedCard } from '../../../../../components'
-import useFunctions from '../../../../../hooks/useFunctions'
-import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
-import { useTranslation } from '../../../../../context/Translation'
 import {
-  Title,
-  Text,
-  Select,
   Box,
   Divider,
   OptGroup,
-  Option
+  Option,
+  Select,
+  Text,
+  Title
 } from '@qonsoll/react-design'
+import React, { useMemo } from 'react'
+
+import { COLLECTIONS } from '../../../../../constants'
+import LetterBox from '../../LetterBox'
+import { NumberedCard } from '../../../../../components'
+import PropTypes from 'prop-types'
+import useFunctions from '../../../../../hooks/useFunctions'
+import { useTranslations } from '@qonsoll/translation'
 
 let startLetter = 65
 
@@ -22,7 +23,7 @@ function EndingSimpleView(props) {
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const { conditionsEndingSelectPlaceholder } = useTranslation()
+  const { t } = useTranslations()
 
   // [CLEAN FUNCTIONS]
   async function handleChange(_, selectedItems) {
@@ -63,10 +64,7 @@ function EndingSimpleView(props) {
         listHeight="300px"
         onChange={handleChange}
         defaultValue={defaultSelectValue}
-        placeholder={
-          conditionsEndingSelectPlaceholder ||
-          TEXTINGS.conditionsEndingSelectPlaceholder
-        }>
+        placeholder={t('Select questions to call current ending')}>
         {questionsData?.map((questionListItem, index) => (
           <OptGroup
             key={`${questionListItem}-${index}`}
@@ -83,7 +81,7 @@ function EndingSimpleView(props) {
                 <Text
                   color="var(--qf-typography-caption-color)"
                   fontSize="var(--qf-typography-fs-body)">
-                  {questionListItem?.title || 'No question text'}
+                  {questionListItem?.title || t('No question text')}
                 </Text>
               </Box>
             }>

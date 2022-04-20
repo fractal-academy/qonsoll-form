@@ -1,22 +1,23 @@
-import React, { useState, forwardRef } from 'react'
-import PropTypes from 'prop-types'
-import { StyledItem } from '../../../components'
-import { COLLECTIONS, TEXTINGS } from '../../../constants'
-import { Row, Col, Box, Text, Title } from '@qonsoll/react-design'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Popconfirm, Dropdown, Menu, message } from 'antd'
-import { useTranslation } from '../../../context/Translation'
-import { FormSimpleFormWithModal } from '../../../domains/Form/components'
-import { MoreOutlined, DeleteOutlined, CheckOutlined } from '@ant-design/icons'
-import useFunctions from '../../../hooks/useFunctions'
-import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import { Box, Col, Row, Text, Title } from '@qonsoll/react-design'
+import { CheckOutlined, DeleteOutlined, MoreOutlined } from '@ant-design/icons'
+import { Dropdown, Menu, Popconfirm, message } from 'antd'
 import {
   ItemPreview,
+  StyledBadge,
   StyledIcon,
   StyledImage,
-  StyledBadge,
   StyledMenu
 } from './ListItem.styles'
+import React, { forwardRef, useState } from 'react'
+
+import { COLLECTIONS } from '../../../constants'
+import { FormSimpleFormWithModal } from '../../../domains/Form/components'
+import PropTypes from 'prop-types'
+import { StyledItem } from '../../../components'
+import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import useFunctions from '../../../hooks/useFunctions'
+import { useTranslations } from '@qonsoll/translation'
 
 const { Item } = Menu
 
@@ -44,13 +45,7 @@ const ListItem = forwardRef((props, ref) => {
       getCollectionRef(COLLECTIONS.ANSWERS).where('formId', '==', data?.id)
   )
   const { onFormItemClick, onFormDelete } = useActionsFunctionsContext()
-  const {
-    editButton,
-    removeButton,
-    listItemNoDescription,
-    popconfirmDeleteFormTitle,
-    popconfirmDeleteImageTitle
-  } = useTranslation()
+  const { t } = useTranslations()
 
   // [COMPONENT STATE HOOKS]
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -58,8 +53,7 @@ const ListItem = forwardRef((props, ref) => {
   const [isPopconfirmVisible, setIsPopconfirmVisible] = useState(false)
 
   // [COMPUTED PROPERTIES]
-  const description =
-    data?.subtitle || listItemNoDescription || TEXTINGS.listItemNoDescription
+  const description = data?.subtitle || t('No description')
   const collection = data?.imageUrl ? COLLECTIONS.MEDIA : COLLECTIONS.FORMS
 
   // [CLEAN FUNCTIONS]
@@ -120,9 +114,7 @@ const ListItem = forwardRef((props, ref) => {
   const menu = (
     <StyledMenu>
       <Item onClick={(e) => showModal(e)} key={'showModal'}>
-        <Text color="var(--qf-typography-subtitle-color)">
-          {editButton || TEXTINGS.editButton}
-        </Text>
+        <Text color="var(--qf-typography-subtitle-color)">{t('Edit')}</Text>
         <FormSimpleFormWithModal
           isEdit
           formData={data}
@@ -137,15 +129,11 @@ const ListItem = forwardRef((props, ref) => {
         <Popconfirm
           visible={isPopconfirmVisible}
           onConfirm={handleDelete}
-          title={
-            popconfirmDeleteFormTitle || TEXTINGS.popconfirmDeleteFormTitle
-          }
+          title={t('Remove form?')}
           okButtonProps={{ loading: confirmLoading }}
           okType="danger"
           okText="Delete">
-          <Text color="var(--ql-color-danger)">
-            {removeButton || TEXTINGS.removeButton}
-          </Text>
+          <Text color="var(--ql-color-danger)">{t('Delete')}</Text>
         </Popconfirm>
       </Item>
     </StyledMenu>
@@ -204,10 +192,7 @@ const ListItem = forwardRef((props, ref) => {
           <Col cw="auto" display="flex" v="center">
             {data?.imageUrl ? (
               <Popconfirm
-                title={
-                  popconfirmDeleteImageTitle ||
-                  TEXTINGS.popconfirmDeleteImageTitle
-                }
+                title={t('Remove image?')}
                 onConfirm={handleDelete}
                 okButtonProps={{ loading: confirmLoading }}
                 okType="danger"

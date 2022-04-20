@@ -2,16 +2,14 @@ import { Input, Switch, TextArea } from '@qonsoll/react-design'
 import React, { useMemo } from 'react'
 
 import { Form } from 'antd'
-import { TEXTINGS } from '../../../../constants'
-import { useTranslation } from '../../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 // const { TextArea } = Input
 function FormSimpleForm(props) {
   const { formData, children, ...rest } = props
 
   // [ADDITIONAL_HOOKS]
-  const { formTitlePlaceholder, formSubtitlePlaceholder, quizSwitcherText } =
-    useTranslation()
+  const { t } = useTranslations()
 
   // [COMPUTED PROPERTIES]
   const initialValues = useMemo(() => {
@@ -27,13 +25,8 @@ function FormSimpleForm(props) {
     <Form {...rest} initialValues={initialValues}>
       <Form.Item
         name="title"
-        rules={[{ required: true, message: TEXTINGS.formValidationRule }]}>
-        <Input
-          mb={4}
-          allowClear
-          maxLength={250}
-          placeholder={formTitlePlaceholder || TEXTINGS.formTitlePlaceholder}
-        />
+        rules={[{ required: true, message: t('Please, enter form name') }]}>
+        <Input mb={4} allowClear maxLength={250} placeholder={t('Form name')} />
       </Form.Item>
       <Form.Item name="subtitle">
         <TextArea
@@ -42,14 +35,10 @@ function FormSimpleForm(props) {
           autoSize={{ minRows: 3, maxRows: 5 }}
           maxLength={1000}
           allowClear
-          placeholder={
-            formSubtitlePlaceholder || TEXTINGS.formSubtitlePlaceholder
-          }
+          placeholder={t('Form short description')}
         />
       </Form.Item>
-      <Form.Item
-        name="isQuiz"
-        label={quizSwitcherText || TEXTINGS.quizSwitcherText}>
+      <Form.Item name="isQuiz" label={t('Enable quiz system')}>
         <Switch defaultChecked={!!formData?.isQuiz} />
       </Form.Item>
       {children}

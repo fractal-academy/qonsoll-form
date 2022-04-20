@@ -1,10 +1,10 @@
+import { Box, Col, Link, NoData, Row, Text } from '@qonsoll/react-design'
+import { ListItem, NewListItem } from '../../../components'
+
+import PropTypes from 'prop-types'
 import React from 'react'
 import { Upload } from 'antd'
-import PropTypes from 'prop-types'
-import { TEXTINGS } from '../../../constants'
-import { ListItem, NewListItem } from '../../../components'
-import { useTranslation } from '../../../context/Translation'
-import { Row, Col, Box, Text, Link, NoData } from '@qonsoll/react-design'
+import { useTranslations } from '@qonsoll/translation'
 
 function StaticList(props) {
   const {
@@ -20,7 +20,7 @@ function StaticList(props) {
   } = props
 
   // [ADDITIONAL HOOKS]
-  const { emptyDescription, uploadImage, createForm } = useTranslation()
+  const { t } = useTranslations()
 
   // [COMPUTED PROPERTIES]
   const columnWidth = data?.[0]?.imageUrl ? 3 : [6, 4, 4, 2]
@@ -56,7 +56,7 @@ function StaticList(props) {
             description={
               <Box display="flex" flexDirection="column">
                 <Text color="var(--qf-typography-subtitle-color)">
-                  {emptyDescription || TEXTINGS.emptyDescription}
+                  {t('Nothing was found')}
                 </Text>
                 {hasMedia ? (
                   <Upload
@@ -66,14 +66,12 @@ function StaticList(props) {
                     customRequest={customRequest}
                     beforeUpload={beforeUpload}>
                     <Link onClick={(e) => e.preventDefault()}>
-                      {uploadImage || TEXTINGS.uploadImage}
+                      {t('Upload new image')}
                     </Link>
                   </Upload>
                 ) : (
                   disableAddButton && (
-                    <Link onClick={onClick}>
-                      {createForm || TEXTINGS.createForm}
-                    </Link>
+                    <Link onClick={onClick}>{t('Add new form')}</Link>
                   )
                 )}
               </Box>

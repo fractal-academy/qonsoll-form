@@ -21,8 +21,7 @@ import {
 import {
   DEFAULT_IMAGE,
   LAYOUT_TYPES,
-  QUESTION_TYPES,
-  TEXTINGS
+  QUESTION_TYPES
 } from '../../../../constants'
 import {
   QuestionConfigurationPopover,
@@ -36,7 +35,7 @@ import PropTypes from 'prop-types'
 import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
 import SideLayoutImage from './SideLayoutImage'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
-import { useTranslation } from '../../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function QuestionForm(props) {
   const {
@@ -53,22 +52,11 @@ function QuestionForm(props) {
 
   // [ADDITIONAL HOOKS]
   const currentQuestion = useCurrentQuestionContext()
-  const {
-    questionStartButton,
-    questionFinishButton,
-    endingListTitle,
-    questionListTitle,
-    questionEditableTitleHint,
-    questionEditableSubtitleHint
-  } = useTranslation()
+  const { t } = useTranslations()
   // [COMPUTED PROPERTIES]
   const questionTypesMap = {
     [QUESTION_TYPES.WELCOME_SCREEN]: {
-      component: (
-        <SubmitButton>
-          {questionStartButton || TEXTINGS.questionStartButton}
-        </SubmitButton>
-      )
+      component: <SubmitButton>{t('Start')}</SubmitButton>
     },
     [QUESTION_TYPES.YES_NO]: {
       component: <YesnoButton />
@@ -101,11 +89,7 @@ function QuestionForm(props) {
       component: <SubmitButton />
     },
     [QUESTION_TYPES.ENDING]: {
-      component: (
-        <SubmitButton>
-          {questionFinishButton || TEXTINGS.questionFinishButton}
-        </SubmitButton>
-      )
+      component: <SubmitButton>{t('Finish')}</SubmitButton>
     },
     [QUESTION_TYPES.VIDEO_ANSWER]: {
       component: (
@@ -115,8 +99,7 @@ function QuestionForm(props) {
           display="flex"
           fontWeight="500"
           alignItems="center">
-          {/* MOVE TO CONSTANTS */}
-          Here will be answer as video. ;)
+          {`${t('Here will be answer as video')}. ;)`}
         </Box>
       )
     }
@@ -128,10 +111,8 @@ function QuestionForm(props) {
   const video = questionData?.isVideoQuestion
   const questionTag =
     currentQuestion.questionType === QUESTION_TYPES.ENDING
-      ? endingListTitle || TEXTINGS.endingListTitle
-      : `${questionListTitle || TEXTINGS.questionListTitle} ${
-          questionData?.order
-        }`
+      ? t('Ending')
+      : `${t('Question')} ${questionData?.order}`
   const layoutType = LAYOUT_TYPES[questionData?.layoutType]
   //rule for template to render column with image, when layout type === left/right(small/big)
   const imageShowRule =
@@ -194,14 +175,8 @@ function QuestionForm(props) {
               <Row noGutters h="between" mb={4}>
                 <Col cw="12" mt={2}>
                   <QuestionHeader
-                    titlePlaceholder={
-                      questionEditableTitleHint ||
-                      TEXTINGS.questionEditableTitleHint
-                    }
-                    subtitlePlaceholder={
-                      questionEditableSubtitleHint ||
-                      TEXTINGS.questionEditableSubtitleHint
-                    }
+                    titlePlaceholder={t('Editable question title')}
+                    subtitlePlaceholder={t('Description (optional)')}
                   />
                 </Col>
               </Row>

@@ -1,11 +1,10 @@
-import React from 'react'
-import { v4 as uuid } from 'uuid'
-import PropTypes from 'prop-types'
-import MatchCondition from './MatchCondition'
 import { Container } from '@qonsoll/react-design'
-import { TEXTINGS } from '../../../../../constants'
 import { CustomButton } from './TextTemplate.styles'
-import { useTranslation } from '../../../../../context/Translation'
+import MatchCondition from './MatchCondition'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { useTranslations } from '@qonsoll/translation'
+import { v4 as uuid } from 'uuid'
 
 function TextTemplate(props) {
   const {
@@ -18,7 +17,7 @@ function TextTemplate(props) {
   } = props
 
   // [ADDITIONAL_HOOKS]
-  const { conditionModalAddCondition } = useTranslation()
+  const { t } = useTranslations()
 
   // [CLEAN FUNCTIONS]
   const onClick = () => {
@@ -45,7 +44,7 @@ function TextTemplate(props) {
         />
       ))}
       <CustomButton onClick={onClick} onMouseDown={(e) => e.preventDefault()}>
-        {conditionModalAddCondition || TEXTINGS.conditionModalAddCondition}
+        {t('+ Add condition')}
       </CustomButton>
     </Container>
   )

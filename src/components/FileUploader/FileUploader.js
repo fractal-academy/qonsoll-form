@@ -1,14 +1,14 @@
+import { Box, Button, Col, Row, Text } from '@qonsoll/react-design'
+import { DeleteOutlined, FileOutlined, InboxOutlined } from '@ant-design/icons'
+import { IconLabel, UploadItem } from './FileUploader.styles'
+import { Popconfirm, Progress, Upload, message } from 'antd'
 import React, { useState } from 'react'
-import { Upload, message, Progress, Popconfirm } from 'antd'
-import { DeleteOutlined, InboxOutlined, FileOutlined } from '@ant-design/icons'
-import { SubmitButton } from '..'
-import { useTranslation } from '../../context/Translation'
+import { useHover, useKeyPress } from '@umijs/hooks'
+
 import COLLECTIONS from '../../constants/collection'
-import { TEXTINGS } from '../../constants'
+import { SubmitButton } from '..'
 import useFunctions from '../../hooks/useFunctions'
-import { Box, Row, Col, Text, Button } from '@qonsoll/react-design'
-import { useKeyPress, useHover } from '@umijs/hooks'
-import { UploadItem, IconLabel } from './FileUploader.styles'
+import { useTranslations } from '@qonsoll/translation'
 
 const { Dragger } = Upload
 
@@ -21,8 +21,7 @@ const UploadArea = (props) => {
   const { onContinue, question, currentSlide } = props
 
   // [ADDITIONAL_HOOKS]
-  const { requiredAnswerMessage, uploaderHint, itemRemovingHint } =
-    useTranslation()
+  const { t } = useTranslations()
   const { getCollectionRef, storage } = useFunctions()
   const [isHovering, hoverRef] = useHover()
 
@@ -121,7 +120,7 @@ const UploadArea = (props) => {
       })
       .catch((error) => {
         console.log('error, ', error)
-        message.error("Couldn't delete file")
+        message.error(t("Couldn't delete file"))
       })
   }
 
@@ -134,7 +133,7 @@ const UploadArea = (props) => {
     question?.isRequired
       ? uploaderData
         ? onContinue?.(data)
-        : message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
+        : message.error(t('The answer is required'))
       : onContinue?.(data)
   }
 
@@ -166,7 +165,7 @@ const UploadArea = (props) => {
           </Box>
           <Box textAlign="center" mt={2}>
             <Text color="var(--qf-typography-subtitle-color)">
-              {uploaderHint || TEXTINGS.uploaderHint}
+              {t('Click or drag file to this area to upload')}
             </Text>
           </Box>
         </Box>
@@ -191,9 +190,9 @@ const UploadArea = (props) => {
                 ) : (
                   <Popconfirm
                     onConfirm={() => onRemove(file)}
-                    title={itemRemovingHint || TEXTINGS.itemRemovingHint}
+                    title={t('Delete this item?')}
                     okType="danger"
-                    okText={TEXTINGS.removeButton}>
+                    okText={t('Delete')}>
                     <Button
                       shape="circle"
                       type="text"

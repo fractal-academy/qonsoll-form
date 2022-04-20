@@ -1,69 +1,39 @@
-import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
-import { TEXTINGS } from '../../../../constants'
 import { Box, NoData } from '@qonsoll/react-design'
-import { Spinner } from '../../../../../src/components'
-import { useTranslation } from '../../../../context/Translation'
-import { StyledTable } from '../../../../domains/Response/components/ResponseTable/ResponseTable.style'
+import React, { useEffect, useMemo } from 'react'
 
-const columns = [
-  {
-    render: (text, record) => (
-      <div
-        style={{
-          wordWrap: 'break-word',
-          wordBreak: 'break-word',
-          width: '50px'
-        }}>
-        {text}
-      </div>
-    ),
-    title: '#',
-    dataIndex: 'order',
-    key: 'order',
-    sortOrder: 'descend',
-    width: '50px'
-  },
-  {
-    render: (text, record) => (
-      <div
-        style={{
-          wordWrap: 'break-word',
-          wordBreak: 'break-word',
-          width: '100%'
-        }}>
-        {text}
-      </div>
-    ),
-    title: TEXTINGS.answerTableQuestionTitle,
-    dataIndex: 'questionTitle',
-    key: 'questionTitle'
-  },
-  {
-    render: (text, record) => (
-      <div
-        style={{
-          wordWrap: 'break-word',
-          wordBreak: 'break-word',
-          width: '100%'
-        }}>
-        {text}
-      </div>
-    ),
-    title: TEXTINGS.answerTableAnswerTitle,
-    dataIndex: 'answer',
-    key: 'answer'
-  }
-]
+import PropTypes from 'prop-types'
+import { Spinner } from '../../../../../src/components'
+import { StyledTable } from '../../../../domains/Response/components/ResponseTable/ResponseTable.style'
+import { useTranslations } from '@qonsoll/translation'
 
 function ResponseTable(props) {
   const { data, loading, isFormQuiz } = props
-  const { answersNoSelectedUser } = useTranslation()
 
-  useEffect(() => {
-    if (isFormQuiz)
-      columns?.push({
-        render: (text, record) => (
+  // [ADDITIONAL HOOKS]
+  const { t } = useTranslations()
+
+  // [COMPUTED PROPERTIES]
+  const columns = useMemo(
+    () => [
+      {
+        render: (text) => (
+          <div
+            style={{
+              wordWrap: 'break-word',
+              wordBreak: 'break-word',
+              width: '50px'
+            }}>
+            {text}
+          </div>
+        ),
+        title: '#',
+        dataIndex: 'order',
+        key: 'order',
+        sortOrder: 'descend',
+        width: '50px'
+      },
+      {
+        render: (text) => (
           <div
             style={{
               wordWrap: 'break-word',
@@ -73,11 +43,48 @@ function ResponseTable(props) {
             {text}
           </div>
         ),
-        title: TEXTINGS.answerTableScoreTitle,
+        title: t('Question'),
+        dataIndex: 'questionTitle',
+        key: 'questionTitle'
+      },
+      {
+        render: (text) => (
+          <div
+            style={{
+              wordWrap: 'break-word',
+              wordBreak: 'break-word',
+              width: '100%'
+            }}>
+            {text}
+          </div>
+        ),
+        title: t('Answer'),
+        dataIndex: 'answer',
+        key: 'answer'
+      }
+    ],
+    [t]
+  )
+
+  // [USE EFFECTS]
+  useEffect(() => {
+    if (isFormQuiz)
+      columns?.push({
+        render: (text) => (
+          <div
+            style={{
+              wordWrap: 'break-word',
+              wordBreak: 'break-word',
+              width: '100%'
+            }}>
+            {text}
+          </div>
+        ),
+        title: t('Score'),
         dataIndex: 'answerScore',
         key: 'answerScore'
       })
-  }, [isFormQuiz])
+  }, [columns, isFormQuiz, t])
 
   return (
     <Box overflowX="hidden">
@@ -93,11 +100,7 @@ function ResponseTable(props) {
               pagination={false}
             />
           ) : (
-            <NoData
-              description={
-                answersNoSelectedUser || TEXTINGS.answersNoSelectedUser
-              }
-            />
+            <NoData description={t('Choose user to display their answers')} />
           )}
         </Box>
       )}

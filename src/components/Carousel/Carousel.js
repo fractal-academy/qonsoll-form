@@ -6,7 +6,6 @@ import {
 import { Carousel as AntdCarousel, message } from 'antd'
 import { Box, Button, Col, Row } from '@qonsoll/react-design'
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
-import { QUESTION_TYPES, TEXTINGS } from '../../constants'
 import React, { cloneElement, useEffect, useRef } from 'react'
 import {
   dateAnswerConditionComparison,
@@ -15,7 +14,8 @@ import {
 import { useKeyPress, useSize } from '@umijs/hooks'
 
 import PropTypes from 'prop-types'
-import { useTranslation } from '../../context/Translation'
+import { QUESTION_TYPES } from '../../constants'
+import { useTranslations } from '@qonsoll/translation'
 
 function Carousel(props) {
   const {
@@ -36,7 +36,7 @@ function Carousel(props) {
   const carouselRef = useRef()
   const answersContext = useAnswersContext()
   const answersContextDispatch = useAnswersContextDispatch()
-  const { requiredAnswerMessage } = useTranslation()
+  const { t } = useTranslations()
 
   const [{ height }, ref] = useSize()
   const [{ height: buttonsHeight }, buttonsRef] = useSize()
@@ -56,7 +56,7 @@ function Carousel(props) {
 
   const next = async (skipButtonEvent) => {
     if (currentSlideData?.isRequired && skipButtonEvent) {
-      message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
+      message.error(t('The answer is required'))
     } else {
       const isAnswerExists = !!answerValue
       const isWelcomeScreen =
