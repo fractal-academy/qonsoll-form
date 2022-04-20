@@ -82,6 +82,7 @@ function QuestionSimpleView(props) {
               }
               onConfirm={(e) => action(e, id)}
               okText={t('Delete')}
+              cancelText={t('Cancel')}
               disabled={disableDelete}
               okType="danger">
               <StyledButton

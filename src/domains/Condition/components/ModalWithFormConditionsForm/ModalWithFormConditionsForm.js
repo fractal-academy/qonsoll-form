@@ -59,9 +59,13 @@ function ModalWithFormConditionsForm(props) {
               </Col>
               <Col cw="auto" v="center">
                 <Popconfirm
-                  title={popconfirmReset || t('Reset logic')}
-                  okText={t('Reset')}
+                  title={
+                    popconfirmReset ||
+                    t('Are you sure you want to reset logic?')
+                  }
                   okType="danger"
+                  okText={t('Reset')}
+                  cancelText={t('Cancel')}
                   onConfirm={onResetClick}>
                   <Button type="text" onMouseDown={(e) => e.preventDefault()}>
                     {t('Reset logic')}

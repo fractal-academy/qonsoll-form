@@ -124,7 +124,8 @@ function RatingExtension(props) {
                   okType="danger"
                   title={t('Delete this item?')}
                   onConfirm={() => deleteOption(index)}
-                  okText={t('Delete')}>
+                  okText={t('Delete')}
+                  cancelText={t('Cancel')}>
                   <Box
                     p={0}
                     mr={2}
@@ -161,7 +162,8 @@ function RatingExtension(props) {
                   title={t('Delete this item?')}
                   okType="danger"
                   onConfirm={() => deleteOption(index)}
-                  okText={t('Delete')}>
+                  okText={t('Delete')}
+                  cancelText={t('Cancel')}>
                   <Box
                     opacity={isHovering ? 1 : 0}
                     color="var(--ql-color-danger)"

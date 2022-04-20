@@ -118,7 +118,8 @@ function ChoiceEditable(props) {
             title={t('This option has connected logic, delete it anyway?')}
             onConfirm={onDelete}
             okType="danger"
-            okText={t('Delete')}>
+            okText={t('Delete')}
+            cancelText={t('Cancel')}>
             <DeleteButton>
               <CloseOutlined />
             </DeleteButton>

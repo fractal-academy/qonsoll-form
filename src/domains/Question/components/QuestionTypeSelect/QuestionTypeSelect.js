@@ -60,7 +60,7 @@ function QuestionTypeSelect(props) {
       icon: <CalendarOutlined />
     },
     {
-      label: `${'Yes'}/${'No'}`,
+      label: `${t('Yes')}/${t('No')}`,
       type: QUESTION_TYPES.YES_NO,
       description: t(QUESTION_DESCRIPTIONS.YES_NO),
       icon: <ShareAltOutlined />

@@ -192,7 +192,8 @@ const UploadArea = (props) => {
                     onConfirm={() => onRemove(file)}
                     title={t('Delete this item?')}
                     okType="danger"
-                    okText={t('Delete')}>
+                    okText={t('Delete')}
+                    cancelText={t('Cancel')}>
                     <Button
                       shape="circle"
                       type="text"

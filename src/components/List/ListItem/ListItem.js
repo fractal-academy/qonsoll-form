@@ -132,7 +132,8 @@ const ListItem = forwardRef((props, ref) => {
           title={t('Remove form?')}
           okButtonProps={{ loading: confirmLoading }}
           okType="danger"
-          okText="Delete">
+          okText={t('Delete')}
+          cancelText={t('Cancel')}>
           <Text color="var(--ql-color-danger)">{t('Delete')}</Text>
         </Popconfirm>
       </Item>
@@ -196,7 +197,8 @@ const ListItem = forwardRef((props, ref) => {
                 onConfirm={handleDelete}
                 okButtonProps={{ loading: confirmLoading }}
                 okType="danger"
-                okText="Delete">
+                okText={t('Delete')}
+                cancelText={t('Cancel')}>
                 <DeleteOutlined />
               </Popconfirm>
             ) : (
