@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { QuestionSelect } from '../../../../Question/components'
-import { Container, Row, Col, Text } from '@qonsoll/react-design'
-import { useTranslation } from '../../../../../context/Translation'
-import QuestionPreview from '../../QuestionPreview'
-import { TEXTINGS } from '../../../../../constants'
+import { Col, Container, Row, Text } from '@qonsoll/react-design'
+
 import LetterBox from '../../LetterBox'
+import PropTypes from 'prop-types'
+import QuestionPreview from '../../QuestionPreview'
+import { QuestionSelect } from '../../../../Question/components'
+import React from 'react'
+import { useTranslations } from '@qonsoll/translation'
 
 let startLetter = 65
 
@@ -19,14 +19,11 @@ function ChoiceTemplate(props) {
   } = props
 
   // [ADDITIONAL_HOOKS]
-  const { conditionModalIsUploaded, conditionModalIsRecorded } =
-    useTranslation()
+  const { t } = useTranslations()
 
   // [COMPUTED PROPERTIES]
-  const uploadChoiceText =
-    conditionModalIsUploaded || TEXTINGS.conditionModalIsUploaded
-  const recordChoiceText =
-    conditionModalIsRecorded || TEXTINGS.conditionModalIsRecorded
+  const uploadChoiceText = t('is uploaded')
+  const recordChoiceText = t('is recorded')
   const choiceAutoTextComputed =
     (handlesUpload && uploadChoiceText) || (handlesRecord && recordChoiceText)
 

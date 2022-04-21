@@ -1,12 +1,12 @@
-import { TEXTINGS } from '../../../../constants'
-import React, { useState, useEffect } from 'react'
-import { useTranslation } from '../../../../context/Translation'
-import { Row, Col, Text, Switch, Select } from '@qonsoll/react-design'
+import { Col, Row, Select, Switch, Text } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+import React, { useEffect, useState } from 'react'
+
+import { useTranslations } from '@qonsoll/translation'
 import { v4 as uuid } from 'uuid'
 
 const maxRange = [...Array(10)].map((_, index) =>
@@ -17,11 +17,7 @@ function AmountOptionsCustomConfig() {
   // [CUSTOM_HOOKS]
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const {
-    questionConfigurationOptions,
-    questionConfigurationExtended,
-    questionConfigurationMultiple
-  } = useTranslation()
+  const { t } = useTranslations()
 
   // [COMPONENT_STATE_HOOKS]
   const [extendedSwitchValue, setExtendedSwitchValue] = useState(
@@ -58,7 +54,7 @@ function AmountOptionsCustomConfig() {
         isExtended: switchValue,
         ratingAdditionalOptions: [
           {
-            answerOption: TEXTINGS.ratingExtendedDefaultOption,
+            answerOption: 'Extended option',
             redirectQuestion: '',
             answerOptionId: uuid(),
             redirectConditionRule: ''
@@ -91,8 +87,7 @@ function AmountOptionsCustomConfig() {
       <Row noGutters mb={3} v="center" h="between">
         <Col v="center">
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionConfigurationExtended ||
-              TEXTINGS.questionConfigurationExtended}
+            {t('Turn on extended options')}
           </Text>
         </Col>
         <Col cw="auto" v="center">
@@ -107,8 +102,7 @@ function AmountOptionsCustomConfig() {
         <Row noGutters mb={3} v="center" h="between">
           <Col v="center">
             <Text color="var(--qf-typography-subtitle-color)">
-              {questionConfigurationMultiple ||
-                TEXTINGS.questionConfigurationMultiple}
+              {t('Switch to multiple option')}
             </Text>
           </Col>
           <Col cw="auto" v="center">
@@ -123,8 +117,7 @@ function AmountOptionsCustomConfig() {
       <Row noGutters mb={2} h="between">
         <Col v="center" mb={2}>
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionConfigurationOptions ||
-              TEXTINGS.questionConfigurationOptions}
+            {t('Amount of options')}
           </Text>
         </Col>
         <Col cw="auto">

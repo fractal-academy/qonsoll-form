@@ -1,11 +1,11 @@
+import { Box, Button, Popover } from '@qonsoll/react-design'
+
+import { PlusOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types'
+import { QuestionTypeSelect } from '../../../domains/Question/components'
 import React from 'react'
 import { Tooltip } from 'antd'
-import PropTypes from 'prop-types'
-import { PlusOutlined } from '@ant-design/icons'
-import { TEXTINGS } from '../../../constants'
-import { Popover, Button, Box } from '@qonsoll/react-design'
-import { useTranslation } from '../../../context/Translation'
-import { QuestionTypeSelect } from '../../../domains/Question/components'
+import { useTranslations } from '@qonsoll/translation'
 
 function TypePopover(props) {
   const {
@@ -19,7 +19,7 @@ function TypePopover(props) {
   } = props
 
   // [ADDITIONAL HOOKS]
-  const { questionCreationTooltip } = useTranslation()
+  const { t } = useTranslations()
 
   return (
     <Popover
@@ -40,9 +40,7 @@ function TypePopover(props) {
           />
         </Box>
       }>
-      <Tooltip
-        placement="bottom"
-        title={questionCreationTooltip || TEXTINGS.questionCreationTooltip}>
+      <Tooltip placement="bottom" title={t('Create new question')}>
         <Button
           type="text"
           icon={<PlusOutlined />}

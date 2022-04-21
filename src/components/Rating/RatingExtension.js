@@ -1,21 +1,21 @@
-import React from 'react'
-import { v4 as uuid } from 'uuid'
-import { useHover } from '@umijs/hooks'
-import { TEXTINGS } from '../../constants'
-import ExtentionItem from './ExtentionItem'
-import { Radio, Checkbox, Popconfirm } from 'antd'
-import { useTranslation } from '../../context/Translation'
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
-import { Container, Box, Button } from '@qonsoll/react-design'
+import {
+  ANSWERS_DISPATCH_EVENTS,
+  useAnswersContextDispatch
+} from '../../context/Answers'
+import { Box, Button, Container } from '@qonsoll/react-design'
+import { Checkbox, Popconfirm, Radio } from 'antd'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
-import {
-  useAnswersContextDispatch,
-  ANSWERS_DISPATCH_EVENTS
-} from '../../context/Answers'
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
+
+import ExtentionItem from './ExtentionItem'
+import React from 'react'
+import { useHover } from '@umijs/hooks'
+import { useTranslations } from '@qonsoll/translation'
+import { v4 as uuid } from 'uuid'
 
 function RatingExtension(props) {
   const {
@@ -32,9 +32,9 @@ function RatingExtension(props) {
   const [isHovering, hoverRef] = useHover()
 
   //[CUSTOM HOOKS]
+  const { t } = useTranslations()
   const answersDispatch = useAnswersContextDispatch()
   const currentQuestion = useCurrentQuestionContext()
-  const { removeButton, itemRemovingHint } = useTranslation()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPUTED PROPERTIES]
@@ -79,7 +79,6 @@ function RatingExtension(props) {
         payload: data
       })
   }
-
   const addOption = () => {
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
@@ -106,7 +105,6 @@ function RatingExtension(props) {
       }
     })
   }
-
   const deleteOption = (index) => {
     ratingProps.splice(index, 1)
     currentQuestionDispatch({
@@ -124,9 +122,10 @@ function RatingExtension(props) {
               {!onClick && (
                 <Popconfirm
                   okType="danger"
-                  title={itemRemovingHint || TEXTINGS.itemRemovingHint}
+                  title={t('Delete this item?')}
                   onConfirm={() => deleteOption(index)}
-                  okText={removeButton || TEXTINGS.removeButton}>
+                  okText={t('Delete')}
+                  cancelText={t('Cancel')}>
                   <Box
                     p={0}
                     mr={2}
@@ -160,10 +159,11 @@ function RatingExtension(props) {
             <Box mb={2} key={index} display="flex" alignItems="center">
               {!onClick && (
                 <Popconfirm
-                  title={itemRemovingHint || TEXTINGS.itemRemovingHint}
+                  title={t('Delete this item?')}
                   okType="danger"
                   onConfirm={() => deleteOption(index)}
-                  okText={removeButton || TEXTINGS.removeButton}>
+                  okText={t('Delete')}
+                  cancelText={t('Cancel')}>
                   <Box
                     opacity={isHovering ? 1 : 0}
                     color="var(--ql-color-danger)"

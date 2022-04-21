@@ -4,13 +4,12 @@ import React, { useState } from 'react'
 import COLLECTIONS from '../../../constants/collection'
 import { CheckOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
-import { TEXTINGS } from '../../../constants'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useAnswersContext } from '../../../context/Answers'
 import useFunctions from '../../../../src/hooks/useFunctions'
 import { useHistory } from 'react-router-dom'
 import { useKeyPress } from '@umijs/hooks'
-import { useTranslation } from '../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function SubmitButton(props) {
   const {
@@ -34,7 +33,7 @@ function SubmitButton(props) {
   const history = useHistory()
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
-  const { submitHint } = useTranslation()
+  const { t } = useTranslations()
   const isntDesktop = window.innerWidth >= 1024
 
   const mockUser = { name: 'John Doe' }
@@ -126,7 +125,7 @@ function SubmitButton(props) {
       {isntDesktop && (
         <Col cw="auto">
           <Text color="var(--qf-typography-subtitle-color)">
-            {(submitHint || TEXTINGS.submitHint) + ' ↵'}
+            {t('Press enter') + ' ↵'}
           </Text>
         </Col>
       )}

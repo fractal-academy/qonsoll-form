@@ -1,14 +1,19 @@
-import { message } from 'antd'
 import React, { useRef } from 'react'
-import { useKeyPress } from '@umijs/hooks'
-import { TEXTINGS } from '../../constants'
+
 import { StyledDatePicker } from './DateTimeInput.styles'
-import { useAnswersContext } from '../../context/Answers'
-import { useTranslation } from '../../context/Translation'
 import { getQuestionAnswerFromContext } from '../../helpers'
+import { message } from 'antd'
+import { useAnswersContext } from '../../context/Answers'
+import { useKeyPress } from '@umijs/hooks'
+import { useTranslations } from '@qonsoll/translation'
 
 const DateTimeInput = (props) => {
   const { onDateChange, question, currentSlide } = props
+
+  // [ADDITIONAL_HOOKS]
+  const datePickerRef = useRef()
+  const { t } = useTranslations()
+  const answersContext = useAnswersContext()
 
   // [CLEAN FUNCTIONS]
   const onChange = (_, dateString) => {
@@ -16,12 +21,6 @@ const DateTimeInput = (props) => {
     !!dateString && onDateChange && onDateChange(data)
     datePickerRef.current.blur()
   }
-  //[CUSTOM HOOKS]
-  const { requiredAnswerMessage, datepickerPlaceholder } = useTranslation()
-  const answersContext = useAnswersContext()
-
-  // [ADDITIONAL_HOOKS]
-  const datePickerRef = useRef()
 
   useKeyPress(
     (event) => event.keyCode === 13 && currentSlide === question?.order,
@@ -37,9 +36,7 @@ const DateTimeInput = (props) => {
         }
 
         question?.isRequired && !questionAnswer
-          ? message.error(
-              requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
-            )
+          ? message.error(t('The answer is required'))
           : onDateChange?.(answerData)
       }
     },
@@ -53,7 +50,7 @@ const DateTimeInput = (props) => {
       ref={datePickerRef}
       onChange={onChange}
       disabled={!onDateChange}
-      placeholder={datepickerPlaceholder || TEXTINGS.datepickerPlaceholder}
+      placeholder={t('Select date')}
       {...props}
     />
   )

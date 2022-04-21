@@ -3,12 +3,11 @@ import React, { useState } from 'react'
 
 import PropTypes from 'prop-types'
 import { StyledRangeButton } from './RangeButton.styles'
-import { TEXTINGS } from '../../../constants'
 import { getQuestionAnswerFromContext } from '../../../helpers'
 import { message } from 'antd'
 import { useAnswersContext } from '../../../context/Answers'
 import { useKeyPress } from '@umijs/hooks'
-import { useTranslation } from '../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function RangeButton(props) {
   const { onClick, question, isFormQuiz, currentSlide, answersScoreData } =
@@ -20,11 +19,9 @@ function RangeButton(props) {
   const cwMedium = window.innerWidth >= 1100
   const cwSmall = window.innerWidth >= 500
 
-  //[CUSTOM HOOKS]
-  const { requiredAnswerMessage } = useTranslation()
-  const answersContext = useAnswersContext()
-
   // [ADDITIONAL HOOKS]
+  const { t } = useTranslations()
+  const answersContext = useAnswersContext()
   useKeyPress(
     (event) =>
       (![].includes(event.key) || event.keyCode === 13) &&
@@ -43,9 +40,7 @@ function RangeButton(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(
-                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
-              )
+            ? message.error(t('The answer is required'))
             : onClick?.(answerData)
         } else {
           onButtonClick(event.key)

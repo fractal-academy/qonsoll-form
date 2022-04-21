@@ -8,12 +8,11 @@ import { Button, Col, Divider, Row, Title } from '@qonsoll/react-design'
 
 import PropTypes from 'prop-types'
 import React from 'react'
-import { TEXTINGS } from '../../../constants'
 import { Tooltip } from 'antd'
 import styled from 'styled-components'
 import { styles } from './PageHeader.styles'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
-import { useTranslation } from '../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 const StyledTitle = styled(Title)`
   overflow: hidden;
@@ -35,7 +34,7 @@ function PageHeader(props) {
   } = props
 
   // [ADDITIONAL HOOKS]
-  const { formViewTooltip, answerViewTooltip } = useTranslation()
+  const { t } = useTranslations()
   const { onFormShow } = useActionsFunctionsContext()
   const { onFormResultsShow } = useActionsFunctionsContext()
 
@@ -74,9 +73,7 @@ function PageHeader(props) {
       {showAnswers && (
         <Col cw="auto" v="center" mr={1}>
           {smallScreen && (
-            <Tooltip
-              placement="bottom"
-              title={answerViewTooltip || TEXTINGS.answerViewTooltip}>
+            <Tooltip placement="bottom" title={t('Answers preview')}>
               <Button
                 mr={1}
                 type="text"
@@ -90,9 +87,7 @@ function PageHeader(props) {
 
       {handlesPreview && title && (
         <Col cw="auto" v="center">
-          <Tooltip
-            placement="bottom"
-            title={formViewTooltip || TEXTINGS.formViewTooltip}>
+          <Tooltip placement="bottom" title={t('Form preview')}>
             <Button
               type="text"
               icon={<EyeOutlined />}

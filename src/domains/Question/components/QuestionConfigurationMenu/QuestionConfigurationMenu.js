@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { QUESTION_TYPES, TEXTINGS } from '../../../../constants'
-import { useTranslation } from '../../../../context/Translation'
-import { Row, Col, Box, Text, Switch } from '@qonsoll/react-design'
-import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
+import { Box, Col, Row, Switch, Text } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+import React, { useEffect, useState } from 'react'
+
+import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
+import { QUESTION_TYPES } from '../../../../constants'
+import { useTranslations } from '@qonsoll/translation'
 
 function QuestionConfigurationMenu() {
   // [CUSTOM_HOOKS]
-  const { questionVideo, questionRequiredSetting } = useTranslation()
+  const { t } = useTranslations()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
@@ -66,7 +67,7 @@ function QuestionConfigurationMenu() {
         <Row mb={3} noGutters v="center">
           <Col v="center">
             <Text color="var(--qf-typography-subtitle-color)">
-              {questionRequiredSetting || TEXTINGS.questionRequiredSetting}
+              {t('Required')}
             </Text>
           </Col>
           <Col cw="auto" px={2}>
@@ -81,7 +82,7 @@ function QuestionConfigurationMenu() {
       <Row mb={3} noGutters v="center">
         <Col v="center">
           <Text color="var(--qf-typography-subtitle-color)">
-            {questionVideo || TEXTINGS.questionVideo}
+            {t('Video question')}
           </Text>
         </Col>
         <Col cw="auto" px={2}>

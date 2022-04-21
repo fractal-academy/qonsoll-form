@@ -1,9 +1,9 @@
+import { Button, Title } from '@qonsoll/react-design'
 import { Form, Modal } from 'antd'
 import React, { useState } from 'react'
-import { TEXTINGS } from '../../../../constants'
-import { Title, Button } from '@qonsoll/react-design'
-import { useTranslation } from '../../../../context/Translation'
+
 import { FormSimpleForm } from '../../../../domains/Form/components'
+import { useTranslations } from '@qonsoll/translation'
 
 const FormSimpleFormWithModal = (props) => {
   const {
@@ -21,12 +21,7 @@ const FormSimpleFormWithModal = (props) => {
 
   // [ADDITIONAL_HOOKS]
   const [form] = Form.useForm()
-  const {
-    formModalCreateTitle,
-    formModalEditTitle,
-    formModalEditButton,
-    formModalCreateButton
-  } = useTranslation()
+  const { t } = useTranslations()
 
   // [HELPER_FUNCTIONS]
   const handleCancel = async () => {
@@ -48,9 +43,7 @@ const FormSimpleFormWithModal = (props) => {
     <Modal
       title={
         <Title color="var(--qf-typography-title-color)" level={4}>
-          {isEdit
-            ? formModalEditTitle || TEXTINGS.formModalEditTitle
-            : formModalCreateTitle || TEXTINGS.formModalCreateTitle}
+          {isEdit ? t('Edit form') : t('Create new form')}
         </Title>
       }
       visible={isModalVisible}
@@ -63,9 +56,7 @@ const FormSimpleFormWithModal = (props) => {
           Cancel
         </Button>,
         <Button onClick={() => form.submit()} type="primary" loading={loading}>
-          {isEdit
-            ? formModalEditButton || TEXTINGS.formModalEditButton
-            : formModalCreateButton || TEXTINGS.formModalCreateButton}
+          {isEdit ? t('Save changes') : t('Create form')}
         </Button>
       ]}>
       <FormSimpleForm

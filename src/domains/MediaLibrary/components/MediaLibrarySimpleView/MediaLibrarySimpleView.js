@@ -1,16 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Box } from '@qonsoll/react-design'
-import { TEXTINGS } from '../../../../constants'
-import RangeSlider from '../../../../components/RangeSlider'
-import { useTranslation } from '../../../../context/Translation'
 import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
-import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
 import {
-  useCurrentQuestionContextDispatch,
-  DISPATCH_EVENTS
+  DISPATCH_EVENTS,
+  useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+
+import { Box } from '@qonsoll/react-design'
+import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
+import PropTypes from 'prop-types'
+import RangeSlider from '../../../../components/RangeSlider'
+import React from 'react'
 import { useHover } from '@umijs/hooks'
+import { useTranslations } from '@qonsoll/translation'
 
 function MediaLibrarySimpleView(props) {
   const {
@@ -23,7 +23,7 @@ function MediaLibrarySimpleView(props) {
   // [ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const [isHovering, hoverRef] = useHover()
-  const { mediaLibraryBrightness } = useTranslation()
+  const { t } = useTranslations()
 
   // [CLEAN FUNCTIONS]
   const onMediaModalContinue = (selectedImage) => {
@@ -53,9 +53,7 @@ function MediaLibrarySimpleView(props) {
           }}
         />
       </CustomBox>
-      <CustomText>
-        {mediaLibraryBrightness || TEXTINGS.mediaLibraryBrightness}
-      </CustomText>
+      <CustomText>{t('Brightness')}</CustomText>
       <Box>
         <RangeSlider
           onBlur={onBlur}

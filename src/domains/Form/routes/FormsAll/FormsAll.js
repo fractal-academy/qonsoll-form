@@ -1,5 +1,5 @@
 import { Box, Container, Text } from '@qonsoll/react-design'
-import { COLLECTIONS, QUESTION_TYPES, TEXTINGS } from '../../../../constants'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import { Input, message } from 'antd'
 import { PageHeader, Spinner, StaticList } from '../../../../components'
 import React, { useEffect, useRef, useState } from 'react'
@@ -10,14 +10,13 @@ import FormSimpleFormWithModal from '../../../../domains/Form/components/FormSim
 import Fuse from 'fuse.js'
 import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
 import PropTypes from 'prop-types'
-import { TranslationContext } from '../../../../context/Translation'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import useFunctions from '../../../../hooks/useFunctions'
+import { useTranslations } from '@qonsoll/translation'
 
 function FormsAll(props) {
   const {
     firebase,
-    translations,
     actions = {},
     childrenModal,
     showHeader,
@@ -45,8 +44,7 @@ function FormsAll(props) {
 
   // [COMPUTED PROPERTIES]
   let amountFiles = currentData?.length
-  const { formsAllTitle, formSearchPlaceholder, formCounter } =
-    translations || {}
+  const { t } = useTranslations()
   const containerPadding =
     wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
 
@@ -87,7 +85,7 @@ function FormsAll(props) {
         id: questionId,
         layoutType: LAYOUT_TYPE_KEYS[0],
         questionType: QUESTION_TYPES.WELCOME_SCREEN,
-        title: TEXTINGS.formDefaultWelcomeScreenTitle,
+        title: t('Welcome screen'),
         order: 0
       }).catch((e) => message.error(e.message))
       setData(COLLECTIONS.QUESTIONS, endingId, {
@@ -95,7 +93,7 @@ function FormsAll(props) {
         id: endingId,
         layoutType: LAYOUT_TYPE_KEYS[0],
         questionType: QUESTION_TYPES.ENDING,
-        title: TEXTINGS.formDefaultEndingTitle,
+        title: t('Thank you for attention!'),
         order: 1
       }).catch((e) => message.error(e.message))
     }
@@ -110,49 +108,45 @@ function FormsAll(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <TranslationContext.Provider value={translations || {}}>
-          <Container p={containerPadding}>
-            {showHeader && (
-              <>
-                <PageHeader title={formsAllTitle || TEXTINGS.formsAllTitle} />
-                <Box mb={3}>
-                  <Text color="var(--qf-typography-caption-color)">
-                    {`${formCounter || TEXTINGS.formCounter}: `}
-                    {amountFiles}
-                  </Text>
-                </Box>
-              </>
-            )}
-
-            {data?.length > 4 && (
-              // Search will be visible only when there's will be more than 4 forms
+        <Container p={containerPadding}>
+          {showHeader && (
+            <>
+              <PageHeader title={t('Forms')} />
               <Box mb={3}>
-                <Input
-                  ref={searchRef}
-                  placeholder={`${
-                    formSearchPlaceholder || TEXTINGS.formSearchPlaceholder
-                  }...`}
-                  onChange={(input) => searchData(input.target.value)}
-                />
+                <Text color="var(--qf-typography-caption-color)">
+                  {`${t('Amount of forms')}: `}
+                  {amountFiles}
+                </Text>
               </Box>
-            )}
-            <Box mr="-10px" className="custom-scroll">
-              <StaticList
-                setEdit={setEdit}
-                data={currentData}
-                onClick={showModal}
-                disableAddButton={!disableAddButton}
-              />
+            </>
+          )}
 
-              <FormSimpleFormWithModal
-                onModalSubmit={onFormCreate}
-                isModalVisible={isModalVisible}
-                setIsModalVisible={setIsModalVisible}>
-                {childrenModal}
-              </FormSimpleFormWithModal>
+          {data?.length > 4 && (
+            // Search will be visible only when there's will be more than 4 forms
+            <Box mb={3}>
+              <Input
+                ref={searchRef}
+                placeholder={`${t('Search form by name')}...`}
+                onChange={(input) => searchData(input.target.value)}
+              />
             </Box>
-          </Container>
-        </TranslationContext.Provider>
+          )}
+          <Box mr="-10px" className="custom-scroll">
+            <StaticList
+              setEdit={setEdit}
+              data={currentData}
+              onClick={showModal}
+              disableAddButton={!disableAddButton}
+            />
+
+            <FormSimpleFormWithModal
+              onModalSubmit={onFormCreate}
+              isModalVisible={isModalVisible}
+              setIsModalVisible={setIsModalVisible}>
+              {childrenModal}
+            </FormSimpleFormWithModal>
+          </Box>
+        </Container>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

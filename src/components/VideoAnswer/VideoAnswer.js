@@ -1,20 +1,33 @@
-import React, { useState } from 'react'
-import { v4 as uuid } from 'uuid'
-import { Box } from '@qonsoll/react-design'
-import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
-import { VideoPlayer, VideoRecording } from '../../components'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
+import React, { useMemo, useState } from 'react'
+import { VideoPlayer, VideoRecording } from '../../components'
+
+import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
+import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
+import { v4 as uuid } from 'uuid'
 
 const API_KEY = process.env.REACT_APP_QVIDEO_API_KEY || QVIDEO_API_KEY
 
-const VideoAnswer = ({ onClick, question }) => {
-  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+const VideoAnswer = (props) => {
+  const { onClick, question, currentSlide } = props
 
+  // [COMPONENT STATES]
   const [video, setVideo] = useState('')
 
+  // [ ADDITIONAL HOOKS]
+  const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+
+  // [COMPUTED PROPERTIES]
+  const showRecorder = useMemo(
+    () => currentSlide === question?.order,
+    [currentSlide, question]
+  )
+
+  // [CLEAN FUNCTIONS]
   const onUpload = (videoId) => {
     videoId && setVideo(videoId)
     const data = {
@@ -42,9 +55,22 @@ const VideoAnswer = ({ onClick, question }) => {
       {video ? (
         <VideoPlayer withDelete videoKey={video} deleteVideo={deleteVideo} />
       ) : (
-        <VideoRecording disabledChapters apiKey={API_KEY} onUpload={onUpload} />
+        showRecorder && (
+          <VideoRecording
+            disabledChapters
+            apiKey={API_KEY}
+            onUpload={onUpload}
+          />
+        )
       )}
     </Box>
   )
 }
+
+VideoAnswer.propTypes = {
+  onClick: PropTypes.func,
+  question: PropTypes.object,
+  currentSlide: PropTypes.number
+}
+
 export default VideoAnswer

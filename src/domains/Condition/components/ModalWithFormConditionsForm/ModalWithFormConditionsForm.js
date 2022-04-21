@@ -1,10 +1,10 @@
+import { Button, Col, Row, Title } from '@qonsoll/react-design'
+import { Modal, Popconfirm, Tooltip } from 'antd'
+
+import PropTypes from 'prop-types'
 import React from 'react'
 import { useState } from 'react'
-import PropTypes from 'prop-types'
-import { TEXTINGS } from '../../../../constants'
-import { Modal, Popconfirm, Tooltip } from 'antd'
-import { Row, Col, Button, Title } from '@qonsoll/react-design'
-import { useTranslation } from '../../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function ModalWithFormConditionsForm(props) {
   const { btnProps, children, onResetClick, popconfirmReset } = props
@@ -13,12 +13,7 @@ function ModalWithFormConditionsForm(props) {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   // [ADDITIONAL_HOOKS]
-  const {
-    conditionModalTitle,
-    conditionModalResetLogic,
-    conditionModalSubmitButton,
-    conditionsModalTooltip
-  } = useTranslation()
+  const { t } = useTranslations()
 
   // [CLEAN FUNCTIONS]
   const onSave = () => {
@@ -27,9 +22,7 @@ function ModalWithFormConditionsForm(props) {
 
   return (
     <>
-      <Tooltip
-        placement="bottomRight"
-        title={conditionsModalTooltip || TEXTINGS.conditionsModalTooltip}>
+      <Tooltip placement="bottomRight" title={t('Configure logic jumps')}>
         <Button
           ml={1}
           {...btnProps}
@@ -53,7 +46,7 @@ function ModalWithFormConditionsForm(props) {
         }}
         footer={
           <Button type="primary" onClick={onSave}>
-            {conditionModalSubmitButton || TEXTINGS.conditionModalSubmitButton}
+            {t('Close')}
           </Button>
         }
         title={
@@ -61,18 +54,21 @@ function ModalWithFormConditionsForm(props) {
             <Row v="center" noGutters>
               <Col>
                 <Title color="var(--qf-typography-title-color)" level={3}>
-                  {conditionModalTitle || TEXTINGS.conditionModalTitle}
+                  {t('Logic')}
                 </Title>
               </Col>
               <Col cw="auto" v="center">
                 <Popconfirm
-                  title={popconfirmReset || TEXTINGS.conditionModalResetLogic}
-                  okText={TEXTINGS.conditionModalResetLogicButton}
+                  title={
+                    popconfirmReset ||
+                    t('Are you sure you want to reset logic?')
+                  }
                   okType="danger"
+                  okText={t('Reset')}
+                  cancelText={t('Cancel')}
                   onConfirm={onResetClick}>
                   <Button type="text" onMouseDown={(e) => e.preventDefault()}>
-                    {conditionModalResetLogic ||
-                      TEXTINGS.conditionModalResetLogic}
+                    {t('Reset logic')}
                   </Button>
                 </Popconfirm>
               </Col>

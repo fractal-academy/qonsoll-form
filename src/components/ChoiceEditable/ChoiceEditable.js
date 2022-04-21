@@ -1,25 +1,26 @@
-import PropTypes from 'prop-types'
-import { Popconfirm } from 'antd'
-import { useHover } from '@umijs/hooks'
-import { Row } from '@qonsoll/react-design'
-import { DEFAULT_IMAGE, TEXTINGS } from '../../constants'
-import { CloseOutlined } from '@ant-design/icons'
-import React, { useState, useEffect } from 'react'
-import { useTranslation } from '../../context/Translation'
-import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
 import {
-  LetterBox,
-  DeleteButton,
   ChoiceInput,
   ChoiceOptionCol,
-  MediaBox,
-  MainBox
+  DeleteButton,
+  LetterBox,
+  MainBox,
+  MediaBox
 } from './ChoiceEditable.styles'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
+import React, { useEffect, useState } from 'react'
+
+import { CloseOutlined } from '@ant-design/icons'
+import { DEFAULT_IMAGE } from '../../constants'
+import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
+import { Popconfirm } from 'antd'
+import PropTypes from 'prop-types'
+import { Row } from '@qonsoll/react-design'
+import { useHover } from '@umijs/hooks'
+import { useTranslations } from '@qonsoll/translation'
 
 let startLetter = 65
 
@@ -32,8 +33,7 @@ function ChoiceEditable(props) {
   const [isHovering, hoverRef] = useHover()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
-  const { choicePlaceholder, conditionRemovingWarn, removeButton } =
-    useTranslation()
+  const { t } = useTranslations()
 
   // [COMPONENT STATE HOOKS]
   const [value, setValue] = useState(data?.answerOption)
@@ -105,9 +105,7 @@ function ChoiceEditable(props) {
             maxLength="150"
             value={value}
             onBlur={onBlur}
-            placeholder={`${
-              choicePlaceholder || TEXTINGS.choicePlaceholder
-            } ${index}`}
+            placeholder={`${t('Choice')} ${index}`}
             autoSize={{ minRows: 1, maxRows: 12 }}
             bordered={false}
             onChange={onChange}
@@ -117,10 +115,11 @@ function ChoiceEditable(props) {
       {isHovering &&
         (hasConditions ? (
           <Popconfirm
-            title={conditionRemovingWarn || TEXTINGS.conditionRemovingWarn}
+            title={t('This option has connected logic, delete it anyway?')}
             onConfirm={onDelete}
             okType="danger"
-            okText={removeButton || TEXTINGS.removeButton}>
+            okText={t('Delete')}
+            cancelText={t('Cancel')}>
             <DeleteButton>
               <CloseOutlined />
             </DeleteButton>

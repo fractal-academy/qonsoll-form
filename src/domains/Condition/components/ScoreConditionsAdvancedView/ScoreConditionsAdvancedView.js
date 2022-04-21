@@ -1,12 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { Box, Col, Row, Text, Title } from '@qonsoll/react-design'
+import { LetterBox, QuestionPreview } from '../../components'
+
+import { COLLECTIONS } from '../../../../constants'
 import { InputNumber } from 'antd'
-import { COLLECTIONS, TEXTINGS } from '../../../../constants'
 import { NumberedCard } from '../../../../components'
+import PropTypes from 'prop-types'
+import React from 'react'
 import useFunctions from '../../../../hooks/useFunctions'
-import { useTranslation } from '../../../../context/Translation'
-import { Box, Row, Col, Text, Title } from '@qonsoll/react-design'
-import { QuestionPreview, LetterBox } from '../../components'
+import { useTranslations } from '@qonsoll/translation'
 
 const startLetter = 65
 
@@ -15,7 +16,7 @@ const ScoreConditionsAdvancedView = (props) => {
 
   // [ADDITIONAL HOOKS]
   const { setData, getCollectionRef } = useFunctions()
-  const { scoreWeightTitle } = useTranslation()
+  const { t } = useTranslations()
 
   // [CLEAN FUNCTIONS]
   const onMarkChange = async (
@@ -82,7 +83,7 @@ const ScoreConditionsAdvancedView = (props) => {
             <Col cw={4} pr={0} pl={2}>
               <InputNumber
                 min={0}
-                placeholder={scoreWeightTitle || TEXTINGS.scoreWeightTitle}
+                placeholder={t('Enter score weight of answer')}
                 value={getScoreByAnswerOptionId(item?.answerOptionId)}
                 onBlur={(event) =>
                   onMarkChange(

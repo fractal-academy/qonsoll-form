@@ -4,17 +4,15 @@ import React, { useRef } from 'react'
 
 import PropTypes from 'prop-types'
 import { SubmitButton } from '../../components'
-import { TEXTINGS } from '../../constants'
 import { useKeyPress } from '@umijs/hooks'
-import { useTranslation } from '../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function LongText(props) {
   const { textAreaProps, onClick, question, currentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
-  const { longTextHint, requiredAnswerMessage, textQuestionPlaceholder } =
-    useTranslation()
+  const { t } = useTranslations()
   const IsntDesktop = window.innerWidth >= 1024
   const textAreaRef = useRef()
 
@@ -42,16 +40,13 @@ function LongText(props) {
     console.log('Failed:', errorInfo)
   }
 
-  // [COMPUTED_PROPERTIES]
-  const explanation = longTextHint || TEXTINGS.longTextHint
-
   const onPressOk = () => {
     //get values from form to check if there is any answer data
     //.trim() removes all useless spaces to prevent submit with only spaces
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     if (question?.isRequired && !value) {
-      message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
+      message.error(t('The answer is required'))
     } else {
       form.submit()
     }
@@ -59,21 +54,10 @@ function LongText(props) {
 
   const onFocusedKeyPress = (e) => {
     if (e.keyCode === 13 && !e.shiftKey) {
-      //Prevent line brake onEnter
+      //Prevent line break on Enter press
       e.preventDefault()
     }
   }
-
-  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
-  // useEffect(
-  // () =>
-  //when question was skipped by navigation buttons and input was focused - reset focus
-  // currentSlide === question?.order && textAreaRef?.current
-  //   ? textAreaRef?.current?.focus?.()
-  //   : textAreaRef?.current?.blur?.(),
-  // [currentSlide]
-  // )
-  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
 
   return (
     <Container>
@@ -89,16 +73,14 @@ function LongText(props) {
             ref={textAreaRef}
             maxLength={1000}
             autoSize={{ minRows: 1, maxRows: 4 }}
-            placeholder={`${
-              textQuestionPlaceholder || TEXTINGS.textQuestionPlaceholder
-            }...`}
+            placeholder={`${t('Type your answer here')}...`}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}
           />
         </Form.Item>
         {IsntDesktop && (
           <Form.Item>
-            <Text>{explanation}</Text>
+            <Text>{t('Shift ⇧ + Enter ↵ to make a line break')}</Text>
           </Form.Item>
         )}
       </Form>

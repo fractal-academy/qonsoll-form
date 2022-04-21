@@ -1,14 +1,14 @@
-import { COLLECTIONS, TEXTINGS } from '../../../../../constants'
 import { Col, Input, Option, Row, Select } from '@qonsoll/react-design'
 import React, { useEffect, useState } from 'react'
 
+import { COLLECTIONS } from '../../../../../constants'
 import PropTypes from 'prop-types'
 import { QuestionSelect } from '../../../../Question/components'
 import { StyledDatePicker } from './TextTemplate.styles'
 import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextStringConditionRules'
 import moment from 'moment'
 import useFunctions from '../../../../../hooks/useFunctions'
-import { useTranslation } from '../../../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function MatchCondition(props) {
   const {
@@ -23,7 +23,7 @@ function MatchCondition(props) {
 
   //[ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const { conditionRedirectPlaceholder } = useTranslation()
+  const { t } = useTranslations()
 
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState(item?.answerOption)
@@ -31,9 +31,7 @@ function MatchCondition(props) {
     item?.answerOption ? moment(item?.answerOption) : ''
   )
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.redirectConditionRule ||
-      conditionRedirectPlaceholder ||
-      TEXTINGS.conditionRedirectPlaceholder
+    item?.redirectConditionRule || t('Select redirect rule')
   )
 
   //[CLEAR FUNCTIONS]
@@ -81,26 +79,19 @@ function MatchCondition(props) {
   useEffect(() => {
     setInputValue(item?.answerOption || '')
     setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
-    setRuleSelectValue(
-      item?.redirectConditionRule ||
-        conditionRedirectPlaceholder ||
-        TEXTINGS.conditionRedirectPlaceholder
-    )
-  }, [item, conditionRedirectPlaceholder])
+    setRuleSelectValue(item?.redirectConditionRule || t('Select redirect rule'))
+  }, [item, t])
 
   return (
     <Row mb={2} key={index}>
       <Col cw={3} pr={2} pl={0}>
         <Select
           allowClear
-          placeholder={
-            conditionRedirectPlaceholder ||
-            TEXTINGS.conditionRedirectPlaceholder
-          }
+          placeholder={t('Select redirect rule')}
           value={ruleSelectValue}
           onChange={onRuleSelectValueChange}>
-          {TEXT_CONDITION_RULES_VALUES.map((item, index) => (
-            <Option key={index}>{item}</Option>
+          {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
+            <Option key={index}>{t(item)}</Option>
           ))}
         </Select>
       </Col>
@@ -112,7 +103,7 @@ function MatchCondition(props) {
           />
         ) : (
           <Input
-            placeholder={TEXTINGS.conditionTextInputPlaceholder}
+            placeholder={t('Enter value')}
             onChange={onInputValueChange}
             value={inputValue}
             maxLength={250}

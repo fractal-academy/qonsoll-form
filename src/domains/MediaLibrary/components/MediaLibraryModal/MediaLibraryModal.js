@@ -1,19 +1,20 @@
+import { Box, Button, Col, Input, Row, Title } from '@qonsoll/react-design'
+import {
+  CustomButton,
+  CustomText,
+  MediaListContainer
+} from './MediaLibraryModal.styles'
+import { EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { Modal, Upload, message } from 'antd'
+import React, { useEffect, useRef, useState } from 'react'
+
+import { COLLECTIONS } from '../../../../constants'
 import Fuse from 'fuse.js'
 import PropTypes from 'prop-types'
-import { Modal, Upload, message } from 'antd'
 import { StaticList } from '../../../../components'
-import useFunctions from '../../../../hooks/useFunctions'
-import React, { useEffect, useRef, useState } from 'react'
-import { COLLECTIONS, TEXTINGS } from '../../../../constants'
-import { SearchOutlined, EditOutlined } from '@ant-design/icons'
-import { useTranslation } from '../../../../context/Translation'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { Row, Col, Box, Input, Title, Button } from '@qonsoll/react-design'
-import {
-  MediaListContainer,
-  CustomButton,
-  CustomText
-} from './MediaLibraryModal.styles'
+import useFunctions from '../../../../hooks/useFunctions'
+import { useTranslations } from '@qonsoll/translation'
 
 function MediaLibraryModal(props) {
   const { btnProps, onClick, onContinue, isHovering } = props
@@ -23,12 +24,7 @@ function MediaLibraryModal(props) {
 
   // [ADDITIONAL HOOKS]
   const [media = []] = useCollectionData(getCollectionRef(COLLECTIONS.MEDIA))
-  const {
-    mediaLibraryCounter,
-    mediaLibraryButton,
-    mediaLibrarySearchPlaceholder,
-    mediaLibraryTitle
-  } = useTranslation()
+  const { t } = useTranslations()
 
   const searchRef = useRef()
 
@@ -102,7 +98,7 @@ function MediaLibraryModal(props) {
 
   const beforeUpload = (file) => {
     if (!file?.type?.includes('image')) {
-      message.error(`${file.name} ${TEXTINGS.mediaLibraryTypeError}`)
+      message.error(`${file.name} ${'is not a picture'}`)
     }
     return file?.type?.includes('image') ? true : Upload.LIST_IGNORE
   }
@@ -112,12 +108,7 @@ function MediaLibraryModal(props) {
     let isComponentMounted = true
     isComponentMounted && imagesList && setImagesList(media)
 
-    // [CLEAN UP FUNCTION]
-
-    return () => {
-      // [FINAL CLEAN UP]
-      isComponentMounted = false
-    }
+    return () => (isComponentMounted = false)
     // eslint-disable-next-line
   }, [media])
 
@@ -129,7 +120,7 @@ function MediaLibraryModal(props) {
             <Box mr={2}>
               <EditOutlined />
             </Box>
-            {mediaLibraryButton || TEXTINGS.mediaLibraryButton}
+            {t('Change')}
           </Box>
         </CustomButton>
       )}
@@ -140,18 +131,16 @@ function MediaLibraryModal(props) {
         width="1024px"
         centered
         bodyStyle={{
-          // gonna use this height when filter is on
-          // height: '768px',
           padding: 0,
           zIndex: 10000
         }}>
         <Row v="center" py={3} px={3}>
           <Col>
             <Title color="var(--qf-typography-title-color)" level={3}>
-              {mediaLibraryTitle || TEXTINGS.mediaLibraryTitle}
+              {t('Media library')}
             </Title>
             <CustomText>
-              {`${mediaLibraryCounter || TEXTINGS.mediaLibraryCounter}: `}
+              {`${t('Amount of shown files')}: `}
               {amountFiles}
             </CustomText>
           </Col>
@@ -162,10 +151,7 @@ function MediaLibraryModal(props) {
               allowClear
               ref={searchRef}
               prefix={<SearchOutlined />}
-              placeholder={`${
-                mediaLibrarySearchPlaceholder ||
-                TEXTINGS.mediaLibrarySearchPlaceholder
-              }...`}
+              placeholder={`${t('Search media file by name')}...`}
               onSearch={searchData}
               onChange={onChange}
             />
@@ -193,12 +179,12 @@ function MediaLibraryModal(props) {
           borderBottomRightRadius="var(--qf-border-radius-md)">
           <Col cw="auto" mr={2}>
             <Button type="text" onClick={onModalCancel}>
-              {TEXTINGS.mediaLibraryCancelButton}
+              {t('Cancel')}
             </Button>
           </Col>
           <Col cw="auto">
             <Button type="primary" onClick={onModalContinue}>
-              {TEXTINGS.mediaLibrarySubmitButton}
+              {t('Continue')}
             </Button>
           </Col>
         </Row>

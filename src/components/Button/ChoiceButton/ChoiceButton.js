@@ -3,12 +3,11 @@ import React, { useMemo, useState } from 'react'
 
 import { KeyBox } from '../../../components'
 import PropTypes from 'prop-types'
-import { TEXTINGS } from '../../../constants'
 import { getQuestionAnswerFromContext } from '../../../helpers'
 import { message } from 'antd'
 import { useAnswersContext } from '../../../context/Answers'
 import { useKeyPress } from '@umijs/hooks'
-import { useTranslation } from '../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 let startLetter = 65
 
@@ -22,15 +21,17 @@ function ChoiceButton(props) {
     currentSlide,
     answersScoreData
   } = props
+
   const { order } = question
 
   // [COMPONENT STATE HOOKS]
   const [buttonKey, setButtonKey] = useState()
 
-  //[CUSTOM HOOKS]
-  const { requiredAnswerMessage } = useTranslation()
-  const answersContext = useAnswersContext()
   // [ADDITIONAL HOOKS]
+  const { t } = useTranslations()
+  const answersContext = useAnswersContext()
+
+  // [COMPUTED PROPERTIES]
   const mappedChoices = useMemo(
     () =>
       choices?.map((el, index) => ({
@@ -65,9 +66,7 @@ function ChoiceButton(props) {
           }
 
           question?.isRequired && !questionAnswer
-            ? message.error(
-                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
-              )
+            ? message.error(t('The answer is required'))
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()

@@ -3,12 +3,11 @@ import React, { useMemo, useState } from 'react'
 import { Box } from '@qonsoll/react-design'
 import { KeyBox } from '../../../components'
 import PropTypes from 'prop-types'
-import { TEXTINGS } from '../../../constants'
 import { getQuestionAnswerFromContext } from '../../../helpers'
 import { message } from 'antd'
 import { useAnswersContext } from '../../../context/Answers'
 import { useKeyPress } from '@umijs/hooks'
-import { useTranslation } from '../../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function YesnoButton(props) {
   const { onClick, question, isFormQuiz, currentSlide, answersScoreData } =
@@ -16,13 +15,7 @@ function YesnoButton(props) {
   const { order, questionConfigurations } = question
 
   //[CUSTOM HOOKS]
-  const {
-    requiredAnswerMessage,
-    yesButton,
-    noButton,
-    yesPressButtonLetter,
-    noPressButtonLetter
-  } = useTranslation()
+  const { t } = useTranslations()
   const answersContext = useAnswersContext()
 
   // [ADDITIONAL_HOOKS]
@@ -42,13 +35,11 @@ function YesnoButton(props) {
             answer: { value: '', letterKey: '' }
           }
           question?.isRequired && !questionAnswer
-            ? message.error(
-                requiredAnswerMessage || TEXTINGS.requiredAnswerMessage
-              )
+            ? message.error(t('The answer is required'))
             : onClick?.(answerData)
         } else {
           const key = `${event.key}`.toUpperCase()
-          const currentChoice = questionConfigurations?.[key === 'Y' ? 0 : 1]
+          const currentChoice = questionConfigurations?.[key === 'N' ? 1 : 0]
           onButtonClick({
             letter: key,
             choice: currentChoice
@@ -67,39 +58,27 @@ function YesnoButton(props) {
   // [COMPUTED PROPERTIES]
   const letters = []
   questionConfigurations?.map((item) =>
-    letters.push(item?.answerOption?.[0].toUpperCase())
+    letters.push(item && t(item?.answerOption?.[0].toUpperCase()))
   )
-
-  const yesButtonComputed = yesButton || TEXTINGS.yesButton
-  const noButtonComputed = noButton || TEXTINGS.noButton
-  const yesLetterComputed =
-    yesPressButtonLetter || TEXTINGS.yesPressButtonLetter
-  const noLetterComputed = noPressButtonLetter || TEXTINGS.noPressButtonLetter
 
   const mappedChoices = useMemo(
     () => [
       {
-        letter: yesLetterComputed,
+        letter: t('Y'),
         choice: {
           ...questionConfigurations?.[0],
-          answerOption: yesButtonComputed
+          answerOption: t('Yes')
         }
       },
       {
-        letter: noLetterComputed,
+        letter: t('N'),
         choice: {
           ...questionConfigurations?.[1],
-          answerOption: noButtonComputed
+          answerOption: t('No')
         }
       }
     ],
-    [
-      questionConfigurations,
-      noButtonComputed,
-      noLetterComputed,
-      yesButtonComputed,
-      yesLetterComputed
-    ]
+    [questionConfigurations, t]
   )
 
   // [CLEAN FUNCTIONS]

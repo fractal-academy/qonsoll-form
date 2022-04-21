@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { Popconfirm, Tooltip } from 'antd'
-import { TEXTINGS } from '../../../../constants'
-import { SettingOutlined } from '@ant-design/icons'
 import { Box, Button, Popover } from '@qonsoll/react-design'
-import { useTranslation } from '../../../../context/Translation'
+import { Popconfirm, Tooltip } from 'antd'
+import React, { useState } from 'react'
+
 import { QuestionConfigurationPopoverContent } from '../../../../domains/Question/components'
+import { SettingOutlined } from '@ant-design/icons'
+import { useTranslations } from '@qonsoll/translation'
 
 function QuestionConfigurationPopover(props) {
   const {
@@ -19,7 +19,7 @@ function QuestionConfigurationPopover(props) {
   const [showPopover, setShowPopover] = useState(false)
 
   // [ADDITIONAL_HOOKS]
-  const { questionConfigurationTooltip } = useTranslation()
+  const { t } = useTranslations()
 
   // [CLEAN FUNCTIONS]
   const popoverShowChange = () => {
@@ -45,12 +45,13 @@ function QuestionConfigurationPopover(props) {
       overlayInnerStyle={{
         width: '400px'
       }}
-      title={TEXTINGS.questionTypeChangePopconfirm}
+      title={t('Changing the question type will delete all connected logic')}
       style={{ width: '350px' }}
       onConfirm={popoverShowChange}
       onCancel={!popoverShowChange}
-      okText={'Continue'}
-      okType="danger">
+      okType="danger"
+      okText={t('Continue')}
+      cancelText={t('Cancel')}>
       <Popover
         visible={showPopover}
         trigger="click"
@@ -65,11 +66,7 @@ function QuestionConfigurationPopover(props) {
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
         }>
-        <Tooltip
-          title={
-            questionConfigurationTooltip ||
-            TEXTINGS.questionConfigurationTooltip
-          }>
+        <Tooltip title={t('Configure question')}>
           <Button
             type="primary"
             icon={<SettingOutlined />}
@@ -97,10 +94,7 @@ function QuestionConfigurationPopover(props) {
           />
         </Box>
       }>
-      <Tooltip
-        title={
-          questionConfigurationTooltip || TEXTINGS.questionConfigurationTooltip
-        }>
+      <Tooltip title={t('Configure question')}>
         <Button
           type="primary"
           icon={<SettingOutlined />}

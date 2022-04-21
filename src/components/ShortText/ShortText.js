@@ -4,17 +4,16 @@ import React, { useRef } from 'react'
 
 import PropTypes from 'prop-types'
 import { SubmitButton } from '../../components'
-import { TEXTINGS } from '../../constants'
 import { useKeyPress } from '@umijs/hooks'
-import { useTranslation } from '../../context/Translation'
+import { useTranslations } from '@qonsoll/translation'
 
 function ShortText(props) {
   const { inputProps, onClick, question, currentSlide } = props
 
   // [ADDITIONAL HOOKS]
-  const [form] = Form.useForm()
-  const { requiredAnswerMessage, textQuestionPlaceholder } = useTranslation()
   const inputRef = useRef()
+  const [form] = Form.useForm()
+  const { t } = useTranslations()
 
   useKeyPress(
     (e) =>
@@ -36,40 +35,26 @@ function ShortText(props) {
     onClick && onClick(data)
     inputRef.current.blur()
   }
-
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
-
   const onFocusedKeyPress = (e) => {
     if (e.keyCode === 13) {
       //Prevent line brake onEnter
       e.preventDefault()
     }
   }
-
   const onPressOk = () => {
     //get values from form to check if there is any answer data
     //.trim() removes all useless spaces to prevent submit with only spaces
     const value = form.getFieldsValue()?.answer?.trim()
     //if required and empty answer - error message, else form submit and set data to context
     if (question?.isRequired && !value) {
-      message.error(requiredAnswerMessage || TEXTINGS.requiredAnswerMessage)
+      message.error(t('The answer is required'))
     } else {
       form.submit()
     }
   }
-
-  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
-  // useEffect(
-  //   () =>
-  //     //when question was skipped by navigation buttons and input was focused - reset focus
-  //     currentSlide === question?.order && inputRef?.current
-  //       ? inputRef?.current?.focus?.()
-  //       : inputRef?.current?.blur?.(),
-  //   [currentSlide]
-  // )
-  // THIS CODE ruining form on form view from android devices (inputs grab focus even on blur) - work fine on iPhones and MiBrowser
 
   return (
     <Container>
@@ -83,9 +68,7 @@ function ShortText(props) {
             {...inputProps}
             ref={inputRef}
             maxLength={250}
-            placeholder={`${
-              textQuestionPlaceholder || TEXTINGS.textQuestionPlaceholder
-            }...`}
+            placeholder={`${t('Type your answer here')}...`}
             onPressEnter={onFocusedKeyPress}
             disabled={!onClick}
           />
@@ -99,9 +82,10 @@ function ShortText(props) {
 }
 
 ShortText.propTypes = {
-  onSubmit: PropTypes.func,
-  isRequired: PropTypes.bool,
-  btnProps: PropTypes.object
+  inputProps: PropTypes.object,
+  onClick: PropTypes.func,
+  question: PropTypes.object,
+  currentSlide: PropTypes.number
 }
 
 export default ShortText

@@ -1,16 +1,17 @@
-import { Tabs } from 'antd'
-import PropTypes from 'prop-types'
-import React, { useMemo } from 'react'
+import { Box, Container, NoData } from '@qonsoll/react-design'
+import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import {
   ConditionForm,
-  ScoreConditionsAdvancedView,
-  EndingsSimpleView
+  EndingsSimpleView,
+  ScoreConditionsAdvancedView
 } from '../../../../domains/Condition/components'
+import { CustomTabs, EmptyState } from './FormConditionsForm.styles'
+import React, { useMemo } from 'react'
+
+import PropTypes from 'prop-types'
+import { Tabs } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
-import { Container, Box, NoData } from '@qonsoll/react-design'
-import { useTranslation } from '../../../../context/Translation'
-import { EmptyState, CustomTabs } from './FormConditionsForm.styles'
-import { QUESTION_TYPES, COLLECTIONS, TEXTINGS } from '../../../../constants'
+import { useTranslations } from '@qonsoll/translation'
 
 const { TabPane } = Tabs
 
@@ -19,13 +20,7 @@ function FormConditionsForm(props) {
 
   // [ADDITIONAL HOOKS]
   const { setData } = useFunctions()
-  const {
-    conditionsQuizTab,
-    conditionsEndingsTab,
-    conditionsLogicJumpsTab,
-    conditionsNoData,
-    conditionAddQuestionType
-  } = useTranslation()
+  const { t } = useTranslations()
 
   // [CLEAN FUNCTIONS]
   const getQuestionListRedirect = (itemIndex) => {
@@ -80,7 +75,7 @@ function FormConditionsForm(props) {
     <Container>
       <CustomTabs onChange={onTabChange}>
         <TabPane
-          tab={conditionsLogicJumpsTab || TEXTINGS.conditionsLogicJumpsTab}
+          tab={t('Logic jumps')}
           key="1"
           style={{
             overflowY: 'scroll',
@@ -102,12 +97,12 @@ function FormConditionsForm(props) {
           ) : (
             <EmptyState
               image={NoData.PRESENTED_IMAGE_SIMPLE}
-              description={conditionsNoData || TEXTINGS.conditionsNoData}
+              description={t('There are no question to configure')}
             />
           )}
         </TabPane>
         <TabPane
-          tab={conditionsEndingsTab || TEXTINGS.conditionsEndingsTab}
+          tab={t('Endings')}
           key="2"
           style={{ overflowY: 'scroll', overflow: 'hidden' }}>
           {!!filteredAnswerForEndings?.length && !!endings?.length ? (
@@ -127,14 +122,14 @@ function FormConditionsForm(props) {
           ) : (
             <EmptyState
               image={NoData.PRESENTED_IMAGE_SIMPLE}
-              description={conditionsNoData || TEXTINGS.conditionsNoData}
+              description={t('There are no question to configure')}
             />
           )}
         </TabPane>
         {formData?.isQuiz && (
           <TabPane
             style={{ overflowY: 'scroll', overflow: 'hidden' }}
-            tab={conditionsQuizTab || TEXTINGS.conditionsQuizTab}
+            tab={t('Answer score configurations')}
             key="3">
             {!!filteredAnswerForEndings?.length ? (
               filteredAnswerForEndings?.map((item, index) => (
@@ -150,16 +145,14 @@ function FormConditionsForm(props) {
             ) : (
               <EmptyState
                 image={NoData.PRESENTED_IMAGE_SIMPLE}
-                description={conditionsNoData || TEXTINGS.conditionsNoData}>
-                {`${
-                  conditionAddQuestionType || TEXTINGS.conditionAddQuestionType
-                }:`}
+                description={t('There are no question to configure')}>
+                {`${t('Please, add one of the following questions types')}:`}
                 <br />
-                {`${QUESTION_TYPES.CHOICE},
-                ${QUESTION_TYPES.PICTURE_CHOICE},
-                ${QUESTION_TYPES.OPINION_SCALE},
-                ${QUESTION_TYPES.RATING},
-                ${QUESTION_TYPES.YES_NO}`}
+                {`${t(QUESTION_TYPES.CHOICE)},
+                ${t(QUESTION_TYPES.PICTURE_CHOICE)},
+                ${t(QUESTION_TYPES.OPINION_SCALE)},
+                ${t(QUESTION_TYPES.RATING)},
+                ${t('Yes or no')}`}
               </EmptyState>
             )}
           </TabPane>
