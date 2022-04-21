@@ -61,8 +61,6 @@ function YesnoButton(props) {
     letters.push(item && t(item?.answerOption?.[0].toUpperCase()))
   )
 
-  console.log({ letters })
-
   const mappedChoices = useMemo(
     () => [
       {
