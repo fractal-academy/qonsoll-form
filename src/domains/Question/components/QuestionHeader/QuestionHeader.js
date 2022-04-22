@@ -1,16 +1,17 @@
-import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import {
+  DISPATCH_EVENTS,
+  useCurrentQuestionContext,
+  useCurrentQuestionContextDispatch
+} from '../../../../context/CurrentQuestion'
+import React, { useEffect, useState } from 'react'
 import {
   TextEditable,
   VideoPlayer,
   VideoRecording
 } from '../../../../components'
-import {
-  useCurrentQuestionContextDispatch,
-  useCurrentQuestionContext,
-  DISPATCH_EVENTS
-} from '../../../../context/CurrentQuestion'
+
 import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 
 function QuestionHeader(props) {
   const { titlePlaceholder, subtitlePlaceholder } = props
@@ -101,6 +102,7 @@ function QuestionHeader(props) {
             value={titleText}
             onChange={onTitleChange}
             placeholder={titlePlaceholder}
+            lineHeight="28px"
             {...props}
           />
           <TextEditable

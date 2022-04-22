@@ -11,5 +11,5 @@ export const StyledTextEditable = styled(TextArea)`
   font-size: ${({ isTitle }) =>
     isTitle && 'var(--qf-question-header-font-size)'};
   line-height: ${({ isTitle }) =>
-    isTitle && 'var(--qf-question-header-line-height)'};
+    isTitle && 'var(--qf-question-header-line-height) !important'};
 `
