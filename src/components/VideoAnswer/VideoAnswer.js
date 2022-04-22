@@ -43,7 +43,8 @@ const VideoAnswer = (props) => {
       onClick?.(data)
     }
   }
-  const deleteVideo = () => {
+  const handleRemoveVideo = () => {
+    setVideo('')
     currentQuestionDispatch({
       type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
       payload: { videoApiKey: '' }
@@ -52,8 +53,12 @@ const VideoAnswer = (props) => {
 
   return (
     <Box height={350} borderRadius="var(--ql-border-radius-lg)">
-      {video ? (
-        <VideoPlayer withDelete videoKey={video} deleteVideo={deleteVideo} />
+      {!!video ? (
+        <VideoPlayer
+          withDelete
+          videoKey={video}
+          onVideoRemove={handleRemoveVideo}
+        />
       ) : (
         showRecorder && (
           <VideoRecording

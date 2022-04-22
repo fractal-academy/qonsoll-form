@@ -65,6 +65,7 @@
   --qf-question-type-icon-default: var(--ql-color-dark-t-lighten4);
   --qf-question-type-icon-danger: var(--ql-color-danger-t-lighten3);
   --qf-question-header-font-size: var(--ql-font-size-h3);
+  --qf-question-header-line-height: var(--ql-line-height-h3);
 
   /*domain component: condition */
   --qf-condition-item-bg: var(--ql-color-dark-t-lighten6);
