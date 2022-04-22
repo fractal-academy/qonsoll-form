@@ -1,5 +1,6 @@
-import styled from 'styled-components'
 import { Box, Col, Input } from '@qonsoll/react-design'
+
+import styled from 'styled-components'
 
 const { TextArea } = Input
 
@@ -58,5 +59,5 @@ export const CustomCol = styled(Col)`
   bottom: 8px;
 `
 export const ChoiceOptionCol = styled(Col)`
-  padding-left: ${({ withImage }) => (withImage ? '0' : '18px')};
+  padding-left: ${({ withImage }) => (withImage ? '0' : '18px !important')};
 `
