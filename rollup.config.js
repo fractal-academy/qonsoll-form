@@ -1,10 +1,11 @@
-import peerDepsExternal from 'rollup-plugin-peer-deps-external'
+import autoExternal from 'rollup-plugin-auto-external'
 import babel from '@rollup/plugin-babel'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import copy from 'rollup-plugin-copy'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
-import autoExternal from 'rollup-plugin-auto-external'
 
 const packageJson = require('./package.json')
 
@@ -15,19 +16,13 @@ export default {
     {
       file: packageJson.main,
       format: 'cjs',
-
-      globals: {
-        react: 'React'
-      },
+      globals: { react: 'React' },
       sourcemap: true
     },
     {
       file: packageJson.module,
       format: 'esm',
-
-      globals: {
-        react: 'React'
-      },
+      globals: { react: 'React' },
       sourcemap: true
     }
   ],
@@ -42,6 +37,12 @@ export default {
     nodeResolve(),
     commonjs(),
     postcss(),
+    copy({
+      targets: [
+        { src: 'styles/index.js', dest: 'dist/styles' },
+        { src: 'styles/vars.css', dest: 'dist/styles' }
+      ]
+    }),
     terser()
   ]
 }
