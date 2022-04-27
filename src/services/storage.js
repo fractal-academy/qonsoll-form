@@ -1,4 +1,4 @@
 const storage = (firebase) => {
-  return firebase?.storage()
+  return firebase?.storage?.()
 }
 export default storage
