@@ -49,7 +49,7 @@ function QuestionConfigurationPopoverContent(props) {
     <Box px={0} py={0}>
       <PopoverSwitcherRow
         noGutters
-        py={2}
+        p={2}
         h="between"
         onClick={changeQuestionConfigState}>
         <Col
