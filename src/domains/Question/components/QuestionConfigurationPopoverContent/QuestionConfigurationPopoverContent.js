@@ -38,7 +38,10 @@ function QuestionConfigurationPopoverContent(props) {
     setShowPopover(false)
   }
   const translatedQuestionType = useMemo(
-    () => t(currentQuestion?.questionType),
+    () =>
+      currentQuestion?.questionType === 'Yes/No'
+        ? `${t('Yes')}/${t('No')}`
+        : t(currentQuestion?.questionType),
     [currentQuestion, t]
   )
 
