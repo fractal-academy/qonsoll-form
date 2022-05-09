@@ -1,5 +1,6 @@
+import { Box, Col, Row } from '@qonsoll/react-design'
+
 import styled from 'styled-components'
-import { Row, Col, Box } from '@qonsoll/react-design'
 
 export const ContentRow = styled(Row)`
   height: ${(props) => props.onEdit && '100%'};

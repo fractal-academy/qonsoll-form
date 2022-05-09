@@ -51,6 +51,7 @@ function EndingSimpleView(props) {
     <NumberedCard top="24px" number={index + 1} key={index}>
       <Title
         color="var(--qf-typography-title-color)"
+        fontFamily="var(--ql-font-family-main)"
         textOverflow="ellipsis"
         level={5}
         mb={2}>

@@ -191,7 +191,7 @@ function YourComponentName() {
 }
 ```
 &#10071; Qonsollform module requires outer handling of routing. That means you need to have prepared constant with route name and propagate through `actions` object routing function with correct naming.
-- `FormsAll` has only one required property: `firebase`. There's also optional properties: `showHeader` - handles whether will be used header of module, or your own, `wrapperPaddings` - handles size of outer wrapper of conponent; default value - 32px, `translations` - object with translated UI texting (see [this step](#how-to-configure-translations) for more information), `childrenModal` - propagates node as child to form creation modal, if you need more form items, `disableAddButton` - handles showing of form creation button.
+- `FormsAll` has only one required property: `firebase`. There's also optional properties: `showHeader` - handles whether will be used header of module, or your own, `wrapperPaddings` - handles size of outer wrapper of conponent; default value - 32px, `childrenModal` - propagates node as child to form creation modal, if you need more form items, `disableAddButton` - handles showing of form creation button.
 - `FormEdit` component has `id` (form id) and `firebase` as required properties. As optional it has also `actions` property to be propagated. Example of needed functions:
 
 ```sh
@@ -207,7 +207,7 @@ function YourComponentName() {
     history.push(path)
   }
 ```
-Other optional properties: `customHeader` (propagate node for custom header and `null` to hide it), `translations`, `wrapperPaddings` (all are the same as in `FormsAll`) and `customQuestionTypes` - if you need to configure question type list (to remove excess question types), configure following array and propagate it through property:
+Other optional properties: `customHeader` (propagate node for custom header and `null` to hide it), `wrapperPaddings` (all are the same as in `FormsAll`) and `customQuestionTypes` - if you need to configure question type list (to remove excess question types), configure following array and propagate it through property:
 
 ```sh
 [
@@ -273,8 +273,8 @@ Other optional properties: `customHeader` (propagate node for custom header and 
   }
 ]
 ```
-- `FormShow` component has `id` (form id) and `firebase` as required properties. As optional it has also `showHeader`, `wrapperPaddings`, `translations` and `submitLoading` (action on form finish button) properties. The `actions` property is not needed.
-- `FormAnswers` component has also `id` (form id) and `firebase` as required properties. As optional it has also `showHeader`, `wrapperPaddings` and `translations` properties. The `actions` property is not needed.
+- `FormShow` component has `id` (form id) and `firebase` as required properties. As optional it has also `showHeader`, `wrapperPaddings` and `submitLoading` (action on form finish button) properties. The `actions` property is not needed.
+- `FormAnswers` component has also `id` (form id) and `firebase` as required properties. As optional it has also `showHeader` and `wrapperPaddings` properties. The `actions` property is not needed.
 - To correct work of components you need to add vars of qonsoll form. Check out [next step](#how-to-configure-module-theme) for it.
 
 ## How to configure module theme
@@ -371,170 +371,8 @@ Other optional properties: `customHeader` (propagate node for custom header and 
 ```
 
 ## How to configure translations
-Qonsollform will perfectly fine work without translations propagating, but app will appear only in English. If you need to add another interface language, follow next steps:
-- First you need to add object with translations to your constants. For example, `qformTranslations.js`. Add following object to it:
+Qonsollform will perfectly fine work without translations propagating, but app will appear only in English. If you need to add another interface language, install 0.4.3 version of `@qonsoll/translations` in your parent application.
 
 ```sh
-const qformTranslations = (t) => {
-  return {
-    //global components
-    requiredAnswerMessage: t('The answer is required'),
-    submitHint: t('Press enter'),
-    choicePlaceholder: t('Сhoice'),
-    conditionRemovingWarn: t('This option has connected logic, delete it anyway?'),
-    editButton: t('Edit'),
-    removeButton: t('Delete'),
-    createForm: t('Add new form'),
-    uploadImage: t('Upload new image'),
-    uploaderHint: t('Click or drag file to this area to upload'),
-    itemRemovingHint: t('Delete this item?'),
-    questionListTitle: t('Questions'),
-    endingListTitle: t('Endings'),
-    questionCreationTooltip: t('Create new question'),
-    endingCreationTooltip: t('Create new ending'),
-    formViewTooltip: t('Form preview'),
-    answerViewTooltip: t('Answers preview'),
-    longTextHint: t('Shift ⇧ + Enter ↵ to make a line break'),
-    textQuestionPlaceholder: t('Type your answer here'),
-    listItemNoDescription: t('No description'),
-    popconfirmDeleteFormTitle: t('Remove item?'),
-    popconfirmDeleteImageTitle: t('Remove image?'),
-    conditionModalIsUploaded: t('is uploaded'),
-    conditionModalIsRecorded: t('is recorded'),
-    emptyDescription: t('Nothing was found'),
-    ratingExtendedDefaultOption: t('Extended option'),
-    
-    //domains: form components
-    conditionsEndingsTab: t('Endings'),
-    conditionsLogicJumpsTab: t('Logic jumps'),
-    conditionsQuizTab: t('Answer score configurations'),
-    conditionsNoData: t('There are no question to configure'),
-    conditionAddQuestionType: t('Please, add one of the following questions types'),
-    quizSwitcherText: t('Enable quiz system'),
-    formTitlePlaceholder: t('Form name'),
-    formSubtitlePlaceholder: t('Form short description'),
-    formModalCreateTitle: t('Create new form'),
-    formModalEditTitle: t('Edit form'),
-    formModalEditButton: t('Save changes'),
-    formModalCreateButton: t('Create form'),
-    formValidationRule: t('Please, enter form name'),
-    
-    //domains: form routes
-    phoneBreakpointDummy: t('This feature is available only on desktop'),
-    formsAllTitle: t('Forms'),
-    formCounter: t('Amount of forms'),
-    formSearchPlaceholder: t('Search form by name'),
-    formDefaultWelcomeScreenTitle: t('Welcome screen'),
-    formDefaultEndingTitle: t('Thank you for attention!'),
-    
-    //domains: condition components
-    conditionsEndingSelectPlaceholder: t('Select questions to call current ending'),
-    conditionModalTitle: t('Logic'),
-    conditionModalResetLogic: t('Reset logic'),
-    conditionModalResetLogicButton: t('Reset'),
-    conditionModalSubmitButton: t('Close'),
-    conditionRedirectPlaceholder: t('Select redirect rule'),
-    conditionsModalTooltip: t('Configure logic jumps'),
-    conditionModalAddCondition: t('+ Add condition'),
-    conditionTextInputPlaceholder: t('Enter value'),
-    conditionNextQuestionRedirect: t('Go to the next question'),
-    conditionRedirectRulePlaceholder: t('Select redirect rule'),
-    conditionIsEqual: t('is equal to'),
-    conditionIsntEqual: t('is not equal to'),
-    conditionBegins: t('begins with'),
-    conditionEnds: t('ends with'),
-    conditionContains: t('contains'),
-    conditionDoesntContains: t('does not contains'),
-    scoreWeightTitle: t('Enter score weight of answer'),
-    
-    //domains: media library components
-    mediaLibraryCounter: t('Amount of shown files'),
-    mediaLibraryButton: t('Change'),
-    mediaLibrarySearchPlaceholder: t('Search media file by name'),
-    mediaLibraryTitle: t('Media library'),
-    mediaLibraryBrightness: t('Brightness'),
-    mediaLibraryTypeError: t('is not a picture'),
-    mediaLibraryCancelButton: t('Cancel'),
-    mediaLibrarySubmitButton: t('Continue'),
-    
-    //domains: question components
-    questionFinishButton: t('Finish'),
-    questionStartButton: t('Start'),
-    questionVideo: t('Video question'),
-    questionRequiredSetting: t('Required'),
-    questionConfigurationTooltip: t('Configure question'),
-    questionTypeConfiguration: t('Question types'),
-    questionConfigurationTitle: t('settings'),
-    questionRangeBottomSetting: t('From'),
-    questionRangeUpperSetting: t('to'),
-    questionConfigurationOptions: t('Amount of options'),
-    questionEditableTitleHint: t('Editable question title'),
-    questionEditableSubtitleHint: t('Description (optional)'),
-    questionRemovingPopconfirm: t('Delete this question?'),
-    questionWithLogicRemovingPopconfirm: t('This question has connected logic, delete it anyway?'),
-    questionConfigurationExtended: t('Turn on extended options'),
-    questionConfigurationMultiple: t('Switch to multiple option'),
-    welcomeScreenTitle: t('Welcome screen'),
-    longTextTitle: t('Long text'),
-    shortTextTitle: t('Short text'),
-    dateTitle: t('Date'),
-    yesnoTitle: t('Yes')/t('No'),
-    yesButton: t('Yes'),
-    noButton: t('No'),
-    yesPressButtonLetter: t('Y'),
-    noPressButtonLetter: t('N'),
-    defaultChoiceTitle: t('Default'),
-    choiceTitle: t('Choice'),
-    pictureChoiceTitle: t('PictureChoice'),
-    opinionTitle: t('Opinion scale'),
-    ratingTitle: t('Rating'),
-    fileUploadTitle: t('File upload'),
-    statementTitle: t('Statement'),
-    welcomeScreenDesc: t('Invite your audience in'),
-    longTextDesc: t('More space to spill the beans'),
-    shortTextDesc: t('For short answers, like names'),
-    dateDesc: t('Collect answers in date format'),
-    fileUploadDesc: t('Upload a file up to 10MB'),
-    opinionDesc: t('A customizable, numbered scale'),
-    pictureChoiceDesc: t('Multiple choice but prettier'),
-    choiceDesc: t('Multiple choice'),
-    ratingDesc: t('Rate'),
-    statementDesc: t('Take the mic for a moment'),
-    yesnoDesc: t('Just 2 options, yes or no'),
-    questionTypeChangePopconfirm: t('Changing the question type will delete all connected logic'),
-
-    //domains: answer components
-    answerTitle: t('Answers'),
-    answerEmptyList: t('There is no responses yet'),
-    answerUserListTitle: t('Users'),
-    answersNoSelectedUser: t('Choose user to display their answers'),
-    answerTableQuestionTitle: t('Question'),
-    answerTableAnswerTitle: t('Answer'),
-    answerTableScoreTitle: t('Score')
-  }
-}
-
-export default qformTranslations
-```
-- In new component's file (with imported module component), import translations object and propagate it with translating function further:
-
-```sh
-import { FormsAll } from 'qonsoll-form/src'
-import { useTranslations } from 'app/contexts'
-. . .
-
-function YourComponentName() {
-
-const { t } = useTranslations()
-const translations = useMemo(() => {
-    return qformTranslations(t)
-  }, [t])
-
-  return (
-    <FormAll
-      firebase={firebase}
-      translations={translations}
-    />
-  )
-}
+npm i @qonsoll/translation@0.4.3
 ```

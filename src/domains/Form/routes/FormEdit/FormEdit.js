@@ -1,4 +1,4 @@
-import { Box, Button, Col, Container, Row, Text } from '@qonsoll/react-design'
+import { Box, Button, Col, Container, Row } from '@qonsoll/react-design'
 import {
   COLLECTIONS,
   DEFAULT_IMAGE,
@@ -9,7 +9,12 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
-import { EditorSidebar, PageHeader, Spinner } from '../../../../components'
+import {
+  EditorSidebar,
+  PageHeader,
+  ResponseInfo,
+  Spinner
+} from '../../../../components'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Tooltip, message } from 'antd'
 import {
@@ -308,27 +313,20 @@ function FormEdit(props) {
                   </Col>
                 </Row>
               )}
-              {smallScreen ? (
-                <QuestionForm
-                  defaultTab={defaultTab}
-                  questionsList={questionsList}
-                  questionData={currentQuestion}
-                  brightnessValue={brightnessValue}
-                  setBrightnessValue={setBrightnessValue}
-                  customQuestionTypes={customQuestionTypes}
-                  onQuestionTypeChange={onQuestionTypeChange}
-                  welcomeScreenShowRule={welcomeScreenShowRule}
-                  onQuestionLayoutChange={onQuestionLayoutChange}
-                />
-              ) : (
-                <Box
-                  height="100%"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center">
-                  <Text>{t('This feature is available only on desktop')}</Text>
-                </Box>
-              )}
+
+              <QuestionForm
+                defaultTab={defaultTab}
+                questionsList={questionsList}
+                questionData={currentQuestion}
+                brightnessValue={brightnessValue}
+                setBrightnessValue={setBrightnessValue}
+                customQuestionTypes={customQuestionTypes}
+                onQuestionTypeChange={onQuestionTypeChange}
+                welcomeScreenShowRule={welcomeScreenShowRule}
+                onQuestionLayoutChange={onQuestionLayoutChange}
+              />
+
+              <ResponseInfo />
             </Box>
             {smallScreen && (
               <EditorSidebar

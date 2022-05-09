@@ -102,6 +102,7 @@ function FormAnswers(props) {
               ml={3}
               my={3}
               level={5}
+              fontFamily="var(--ql-font-family-main)"
               color="var(--qf-typography-title-color)">
               {t('Users')}
             </Title>

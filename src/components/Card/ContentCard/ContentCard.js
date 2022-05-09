@@ -1,13 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { Col, Row } from '@qonsoll/react-design'
 import { ImageBackground, RoundedCol } from './ContentCard.styles'
+
+import PropTypes from 'prop-types'
+import React from 'react'
 
 function ContentCard(props) {
   const { image, leftSideMenu, brightnessValue, children } = props
 
   return (
     <Row
+      display={['none', 'flex']}
       flexGrow={1}
       noGutters
       overflowX="hidden"

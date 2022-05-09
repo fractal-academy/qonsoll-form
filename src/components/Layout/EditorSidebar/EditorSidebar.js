@@ -255,7 +255,10 @@ function EditorSidebar(props) {
       setDraverVisible={setDraverOpened}>
       <Row my={2} v="center" h="between">
         <Col cw="auto">
-          <Title color="var(--qf-typography-title-color)" level={5}>
+          <Title
+            color="var(--qf-typography-title-color)"
+            fontFamily="var(--ql-font-family-main)"
+            level={5}>
             {t('Questions')}
           </Title>
         </Col>
@@ -297,7 +300,10 @@ function EditorSidebar(props) {
 
         <Row my={2} v="center" h="between">
           <Col cw="auto">
-            <Title color="var(--qf-typography-title-color)" level={5}>
+            <Title
+              color="var(--qf-typography-title-color)"
+              fontFamily="var(--ql-font-family-main)"
+              level={5}>
               {t('Endings')}
             </Title>
           </Col>
