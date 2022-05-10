@@ -173,6 +173,7 @@ const ListItem = forwardRef((props, ref) => {
           <Col display="grid">
             <Title
               color="var(--qf-typography-subtitle-color)"
+              fontFamily="var(--ql-font-family-main)"
               wordBreak="break-all"
               ellipsis={true}
               textOverflow="ellipsis"

@@ -8,6 +8,7 @@ import { VideoPlayer, VideoRecording } from '../../components'
 import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
+import { useKeyPress } from '@umijs/hooks'
 import { v4 as uuid } from 'uuid'
 
 const API_KEY = process.env.REACT_APP_QVIDEO_API_KEY || QVIDEO_API_KEY
@@ -20,6 +21,18 @@ const VideoAnswer = (props) => {
 
   // [ ADDITIONAL HOOKS]
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
+
+  useKeyPress(
+    (event) => event.keyCode === 13 && currentSlide === question?.order,
+    (event) => {
+      if (event.type === 'keyup') {
+        onClick()
+      }
+    },
+    {
+      events: ['keydown', 'keyup']
+    }
+  )
 
   // [COMPUTED PROPERTIES]
   const showRecorder = useMemo(

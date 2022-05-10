@@ -1,12 +1,13 @@
-import PropTypes from 'prop-types'
-import React, { cloneElement } from 'react'
-import { Title } from '@qonsoll/react-design'
-import { NumberedCard } from '../../../../components'
-import { QUESTION_TYPES } from '../../../../constants'
 import {
-  TextTemplate,
-  ChoiceTemplate
+  ChoiceTemplate,
+  TextTemplate
 } from '../../../../domains/Condition/components/ConditionTemplates'
+import React, { cloneElement } from 'react'
+
+import { NumberedCard } from '../../../../components'
+import PropTypes from 'prop-types'
+import { QUESTION_TYPES } from '../../../../constants'
+import { Title } from '@qonsoll/react-design'
 
 function ConditionForm(props) {
   const {
@@ -57,6 +58,7 @@ function ConditionForm(props) {
     <NumberedCard top="24px" number={index + 1} key={index}>
       <Title
         color="var(--qf-typography-title-color)"
+        fontFamily="var(--ql-font-family-main)"
         textOverflow="ellipsis"
         level={5}
         mb={2}>

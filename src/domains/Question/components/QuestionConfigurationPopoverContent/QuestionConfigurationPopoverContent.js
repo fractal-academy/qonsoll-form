@@ -38,7 +38,10 @@ function QuestionConfigurationPopoverContent(props) {
     setShowPopover(false)
   }
   const translatedQuestionType = useMemo(
-    () => t(currentQuestion?.questionType),
+    () =>
+      currentQuestion?.questionType === 'Yes/No'
+        ? `${t('Yes')}/${t('No')}`
+        : t(currentQuestion?.questionType),
     [currentQuestion, t]
   )
 
@@ -49,7 +52,7 @@ function QuestionConfigurationPopoverContent(props) {
     <Box px={0} py={0}>
       <PopoverSwitcherRow
         noGutters
-        py={2}
+        p={2}
         h="between"
         onClick={changeQuestionConfigState}>
         <Col
@@ -61,7 +64,10 @@ function QuestionConfigurationPopoverContent(props) {
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>
         <Col cw="auto" order={2}>
-          <Title color="var(--qf-typography-title-color)" level={4}>
+          <Title
+            color="var(--qf-typography-title-color)"
+            fontFamily="var(--ql-font-family-main)"
+            level={4}>
             {isQuestionConfig ? configurationTitle : t('Question types')}
           </Title>
         </Col>

@@ -42,7 +42,10 @@ const FormSimpleFormWithModal = (props) => {
   return (
     <Modal
       title={
-        <Title color="var(--qf-typography-title-color)" level={4}>
+        <Title
+          color="var(--qf-typography-title-color)"
+          fontFamily="var(--ql-font-family-main)"
+          level={4}>
           {isEdit ? t('Edit form') : t('Create new form')}
         </Title>
       }

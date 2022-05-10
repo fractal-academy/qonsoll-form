@@ -1,6 +1,6 @@
 import { Box } from '@qonsoll/react-design'
-import styled from 'styled-components'
 import { LAYOUT_TYPES } from '../../../../constants'
+import styled from 'styled-components'
 
 const ImageContainer = styled(Box)`
   ${({ image, layoutType, tabletSupport, brightness }) => `

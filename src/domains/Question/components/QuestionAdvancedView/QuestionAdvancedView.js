@@ -122,10 +122,12 @@ function QuestionAdvancedView(props) {
     data?.questionType === QUESTION_TYPES.ENDING
 
   //rule for template to render column with image, when layout type === left/right(small/big)
-  const imageShowRule =
-    layoutType.type !== LAYOUT_TYPES.BETWEEN.type &&
-    layoutType.type !== LAYOUT_TYPES.FULL_SCREEN.type &&
-    layoutType.type !== LAYOUT_TYPES.DEFAULT.type
+  const imageShowRule = ![
+    LAYOUT_TYPES.BETWEEN.type,
+    LAYOUT_TYPES.FULL_SCREEN.type,
+    LAYOUT_TYPES.DEFAULT.type
+  ]?.includes(layoutType?.type)
+
   const backgroundRule = layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
   const bgImage = {
     ...(layoutType.type === LAYOUT_TYPES.FULL_SCREEN.type
@@ -176,6 +178,7 @@ function QuestionAdvancedView(props) {
                   {questionNumberRule && (
                     <Title
                       color="var(--qf-typography-title-color)"
+                      fontFamily="var(--ql-font-family-main)"
                       style={{ wordBreak: 'break-word' }}
                       level={4}>
                       {questionNumber}.{t('Video question')}
@@ -194,6 +197,7 @@ function QuestionAdvancedView(props) {
               ) : (
                 <Title
                   color="var(--qf-typography-title-color)"
+                  fontFamily="var(--ql-font-family-main)"
                   style={{ wordBreak: 'break-word' }}
                   level={4}>
                   {questionNumberRule && `${questionNumber}.`} {data?.title}
@@ -239,7 +243,7 @@ function QuestionAdvancedView(props) {
           <QuestionImageContainer
             image={img}
             layoutType={layoutType?.type}
-            widthTablet={widthTablet}
+            tabletSupport={widthTablet}
             {...layoutType.imgSize}
             imageBrightness={data?.imageBrightness || 0}
           />

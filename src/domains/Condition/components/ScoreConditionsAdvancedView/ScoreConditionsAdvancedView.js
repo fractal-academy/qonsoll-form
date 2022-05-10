@@ -57,6 +57,7 @@ const ScoreConditionsAdvancedView = (props) => {
       <Box>
         <Title
           color="var(--qf-typography-title-color)"
+          fontFamily="var(--ql-font-family-main)"
           textOverflow="ellipsis"
           level={5}
           mb={2}>
