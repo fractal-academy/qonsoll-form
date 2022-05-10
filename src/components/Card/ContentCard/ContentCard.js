@@ -7,8 +7,6 @@ import React from 'react'
 function ContentCard(props) {
   const { image, onEdit, leftSideMenu, brightnessValue, children } = props
 
-  console.log(onEdit)
-
   return (
     <Row
       display={onEdit ? ['none', 'flex'] : 'flex'}
