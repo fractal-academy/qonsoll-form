@@ -5,11 +5,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 function ContentCard(props) {
-  const { image, leftSideMenu, brightnessValue, children } = props
+  const { image, onEdit, leftSideMenu, brightnessValue, children } = props
+
+  console.log(onEdit)
 
   return (
     <Row
-      display={['none', 'flex']}
+      display={onEdit ? ['none', 'flex'] : 'flex'}
       flexGrow={1}
       noGutters
       overflowX="hidden"
