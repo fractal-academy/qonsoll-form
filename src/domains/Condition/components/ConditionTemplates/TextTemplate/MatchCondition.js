@@ -28,18 +28,13 @@ function MatchCondition(props) {
   //[COMPONENT STATE HOOKS]
   const [inputValue, setInputValue] = useState('')
   const [datePickerValue, setDatePickerValue] = useState('')
-  const [ruleSelectValue, setRuleSelectValue] = useState(
-    t('Select redirect rule')
-  )
+  const [ruleSelectValue, setRuleSelectValue] = useState('')
 
   //[CLEAR FUNCTIONS]
-  const onInputValueChange = ({ target }) => {
-    setInputValue(target.value)
-  }
-  const onDatePickerValueChange = (datePickerVal, stringDateValue = '') => {
+  const onInputValueChange = ({ target }) => setInputValue(target.value)
+  const onDatePickerValueChange = (datePickerVal) => {
     setDatePickerValue(datePickerVal || '')
   }
-
   const onRuleSelectValueChange = (selectValue) => {
     setRuleSelectValue(selectValue || '')
 
@@ -87,7 +82,7 @@ function MatchCondition(props) {
         <Select
           allowClear
           placeholder={t('Select redirect rule')}
-          value={ruleSelectValue}
+          value={ruleSelectValue || t('Select redirect rule')}
           onChange={onRuleSelectValueChange}>
           {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
             <Option key={index}>{t(item)}</Option>
