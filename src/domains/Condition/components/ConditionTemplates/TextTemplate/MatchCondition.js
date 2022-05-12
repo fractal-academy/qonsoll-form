@@ -26,12 +26,10 @@ function MatchCondition(props) {
   const { t } = useTranslations()
 
   //[COMPONENT STATE HOOKS]
-  const [inputValue, setInputValue] = useState(item?.answerOption)
-  const [datePickerValue, setDatePickerValue] = useState(
-    item?.answerOption ? moment(item?.answerOption) : ''
-  )
+  const [inputValue, setInputValue] = useState('')
+  const [datePickerValue, setDatePickerValue] = useState('')
   const [ruleSelectValue, setRuleSelectValue] = useState(
-    item?.redirectConditionRule || t('Select redirect rule')
+    t('Select redirect rule')
   )
 
   //[CLEAR FUNCTIONS]
@@ -77,10 +75,11 @@ function MatchCondition(props) {
 
   // [COMPUTED PROPERTIES]
   useEffect(() => {
-    setInputValue(item?.answerOption || '')
-    setDatePickerValue(item?.answerOption ? moment(item?.answerOption) : '')
-    setRuleSelectValue(item?.redirectConditionRule || t('Select redirect rule'))
-  }, [item, t])
+    item?.answerOption && setInputValue(item?.answerOption)
+    item?.answerOption && setDatePickerValue(moment(item?.answerOption))
+    item?.redirectConditionRule &&
+      setRuleSelectValue(item?.redirectConditionRule)
+  }, [item])
 
   return (
     <Row mb={2} key={index}>
