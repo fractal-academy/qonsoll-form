@@ -102,7 +102,7 @@ function QuestionHeader(props) {
             value={titleText}
             onChange={onTitleChange}
             placeholder={titlePlaceholder}
-            lineHeight="28px"
+            // lineHeight="28px"
             {...props}
           />
           <TextEditable

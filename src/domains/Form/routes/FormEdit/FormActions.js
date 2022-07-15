@@ -21,23 +21,23 @@ const FormActions = (props) => {
 
   return (
     <Box display="flex">
-      <Tooltip title={t('Show answers')}>
-        <Button
-          mr="16px"
-          display={['none', 'flex']}
-          onClick={handleAnswersShow}
-          icon={<Icon name="FormFilled" size={20} />}
-        />
-      </Tooltip>
       {showAnswers && (
-        <Tooltip title={t('Form preview')}>
+        <Tooltip title={t('Show answers')}>
           <Button
-            onClick={handleFormShow}
-            mr={showDrawer && '16px'}
-            icon={<Icon name="ShowFilled" size={20} />}
+            mr="16px"
+            display={['none', 'flex']}
+            onClick={handleAnswersShow}
+            icon={<Icon name="FormFilled" size={20} />}
           />
         </Tooltip>
       )}
+      <Tooltip title={t('Form preview')}>
+        <Button
+          onClick={handleFormShow}
+          mr={showDrawer && '16px'}
+          icon={<Icon name="ShowFilled" size={20} />}
+        />
+      </Tooltip>
 
       {/* drawer state controll button */}
       <Button
