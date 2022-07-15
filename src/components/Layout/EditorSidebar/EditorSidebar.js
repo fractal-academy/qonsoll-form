@@ -4,7 +4,6 @@ import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
 } from '../../../context/CurrentQuestion'
-import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Tooltip, message } from 'antd'
 
@@ -41,7 +40,6 @@ function EditorSidebar(props) {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
-  // const [open, setOpen] = useState(true)
   const [showPopover, setShowPopover] = useState(false)
   const [tabKey, setTabKey] = useState('1')
 
@@ -274,7 +272,10 @@ function EditorSidebar(props) {
 
           <ModalWithFormConditionsForm
             onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
-            btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
+            btnProps={{
+              icon: <Icon name="SettingsFilled" size={20} />,
+              type: 'text'
+            }}>
             <FormConditionsForm
               endings={endings}
               formData={formData}

@@ -22,7 +22,7 @@ const SideLayoutImage = (props) => {
         brightness={brightness}
         {...layoutType?.imgSize}
         layoutType={layoutType?.type}>
-        <Box right={0} position="fixed" mr={[3, 3, 4]}>
+        <Box right={0} position="fixed" mr="24px">
           <QuestionMediaPopover
             brightnessValue={brightness}
             setBrightnessValue={setBrightness}

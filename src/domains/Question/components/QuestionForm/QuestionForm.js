@@ -144,7 +144,7 @@ function QuestionForm(props) {
         )
       }>
       {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
-        <Box position="absolute" right="48px">
+        <Box position="absolute" right="24px">
           <QuestionMediaPopover
             brightnessValue={questionData?.brightnessValue || brightnessValue}
             setBrightnessValue={setBrightnessValue}
@@ -172,7 +172,7 @@ function QuestionForm(props) {
                   </Col>
                 )}
               </Row>
-              <Row noGutters h="between" mb="24px">
+              <Row noGutters h="between">
                 <Col cw="12" mt="24px">
                   <QuestionHeader
                     titlePlaceholder={t('Editable question title')}

@@ -1,5 +1,5 @@
 import { Box, Container, Text, TextArea } from '@qonsoll/react-design'
-import { Form, message } from 'antd'
+import { Form, Grid, message } from 'antd'
 import React, { useRef } from 'react'
 
 import PropTypes from 'prop-types'
@@ -7,13 +7,15 @@ import { SubmitButton } from '../../components'
 import { useKeyPress } from '@umijs/hooks'
 import { useTranslations } from '@qonsoll/translation'
 
+const { useBreakpoint } = Grid
+
 function LongText(props) {
   const { textAreaProps, onClick, question, currentSlide } = props
 
   // [ADDITIONAL HOOKS]
   const [form] = Form.useForm()
   const { t } = useTranslations()
-  const IsntDesktop = window.innerWidth >= 1024
+  const { xl } = useBreakpoint()
   const textAreaRef = useRef()
 
   useKeyPress(
@@ -64,27 +66,28 @@ function LongText(props) {
       <Form
         form={form}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        style={{ width: '100%' }}>
+        style={{ width: '100%' }}
+        onFinishFailed={onFinishFailed}>
         <Form.Item name="answer" rules={[{ required: question?.isRequired }]}>
           <TextArea
-            {...textAreaProps}
             bordered
-            ref={textAreaRef}
             maxLength={1000}
-            autoSize={{ minRows: 1, maxRows: 4 }}
-            placeholder={`${t('Type your answer here')}...`}
-            onPressEnter={onFocusedKeyPress}
+            ref={textAreaRef}
+            {...textAreaProps}
             disabled={!onClick}
+            onPressEnter={onFocusedKeyPress}
+            autoSize={{ minRows: 4, maxRows: 4 }}
+            placeholder={`${t('Type your answer here')}...`}
           />
         </Form.Item>
-        {IsntDesktop && (
-          <Form.Item>
-            <Text>{t('Shift ⇧ + Enter ↵ to make a line break')}</Text>
-          </Form.Item>
+
+        {xl && (
+          <Text type="secondary" mt="4px">
+            {t('Shift ⇧ + Enter ↵ to make a line break')}
+          </Text>
         )}
       </Form>
-      <Box mt={4}>
+      <Box mt="24px">
         <SubmitButton onClick={onPressOk} disablePressEnter />
       </Box>
     </Container>

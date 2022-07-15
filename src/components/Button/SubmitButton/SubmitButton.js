@@ -2,7 +2,6 @@ import { Box, Button, Col, Row, Text } from '@qonsoll/react-design'
 import React, { useState } from 'react'
 
 import COLLECTIONS from '../../../constants/collection'
-import { CheckOutlined } from '@ant-design/icons'
 import { Icon } from '@qonsoll/icons'
 import PropTypes from 'prop-types'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
@@ -101,8 +100,8 @@ function SubmitButton(props) {
   }
 
   return (
-    <Row display="flex" v="center" mt={!isntDesktop && 3} noGutters>
-      <Col cw="auto" mr='16px'>
+    <Row display="flex" v="center" noGutters>
+      <Col cw="auto" mr="16px">
         <Button
           size="large"
           type="primary"
@@ -111,12 +110,14 @@ function SubmitButton(props) {
           onMouseDown={(e) => e.preventDefault()}
           {...rest}>
           {children || (
-            <Box display="flex" alignItems='center'>
-
-              <Text mr='16px'>OK</Text>
-
-              <CheckOutlined />
-
+            <Box display="flex" alignItems="center">
+              OK
+              <Icon
+                ml="16px"
+                size={24}
+                name="CheckmarkFilled"
+                fill="var(--btn-primary-color)"
+              />
             </Box>
           )}
         </Button>

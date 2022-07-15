@@ -1,4 +1,4 @@
-import { Button, Text, Title } from '@qonsoll/react-design'
+import { Button, Title } from '@qonsoll/react-design'
 import { Form, Modal } from 'antd'
 import React, { cloneElement, useState } from 'react'
 
@@ -86,6 +86,14 @@ const FormSimpleFormWithModal = (props) => {
       </Modal>
     </>
   )
+}
+
+FormSimpleFormWithModal.propTypes = {
+  title: PropTypes.string,
+  defaultValues: PropTypes.object,
+  onSubmit: PropTypes.func,
+  triggerNode: PropTypes.node,
+  children: PropTypes.node
 }
 
 export default FormSimpleFormWithModal

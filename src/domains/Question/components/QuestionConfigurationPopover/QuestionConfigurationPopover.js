@@ -2,9 +2,8 @@ import { Box, Button, Popover } from '@qonsoll/react-design'
 import { Popconfirm, Tooltip } from 'antd'
 import React, { useState } from 'react'
 
-import {Icon} from '@qonsoll/icons'
+import { Icon } from '@qonsoll/icons'
 import { QuestionConfigurationPopoverContent } from '../../../../domains/Question/components'
-import { SettingOutlined } from '@ant-design/icons'
 import { useTranslations } from '@qonsoll/translation'
 
 function QuestionConfigurationPopover(props) {
@@ -70,8 +69,14 @@ function QuestionConfigurationPopover(props) {
         <Tooltip title={t('Configure question')}>
           <Button
             type="primary"
-            icon={<Icon name='SettingsFilled' size={20} />}
             onMouseDown={(e) => e.preventDefault()}
+            icon={
+              <Icon
+                size={20}
+                name="SettingsFilled"
+                fill="var(--btn-primary-color)"
+              />
+            }
           />
         </Tooltip>
       </Popover>
@@ -85,7 +90,7 @@ function QuestionConfigurationPopover(props) {
       overlayStyle={{ width: '320px' }}
       content={
         // Box popoverContent was wrapped with Box with negative margin to cover antD default popover paddings
-        <Box my={-12} mx={-16}>
+        <Box my={-12} mx={-16} p="8px">
           <QuestionConfigurationPopoverContent
             questionData={questionData}
             setShowPopover={setShowPopover}
@@ -98,9 +103,15 @@ function QuestionConfigurationPopover(props) {
       <Tooltip title={t('Configure question')}>
         <Button
           type="primary"
-          icon={<SettingOutlined />}
           onClick={popoverShowChange}
           onMouseDown={(e) => e.preventDefault()}
+          icon={
+            <Icon
+              size={20}
+              name="SettingsFilled"
+              fill="var(--btn-primary-color)"
+            />
+          }
         />
       </Tooltip>
     </Popover>

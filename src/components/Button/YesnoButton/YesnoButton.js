@@ -107,7 +107,7 @@ function YesnoButton(props) {
   return (
     <Box display="block">
       {mappedChoices?.map((item, index) => (
-        <Box key={index} mb={2}>
+        <Box key={index} mb="8px">
           <KeyBox
             isActive={buttonKey === item?.letter}
             onButtonClick={onButtonClick}

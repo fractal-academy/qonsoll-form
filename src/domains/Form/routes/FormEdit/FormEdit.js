@@ -1,4 +1,4 @@
-import { Box, Col, Container, Row, Spin } from '@qonsoll/react-design'
+import { Box, Container, Spin } from '@qonsoll/react-design'
 import {
   COLLECTIONS,
   DEFAULT_IMAGE,
@@ -9,12 +9,7 @@ import {
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
-import {
-  EditorSidebar,
-  PageHeader,
-  ResponseInfo,
-  Spinner
-} from '../../../../components'
+import { EditorSidebar, PageHeader, ResponseInfo } from '../../../../components'
 import React, { useEffect, useMemo, useState } from 'react'
 import {
   useCollectionData,
@@ -28,7 +23,6 @@ import PropTypes from 'prop-types'
 import { QuestionForm } from '../../../../domains/Question/components'
 import { message } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
-import { useHistory } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
 //configuration for certain types of questions
@@ -59,7 +53,6 @@ function FormEdit(props) {
   } = props
 
   // [ADDITIONAL HOOKS]
-  const history = useHistory()
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
@@ -269,59 +262,56 @@ function FormEdit(props) {
     return <Spin />
   }
 
-
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-      
-          <Container display="flex" height="inherit" overflowX="hidden">
-            <Box
-              flex={1}
-              display="flex"
-              p={containerPadding}
-              flexDirection="column">
-              {customHeader || (
-                <PageHeader
-                  title={form?.title}
-                  onBack={onBack}
-                  actions={
-                    <FormActions
-                      id={form?.id}
-                      showAnswers={showAnswers}
-                      showDrawer={handleDrawerOpen}
-                    />
-                  }
-                />
-              )}
-
-              <QuestionForm
-                defaultTab={defaultTab}
-                questionsList={questionsList}
-                questionData={currentQuestion}
-                brightnessValue={brightnessValue}
-                setBrightnessValue={setBrightnessValue}
-                customQuestionTypes={customQuestionTypes}
-                onQuestionTypeChange={onQuestionTypeChange}
-                welcomeScreenShowRule={welcomeScreenShowRule}
-                onQuestionLayoutChange={onQuestionLayoutChange}
+        <Container display="flex" height="inherit" overflowX="hidden">
+          <Box
+            flex={1}
+            display="flex"
+            p={containerPadding}
+            flexDirection="column">
+            {customHeader || (
+              <PageHeader
+                title={form?.title}
+                onBack={onBack}
+                actions={
+                  <FormActions
+                    id={form?.id}
+                    showAnswers={showAnswers}
+                    showDrawer={handleDrawerOpen}
+                  />
+                }
               />
+            )}
 
-              <ResponseInfo />
-            </Box>
-
-            <EditorSidebar
-              id={id}
-              formData={form}
-              endings={endings}
-              questions={questions}
-              showDrawer={showDrawer}
-              setShowDrawer={setShowDrawer}
-              answerScoresData={answerScoresList}
+            <QuestionForm
+              defaultTab={defaultTab}
+              questionsList={questionsList}
+              questionData={currentQuestion}
+              brightnessValue={brightnessValue}
+              setBrightnessValue={setBrightnessValue}
               customQuestionTypes={customQuestionTypes}
+              onQuestionTypeChange={onQuestionTypeChange}
               welcomeScreenShowRule={welcomeScreenShowRule}
+              onQuestionLayoutChange={onQuestionLayoutChange}
             />
-          </Container>
-      
+
+            <ResponseInfo />
+          </Box>
+
+          <EditorSidebar
+            id={id}
+            formData={form}
+            endings={endings}
+            questions={questions}
+            showDrawer={showDrawer}
+            setShowDrawer={setShowDrawer}
+            answerScoresData={answerScoresList}
+            customQuestionTypes={customQuestionTypes}
+            welcomeScreenShowRule={welcomeScreenShowRule}
+          />
+        </Container>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

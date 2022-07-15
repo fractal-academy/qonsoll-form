@@ -34,7 +34,7 @@ const FormActions = (props) => {
       <Tooltip title={t('Form preview')}>
         <Button
           onClick={handleFormShow}
-          mr={showDrawer && '16px'}
+          mr={['0px', '16px', '16px', '0px']}
           icon={<Icon name="ShowFilled" size={20} />}
         />
       </Tooltip>

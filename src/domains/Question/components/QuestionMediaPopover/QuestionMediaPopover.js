@@ -1,9 +1,10 @@
-import styled from 'styled-components'
-import { Popover, Button } from 'antd'
+import { Button, Popover } from 'antd'
 import React, { useState } from 'react'
+
 import { Box } from '@qonsoll/react-design'
-import { PictureOutlined } from '@ant-design/icons'
+import { Icon } from '@qonsoll/icons'
 import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
+import styled from 'styled-components'
 
 const StyledBookmarkButton = styled(Button)`
   border-top-left-radius: 0px;
@@ -40,7 +41,9 @@ function QuestionMediaPopover(props) {
       }>
       <StyledBookmarkButton
         type="primary"
-        icon={<PictureOutlined />}
+        icon={
+          <Icon size={20} name="ImageFilled" fill="var(--btn-primary-color)" />
+        }
         onClick={changeImageEditVisibleState}
         onMouseDown={(e) => e.preventDefault()}
       />

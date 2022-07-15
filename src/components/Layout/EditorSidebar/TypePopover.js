@@ -1,6 +1,6 @@
 import { Box, Button, Popover } from '@qonsoll/react-design'
 
-import { PlusOutlined } from '@ant-design/icons'
+import { Icon } from '@qonsoll/icons'
 import PropTypes from 'prop-types'
 import { QuestionTypeSelect } from '../../../domains/Question/components'
 import React from 'react'
@@ -43,7 +43,7 @@ function TypePopover(props) {
       <Tooltip placement="bottom" title={t('Create new question')}>
         <Button
           type="text"
-          icon={<PlusOutlined />}
+          icon={<Icon name="PlusFilled" size={20} />}
           onClick={popoverShowChange}
           onMouseDown={(e) => e.preventDefault()}
         />
