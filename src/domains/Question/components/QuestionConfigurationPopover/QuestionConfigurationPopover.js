@@ -2,6 +2,7 @@ import { Box, Button, Popover } from '@qonsoll/react-design'
 import { Popconfirm, Tooltip } from 'antd'
 import React, { useState } from 'react'
 
+import {Icon} from '@qonsoll/icons'
 import { QuestionConfigurationPopoverContent } from '../../../../domains/Question/components'
 import { SettingOutlined } from '@ant-design/icons'
 import { useTranslations } from '@qonsoll/translation'
@@ -69,7 +70,7 @@ function QuestionConfigurationPopover(props) {
         <Tooltip title={t('Configure question')}>
           <Button
             type="primary"
-            icon={<SettingOutlined />}
+            icon={<Icon name='SettingsFilled' size={20} />}
             onMouseDown={(e) => e.preventDefault()}
           />
         </Tooltip>

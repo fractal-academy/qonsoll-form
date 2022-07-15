@@ -49,7 +49,7 @@ function QuestionConfigurationPopoverContent(props) {
   const configurationTitle = `${translatedQuestionType} ${t('settings')}`
 
   return (
-    <Box px={0} py={0}>
+    <Box >
       <PopoverSwitcherRow
         noGutters
         p={2}

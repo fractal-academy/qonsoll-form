@@ -8,7 +8,8 @@ function TextEditable(props) {
   return (
     <StyledTextEditable
       {...rest}
-      maxLength={500}
+      mb='24px'
+      maxLength={250}
       isTitle={isTitle}
       autoSize={{ minRows: 1 }}
       textSecondary={textSecondary}

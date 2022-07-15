@@ -1,4 +1,4 @@
-import { Box, Col, Container, Row } from '@qonsoll/react-design'
+import { Box, Col, Container, Row, Spin } from '@qonsoll/react-design'
 import {
   COLLECTIONS,
   DEFAULT_IMAGE,
@@ -53,6 +53,7 @@ function FormEdit(props) {
     actions = {},
     customHeader,
     showAnswers,
+    onBack,
     customQuestionTypes,
     wrapperPaddings
   } = props
@@ -264,12 +265,15 @@ function FormEdit(props) {
   const containerPadding = wrapperPaddings || ['24px', '24px', '32px']
   const welcomeScreenShowRule = true
 
+  if (formLoading || questionsListLoading || answerScoresListLoading) {
+    return <Spin />
+  }
+
+
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        {formLoading || questionsListLoading || answerScoresListLoading ? (
-          <Spinner />
-        ) : (
+      
           <Container display="flex" height="inherit" overflowX="hidden">
             <Box
               flex={1}
@@ -279,7 +283,7 @@ function FormEdit(props) {
               {customHeader || (
                 <PageHeader
                   title={form?.title}
-                  onBack={history.goBack}
+                  onBack={onBack}
                   actions={
                     <FormActions
                       id={form?.id}
@@ -317,7 +321,7 @@ function FormEdit(props) {
               welcomeScreenShowRule={welcomeScreenShowRule}
             />
           </Container>
-        )}
+      
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

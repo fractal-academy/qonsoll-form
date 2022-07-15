@@ -1,8 +1,9 @@
-import { Button, Col, Row, Text } from '@qonsoll/react-design'
+import { Box, Button, Col, Row, Text } from '@qonsoll/react-design'
 import React, { useState } from 'react'
 
 import COLLECTIONS from '../../../constants/collection'
 import { CheckOutlined } from '@ant-design/icons'
+import { Icon } from '@qonsoll/icons'
 import PropTypes from 'prop-types'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useAnswersContext } from '../../../context/Answers'
@@ -101,24 +102,22 @@ function SubmitButton(props) {
 
   return (
     <Row display="flex" v="center" mt={!isntDesktop && 3} noGutters>
-      <Col cw="auto" mr={3}>
+      <Col cw="auto" mr='16px'>
         <Button
+          size="large"
           type="primary"
-          height="56px"
-          loading={submitLoading || loading}
           onClick={onButtonClick}
+          loading={submitLoading || loading}
           onMouseDown={(e) => e.preventDefault()}
-          fontSize="var(--qf-submit-button-font-size)"
           {...rest}>
           {children || (
-            <Row display="flex" noGutters>
-              <Col cw="auto" mr={2}>
-                OK
-              </Col>
-              <Col v="center">
-                <CheckOutlined />
-              </Col>
-            </Row>
+            <Box display="flex" alignItems='center'>
+
+              <Text mr='16px'>OK</Text>
+
+              <CheckOutlined />
+
+            </Box>
           )}
         </Button>
       </Col>
