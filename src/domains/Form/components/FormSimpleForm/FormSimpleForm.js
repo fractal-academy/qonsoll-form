@@ -1,6 +1,7 @@
-import { Input, Switch, TextArea } from '@qonsoll/react-design'
+import { Col, Input, Row, Text, TextArea } from '@qonsoll/react-design'
 import React, { useMemo } from 'react'
 
+import { Checkbox } from 'antd'
 import { Form } from 'antd'
 import { useTranslations } from '@qonsoll/translation'
 
@@ -23,25 +24,40 @@ function FormSimpleForm(props) {
 
   return (
     <Form {...rest} initialValues={initialValues}>
-      <Form.Item
-        name="title"
-        rules={[{ required: true, message: t('Please, enter form name') }]}>
-        <Input mb={4} allowClear maxLength={250} placeholder={t('Form name')} />
-      </Form.Item>
-      <Form.Item name="subtitle">
-        <TextArea
-          mb={4}
-          showCount
-          autoSize={{ minRows: 3, maxRows: 5 }}
-          maxLength={1000}
-          allowClear
-          placeholder={t('Form short description')}
-        />
-      </Form.Item>
-      <Form.Item name="isQuiz" label={t('Enable quiz system')}>
-        <Switch defaultChecked={!!formData?.isQuiz} />
-      </Form.Item>
-      {children}
+      <Row noGutters>
+        <Col cw={12}>
+          <Form.Item
+            name="title"
+            rules={[{ required: true, message: t('Please, enter form name') }]}>
+            <Input allowClear maxLength={100} placeholder={t('Form name')} />
+          </Form.Item>
+        </Col>
+
+        <Col cw={12}>
+          <Form.Item name="subtitle">
+            <TextArea
+              showCount
+              autoSize={{ minRows: 5 }}
+              maxLength={250}
+              allowClear
+              placeholder={t('Form short description')}
+            />
+          </Form.Item>
+        </Col>
+
+        <Col cw={12}>
+          <Form.Item name="isQuiz" valuePropName="checked">
+            <Checkbox
+              defaultChecked={initialValues?.isQuiz}
+              data-testproject="quizSystem">
+              <Text>{t('Enable quiz system')}</Text>
+            </Checkbox>
+            {/* <Switch defaultChecked={!!formData?.isQuiz} /> */}
+          </Form.Item>
+        </Col>
+
+        <Col cw={12}>{children}</Col>
+      </Row>
     </Form>
   )
 }

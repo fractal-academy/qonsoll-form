@@ -172,8 +172,8 @@ function QuestionForm(props) {
                   </Col>
                 )}
               </Row>
-              <Row noGutters h="between" mb={4}>
-                <Col cw="12" mt={2}>
+              <Row noGutters h="between" mb="24px">
+                <Col cw="12" mt="24px">
                   <QuestionHeader
                     titlePlaceholder={t('Editable question title')}
                     subtitlePlaceholder={t('Description (optional)')}

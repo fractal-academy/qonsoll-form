@@ -12,4 +12,9 @@ export const StyledTextEditable = styled(TextArea)`
     isTitle && 'var(--qf-question-header-font-size)'};
   line-height: ${({ isTitle }) =>
     isTitle && 'var(--qf-question-header-line-height) !important'};
+
+  .ant-input:focus,
+  .ant-input-focused {
+    border: none !important;
+  }
 `

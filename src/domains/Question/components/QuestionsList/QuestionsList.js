@@ -1,16 +1,17 @@
-import { message } from 'antd'
-import PropTypes from 'prop-types'
-import React, { useMemo } from 'react'
-import { Box } from '@qonsoll/react-design'
-import { DragableList } from '../../../../components'
-import useFunctions from '../../../../hooks/useFunctions'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
-import { QuestionSimpleView } from '../../../../domains/Question/components'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
+import React, { useMemo } from 'react'
+
+import { Box } from '@qonsoll/react-design'
+import { DragableList } from '../../../../components'
+import PropTypes from 'prop-types'
+import { QuestionSimpleView } from '../../../../domains/Question/components'
+import { message } from 'antd'
+import useFunctions from '../../../../hooks/useFunctions'
 
 function QuestionsList(props) {
   const {
@@ -140,11 +141,11 @@ function QuestionsList(props) {
   const sortable = filteredDataSource?.length > 1
 
   return (
-    <Box p={2}>
+    <Box>
       {dataSource?.map(
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
-            <Box pl="24px" mb={2} key={item}>
+            <Box pl="24px" mb="8px" key={item}>
               <QuestionSimpleView
                 {...item}
                 endings={endings}

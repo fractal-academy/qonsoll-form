@@ -1,4 +1,4 @@
-import { Box, Button, Col, Container, Row } from '@qonsoll/react-design'
+import { Box, Col, Container, Row } from '@qonsoll/react-design'
 import {
   COLLECTIONS,
   DEFAULT_IMAGE,
@@ -16,7 +16,6 @@ import {
   Spinner
 } from '../../../../components'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Tooltip, message } from 'antd'
 import {
   useCollectionData,
   useDocumentData
@@ -24,12 +23,12 @@ import {
 
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
+import FormActions from './FormActions'
 import PropTypes from 'prop-types'
 import { QuestionForm } from '../../../../domains/Question/components'
-import { UnorderedListOutlined } from '@ant-design/icons'
+import { message } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useHistory } from 'react-router-dom'
-import { useTranslations } from '@qonsoll/translation'
 import { v4 as uuid } from 'uuid'
 
 //configuration for certain types of questions
@@ -58,12 +57,8 @@ function FormEdit(props) {
     wrapperPaddings
   } = props
 
-  //[CUSTOM HOOKS]
-  const { t } = useTranslations()
-
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const smallScreen = window.innerWidth >= 768
   const currentQuestion = useCurrentQuestionContext()
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
   const { getCollectionRef, setData } = useFunctions(firebase)
@@ -88,7 +83,7 @@ function FormEdit(props) {
   const [defaultTab, setDefaultTab] = useState(currentQuestion?.layoutType)
   const [brightnessValue, setBrightnessValue] = useState(0)
   const [currentQuestionId, setCurrentQuestionId] = useState()
-  const [isDrawerOpened, setDraverOpened] = useState(false)
+  const [showDrawer, setShowDrawer] = useState(false)
 
   // [COMPUTED PROPERTIES]
   const choicesConfiguration = [
@@ -143,7 +138,7 @@ function FormEdit(props) {
     })
   }
   const handleDrawerOpen = () => {
-    setDraverOpened(!isDrawerOpened)
+    setShowDrawer(!showDrawer)
   }
   const onQuestionTypeChange = async ({ key }) => {
     //conditions to check if current question type changes to/from Welcome screen type
@@ -266,8 +261,7 @@ function FormEdit(props) {
   }, [currentQuestion])
 
   // [COMPUTED PROPERTIES]
-  const containerPadding =
-    wrapperPaddings !== undefined ? wrapperPaddings : smallScreen ? 4 : 2
+  const containerPadding = wrapperPaddings || ['24px', '24px', '32px']
   const welcomeScreenShowRule = true
 
   return (
@@ -282,36 +276,18 @@ function FormEdit(props) {
               display="flex"
               p={containerPadding}
               flexDirection="column">
-              {customHeader !== null && (
-                <Row noGutters v="center">
-                  <Col>
-                    {customHeader ? (
-                      <>{customHeader}</>
-                    ) : (
-                      <PageHeader
-                        id={id}
-                        handlesPreview
-                        title={form?.title}
-                        onBack={history.goBack}
-                        showAnswers={showAnswers}
-                        smallScreen={smallScreen}
-                        isDrawerOpened={isDrawerOpened}
-                        setDraverOpened={setDraverOpened}
-                      />
-                    )}
-                  </Col>
-                  <Col cw="auto" mb={'var(--qf-header-mb)'}>
-                    <Tooltip placement="bottom" title={t('Show question list')}>
-                      <Button
-                        ml={1}
-                        display={['flex', 'flex', 'flex', 'none']}
-                        type="text"
-                        icon={<UnorderedListOutlined />}
-                        onClick={handleDrawerOpen}
-                      />
-                    </Tooltip>
-                  </Col>
-                </Row>
+              {customHeader || (
+                <PageHeader
+                  title={form?.title}
+                  onBack={history.goBack}
+                  actions={
+                    <FormActions
+                      id={form?.id}
+                      showAnswers={showAnswers}
+                      showDrawer={handleDrawerOpen}
+                    />
+                  }
+                />
               )}
 
               <QuestionForm
@@ -328,19 +304,18 @@ function FormEdit(props) {
 
               <ResponseInfo />
             </Box>
-            {smallScreen && (
-              <EditorSidebar
-                id={id}
-                formData={form}
-                endings={endings}
-                questions={questions}
-                isDrawerOpened={isDrawerOpened}
-                setDraverOpened={setDraverOpened}
-                answerScoresData={answerScoresList}
-                customQuestionTypes={customQuestionTypes}
-                welcomeScreenShowRule={welcomeScreenShowRule}
-              />
-            )}
+
+            <EditorSidebar
+              id={id}
+              formData={form}
+              endings={endings}
+              questions={questions}
+              showDrawer={showDrawer}
+              setShowDrawer={setShowDrawer}
+              answerScoresData={answerScoresList}
+              customQuestionTypes={customQuestionTypes}
+              welcomeScreenShowRule={welcomeScreenShowRule}
+            />
           </Container>
         )}
       </ActionsFunctionsContext.Provider>

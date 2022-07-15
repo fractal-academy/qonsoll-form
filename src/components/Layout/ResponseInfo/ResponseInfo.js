@@ -11,12 +11,14 @@ const ResponseInfo = (props) => {
   return (
     <Box
       height="100%"
-      display={['flex', 'none']}
-      flexDirection="column"
       alignItems="center"
-      justifyContent="center">
-      <Img src={ResponsiveImage} alt="Wrong device" height={150} mb={3} />
-      <Text>{t('This feature is available only on desktop')}</Text>
+      flexDirection="column"
+      justifyContent="center"
+      display={['flex', 'none']}>
+      <Img src={ResponsiveImage} alt="Wrong device" height={150} mb="24px" />
+      <Text type="secondary">
+        {t('This feature is available only on desktop')}
+      </Text>
     </Box>
   )
 }
