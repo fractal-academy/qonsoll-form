@@ -1,17 +1,20 @@
-import { Box, Button, Col, Input, Row, Title } from '@qonsoll/react-design'
 import {
-  CustomButton,
-  CustomText,
-  MediaListContainer
-} from './MediaLibraryModal.styles'
-import { EditOutlined, SearchOutlined } from '@ant-design/icons'
+  Box,
+  Button,
+  Col,
+  Input,
+  Row,
+  Text,
+  Title
+} from '@qonsoll/react-design'
 import { Modal, Upload, message } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { COLLECTIONS } from '../../../../constants'
 import Fuse from 'fuse.js'
+import { Icon } from '@qonsoll/icons'
+import { MediaList } from '..'
 import PropTypes from 'prop-types'
-import { StaticList } from '../../../../components'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
@@ -29,13 +32,14 @@ function MediaLibraryModal(props) {
   const searchRef = useRef()
 
   // [COMPONENT STATE HOOKS]
-  const [selectedBackgroundImg, setSelectedBackgroundImg] = useState(false)
+  const [selectedImage, setSelectedImage] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [imagesList, setImagesList] = useState(media)
 
   // [COMPUTED PROPERTIES]
   const amountFiles = imagesList.length
   const fuse = new Fuse(media, { keys: ['title'] })
+  const subtitle = `${t('You have')} ${amountFiles} ${'file'}(s)`
 
   // [CLEAN FUNCTIONS]
   const onMediaUploaded = (data) => {
@@ -46,7 +50,7 @@ function MediaLibraryModal(props) {
   }
   const onModalContinue = async () => {
     setIsModalVisible(!isModalVisible)
-    onContinue && onContinue(selectedBackgroundImg)
+    onContinue && onContinue(selectedImage)
   }
   const onModalCancel = () => {
     setIsModalVisible(!isModalVisible)
@@ -115,26 +119,74 @@ function MediaLibraryModal(props) {
   return (
     <>
       {isHovering && (
-        <CustomButton {...btnProps} onClick={modalStateChange}>
-          <Box display="flex">
-            <Box mr={2}>
-              <EditOutlined />
-            </Box>
+        <Box
+          display="flex"
+          width="inherit"
+          height="inherit"
+          alignItems="center"
+          justifyContent="center">
+          <Button {...btnProps} onClick={modalStateChange}>
+            <Icon name="EditFilled" size={20} fill="var(--btn-primary-color)" />
+
             {t('Change')}
-          </Box>
-        </CustomButton>
+          </Button>
+        </Box>
       )}
       <Modal
+        title={
+          <Row noGutters>
+            <Col>
+              <Title level={3}>{t('Media library')}</Title>
+              <Text
+                clamp="1"
+                type="secondary"
+                fontSize="var(--ql-font-size-body1)">
+                {subtitle}
+              </Text>
+            </Col>
+            <Col cw="auto">
+              <Button type="primary" onClick={customRequest}>
+                {t('Upload image')}
+              </Button>
+            </Col>
+          </Row>
+        }
+        footer={
+          <>
+            <Button mr="16px" onClick={onModalCancel}>
+              {t('Cancel')}
+            </Button>
+            <Button type="primary" onClick={onModalContinue}>
+              {t('Continue')}
+            </Button>
+          </>
+        }
         visible={isModalVisible}
-        footer={null}
         closable={false}
-        width="1024px"
-        centered
-        bodyStyle={{
-          padding: 0,
-          zIndex: 10000
-        }}>
-        <Row v="center" py={3} px={3}>
+        destroyOnClose
+        width="70%"
+        centered>
+        <Row noGutters>
+          <Col cw={12} mb="16px">
+            <Input
+              allowClear
+              ref={searchRef}
+              prefix={<Icon name="SearchFilled" size={20} />}
+              placeholder={`${t('Search media file by name')}...`}
+              onSearch={searchData}
+              onChange={onChange}
+            />
+          </Col>
+
+          <Col cw={12}>
+            <MediaList
+              media={imagesList}
+              selected={selectedImage}
+              handleSelect={setSelectedImage}
+            />
+          </Col>
+        </Row>
+        {/* <Row v="center" py={3} px={3}>
           <Col>
             <Title
               color="var(--qf-typography-title-color)"
@@ -162,7 +214,6 @@ function MediaLibraryModal(props) {
         </Row>
 
         <MediaListContainer px={4} pt={2}>
-          {/* RENDER MEDIA */}
           <Box width="100%" mr="-10px">
             <StaticList
               hasMedia
@@ -190,7 +241,7 @@ function MediaLibraryModal(props) {
               {t('Continue')}
             </Button>
           </Col>
-        </Row>
+        </Row> */}
       </Modal>
     </>
   )

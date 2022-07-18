@@ -1,4 +1,4 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Box, Col, Row, Text } from '@qonsoll/react-design'
 import {
   ChoiceEditableGroup,
   ContentCard,
@@ -93,14 +93,9 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.VIDEO_ANSWER]: {
       component: (
-        <Box
-          my={2}
-          height="100%"
-          display="flex"
-          fontWeight="500"
-          alignItems="center">
-          {`${t('Here will be answer as video')}. ;)`}
-        </Box>
+        <Text type="secondary" my="24px">{`${t(
+          'Here will be answer as video'
+        )}. ;)`}</Text>
       )
     }
   }

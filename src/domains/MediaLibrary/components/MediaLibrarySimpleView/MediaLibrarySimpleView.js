@@ -1,10 +1,10 @@
+import { Box, Text } from '@qonsoll/react-design'
 import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
 
-import { Box } from '@qonsoll/react-design'
 import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
 import PropTypes from 'prop-types'
 import RangeSlider from '../../../../components/RangeSlider'
@@ -41,7 +41,7 @@ function MediaLibrarySimpleView(props) {
 
   return (
     <Box>
-      <CustomBox backgroundImage={bgImage} mb={2} ref={hoverRef}>
+      <CustomBox backgroundImage={bgImage} mb="16px" ref={hoverRef}>
         <MediaLibraryModal
           onClick={() => {
             setIsImageEditVisible(false)
@@ -53,14 +53,14 @@ function MediaLibrarySimpleView(props) {
           }}
         />
       </CustomBox>
-      <CustomText>{t('Brightness')}</CustomText>
-      <Box>
-        <RangeSlider
-          onBlur={onBlur}
-          inputValue={brightnessValue}
-          setInputValue={setBrightnessValue}
-        />
-      </Box>
+
+      <Text>{t('Brightness')}</Text>
+
+      <RangeSlider
+        onBlur={onBlur}
+        inputValue={brightnessValue}
+        setInputValue={setBrightnessValue}
+      />
     </Box>
   )
 }

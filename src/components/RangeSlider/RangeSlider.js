@@ -1,8 +1,7 @@
+import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { Slider } from 'antd'
-import PropTypes from 'prop-types'
-import { Box } from '@qonsoll/react-design'
-import { CustomInputNumber } from './RangeSlider.styles'
 
 function RangeSlider(props) {
   const { onBlur, inputValue, setInputValue } = props
@@ -21,9 +20,9 @@ function RangeSlider(props) {
         onBlur={onBlur}
         onChange={onSlide}
         value={value}
-        style={{ flexGrow: 1, marginRight: '12px' }}
+        style={{ flexGrow: 1 }}
       />
-      <CustomInputNumber
+      {/* <CustomInputNumber
         min={-100}
         max={100}
         value={inputValue}
@@ -32,7 +31,7 @@ function RangeSlider(props) {
           display: 'flex',
           alignItems: 'center'
         }}
-      />
+      /> */}
     </Box>
   )
 }
