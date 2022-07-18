@@ -65,7 +65,7 @@ const VideoAnswer = (props) => {
   }
 
   return (
-    <Box height={350} borderRadius="var(--ql-border-radius-lg)">
+    <Box height={350} borderRadius="var(--card-radius)" overflow="hidden">
       {!!video ? (
         <VideoPlayer
           withDelete

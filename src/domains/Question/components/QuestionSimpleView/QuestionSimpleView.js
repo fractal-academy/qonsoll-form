@@ -1,9 +1,9 @@
-import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { DescriptionContainer, StyledButton } from './QuestionSimpleView.styles'
 import { IconRoundContainer, NumberedCard } from '../../../../components'
 import React, { cloneElement } from 'react'
 
 import { Box } from '@qonsoll/react-design'
+import { ExclamationOutlined } from '@ant-design/icons'
 import { Icon } from '@qonsoll/icons'
 import { LAYOUT_TYPES } from '../../../../constants'
 import { Popconfirm } from 'antd'

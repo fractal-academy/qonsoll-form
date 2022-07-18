@@ -7,24 +7,6 @@ import React from 'react'
 function PageHeader(props) {
   const { title, titleProps, subtitle, subtitleProps, onBack, actions } = props
 
-  // [ADDITIONAL HOOKS]
-
-  // const { onFormShow } = useActionsFunctionsContext()
-  // const { onFormResultsShow } = useActionsFunctionsContext()
-
-  // [CLEAN FUNCTIONS]
-  // const onFormShowDisplay = () => {
-  //   onFormShow?.(id)
-  //   // history.push(formPath)
-  // }
-  // const onFormResultsDisplay = () => {
-  //   onFormResultsShow?.(id)
-  //   // history.push(formPath)
-  // }
-  // const onRestart = () => {
-  //   window.location.reload()
-  // }
-
   return (
     <Row noGutters v="center" mb="32px">
       {onBack && (
@@ -51,12 +33,12 @@ function PageHeader(props) {
 }
 
 PageHeader.propTypes = {
-  id: PropTypes.string,
   onBack: PropTypes.func,
   title: PropTypes.string,
-  smallScreen: PropTypes.bool,
   titleProps: PropTypes.object,
-  handlesPreview: PropTypes.bool
+  subtitle: PropTypes.string,
+  subtitleProps: PropTypes.object,
+  actions: PropTypes.node
 }
 
 export default PageHeader

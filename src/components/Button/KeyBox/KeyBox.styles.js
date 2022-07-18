@@ -5,7 +5,8 @@ import { blinkBackground } from '../../../animation'
 
 export const StyledKeybox = styled(Box)`
   position: absolute;
-  top: 50%;
+  top: ${({ hasImages }) => !hasImages && '50%'};
+  bottom: ${({ hasImages }) => hasImages && 0};
   transform: translate(0px, -50%);
   border-width: 1px;
   text-align: center;
@@ -31,7 +32,7 @@ export const ImageContainer = styled(Box)`
 export const StyledButton = styled(Box)`
   width: 100%;
   height: 100%;
-  padding: 12px 24px;
+  padding: ${({ hasImages }) => (hasImages ? '12px' : '12px 24px')};
   position: relative;
   border-radius: var(--btn-border-radius-base);
   color: var(--qf-button-color);
@@ -51,7 +52,7 @@ export const StyledButton = styled(Box)`
 export const StyledText = styled(Text)`
   width: ${({ hasImages, phoneSmall }) =>
     hasImages ? (phoneSmall ? '100%' : '15ch') : '100%'};
-  padding-left: ${({ hasImages }) => (hasImages ? '0' : '30px')};
+  padding-left: ${({ hasImages }) => (hasImages ? '32px' : '30px')};
   word-break: break-word;
   color: ${({ isActive }) =>
     isActive ? 'var(--qf-button-color-active)' : 'var(--qf-button-color)'};

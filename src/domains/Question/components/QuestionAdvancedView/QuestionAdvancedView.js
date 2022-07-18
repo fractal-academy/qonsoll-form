@@ -150,6 +150,7 @@ function QuestionAdvancedView(props) {
   const questionNumberRule =
     data?.questionType !== QUESTION_TYPES.WELCOME_SCREEN
   const img = `url('${data?.image}')`
+  const titleSpacing = data?.subtitle ? '4px' : '32px'
 
   return (
     <Row {...styles.mainRowStyle} noGutters>
@@ -160,13 +161,13 @@ function QuestionAdvancedView(props) {
           imageBrightness={data?.imageBrightness || 0}
         />
       )}
-      <Col mx={2} order={2} cw={[12, 12, 6, 6]} alignSelf={tabletImageCheck}>
+      <Col mx="8px" order={2} cw={[12, 12, 6, 6]} alignSelf={tabletImageCheck}>
         <StyledBox
           pl={devicePadding}
           pr={devicePadding}
           bordered={false}
           specialLayoutRule={specialLayoutRule}>
-          <Row noGutters py={2} width="100%">
+          <Row noGutters py={titleSpacing} width="100%">
             <Col cw={12}>
               {data?.isVideoQuestion ? (
                 <Box
@@ -205,13 +206,15 @@ function QuestionAdvancedView(props) {
               )}
             </Col>
           </Row>
-          <Row noGutters mb={3}>
-            <Col>
-              <Text color="var(--qf-typography-subtitle-color)">
-                {data?.subtitle}
-              </Text>
-            </Col>
-          </Row>
+          {data?.subtitle && (
+            <Row noGutters mb="32px">
+              <Col>
+                <Text color="var(--qf-typography-subtitle-color)">
+                  {data?.subtitle}
+                </Text>
+              </Col>
+            </Row>
+          )}
           {layoutType.type === LAYOUT_TYPES.BETWEEN.type && (
             <Row noGutters mb={3} h={widthTablet && 'center'}>
               <Col cw="auto">

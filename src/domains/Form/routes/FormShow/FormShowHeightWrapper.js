@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, { bool } from 'prop-types'
+
 import { Box } from '@qonsoll/react-design'
 import { QuestionAdvancedView } from '../../../Question/components'
+import React from 'react'
 
 function FormShowHeightWrapper(props) {
   const {
@@ -44,7 +45,8 @@ FormShowHeightWrapper.propTypes = {
   currentSlide: PropTypes.number,
   wrapperHeight: PropTypes.number,
   answersScoreData: PropTypes.array,
-  containWelcomeScreen: PropTypes.bool
+  containWelcomeScreen: PropTypes.bool,
+  preventFirebaseUsage: bool
 }
 
 export default FormShowHeightWrapper

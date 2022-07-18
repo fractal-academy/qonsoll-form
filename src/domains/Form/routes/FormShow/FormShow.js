@@ -46,7 +46,6 @@ function FormShow(props) {
 
   // [ADDITIONAL HOOKS]
   const history = useHistory()
-  const smallScreen = window.innerWidth >= 768
   useKeyPress(9, (e) => {
     e.preventDefault()
   })
@@ -203,6 +202,7 @@ function FormShow(props) {
       determineEnding()
     }
   }, [isLastQuestionWithoutEndings, isAnswered, loading, determineEnding])
+
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
@@ -215,14 +215,7 @@ function FormShow(props) {
               display="flex"
               flexDirection="column"
               p={containerPadding}>
-              {showHeader && (
-                <PageHeader
-                  id={id}
-                  handlesPreview
-                  smallScreen={smallScreen}
-                  onBack={history.goBack}
-                />
-              )}
+              {showHeader && <PageHeader id={id} onBack={history.goBack} />}
               <ContentCard
                 topOffset={wrapperOffset}
                 wrapperHeight={wrapperHeight}>

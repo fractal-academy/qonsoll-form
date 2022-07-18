@@ -192,62 +192,6 @@ function MediaLibraryModal(props) {
             />
           </Col>
         </Row>
-        {/* <Row v="center" py={3} px={3}>
-          <Col>
-            <Title
-              color="var(--qf-typography-title-color)"
-              fontFamily="var(--ql-font-family-main)"
-              level={3}>
-              {t('Media library')}
-            </Title>
-            <CustomText>
-              {`${t('Amount of shown files')}: `}
-              {amountFiles}
-            </CustomText>
-          </Col>
-        </Row>
-        <Row px={3} pb={3}>
-          <Col>
-            <Input
-              allowClear
-              ref={searchRef}
-              prefix={<SearchOutlined />}
-              placeholder={`${t('Search media file by name')}...`}
-              onSearch={searchData}
-              onChange={onChange}
-            />
-          </Col>
-        </Row>
-
-        <MediaListContainer px={4} pt={2}>
-          <Box width="100%" mr="-10px">
-            <StaticList
-              hasMedia
-              data={imagesList}
-              beforeUpload={beforeUpload}
-              customRequest={customRequest}
-              selectedBackgroundImg={selectedBackgroundImg}
-              setSelectedBackgroundImg={setSelectedBackgroundImg}
-            />
-          </Box>
-        </MediaListContainer>
-        <Row
-          p={3}
-          h="right"
-          noGutters
-          borderBottomLeftRadius="var(--qf-border-radius-md)"
-          borderBottomRightRadius="var(--qf-border-radius-md)">
-          <Col cw="auto" mr={2}>
-            <Button type="text" onClick={onModalCancel}>
-              {t('Cancel')}
-            </Button>
-          </Col>
-          <Col cw="auto">
-            <Button type="primary" onClick={onModalContinue}>
-              {t('Continue')}
-            </Button>
-          </Col>
-        </Row> */}
       </Modal>
     </>
   )

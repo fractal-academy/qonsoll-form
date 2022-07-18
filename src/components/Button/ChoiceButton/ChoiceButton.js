@@ -1,6 +1,7 @@
-import { Col, Row } from '@qonsoll/react-design'
 import React, { useMemo, useState } from 'react'
 
+import ChoiceList from './ChoiceList'
+import ImageChoiceList from './ImageChoiceList'
 import { KeyBox } from '../../../components'
 import PropTypes from 'prop-types'
 import { getQuestionAnswerFromContext } from '../../../helpers'
@@ -44,7 +45,6 @@ function ChoiceButton(props) {
     () => (mappedChoices ? mappedChoices?.map(({ letter }) => letter) : []),
     [mappedChoices]
   )
-  const phoneSize = window.innerWidth <= 500
 
   useKeyPress(
     (event) => ![].includes(event.key) && currentSlide === question?.order,
@@ -105,24 +105,22 @@ function ChoiceButton(props) {
     }
   }
 
-  return (
-    <Row noGutters h={phoneSize && 'center'}>
-      {mappedChoices?.map((item, index) => (
-        <Col
-          mr={2}
-          key={index}
-          cw={hasImages ? (phoneSize ? '10' : '3') : '12'}>
-          <KeyBox
-            index={index}
-            item={item}
-            hasImages={hasImages}
-            buttonKey={buttonKey}
-            onButtonClick={onButtonClick}
-            isActive={buttonKey === item.letter}
-          />
-        </Col>
-      ))}
-    </Row>
+  return hasImages ? (
+    <ImageChoiceList
+      data={mappedChoices}
+      hasImages={hasImages}
+      buttonKey={buttonKey}
+      onButtonClick={onButtonClick}>
+      <KeyBox />
+    </ImageChoiceList>
+  ) : (
+    <ChoiceList
+      data={mappedChoices}
+      hasImages={hasImages}
+      buttonKey={buttonKey}
+      onButtonClick={onButtonClick}>
+      <KeyBox />
+    </ChoiceList>
   )
 }
 
