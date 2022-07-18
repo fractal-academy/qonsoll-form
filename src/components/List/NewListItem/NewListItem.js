@@ -1,10 +1,10 @@
-import React from 'react'
-import { Upload } from 'antd'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
-import { StyledItem } from '../../../components'
 import { PlusOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { StyledItem } from '../../../components'
+import { Upload } from 'antd'
+import styled from 'styled-components'
 
 const StyledDragger = styled(Upload.Dragger)`
   display: block;

@@ -15,6 +15,7 @@ import Fuse from 'fuse.js'
 import { Icon } from '@qonsoll/icons'
 import { MediaList } from '..'
 import PropTypes from 'prop-types'
+import { StyledDragger } from './MediaLibraryModal.styled'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
@@ -145,9 +146,14 @@ function MediaLibraryModal(props) {
               </Text>
             </Col>
             <Col cw="auto">
-              <Button type="primary" onClick={customRequest}>
-                {t('Upload image')}
-              </Button>
+              <StyledDragger
+                multiple
+                name="file"
+                showUploadList={false}
+                beforeUpload={beforeUpload}
+                customRequest={customRequest}>
+                <Button type="primary">{t('Upload image')}</Button>
+              </StyledDragger>
             </Col>
           </Row>
         }

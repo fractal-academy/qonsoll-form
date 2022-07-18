@@ -61,7 +61,7 @@ function ConditionForm(props) {
         fontFamily="var(--ql-font-family-main)"
         textOverflow="ellipsis"
         level={5}
-        mb={2}>
+        mb="8px">
         {item?.title}
       </Title>
 

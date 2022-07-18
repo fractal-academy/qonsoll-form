@@ -60,15 +60,15 @@ const ScoreConditionsAdvancedView = (props) => {
           fontFamily="var(--ql-font-family-main)"
           textOverflow="ellipsis"
           level={5}
-          mb={2}>
+          mb="8px">
           {questionData?.title}
         </Title>
 
         {questionData?.questionConfigurations?.map((item, index) => (
-          <Row mb={2} key={index}>
-            <Col cw={8} pr={2} pl={0}>
+          <Row mb="8px" key={index}>
+            <Col cw={8} pr="8px" pl={0}>
               <QuestionPreview px={3}>
-                <LetterBox px={2} mr={2}>
+                <LetterBox px="8px" mr="8px">
                   <Text color="var(--qf-typography-subtitle-color)" strong>
                     {String.fromCharCode(startLetter + index)}
                   </Text>
@@ -81,7 +81,7 @@ const ScoreConditionsAdvancedView = (props) => {
                 </Text>
               </QuestionPreview>
             </Col>
-            <Col cw={4} pr={0} pl={2}>
+            <Col cw={4} pr={0} pl="8px">
               <InputNumber
                 min={0}
                 placeholder={t('Enter score weight of answer')}

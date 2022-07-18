@@ -1,10 +1,10 @@
 import { Box, Text } from '@qonsoll/react-design'
-import { CustomBox, CustomText } from './MediaLibrarySimpleView.styles'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
 } from '../../../../context/CurrentQuestion'
 
+import { CustomBox } from './MediaLibrarySimpleView.styles'
 import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
 import PropTypes from 'prop-types'
 import RangeSlider from '../../../../components/RangeSlider'

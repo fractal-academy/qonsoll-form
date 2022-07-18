@@ -10,9 +10,9 @@ const useRemoveMedia = () => {
   // [ADDITIONAL HOOKS]
   const { deleteData } = useFunctions()
 
-  const removeMedia = async (data) => {
+  const removeMedia = async (id) => {
     setRemoveLoading(true)
-    await deleteData(COLLECTIONS.MEDIA, data?.id).catch((e) =>
+    await deleteData(COLLECTIONS.MEDIA, id).catch((e) =>
       message.error(e.message)
     )
 
