@@ -15,9 +15,9 @@ const MediaList = (props) => {
         xs: 1,
         sm: 1,
         md: 2,
-        lg: 2,
-        xl: 3,
-        xxl: 4
+        lg: 1,
+        xl: 2,
+        xxl: 3
       }}
       dataSource={data}
       renderItem={(item, index) =>
