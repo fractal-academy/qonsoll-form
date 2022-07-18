@@ -80,9 +80,9 @@ function RangeButton(props) {
   }
 
   return (
-    <Row display="flex" width="100%" noGutters>
+    <Row display="flex" h="center" width="100%" noGutters>
       {range?.map((item) => (
-        <Col key={item} cw={columnWidth} mr={2} mb={2}>
+        <Col key={item} cw={columnWidth} mr="16px" mb="16px">
           <StyledRangeButton
             key={item}
             onTouchStart={() => onButtonClick(item)}

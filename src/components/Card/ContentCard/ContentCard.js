@@ -16,7 +16,7 @@ function ContentCard(props) {
       overflowY="hidden"
       style={{ flexGrow: 1 }}>
       {leftSideMenu && (
-        <Col mr={3} cw="auto" px="0">
+        <Col mr="16px" cw="auto" px="0">
           {leftSideMenu}
         </Col>
       )}

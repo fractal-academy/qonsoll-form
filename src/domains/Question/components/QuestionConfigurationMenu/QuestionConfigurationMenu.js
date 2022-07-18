@@ -64,7 +64,7 @@ function QuestionConfigurationMenu() {
   return (
     <Box px={3} pt={3} h="between">
       {isNotWelcomeScreenOrStatement && (
-        <Row mb={3} noGutters v="center">
+        <Row mb="8px" noGutters v="center">
           <Col v="center">
             <Text color="var(--qf-typography-subtitle-color)">
               {t('Required')}
@@ -79,8 +79,8 @@ function QuestionConfigurationMenu() {
           </Col>
         </Row>
       )}
-      <Row mb={3} noGutters v="center">
-        <Col v="center">
+      <Row mb="8px" noGutters v="center">
+        <Col>
           <Text color="var(--qf-typography-subtitle-color)">
             {t('Video question')}
           </Text>

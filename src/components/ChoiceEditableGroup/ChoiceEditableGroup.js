@@ -1,14 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { ChoiceEditable } from '../../components'
-import { Box } from '@qonsoll/react-design'
-import { PlusOutlined } from '@ant-design/icons'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
-import { styles, AddNewChoiceBox } from './ChoiceEditableGroup.styles'
+
+import ChoiceList from './ChoiceList'
+import MediaList from './MediaList'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { v4 as uuid } from 'uuid'
 
 function ChoiceEditableGroup(props) {
@@ -20,6 +19,7 @@ function ChoiceEditableGroup(props) {
 
   // [COMPUTED PROPERTIES]
   const choiceProps = currentQuestion.questionConfigurations || []
+  const listData = [{ isCreate: true }, ...choiceProps]
 
   // [CLEAN FUNCTIONS]
   const onAddChoice = () => {
@@ -50,23 +50,20 @@ function ChoiceEditableGroup(props) {
     })
   }
 
-  return (
-    <Box {...styles.mainBox} flexDirection={withImage ? 'row' : 'column'}>
-      {choiceProps?.map((item, index) => (
-        <ChoiceEditable
-          key={index}
-          data={item}
-          index={index}
-          withImage={withImage}
-        />
-      ))}
-      <AddNewChoiceBox
-        height={withImage ? '146px' : '40px'}
-        width={withImage && '166px'}
-        onClick={onAddChoice}>
-        <PlusOutlined />
-      </AddNewChoiceBox>
-    </Box>
+  // workaround to make list listen to different
+  // grid settings on question change
+  return withImage ? (
+    <MediaList
+      data={listData}
+      withImage={withImage}
+      onAddChoice={onAddChoice}
+    />
+  ) : (
+    <ChoiceList
+      data={listData}
+      withImage={withImage}
+      onAddChoice={onAddChoice}
+    />
   )
 }
 

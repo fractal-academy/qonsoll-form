@@ -83,7 +83,7 @@ function FormConditionsForm(props) {
           }}>
           {!!data?.length ? (
             data?.map((item, index) => (
-              <Box mb={3} ml={2} key={index}>
+              <Box mb="24px" ml="8px" key={index}>
                 <ConditionForm
                   key={index}
                   item={item}
@@ -107,7 +107,7 @@ function FormConditionsForm(props) {
           style={{ overflowY: 'scroll', overflow: 'hidden' }}>
           {!!filteredAnswerForEndings?.length && !!endings?.length ? (
             endings?.map((item, index) => (
-              <Box mb={3} ml={2} key={index}>
+              <Box mb="24px" ml="8px" key={index}>
                 <EndingsSimpleView
                   key={index}
                   item={item}
@@ -129,11 +129,11 @@ function FormConditionsForm(props) {
         {formData?.isQuiz && (
           <TabPane
             style={{ overflowY: 'scroll', overflow: 'hidden' }}
-            tab={t('Answer score configurations')}
+            tab={t('Scores')}
             key="3">
             {!!filteredAnswerForEndings?.length ? (
               filteredAnswerForEndings?.map((item, index) => (
-                <Box mb={3} ml={2} key={index}>
+                <Box mb="24px" ml="8px" key={index}>
                   <ScoreConditionsAdvancedView
                     key={index}
                     questionData={item}

@@ -24,7 +24,7 @@ function ModalWithFormConditionsForm(props) {
     <>
       <Tooltip placement="bottomRight" title={t('Configure logic jumps')}>
         <Button
-          ml={1}
+          ml="8px"
           {...btnProps}
           onClick={() => {
             setIsModalVisible(!isModalVisible)
@@ -53,10 +53,7 @@ function ModalWithFormConditionsForm(props) {
           <>
             <Row v="center" noGutters>
               <Col>
-                <Title
-                  color="var(--qf-typography-title-color)"
-                  fontFamily="var(--ql-font-family-main)"
-                  level={3}>
+                <Title clamp="1" level={3}>
                   {t('Logic')}
                 </Title>
               </Col>

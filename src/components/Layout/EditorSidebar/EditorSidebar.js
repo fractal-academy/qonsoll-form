@@ -4,11 +4,11 @@ import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
 } from '../../../context/CurrentQuestion'
-import { PlusOutlined, SettingOutlined } from '@ant-design/icons'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Tooltip, message } from 'antd'
 
 import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
+import { Icon } from '@qonsoll/icons'
 import { LAYOUT_TYPE_KEYS } from '../../../constants/layoutTypes'
 import { ModalWithFormConditionsForm } from '../../../domains/Condition/components'
 import PropTypes from 'prop-types'
@@ -25,8 +25,8 @@ function EditorSidebar(props) {
     endings,
     formData,
     questions,
-    isDrawerOpened,
-    setDraverOpened,
+    showDrawer,
+    setShowDrawer,
     answerScoresData,
     customQuestionTypes,
     welcomeScreenShowRule
@@ -40,7 +40,6 @@ function EditorSidebar(props) {
   const currentQuestionDispatch = useCurrentQuestionContextDispatch()
 
   // [COMPONENT STATE HOOKS]
-  // const [open, setOpen] = useState(true)
   const [showPopover, setShowPopover] = useState(false)
   const [tabKey, setTabKey] = useState('1')
 
@@ -250,10 +249,8 @@ function EditorSidebar(props) {
   }, [questions?.length])
 
   return (
-    <SidebarBoxWrapper
-      isDrawerVisible={isDrawerOpened}
-      setDraverVisible={setDraverOpened}>
-      <Row my={2} v="center" h="between">
+    <SidebarBoxWrapper showDrawer={showDrawer} setShowDrawer={setShowDrawer}>
+      <Row mb="8px" v="center" h="between">
         <Col cw="auto">
           <Title
             color="var(--qf-typography-title-color)"
@@ -262,7 +259,7 @@ function EditorSidebar(props) {
             {t('Questions')}
           </Title>
         </Col>
-        <Col display="block" cw="auto">
+        <Col flexDirection="row" cw="auto">
           <TypePopover
             questions={questions}
             onClick={addQuestion}
@@ -275,7 +272,10 @@ function EditorSidebar(props) {
 
           <ModalWithFormConditionsForm
             onResetClick={tabKey === '1' ? onResetLogic : onResetEndings}
-            btnProps={{ icon: <SettingOutlined />, type: 'text' }}>
+            btnProps={{
+              icon: <Icon name="SettingsFilled" size={20} />,
+              type: 'text'
+            }}>
             <FormConditionsForm
               endings={endings}
               formData={formData}
@@ -286,7 +286,7 @@ function EditorSidebar(props) {
           </ModalWithFormConditionsForm>
         </Col>
       </Row>
-      <Box overflow="auto">
+      <Box overflow="auto" mr="-8px" pr="8px">
         {!!questions?.length && (
           <QuestionsList
             data={questions}
@@ -296,9 +296,9 @@ function EditorSidebar(props) {
         )}
       </Box>
       <Box mt="auto">
-        <Divider mt={2} type="horizontal" />
+        <Divider my="8px" type="horizontal" />
 
-        <Row my={2} v="center" h="between">
+        <Row mb="8px" v="center" h="between">
           <Col cw="auto">
             <Title
               color="var(--qf-typography-title-color)"
@@ -312,13 +312,13 @@ function EditorSidebar(props) {
               <Button
                 type="text"
                 onClick={addQuestion}
-                icon={<PlusOutlined />}
+                icon={<Icon name="PlusFilled" size={20} />}
               />
             </Tooltip>
           </Col>
         </Row>
         {!!endings?.length && (
-          <Box overflow="auto" maxHeight="250px">
+          <Box overflow="auto" maxHeight="250px" mr="-8px" pr="8px">
             <QuestionsList
               data={endings}
               endings={endings}

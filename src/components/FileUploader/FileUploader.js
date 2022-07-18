@@ -150,20 +150,21 @@ const UploadArea = (props) => {
   )
 
   return (
-    <Box flexDirection="column" p={2}>
+    <Box flexDirection="column">
       <Dragger
+        style={{ borderRadius: 'var(--btn-border-radius-base)' }}
         {...config}
         {...props}
         customRequest={onChange}
         fileList={[]}
         disabled={!onContinue}>
         <Box onMouseDown={(e) => e.preventDefault()} ref={hoverRef}>
-          <Box display="flex" justifyContent="center">
+          <Box display="flex" justifyContent="center" mb="8px">
             <IconLabel disabled={!onContinue} isHovering={isHovering}>
               <InboxOutlined style={{ fontSize: '24px' }} />
             </IconLabel>
           </Box>
-          <Box textAlign="center" mt={2}>
+          <Box textAlign="center">
             <Text color="var(--qf-typography-subtitle-color)">
               {t('Click or drag file to this area to upload')}
             </Text>
@@ -209,7 +210,7 @@ const UploadArea = (props) => {
           </UploadItem>
         ))}
       </Box>
-      <Box mt={4}>
+      <Box mt="24px">
         <SubmitButton onClick={onApply} disablePressEnter />
       </Box>
     </Box>

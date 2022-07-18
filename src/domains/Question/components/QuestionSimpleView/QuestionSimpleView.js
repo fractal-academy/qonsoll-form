@@ -1,9 +1,10 @@
-import { DeleteOutlined, ExclamationOutlined } from '@ant-design/icons'
 import { DescriptionContainer, StyledButton } from './QuestionSimpleView.styles'
 import { IconRoundContainer, NumberedCard } from '../../../../components'
 import React, { cloneElement } from 'react'
 
 import { Box } from '@qonsoll/react-design'
+import { ExclamationOutlined } from '@ant-design/icons'
+import { Icon } from '@qonsoll/icons'
 import { LAYOUT_TYPES } from '../../../../constants'
 import { Popconfirm } from 'antd'
 import PropTypes from 'prop-types'
@@ -54,7 +55,7 @@ function QuestionSimpleView(props) {
   return (
     <NumberedCard current={current} onClick={onClick} number={number}>
       <Box display="flex" alignItems="center">
-        <Box mr={2}>
+        <Box mr="8px">
           {!!title?.length ? (
             <IconRoundContainer>
               {layoutType && cloneElement(LAYOUT_TYPES[layoutType]?.icon)}
@@ -71,7 +72,7 @@ function QuestionSimpleView(props) {
         </Box>
         <Box ml={2}>
           {hiddenDelete ? (
-            <Box height="24px" width="24px"></Box>
+            <Box height="24px" width="24px" />
           ) : (
             <Popconfirm
               placement="topRight"
@@ -91,7 +92,7 @@ function QuestionSimpleView(props) {
                 size="small"
                 danger
                 disabled={disableDelete}>
-                <DeleteOutlined style={{ fontSize: '18px' }} />
+                <Icon name="TrashFilled" size={20} />
               </StyledButton>
             </Popconfirm>
           )}

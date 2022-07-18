@@ -77,8 +77,8 @@ function MatchCondition(props) {
   }, [item])
 
   return (
-    <Row mb={2} key={index}>
-      <Col cw={3} pr={2} pl={0}>
+    <Row mb="16px" key={index}>
+      <Col cw={3} pr="8px" pl={0}>
         <Select
           allowClear
           placeholder={t('Select redirect rule')}
@@ -89,7 +89,7 @@ function MatchCondition(props) {
           ))}
         </Select>
       </Col>
-      <Col cw={3} pl={0} pr={2}>
+      <Col cw={3} pl={0} pr="8px">
         {handlesDate ? (
           <StyledDatePicker
             value={datePickerValue}
@@ -105,7 +105,7 @@ function MatchCondition(props) {
           />
         )}
       </Col>
-      <Col cw={6} pr={0} pl={2}>
+      <Col cw={6} pr={0} pl="8px">
         <QuestionSelect
           index={index}
           questionList={questionList}

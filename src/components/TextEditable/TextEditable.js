@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { StyledTextEditable } from './TextEditable.styles'
 
 function TextEditable(props) {
@@ -8,8 +8,8 @@ function TextEditable(props) {
   return (
     <StyledTextEditable
       {...rest}
-      maxLength={700}
-      bordered={false}
+      mb="24px"
+      maxLength={250}
       isTitle={isTitle}
       autoSize={{ minRows: 1 }}
       textSecondary={textSecondary}

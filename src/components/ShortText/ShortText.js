@@ -59,9 +59,9 @@ function ShortText(props) {
   return (
     <Container>
       <Form
-        style={{ width: '100%' }}
         form={form}
         onFinish={onFinish}
+        style={{ width: '100%' }}
         onFinishFailed={onFinishFailed}>
         <Form.Item name="answer" rules={[{ required: question?.isRequired }]}>
           <Input
@@ -74,7 +74,7 @@ function ShortText(props) {
           />
         </Form.Item>
       </Form>
-      <Box mt={4}>
+      <Box mt="24px">
         <SubmitButton onClick={onPressOk} disablePressEnter />
       </Box>
     </Container>

@@ -1,8 +1,4 @@
-import { Box, Col, Row, Title } from '@qonsoll/react-design'
-import {
-  CustomDivider,
-  PopoverSwitcherRow
-} from './QuestionConfigurationPopoverContent.styles'
+import { Box, Col, Divider, Row, Title } from '@qonsoll/react-design'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import {
   QuestionConfigurationMenu,
@@ -10,6 +6,7 @@ import {
 } from '../../../../domains/Question/components'
 import React, { useMemo, useState } from 'react'
 
+import { PopoverSwitcherRow } from './QuestionConfigurationPopoverContent.styles'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { useTranslations } from '@qonsoll/translation'
 
@@ -49,7 +46,7 @@ function QuestionConfigurationPopoverContent(props) {
   const configurationTitle = `${translatedQuestionType} ${t('settings')}`
 
   return (
-    <Box px={0} py={0}>
+    <Box>
       <PopoverSwitcherRow
         noGutters
         p={2}
@@ -72,7 +69,7 @@ function QuestionConfigurationPopoverContent(props) {
           </Title>
         </Col>
       </PopoverSwitcherRow>
-      <CustomDivider />
+      <Divider my="4px" />
       <Row noGutters>
         <Col pr={0} display="block">
           {isQuestionConfig ? (

@@ -219,8 +219,8 @@ function Carousel(props) {
         )}
       </AntdCarousel>
       <Box ref={buttonsRef} position="absolute" bottom="0" right="0">
-        <Row h="right" p={2} noGutters>
-          <Col cw="auto" mr={2}>
+        <Row h="right" p="16px" noGutters>
+          <Col cw="auto" mr="16px">
             <Button
               disabled={disabledUp}
               type="primary"

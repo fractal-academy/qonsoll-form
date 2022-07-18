@@ -126,10 +126,10 @@ function QuestionTypeSelect(props) {
         {updatedMap?.map((item) => (
           <QuestionMenuItem key={item?.type} onClick={onClick}>
             <Row h="center" v="center" noGutters>
-              <Col cw="auto" ml={2}>
+              <Col cw="auto" ml="8px">
                 {item?.icon}
               </Col>
-              <Col display="grid">
+              <Col>
                 <Text color="var(--qf-typography-title-color)">
                   {item?.label}
                 </Text>

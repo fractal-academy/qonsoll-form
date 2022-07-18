@@ -1,14 +1,17 @@
-import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
+import styled from 'styled-components'
 
 const QuestionPreview = styled(Box)`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  background: var(--qf-condition-item-bg);
-  border-radius: var(--qf-border-radius-md);
-  border: 1px solid var(--qf-condition-item-border);
+  padding: var(--input-padding-vertical-base)
+    var(--input-padding-horizontal-base);
+  background: var(--input-bg);
+  border-radius: var(--input-border-radius-base);
+  border: var(--ql-border-width-default) var(--ql-border-style-default)
+    var(--input-border-color);
 `
 
 export default QuestionPreview

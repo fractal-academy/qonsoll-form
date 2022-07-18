@@ -1,13 +1,24 @@
-import styled from 'styled-components'
-import { Popover, Button } from 'antd'
 import React, { useState } from 'react'
-import { Box } from '@qonsoll/react-design'
-import { PictureOutlined } from '@ant-design/icons'
-import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
 
-const StyledBookmarkButton = styled(Button)`
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+import { Box } from '@qonsoll/react-design'
+import { Icon } from '@qonsoll/icons'
+import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
+import { Popover } from 'antd'
+import styled from 'styled-components'
+
+const StyledBookmarkButton = styled(Box)`
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ql-color-accent1);
+  border-radius: 0 0 var(--btn-border-radius-base) var(--btn-border-radius-base);
+
+  &:hover {
+    background: var(--ql-color-accent1-t-lighten1);
+  }
 `
 
 function QuestionMediaPopover(props) {
@@ -39,11 +50,10 @@ function QuestionMediaPopover(props) {
         </Box>
       }>
       <StyledBookmarkButton
-        type="primary"
-        icon={<PictureOutlined />}
         onClick={changeImageEditVisibleState}
-        onMouseDown={(e) => e.preventDefault()}
-      />
+        onMouseDown={(e) => e.preventDefault()}>
+        <Icon size={22} name="ImageFilled" fill="var(--ql-color-white)" />
+      </StyledBookmarkButton>
     </Popover>
   )
 }

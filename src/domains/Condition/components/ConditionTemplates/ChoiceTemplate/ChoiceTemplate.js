@@ -30,11 +30,11 @@ function ChoiceTemplate(props) {
   return (
     <Container>
       {questionConfigurations?.map((item, index) => (
-        <Row mb={2} key={index}>
-          <Col cw={6} pr={2} pl={0}>
-            <QuestionPreview px={3}>
+        <Row mb="8px" key={index}>
+          <Col cw={6} pr="8px" pl={0}>
+            <QuestionPreview>
               {!handlesUpload && !handlesRecord && (
-                <LetterBox px={2} mr={2}>
+                <LetterBox px="8px" mr="8px">
                   <Text color="var(--qf-typography-subtitle-color)" strong>
                     {String.fromCharCode(startLetter + index)}
                   </Text>
@@ -48,7 +48,7 @@ function ChoiceTemplate(props) {
               </Text>
             </QuestionPreview>
           </Col>
-          <Col cw={6} pr={0} pl={2}>
+          <Col cw={6} pr={0} pl="8px">
             <QuestionSelect
               index={index}
               questionList={questionList}

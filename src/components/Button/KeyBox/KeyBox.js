@@ -23,7 +23,6 @@ function KeyBox(props) {
     <Box
       ref={hoverRef}
       display={hasImages && 'inline-block'}
-      mb={2}
       mr={phoneSmall ? 0 : 2}
       width="100%">
       <StyledButton

@@ -54,7 +54,7 @@ function EndingSimpleView(props) {
         fontFamily="var(--ql-font-family-main)"
         textOverflow="ellipsis"
         level={5}
-        mb={2}>
+        mb="8px">
         {item?.title}
       </Title>
 
@@ -71,7 +71,7 @@ function EndingSimpleView(props) {
             key={`${questionListItem}-${index}`}
             label={
               <Box display="flex">
-                <LetterBox px={2} mr={2}>
+                <LetterBox px={2} mr="8px">
                   <Text
                     color="var(--qf-typography-subtitle-color)"
                     fontSize="var(--qf-typography-fs-body)"

@@ -1,4 +1,4 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Box, Col, Row, Text } from '@qonsoll/react-design'
 import {
   ChoiceEditableGroup,
   ContentCard,
@@ -93,14 +93,9 @@ function QuestionForm(props) {
     },
     [QUESTION_TYPES.VIDEO_ANSWER]: {
       component: (
-        <Box
-          my={2}
-          height="100%"
-          display="flex"
-          fontWeight="500"
-          alignItems="center">
-          {`${t('Here will be answer as video')}. ;)`}
-        </Box>
+        <Text type="secondary" my="24px">{`${t(
+          'Here will be answer as video'
+        )}. ;)`}</Text>
       )
     }
   }
@@ -144,7 +139,7 @@ function QuestionForm(props) {
         )
       }>
       {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
-        <Box position="absolute" right="48px">
+        <Box position="absolute" right="24px">
           <QuestionMediaPopover
             brightnessValue={questionData?.brightnessValue || brightnessValue}
             setBrightnessValue={setBrightnessValue}
@@ -172,8 +167,8 @@ function QuestionForm(props) {
                   </Col>
                 )}
               </Row>
-              <Row noGutters h="between" mb={4}>
-                <Col cw="12" mt={2}>
+              <Row noGutters h="between">
+                <Col cw="12" mt="24px">
                   <QuestionHeader
                     titlePlaceholder={t('Editable question title')}
                     subtitlePlaceholder={t('Description (optional)')}

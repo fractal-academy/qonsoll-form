@@ -1,51 +1,53 @@
 import { Box } from '@qonsoll/react-design'
-import { CloseOutlined } from '@ant-design/icons'
 import { Drawer } from 'antd'
+import { Icon } from '@qonsoll/icons'
 import React from 'react'
 
 const SidebarBoxWrapper = (props) => {
-  const { children, isDrawerVisible, setDraverVisible } = props
+  const { children, showDrawer, setShowDrawer } = props
 
   // [HELPER FUNCTIONS]
   const hideDrawer = () => {
-    setDraverVisible(false)
+    setShowDrawer(false)
   }
 
   return (
     <>
       <Box
+        p="8px"
         display={['none', 'none', 'none', 'flex']}
-        minWidth={300}
-        flexDirection="column"
+        width="var(--qf-sidebar-width)"
         bg="var(--qf-sidebar-bg)"
-        width="var(--qf-sidebar-width)">
+        flexDirection="column"
+        minWidth={300}>
         {children}
       </Box>
 
       <Drawer
         closeIcon={
-          isDrawerVisible && (
-            <Box
+          showDrawer && (
+            <Icon
               borderRadius="var(--ql-border-radius-md) 0 0 var(--ql-border-radius-md)"
               right="var(--qf-sidebar-width)"
               bg="var(--ql-color-white)"
               onClick={hideDrawer}
+              name="CloseFilled"
               position="fixed"
-              p={2}
-              top={0}>
-              <CloseOutlined />
-            </Box>
+              size={20}
+              top={0}
+              p="6px"
+            />
           )
         }
         bodyStyle={{
-          padding: 0,
+          padding: '8px',
           display: 'flex',
           flexDirection: 'column',
           fontSize: 'var(--qf-typography-fs-body)'
         }}
         width="var(--qf-sidebar-width)"
-        visible={isDrawerVisible}>
-        {isDrawerVisible && children}
+        visible={showDrawer}>
+        {showDrawer && children}
       </Drawer>
     </>
   )

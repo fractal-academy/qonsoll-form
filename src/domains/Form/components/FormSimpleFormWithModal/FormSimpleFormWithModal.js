@@ -1,23 +1,18 @@
 import { Button, Title } from '@qonsoll/react-design'
 import { Form, Modal } from 'antd'
-import React, { useState } from 'react'
+import React, { cloneElement, useState } from 'react'
 
 import { FormSimpleForm } from '../../../../domains/Form/components'
+import { Icon } from '@qonsoll/icons'
+import PropTypes from 'prop-types'
 import { useTranslations } from '@qonsoll/translation'
 
 const FormSimpleFormWithModal = (props) => {
-  const {
-    formData,
-    setEdit,
-    isModalVisible,
-    setIsModalVisible,
-    onModalSubmit,
-    isEdit,
-    children
-  } = props
+  const { title, defaultValues, onSubmit, triggerNode, children } = props
 
   // [STATE]
   const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(false)
 
   // [ADDITIONAL_HOOKS]
   const [form] = Form.useForm()
@@ -26,50 +21,79 @@ const FormSimpleFormWithModal = (props) => {
   // [HELPER_FUNCTIONS]
   const handleCancel = async () => {
     await setLoading(false)
-    await setIsModalVisible(false)
+    await setVisible(false)
     form.resetFields()
   }
-  const onFormEdit = (data) => {
+
+  const onFormSubmit = (data) => {
     setLoading(true)
-    onModalSubmit(data)
-    !isEdit && form.resetFields()
+
+    const updatedData = defaultValues
+      ? { id: defaultValues?.id, ...data }
+      : data
+
+    onSubmit(updatedData)
+    form.resetFields()
+
     setLoading(false)
-    setIsModalVisible(false)
-    setEdit?.(isEdit)
+    setVisible(false)
   }
-  // [COMPUTED PROPERTIES]
+
+  const showModal = () => setVisible(true)
 
   return (
-    <Modal
-      title={
-        <Title
-          color="var(--qf-typography-title-color)"
-          fontFamily="var(--ql-font-family-main)"
-          level={4}>
-          {isEdit ? t('Edit form') : t('Create new form')}
-        </Title>
-      }
-      visible={isModalVisible}
-      onCancel={handleCancel}
-      footer={[
-        <Button
-          onClick={() => {
-            handleCancel()
-          }}>
-          Cancel
-        </Button>,
-        <Button onClick={() => form.submit()} type="primary" loading={loading}>
-          {isEdit ? t('Save changes') : t('Create form')}
+    <>
+      {triggerNode ? (
+        cloneElement(triggerNode, { onClick: showModal })
+      ) : (
+        <Button type="primary" onClick={showModal}>
+          <Icon
+            mr="8px"
+            size={22}
+            name="PlusOutlined"
+            fill="var(--btn-primary-color)"
+          />
+          {t('Add new form')}
         </Button>
-      ]}>
-      <FormSimpleForm
-        form={form}
-        formData={formData}
-        children={children}
-        onFinish={onFormEdit}
-      />
-    </Modal>
+      )}
+      <Modal
+        destroyOnClose
+        closable={false}
+        visible={visible}
+        title={
+          <Title
+            level={4}
+            color="var(--qf-typography-title-color)"
+            fontFamily="var(--ql-font-family-main)">
+            {t(title)}
+          </Title>
+        }
+        footer={[
+          <Button onClick={handleCancel}>{t('Cancel')}</Button>,
+          <Button
+            onClick={() => form.submit()}
+            loading={loading}
+            type="primary">
+            {t('Save')}
+          </Button>
+        ]}>
+        <FormSimpleForm
+          form={form}
+          children={children}
+          onFinish={onFormSubmit}
+          formData={defaultValues}
+        />
+      </Modal>
+    </>
   )
+}
+
+FormSimpleFormWithModal.propTypes = {
+  title: PropTypes.string,
+  defaultValues: PropTypes.object,
+  onSubmit: PropTypes.func,
+  triggerNode: PropTypes.node,
+  children: PropTypes.node
 }
 
 export default FormSimpleFormWithModal
