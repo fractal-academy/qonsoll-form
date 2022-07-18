@@ -1,5 +1,5 @@
-import { Container } from '@qonsoll/react-design'
-import { CustomButton } from './TextTemplate.styles'
+import { Button, Container } from '@qonsoll/react-design'
+
 import MatchCondition from './MatchCondition'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -43,9 +43,9 @@ function TextTemplate(props) {
           questionConfigurations={questionConfigurations}
         />
       ))}
-      <CustomButton onClick={onClick} onMouseDown={(e) => e.preventDefault()}>
+      <Button onClick={onClick} onMouseDown={(e) => e.preventDefault()}>
         {t('+ Add condition')}
-      </CustomButton>
+      </Button>
     </Container>
   )
 }
