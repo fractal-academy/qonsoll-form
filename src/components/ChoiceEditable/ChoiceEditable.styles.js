@@ -1,22 +1,20 @@
-import { Box, Col, Input } from '@qonsoll/react-design'
+import { Box, Col, TextArea } from '@qonsoll/react-design'
 
 import styled from 'styled-components'
 
-const { TextArea } = Input
+export const Wrapper = styled(Box)`
+  padding: ${(props) => (props.withImage ? '12px' : '12px 24px')};
 
-export const MainBox = styled(Box)`
-  ${({ withImage }) => `
-  border-radius: var(--qf-border-radius-md);
-  width: ${withImage ? 'auto' : '100%'};
-  position: relative;
+  color: var(--qf-button-color);
   background-color: var(--qf-button-bg);
-  &:hover{
-     background-color: var(--qf-button-bg-hover);
+  border-radius: var(--btn-border-radius-base);
+
+  &:hover {
+    background-color: var(--qf-button-bg-hover);
   }
-`}
 `
 
-export const MediaBox = styled(Box)`
+export const Media = styled(Box)`
   height: 100px;
   width: 150px;
   position: relative;
@@ -25,16 +23,17 @@ export const MediaBox = styled(Box)`
   border-radius: var(--qf-border-radius-md);
 `
 
-export const LetterBox = styled(Box)`
-  ${({ withImage }) => `
-  position: absolute;
-  top: ${withImage ? '12px' : '6px'};
+export const LetterBox = styled(Col)`
+  // position: absolute;
+  // top: 50%;
+  // left: 24px;
+  // transform: translate(0px, -50%);
   width: 26px;
+  height: 26px;
   text-align: center;
   color: var(--qf-keybox-color);
   background-color: var(--qf-keybox-bg);
   border: 1px solid var(--qf-keybox-color);
-`}
 `
 export const DeleteButton = styled(Box)`
   position: absolute;
@@ -52,7 +51,14 @@ export const DeleteButton = styled(Box)`
   border-radius: var(--qf-border-radius-full);
 `
 export const ChoiceInput = styled(TextArea)`
+  border: none !important;
+  background-color: transparent !important;
   color: var(--qf-typography-subtitle-color);
+
+  .ant-input:focus,
+  .ant-input-focused {
+    border: none !important;
+  }
 `
 export const CustomCol = styled(Col)`
   position: absolute;

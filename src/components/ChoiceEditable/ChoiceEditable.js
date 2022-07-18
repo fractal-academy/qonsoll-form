@@ -3,22 +3,22 @@ import {
   ChoiceOptionCol,
   DeleteButton,
   LetterBox,
-  MainBox,
-  MediaBox
+  Media,
+  Wrapper
 } from './ChoiceEditable.styles'
+import { Col, Row } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
+import { Popconfirm, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 
 import { CloseOutlined } from '@ant-design/icons'
 import { DEFAULT_IMAGE } from '../../constants'
 import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
-import { Popconfirm } from 'antd'
 import PropTypes from 'prop-types'
-import { Row } from '@qonsoll/react-design'
 import { useHover } from '@umijs/hooks'
 import { useTranslations } from '@qonsoll/translation'
 
@@ -83,53 +83,68 @@ function ChoiceEditable(props) {
   }, [data])
 
   return (
-    <MainBox mb={2} mr={withImage && 2} withImage={withImage} ref={hoverRef}>
-      {withImage && (
-        <MediaBox backgroundImage={bgImage} mx={2} mt={2}>
-          <MediaLibraryModal
-            btnProps={{
-              type: 'primary'
-            }}
-            isHovering={isHovering}
-            onContinue={onMediaModalContinue}
-          />
-        </MediaBox>
-      )}
-      <Row noGutters px={2}>
-        <LetterBox withImage={withImage}>{letter}</LetterBox>
-        <ChoiceOptionCol
-          width={withImage ? '150px' : '100%'}
-          withImage={withImage}>
-          <ChoiceInput
-            withImage={withImage}
-            maxLength="150"
-            value={value}
-            onBlur={onBlur}
-            placeholder={`${t('Choice')} ${index}`}
-            autoSize={{ minRows: 1, maxRows: 12 }}
-            bordered={false}
-            onChange={onChange}
-          />
-        </ChoiceOptionCol>
+    <Wrapper withImage={withImage}>
+      <Row noGutters v="center">
+        {/* image column */}
+        {/* {withImage && <Col cw={12}></Col>} */}
+
+        <LetterBox cw="auto">{letter}</LetterBox>
+
+        <Col>
+          {/* <Typography.Paragraph>{value}</Typography.Paragraph> */}
+          <ChoiceInput maxLength="150" />
+        </Col>
       </Row>
-      {isHovering &&
-        (hasConditions ? (
-          <Popconfirm
-            title={t('This option has connected logic, delete it anyway?')}
-            onConfirm={onDelete}
-            okType="danger"
-            okText={t('Delete')}
-            cancelText={t('Cancel')}>
-            <DeleteButton>
-              <CloseOutlined />
-            </DeleteButton>
-          </Popconfirm>
-        ) : (
-          <DeleteButton onClick={onDelete}>
-            <CloseOutlined />
-          </DeleteButton>
-        ))}
-    </MainBox>
+    </Wrapper>
+    // <MainBox mb="8px" mr={withImage && 2} withImage={withImage} ref={hoverRef}>
+    //   {withImage && (
+    //     <MediaBox backgroundImage={bgImage} mx={2} mt={2}>
+    //       <MediaLibraryModal
+    //         btnProps={{
+    //           type: 'primary'
+    //         }}
+    //         isHovering={isHovering}
+    //         onContinue={onMediaModalContinue}
+    //       />
+    //     </MediaBox>
+    //   )}
+    //   <Row noGutters v="center" padding="12px 24px">
+    //     <LetterBox cw="auto" withImage={withImage}>
+    //       {letter}
+    //     </LetterBox>
+    //     <ChoiceOptionCol
+    //       width={withImage ? '150px' : '100%'}
+    //       withImage={withImage}>
+    //       <ChoiceInput
+    //         withImage={withImage}
+    //         maxLength="150"
+    //         value={value}
+    //         onBlur={onBlur}
+    //         placeholder={`${t('Choice')} ${index}`}
+    //         autoSize={{ minRows: 1, maxRows: 12 }}
+    //         bordered={false}
+    //         onChange={onChange}
+    //       />
+    //     </ChoiceOptionCol>
+    //   </Row>
+    //   {isHovering &&
+    //     (hasConditions ? (
+    //       <Popconfirm
+    //         title={t('This option has connected logic, delete it anyway?')}
+    //         onConfirm={onDelete}
+    //         okType="danger"
+    //         okText={t('Delete')}
+    //         cancelText={t('Cancel')}>
+    //         <DeleteButton>
+    //           <CloseOutlined />
+    //         </DeleteButton>
+    //       </Popconfirm>
+    //     ) : (
+    //       <DeleteButton onClick={onDelete}>
+    //         <CloseOutlined />
+    //       </DeleteButton>
+    //     ))}
+    // </MainBox>
   )
 }
 

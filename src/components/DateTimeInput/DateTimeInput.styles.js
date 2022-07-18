@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import { DatePicker } from 'antd'
+import styled from 'styled-components'
 
 export const StyledDatePicker = styled(DatePicker)`
   background-color: var(--qf-input-background);
