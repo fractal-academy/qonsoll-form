@@ -10,12 +10,13 @@ export const StyledKeybox = styled(Box)`
   transform: translate(0px, -50%);
   border-width: 1px;
   text-align: center;
+  z-index:1000;
   border-style: solid;
   border-color: var(--qf-button-color);
   color: ${({ isActive }) =>
     isActive ? 'var(--qf-active-button-color)' : 'var(--qf-button-color)'};
   margin-left: ${({ isHovering, phoneSmall }) =>
-    isHovering && phoneSmall ? '' : isHovering && '-40px'};
+    isHovering && phoneSmall ? '' : isHovering && '-10px'};
   background-color: ${({ isActive }) =>
     isActive ? 'var(--qf-keybox-bg)' : 'var(--qf-keybox-bg)'};
   width: ${({ isHovering, phoneSmall }) =>
