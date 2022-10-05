@@ -54,7 +54,7 @@ function QuestionConfigurationMenu() {
   }, [currentQuestion])
 
   useEffect(() => {
-    if (!!currentQuestion?.isVideoQuestion)
+    if (currentQuestion?.isVideoQuestion)
       currentQuestionDispatch({
         type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
         payload: { title: 'Video question', layoutType: 'DEFAULT' }

@@ -50,7 +50,7 @@ const VideoAnswer = (props) => {
       answerScore: 0
     }
 
-    if (!!videoId) {
+    if (videoId) {
       onClick && setTimeout(onClick, 700, data)
     } else {
       onClick?.(data)
@@ -66,7 +66,7 @@ const VideoAnswer = (props) => {
 
   return (
     <Box height={350} borderRadius="var(--card-radius)" overflow="hidden">
-      {!!video ? (
+      {video ? (
         <VideoPlayer
           withDelete
           videoKey={video}

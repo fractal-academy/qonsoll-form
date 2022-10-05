@@ -19,19 +19,21 @@ function VideoPlayer(props) {
     <Box height="inherit" position="relative">
       {withDelete && (
         <Tooltip title={t('Delete this video and record new')}>
-            {/*//TODO add delete video from DB with onClick*/}
-              <Remove
-                position="absolute" top={10} right={10}
-                zIndex="1"
-                question={t('Are you sure you want to remove')}
-                icon={<Icon name="TrashFilled" size={20} fill="currentColor" />}
-                type="primary"
-                onSubmit={deleteVideo}
-                popconfirmPlacement="bottomRight"
-                confirmLabel={t('Yes, remove')}
-                cancelLabel={t('No, keep')}
-                itemName={t('video')}
-              />
+          {/*//TODO add delete video from DB with onClick*/}
+          <Remove
+            position="absolute"
+            top={10}
+            right={10}
+            zIndex="1"
+            question={t('Are you sure you want to remove')}
+            icon={<Icon name="TrashFilled" size={20} fill="currentColor" />}
+            type="primary"
+            onSubmit={deleteVideo}
+            popconfirmPlacement="bottomRight"
+            confirmLabel={t('Yes, remove')}
+            cancelLabel={t('No, keep')}
+            itemName={t('video')}
+          />
         </Tooltip>
       )}
       <Player

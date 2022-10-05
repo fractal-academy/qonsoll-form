@@ -242,7 +242,7 @@ function FormEdit(props) {
       ).catch((e) => message.error(e.message))
 
     //save actual current question data to storage
-    if (!!Object.keys(currentQuestion).length) {
+    if (Object.keys(currentQuestion).length) {
       localStorage.setItem(
         'currentQuestion',
         JSON.stringify(currentQuestion?.id)

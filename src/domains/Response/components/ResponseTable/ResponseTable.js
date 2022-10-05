@@ -92,7 +92,7 @@ function ResponseTable(props) {
         <Spinner width="100%" size="large" />
       ) : (
         <Box>
-          {!!data?.length ? (
+          {data?.length ? (
             <StyledTable
               sortOrder
               columns={columns}

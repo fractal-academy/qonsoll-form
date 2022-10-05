@@ -10,7 +10,7 @@ export const StyledKeybox = styled(Box)`
   transform: translate(0px, -50%);
   border-width: 1px;
   text-align: center;
-  z-index:1000;
+  z-index: 1000;
   border-style: solid;
   border-color: var(--qf-button-color);
   color: ${({ isActive }) =>

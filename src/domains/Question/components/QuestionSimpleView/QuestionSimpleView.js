@@ -56,7 +56,7 @@ function QuestionSimpleView(props) {
     <NumberedCard current={current} onClick={onClick} number={number}>
       <Box display="flex" alignItems="center">
         <Box mr="8px">
-          {!!title?.length ? (
+          {title?.length ? (
             <IconRoundContainer>
               {layoutType && cloneElement(LAYOUT_TYPES[layoutType]?.icon)}
             </IconRoundContainer>

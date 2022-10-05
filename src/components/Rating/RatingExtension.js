@@ -53,7 +53,7 @@ function RatingExtension(props) {
     }
 
     // if the data is sent we delay and animate the selected value, else - just go to next question
-    if (!!option) {
+    if (option) {
       onClick && setTimeout(onClick, 700, data)
     } else {
       onClick?.(data)

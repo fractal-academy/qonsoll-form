@@ -81,7 +81,7 @@ function FormConditionsForm(props) {
             overflowY: 'scroll',
             overflow: 'hidden'
           }}>
-          {!!data?.length ? (
+          {data?.length ? (
             data?.map((item, index) => (
               <Box mb="24px" ml="8px" key={index}>
                 <ConditionForm
@@ -131,7 +131,7 @@ function FormConditionsForm(props) {
             style={{ overflowY: 'scroll', overflow: 'hidden' }}
             tab={t('Scores')}
             key="3">
-            {!!filteredAnswerForEndings?.length ? (
+            {filteredAnswerForEndings?.length ? (
               filteredAnswerForEndings?.map((item, index) => (
                 <Box mb="24px" ml="8px" key={index}>
                   <ScoreConditionsAdvancedView

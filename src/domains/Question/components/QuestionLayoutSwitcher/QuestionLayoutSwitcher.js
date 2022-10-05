@@ -1,15 +1,16 @@
-import PropTypes from 'prop-types'
-import React, { cloneElement } from 'react'
-import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
-import { StyledMenu, StyledItem } from './QuestionLayoutSwitcher.styles'
 import {
-  PicCenterOutlined,
-  PicRightOutlined,
-  PicLeftOutlined,
   AlignLeftOutlined,
-  ProfileFilled,
-  MenuUnfoldOutlined
+  MenuUnfoldOutlined,
+  PicCenterOutlined,
+  PicLeftOutlined,
+  PicRightOutlined,
+  ProfileFilled
 } from '@ant-design/icons'
+import React, { cloneElement } from 'react'
+import { StyledItem, StyledMenu } from './QuestionLayoutSwitcher.styles'
+
+import { LAYOUT_TYPE_KEYS } from '../../../../constants/layoutTypes'
+import PropTypes from 'prop-types'
 
 const menuMap = [
   {

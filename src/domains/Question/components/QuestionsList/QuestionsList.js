@@ -37,7 +37,7 @@ function QuestionsList(props) {
     //update current questions order after drag and drop
     updatedQuestions?.forEach((item, index) =>
       setData(COLLECTIONS.QUESTIONS, item?.id, {
-        order: !!questionsData
+        order: questionsData
           ? containWelcomeScreen
             ? questionsData?.length + index
             : questionsData?.length + item?.order
@@ -49,7 +49,7 @@ function QuestionsList(props) {
               type: DISPATCH_EVENTS.UPDATE_CURRENT_QUESTION,
               payload: {
                 ...item,
-                order: !!questionsData
+                order: questionsData
                   ? containWelcomeScreen
                     ? questionsData?.length + index
                     : questionsData?.length + item?.order
@@ -83,7 +83,7 @@ function QuestionsList(props) {
     //update order for all questions/endings
     updatedData = updatedData?.map((item, index) => {
       //define updated order for questions/endings
-      let updatedOrder = !!questionsLength ? questionsLength + index : index
+      let updatedOrder = questionsLength ? questionsLength + index : index
       if (!containWelcomeScreen) {
         updatedOrder++
       }

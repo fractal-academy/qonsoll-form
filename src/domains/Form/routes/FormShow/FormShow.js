@@ -66,6 +66,7 @@ function FormShow(props) {
         id
       )
   )
+  console.log('12312312311231232')
   const answersScoreDataChoosen = noFirebaseAnswersScore || answersScoreData
 
   const [formData] = useDocumentData(

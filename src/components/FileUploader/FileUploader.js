@@ -125,7 +125,7 @@ const UploadArea = (props) => {
   }
 
   const onApply = () => {
-    const uploaderData = !!Object.keys(filesList).length ? filesList : ''
+    const uploaderData = Object.keys(filesList).length ? filesList : ''
     const data = {
       question,
       answer: { value: uploaderData }
