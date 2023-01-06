@@ -1,6 +1,6 @@
+import { Button } from '@qonsoll/react-design'
 import { DatePicker } from 'antd'
 import styled from 'styled-components'
-import { Button } from '@qonsoll/react-design'
 
 export const CustomButton = styled(Button)`
   color: var(--qf-typography-title-color);

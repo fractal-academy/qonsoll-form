@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 
+import PropTypes from 'prop-types'
 import { StyledDatePicker } from './DateTimeInput.styles'
 import { getQuestionAnswerFromContext } from '../../helpers'
 import { message } from 'antd'
@@ -55,5 +56,9 @@ const DateTimeInput = (props) => {
     />
   )
 }
-
+DateTimeInput.propTypes = {
+  onDateChange: PropTypes.func,
+  question: PropTypes.object,
+  currentSlide: PropTypes.number
+}
 export default DateTimeInput

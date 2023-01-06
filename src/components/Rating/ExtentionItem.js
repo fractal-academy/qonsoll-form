@@ -5,6 +5,8 @@ import {
 } from '../../context/CurrentQuestion'
 import React, { useEffect, useState } from 'react'
 
+import PropTypes from 'prop-types'
+
 function ExtentionItem(props) {
   const { index, item, ratingProps, onClick } = props
 
@@ -55,6 +57,13 @@ function ExtentionItem(props) {
       )}
     </Container>
   )
+}
+
+ExtentionItem.propTypes = {
+  index: PropTypes.string,
+  item: PropTypes.object,
+  ratingProps: PropTypes.array,
+  onClick: PropTypes.func
 }
 
 export default ExtentionItem

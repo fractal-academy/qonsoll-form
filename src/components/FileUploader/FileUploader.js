@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { useHover, useKeyPress } from '@umijs/hooks'
 
 import COLLECTIONS from '../../constants/collection'
+import PropTypes from 'prop-types'
 import { SubmitButton } from '..'
 import useFunctions from '../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
@@ -119,6 +120,7 @@ const UploadArea = (props) => {
         setFilesList(filteredFilesToObj)
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log('error, ', error)
         message.error(t("Couldn't delete file"))
       })
@@ -217,6 +219,10 @@ const UploadArea = (props) => {
   )
 }
 
-UploadArea.propTypes = {}
+UploadArea.propTypes = {
+  onContinue: PropTypes.func,
+  question: PropTypes.object,
+  currentSlide: PropTypes.number
+}
 
 export default UploadArea

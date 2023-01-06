@@ -218,10 +218,13 @@ function QuestionForm(props) {
 QuestionForm.propTypes = {
   questionData: PropTypes.object,
   onQuestionTypeChange: PropTypes.func,
-  setShowPopover: PropTypes.func,
-  showPopover: PropTypes.bool,
-  setIsImageEditVisible: PropTypes.func,
-  isImageEditVisible: PropTypes.bool
+  defaultTab: PropTypes.string,
+  questionsList: PropTypes.array,
+  brightnessValue: PropTypes.number,
+  setBrightnessValue: PropTypes.func,
+  customQuestionTypes: PropTypes.array,
+  welcomeScreenShowRule: PropTypes.bool,
+  onQuestionLayoutChange: PropTypes.func
 }
 
 export default QuestionForm

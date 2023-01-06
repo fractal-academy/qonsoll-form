@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { Item } from './StyledItem.styles'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 function StyledItem(props) {
   const { children, onClick, isCard, disable } = props
@@ -13,9 +13,10 @@ function StyledItem(props) {
 }
 
 StyledItem.propTypes = {
-  size: PropTypes.array,
   onClick: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
+  isCard: PropTypes.bool,
+  disable: PropTypes.bool
 }
 
 export default StyledItem

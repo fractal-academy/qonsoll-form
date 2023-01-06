@@ -34,7 +34,10 @@ const ChoiceList = (props) => {
 
 ChoiceList.propTypes = {
   data: PropTypes.array,
-  children: PropTypes.node
+  children: PropTypes.node,
+  buttonKey: PropTypes.string,
+  hasImages: PropTypes.bool,
+  onButtonClick: PropTypes.func
 }
 
 export default ChoiceList

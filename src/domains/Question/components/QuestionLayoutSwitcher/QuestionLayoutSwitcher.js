@@ -63,7 +63,8 @@ function QuestionLayoutSwitcher(props) {
 
 QuestionLayoutSwitcher.propTypes = {
   onChange: PropTypes.func,
-  defaultActive: PropTypes.string
+  defaultActive: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default QuestionLayoutSwitcher

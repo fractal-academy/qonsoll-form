@@ -32,6 +32,7 @@ function ContentCard(props) {
 
 ContentCard.propTypes = {
   image: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  onEdit: PropTypes.bool,
   children: PropTypes.node,
   leftSideMenu: PropTypes.node,
   brightnessValue: PropTypes.number

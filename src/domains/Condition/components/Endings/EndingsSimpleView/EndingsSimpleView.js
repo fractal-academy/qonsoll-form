@@ -62,7 +62,7 @@ function EndingSimpleView(props) {
         allowClear
         width="100%"
         mode="multiple"
-        listHeight="300px"
+        listHeight={300}
         onChange={handleChange}
         defaultValue={defaultSelectValue}
         placeholder={t('Select questions to call current ending')}>

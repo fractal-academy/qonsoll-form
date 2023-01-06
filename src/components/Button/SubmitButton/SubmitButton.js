@@ -135,7 +135,13 @@ function SubmitButton(props) {
 
 SubmitButton.propTypes = {
   onClick: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
+  finish: PropTypes.bool,
+  question: PropTypes.object,
+  currentSlide: PropTypes.number,
+  submitLoading: PropTypes.bool,
+  disablePressEnter: PropTypes.bool,
+  preventFirebaseUsage: PropTypes.bool
 }
 
 export default SubmitButton

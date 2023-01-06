@@ -4,6 +4,7 @@ import {
 } from '../../../../domains/Question/components'
 
 import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const MiddleLayoutImage = (props) => {
@@ -26,6 +27,14 @@ const MiddleLayoutImage = (props) => {
       </QuestionImageContainer>
     </Box>
   )
+}
+
+MiddleLayoutImage.propTypes = {
+  layoutType: PropTypes.object,
+  url: PropTypes.string,
+  brightness: PropTypes.number,
+  setBrightness: PropTypes.func,
+  tabletSupport: PropTypes.bool
 }
 
 export default MiddleLayoutImage

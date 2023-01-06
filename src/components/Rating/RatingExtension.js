@@ -12,6 +12,7 @@ import {
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 
 import ExtentionItem from './ExtentionItem'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { useHover } from '@umijs/hooks'
 import { useTranslations } from '@qonsoll/translation'
@@ -201,6 +202,16 @@ function RatingExtension(props) {
       )}
     </Container>
   )
+}
+
+RatingExtension.propTypes = {
+  question: PropTypes.object,
+  onClick: PropTypes.func,
+  isFormQuiz: PropTypes.bool,
+  isMultiple: PropTypes.bool,
+  setSelectedValue: PropTypes.func,
+  radioChecked: PropTypes.bool,
+  checkboxChecked: PropTypes.bool
 }
 
 export default RatingExtension

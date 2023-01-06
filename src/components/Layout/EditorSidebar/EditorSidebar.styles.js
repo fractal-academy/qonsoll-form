@@ -1,6 +1,7 @@
 import { Box } from '@qonsoll/react-design'
 import { Drawer } from 'antd'
 import { Icon } from '@qonsoll/icons'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const SidebarBoxWrapper = (props) => {
@@ -51,6 +52,12 @@ const SidebarBoxWrapper = (props) => {
       </Drawer>
     </>
   )
+}
+
+SidebarBoxWrapper.propTypes = {
+  children: PropTypes.node,
+  showDrawer: PropTypes.bool,
+  setShowDrawer: PropTypes.func
 }
 
 export default SidebarBoxWrapper

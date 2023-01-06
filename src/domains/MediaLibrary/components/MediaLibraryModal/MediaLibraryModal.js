@@ -201,7 +201,9 @@ MediaLibraryModal.defaultProps = {
 }
 MediaLibraryModal.propTypes = {
   btnProps: PropTypes.object.isRequired,
-  data: PropTypes.array
+  onClick: PropTypes.func,
+  onContinue: PropTypes.func,
+  isHovering: PropTypes.bool
 }
 
 export default MediaLibraryModal

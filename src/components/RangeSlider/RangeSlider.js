@@ -37,6 +37,7 @@ function RangeSlider(props) {
 }
 
 RangeSlider.propTypes = {
+  onBlur: PropTypes.func,
   inputValue: PropTypes.number,
   setInputValue: PropTypes.func
 }

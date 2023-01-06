@@ -32,6 +32,7 @@ const ScoreConditionsAdvancedView = (props) => {
       getCollectionRef(COLLECTIONS.ANSWERS_SCORES_CONDITIONS).doc().id
     const questionScores = questionScoresData.questionScores?.length
       ? [
+          // eslint-disable-next-line no-unsafe-optional-chaining
           ...questionScoresData?.questionScores?.filter(
             (item) => item?.answerOptionId !== answerOptionId
           ),

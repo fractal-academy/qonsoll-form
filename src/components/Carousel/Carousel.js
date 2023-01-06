@@ -248,7 +248,14 @@ Carousel.propTypes = {
   children: PropTypes.node,
   isAnswered: PropTypes.bool,
   setIsAnswered: PropTypes.func,
-  setCurrentSlide: PropTypes.func
+  setCurrentSlide: PropTypes.func,
+  disabledUp: PropTypes.bool,
+  disabledDown: PropTypes.bool,
+  currentSlide: PropTypes.number,
+  questionsData: PropTypes.array,
+  containWelcomeScreen: PropTypes.bool,
+  previousQuestionOrder: PropTypes.array,
+  setPreviousQuestionOrder: PropTypes.func
 }
 
 export default Carousel

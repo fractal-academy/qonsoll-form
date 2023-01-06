@@ -181,9 +181,11 @@ function QuestionsList(props) {
 
 QuestionsList.propTypes = {
   data: PropTypes.array,
-  action: PropTypes.func,
   setNewOrder: PropTypes.func,
-  onItemClick: PropTypes.func
+  onItemClick: PropTypes.func,
+  disableDelete: PropTypes.bool,
+  questionsData: PropTypes.array,
+  endings: PropTypes.array
 }
 
 export default QuestionsList

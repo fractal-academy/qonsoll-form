@@ -55,7 +55,8 @@ TextTemplate.propTypes = {
   addCondition: PropTypes.func,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func,
-  questionConfigurations: PropTypes.array
+  questionConfigurations: PropTypes.array,
+  handlesDate: PropTypes.bool
 }
 
 export default TextTemplate

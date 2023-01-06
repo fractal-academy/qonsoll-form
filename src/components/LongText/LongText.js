@@ -39,6 +39,7 @@ function LongText(props) {
     textAreaRef.current.blur()
   }
   const onFinishFailed = (errorInfo) => {
+    // eslint-disable-next-line no-console
     console.log('Failed:', errorInfo)
   }
 
@@ -96,7 +97,9 @@ function LongText(props) {
 
 LongText.propTypes = {
   textAreaProps: PropTypes.object,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  question: PropTypes.object,
+  currentSlide: PropTypes.number
 }
 
 export default LongText

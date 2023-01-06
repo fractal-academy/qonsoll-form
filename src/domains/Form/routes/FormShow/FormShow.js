@@ -260,14 +260,18 @@ function FormShow(props) {
 
 FormShow.propTypes = {
   id: PropTypes.string.isRequired,
-  onBack: PropTypes.func,
   firebase: PropTypes.object,
-  translate: PropTypes.object,
   submitLoading: PropTypes.bool,
   wrapperHeight: PropTypes.number,
   wrapperOffset: PropTypes.number,
-  configurations: PropTypes.object,
-  actions: PropTypes.shape({ onFinish: PropTypes.func })
+  actions: PropTypes.shape({ onFinish: PropTypes.func }),
+  translations: PropTypes.object,
+  wrapperPaddings: PropTypes.string,
+  preventFirebaseUsage: PropTypes.bool,
+  showHeader: PropTypes.bool,
+  noFirebaseForm: PropTypes.object,
+  noFirebaseQuestions: PropTypes.array,
+  noFirebaseAnswersScore: PropTypes.array
 }
 
 export default FormShow

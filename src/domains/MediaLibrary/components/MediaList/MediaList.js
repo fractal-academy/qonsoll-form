@@ -41,7 +41,7 @@ const MediaList = (props) => {
 
 MediaList.propTypes = {
   media: PropTypes.array,
-  selected: PropTypes.string,
+  selected: PropTypes.bool,
   handleSelect: PropTypes.func
 }
 

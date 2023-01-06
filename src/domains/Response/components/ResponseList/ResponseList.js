@@ -1,9 +1,9 @@
-import React from 'react'
-import moment from 'moment'
-import { Spin } from 'antd'
-import PropTypes from 'prop-types'
 import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
+import React from 'react'
 import ResponseListItem from './ResponseListItem'
+import { Spin } from 'antd'
+import moment from 'moment'
 
 function ResponseList(props) {
   const {
@@ -44,7 +44,8 @@ function ResponseList(props) {
 ResponseList.propTypes = {
   userAnswerGroup: PropTypes.array,
   loading: PropTypes.bool,
-  onListItemClick: PropTypes.func
+  onListItemClick: PropTypes.func,
+  setCurrentUserAnswerGroup: PropTypes.func
 }
 
 export default ResponseList

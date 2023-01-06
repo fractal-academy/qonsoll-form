@@ -321,8 +321,11 @@ FormEdit.propTypes = {
   firebase: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   onBack: PropTypes.func,
-  showCondition: PropTypes.bool,
-  configurations: PropTypes.object
+  actions: PropTypes.object,
+  customHeader: PropTypes.node,
+  showAnswers: PropTypes.bool,
+  customQuestionTypes: PropTypes.array,
+  wrapperPaddings: PropTypes.string
 }
 
 export default FormEdit

@@ -7,6 +7,7 @@ import {
 import React, { useMemo, useState } from 'react'
 
 import { PopoverSwitcherRow } from './QuestionConfigurationPopoverContent.styles'
+import PropTypes from 'prop-types'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { useTranslations } from '@qonsoll/translation'
 
@@ -88,6 +89,12 @@ function QuestionConfigurationPopoverContent(props) {
   )
 }
 
-QuestionConfigurationPopoverContent.propTypes = {}
+QuestionConfigurationPopoverContent.propTypes = {
+  questionData: PropTypes.object,
+  setShowPopover: PropTypes.func,
+  customQuestionTypes: PropTypes.array,
+  onQuestionTypeChange: PropTypes.func,
+  welcomeScreenShowRule: PropTypes.bool
+}
 
 export default QuestionConfigurationPopoverContent

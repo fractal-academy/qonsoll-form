@@ -121,10 +121,10 @@ MatchCondition.propTypes = {
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   questionId: PropTypes.string,
-  addCondition: PropTypes.func,
   questionList: PropTypes.array,
   addRedirectQuestion: PropTypes.func,
-  questionConfigurations: PropTypes.array
+  questionConfigurations: PropTypes.array,
+  handlesDate: PropTypes.bool
 }
 
 export default MatchCondition

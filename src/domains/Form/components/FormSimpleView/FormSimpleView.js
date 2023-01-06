@@ -69,7 +69,8 @@ const FormSimpleView = (props) => {
 FormSimpleView.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
-  description: PropTypes.string
+  subtitle: PropTypes.string,
+  firebase: PropTypes.object
 }
 
 export default FormSimpleView

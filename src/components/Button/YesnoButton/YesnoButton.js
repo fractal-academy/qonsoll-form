@@ -122,8 +122,10 @@ function YesnoButton(props) {
 
 YesnoButton.propTypes = {
   onClick: PropTypes.func,
-  order: PropTypes.number,
-  currentSlide: PropTypes.number
+  currentSlide: PropTypes.number,
+  question: PropTypes.object,
+  isFormQuiz: PropTypes.bool,
+  answersScoreData: PropTypes.array
 }
 
 export default YesnoButton

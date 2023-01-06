@@ -82,8 +82,7 @@ function ChoiceButton(props) {
   )
 
   // [CLEAN FUNCTIONS]
-  const onButtonClick = (props) => {
-    const { letter, choice } = props
+  const onButtonClick = ({ letter, choice }) => {
     //answer score if configured
     const score =
       answersScoreData?.find(
@@ -125,11 +124,13 @@ function ChoiceButton(props) {
 }
 
 ChoiceButton.propTypes = {
-  order: PropTypes.number,
   onClick: PropTypes.func,
   choices: PropTypes.array,
   hasImages: PropTypes.bool,
-  currentSlide: PropTypes.number
+  currentSlide: PropTypes.number,
+  question: PropTypes.object,
+  isFormQuiz: PropTypes.bool,
+  answersScoreData: PropTypes.array
 }
 
 export default ChoiceButton

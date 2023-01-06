@@ -3,6 +3,7 @@ import React, { useMemo } from 'react'
 
 import { Checkbox } from 'antd'
 import { Form } from 'antd'
+import PropTypes from 'prop-types'
 import { useTranslations } from '@qonsoll/translation'
 
 // const { TextArea } = Input
@@ -62,6 +63,9 @@ function FormSimpleForm(props) {
   )
 }
 
-FormSimpleForm.propTypes = {}
+FormSimpleForm.propTypes = {
+  formData: PropTypes.object,
+  children: PropTypes.node
+}
 
 export default FormSimpleForm

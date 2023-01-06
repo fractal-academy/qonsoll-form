@@ -10,6 +10,7 @@ import ActionsFunctionsContext from '../../../../context/ActionsFunctions/Action
 import { COLLECTIONS } from '../../../../constants'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import { PageHeader } from '../../../../components'
+import PropTypes from 'prop-types'
 import SidebarBoxWrapper from '../../../../components/Layout/EditorSidebar/EditorSidebar.styles'
 import { message } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
@@ -124,6 +125,12 @@ function FormAnswers(props) {
   )
 }
 
-FormAnswers.propTypes = {}
+FormAnswers.propTypes = {
+  id: PropTypes.string,
+  firebase: PropTypes.object,
+  showHeader: PropTypes.bool,
+  wrapperPaddings: PropTypes.string,
+  actions: PropTypes.object
+}
 
 export default FormAnswers

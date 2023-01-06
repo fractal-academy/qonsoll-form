@@ -3,6 +3,7 @@ import { Popconfirm, Tooltip } from 'antd'
 import React, { useState } from 'react'
 
 import { Icon } from '@qonsoll/icons'
+import PropTypes from 'prop-types'
 import { QuestionConfigurationPopoverContent } from '../../../../domains/Question/components'
 import { useTranslations } from '@qonsoll/translation'
 
@@ -119,6 +120,12 @@ function QuestionConfigurationPopover(props) {
   )
 }
 
-QuestionConfigurationPopover.propTypes = {}
+QuestionConfigurationPopover.propTypes = {
+  questionData: PropTypes.object,
+  questionsList: PropTypes.array,
+  customQuestionTypes: PropTypes.array,
+  onQuestionTypeChange: PropTypes.func,
+  welcomeScreenShowRule: PropTypes.bool
+}
 
 export default QuestionConfigurationPopover

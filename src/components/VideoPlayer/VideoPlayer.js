@@ -1,9 +1,10 @@
 import '@qonsoll/qvideo/dist/styles/styles.css'
 
-import { Box, Button, Remove } from '@qonsoll/react-design'
+import { Box, Remove } from '@qonsoll/react-design'
 
 import { Icon } from '@qonsoll/icons'
 import { Player } from '@qonsoll/qvideo'
+import PropTypes from 'prop-types'
 import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
 import React from 'react'
 import { Tooltip } from 'antd'
@@ -45,6 +46,13 @@ function VideoPlayer(props) {
       />
     </Box>
   )
+}
+
+VideoPlayer.propTypes = {
+  videoKey: PropTypes.string,
+  deleteVideo: PropTypes.func,
+  withDelete: PropTypes.bool,
+  customOptions: PropTypes.object
 }
 
 export default VideoPlayer

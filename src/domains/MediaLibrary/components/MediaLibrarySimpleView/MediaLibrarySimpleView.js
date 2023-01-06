@@ -67,7 +67,9 @@ function MediaLibrarySimpleView(props) {
 
 MediaLibrarySimpleView.propTypes = {
   setIsImageEditVisible: PropTypes.func,
-  bgImage: PropTypes.string
+  bgImage: PropTypes.string,
+  brightnessValue: PropTypes.number,
+  setBrightnessValue: PropTypes.func
 }
 
 export default MediaLibrarySimpleView

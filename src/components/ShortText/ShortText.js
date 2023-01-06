@@ -36,6 +36,7 @@ function ShortText(props) {
     inputRef.current.blur()
   }
   const onFinishFailed = (errorInfo) => {
+    // eslint-disable-next-line no-console
     console.log('Failed:', errorInfo)
   }
   const onFocusedKeyPress = (e) => {

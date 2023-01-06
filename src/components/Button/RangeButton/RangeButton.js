@@ -99,8 +99,10 @@ function RangeButton(props) {
 
 RangeButton.propTypes = {
   onClick: PropTypes.func,
-  to: PropTypes.number.isRequired,
-  from: PropTypes.number.isRequired
+  question: PropTypes.object,
+  isFormQuiz: PropTypes.bool,
+  currentSlide: PropTypes.number,
+  answersScoreData: PropTypes.array
 }
 RangeButton.defaultProps = {
   from: 1,

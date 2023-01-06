@@ -1,9 +1,11 @@
+import React, { useEffect, useMemo, useState } from 'react'
+
+import { Box } from '@qonsoll/react-design'
+import PropTypes from 'prop-types'
+import SortableContainer from './SortableContainer'
+import SortableItem from './SortableItem'
 import arrayMove from 'array-move'
 import styled from 'styled-components'
-import SortableItem from './SortableItem'
-import { Box } from '@qonsoll/react-design'
-import SortableContainer from './SortableContainer'
-import React, { useEffect, useMemo, useState } from 'react'
 
 const UnsortableItem = styled(Box)`
   padding-left: 24px;
@@ -58,6 +60,13 @@ function DragableList(props) {
       ))}
     </Container>
   )
+}
+
+DragableList.propTypes = {
+  dataSource: PropTypes.array,
+  onUpdate: PropTypes.func,
+  renderItem: PropTypes.func,
+  sortable: PropTypes.bool
 }
 
 export default DragableList

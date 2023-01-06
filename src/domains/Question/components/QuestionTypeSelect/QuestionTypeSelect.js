@@ -23,12 +23,7 @@ import React from 'react'
 import { useTranslations } from '@qonsoll/translation'
 
 function QuestionTypeSelect(props) {
-  const {
-    //  questionData,
-    onClick,
-    welcomeScreenShowRule,
-    customQuestionTypes
-  } = props
+  const { onClick, welcomeScreenShowRule, customQuestionTypes } = props
 
   // [ADDITIONAL_HOOKS]
   const { t } = useTranslations()
@@ -146,7 +141,8 @@ function QuestionTypeSelect(props) {
 }
 
 QuestionTypeSelect.propTypes = {
-  onChange: PropTypes.func,
+  welcomeScreenShowRule: PropTypes.bool,
+  customQuestionTypes: PropTypes.array,
   onClick: PropTypes.func
 }
 

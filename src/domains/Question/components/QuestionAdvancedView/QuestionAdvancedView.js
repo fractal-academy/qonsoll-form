@@ -259,7 +259,12 @@ function QuestionAdvancedView(props) {
 QuestionAdvancedView.propTypes = {
   data: PropTypes.object,
   onClick: PropTypes.func,
-  questionNumber: PropTypes.number
+  questionNumber: PropTypes.number,
+  isFormQuiz: PropTypes.bool,
+  currentSlide: PropTypes.number,
+  submitLoading: PropTypes.bool,
+  answersScoreData: PropTypes.array,
+  preventFirebaseUsage: PropTypes.bool
 }
 
 export default QuestionAdvancedView

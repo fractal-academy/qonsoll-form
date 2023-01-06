@@ -209,6 +209,7 @@ function EditorSidebar(props) {
   }
 
   const onResetEndings = () => {
+    // eslint-disable-next-line no-console
     console.log('reset endings')
   }
 
@@ -340,7 +341,9 @@ EditorSidebar.propTypes = {
   questions: PropTypes.array,
   answerScoresData: PropTypes.array,
   customQuestionTypes: PropTypes.array,
-  welcomeScreenShowRule: PropTypes.bool
+  welcomeScreenShowRule: PropTypes.bool,
+  showDrawer: PropTypes.bool,
+  setShowDrawer: PropTypes.func
 }
 
 export default EditorSidebar

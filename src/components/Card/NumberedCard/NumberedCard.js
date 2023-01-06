@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { ContentBox, HiddenBox, NumberBox } from './NumberedCard.styles'
+
 import { Box } from '@qonsoll/react-design'
-import { HiddenBox, ContentBox, NumberBox } from './NumberedCard.styles'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 function NumberedCard(props) {
   const { top, number, current, children, ...args } = props
@@ -19,7 +20,9 @@ function NumberedCard(props) {
 
 NumberedCard.propTypes = {
   number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  children: PropTypes.node
+  children: PropTypes.node,
+  top: PropTypes.string,
+  current: PropTypes.bool
 }
 
 export default NumberedCard

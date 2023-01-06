@@ -4,6 +4,7 @@ import { Box } from '@qonsoll/react-design'
 import { Icon } from '@qonsoll/icons'
 import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
 import { Popover } from 'antd'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const StyledBookmarkButton = styled(Box)`
@@ -58,6 +59,10 @@ function QuestionMediaPopover(props) {
   )
 }
 
-QuestionMediaPopover.propTypes = {}
+QuestionMediaPopover.propTypes = {
+  MediaModalButtonBackground: PropTypes.string,
+  brightnessValue: PropTypes.number,
+  setBrightnessValue: PropTypes.func
+}
 
 export default QuestionMediaPopover

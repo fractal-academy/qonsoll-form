@@ -29,6 +29,7 @@ function FormConditionsForm(props) {
 
   const addCondition = (answer, index) => {
     setData(COLLECTIONS.QUESTIONS, data?.[index]?.id, {
+      // eslint-disable-next-line no-unsafe-optional-chaining
       questionConfigurations: [...data?.[index]?.questionConfigurations, answer]
     })
   }
@@ -165,7 +166,9 @@ function FormConditionsForm(props) {
 FormConditionsForm.propTypes = {
   onTabChange: PropTypes.func,
   data: PropTypes.array.isRequired,
-  endings: PropTypes.array
+  endings: PropTypes.array,
+  formData: PropTypes.object,
+  answerScores: PropTypes.array
 }
 
 export default FormConditionsForm

@@ -62,7 +62,9 @@ function KeyBox(props) {
 KeyBox.propTypes = {
   item: PropTypes.object,
   hasImages: PropTypes.bool,
-  onButtonClick: PropTypes.func
+  onButtonClick: PropTypes.func,
+  index: PropTypes.number,
+  isActive: PropTypes.bool
 }
 
 export default KeyBox

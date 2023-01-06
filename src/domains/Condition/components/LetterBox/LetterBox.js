@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import { Box } from '@qonsoll/react-design'
+import styled from 'styled-components'
 
 const LetterBox = styled(Box)`
   min-width: 24px;

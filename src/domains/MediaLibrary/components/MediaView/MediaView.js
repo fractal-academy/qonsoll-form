@@ -75,7 +75,7 @@ MediaView.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   imageUrl: PropTypes.string,
-  selected: PropTypes.string,
+  selected: PropTypes.bool,
   handleSelect: PropTypes.func
 }
 
