@@ -1,17 +1,16 @@
-import FIREBASE_CONFIG from './firebaseConfig'
+import ANSWER_TYPES from './answerType'
+import API_KEY from './qvideoApiKey'
+import COLLECTIONS from './collection'
+import DATE_CONDITION_RULES from './dateConditionRules'
+import DEFAULT_IMAGE from './defaultImage'
 import LAYOUT_TYPES from './layoutTypes'
 import QUESTION_DESCRIPTIONS from './questionDescriptions'
 import QUESTION_TYPES from './quetstionType'
-import ANSWER_TYPES from './answerType'
-import DATE_CONDITION_RULES from './dateConditionRules'
 import TEXT_CONDITION_RULES from './planeTextStringConditionRules'
-import COLLECTIONS from './collection'
-import TEXTINGS from './textings'
-import DEFAULT_IMAGE from './defaultImage'
-import API_KEY from './qvideoApiKey'
+import firebaseConfig from './firebaseConfig'
 
 export {
-  FIREBASE_CONFIG,
+  firebaseConfig,
   LAYOUT_TYPES,
   QUESTION_DESCRIPTIONS,
   QUESTION_TYPES,
@@ -20,6 +19,5 @@ export {
   TEXT_CONDITION_RULES,
   COLLECTIONS,
   DEFAULT_IMAGE,
-  TEXTINGS,
   API_KEY
 }

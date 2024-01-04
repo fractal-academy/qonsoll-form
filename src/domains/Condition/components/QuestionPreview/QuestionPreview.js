@@ -1,7 +1,6 @@
-import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 
-const QuestionPreview = styled(Box)`
+const QuestionPreview = styled.div`
   width: 100%;
   height: 100%;
   display: flex;

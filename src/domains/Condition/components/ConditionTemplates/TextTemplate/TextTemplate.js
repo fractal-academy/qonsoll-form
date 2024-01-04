@@ -1,5 +1,4 @@
-import { Button, Container } from '@qonsoll/react-design'
-
+import { Button } from 'antd'
 import MatchCondition from './MatchCondition'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -30,7 +29,7 @@ function TextTemplate(props) {
   }
 
   return (
-    <Container>
+    <div>
       {questionConfigurations?.map((item, index) => (
         <MatchCondition
           item={item}
@@ -46,7 +45,7 @@ function TextTemplate(props) {
       <Button onClick={onClick} onMouseDown={(e) => e.preventDefault()}>
         {t('+ Add condition')}
       </Button>
-    </Container>
+    </div>
   )
 }
 

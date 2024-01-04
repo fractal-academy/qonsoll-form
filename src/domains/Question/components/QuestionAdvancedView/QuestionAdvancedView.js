@@ -3,7 +3,6 @@ import {
   StyledBox,
   styles
 } from './QuestionAdvancedView.styles'
-import { Box, Col, Row, Text, Title } from '@qonsoll/react-design'
 import {
   ChoiceButton,
   DateTimeInput,
@@ -17,12 +16,15 @@ import {
   VideoPlayer,
   YesnoButton
 } from '../../../../components'
+import { Col, Row, Typography } from 'antd'
 import { LAYOUT_TYPES, QUESTION_TYPES } from '../../../../constants'
 import React, { cloneElement } from 'react'
 
 import PropTypes from 'prop-types'
 import QuestionImageContainer from '../QuestionImageContainer'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title, Text } = Typography
 
 function QuestionAdvancedView(props) {
   const {
@@ -106,7 +108,8 @@ function QuestionAdvancedView(props) {
           onClick={onClick}
           submitLoading={submitLoading}
           currentSlide={currentSlide}
-          preventFirebaseUsage={preventFirebaseUsage}>
+          preventFirebaseUsage={preventFirebaseUsage}
+        >
           {t('Finish')}
         </SubmitButton>
       )
@@ -166,22 +169,25 @@ function QuestionAdvancedView(props) {
           pl={devicePadding}
           pr={devicePadding}
           bordered={false}
-          specialLayoutRule={specialLayoutRule}>
+          specialLayoutRule={specialLayoutRule}
+        >
           <Row noGutters py={titleSpacing} width="100%">
             <Col cw={12}>
               {data?.isVideoQuestion ? (
-                <Box
+                <div
                   height={350}
                   position="relative"
                   display="flex"
                   flexDirection="column"
-                  justifyContent="center">
+                  justifyContent="center"
+                >
                   {questionNumberRule && (
                     <Title
                       color="var(--qf-typography-title-color)"
                       fontFamily="var(--ql-font-family-main)"
                       style={{ wordBreak: 'break-word' }}
-                      level={4}>
+                      level={4}
+                    >
                       {questionNumber}.{t('Video question')}
                     </Title>
                   )}
@@ -194,13 +200,14 @@ function QuestionAdvancedView(props) {
                       autoplay: false
                     }}
                   />
-                </Box>
+                </div>
               ) : (
                 <Title
                   color="var(--qf-typography-title-color)"
                   fontFamily="var(--ql-font-family-main)"
                   style={{ wordBreak: 'break-word' }}
-                  level={4}>
+                  level={4}
+                >
                   {questionNumberRule && `${questionNumber}.`} {data?.title}
                 </Title>
               )}
@@ -228,13 +235,13 @@ function QuestionAdvancedView(props) {
               </Col>
             </Row>
           )}
-          <Box>
+          <div>
             {cloneElement(component, {
               question: data,
               answersScoreData,
               isFormQuiz
             })}
-          </Box>
+          </div>
         </StyledBox>
       </Col>
       {imageShowRule && (
@@ -242,7 +249,8 @@ function QuestionAdvancedView(props) {
           v="center"
           h="center"
           height={deviceImageHeight}
-          order={widthTablet ? '1' : layoutType.imageOrder}>
+          order={widthTablet ? '1' : layoutType.imageOrder}
+        >
           <QuestionImageContainer
             image={img}
             layoutType={layoutType?.type}

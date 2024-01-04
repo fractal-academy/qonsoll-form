@@ -1,4 +1,4 @@
-import { Box, Button, Col, Row, Text } from '@qonsoll/react-design'
+import { Button, Col, Row, Typography } from 'antd'
 import { DeleteOutlined, FileOutlined, InboxOutlined } from '@ant-design/icons'
 import { IconLabel, UploadItem } from './FileUploader.styles'
 import { Popconfirm, Progress, Upload, message } from 'antd'
@@ -12,7 +12,7 @@ import useFunctions from '../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
 
 const { Dragger } = Upload
-
+const { Text } = Typography
 const config = {
   name: 'file',
   multiple: true
@@ -152,28 +152,29 @@ const UploadArea = (props) => {
   )
 
   return (
-    <Box flexDirection="column">
+    <div flexDirection="column">
       <Dragger
         style={{ borderRadius: 'var(--btn-border-radius-base)' }}
         {...config}
         {...props}
         customRequest={onChange}
         fileList={[]}
-        disabled={!onContinue}>
-        <Box onMouseDown={(e) => e.preventDefault()} ref={hoverRef}>
-          <Box display="flex" justifyContent="center" mb="8px">
+        disabled={!onContinue}
+      >
+        <div onMouseDown={(e) => e.preventDefault()} ref={hoverRef}>
+          <div display="flex" justifyContent="center" mb="8px">
             <IconLabel disabled={!onContinue} isHovering={isHovering}>
               <InboxOutlined style={{ fontSize: '24px' }} />
             </IconLabel>
-          </Box>
-          <Box textAlign="center">
+          </div>
+          <div textAlign="center">
             <Text color="var(--qf-typography-subtitle-color)">
               {t('Click or drag file to this area to upload')}
             </Text>
-          </Box>
-        </Box>
+          </div>
+        </div>
       </Dragger>
-      <Box mt={3}>
+      <div mt={3}>
         {Object.values(filesList)?.map((file) => (
           <UploadItem my={1} py={2} px={3}>
             <Row noGutters>
@@ -183,7 +184,8 @@ const UploadArea = (props) => {
               <Col v="center">
                 <Text
                   color="var(--qf-typography-subtitle-color)"
-                  wordBreak="break-all">
+                  wordBreak="break-all"
+                >
                   {file?.name}
                 </Text>
               </Col>
@@ -196,13 +198,15 @@ const UploadArea = (props) => {
                     title={t('Delete this item?')}
                     okType="danger"
                     okText={t('Delete')}
-                    cancelText={t('Cancel')}>
+                    cancelText={t('Cancel')}
+                  >
                     <Button
                       shape="circle"
                       type="text"
                       color="red"
                       size="small"
-                      danger>
+                      danger
+                    >
                       <DeleteOutlined />
                     </Button>
                   </Popconfirm>
@@ -211,11 +215,11 @@ const UploadArea = (props) => {
             </Row>
           </UploadItem>
         ))}
-      </Box>
-      <Box mt="24px">
+      </div>
+      <div mt="24px">
         <SubmitButton onClick={onApply} disablePressEnter />
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 

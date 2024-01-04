@@ -1,10 +1,12 @@
-import { Col, Input, Row, Text, TextArea } from '@qonsoll/react-design'
+import { Col, Form, Input, Row, Typography } from 'antd'
 import React, { useMemo } from 'react'
 
 import { Checkbox } from 'antd'
-import { Form } from 'antd'
 import PropTypes from 'prop-types'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Text } = Typography
+const { TextArea } = Input
 
 // const { TextArea } = Input
 function FormSimpleForm(props) {
@@ -29,7 +31,8 @@ function FormSimpleForm(props) {
         <Col cw={12}>
           <Form.Item
             name="title"
-            rules={[{ required: true, message: t('Please, enter form name') }]}>
+            rules={[{ required: true, message: t('Please, enter form name') }]}
+          >
             <Input allowClear maxLength={100} placeholder={t('Form name')} />
           </Form.Item>
         </Col>
@@ -50,7 +53,8 @@ function FormSimpleForm(props) {
           <Form.Item name="isQuiz" valuePropName="checked">
             <Checkbox
               defaultChecked={initialValues?.isQuiz}
-              data-testproject="quizSystem">
+              data-testproject="quizSystem"
+            >
               <Text>{t('Enable quiz system')}</Text>
             </Checkbox>
             {/* <Switch defaultChecked={!!formData?.isQuiz} /> */}

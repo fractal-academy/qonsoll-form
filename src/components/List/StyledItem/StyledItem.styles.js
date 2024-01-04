@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { Box } from '@qonsoll/react-design'
 
-export const Item = styled(Box)`
+export const Item = styled.div`
   height: 100%;
   margin-right: 10px;
   margin-bottom: 20px;

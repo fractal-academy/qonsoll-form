@@ -1,5 +1,8 @@
+import { Button, Typography } from 'antd'
+
 import styled from 'styled-components'
-import { Box, Text, Button } from '@qonsoll/react-design'
+
+const { Text } = Typography
 
 export const CustomText = styled(Text)`
   color: var(--qf-typography-caption-color);
@@ -11,7 +14,7 @@ export const CustomButton = styled(Button)`
   transform: translate(-50%, -50%);
 `
 
-export const MediaListContainer = styled(Box)`
+export const MediaListContainer = styled.div`
   height: 450px;
   overflow: auto;
   display: flex;

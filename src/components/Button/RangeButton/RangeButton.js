@@ -1,10 +1,9 @@
-import { Col, Row } from '@qonsoll/react-design'
+import { Col, Row, message } from 'antd'
 import React, { useState } from 'react'
 
 import PropTypes from 'prop-types'
 import { StyledRangeButton } from './RangeButton.styles'
 import { getQuestionAnswerFromContext } from '../../../helpers'
-import { message } from 'antd'
 import { useAnswersContext } from '../../../context/Answers'
 import { useKeyPress } from '@umijs/hooks'
 import { useTranslations } from '@qonsoll/translation'
@@ -88,7 +87,8 @@ function RangeButton(props) {
             onTouchStart={() => onButtonClick(item)}
             onClick={() => onButtonClick(item)}
             onMouseDown={(e) => e.preventDefault()}
-            isActive={Number(buttonKey) === item}>
+            isActive={Number(buttonKey) === item}
+          >
             {item}
           </StyledRangeButton>
         </Col>

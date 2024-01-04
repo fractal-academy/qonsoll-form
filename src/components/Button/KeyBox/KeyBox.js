@@ -1,4 +1,4 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Col, Row } from 'antd'
 import {
   ImageContainer,
   StyledButton,
@@ -20,16 +20,18 @@ function KeyBox(props) {
   const phoneSmall = window.innerWidth <= 500
 
   return (
-    <Box
+    <div
       ref={hoverRef}
       display={hasImages && 'inline-block'}
       mr={phoneSmall ? 0 : 2}
-      width="100%">
+      width="100%"
+    >
       <StyledButton
         hasImages={hasImages}
         onTouchStart={() => onButtonClick(item)}
         onClick={() => onButtonClick(item)}
-        isActive={isActive}>
+        isActive={isActive}
+      >
         {hasImages && (
           <ImageContainer
             phoneSmall={phoneSmall}
@@ -42,20 +44,22 @@ function KeyBox(props) {
               isHovering={isHovering}
               phoneSmall={phoneSmall}
               isActive={isActive}
-              hasImages={hasImages}>
+              hasImages={hasImages}
+            >
               {isHovering && !phoneSmall ? `Key ${letter}` : letter}
             </StyledKeybox>
             <StyledText
               ml={1}
               isActive={isActive}
               hasImages={hasImages}
-              phoneSmall={phoneSmall}>
+              phoneSmall={phoneSmall}
+            >
               {item?.choice?.answerOption || `Choice ${index + 1}`}
             </StyledText>
           </Col>
         </Row>
       </StyledButton>
-    </Box>
+    </div>
   )
 }
 

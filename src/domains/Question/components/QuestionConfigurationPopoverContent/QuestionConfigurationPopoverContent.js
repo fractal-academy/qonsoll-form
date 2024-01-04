@@ -1,4 +1,4 @@
-import { Box, Col, Divider, Row, Title } from '@qonsoll/react-design'
+import { Col, Divider, Row, Typography } from 'antd'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import {
   QuestionConfigurationMenu,
@@ -10,6 +10,8 @@ import { PopoverSwitcherRow } from './QuestionConfigurationPopoverContent.styles
 import PropTypes from 'prop-types'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title } = Typography
 
 function QuestionConfigurationPopoverContent(props) {
   const {
@@ -47,25 +49,28 @@ function QuestionConfigurationPopoverContent(props) {
   const configurationTitle = `${translatedQuestionType} ${t('settings')}`
 
   return (
-    <Box>
+    <div>
       <PopoverSwitcherRow
         noGutters
         p={2}
         h="between"
-        onClick={changeQuestionConfigState}>
+        onClick={changeQuestionConfigState}
+      >
         <Col
           v="center"
           cw="auto"
           pr={isQuestionConfig && '0px'}
           pl={!isQuestionConfig && '0px'}
-          order={isQuestionConfig ? 1 : 3}>
+          order={isQuestionConfig ? 1 : 3}
+        >
           {isQuestionConfig ? <LeftOutlined /> : <RightOutlined />}
         </Col>
         <Col cw="auto" order={2}>
           <Title
             color="var(--qf-typography-title-color)"
             fontFamily="var(--ql-font-family-main)"
-            level={4}>
+            level={4}
+          >
             {isQuestionConfig ? configurationTitle : t('Question types')}
           </Title>
         </Col>
@@ -85,7 +90,7 @@ function QuestionConfigurationPopoverContent(props) {
           )}
         </Col>
       </Row>
-    </Box>
+    </div>
   )
 }
 

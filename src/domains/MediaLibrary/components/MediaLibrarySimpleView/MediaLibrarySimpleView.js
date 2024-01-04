@@ -1,4 +1,3 @@
-import { Box, Text } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
@@ -9,8 +8,11 @@ import { MediaLibraryModal } from '../../../../domains/MediaLibrary/components'
 import PropTypes from 'prop-types'
 import RangeSlider from '../../../../components/RangeSlider'
 import React from 'react'
+import { Typography } from 'antd'
 import { useHover } from '@umijs/hooks'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Text } = Typography
 
 function MediaLibrarySimpleView(props) {
   const {
@@ -40,7 +42,7 @@ function MediaLibrarySimpleView(props) {
   }
 
   return (
-    <Box>
+    <div>
       <CustomBox backgroundImage={bgImage} mb="16px" ref={hoverRef}>
         <MediaLibraryModal
           onClick={() => {
@@ -61,7 +63,7 @@ function MediaLibrarySimpleView(props) {
         inputValue={brightnessValue}
         setInputValue={setBrightnessValue}
       />
-    </Box>
+    </div>
   )
 }
 

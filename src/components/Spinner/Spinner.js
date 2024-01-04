@@ -1,16 +1,16 @@
-import { Box } from '@qonsoll/react-design'
 import React from 'react'
 import { Spin } from 'antd'
 
 function Spinner() {
   return (
-    <Box
+    <div
       top="50%"
       left="50%"
       position="absolute"
-      transform="translate(-50%, -50%)">
+      transform="translate(-50%, -50%)"
+    >
       <Spin size="large" />
-    </Box>
+    </div>
   )
 }
 

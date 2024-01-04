@@ -53,7 +53,8 @@ function QuestionLayoutSwitcher(props) {
           disabled={disabled}
           key={item.layoutType}
           onClick={onChange}
-          p={2}>
+          p={2}
+        >
           {cloneElement(item.icon, { style: { margin: 0 } })}
         </StyledItem>
       ))}

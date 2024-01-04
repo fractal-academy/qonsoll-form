@@ -1,4 +1,4 @@
-import { Box, Col, Row, Switch, Text } from '@qonsoll/react-design'
+import { Col, Row, Switch, Typography } from 'antd'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
@@ -9,6 +9,8 @@ import React, { useEffect, useState } from 'react'
 import { AmountOptionsCustomConfig } from '../../../../domains/Question/components/QuestionCustomConfigurations'
 import { QUESTION_TYPES } from '../../../../constants'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Text } = Typography
 
 function QuestionConfigurationMenu() {
   // [CUSTOM_HOOKS]
@@ -62,7 +64,7 @@ function QuestionConfigurationMenu() {
   }, [currentQuestion?.isVideoQuestion, currentQuestionDispatch])
 
   return (
-    <Box px={3} pt={3} h="between">
+    <div px={3} pt={3} h="between">
       {isNotWelcomeScreenOrStatement && (
         <Row mb="8px" noGutters v="center">
           <Col v="center">
@@ -98,7 +100,7 @@ function QuestionConfigurationMenu() {
         QUESTION_TYPES.RATING,
         QUESTION_TYPES.RATING_EXTENDED
       ].includes(currentQuestion.questionType) && <AmountOptionsCustomConfig />}
-    </Box>
+    </div>
   )
 }
 

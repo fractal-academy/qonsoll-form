@@ -1,4 +1,3 @@
-import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import React from 'react'
 import ResponseListItem from './ResponseListItem'
@@ -20,11 +19,11 @@ function ResponseList(props) {
   )
 
   return (
-    <Box p={3} width="100%">
+    <div p={3} width="100%">
       {loading ? (
-        <Box display="flex" flex={1} alignItems="center">
+        <div display="flex" flex={1} alignItems="center">
           <Spin size="large" />
-        </Box>
+        </div>
       ) : (
         sortedUserAnswerGroup?.map((item, index) => (
           <ResponseListItem
@@ -37,7 +36,7 @@ function ResponseList(props) {
           />
         ))
       )}
-    </Box>
+    </div>
   )
 }
 

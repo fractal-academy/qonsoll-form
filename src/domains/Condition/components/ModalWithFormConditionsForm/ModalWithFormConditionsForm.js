@@ -1,4 +1,4 @@
-import { Button, Col, Row, Title } from '@qonsoll/react-design'
+import { Button, Col, Row, Typography } from 'antd'
 import { Modal, Popconfirm, Tooltip } from 'antd'
 
 import PropTypes from 'prop-types'
@@ -6,6 +6,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useTranslations } from '@qonsoll/translation'
 
+const { Title } = Typography
 function ModalWithFormConditionsForm(props) {
   const { btnProps, children, onResetClick, popconfirmReset } = props
 
@@ -66,7 +67,8 @@ function ModalWithFormConditionsForm(props) {
                   okType="danger"
                   okText={t('Reset')}
                   cancelText={t('Cancel')}
-                  onConfirm={onResetClick}>
+                  onConfirm={onResetClick}
+                >
                   <Button type="text" onMouseDown={(e) => e.preventDefault()}>
                     {t('Reset logic')}
                   </Button>
@@ -74,7 +76,8 @@ function ModalWithFormConditionsForm(props) {
               </Col>
             </Row>
           </>
-        }>
+        }
+      >
         {children}
       </Modal>
     </>

@@ -1,13 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
-import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import SortableContainer from './SortableContainer'
 import SortableItem from './SortableItem'
 import arrayMove from 'array-move'
 import styled from 'styled-components'
 
-const UnsortableItem = styled(Box)`
+const UnsortableItem = styled.div`
   padding-left: 24px;
 `
 
@@ -32,7 +31,8 @@ function DragableList(props) {
   }
   // [COMPUTED PROPERTIES]
   const Container = useMemo(
-    () => (sortable ? SortableContainer : Box),
+    //FIX THIS ASAP
+    () => (sortable ? SortableContainer : <></>),
     [sortable]
   )
   const SortableWrapper = useMemo(

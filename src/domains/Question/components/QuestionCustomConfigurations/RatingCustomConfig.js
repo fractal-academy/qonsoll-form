@@ -1,4 +1,4 @@
-import { Col, Row, Select, Switch, Text } from '@qonsoll/react-design'
+import { Col, Row, Select, Switch, Typography } from 'antd'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
@@ -8,6 +8,8 @@ import React, { useEffect, useState } from 'react'
 
 import { useTranslations } from '@qonsoll/translation'
 import { v4 as uuid } from 'uuid'
+
+const { Text } = Typography
 
 const maxRange = [...Array(10)].map((_, index) =>
   Object.create({ value: index + 1 })

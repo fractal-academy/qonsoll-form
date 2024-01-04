@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Col,
-  Input,
-  Row,
-  Text,
-  Title
-} from '@qonsoll/react-design'
+import { Button, Col, Input, Row, Typography } from 'antd'
 import { Modal, Upload, message } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -19,6 +11,8 @@ import { StyledDragger } from './MediaLibraryModal.styled'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title, Text } = Typography
 
 function MediaLibraryModal(props) {
   const { btnProps, onClick, onContinue, isHovering } = props
@@ -120,18 +114,19 @@ function MediaLibraryModal(props) {
   return (
     <>
       {isHovering && (
-        <Box
+        <div
           display="flex"
           width="inherit"
           height="inherit"
           alignItems="center"
-          justifyContent="center">
+          justifyContent="center"
+        >
           <Button {...btnProps} onClick={modalStateChange}>
             <Icon name="EditFilled" size={20} fill="var(--btn-primary-color)" />
 
             {t('Change')}
           </Button>
-        </Box>
+        </div>
       )}
       <Modal
         title={
@@ -141,7 +136,8 @@ function MediaLibraryModal(props) {
               <Text
                 clamp="1"
                 type="secondary"
-                fontSize="var(--ql-font-size-body1)">
+                fontSize="var(--ql-font-size-body1)"
+              >
                 {subtitle}
               </Text>
             </Col>
@@ -151,7 +147,8 @@ function MediaLibraryModal(props) {
                 name="file"
                 showUploadList={false}
                 beforeUpload={beforeUpload}
-                customRequest={customRequest}>
+                customRequest={customRequest}
+              >
                 <Button type="primary">{t('Upload image')}</Button>
               </StyledDragger>
             </Col>
@@ -171,7 +168,8 @@ function MediaLibraryModal(props) {
         closable={false}
         destroyOnClose
         width="70%"
-        centered>
+        centered
+      >
         <Row noGutters>
           <Col cw={12} mb="16px">
             <Input

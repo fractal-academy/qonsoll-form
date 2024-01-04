@@ -1,8 +1,7 @@
-import { Box } from '@qonsoll/react-design'
 import { InputNumber } from 'antd'
 import styled from 'styled-components'
 
-export const OptionBox = styled(Box)`
+export const OptionBox = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -17,7 +16,7 @@ export const StyledInputNumber = styled(InputNumber)`
   // text-align: center;
 `
 
-export const CustomTextBox = styled(Box)`
+export const CustomTextBox = styled.div`
   min-width: 30px;
   display: flex;
   justify-content: center;

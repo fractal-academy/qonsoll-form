@@ -1,4 +1,4 @@
-import { Col, Row } from '@qonsoll/react-design'
+import { Col, Row } from 'antd'
 import { ImageBackground, RoundedCol } from './ContentCard.styles'
 
 import PropTypes from 'prop-types'
@@ -14,7 +14,8 @@ function ContentCard(props) {
       noGutters
       overflowX="hidden"
       overflowY="hidden"
-      style={{ flexGrow: 1 }}>
+      style={{ flexGrow: 1 }}
+    >
       {leftSideMenu && (
         <Col mr="16px" cw="auto" px="0">
           {leftSideMenu}

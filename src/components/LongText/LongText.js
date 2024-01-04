@@ -1,5 +1,5 @@
-import { Box, Container, Text, TextArea } from '@qonsoll/react-design'
 import { Form, Grid, message } from 'antd'
+import { Input, Typography } from 'antd'
 import React, { useRef } from 'react'
 
 import PropTypes from 'prop-types'
@@ -8,6 +8,8 @@ import { useKeyPress } from '@umijs/hooks'
 import { useTranslations } from '@qonsoll/translation'
 
 const { useBreakpoint } = Grid
+const { Text } = Typography
+const { TextArea } = Input
 
 function LongText(props) {
   const { textAreaProps, onClick, question, currentSlide } = props
@@ -63,12 +65,13 @@ function LongText(props) {
   }
 
   return (
-    <Container>
+    <div>
       <Form
         form={form}
         onFinish={onFinish}
         style={{ width: '100%' }}
-        onFinishFailed={onFinishFailed}>
+        onFinishFailed={onFinishFailed}
+      >
         <Form.Item name="answer" rules={[{ required: question?.isRequired }]}>
           <TextArea
             bordered
@@ -88,10 +91,10 @@ function LongText(props) {
           </Text>
         )}
       </Form>
-      <Box mt="24px">
+      <div mt="24px">
         <SubmitButton onClick={onPressOk} disablePressEnter />
-      </Box>
-    </Container>
+      </div>
+    </div>
   )
 }
 

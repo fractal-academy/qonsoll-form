@@ -1,5 +1,4 @@
-import { Box, Button, Text } from '@qonsoll/react-design'
-import { Dropdown, Menu, Popconfirm } from 'antd'
+import { Button, Dropdown, Menu, Popconfirm, Typography } from 'antd'
 
 import { FormSimpleFormWithModal } from '..'
 import { Icon } from '@qonsoll/icons'
@@ -8,6 +7,8 @@ import React from 'react'
 import { useEditForm } from '../../hooks/edit'
 import { useRemoveForm } from '../../hooks/remove'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Text } = Typography
 
 const FormViewActions = (props) => {
   const { form, firebase } = props
@@ -28,10 +29,10 @@ const FormViewActions = (props) => {
         onSubmit={editForm}
         triggerNode={
           <Menu.Item>
-            <Box display="flex" alignItems="center">
+            <div display="flex" alignItems="center">
               <Icon name="EditFilled" mr="8px" />
               <Text>{t('Edit form')}</Text>
-            </Box>
+            </div>
           </Menu.Item>
         }
       />
@@ -41,12 +42,13 @@ const FormViewActions = (props) => {
         title={popconfirm}
         onConfirm={removeForm}
         okText={t('Remove')}
-        cancelText={t('Cancel')}>
+        cancelText={t('Cancel')}
+      >
         <Menu.Item danger>
-          <Box display="flex" alignItems="center">
+          <div display="flex" alignItems="center">
             <Icon name="TrashFilled" mr="8px" />
             <Text>{t('Remove form')}</Text>
-          </Box>
+          </div>
         </Menu.Item>
       </Popconfirm>
     </Menu>

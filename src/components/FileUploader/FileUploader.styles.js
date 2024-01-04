@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { Box } from '@qonsoll/react-design'
 
-export const UploadItem = styled(Box)`
+export const UploadItem = styled.div`
   background-color: var(--qf-uploader-item-bg);
   border-radius: var(--qf-border-radius-md);
 `

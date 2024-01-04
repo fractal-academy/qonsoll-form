@@ -7,7 +7,9 @@ import React, { cloneElement } from 'react'
 import { NumberedCard } from '../../../../components'
 import PropTypes from 'prop-types'
 import { QUESTION_TYPES } from '../../../../constants'
-import { Title } from '@qonsoll/react-design'
+import { Typography } from 'antd'
+
+const { Title } = Typography
 
 function ConditionForm(props) {
   const {
@@ -61,7 +63,8 @@ function ConditionForm(props) {
         fontFamily="var(--ql-font-family-main)"
         textOverflow="ellipsis"
         level={5}
-        mb="8px">
+        mb="8px"
+      >
         {item?.title}
       </Title>
 

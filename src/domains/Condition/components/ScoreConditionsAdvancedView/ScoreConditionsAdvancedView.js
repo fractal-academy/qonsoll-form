@@ -1,4 +1,4 @@
-import { Box, Col, Row, Text, Title } from '@qonsoll/react-design'
+import { Col, Row, Typography } from 'antd'
 import { LetterBox, QuestionPreview } from '../../components'
 
 import { COLLECTIONS } from '../../../../constants'
@@ -8,6 +8,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title, Text } = Typography
 
 const startLetter = 65
 
@@ -55,13 +57,14 @@ const ScoreConditionsAdvancedView = (props) => {
 
   return (
     <NumberedCard top="24px" number={index + 1} key={index}>
-      <Box>
+      <div>
         <Title
           color="var(--qf-typography-title-color)"
           fontFamily="var(--ql-font-family-main)"
           textOverflow="ellipsis"
           level={5}
-          mb="8px">
+          mb="8px"
+        >
           {questionData?.title}
         </Title>
 
@@ -77,7 +80,8 @@ const ScoreConditionsAdvancedView = (props) => {
                 <Text
                   color="var(--qf-typography-title-color)"
                   textOverflow="ellipsis"
-                  variant="body1">
+                  variant="body1"
+                >
                   {item?.answerOption}
                 </Text>
               </QuestionPreview>
@@ -99,7 +103,7 @@ const ScoreConditionsAdvancedView = (props) => {
             </Col>
           </Row>
         ))}
-      </Box>
+      </div>
     </NumberedCard>
   )
 }

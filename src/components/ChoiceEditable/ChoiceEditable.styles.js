@@ -1,6 +1,8 @@
-import { Box, Col, Row, TextArea } from '@qonsoll/react-design'
+import { Col, Input, Row } from 'antd'
 
 import styled from 'styled-components'
+
+const { TextArea } = Input
 
 export const Wrapper = styled(Row)`
   padding: ${(props) => (props.withImage ? '12px' : '12px 24px')};
@@ -23,7 +25,7 @@ export const Media = styled(Col)`
   border-radius: var(--btn-border-radius-base);
 `
 
-export const Letter = styled(Box)`
+export const Letter = styled.div`
   width: 26px;
   height: 26px;
   text-align: center;
@@ -31,7 +33,7 @@ export const Letter = styled(Box)`
   background-color: var(--qf-keybox-bg);
   border: 1px solid var(--qf-keybox-color);
 `
-export const Remove = styled(Box)`
+export const Remove = styled.div`
   position: absolute;
   right: 0px;
   top: 0px;

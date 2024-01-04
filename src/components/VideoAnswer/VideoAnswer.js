@@ -5,7 +5,6 @@ import {
 import React, { useMemo, useState } from 'react'
 import { VideoPlayer, VideoRecording } from '../../components'
 
-import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import QVIDEO_API_KEY from '../../constants/qvideoApiKey'
 import { useKeyPress } from '@umijs/hooks'
@@ -65,7 +64,7 @@ const VideoAnswer = (props) => {
   }
 
   return (
-    <Box height={350} borderRadius="var(--card-radius)" overflow="hidden">
+    <div height={350} borderRadius="var(--card-radius)" overflow="hidden">
       {video ? (
         <VideoPlayer
           withDelete
@@ -81,7 +80,7 @@ const VideoAnswer = (props) => {
           />
         )
       )}
-    </Box>
+    </div>
   )
 }
 

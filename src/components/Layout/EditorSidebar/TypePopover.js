@@ -1,10 +1,9 @@
-import { Box, Button, Popover } from '@qonsoll/react-design'
+import { Button, Popover, Tooltip } from 'antd'
 
 import { Icon } from '@qonsoll/icons'
 import PropTypes from 'prop-types'
 import { QuestionTypeSelect } from '../../../domains/Question/components'
 import React from 'react'
-import { Tooltip } from 'antd'
 import { useTranslations } from '@qonsoll/translation'
 
 function TypePopover(props) {
@@ -31,15 +30,16 @@ function TypePopover(props) {
       }}
       content={
         // Box popoverContent was wrapped with Box with negative margin to cover antD default popover paddings
-        <Box my={-12} mx={-16}>
+        <div my={-12} mx={-16}>
           <QuestionTypeSelect
             onClick={onClick}
             questions={questions}
             customQuestionTypes={customQuestionTypes}
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
-        </Box>
-      }>
+        </div>
+      }
+    >
       <Tooltip placement="bottom" title={t('Create new question')}>
         <Button
           type="text"

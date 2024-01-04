@@ -5,6 +5,7 @@ import {
   Remove,
   Wrapper
 } from './ChoiceEditable.styles'
+import { Col, Popconfirm } from 'antd'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContext,
@@ -13,10 +14,8 @@ import {
 import React, { useEffect, useState } from 'react'
 
 import { CloseOutlined } from '@ant-design/icons'
-import { Col } from '@qonsoll/react-design'
 import { DEFAULT_IMAGE } from '../../constants'
 import { MediaLibraryModal } from '../../domains/MediaLibrary/components'
-import { Popconfirm } from 'antd'
 import PropTypes from 'prop-types'
 import { useHover } from '@umijs/hooks'
 import { useTranslations } from '@qonsoll/translation'
@@ -117,7 +116,8 @@ function ChoiceEditable(props) {
             onConfirm={onDelete}
             okType="danger"
             okText={t('Delete')}
-            cancelText={t('Cancel')}>
+            cancelText={t('Cancel')}
+          >
             <Remove>
               <CloseOutlined />
             </Remove>

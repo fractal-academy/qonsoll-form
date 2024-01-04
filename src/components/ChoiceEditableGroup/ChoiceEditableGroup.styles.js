@@ -1,4 +1,3 @@
-import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 
 export const styles = {
@@ -9,7 +8,7 @@ export const styles = {
   }
 }
 
-export const AddNewChoiceBox = styled(Box)`
+export const AddNewChoiceBox = styled.div`
   display: flex;
   cursor: pointer;
   align-items: center;

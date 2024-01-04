@@ -1,4 +1,3 @@
-import { Box, Container, Spin } from '@qonsoll/react-design'
 import {
   COLLECTIONS,
   DEFAULT_IMAGE,
@@ -11,6 +10,7 @@ import {
 } from '../../../../context/CurrentQuestion'
 import { EditorSidebar, PageHeader, ResponseInfo } from '../../../../components'
 import React, { useEffect, useMemo, useState } from 'react'
+import { Spin, message } from 'antd'
 import {
   useCollectionData,
   useDocumentData
@@ -21,7 +21,6 @@ import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import FormActions from './FormActions'
 import PropTypes from 'prop-types'
 import { QuestionForm } from '../../../../domains/Question/components'
-import { message } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
 import { v4 as uuid } from 'uuid'
 
@@ -265,12 +264,13 @@ function FormEdit(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <Container display="flex" height="inherit" overflowX="hidden">
-          <Box
+        <div display="flex" height="inherit" overflowX="hidden">
+          <div
             flex={1}
             display="flex"
             p={containerPadding}
-            flexDirection="column">
+            flexDirection="column"
+          >
             {customHeader || (
               <PageHeader
                 title={form?.title}
@@ -298,7 +298,7 @@ function FormEdit(props) {
             />
 
             <ResponseInfo />
-          </Box>
+          </div>
 
           <EditorSidebar
             id={id}
@@ -311,7 +311,7 @@ function FormEdit(props) {
             customQuestionTypes={customQuestionTypes}
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
-        </Container>
+        </div>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

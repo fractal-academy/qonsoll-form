@@ -1,4 +1,4 @@
-import { Box, Button, Col, Row, Text } from '@qonsoll/react-design'
+import { Button, Col, Row, Typography } from 'antd'
 import React, { useState } from 'react'
 
 import COLLECTIONS from '../../../constants/collection'
@@ -7,9 +7,11 @@ import PropTypes from 'prop-types'
 import { useActionsFunctionsContext } from '../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useAnswersContext } from '../../../context/Answers'
 import useFunctions from '../../../../src/hooks/useFunctions'
-import { useHistory } from 'react-router-dom'
 import { useKeyPress } from '@umijs/hooks'
+import { useNavigate } from 'react-router-dom'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Text } = Typography
 
 function SubmitButton(props) {
   const {
@@ -30,7 +32,7 @@ function SubmitButton(props) {
   const { getCollectionRef, setData, getTimestamp } = useFunctions()
 
   // [ADDITIONAL_HOOKS]
-  const history = useHistory()
+  const navigate = useNavigate()
   const answers = useAnswersContext()
   const { onFinish } = useActionsFunctionsContext()
   const { t } = useTranslations()
@@ -89,7 +91,7 @@ function SubmitButton(props) {
           user: mockUser?.name
         })
         setLoading(false)
-        await history.goBack()
+        await navigate(-1)
       }
       //This part for future improvements - add answer for answer layout
       // Object.values(answers)?.map((questionWithAnswer, index) => {})
@@ -108,9 +110,10 @@ function SubmitButton(props) {
           onClick={onButtonClick}
           loading={submitLoading || loading}
           onMouseDown={(e) => e.preventDefault()}
-          {...rest}>
+          {...rest}
+        >
           {children || (
-            <Box display="flex" alignItems="center">
+            <div display="flex" alignItems="center">
               OK
               <Icon
                 ml="16px"
@@ -118,7 +121,7 @@ function SubmitButton(props) {
                 name="CheckmarkFilled"
                 fill="var(--btn-primary-color)"
               />
-            </Box>
+            </div>
           )}
         </Button>
       </Col>

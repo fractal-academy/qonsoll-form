@@ -1,11 +1,12 @@
-import { Button, Card, Col, Img, Row, Title } from '@qonsoll/react-design'
+import { Button, Card, Col, Image, Popconfirm, Row, Typography } from 'antd'
 import React, { useMemo } from 'react'
 
 import { Icon } from '@qonsoll/icons'
-import { Popconfirm } from 'antd'
 import PropTypes from 'prop-types'
 import { useRemoveMedia } from '../../hooks/remove'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title } = Typography
 
 const MediaView = (props) => {
   const { id, title, imageUrl, selected, handleSelect } = props
@@ -36,10 +37,11 @@ const MediaView = (props) => {
       bordered={false}
       onClick={handleClick}
       bg="var(--qf-card-bg)"
-      borderRadius="var(--qf-card-border-radius)">
+      borderRadius="var(--qf-card-border-radius)"
+    >
       <Row noGutters mb="16px">
         <Col cw={12} borderRadius="var(--qf-card-border-radius)">
-          <Img
+          <Image
             height={140}
             src={imageUrl}
             objectFit="cover"
@@ -62,7 +64,8 @@ const MediaView = (props) => {
             cancelText={t('Cancel')}
             onConfirm={handleRemove}
             title={t('Remove image?')}
-            okButtonProps={{ loading: removeLoading }}>
+            okButtonProps={{ loading: removeLoading }}
+          >
             <Button danger icon={<Icon name="TrashFilled" size={20} />} />
           </Popconfirm>
         </Col>

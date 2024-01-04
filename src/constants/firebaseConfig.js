@@ -1,4 +1,4 @@
-const FIREBASE_CONFIG = {
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_AUTH_PROJECT_ID,
@@ -8,4 +8,4 @@ const FIREBASE_CONFIG = {
   measurementId: process.env.REACT_APP_AUTH_MEASUREMENT_ID
 }
 
-export default FIREBASE_CONFIG
+export default firebaseConfig

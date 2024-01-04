@@ -1,7 +1,5 @@
 import '@qonsoll/qvideo/dist/styles/styles.css'
 
-import { Box, Remove } from '@qonsoll/react-design'
-
 import { Icon } from '@qonsoll/icons'
 import { Player } from '@qonsoll/qvideo'
 import PropTypes from 'prop-types'
@@ -17,11 +15,11 @@ function VideoPlayer(props) {
   const { t } = useTranslations()
 
   return (
-    <Box height="inherit" position="relative">
+    <div height="inherit" position="relative">
       {withDelete && (
         <Tooltip title={t('Delete this video and record new')}>
           {/*//TODO add delete video from DB with onClick*/}
-          <Remove
+          {/* <Remove
             position="absolute"
             top={10}
             right={10}
@@ -34,7 +32,7 @@ function VideoPlayer(props) {
             confirmLabel={t('Yes, remove')}
             cancelLabel={t('No, keep')}
             itemName={t('video')}
-          />
+          /> */}
         </Tooltip>
       )}
       <Player
@@ -44,7 +42,7 @@ function VideoPlayer(props) {
         videoToken={videoKey}
         customOptions={customOptions}
       />
-    </Box>
+    </div>
   )
 }
 

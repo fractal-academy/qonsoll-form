@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
 
-import { Box } from '@qonsoll/react-design'
 import { KeyBox } from '../../../components'
 import PropTypes from 'prop-types'
 import { getQuestionAnswerFromContext } from '../../../helpers'
@@ -105,18 +104,18 @@ function YesnoButton(props) {
   }
 
   return (
-    <Box display="block">
+    <div display="block">
       {mappedChoices?.map((item, index) => (
-        <Box key={index} mb="8px">
+        <div key={index} mb="8px">
           <KeyBox
             isActive={buttonKey === item?.letter}
             onButtonClick={onButtonClick}
             item={item}
             buttonKey={buttonKey}
           />
-        </Box>
+        </div>
       ))}
-    </Box>
+    </div>
   )
 }
 

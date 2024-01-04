@@ -3,8 +3,7 @@ import {
   useAnswersContext,
   useAnswersContextDispatch
 } from '../../context/Answers'
-import { Carousel as AntdCarousel, message } from 'antd'
-import { Box, Button, Col, Row } from '@qonsoll/react-design'
+import { Carousel as AntdCarousel, Button, Col, Row, message } from 'antd'
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import React, { cloneElement, useEffect, useRef } from 'react'
 import {
@@ -202,7 +201,7 @@ function Carousel(props) {
   }, [isAnswered, typeAction])
 
   return (
-    <Box ref={ref} height="100%" width="100%" position="relative">
+    <div ref={ref} height="100%" width="100%" position="relative">
       <AntdCarousel
         dots={false}
         swipe={false}
@@ -210,7 +209,8 @@ function Carousel(props) {
         ref={carouselRef}
         dotPosition="right"
         afterChange={onCurrentSlideChange}
-        infinite={false}>
+        infinite={false}
+      >
         {children?.map((el, index) =>
           cloneElement(el, {
             wrapperHeight: height - buttonsHeight,
@@ -218,14 +218,15 @@ function Carousel(props) {
           })
         )}
       </AntdCarousel>
-      <Box ref={buttonsRef} position="absolute" bottom="0" right="0">
+      <div ref={buttonsRef} position="absolute" bottom="0" right="0">
         <Row h="right" p="16px" noGutters>
           <Col cw="auto" mr="16px">
             <Button
               disabled={disabledUp}
               type="primary"
               onClick={previous}
-              onMouseDown={(e) => e.preventDefault()}>
+              onMouseDown={(e) => e.preventDefault()}
+            >
               <UpOutlined />
             </Button>
           </Col>
@@ -234,13 +235,14 @@ function Carousel(props) {
               disabled={disabledDown}
               type="primary"
               onClick={handleNextClick}
-              onMouseDown={(e) => e.preventDefault()}>
+              onMouseDown={(e) => e.preventDefault()}
+            >
               <DownOutlined />
             </Button>
           </Col>
         </Row>
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 

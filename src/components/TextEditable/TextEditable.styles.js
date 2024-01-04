@@ -1,5 +1,7 @@
-import { TextArea } from '@qonsoll/react-design'
+import { Input } from 'antd'
 import styled from 'styled-components'
+
+const { TextArea } = Input
 
 export const StyledTextEditable = styled(TextArea)`
   color: ${({ textSecondary }) =>
