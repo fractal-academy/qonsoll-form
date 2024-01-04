@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-import { Container } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import RatingExtension from './RatingExtension'
 import { StarFilled } from '@ant-design/icons'
@@ -94,7 +93,7 @@ function CustomRating(props) {
   )
 
   return (
-    <Container display="grid">
+    <div display="grid">
       <StyledRate
         value={selectedValue}
         autoFocus={false}
@@ -119,7 +118,7 @@ function CustomRating(props) {
           isMultiple={question?.isMultiple}
         />
       )}
-    </Container>
+    </div>
   )
 }
 

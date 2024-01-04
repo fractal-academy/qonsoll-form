@@ -1,9 +1,11 @@
+import { Typography } from 'antd'
 import styled from 'styled-components'
-import { Box, Text } from '@qonsoll/react-design'
+
+const { Text } = Typography
 
 export const CustomText = styled(Text)``
 
-export const CustomBox = styled(Box)`
+export const CustomBox = styled.div`
   border-radius: var(--qf-border-radius-md);
   height: 150px;
   position: relative;

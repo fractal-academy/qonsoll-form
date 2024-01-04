@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 
-import { Box } from '@qonsoll/react-design'
 import { Icon } from '@qonsoll/icons'
 import { MediaLibrarySimpleView } from '../../../../domains/MediaLibrary/components'
 import { Popover } from 'antd'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const StyledBookmarkButton = styled(Box)`
+const StyledBookmarkButton = styled.div`
   height: 48px;
   width: 48px;
   cursor: pointer;
@@ -41,18 +40,20 @@ function QuestionMediaPopover(props) {
       trigger="click"
       placement="rightTop"
       content={
-        <Box width="190px">
+        <div width="190px">
           <MediaLibrarySimpleView
             brightnessValue={brightnessValue}
             setBrightnessValue={setBrightnessValue}
             setIsImageEditVisible={setIsImageEditVisible}
             bgImage={MediaModalButtonBackground}
           />
-        </Box>
-      }>
+        </div>
+      }
+    >
       <StyledBookmarkButton
         onClick={changeImageEditVisibleState}
-        onMouseDown={(e) => e.preventDefault()}>
+        onMouseDown={(e) => e.preventDefault()}
+      >
         <Icon size={22} name="ImageFilled" fill="var(--ql-color-white)" />
       </StyledBookmarkButton>
     </Popover>

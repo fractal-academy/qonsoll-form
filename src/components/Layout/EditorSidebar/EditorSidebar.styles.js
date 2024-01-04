@@ -1,4 +1,3 @@
-import { Box } from '@qonsoll/react-design'
 import { Drawer } from 'antd'
 import { Icon } from '@qonsoll/icons'
 import PropTypes from 'prop-types'
@@ -14,15 +13,16 @@ const SidebarBoxWrapper = (props) => {
 
   return (
     <>
-      <Box
+      <div
         p="8px"
         display={['none', 'none', 'none', 'flex']}
         width="var(--qf-sidebar-width)"
         bg="var(--qf-sidebar-bg)"
         flexDirection="column"
-        minWidth={300}>
+        minWidth={300}
+      >
         {children}
-      </Box>
+      </div>
 
       <Drawer
         closeIcon={
@@ -40,14 +40,15 @@ const SidebarBoxWrapper = (props) => {
             />
           )
         }
-        bodyStyle={{
-          padding: '8px',
-          display: 'flex',
-          flexDirection: 'column',
-          fontSize: 'var(--qf-typography-fs-body)'
-        }}
+        // bodyStyle={{
+        //   padding: '8px',
+        //   display: 'flex',
+        //   flexDirection: 'column',
+        //   fontSize: 'var(--qf-typography-fs-body)'
+        // }}
         width="var(--qf-sidebar-width)"
-        visible={showDrawer}>
+        visible={showDrawer}
+      >
         {showDrawer && children}
       </Drawer>
     </>

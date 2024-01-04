@@ -6,7 +6,6 @@ import {
 } from '../../../../context/CurrentQuestion'
 import React, { useMemo } from 'react'
 
-import { Box } from '@qonsoll/react-design'
 import { DragableList } from '../../../../components'
 import PropTypes from 'prop-types'
 import { QuestionSimpleView } from '../../../../domains/Question/components'
@@ -141,11 +140,11 @@ function QuestionsList(props) {
   const sortable = filteredDataSource?.length > 1
 
   return (
-    <Box>
+    <div>
       {dataSource?.map(
         (item) =>
           item.questionType === QUESTION_TYPES.WELCOME_SCREEN && (
-            <Box pl="24px" mb="8px" key={item}>
+            <div pl="24px" mb="8px" key={item}>
               <QuestionSimpleView
                 {...item}
                 endings={endings}
@@ -154,7 +153,7 @@ function QuestionsList(props) {
                 action={handleDelete}
                 onClick={() => onItemClick(item)}
               />
-            </Box>
+            </div>
           )
       )}
       <DragableList
@@ -175,7 +174,7 @@ function QuestionsList(props) {
           />
         )}
       />
-    </Box>
+    </div>
   )
 }
 

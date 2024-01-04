@@ -1,11 +1,10 @@
-import { Box, Button, Col, Divider, Row, Title } from '@qonsoll/react-design'
+import { Button, Col, Divider, Row, Tooltip, Typography, message } from 'antd'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../constants'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
 } from '../../../context/CurrentQuestion'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Tooltip, message } from 'antd'
 
 import FormConditionsForm from '../../../domains/Form/components/FormConditionsForm'
 import { Icon } from '@qonsoll/icons'
@@ -18,6 +17,8 @@ import TypePopover from './TypePopover'
 import useFunctions from '../../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
 import { v4 as uuid } from 'uuid'
+
+const { Title } = Typography
 
 function EditorSidebar(props) {
   const {
@@ -256,7 +257,8 @@ function EditorSidebar(props) {
           <Title
             color="var(--qf-typography-title-color)"
             fontFamily="var(--ql-font-family-main)"
-            level={5}>
+            level={5}
+          >
             {t('Questions')}
           </Title>
         </Col>
@@ -276,7 +278,8 @@ function EditorSidebar(props) {
             btnProps={{
               icon: <Icon name="SettingsFilled" size={20} />,
               type: 'text'
-            }}>
+            }}
+          >
             <FormConditionsForm
               endings={endings}
               formData={formData}
@@ -287,7 +290,7 @@ function EditorSidebar(props) {
           </ModalWithFormConditionsForm>
         </Col>
       </Row>
-      <Box overflow="auto" mr="-8px" pr="8px">
+      <div overflow="auto" mr="-8px" pr="8px">
         {!!questions?.length && (
           <QuestionsList
             data={questions}
@@ -295,8 +298,8 @@ function EditorSidebar(props) {
             onItemClick={onItemClick}
           />
         )}
-      </Box>
-      <Box mt="auto">
+      </div>
+      <div mt="auto">
         <Divider my="8px" type="horizontal" />
 
         <Row mb="8px" v="center" h="between">
@@ -304,7 +307,8 @@ function EditorSidebar(props) {
             <Title
               color="var(--qf-typography-title-color)"
               fontFamily="var(--ql-font-family-main)"
-              level={5}>
+              level={5}
+            >
               {t('Endings')}
             </Title>
           </Col>
@@ -319,7 +323,7 @@ function EditorSidebar(props) {
           </Col>
         </Row>
         {!!endings?.length && (
-          <Box overflow="auto" maxHeight="250px" mr="-8px" pr="8px">
+          <div overflow="auto" maxHeight="250px" mr="-8px" pr="8px">
             <QuestionsList
               data={endings}
               endings={endings}
@@ -327,9 +331,9 @@ function EditorSidebar(props) {
               onItemClick={onItemClick}
               disableDelete={endings?.length === 1}
             />
-          </Box>
+          </div>
         )}
-      </Box>
+      </div>
     </SidebarBoxWrapper>
   )
 }

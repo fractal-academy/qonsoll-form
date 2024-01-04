@@ -1,7 +1,7 @@
+import { Button } from 'antd'
 import styled from 'styled-components'
-import { Box, Button } from '@qonsoll/react-design'
 
-export const DescriptionContainer = styled(Box)`
+export const DescriptionContainer = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

@@ -1,4 +1,3 @@
-import { Box, Col, Row, Text } from '@qonsoll/react-design'
 import {
   CalendarOutlined,
   CopyrightOutlined,
@@ -12,6 +11,7 @@ import {
   UploadOutlined,
   VideoCameraOutlined
 } from '@ant-design/icons'
+import { Col, Row, Typography } from 'antd'
 import { QUESTION_DESCRIPTIONS, QUESTION_TYPES } from '../../../../constants'
 import {
   QuestionMenuItem,
@@ -21,6 +21,8 @@ import {
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Text } = Typography
 
 function QuestionTypeSelect(props) {
   const { onClick, welcomeScreenShowRule, customQuestionTypes } = props
@@ -116,7 +118,7 @@ function QuestionTypeSelect(props) {
   // ).length
 
   return (
-    <Box pl={2} display="block">
+    <div pl={2} display="block">
       <QuestionsTypeMenu>
         {updatedMap?.map((item) => (
           <QuestionMenuItem key={item?.type} onClick={onClick}>
@@ -136,7 +138,7 @@ function QuestionTypeSelect(props) {
           </QuestionMenuItem>
         ))}
       </QuestionsTypeMenu>
-    </Box>
+    </div>
   )
 }
 

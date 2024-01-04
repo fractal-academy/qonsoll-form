@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { Box } from '@qonsoll/react-design'
 
-const IconRoundContainer = styled(Box)`
+const IconRoundContainer = styled.div`
   ${({ danger }) => `
   display: flex;
   justify-content: center;

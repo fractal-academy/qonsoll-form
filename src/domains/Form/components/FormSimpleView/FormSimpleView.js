@@ -1,4 +1,4 @@
-import { Card, Col, Row, Text, Title } from '@qonsoll/react-design'
+import { Card, Col, Row, Typography } from 'antd'
 
 import FormViewActions from './FormViewActions'
 import { Icon } from '@qonsoll/icons'
@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useActionsFunctionsContext } from '../../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title, Text } = Typography
 
 const FormSimpleView = (props) => {
   const { id, title, subtitle, firebase } = props
@@ -26,13 +28,15 @@ const FormSimpleView = (props) => {
       size="small"
       bordered={false}
       bg="var(--qf-card-bg)"
-      borderRadius="var(--qf-card-border-radius)">
+      borderRadius="var(--qf-card-border-radius)"
+    >
       <Row noGutters mb="16px">
         <Col
           cw={12}
           height={240}
           bg="var(--qf-card-content-bg)"
-          borderRadius="var(--qf-card-border-radius)">
+          borderRadius="var(--qf-card-border-radius)"
+        >
           <Icon
             size={48}
             height="inherit"
@@ -50,7 +54,8 @@ const FormSimpleView = (props) => {
             clamp="1"
             cursor="pointer"
             wordBreak="break-all"
-            onClick={handleFormPreview}>
+            onClick={handleFormPreview}
+          >
             {title}
           </Title>
           <Text type="secondary" clamp="1" wordBreak="break-all">

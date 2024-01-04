@@ -1,7 +1,7 @@
-import { Box, Container, Input } from '@qonsoll/react-design'
 import { Form, message } from 'antd'
 import React, { useRef } from 'react'
 
+import { Input } from 'antd'
 import PropTypes from 'prop-types'
 import { SubmitButton } from '../../components'
 import { useKeyPress } from '@umijs/hooks'
@@ -58,12 +58,13 @@ function ShortText(props) {
   }
 
   return (
-    <Container>
+    <div>
       <Form
         form={form}
         onFinish={onFinish}
         style={{ width: '100%' }}
-        onFinishFailed={onFinishFailed}>
+        onFinishFailed={onFinishFailed}
+      >
         <Form.Item name="answer" rules={[{ required: question?.isRequired }]}>
           <Input
             {...inputProps}
@@ -75,10 +76,10 @@ function ShortText(props) {
           />
         </Form.Item>
       </Form>
-      <Box mt="24px">
+      <div mt="24px">
         <SubmitButton onClick={onPressOk} disablePressEnter />
-      </Box>
-    </Container>
+      </div>
+    </div>
   )
 }
 

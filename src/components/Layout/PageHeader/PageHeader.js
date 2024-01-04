@@ -1,8 +1,10 @@
-import { Button, Col, Divider, Row, Text, Title } from '@qonsoll/react-design'
+import { Button, Col, Divider, Row, Typography } from 'antd'
 
 import { Icon } from '@qonsoll/icons'
 import PropTypes from 'prop-types'
 import React from 'react'
+
+const { Title, Text } = Typography
 
 function PageHeader(props) {
   const { title, titleProps, subtitle, subtitleProps, onBack, actions } = props

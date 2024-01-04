@@ -1,4 +1,4 @@
-import { Container, Input, Spin } from '@qonsoll/react-design'
+import { Input, Spin } from 'antd'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
@@ -58,7 +58,7 @@ function FormsAll(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <Container p={containerPadding}>
+        <div p={containerPadding}>
           {showHeader && (
             <PageHeader
               title={t('Forms')}
@@ -67,7 +67,8 @@ function FormsAll(props) {
                 !disableAddButton && (
                   <FormSimpleFormWithModal
                     title="Create new form"
-                    onSubmit={createForm}>
+                    onSubmit={createForm}
+                  >
                     {childrenModal}
                   </FormSimpleFormWithModal>
                 )
@@ -86,7 +87,7 @@ function FormsAll(props) {
           )}
 
           <FormList firebase={firebase} forms={searchResult} />
-        </Container>
+        </div>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

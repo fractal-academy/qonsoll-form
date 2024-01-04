@@ -1,11 +1,13 @@
-import { Container, Input, Text } from '@qonsoll/react-design'
 import {
   DISPATCH_EVENTS,
   useCurrentQuestionContextDispatch
 } from '../../context/CurrentQuestion'
+import { Input, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 
 import PropTypes from 'prop-types'
+
+const { Text } = Typography
 
 function ExtentionItem(props) {
   const { index, item, ratingProps, onClick } = props
@@ -37,7 +39,7 @@ function ExtentionItem(props) {
   }, [item])
 
   return (
-    <Container>
+    <div>
       {onClick ? (
         <Text color="var(--qf-typography-subtitle-color)">
           {item?.answerOption || ''}
@@ -55,7 +57,7 @@ function ExtentionItem(props) {
           color="var(--qf-typography-subtitle-color)"
         />
       )}
-    </Container>
+    </div>
   )
 }
 

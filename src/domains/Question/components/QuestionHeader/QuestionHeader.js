@@ -10,7 +10,6 @@ import {
   VideoRecording
 } from '../../../../components'
 
-import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 
 function QuestionHeader(props) {
@@ -77,10 +76,11 @@ function QuestionHeader(props) {
   return (
     <>
       {currentQuestion?.isVideoQuestion ? (
-        <Box
+        <div
           height={350}
           position="relative"
-          borderRadius="var(--ql-border-radius-lg)">
+          borderRadius="var(--ql-border-radius-lg)"
+        >
           {video ? (
             <VideoPlayer
               withDelete
@@ -93,7 +93,7 @@ function QuestionHeader(props) {
           ) : (
             <VideoRecording onUpload={onUploadedVideoQuestion} />
           )}
-        </Box>
+        </div>
       ) : (
         <>
           <TextEditable

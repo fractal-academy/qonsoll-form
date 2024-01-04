@@ -1,11 +1,12 @@
-import { Button, Title } from '@qonsoll/react-design'
-import { Form, Modal } from 'antd'
+import { Button, Form, Modal, Typography } from 'antd'
 import React, { cloneElement, useState } from 'react'
 
 import { FormSimpleForm } from '../../../../domains/Form/components'
 import { Icon } from '@qonsoll/icons'
 import PropTypes from 'prop-types'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title } = Typography
 
 const FormSimpleFormWithModal = (props) => {
   const { title, defaultValues, onSubmit, triggerNode, children } = props
@@ -64,7 +65,8 @@ const FormSimpleFormWithModal = (props) => {
           <Title
             level={4}
             color="var(--qf-typography-title-color)"
-            fontFamily="var(--ql-font-family-main)">
+            fontFamily="var(--ql-font-family-main)"
+          >
             {t(title)}
           </Title>
         }
@@ -73,10 +75,12 @@ const FormSimpleFormWithModal = (props) => {
           <Button
             onClick={() => form.submit()}
             loading={loading}
-            type="primary">
+            type="primary"
+          >
             {t('Save')}
           </Button>
-        ]}>
+        ]}
+      >
         <FormSimpleForm
           form={form}
           children={children}

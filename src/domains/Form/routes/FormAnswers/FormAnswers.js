@@ -1,4 +1,4 @@
-import { Box, Container, NoData, Title } from '@qonsoll/react-design'
+import { Empty, Typography, message } from 'antd'
 import React, { useState } from 'react'
 import { ResponseList, ResponseTable } from '../../../Response/components'
 import {
@@ -12,10 +12,11 @@ import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import { PageHeader } from '../../../../components'
 import PropTypes from 'prop-types'
 import SidebarBoxWrapper from '../../../../components/Layout/EditorSidebar/EditorSidebar.styles'
-import { message } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title } = Typography
 
 function FormAnswers(props) {
   const { id, firebase, showHeader, wrapperPaddings, actions = {} } = props
@@ -29,7 +30,7 @@ function FormAnswers(props) {
   const { getCollectionRef } = useFunctions(firebase)
 
   // [ADDITIONAL HOOKS]
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t } = useTranslations()
   const [userAnswerGroup, userAnswerGroupLoading] = useCollectionData(
     getCollectionRef(COLLECTIONS.USER_ANSWERS_GROUP).where('formId', '==', id)
@@ -79,13 +80,13 @@ function FormAnswers(props) {
   return (
     <FirebaseContext.Provider value={firebase}>
       <ActionsFunctionsContext.Provider value={actions}>
-        <Container display="flex" height="inherit">
-          <Container p={containerPadding}>
+        <div display="flex" height="inherit">
+          <div p={containerPadding}>
             {showHeader && (
               <PageHeader
                 isDrawerOpened={isDrawerOpened}
                 setDraverOpened={setDraverOpened}
-                onBack={() => history.goBack()}
+                onBack={() => navigate(-1)}
                 title={t('Answers')}
               />
             )}
@@ -95,31 +96,33 @@ function FormAnswers(props) {
               data={userAnswers}
               loading={userAnswersLoading}
             />
-          </Container>
+          </div>
           <SidebarBoxWrapper
             // isDrawerVisible={true}
-            setDraverVisible={setDraverOpened}>
+            setDraverVisible={setDraverOpened}
+          >
             <Title
               ml={3}
               my={3}
               level={5}
               fontFamily="var(--ql-font-family-main)"
-              color="var(--qf-typography-title-color)">
+              color="var(--qf-typography-title-color)"
+            >
               {t('Users')}
             </Title>
             {checkUserAswerGroup ? (
-              <Box overflow="auto">
+              <div overflow="auto">
                 <ResponseList
                   userAnswerGroup={userAnswerGroup}
                   loading={userAnswerGroupLoading}
                   onListItemClick={onListItemClick}
                 />
-              </Box>
+              </div>
             ) : (
-              <NoData description={t('There is no responses yet')} />
+              <Empty description={t('There is no responses yet')} />
             )}
           </SidebarBoxWrapper>
-        </Container>
+        </div>
       </ActionsFunctionsContext.Provider>
     </FirebaseContext.Provider>
   )

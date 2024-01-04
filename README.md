@@ -172,12 +172,12 @@ import { FormsAll } from 'qonsoll-form/src'
 
 function YourComponentName() {
   
-  const history = useHistory()
+  const navigate = useNavigate()
 
   //this name is required
   const onFormItemClick = (id) => {
     const path = generatePath(ROUTES_PATHS.FORM_EDIT, { id })
-    history.push(path)
+    navigate(path)
   }
 
   return (
@@ -196,15 +196,15 @@ function YourComponentName() {
 
 ```sh
   const { id } = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
   
   const onFormShow = (id) => {
     const path = generatePath(ROUTES_PATHS.FORM_SHOW, { id })
-    history.push(path)
+    navigate(path)
   }
   const onFormResultsShow = (id) => {
     const path = generatePath(ROUTES_PATHS.FORM_ANSWERS, { id })
-    history.push(path)
+    navigate(path)
   }
 ```
 Other optional properties: `customHeader` (propagate node for custom header and `null` to hide it), `wrapperPaddings` (all are the same as in `FormsAll`) and `customQuestionTypes` - if you need to configure question type list (to remove excess question types), configure following array and propagate it through property:

@@ -12,15 +12,14 @@ import {
 } from 'react-firebase-hooks/firestore'
 
 import ActionsFunctionsContext from '../../../../context/ActionsFunctions/ActionsFunctionsContext'
-import { Container } from '@qonsoll/react-design'
 import FirebaseContext from '../../../../context/Firebase/FirebaseContext'
 import { FormAdvancedView } from '../../../../domains/Form/components'
 import FormShowHeightWrapper from './FormShowHeightWrapper'
 import PropTypes from 'prop-types'
 import { TranslationContext } from '../../../../context/Translation'
 import useFunctions from '../../../../hooks/useFunctions'
-import { useHistory } from 'react-router-dom'
 import { useKeyPress } from '@umijs/hooks'
+import { useNavigate } from 'react-router-dom'
 
 function FormShow(props) {
   const {
@@ -45,7 +44,7 @@ function FormShow(props) {
   const answersContext = useAnswersContext()
 
   // [ADDITIONAL HOOKS]
-  const history = useHistory()
+  const navigate = useNavigate()
   useKeyPress(9, (e) => {
     e.preventDefault()
   })
@@ -210,15 +209,17 @@ function FormShow(props) {
           {loading ? (
             <Spinner />
           ) : (
-            <Container
+            <div
               height="100%"
               display="flex"
               flexDirection="column"
-              p={containerPadding}>
-              {showHeader && <PageHeader id={id} onBack={history.goBack} />}
+              p={containerPadding}
+            >
+              {showHeader && <PageHeader id={id} onBack={navigate(-1)} />}
               <ContentCard
                 topOffset={wrapperOffset}
-                wrapperHeight={wrapperHeight}>
+                wrapperHeight={wrapperHeight}
+              >
                 <FormAdvancedView
                   isAnswered={isAnswered}
                   disabledUp={disabledUp}
@@ -229,7 +230,8 @@ function FormShow(props) {
                   setCurrentSlide={setCurrentSlide}
                   containWelcomeScreen={containWelcomeScreen}
                   previousQuestionOrder={previousQuestionOrder}
-                  setPreviousQuestionOrder={setPreviousQuestionOrder}>
+                  setPreviousQuestionOrder={setPreviousQuestionOrder}
+                >
                   {filteredQuestionsList?.map((question, index) => (
                     <FormShowHeightWrapper
                       key={index}
@@ -250,7 +252,7 @@ function FormShow(props) {
                   ))}
                 </FormAdvancedView>
               </ContentCard>
-            </Container>
+            </div>
           )}
         </TranslationContext.Provider>
       </ActionsFunctionsContext.Provider>

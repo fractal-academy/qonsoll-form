@@ -1,5 +1,5 @@
+import { Col } from 'antd'
 import styled from 'styled-components'
-import { Box, Col } from '@qonsoll/react-design'
 
 export const styles = {
   mainRowStyle: {
@@ -9,7 +9,7 @@ export const styles = {
   }
 }
 
-export const StyledBox = styled(Box)`
+export const StyledBox = styled.div`
   ${({ specialLayoutRule }) => `
   display:flex;
   flex-direction:column;  

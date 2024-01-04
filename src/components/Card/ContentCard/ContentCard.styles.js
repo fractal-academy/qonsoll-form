@@ -1,4 +1,4 @@
-import { Box, Col, Row } from '@qonsoll/react-design'
+import { Col, Row } from 'antd'
 
 import styled from 'styled-components'
 
@@ -6,7 +6,7 @@ export const ContentRow = styled(Row)`
   height: ${(props) => props.onEdit && '100%'};
 `
 
-export const ImageBackground = styled(Box)`
+export const ImageBackground = styled.div`
   ${({ image, brightnessValue }) => `
   padding:0;
   width: 100%;

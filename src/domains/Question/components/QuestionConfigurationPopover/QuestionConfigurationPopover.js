@@ -1,5 +1,4 @@
-import { Box, Button, Popover } from '@qonsoll/react-design'
-import { Popconfirm, Tooltip } from 'antd'
+import { Button, Popconfirm, Popover, Tooltip } from 'antd'
 import React, { useState } from 'react'
 
 import { Icon } from '@qonsoll/icons'
@@ -52,7 +51,8 @@ function QuestionConfigurationPopover(props) {
       onCancel={!popoverShowChange}
       okType="danger"
       okText={t('Continue')}
-      cancelText={t('Cancel')}>
+      cancelText={t('Cancel')}
+    >
       <Popover
         visible={showPopover}
         trigger="click"
@@ -66,7 +66,8 @@ function QuestionConfigurationPopover(props) {
             onQuestionTypeChange={onQuestionTypeChange}
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
-        }>
+        }
+      >
         <Tooltip title={t('Configure question')}>
           <Button
             type="primary"
@@ -91,7 +92,7 @@ function QuestionConfigurationPopover(props) {
       overlayStyle={{ width: '320px' }}
       content={
         // Box popoverContent was wrapped with Box with negative margin to cover antD default popover paddings
-        <Box my={-12} mx={-16} p="8px">
+        <div my={-12} mx={-16} p="8px">
           <QuestionConfigurationPopoverContent
             questionData={questionData}
             setShowPopover={setShowPopover}
@@ -99,8 +100,9 @@ function QuestionConfigurationPopover(props) {
             onQuestionTypeChange={onQuestionTypeChange}
             welcomeScreenShowRule={welcomeScreenShowRule}
           />
-        </Box>
-      }>
+        </div>
+      }
+    >
       <Tooltip title={t('Configure question')}>
         <Button
           type="primary"

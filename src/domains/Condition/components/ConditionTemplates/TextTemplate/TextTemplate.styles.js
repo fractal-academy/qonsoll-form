@@ -1,5 +1,5 @@
-import { Button } from '@qonsoll/react-design'
-import { DatePicker } from 'antd'
+import { Button, DatePicker } from 'antd'
+
 import styled from 'styled-components'
 
 export const CustomButton = styled(Button)`

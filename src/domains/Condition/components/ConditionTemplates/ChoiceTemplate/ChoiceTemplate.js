@@ -1,4 +1,4 @@
-import { Col, Container, Row, Text } from '@qonsoll/react-design'
+import { Col, Row, Typography } from 'antd'
 
 import LetterBox from '../../LetterBox'
 import PropTypes from 'prop-types'
@@ -6,6 +6,8 @@ import QuestionPreview from '../../QuestionPreview'
 import { QuestionSelect } from '../../../../Question/components'
 import React from 'react'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Text } = Typography
 
 let startLetter = 65
 
@@ -28,7 +30,7 @@ function ChoiceTemplate(props) {
     (handlesUpload && uploadChoiceText) || (handlesRecord && recordChoiceText)
 
   return (
-    <Container>
+    <div>
       {questionConfigurations?.map((item, index) => (
         <Row mb="8px" key={index}>
           <Col cw={6} pr="8px" pl={0}>
@@ -43,7 +45,8 @@ function ChoiceTemplate(props) {
               <Text
                 color="var(--qf-typography-title-color)"
                 textOverflow="ellipsis"
-                variant="body1">
+                variant="body1"
+              >
                 {choiceAutoTextComputed || item?.answerOption}
               </Text>
             </QuestionPreview>
@@ -58,7 +61,7 @@ function ChoiceTemplate(props) {
           </Col>
         </Row>
       ))}
-    </Container>
+    </div>
   )
 }
 

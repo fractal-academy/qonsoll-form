@@ -1,4 +1,3 @@
-import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Slider } from 'antd'
@@ -13,7 +12,7 @@ function RangeSlider(props) {
   const value = typeof inputValue === 'number' ? inputValue : 0
 
   return (
-    <Box display="flex" alignItems="center">
+    <div display="flex" alignItems="center">
       <Slider
         min={-100}
         max={100}
@@ -32,7 +31,7 @@ function RangeSlider(props) {
           alignItems: 'center'
         }}
       /> */}
-    </Box>
+    </div>
   )
 }
 

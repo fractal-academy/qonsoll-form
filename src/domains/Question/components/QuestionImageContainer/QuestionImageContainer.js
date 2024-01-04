@@ -1,8 +1,7 @@
-import { Box } from '@qonsoll/react-design'
 import { LAYOUT_TYPES } from '../../../../constants'
 import styled from 'styled-components'
 
-const ImageContainer = styled(Box)`
+const ImageContainer = styled.div`
   ${({ image, layoutType, tabletSupport, brightness }) => `
     filter: brightness(${brightness + 100}%);
     background-size: cover;

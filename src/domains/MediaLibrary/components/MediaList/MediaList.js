@@ -1,6 +1,6 @@
-import { List } from 'antd'
+import { Empty, List } from 'antd'
+
 import { MediaView } from '..'
-import { NoData } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useTranslations } from '@qonsoll/translation'
@@ -24,7 +24,7 @@ const MediaList = (props) => {
         xxl: 4
       }}
       locale={{
-        emptyText: <NoData description={t('There is no media uploaded yet')} />
+        emptyText: <Empty description={t('There is no media uploaded yet')} />
       }}
       renderItem={(item, index) => (
         <List.Item key={item?.id || index}>

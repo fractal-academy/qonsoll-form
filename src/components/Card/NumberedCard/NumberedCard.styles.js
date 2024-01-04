@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { Box } from '@qonsoll/react-design'
 
-export const HiddenBox = styled(Box)`
+export const HiddenBox = styled.div`
   position: absolute;
   left: -4px;
   top: ${({ top }) => `${top ? `${top}px` : '50%'}`};
@@ -13,7 +12,7 @@ export const HiddenBox = styled(Box)`
   border-bottom-left-radius: var(--qf-border-radius-sm);
   background-color: var(--qf-dnd-item-badge-bg);
 `
-export const ContentBox = styled(Box)`
+export const ContentBox = styled.div`
   ${({ current }) => `
   cursor: pointer;
   z-index: 400;
@@ -29,7 +28,7 @@ export const ContentBox = styled(Box)`
   }
 `}
 `
-export const NumberBox = styled(Box)`
+export const NumberBox = styled.div`
   position: absolute;
   left: -4px;
   top: ${({ top }) => `${top ? `calc(${top} + 5px)` : '50%'}`};

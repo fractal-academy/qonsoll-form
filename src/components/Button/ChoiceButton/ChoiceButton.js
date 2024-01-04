@@ -109,7 +109,8 @@ function ChoiceButton(props) {
       data={mappedChoices}
       hasImages={hasImages}
       buttonKey={buttonKey}
-      onButtonClick={onButtonClick}>
+      onButtonClick={onButtonClick}
+    >
       <KeyBox />
     </ImageChoiceList>
   ) : (
@@ -117,7 +118,8 @@ function ChoiceButton(props) {
       data={mappedChoices}
       hasImages={hasImages}
       buttonKey={buttonKey}
-      onButtonClick={onButtonClick}>
+      onButtonClick={onButtonClick}
+    >
       <KeyBox />
     </ChoiceList>
   )

@@ -1,9 +1,8 @@
-import { Box, Button } from '@qonsoll/react-design'
+import { Button, Tooltip } from 'antd'
 
 import { Icon } from '@qonsoll/icons'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Tooltip } from 'antd'
 import { UnorderedListOutlined } from '@ant-design/icons'
 import { useActionsFunctionsContext } from '../../../../context/ActionsFunctions/useActionsFunctionsContext'
 import { useTranslations } from '@qonsoll/translation'
@@ -20,7 +19,7 @@ const FormActions = (props) => {
   const handleAnswersShow = () => onFormResultsShow?.(id)
 
   return (
-    <Box display="flex">
+    <div display="flex">
       {showAnswers && (
         <Tooltip title={t('Show answers')}>
           <Button
@@ -45,7 +44,7 @@ const FormActions = (props) => {
         icon={<UnorderedListOutlined />}
         display={['none', 'flex', 'flex', 'none']}
       />
-    </Box>
+    </div>
   )
 }
 

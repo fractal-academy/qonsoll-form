@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { Button } from '@qonsoll/react-design'
+import { Button } from 'antd'
 import { blinkBackground } from '../../../animation'
 
 export const StyledRangeButton = styled(Button)`

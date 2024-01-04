@@ -1,6 +1,6 @@
+import { Empty, List } from 'antd'
+
 import { FormSimpleView } from '..'
-import { List } from 'antd'
-import { NoData } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useTranslations } from '@qonsoll/translation'
@@ -24,7 +24,7 @@ const FormList = (props) => {
         xxl: 4
       }}
       locale={{
-        emptyText: <NoData description={t('There is no forms created yet')} />
+        emptyText: <Empty description={t('There is no forms created yet')} />
       }}
       renderItem={(item, index) => (
         <List.Item key={item?.id || index}>

@@ -1,4 +1,3 @@
-import { Box } from '@qonsoll/react-design'
 import PropTypes from 'prop-types'
 import { QuestionAdvancedView } from '../../../Question/components'
 import React from 'react'
@@ -21,7 +20,7 @@ function FormShowHeightWrapper(props) {
   const questionNumber = containWelcomeScreen ? index : index + 1
 
   return (
-    <Box height={wrapperHeight} overflowY="auto" overflowX="hidden">
+    <div height={wrapperHeight} overflowY="auto" overflowX="hidden">
       <QuestionAdvancedView
         data={question}
         onClick={onClick}
@@ -32,7 +31,7 @@ function FormShowHeightWrapper(props) {
         answersScoreData={answersScoreData}
         preventFirebaseUsage={preventFirebaseUsage}
       />
-    </Box>
+    </div>
   )
 }
 

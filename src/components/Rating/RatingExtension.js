@@ -2,7 +2,6 @@ import {
   ANSWERS_DISPATCH_EVENTS,
   useAnswersContextDispatch
 } from '../../context/Answers'
-import { Box, Button, Container } from '@qonsoll/react-design'
 import { Checkbox, Popconfirm, Radio } from 'antd'
 import {
   DISPATCH_EVENTS,
@@ -11,6 +10,7 @@ import {
 } from '../../context/CurrentQuestion'
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 
+import { Button } from 'antd'
 import ExtentionItem from './ExtentionItem'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -115,33 +115,36 @@ function RatingExtension(props) {
   }
 
   return (
-    <Container mt={4} ref={hoverRef}>
+    <div mt={4} ref={hoverRef}>
       {isMultiple ? (
         <Checkbox.Group disabled={!onClick} onChange={onCheckboxChange}>
           {question?.ratingAdditionalOptions?.map((item, index) => (
-            <Box key={index} mb={2} display="flex" alignItems="center">
+            <div key={index} mb={2} display="flex" alignItems="center">
               {!onClick && (
                 <Popconfirm
                   okType="danger"
                   title={t('Delete this item?')}
                   onConfirm={() => deleteOption(index)}
                   okText={t('Delete')}
-                  cancelText={t('Cancel')}>
-                  <Box
+                  cancelText={t('Cancel')}
+                >
+                  <div
                     p={0}
                     mr={2}
                     type="text"
                     size="small"
                     opacity={isHovering ? 1 : 0}
-                    color="var(--ql-color-danger)">
+                    color="var(--ql-color-danger)"
+                  >
                     <DeleteOutlined />
-                  </Box>
+                  </div>
                 </Popconfirm>
               )}
               <Checkbox
                 value={item || ''}
                 disabled={!onClick}
-                checked={checkboxChecked}>
+                checked={checkboxChecked}
+              >
                 <ExtentionItem
                   item={item}
                   index={index}
@@ -151,36 +154,39 @@ function RatingExtension(props) {
                   defaultValue={item?.answerOption || ''}
                 />
               </Checkbox>
-            </Box>
+            </div>
           ))}
         </Checkbox.Group>
       ) : (
         <Radio.Group onChange={onRadioChange}>
           {question?.ratingAdditionalOptions?.map((item, index) => (
-            <Box mb={2} key={index} display="flex" alignItems="center">
+            <div mb={2} key={index} display="flex" alignItems="center">
               {!onClick && (
                 <Popconfirm
                   title={t('Delete this item?')}
                   okType="danger"
                   onConfirm={() => deleteOption(index)}
                   okText={t('Delete')}
-                  cancelText={t('Cancel')}>
-                  <Box
+                  cancelText={t('Cancel')}
+                >
+                  <div
                     opacity={isHovering ? 1 : 0}
                     color="var(--ql-color-danger)"
                     mr={2}
                     type="text"
                     size="small"
-                    p={0}>
+                    p={0}
+                  >
                     <DeleteOutlined />
-                  </Box>
+                  </div>
                 </Popconfirm>
               )}
 
               <Radio
                 value={item || ''}
                 disabled={!onClick}
-                radioChecked={radioChecked}>
+                radioChecked={radioChecked}
+              >
                 <ExtentionItem
                   item={item}
                   index={index}
@@ -189,18 +195,18 @@ function RatingExtension(props) {
                   defaultValue={item?.answerOption || ''}
                 />
               </Radio>
-            </Box>
+            </div>
           ))}
         </Radio.Group>
       )}
       {!onClick && (
-        <Box mt={2} ml={2}>
+        <div mt={2} ml={2}>
           <Button type="dashed" onClick={addOption}>
             <PlusOutlined />
           </Button>
-        </Box>
+        </div>
       )}
-    </Container>
+    </div>
   )
 }
 

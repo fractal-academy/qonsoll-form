@@ -1,7 +1,6 @@
-import { Box } from '@qonsoll/react-design'
 import styled from 'styled-components'
 
-const LetterBox = styled(Box)`
+const LetterBox = styled.div`
   min-width: 24px;
   display: flex;
   align-items: center;

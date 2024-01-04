@@ -1,4 +1,3 @@
-import { Box, Col, Row, Text } from '@qonsoll/react-design'
 import {
   ChoiceEditableGroup,
   ContentCard,
@@ -11,6 +10,7 @@ import {
   SubmitButton,
   YesnoButton
 } from '../../../../components'
+import { Col, Row, Typography } from 'antd'
 import {
   CustomCard,
   CustomRow,
@@ -36,6 +36,8 @@ import QuestionLayoutSwitcher from '../QuestionLayoutSwitcher'
 import SideLayoutImage from './SideLayoutImage'
 import { useCurrentQuestionContext } from '../../../../context/CurrentQuestion'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Text } = Typography
 
 function QuestionForm(props) {
   const {
@@ -137,15 +139,16 @@ function QuestionForm(props) {
             disabled={video}
           />
         )
-      }>
+      }
+    >
       {layoutType?.type === LAYOUT_TYPES.FULL_SCREEN.type && (
-        <Box position="absolute" right="24px">
+        <div position="absolute" right="24px">
           <QuestionMediaPopover
             brightnessValue={questionData?.brightnessValue || brightnessValue}
             setBrightnessValue={setBrightnessValue}
             MediaModalButtonBackground={url}
           />
-        </Box>
+        </div>
       )}
       {!!Object.keys(currentQuestion).length && (
         <CustomRow noGutters>
@@ -187,20 +190,21 @@ function QuestionForm(props) {
                   </Col>
                 </Row>
               )}
-              <Box>
+              <div>
                 {cloneElement(
                   questionTypesMap[questionData?.questionType].component,
                   {
                     question: questionData
                   }
                 )}
-              </Box>
+              </div>
             </CustomCard>
           </Col>
           {imageShowRule && (
             <StyledCol
               order={layoutType?.imageOrder}
-              {...styles.sideImageColumnStyle}>
+              {...styles.sideImageColumnStyle}
+            >
               <SideLayoutImage
                 url={url}
                 layoutType={layoutType}

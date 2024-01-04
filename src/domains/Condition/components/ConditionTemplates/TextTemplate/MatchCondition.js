@@ -1,4 +1,4 @@
-import { Col, Input, Option, Row, Select } from '@qonsoll/react-design'
+import { Col, Input, Row, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 
 import { COLLECTIONS } from '../../../../../constants'
@@ -9,6 +9,8 @@ import { TEXT_CONDITION_RULES_VALUES } from '../../../../../constants/planeTextS
 import moment from 'moment'
 import useFunctions from '../../../../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Option } = Select
 
 function MatchCondition(props) {
   const {
@@ -83,7 +85,8 @@ function MatchCondition(props) {
           allowClear
           placeholder={t('Select redirect rule')}
           value={ruleSelectValue || t('Select redirect rule')}
-          onChange={onRuleSelectValueChange}>
+          onChange={onRuleSelectValueChange}
+        >
           {TEXT_CONDITION_RULES_VALUES?.map((item, index) => (
             <Option key={index}>{t(item)}</Option>
           ))}

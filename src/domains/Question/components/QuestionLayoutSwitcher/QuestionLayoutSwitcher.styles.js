@@ -1,5 +1,7 @@
-import { Menu, MenuItem } from '@qonsoll/react-design'
+import { Menu } from 'antd'
 import styled from 'styled-components'
+
+const { Item } = Menu
 
 export const StyledMenu = styled(Menu)`
   background-color: var(--ql-body-bg);
@@ -7,7 +9,7 @@ export const StyledMenu = styled(Menu)`
   height: fit-content;
   border: none;
 `
-export const StyledItem = styled(MenuItem)`
+export const StyledItem = styled(Item)`
   display: flex;
   align-items: center;
   margin: 0 !important;

@@ -1,10 +1,12 @@
-import { Avatar, Box, Col, Row, Text, Title } from '@qonsoll/react-design'
+import { Avatar, Col, Row, Typography } from 'antd'
 
 import { NumberedCard } from '../../../../components'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { UserOutlined } from '@ant-design/icons'
 import moment from 'moment'
+
+const { Title, Text } = Typography
 
 function ResponseList(props) {
   const { date, user, index, onClick } = props
@@ -18,7 +20,7 @@ function ResponseList(props) {
   const formattedDate = moment(date.toDate(), 'YYYYMMDD').fromNow()
 
   return (
-    <Box mb={2} onClick={onItemClick}>
+    <div mb={2} onClick={onItemClick}>
       <NumberedCard number={index + 1}>
         <Row v="center" noGutters>
           <Col cw="auto" ml={2} mr={3}>
@@ -28,7 +30,8 @@ function ResponseList(props) {
             <Title
               level={5}
               color="var(--qf-typography-title-color)"
-              fontFamily="var(--ql-font-family-main)">
+              fontFamily="var(--ql-font-family-main)"
+            >
               {user}
             </Title>
             <Text color="var(--qf-typography-subtitle-color)">
@@ -37,7 +40,7 @@ function ResponseList(props) {
           </Col>
         </Row>
       </NumberedCard>
-    </Box>
+    </div>
   )
 }
 

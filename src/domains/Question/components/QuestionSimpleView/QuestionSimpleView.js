@@ -2,7 +2,6 @@ import { DescriptionContainer, StyledButton } from './QuestionSimpleView.styles'
 import { IconRoundContainer, NumberedCard } from '../../../../components'
 import React, { cloneElement } from 'react'
 
-import { Box } from '@qonsoll/react-design'
 import { ExclamationOutlined } from '@ant-design/icons'
 import { Icon } from '@qonsoll/icons'
 import { LAYOUT_TYPES } from '../../../../constants'
@@ -54,8 +53,8 @@ function QuestionSimpleView(props) {
 
   return (
     <NumberedCard current={current} onClick={onClick} number={number}>
-      <Box display="flex" alignItems="center">
-        <Box mr="8px">
+      <div display="flex" alignItems="center">
+        <div mr="8px">
           {title?.length ? (
             <IconRoundContainer>
               {layoutType && cloneElement(LAYOUT_TYPES[layoutType]?.icon)}
@@ -66,13 +65,13 @@ function QuestionSimpleView(props) {
                 cloneElement(<ExclamationOutlined style={{ color: 'red' }} />)}
             </IconRoundContainer>
           )}
-        </Box>
-        <Box flexGrow={1}>
+        </div>
+        <div flexGrow={1}>
           <DescriptionContainer>{title}</DescriptionContainer>
-        </Box>
-        <Box ml={2}>
+        </div>
+        <div ml={2}>
           {hiddenDelete ? (
-            <Box height="24px" width="24px" />
+            <div height="24px" width="24px" />
           ) : (
             <Popconfirm
               placement="topRight"
@@ -85,19 +84,21 @@ function QuestionSimpleView(props) {
               okText={t('Delete')}
               cancelText={t('Cancel')}
               disabled={disableDelete}
-              okType="danger">
+              okType="danger"
+            >
               <StyledButton
                 type="text"
                 shape="circle"
                 size="small"
                 danger
-                disabled={disableDelete}>
+                disabled={disableDelete}
+              >
                 <Icon name="TrashFilled" size={20} />
               </StyledButton>
             </Popconfirm>
           )}
-        </Box>
-      </Box>
+        </div>
+      </div>
     </NumberedCard>
   )
 }

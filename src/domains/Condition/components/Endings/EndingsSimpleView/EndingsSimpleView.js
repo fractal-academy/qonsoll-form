@@ -1,12 +1,4 @@
-import {
-  Box,
-  Divider,
-  OptGroup,
-  Option,
-  Select,
-  Text,
-  Title
-} from '@qonsoll/react-design'
+import { Divider, Select, Typography } from 'antd'
 import React, { useMemo } from 'react'
 
 import { COLLECTIONS } from '../../../../../constants'
@@ -15,6 +7,9 @@ import { NumberedCard } from '../../../../../components'
 import PropTypes from 'prop-types'
 import useFunctions from '../../../../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
+
+const { Title, Text } = Typography
+const { Option, OptGroup } = Select
 
 let startLetter = 65
 
@@ -54,7 +49,8 @@ function EndingSimpleView(props) {
         fontFamily="var(--ql-font-family-main)"
         textOverflow="ellipsis"
         level={5}
-        mb="8px">
+        mb="8px"
+      >
         {item?.title}
       </Title>
 
@@ -65,47 +61,54 @@ function EndingSimpleView(props) {
         listHeight={300}
         onChange={handleChange}
         defaultValue={defaultSelectValue}
-        placeholder={t('Select questions to call current ending')}>
+        placeholder={t('Select questions to call current ending')}
+      >
         {questionsData?.map((questionListItem, index) => (
           <OptGroup
             key={`${questionListItem}-${index}`}
             label={
-              <Box display="flex">
+              <div display="flex">
                 <LetterBox px={2} mr="8px">
                   <Text
                     color="var(--qf-typography-subtitle-color)"
                     fontSize="var(--qf-typography-fs-body)"
-                    strong>
+                    strong
+                  >
                     {questionListItem?.order}
                   </Text>
                 </LetterBox>
                 <Text
                   color="var(--qf-typography-caption-color)"
-                  fontSize="var(--qf-typography-fs-body)">
+                  fontSize="var(--qf-typography-fs-body)"
+                >
                   {questionListItem?.title || t('No question text')}
                 </Text>
-              </Box>
-            }>
+              </div>
+            }
+          >
             {questionListItem?.questionConfigurations?.map(
               (questionAnswerItem, ind) => (
                 <Option
                   value={`${questionListItem?.id} ${index}${ind}`}
-                  key={questionAnswerItem?.answerOptionId}>
-                  <Box display="flex">
+                  key={questionAnswerItem?.answerOptionId}
+                >
+                  <div display="flex">
                     <Text
                       color="var(--qf-typography-subtitle-color)"
                       fontSize="var(--qf-typography-fs-body)"
-                      strong>
+                      strong
+                    >
                       {questionListItem?.order}
                       {String.fromCharCode(startLetter + ind)}
                     </Text>
                     <Divider height="auto" type="vertical" />
                     <Text
                       color="var(--qf-typography-title-color)"
-                      fontSize="var(--qf-typography-fs-body)">
+                      fontSize="var(--qf-typography-fs-body)"
+                    >
                       {questionAnswerItem?.answerOption || '-'}
                     </Text>
-                  </Box>
+                  </div>
                 </Option>
               )
             )}

@@ -1,6 +1,8 @@
-import { Select, Tag } from 'antd'
+import { Select, Tag, Typography } from 'antd'
+
 import styled from 'styled-components'
-import { Text } from '@qonsoll/react-design'
+
+const { Text } = Typography
 
 export const StyledSelect = styled(Select)`
   width: 100%;

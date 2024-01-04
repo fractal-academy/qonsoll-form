@@ -1,4 +1,3 @@
-import { Box, Container, NoData } from '@qonsoll/react-design'
 import { COLLECTIONS, QUESTION_TYPES } from '../../../../constants'
 import {
   ConditionForm,
@@ -6,10 +5,10 @@ import {
   ScoreConditionsAdvancedView
 } from '../../../../domains/Condition/components'
 import { CustomTabs, EmptyState } from './FormConditionsForm.styles'
+import { Empty, Tabs } from 'antd'
 import React, { useMemo } from 'react'
 
 import PropTypes from 'prop-types'
-import { Tabs } from 'antd'
 import useFunctions from '../../../../hooks/useFunctions'
 import { useTranslations } from '@qonsoll/translation'
 
@@ -73,7 +72,7 @@ function FormConditionsForm(props) {
   )
 
   return (
-    <Container>
+    <div>
       <CustomTabs onChange={onTabChange}>
         <TabPane
           tab={t('Logic jumps')}
@@ -81,10 +80,11 @@ function FormConditionsForm(props) {
           style={{
             overflowY: 'scroll',
             overflow: 'hidden'
-          }}>
+          }}
+        >
           {data?.length ? (
             data?.map((item, index) => (
-              <Box mb="24px" ml="8px" key={index}>
+              <div mb="24px" ml="8px" key={index}>
                 <ConditionForm
                   key={index}
                   item={item}
@@ -93,11 +93,11 @@ function FormConditionsForm(props) {
                   addRedirectQuestion={addRedirectQuestion}
                   getQuestionListRedirect={getQuestionListRedirect}
                 />
-              </Box>
+              </div>
             ))
           ) : (
             <EmptyState
-              image={NoData.PRESENTED_IMAGE_SIMPLE}
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
               description={t('There are no question to configure')}
             />
           )}
@@ -105,10 +105,11 @@ function FormConditionsForm(props) {
         <TabPane
           tab={t('Endings')}
           key="2"
-          style={{ overflowY: 'scroll', overflow: 'hidden' }}>
+          style={{ overflowY: 'scroll', overflow: 'hidden' }}
+        >
           {!!filteredAnswerForEndings?.length && !!endings?.length ? (
             endings?.map((item, index) => (
-              <Box mb="24px" ml="8px" key={index}>
+              <div mb="24px" ml="8px" key={index}>
                 <EndingsSimpleView
                   key={index}
                   item={item}
@@ -118,11 +119,11 @@ function FormConditionsForm(props) {
                   addRedirectQuestion={addRedirectQuestion}
                   getQuestionListRedirect={getQuestionListRedirect}
                 />
-              </Box>
+              </div>
             ))
           ) : (
             <EmptyState
-              image={NoData.PRESENTED_IMAGE_SIMPLE}
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
               description={t('There are no question to configure')}
             />
           )}
@@ -131,22 +132,24 @@ function FormConditionsForm(props) {
           <TabPane
             style={{ overflowY: 'scroll', overflow: 'hidden' }}
             tab={t('Scores')}
-            key="3">
+            key="3"
+          >
             {filteredAnswerForEndings?.length ? (
               filteredAnswerForEndings?.map((item, index) => (
-                <Box mb="24px" ml="8px" key={index}>
+                <div mb="24px" ml="8px" key={index}>
                   <ScoreConditionsAdvancedView
                     key={index}
                     questionData={item}
                     index={index}
                     questionScoresData={findAnswerScoreByQuestionId(item?.id)}
                   />
-                </Box>
+                </div>
               ))
             ) : (
               <EmptyState
-                image={NoData.PRESENTED_IMAGE_SIMPLE}
-                description={t('There are no question to configure')}>
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description={t('There are no question to configure')}
+              >
                 {`${t('Please, add one of the following questions types')}:`}
                 <br />
                 {`${t(QUESTION_TYPES.CHOICE)},
@@ -159,7 +162,7 @@ function FormConditionsForm(props) {
           </TabPane>
         )}
       </CustomTabs>
-    </Container>
+    </div>
   )
 }
 

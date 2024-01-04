@@ -38,7 +38,8 @@ function QuestionSelect(props) {
       showSearch
       allowClear
       onChange={(question) => onChange(question, index)}
-      defaultValue={t('Go to the next question')}>
+      defaultValue={t('Go to the next question')}
+    >
       <OptGroup label={<StyledCaptionText>JUMP TO...</StyledCaptionText>}>
         {questionList?.map((item) => (
           <Option key={item?.id} value={item?.id}>

@@ -1,9 +1,11 @@
-import { Box, Text } from '@qonsoll/react-design'
 import styled, { css } from 'styled-components'
 
+import { Typography } from 'antd'
 import { blinkBackground } from '../../../animation'
 
-export const StyledKeybox = styled(Box)`
+const { Text } = Typography
+
+export const StyledKeybox = styled.div`
   position: absolute;
   top: ${({ hasImages }) => !hasImages && '50%'};
   bottom: ${({ hasImages }) => hasImages && 0};
@@ -22,7 +24,7 @@ export const StyledKeybox = styled(Box)`
   width: ${({ isHovering, phoneSmall }) =>
     isHovering && !phoneSmall ? '66px !important' : '26px !important'};
 `
-export const ImageContainer = styled(Box)`
+export const ImageContainer = styled.div`
   width: 100%;
   height: ${({ phoneSmall }) => (phoneSmall ? '200px' : '100px')};
   border-radius: var(--qf-border-radius-md);
@@ -30,7 +32,7 @@ export const ImageContainer = styled(Box)`
   background-size: cover;
   background-image: url(${({ image }) => image});
 `
-export const StyledButton = styled(Box)`
+export const StyledButton = styled.div`
   width: 100%;
   height: 100%;
   padding: ${({ hasImages }) => (hasImages ? '12px' : '12px 24px')};

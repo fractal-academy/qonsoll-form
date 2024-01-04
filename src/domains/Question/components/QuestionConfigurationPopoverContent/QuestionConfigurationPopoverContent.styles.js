@@ -1,5 +1,5 @@
-import { Row } from '@qonsoll/react-design'
-import { Divider } from 'antd'
+import { Divider, Row } from 'antd'
+
 import styled from 'styled-components'
 
 export const PopoverSwitcherRow = styled(Row)`

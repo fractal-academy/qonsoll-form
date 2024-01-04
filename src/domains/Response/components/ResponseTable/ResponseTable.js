@@ -1,6 +1,6 @@
-import { Box, NoData } from '@qonsoll/react-design'
 import React, { useEffect, useMemo } from 'react'
 
+import { Empty } from 'antd'
 import PropTypes from 'prop-types'
 import { Spinner } from '../../../../../src/components'
 import { StyledTable } from '../../../../domains/Response/components/ResponseTable/ResponseTable.style'
@@ -22,7 +22,8 @@ function ResponseTable(props) {
               wordWrap: 'break-word',
               wordBreak: 'break-word',
               width: '50px'
-            }}>
+            }}
+          >
             {text}
           </div>
         ),
@@ -39,7 +40,8 @@ function ResponseTable(props) {
               wordWrap: 'break-word',
               wordBreak: 'break-word',
               width: '100%'
-            }}>
+            }}
+          >
             {text}
           </div>
         ),
@@ -54,7 +56,8 @@ function ResponseTable(props) {
               wordWrap: 'break-word',
               wordBreak: 'break-word',
               width: '100%'
-            }}>
+            }}
+          >
             {text}
           </div>
         ),
@@ -76,7 +79,8 @@ function ResponseTable(props) {
               wordWrap: 'break-word',
               wordBreak: 'break-word',
               width: '100%'
-            }}>
+            }}
+          >
             {text}
           </div>
         ),
@@ -87,11 +91,11 @@ function ResponseTable(props) {
   }, [columns, isFormQuiz, t])
 
   return (
-    <Box overflowX="hidden">
+    <div overflowX="hidden">
       {loading ? (
         <Spinner width="100%" size="large" />
       ) : (
-        <Box>
+        <div>
           {data?.length ? (
             <StyledTable
               sortOrder
@@ -100,11 +104,11 @@ function ResponseTable(props) {
               pagination={false}
             />
           ) : (
-            <NoData description={t('Choose user to display their answers')} />
+            <Empty description={t('Choose user to display their answers')} />
           )}
-        </Box>
+        </div>
       )}
-    </Box>
+    </div>
   )
 }
 
